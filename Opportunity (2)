@@ -1,0 +1,2114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PathKeeper | Opportunity Atlas</title>
+
+<style>
+
+/* =========================================================
+   PATHKEEPER OPPORTUNITY ATLAS
+   GOOGLE SITES FRIENDLY VERSION
+   ========================================================= */
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    padding:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4efe4;
+    color:#26352b;
+    line-height:1.6;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+img{
+    max-width:100%;
+}
+
+/* =========================================================
+   COLORS
+   ========================================================= */
+
+:root{
+    --green:#245238;
+    --green-dark:#173a28;
+    --green-light:#dfe9df;
+    --brown:#68452d;
+    --brown-dark:#40291d;
+    --brown-light:#eadccc;
+    --cream:#f4efe4;
+    --paper:#fffdf8;
+    --gold:#a87932;
+    --text:#26352b;
+    --muted:#687168;
+    --line:#d8ccba;
+    --white:#ffffff;
+}
+
+/* =========================================================
+   MAIN WRAPPER
+   ========================================================= */
+
+.page{
+    width:100%;
+    overflow:hidden;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero{
+    background:#173a28;
+    color:#ffffff;
+    padding:55px 20px 60px;
+}
+
+.hero-inner{
+    width:100%;
+    max-width:1150px;
+    margin:0 auto;
+}
+
+.hero-label{
+    display:inline-block;
+    background:#a87932;
+    color:#ffffff;
+    padding:7px 12px;
+    border-radius:4px;
+    font-size:11px;
+    font-weight:bold;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    margin:0 0 20px;
+    font-size:clamp(38px,7vw,76px);
+    line-height:1;
+    letter-spacing:-2px;
+}
+
+.hero h1 span{
+    color:#d9b878;
+}
+
+.hero-text{
+    max-width:780px;
+    font-size:18px;
+    color:#e1e8e2;
+    margin:0 0 30px;
+}
+
+.hero-buttons{
+    margin-top:20px;
+}
+
+.hero-button{
+    display:inline-block;
+    background:#d2ad68;
+    color:#173a28;
+    padding:13px 18px;
+    border-radius:5px;
+    font-size:13px;
+    font-weight:bold;
+    margin:5px 5px 5px 0;
+}
+
+.hero-button.alt{
+    background:transparent;
+    border:1px solid #8da393;
+    color:#ffffff;
+}
+
+/* =========================================================
+   HERO PATH
+   ========================================================= */
+
+.hero-path{
+    margin-top:40px;
+    background:#214a34;
+    border:1px solid #3c654c;
+    padding:20px;
+    border-radius:8px;
+}
+
+.hero-path-title{
+    color:#d8b56f;
+    font-size:11px;
+    letter-spacing:1.5px;
+    font-weight:bold;
+    text-transform:uppercase;
+    margin-bottom:15px;
+}
+
+.path-item{
+    display:inline-block;
+    width:auto;
+    margin:4px 3px;
+    background:#173a28;
+    border:1px solid #476954;
+    padding:9px 12px;
+    border-radius:4px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+/* =========================================================
+   GENERAL SECTION
+   ========================================================= */
+
+.section{
+    padding:65px 20px;
+}
+
+.section-inner{
+    width:100%;
+    max-width:1150px;
+    margin:0 auto;
+}
+
+.section.green{
+    background:#245238;
+    color:#ffffff;
+}
+
+.section.brown{
+    background:#68452d;
+    color:#ffffff;
+}
+
+.section.cream{
+    background:#f4efe4;
+}
+
+.section.paper{
+    background:#fffdf8;
+}
+
+.section.soft-green{
+    background:#dfe9df;
+}
+
+.section.soft-brown{
+    background:#eadccc;
+}
+
+.section-heading{
+    max-width:800px;
+    margin-bottom:35px;
+}
+
+.section-number{
+    color:#a87932;
+    font-size:11px;
+    font-weight:bold;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:8px;
+}
+
+.section.green .section-number,
+.section.brown .section-number{
+    color:#dfbd79;
+}
+
+.section-heading h2{
+    margin:0 0 15px;
+    font-size:clamp(30px,5vw,52px);
+    line-height:1.05;
+    letter-spacing:-1px;
+}
+
+.section-heading p{
+    margin:0;
+    color:#687168;
+    font-size:16px;
+}
+
+.section.green .section-heading p,
+.section.brown .section-heading p{
+    color:#d9e3dc;
+}
+
+/* =========================================================
+   STARTING POINT CARDS
+   ========================================================= */
+
+.card-row{
+    width:100%;
+    font-size:0;
+}
+
+.card{
+    display:inline-block;
+    vertical-align:top;
+    width:31.8%;
+    margin:0 1.4% 18px 0;
+    background:#ffffff;
+    border:1px solid #d8ccba;
+    border-radius:7px;
+    padding:24px;
+    font-size:14px;
+}
+
+.card:nth-child(3n){
+    margin-right:0;
+}
+
+.card-icon{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:#dfe9df;
+    color:#245238;
+    display:block;
+    text-align:center;
+    line-height:40px;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+.card h3{
+    color:#40291d;
+    margin:0 0 8px;
+    font-size:19px;
+}
+
+.card p{
+    color:#687168;
+    font-size:13px;
+    margin:0 0 15px;
+}
+
+.card-question{
+    color:#245238;
+    border-top:1px solid #eee7dc;
+    padding-top:12px;
+    font-size:11px;
+    font-weight:bold;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+}
+
+/* =========================================================
+   OPPORTUNITY LADDER
+   ========================================================= */
+
+.ladder{
+    width:100%;
+}
+
+.ladder-step{
+    display:inline-block;
+    vertical-align:top;
+    width:15.8%;
+    min-height:250px;
+    margin:0 1% 15px 0;
+    padding:20px 16px;
+    background:#fffdf8;
+    border:1px solid #d8ccba;
+    border-top:5px solid #245238;
+    border-radius:5px;
+}
+
+.ladder-step:last-child{
+    margin-right:0;
+}
+
+.ladder-number{
+    color:#a87932;
+    font-weight:bold;
+    font-size:12px;
+}
+
+.ladder-step h3{
+    color:#40291d;
+    font-size:17px;
+    line-height:1.2;
+    margin:15px 0 10px;
+}
+
+.ladder-step p{
+    color:#687168;
+    font-size:12px;
+    margin:0;
+}
+
+/* =========================================================
+   OPPORTUNITY CATEGORIES
+   ========================================================= */
+
+.category{
+    width:100%;
+    margin-bottom:22px;
+    background:#ffffff;
+    border:1px solid #d8ccba;
+    border-radius:7px;
+    overflow:hidden;
+}
+
+.category-header{
+    background:#245238;
+    color:#ffffff;
+    padding:18px 22px;
+}
+
+.category-header h3{
+    margin:0;
+    font-size:23px;
+}
+
+.category-header p{
+    margin:4px 0 0;
+    color:#d8e3da;
+    font-size:13px;
+}
+
+.category-body{
+    padding:20px;
+}
+
+/* =========================================================
+   OPPORTUNITY TAGS
+   ========================================================= */
+
+.opportunity{
+    display:inline-block;
+    vertical-align:top;
+    width:23.5%;
+    margin:0 1.4% 12px 0;
+    padding:15px;
+    min-height:105px;
+    background:#f4efe4;
+    border:1px solid #d8ccba;
+    border-radius:5px;
+}
+
+.opportunity:nth-child(4n){
+    margin-right:0;
+}
+
+.opportunity strong{
+    display:block;
+    color:#40291d;
+    font-size:14px;
+    margin-bottom:5px;
+}
+
+.opportunity span{
+    display:block;
+    color:#687168;
+    font-size:11px;
+}
+
+/* =========================================================
+   DECISION FRAMEWORK
+   ========================================================= */
+
+.decision-table{
+    width:100%;
+    border-collapse:collapse;
+    background:#ffffff;
+    border:1px solid #d8ccba;
+}
+
+.decision-table th{
+    background:#68452d;
+    color:#ffffff;
+    text-align:left;
+    padding:15px;
+    font-size:13px;
+}
+
+.decision-table td{
+    border-top:1px solid #e1d8ca;
+    padding:15px;
+    font-size:13px;
+    color:#4d5b51;
+    vertical-align:top;
+}
+
+.decision-table tr:nth-child(even){
+    background:#faf7f0;
+}
+
+.decision-table td:first-child{
+    font-weight:bold;
+    color:#245238;
+}
+
+/* =========================================================
+   EVIDENCE
+   ========================================================= */
+
+.evidence-box{
+    display:inline-block;
+    vertical-align:top;
+    width:48.7%;
+    margin-right:2%;
+    background:#ffffff;
+    border:1px solid #d8ccba;
+    padding:25px;
+    border-radius:7px;
+}
+
+.evidence-box:last-child{
+    margin-right:0;
+}
+
+.evidence-box h3{
+    margin:0 0 15px;
+    color:#40291d;
+    font-size:21px;
+}
+
+.evidence-list{
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+
+.evidence-list li{
+    padding:9px 0;
+    border-bottom:1px solid #eee7dc;
+    font-size:13px;
+    color:#59655c;
+}
+
+.evidence-list li:before{
+    content:"✓";
+    color:#245238;
+    font-weight:bold;
+    margin-right:8px;
+}
+
+/* =========================================================
+   OPPORTUNITY SOURCES
+   ========================================================= */
+
+.source-box{
+    background:#fffdf8;
+    border:1px solid #d8ccba;
+    border-left:6px solid #68452d;
+    padding:24px;
+    margin-bottom:15px;
+    border-radius:4px;
+}
+
+.source-box h3{
+    margin:0 0 6px;
+    color:#40291d;
+    font-size:19px;
+}
+
+.source-box p{
+    color:#687168;
+    font-size:13px;
+    margin:0 0 10px;
+}
+
+.source-type{
+    display:inline-block;
+    background:#dfe9df;
+    color:#245238;
+    padding:5px 8px;
+    border-radius:3px;
+    font-size:9px;
+    font-weight:bold;
+    letter-spacing:.8px;
+}
+
+/* =========================================================
+   SEARCH SYSTEM
+   ========================================================= */
+
+.search-panel{
+    background:#173a28;
+    color:#ffffff;
+    padding:35px;
+    border-radius:8px;
+}
+
+.search-panel h2{
+    margin:0 0 10px;
+    font-size:32px;
+}
+
+.search-panel p{
+    color:#d4dfd7;
+    font-size:14px;
+    max-width:750px;
+}
+
+.search-rule{
+    background:#245238;
+    border:1px solid #456850;
+    padding:18px;
+    margin-top:20px;
+    border-radius:5px;
+}
+
+.search-rule strong{
+    color:#dfbd79;
+}
+
+.search-steps{
+    margin-top:25px;
+}
+
+.search-step{
+    display:inline-block;
+    vertical-align:top;
+    width:18.4%;
+    margin-right:1.7%;
+    background:#ffffff;
+    color:#26352b;
+    padding:17px;
+    min-height:130px;
+    border-radius:5px;
+}
+
+.search-step:last-child{
+    margin-right:0;
+}
+
+.search-step b{
+    color:#a87932;
+    display:block;
+    font-size:11px;
+    margin-bottom:8px;
+}
+
+.search-step strong{
+    color:#40291d;
+    display:block;
+    margin-bottom:7px;
+}
+
+.search-step span{
+    color:#687168;
+    font-size:11px;
+}
+
+/* =========================================================
+   WEEKLY SYSTEM
+   ========================================================= */
+
+.week{
+    display:inline-block;
+    vertical-align:top;
+    width:18.4%;
+    margin-right:1.7%;
+    background:#ffffff;
+    border:1px solid #d8ccba;
+    padding:20px;
+    min-height:185px;
+    border-radius:5px;
+}
+
+.week:last-child{
+    margin-right:0;
+}
+
+.week-day{
+    color:#a87932;
+    font-size:10px;
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+.week h3{
+    color:#40291d;
+    font-size:18px;
+    margin:10px 0 8px;
+}
+
+.week p{
+    color:#687168;
+    font-size:12px;
+    margin:0;
+}
+
+/* =========================================================
+   PRINCIPLE
+   ========================================================= */
+
+.principle{
+    text-align:center;
+    max-width:850px;
+    margin:0 auto;
+}
+
+.principle h2{
+    margin:0 0 20px;
+    font-size:clamp(34px,6vw,64px);
+    line-height:1;
+    letter-spacing:-1.5px;
+}
+
+.principle p{
+    font-size:17px;
+    color:#dce6df;
+}
+
+.principle-rule{
+    margin-top:25px;
+    padding:15px;
+    border-top:1px solid #587361;
+    border-bottom:1px solid #587361;
+    color:#dfbd79;
+    font-weight:bold;
+    font-size:13px;
+    letter-spacing:.7px;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer{
+    background:#40291d;
+    color:#ffffff;
+    padding:35px 20px;
+}
+
+.footer-inner{
+    max-width:1150px;
+    margin:0 auto;
+}
+
+.footer-title{
+    color:#dfbd79;
+    font-size:13px;
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+.footer p{
+    margin:7px 0 0;
+    color:#cbbeb3;
+    font-size:11px;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+/*
+   These rules are intentionally simple.
+   Google Sites sometimes gives embedded content a narrow width.
+*/
+
+@media(max-width:900px){
+
+    .card{
+        width:48.5%;
+        margin-right:3%;
+    }
+
+    .card:nth-child(3n){
+        margin-right:3%;
+    }
+
+    .card:nth-child(2n){
+        margin-right:0;
+    }
+
+    .ladder-step{
+        width:31.8%;
+        margin-right:1.5%;
+    }
+
+    .ladder-step:nth-child(3n){
+        margin-right:0;
+    }
+
+    .opportunity{
+        width:48%;
+        margin-right:3%;
+    }
+
+    .opportunity:nth-child(4n){
+        margin-right:3%;
+    }
+
+    .opportunity:nth-child(2n){
+        margin-right:0;
+    }
+
+    .search-step{
+        width:31%;
+        margin-right:2.5%;
+        margin-bottom:12px;
+    }
+
+    .search-step:nth-child(3n){
+        margin-right:0;
+    }
+
+    .week{
+        width:31%;
+        margin-right:2.5%;
+        margin-bottom:12px;
+    }
+
+    .week:nth-child(3n){
+        margin-right:0;
+    }
+}
+
+@media(max-width:600px){
+
+    .hero{
+        padding:42px 15px 45px;
+    }
+
+    .section{
+        padding:45px 15px;
+    }
+
+    .card{
+        width:100%;
+        margin-right:0 !important;
+    }
+
+    .ladder-step{
+        width:100%;
+        margin-right:0 !important;
+        min-height:auto;
+    }
+
+    .opportunity{
+        width:100%;
+        margin-right:0 !important;
+    }
+
+    .evidence-box{
+        width:100%;
+        margin-right:0;
+        margin-bottom:15px;
+    }
+
+    .search-step{
+        width:100%;
+        margin-right:0;
+        margin-bottom:12px;
+        min-height:auto;
+    }
+
+    .week{
+        width:100%;
+        margin-right:0;
+        min-height:auto;
+    }
+
+    .decision-table{
+        font-size:11px;
+    }
+
+    .decision-table th,
+    .decision-table td{
+        padding:10px;
+    }
+
+    .search-panel{
+        padding:23px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+<!-- ======================================================
+     HERO
+====================================================== -->
+
+<section class="hero">
+
+<div class="hero-inner">
+
+<div class="hero-label">
+PathKeeper / Opportunity Atlas
+</div>
+
+<h1>
+Find a better path.<br>
+<span>Keep finding better ones.</span>
+</h1>
+
+<p class="hero-text">
+The Opportunity Atlas is designed for people who don't want their
+future to depend on one job application, one degree, one employer,
+or one lucky break. Learn how to identify opportunities, compare
+pathways, build evidence, and continuously search for better options.
+</p>
+
+<div class="hero-buttons">
+
+<a href="#starting-point" class="hero-button">
+START WITH YOUR SITUATION
+</a>
+
+<a href="#opportunities" class="hero-button alt">
+EXPLORE OPPORTUNITIES
+</a>
+
+</div>
+
+
+<div class="hero-path">
+
+<div class="hero-path-title">
+The Opportunity Loop
+</div>
+
+<div class="path-item">IDENTIFY</div>
+<div class="path-item">SEARCH</div>
+<div class="path-item">COMPARE</div>
+<div class="path-item">PREPARE</div>
+<div class="path-item">APPLY</div>
+<div class="path-item">LEARN</div>
+<div class="path-item">SEARCH AGAIN</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ======================================================
+     SECTION 1
+====================================================== -->
+
+<section class="section cream" id="starting-point">
+
+<div class="section-inner">
+
+<div class="section-heading">
+
+<div class="section-number">
+01 / STARTING POINT
+</div>
+
+<h2>
+Don't start with the opportunity. Start with the problem.
+</h2>
+
+<p>
+The right opportunity depends on what you are actually trying to
+change. Identify the constraint first, then search for solutions.
+</p>
+
+</div>
+
+
+<div class="card-row">
+
+<div class="card">
+
+<div class="card-icon">1</div>
+
+<h3>I Need Income</h3>
+
+<p>
+Look for employment, paid training, apprenticeships, contract work,
+freelancing, and other routes that can create income while building
+future earning power.
+</p>
+
+<div class="card-question">
+Primary question: How quickly can this create income?
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">2</div>
+
+<h3>I Need Skills</h3>
+
+<p>
+Find free courses, employer training, apprenticeships, projects,
+labs, simulations, and structured practice.
+</p>
+
+<div class="card-question">
+Primary question: What skill will create future options?
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">3</div>
+
+<h3>I Need Experience</h3>
+
+<p>
+Search for internships, apprenticeships, volunteer work, freelance
+projects, competitions, and real-world project opportunities.
+</p>
+
+<div class="card-question">
+Primary question: Where can I prove I can do the work?
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">4</div>
+
+<h3>I Need a Credential</h3>
+
+<p>
+Investigate certifications, licenses, degrees, certificates,
+badges, and employer-recognized training.
+</p>
+
+<div class="card-question">
+Primary question: Which credential is actually valued?
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">5</div>
+
+<h3>I Need Funding</h3>
+
+<p>
+Search scholarships, grants, stipends, fellowships, competitions,
+tuition assistance, and employer-paid programs.
+</p>
+
+<div class="card-question">
+Primary question: Who will pay for the next step?
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">6</div>
+
+<h3>I Need Mobility</h3>
+
+<p>
+Investigate relocation programs, remote work, international
+opportunities, talent programs, and geographic alternatives.
+</p>
+
+<div class="card-question">
+Primary question: Can changing location change my options?
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ======================================================
+     SECTION 2
+====================================================== -->
+
+<section class="section soft-brown">
+
+<div class="section-inner">
+
+<div class="section-heading">
+
+<div class="section-number">
+02 / OPPORTUNITY LADDER
+</div>
+
+<h2>
+You don't always need a breakthrough. You need a sequence.
+</h2>
+
+<p>
+Use smaller opportunities to create evidence that qualifies you
+for larger opportunities.
+</p>
+
+</div>
+
+
+<div class="ladder">
+
+<div class="ladder-step">
+
+<div class="ladder-number">01</div>
+
+<h3>Current Position</h3>
+
+<p>
+Inventory your education, skills, experience, money, location,
+network, tools, and constraints.
+</p>
+
+</div>
+
+
+<div class="ladder-step">
+
+<div class="ladder-number">02</div>
+
+<h3>Build Evidence</h3>
+
+<p>
+Create projects, work samples, portfolios, demonstrations,
+case studies, and documented results.
+</p>
+
+</div>
+
+
+<div class="ladder-step">
+
+<div class="ladder-number">03</div>
+
+<h3>Get Experience</h3>
+
+<p>
+Use work, apprenticeships, internships, volunteering,
+freelancing, or projects to gain practical experience.
+</p>
+
+</div>
+
+
+<div class="ladder-step">
+
+<div class="ladder-number">04</div>
+
+<h3>Add Credentials</h3>
+
+<p>
+Add targeted qualifications when they increase your credibility
+or unlock opportunities.
+</p>
+
+</div>
+
+
+<div class="ladder-step">
+
+<div class="ladder-number">05</div>
+
+<h3>Compete Higher</h3>
+
+<p>
+Use your accumulated evidence to pursue better employers,
+programs, contracts, funding, or education.
+</p>
+
+</div>
+
+
+<div class="ladder-step">
+
+<div class="ladder-number">06</div>
+
+<h3>Create Leverage</h3>
+
+<p>
+Skills, experience, reputation, relationships, and money can
+begin producing opportunities instead of only requiring you to
+search for them.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ======================================================
+     OPPORTUNITY ATLAS
+====================================================== -->
+
+<section class="section paper" id="opportunities">
+
+<div class="section-inner">
+
+<div class="section-heading">
+
+<div class="section-number">
+03 / OPPORTUNITY ATLAS
+</div>
+
+<h2>
+Search across the entire opportunity ecosystem.
+</h2>
+
+<p>
+A job is only one kind of opportunity. Explore the mechanisms that
+can improve education, income, skills, experience, funding, mobility,
+and independence.
+</p>
+
+</div>
+
+
+<!-- EDUCATION -->
+
+<div class="category">
+
+<div class="category-header">
+
+<h3>Education & Learning</h3>
+
+<p>
+Ways to learn without assuming there is only one educational route.
+</p>
+
+</div>
+
+<div class="category-body">
+
+<div class="opportunity">
+<strong>Community Colleges</strong>
+<span>Lower-cost pathways into degrees, certificates, and technical programs.</span>
+</div>
+
+<div class="opportunity">
+<strong>Online Courses</strong>
+<span>Learn specific skills without committing to a full program.</span>
+</div>
+
+<div class="opportunity">
+<strong>Open Courseware</strong>
+<span>University-level educational material available for independent learning.</span>
+</div>
+
+<div class="opportunity">
+<strong>Trade Schools</strong>
+<span>Career-focused training for skilled occupations.</span>
+</div>
+
+<div class="opportunity">
+<strong>Bootcamps</strong>
+<span>Intensive training focused on specific career skills.</span>
+</div>
+
+<div class="opportunity">
+<strong>Employer Training</strong>
+<span>Companies sometimes train workers for specialized positions.</span>
+</div>
+
+<div class="opportunity">
+<strong>Continuing Education</strong>
+<span>Shorter programs designed around specific professional skills.</span>
+</div>
+
+<div class="opportunity">
+<strong>Self-Education</strong>
+<span>Independent learning supported by projects and measurable evidence.</span>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- WORK -->
+
+<div class="category">
+
+<div class="category-header">
+
+<h3>Employment & Work</h3>
+
+<p>
+Ways to turn skills and effort into income and professional experience.
+</p>
+
+</div>
+
+<div class="category-body">
+
+<div class="opportunity">
+<strong>Entry-Level Jobs</strong>
+<span>Starting positions where employers train or supervise developing workers.</span>
+</div>
+
+<div class="opportunity">
+<strong>Apprenticeships</strong>
+<span>Earn experience while learning through structured work.</span>
+</div>
+
+<div class="opportunity">
+<strong>Internships</strong>
+<span>Gain workplace experience before competing for higher-level roles.</span>
+</div>
+
+<div class="opportunity">
+<strong>Paid Training</strong>
+<span>Look for employers that train workers after hiring.</span>
+</div>
+
+<div class="opportunity">
+<strong>Contract Work</strong>
+<span>Short-term projects that can produce experience and references.</span>
+</div>
+
+<div class="opportunity">
+<strong>Freelancing</strong>
+<span>Sell a specific skill directly to clients.</span>
+</div>
+
+<div class="opportunity">
+<strong>Temporary Work</strong>
+<span>Can provide income while creating a bridge toward another career.</span>
+</div>
+
+<div class="opportunity">
+<strong>Remote Work</strong>
+<span>Jobs where location is less restrictive than traditional employment.</span>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- FUNDING -->
+
+<div class="category">
+
+<div class="category-header">
+
+<h3>Funding & Financial Support</h3>
+
+<p>
+Look for people and organizations willing to finance the next step.
+</p>
+
+</div>
+
+<div class="category-body">
+
+<div class="opportunity">
+<strong>Scholarships</strong>
+<span>Funding that can reduce education and training costs.</span>
+</div>
+
+<div class="opportunity">
+<strong>Grants</strong>
+<span>Funding for qualifying projects, businesses, education, or initiatives.</span>
+</div>
+
+<div class="opportunity">
+<strong>Fellowships</strong>
+<span>Structured funding combined with learning, research, or professional development.</span>
+</div>
+
+<div class="opportunity">
+<strong>Stipends</strong>
+<span>Payments that can support participation in qualifying programs.</span>
+</div>
+
+<div class="opportunity">
+<strong>Competitions</strong>
+<span>Some competitions provide money, mentorship, or exposure.</span>
+</div>
+
+<div class="opportunity">
+<strong>Employer Tuition Aid</strong>
+<span>Some employers help workers pay for education.</span>
+</div>
+
+<div class="opportunity">
+<strong>Training Assistance</strong>
+<span>Programs may help eligible workers obtain career training.</span>
+</div>
+
+<div class="opportunity">
+<strong>Business Microgrants</strong>
+<span>Small funding opportunities for qualifying entrepreneurs and projects.</span>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- CREDENTIALS -->
+
+<div class="category">
+
+<div class="category-header">
+
+<h3>Credentials & Professional Signals</h3>
+
+<p>
+Ways to demonstrate knowledge, competence, or professional qualification.
+</p>
+
+</div>
+
+<div class="category-body">
+
+<div class="opportunity">
+<strong>Professional Certifications</strong>
+<span>Industry credentials tied to specific knowledge or skills.</span>
+</div>
+
+<div class="opportunity">
+<strong>Technical Certifications</strong>
+<span>Credentials covering technology, systems, platforms, or technical skills.</span>
+</div>
+
+<div class="opportunity">
+<strong>Licenses</strong>
+<span>Legally or professionally recognized qualifications for certain occupations.</span>
+</div>
+
+<div class="opportunity">
+<strong>Digital Badges</strong>
+<span>Smaller credentials that can document specific competencies.</span>
+</div>
+
+<div class="opportunity">
+<strong>Portfolios</strong>
+<span>Direct evidence showing what you can actually create.</span>
+</div>
+
+<div class="opportunity">
+<strong>Assessments</strong>
+<span>Tests and skill evaluations that can demonstrate competence.</span>
+</div>
+
+<div class="opportunity">
+<strong>Industry Projects</strong>
+<span>Projects that demonstrate practical understanding of professional problems.</span>
+</div>
+
+<div class="opportunity">
+<strong>Published Work</strong>
+<span>Articles, research, documentation, tutorials, or other public evidence.</span>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ENTREPRENEURSHIP -->
+
+<div class="category">
+
+<div class="category-header">
+
+<h3>Entrepreneurship & Independent Work</h3>
+
+<p>
+Routes for people who want to create value rather than rely entirely on employment.
+</p>
+
+</div>
+
+<div class="category-body">
+
+<div class="opportunity">
+<strong>Incubators</strong>
+<span>Organizations that help early-stage ideas develop.</span>
+</div>
+
+<div class="opportunity">
+<strong>Accelerators</strong>
+<span>Structured programs designed to accelerate promising ventures.</span>
+</div>
+
+<div class="opportunity">
+<strong>Startup Competitions</strong>
+<span>Events where ideas and businesses can receive feedback, exposure, or prizes.</span>
+</div>
+
+<div class="opportunity">
+<strong>Maker Programs</strong>
+<span>Resources for building and testing physical or digital products.</span>
+</div>
+
+<div class="opportunity">
+<strong>Small Business Programs</strong>
+<span>Training, advising, and support for entrepreneurs.</span>
+</div>
+
+<div class="opportunity">
+<strong>Freelance Businesses</strong>
+<span>Turn a specific professional skill into an independent service.</span>
+</div>
+
+<div class="opportunity">
+<strong>Digital Products</strong>
+<span>Create useful resources that can potentially be sold repeatedly.</span>
+</div>
+
+<div class="opportunity">
+<strong>Service Businesses</strong>
+<span>Build an income stream around solving a specific customer problem.</span>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- MOBILITY -->
+
+<div class="category">
+
+<div class="category-header">
+
+<h3>Mobility & Relocation</h3>
+
+<p>
+Changing your geographic environment can sometimes change the opportunity set available to you.
+</p>
+
+</div>
+
+<div class="category-body">
+
+<div class="opportunity">
+<strong>Relocation Programs</strong>
+<span>Some communities create incentives to attract workers or residents.</span>
+</div>
+
+<div class="opportunity">
+<strong>Talent Programs</strong>
+<span>Programs designed to attract people with specific skills.</span>
+</div>
+
+<div class="opportunity">
+<strong>Remote Careers</strong>
+<span>Careers that allow work without relocating to an employer's headquarters.</span>
+</div>
+
+<div class="opportunity">
+<strong>International Programs</strong>
+<span>Education, work, cultural, and professional opportunities abroad.</span>
+</div>
+
+<div class="opportunity">
+<strong>Entrepreneur Residency</strong>
+<span>Some locations create programs for qualifying entrepreneurs.</span>
+</div>
+
+<div class="opportunity">
+<strong>Work Visas</strong>
+<span>Legal pathways that can allow qualified workers to work internationally.</span>
+</div>
+
+<div class="opportunity">
+<strong>Study Abroad</strong>
+<span>Educational programs that can create international experience.</span>
+</div>
+
+<div class="opportunity">
+<strong>Professional Exchanges</strong>
+<span>Programs that connect professionals across regions or countries.</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ======================================================
+     DECISION FRAMEWORK
+====================================================== -->
+
+<section class="section soft-green">
+
+<div class="section-inner">
+
+<div class="section-heading">
+
+<div class="section-number">
+04 / DECISION FRAMEWORK
+</div>
+
+<h2>
+Choose opportunities by constraints, not excitement.
+</h2>
+
+<p>
+An opportunity isn't good simply because it sounds impressive.
+Evaluate whether it actually fits your situation.
+</p>
+
+</div>
+
+
+<table class="decision-table">
+
+<tr>
+<th>What matters?</th>
+<th>Look for</th>
+<th>Be careful about</th>
+</tr>
+
+<tr>
+<td>Speed</td>
+<td>Short training, paid work, apprenticeships, immediate applications</td>
+<td>Long programs with no clear employment outcome</td>
+</tr>
+
+<tr>
+<td>Low Cost</td>
+<td>Free education, grants, scholarships, employer-paid training</td>
+<td>Expensive programs with vague promises</td>
+</tr>
+
+<tr>
+<td>Experience</td>
+<td>Projects, internships, apprenticeships, volunteer work</td>
+<td>Collecting credentials without practical evidence</td>
+</tr>
+
+<tr>
+<td>Income Growth</td>
+<td>Skills with advancement, demand, specialization, and portability</td>
+<td>Only comparing today's starting salary</td>
+</tr>
+
+<tr>
+<td>Remote Work</td>
+<td>Digitally deliverable skills and remote-capable occupations</td>
+<td>Assuming every online job is legitimate</td>
+</tr>
+
+<tr>
+<td>Credential</td>
+<td>Qualifications explicitly valued by target employers</td>
+<td>Collecting unrelated certificates</td>
+</tr>
+
+<tr>
+<td>Mobility</td>
+<td>Relocation programs, international pathways, remote employment</td>
+<td>Moving without researching actual employment conditions</td>
+</tr>
+
+<tr>
+<td>Independence</td>
+<td>Freelancing, entrepreneurship, products, services</td>
+<td>Starting without validating whether people will pay</td>
+</tr>
+
+</table>
+
+</div>
+
+</section>
+
+
+<!-- ======================================================
+     EVIDENCE
+====================================================== -->
+
+<section class="section cream" id="evidence">
+
+<div class="section-inner">
+
+<div class="section-heading">
+
+<div class="section-number">
+05 / BUILD EVIDENCE
+</div>
+
+<h2>
+Make your ability easier for other people to believe.
+</h2>
+
+<p>
+Credentials tell people what you studied. Evidence can show what you can do.
+Strong candidates build both when both are useful.
+</p>
+
+</div>
+
+
+<div class="evidence-box">
+
+<h3>Evidence You Can Build Yourself</h3>
+
+<ul class="evidence-list">
+
+<li>Portfolio website</li>
+<li>Technical projects</li>
+<li>GitHub repositories</li>
+<li>Case studies</li>
+<li>Writing samples</li>
+<li>Data analysis projects</li>
+<li>Design projects</li>
+<li>Automation projects</li>
+<li>Documentation</li>
+<li>Demonstration videos</li>
+<li>Personal experiments</li>
+<li>Open-source contributions</li>
+
+</ul>
+
+</div>
+
+
+<div class="evidence-box">
+
+<h3>Evidence Other People Can Confirm</h3>
+
+<ul class="evidence-list">
+
+<li>Employment history</li>
+<li>Internships</li>
+<li>Apprenticeships</li>
+<li>Client work</li>
+<li>References</li>
+<li>Recommendations</li>
+<li>Published work</li>
+<li>Competition results</li>
+<li>Volunteer projects</li>
+<li>Professional memberships</li>
+<li>Employer assessments</li>
+<li>Completed contracts</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ======================================================
+     OPPORTUNITY SEARCH SOURCES
+====================================================== -->
+
+<section class="section soft-brown">
+
+<div class="section-inner">
+
+<div class="section-heading">
+
+<div class="section-number">
+06 / WHERE TO SEARCH
+</div>
+
+<h2>
+Build a portfolio of places to search.
+</h2>
+
+<p>
+Don't depend on one website. Different opportunity types appear in different ecosystems.
+</p>
+
+</div>
+
+
+<div class="source-box">
+
+<h3>Government & Public Programs</h3>
+
+<p>
+Look for workforce development, training assistance, grants,
+education programs, public employment programs, and regional initiatives.
+</p>
+
+<span class="source-type">PUBLIC RESOURCES</span>
+
+</div>
+
+
+<div class="source-box">
+
+<h3>Employers</h3>
+
+<p>
+Search company career pages for apprenticeships, internships,
+paid training, entry-level roles, returnships, and career-development programs.
+</p>
+
+<span class="source-type">EMPLOYER OPPORTUNITIES</span>
+
+</div>
+
+
+<div class="source-box">
+
+<h3>Universities & Colleges</h3>
+
+<p>
+Look beyond degree admissions. Search continuing education,
+certificates, research opportunities, scholarships, workforce programs,
+and public educational resources.
+</p>
+
+<span class="source-type">EDUCATION</span>
+
+</div>
+
+
+<div class="source-box">
+
+<h3>Professional Organizations</h3>
+
+<p>
+Industry organizations often publish scholarships, competitions,
+certifications, events, mentorship programs, and career resources.
+</p>
+
+<span class="source-type">PROFESSIONAL NETWORKS</span>
+
+</div>
+
+
+<div class="source-box">
+
+<h3>Economic Development Organizations</h3>
+
+<p>
+Cities and regions sometimes provide programs designed to attract
+businesses, workers, entrepreneurs, and specialized talent.
+</p>
+
+<span class="source-type">MOBILITY</span>
+
+</div>
+
+
+<div class="source-box">
+
+<h3>Foundations & Nonprofits</h3>
+
+<p>
+Nonprofits and foundations may offer grants, fellowships,
+scholarships, training, mentorship, and community programs.
+</p>
+
+<span class="source-type">FUNDING & SUPPORT</span>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- ======================================================
+     SEARCH SYSTEM
+====================================================== -->
+
+<section class="section green">
+
+<div class="section-inner">
+
+<div class="search-panel">
+
+<h2>
+The opportunity search system
+</h2>
+
+<p>
+Instead of searching randomly, run the same process every time.
+This turns opportunity discovery into a repeatable skill.
+</p>
+
+
+<div class="search-rule">
+
+<strong>Important:</strong>
+Don't search only for the job you want.
+Search for the requirements, experiences, funding, training,
+people, organizations, and adjacent pathways that can lead to it.
+
+</div>
+
+
+<div class="search-steps">
+
+<div class="search-step">
+
+<b>01</b>
+
+<strong>Define</strong>
+
+<span>
+Write the outcome you want.
+</span>
+
+</div>
+
+
+<div class="search-step">
+
+<b>02</b>
+
+<strong>Expand</strong>
+
+<span>
+Find multiple ways to reach that outcome.
+</span>
+
+</div>
+
+
+<div class="search-step">
+
+<b>03</b>
+
+<strong>Filter</strong>
+
+<span>
+Remove options that don't fit your constraints.
+</span>
+
+</div>
+
+
+<div class="search-step">
+
+<b>04</b>
+
+<strong>Prepare</strong>
+
+<span>
+Build the evidence and requirements.
+</span>
+
+</div>
+
+
+<div class="search-step">
+
+<b>05</b>
+
+<strong>Act</strong>
+
+<span>
+Apply, contact, build, test, or participate.
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ======================================================
+     WEEKLY SYSTEM
+====================================================== -->
+
+<section class="section paper">
+
+<div class="section-inner">
+
+<div class="section-heading">
+
+<div class="section-number">
+07 / WEEKLY OPPORTUNITY HABIT
+</div>
+
+<h2>
+Don't wait until you're desperate to search.
+</h2>
+
+<p>
+Opportunity discovery works better when it becomes a routine.
+</p>
+
+</div>
+
+
+<div>
+
+<div class="week">
+
+<div class="week-day">
+MONDAY
+</div>
+
+<h3>Discover</h3>
+
+<p>
+Search for new jobs, programs, funding, training, and pathways.
+</p>
+
+</div>
+
+
+<div class="week">
+
+<div class="week-day">
+TUESDAY
+</div>
+
+<h3>Compare</h3>
+
+<p>
+Compare cost, requirements, time, location, income, and evidence.
+</p>
+
+</div>
+
+
+<div class="week">
+
+<div class="week-day">
+WEDNESDAY
+</div>
+
+<h3>Prepare</h3>
+
+<p>
+Improve your resume, portfolio, documents, skills, or application.
+</p>
+
+</div>
+
+
+<div class="week">
+
+<div class="week-day">
+THURSDAY
+</div>
+
+<h3>Apply</h3>
+
+<p>
+Submit applications, contact organizations, or pursue opportunities.
+</p>
+
+</div>
+
+
+<div class="week">
+
+<div class="week-day">
+FRIDAY
+</div>
+
+<h3>Review</h3>
+
+<p>
+Record what you learned and decide what deserves another attempt.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ======================================================
+     FINAL PRINCIPLE
+====================================================== -->
+
+<section class="section green">
+
+<div class="section-inner">
+
+<div class="principle">
+
+<div class="section-number">
+PATHKEEPER PRINCIPLE
+</div>
+
+<h2>
+Your future shouldn't depend on finding one perfect opportunity.
+</h2>
+
+<p>
+Build a system that continuously discovers possibilities,
+evaluates them against your reality, develops the evidence you need,
+and keeps moving toward better options.
+</p>
+
+<div class="principle-rule">
+IDENTIFY → SEARCH → FILTER → PREPARE → APPLY → LEARN → SEARCH AGAIN
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ======================================================
+     FOOTER
+====================================================== -->
+
+<footer class="footer">
+
+<div class="footer-inner">
+
+<div class="footer-title">
+PATHKEEPER / OPPORTUNITY ATLAS
+</div>
+
+<p>
+A continuous opportunity-navigation system for education,
+employment, skills, funding, mobility, and independent work.
+</p>
+
+</div>
+
+</footer>
+
+</div>
+
+</body>
+</html>
