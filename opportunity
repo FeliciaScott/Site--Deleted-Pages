@@ -1,0 +1,3480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Opportunity Atlas | Find Your Next Path</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+:root{
+--bg:#10150f;
+--panel:#182018;
+--panel2:#202a1f;
+--line:#394735;
+--brown:#76543a;
+--brown-dark:#4d3828;
+--brown-light:#a9825b;
+--green:#7fb069;
+--green-bright:#9acb7b;
+--green-dark:#3f6338;
+--cream:#f5f0df;
+--cream-dark:#e3dcc8;
+--muted:#b2b8a8;
+--red:#c8786d;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+background:
+radial-gradient(circle at 10% 0%,rgba(127,176,105,.12),transparent 30%),
+radial-gradient(circle at 90% 10%,rgba(118,84,58,.14),transparent 30%),
+var(--bg);
+color:var(--cream);
+line-height:1.6;
+overflow-x:hidden;
+}
+
+.container{
+width:min(1500px,94%);
+margin:auto;
+}
+
+/* =========================
+HERO
+========================= */
+
+.hero{
+padding:80px 20px 65px;
+border-bottom:1px solid var(--line);
+background:
+linear-gradient(
+135deg,
+rgba(63,99,56,.18),
+rgba(77,56,40,.15)
+);
+}
+
+.eyebrow{
+color:var(--green-bright);
+font-size:.72rem;
+font-weight:900;
+letter-spacing:.2em;
+text-transform:uppercase;
+margin-bottom:16px;
+}
+
+.hero h1{
+font-size:clamp(2.8rem,6vw,6rem);
+line-height:.96;
+max-width:1150px;
+margin-bottom:25px;
+}
+
+.hero h1 span{
+color:var(--green-bright);
+}
+
+.hero p{
+max-width:950px;
+font-size:1.12rem;
+color:var(--muted);
+}
+
+.hero-grid{
+display:grid;
+grid-template-columns:2fr 1fr;
+gap:18px;
+margin-top:38px;
+}
+
+.hero-stat{
+background:rgba(24,32,24,.9);
+border:1px solid var(--line);
+border-radius:18px;
+padding:23px;
+}
+
+.hero-stat:first-child{
+border-left:4px solid var(--green);
+}
+
+.hero-stat:last-child{
+border-left:4px solid var(--brown-light);
+}
+
+.hero-stat strong{
+display:block;
+font-size:2.4rem;
+color:var(--green-bright);
+margin-bottom:3px;
+}
+
+.hero-stat span{
+font-size:.75rem;
+text-transform:uppercase;
+letter-spacing:.1em;
+color:var(--muted);
+}
+
+/* =========================
+MAIN
+========================= */
+
+.dashboard{
+padding:40px 0 80px;
+}
+
+.panel{
+background:
+linear-gradient(
+145deg,
+rgba(24,32,24,.98),
+rgba(16,21,15,.98)
+);
+border:1px solid var(--line);
+border-radius:20px;
+padding:28px;
+margin-bottom:22px;
+}
+
+.panel h2{
+color:var(--green-bright);
+font-size:1.3rem;
+margin-bottom:18px;
+}
+
+/* =========================
+OPPORTUNITY LIBRARY
+========================= */
+
+.opportunity-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:20px;
+margin-bottom:20px;
+}
+
+.result-count{
+font-size:.8rem;
+color:var(--muted);
+}
+
+.opportunity-grid{
+display:grid;
+grid-template-columns:repeat(3,minmax(0,1fr));
+gap:18px;
+width:100%;
+}
+
+.opportunity{
+background:
+linear-gradient(
+145deg,
+#172017,
+#111811
+);
+border:1px solid var(--line);
+border-radius:17px;
+padding:21px;
+display:flex;
+flex-direction:column;
+min-height:310px;
+height:auto;
+overflow:visible;
+word-break:normal;
+overflow-wrap:anywhere;
+transition:.2s;
+}
+
+.opportunity:hover{
+border-color:var(--green);
+transform:translateY(-2px);
+}
+
+.opportunity-top{
+display:flex;
+justify-content:space-between;
+gap:10px;
+margin-bottom:12px;
+}
+
+.tag{
+font-size:.65rem;
+font-weight:900;
+letter-spacing:.1em;
+text-transform:uppercase;
+color:var(--brown-light);
+}
+
+.save{
+background:none;
+border:0;
+padding:0;
+font-size:1.2rem;
+color:var(--muted);
+cursor:pointer;
+}
+
+.save.saved{
+color:var(--green-bright);
+}
+
+.opportunity h3{
+font-size:1.15rem;
+margin-bottom:8px;
+color:var(--cream);
+line-height:1.3;
+}
+
+.opportunity p{
+font-size:.84rem;
+color:var(--muted);
+margin-bottom:15px;
+}
+
+.meta{
+display:flex;
+flex-wrap:wrap;
+gap:6px;
+margin-bottom:16px;
+}
+
+.meta span{
+font-size:.65rem;
+padding:4px 8px;
+border-radius:20px;
+background:#253023;
+color:#d1dfc6;
+border:1px solid #344331;
+}
+
+.opportunity-footer{
+margin-top:auto;
+display:flex;
+gap:8px;
+padding-top:10px;
+}
+
+.opportunity-footer a{
+flex:1;
+text-decoration:none;
+text-align:center;
+padding:11px;
+border-radius:9px;
+font-weight:900;
+font-size:.78rem;
+background:var(--green);
+color:#10150f;
+}
+
+.opportunity-footer button{
+background:var(--brown-dark);
+color:var(--cream);
+border:1px solid var(--brown);
+}
+
+button:hover,
+.opportunity-footer a:hover{
+filter:brightness(1.1);
+}
+
+/* =========================
+DISCOVERY
+========================= */
+
+.discovery{
+display:grid;
+grid-template-columns:1.5fr 1fr;
+gap:20px;
+}
+
+.discovery-box{
+background:
+linear-gradient(
+145deg,
+#253224,
+#151c15
+);
+border:1px solid #42523d;
+border-radius:17px;
+padding:23px;
+height:100%;
+}
+
+.discovery-box h3{
+color:var(--green-bright);
+margin-bottom:8px;
+}
+
+.discovery-box p{
+color:var(--muted);
+font-size:.88rem;
+}
+
+.path-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:12px;
+margin-top:18px;
+}
+
+.path{
+background:#111811;
+border:1px solid var(--line);
+border-radius:12px;
+padding:16px;
+}
+
+.path strong{
+display:block;
+color:var(--cream);
+}
+
+.path span{
+font-size:.76rem;
+color:var(--muted);
+}
+
+/* =========================
+TRACKER
+========================= */
+
+.tracker-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:12px;
+}
+
+.tracker-stat{
+background:#172017;
+border:1px solid var(--line);
+border-radius:13px;
+padding:18px;
+}
+
+.tracker-stat strong{
+display:block;
+font-size:2rem;
+color:var(--green-bright);
+}
+
+.tracker-stat span{
+font-size:.68rem;
+color:var(--muted);
+text-transform:uppercase;
+letter-spacing:.08em;
+}
+
+.tracker-form{
+display:grid;
+grid-template-columns:2fr 1fr 1fr auto;
+gap:10px;
+margin-top:20px;
+}
+
+input,
+select{
+width:100%;
+background:#10160f;
+border:1px solid var(--line);
+border-radius:10px;
+padding:13px;
+color:var(--cream);
+font-size:.95rem;
+outline:none;
+}
+
+input:focus,
+select:focus{
+border-color:var(--green);
+}
+
+button{
+border:0;
+border-radius:10px;
+padding:12px 17px;
+font-weight:900;
+cursor:pointer;
+font-size:.88rem;
+}
+
+.primary{
+background:var(--green);
+color:#10150f;
+}
+
+.secondary{
+background:var(--brown-dark);
+color:var(--cream);
+border:1px solid var(--brown);
+}
+
+.gold{
+background:var(--brown-light);
+color:#17100a;
+}
+
+.danger{
+background:#3d2521;
+color:#ffb8b0;
+}
+
+.tracker-list{
+margin-top:18px;
+display:grid;
+gap:9px;
+}
+
+.tracker-item{
+display:grid;
+grid-template-columns:2fr 1fr 1fr auto;
+gap:10px;
+align-items:center;
+background:#172017;
+border:1px solid var(--line);
+border-radius:10px;
+padding:13px;
+}
+
+.tracker-item strong{
+color:var(--cream);
+}
+
+.tracker-item span{
+font-size:.78rem;
+color:var(--muted);
+}
+
+.status{
+display:inline-block;
+padding:4px 8px;
+border-radius:20px;
+font-size:.62rem;
+font-weight:900;
+text-transform:uppercase;
+}
+
+.research{
+background:#29402c;
+color:#b9e6a7;
+}
+
+.preparing{
+background:#4a4128;
+color:#e5d797;
+}
+
+.applied{
+background:#304338;
+color:#b9d8b0;
+}
+
+.rejected{
+background:#422625;
+color:#ffb2aa;
+}
+
+.won{
+background:#2e4b2f;
+color:#b8edaa;
+}
+
+/* =========================
+WARNING
+========================= */
+
+.warning{
+margin-top:20px;
+padding:20px;
+border-left:3px solid var(--brown-light);
+background:#1b2119;
+border-radius:10px;
+}
+
+.warning h3{
+color:var(--brown-light);
+margin-bottom:5px;
+}
+
+.warning p{
+color:var(--muted);
+font-size:.85rem;
+}
+
+/* =========================
+FOOTER
+========================= */
+
+footer{
+border-top:1px solid var(--line);
+padding:40px 20px;
+text-align:center;
+color:var(--muted);
+background:#0d120d;
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+
+@media(max-width:1100px){
+
+.opportunity-grid{
+grid-template-columns:1fr 1fr;
+}
+
+.tracker-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+.path-grid{
+grid-template-columns:1fr 1fr;
+}
+
+}
+
+@media(max-width:800px){
+
+.hero-grid,
+.discovery{
+grid-template-columns:1fr;
+}
+
+.opportunity-grid{
+grid-template-columns:1fr;
+}
+
+}
+
+@media(max-width:600px){
+
+.hero{
+padding:55px 15px 45px;
+}
+
+.dashboard{
+padding:25px 0 55px;
+}
+
+.panel{
+padding:20px 15px;
+}
+
+.hero-grid{
+grid-template-columns:1fr;
+}
+
+.path-grid,
+.tracker-grid{
+grid-template-columns:1fr;
+}
+
+.tracker-form{
+grid-template-columns:1fr;
+}
+
+.tracker-item{
+grid-template-columns:1fr;
+}
+
+.opportunity-header{
+align-items:flex-start;
+flex-direction:column;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+HERO
+========================= -->
+
+<section class="hero">
+
+<div class="container">
+
+<div class="eyebrow">
+OPPORTUNITY ATLAS
+</div>
+
+<h1>
+Build more than a career.<br>
+<span>Build options.</span>
+</h1>
+
+<p>
+A continuously searchable map of programs, pathways, funding,
+residencies, fellowships, accelerators, scholarships, mentorships,
+international mobility options, volunteering and other ways to
+change your trajectory.
+</p>
+
+<div class="hero-grid">
+
+<div class="hero-stat">
+
+<strong>Keep Multiple Paths Open</strong>
+
+<span>
+Don't allow one rejection, job, school or location to determine your future.
+</span>
+
+</div>
+
+<div class="hero-stat">
+
+<strong id="totalCount">
+0
+</strong>
+
+<span>
+Opportunities in this hub
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<main class="dashboard">
+
+<div class="container">
+
+
+<!-- =========================
+OPPORTUNITIES
+SECTION 01
+========================= -->
+
+<section class="panel">
+
+<div class="opportunity-header">
+
+<h2>
+01 / Opportunity Library
+</h2>
+
+<div class="result-count" id="resultCount">
+Showing opportunities
+</div>
+
+</div>
+
+<div
+class="opportunity-grid"
+id="opportunityGrid">
+</div>
+
+</section>
+
+
+<!-- =========================
+DISCOVERY STRATEGY
+SECTION 02
+========================= -->
+
+<section class="panel">
+
+<h2>
+02 / Opportunity Strategy
+</h2>
+
+<div class="discovery">
+
+<div class="discovery-box">
+
+<h3>
+Stop Searching in Only One Direction
+</h3>
+
+<p>
+A strong opportunity strategy uses several pipelines simultaneously.
+If employment is difficult, look at fellowships. If funding is difficult,
+look at accelerators. If credentials are weak, look at apprenticeships,
+mentorships and projects. If geography is limiting you, investigate
+international mobility pathways.
+</p>
+
+<div class="path-grid">
+
+<div class="path">
+<strong>Career</strong>
+<span>Jobs → internships → apprenticeships</span>
+</div>
+
+<div class="path">
+<strong>Education</strong>
+<span>Scholarships → fellowships → exchanges</span>
+</div>
+
+<div class="path">
+<strong>Business</strong>
+<span>Accelerators → grants → investors</span>
+</div>
+
+<div class="path">
+<strong>Global</strong>
+<span>Residencies → visas → mobility programs</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="discovery-box">
+
+<h3>
+The 5-Path Rule
+</h3>
+
+<p>
+Never let one rejection end your search. Maintain five different
+opportunity categories at different stages.
+</p>
+
+<div class="warning">
+
+<h3>
+Example Pipeline
+</h3>
+
+<p>
+1 active application<br>
+2 opportunities being prepared<br>
+3 opportunities under research<br>
+5 opportunities saved for future cycles
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+WATCHLIST
+SECTION 03
+========================= -->
+
+<section class="panel">
+
+<h2>
+03 / Your Opportunity Watchlist
+</h2>
+
+<div
+class="opportunity-grid"
+id="savedGrid">
+
+<div class="warning">
+
+<h3>
+Nothing saved yet
+</h3>
+
+<p>
+Save opportunities that are not right for you today but may become
+valuable later. Opportunity searching works better as a pipeline
+than as a one-time event.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+TRACKER
+SECTION 04
+========================= -->
+
+<section class="panel">
+
+<h2>
+04 / Application Pipeline
+</h2>
+
+<div class="tracker-grid">
+
+<div class="tracker-stat">
+<strong id="researchCount">0</strong>
+<span>Researching</span>
+</div>
+
+<div class="tracker-stat">
+<strong id="preparingCount">0</strong>
+<span>Preparing</span>
+</div>
+
+<div class="tracker-stat">
+<strong id="appliedCount">0</strong>
+<span>Applied</span>
+</div>
+
+<div class="tracker-stat">
+<strong id="wonCount">0</strong>
+<span>Won</span>
+</div>
+
+</div>
+
+
+<div class="tracker-form">
+
+<input
+id="trackName"
+placeholder="Opportunity name">
+
+<select id="trackStatus">
+
+<option>Researching</option>
+<option>Preparing</option>
+<option>Applied</option>
+<option>Rejected</option>
+<option>Won</option>
+
+</select>
+
+<input
+id="trackDate"
+type="date">
+
+<button
+class="primary"
+onclick="addApplication()">
+
+Add
+
+</button>
+
+</div>
+
+
+<div
+class="tracker-list"
+id="trackerList">
+</div>
+
+</section>
+
+
+<!-- =========================
+OPPORTUNITY INTELLIGENCE
+SECTION 05
+========================= -->
+
+<section class="panel">
+
+<h2>
+05 / Opportunity Intelligence
+</h2>
+
+<div class="discovery">
+
+<div class="discovery-box">
+
+<h3>
+A Rejection Is Data
+</h3>
+
+<p>
+If you repeatedly apply to one class of opportunity and receive no
+traction, don't simply apply harder. Change the variable: eligibility,
+experience, evidence, geography, program type, timing, or target.
+</p>
+
+</div>
+
+<div class="discovery-box">
+
+<h3>
+Search Before You Need It
+</h3>
+
+<p>
+The best time to discover an alternative pathway is before the
+current pathway fails. Build your watchlist while things are going
+well.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+</div>
+
+</main>
+
+
+<footer>
+
+Opportunity Atlas • Search Wider • Build Options • Keep Moving
+
+</footer>
+
+
+<script>
+
+/* =========================
+URL BUILDER
+========================= */
+
+function site(protocol,domain,path=""){
+return protocol + "://" + domain + path;
+}
+
+
+/* =========================
+OPPORTUNITY DATABASE
+The complete original database
+is preserved.
+========================= */
+
+const opportunities = [
+
+{
+name:"Estonia e-Residency",
+category:"Residency",
+type:"business",
+location:"Estonia / Global",
+eligibility:"International founders",
+description:"Digital identity and business infrastructure that can help eligible people establish and manage an EU company remotely.",
+tags:["EU","Business","Remote","Founder"],
+url:site("https","www.e-resident.gov.ee","/"),
+source:"Official Estonia e-Residency"
+},
+
+{
+name:"Estonia Startup Visa",
+category:"Startup",
+type:"global",
+location:"Estonia",
+eligibility:"Non-EU startup founders",
+description:"A pathway for eligible non-EU founders with innovative, scalable startups to relocate and build in Estonia.",
+tags:["Visa","Startup","Europe"],
+url:site("https","startupestonia.ee","/visa"),
+source:"Official Startup Estonia"
+},
+
+{
+name:"Techstars Accelerators",
+category:"Accelerator",
+type:"business",
+location:"Global",
+eligibility:"Early-stage startups",
+description:"Mentorship-driven accelerator programs connecting startups with mentors, investors, partners and capital.",
+tags:["Startup","Mentorship","Capital"],
+url:site("https","www.techstars.com","/accelerators"),
+source:"Official Techstars"
+},
+
+{
+name:"Antler Residency",
+category:"Residency",
+type:"business",
+location:"Multiple global locations",
+eligibility:"Founders / builders",
+description:"Founder residency programs bringing builders together to develop companies, access networks and pursue investment.",
+tags:["Founder","Residency","Investment"],
+url:site("https","www.antler.co","/"),
+source:"Official Antler"
+},
+
+{
+name:"Y Combinator",
+category:"Accelerator",
+type:"business",
+location:"Global",
+eligibility:"Startups",
+description:"One of the world's major startup accelerators. Applications are submitted online for its batches.",
+tags:["Startup","Funding","Global"],
+url:site("https","www.ycombinator.com","/apply/"),
+source:"Official Y Combinator"
+},
+
+{
+name:"Google for Startups",
+category:"Startup",
+type:"business",
+location:"Global",
+eligibility:"Startups varies by program",
+description:"Google programs, technology, communities and specialized initiatives designed to help startups build and scale.",
+tags:["Google","Startup","Technology"],
+url:site("https","startup.google.com","/"),
+source:"Official Google for Startups"
+},
+
+{
+name:"Microsoft for Startups",
+category:"Startup",
+type:"business",
+location:"Global",
+eligibility:"Eligible startups",
+description:"Startup resources including technology, AI capabilities, credits and go-to-market support.",
+tags:["Microsoft","AI","Startup"],
+url:site("https","www.microsoft.com","/en-us/startups/"),
+source:"Official Microsoft"
+},
+
+{
+name:"EIC Accelerator",
+category:"Funding",
+type:"funded",
+location:"Europe",
+eligibility:"Startups and SMEs",
+description:"European Innovation Council support combining grants and potential investment for eligible high-impact innovations.",
+tags:["Grant","Investment","Europe"],
+url:site("https","eic.ec.europa.eu","/eic-funding-opportunities/eic-accelerator_en"),
+source:"European Commission"
+},
+
+{
+name:"EIC Funding Opportunities",
+category:"Funding",
+type:"funded",
+location:"Europe",
+eligibility:"Researchers / innovators / startups varies",
+description:"A broader collection of European Innovation Council funding pathways including Pathfinder, Transition, Pre-Accelerator and Accelerator programs.",
+tags:["EU","Research","Innovation"],
+url:site("https","eic.ec.europa.eu","/funding-opportunities_en"),
+source:"European Commission"
+},
+
+{
+name:"Outreachy",
+category:"Internship",
+type:"career",
+location:"Remote / Global",
+eligibility:"Eligibility varies",
+description:"Paid, remote open-source internships covering programming, research, UX, documentation, design, data science and more.",
+tags:["Remote","Open Source","Paid"],
+url:site("https","www.outreachy.org","/"),
+source:"Official Outreachy"
+},
+
+{
+name:"Linux Foundation Mentorship",
+category:"Mentorship",
+type:"career",
+location:"Remote / Global",
+eligibility:"Developers and open-source contributors",
+description:"Structured mentorship opportunities where participants contribute to open-source projects under experienced mentors.",
+tags:["Open Source","Mentorship","Tech"],
+url:site("https","www.linuxfoundation.org","/about/mentorship-programs/"),
+source:"Linux Foundation"
+},
+
+{
+name:"UN Volunteers",
+category:"Volunteering",
+type:"global",
+location:"Global / Online",
+eligibility:"Varies by assignment",
+description:"International and online volunteering opportunities supporting UN system initiatives and development work.",
+tags:["UN","Global","Volunteer"],
+url:site("https","www.unv.org","/become-volunteer"),
+source:"United Nations Volunteers"
+},
+
+{
+name:"European Solidarity Corps",
+category:"Volunteering",
+type:"global",
+location:"Europe",
+eligibility:"Generally 18–30; humanitarian aid has different age rules",
+description:"Volunteering opportunities across fields including digital technology, health, environment and humanitarian work.",
+tags:["Europe","Volunteer","Youth"],
+url:site("https","youth.europa.eu","/solidarity_en"),
+source:"European Union"
+},
+
+{
+name:"Chevening Scholarships",
+category:"Scholarship",
+type:"funded",
+location:"United Kingdom",
+eligibility:"Applicants from participating countries",
+description:"Fully funded one-year UK master's scholarships for emerging leaders.",
+tags:["UK","Masters","Fully Funded"],
+url:site("https","www.chevening.org","/scholarships/"),
+source:"Official Chevening"
+},
+
+{
+name:"Chevening Fellowships",
+category:"Fellowship",
+type:"global",
+location:"United Kingdom",
+eligibility:"Mid-career professionals varies by program",
+description:"Fellowships for professionals and academics to pursue focused research or professional development.",
+tags:["Fellowship","UK","Research"],
+url:site("https","www.chevening.org","/fellowships/find-a-programme/"),
+source:"Official Chevening"
+},
+
+{
+name:"DAAD Scholarship Database",
+category:"Scholarship",
+type:"learning",
+location:"Germany / Global",
+eligibility:"Students, graduates and researchers varies",
+description:"Searchable database containing DAAD funding and selected external funding opportunities.",
+tags:["Germany","Study","Research"],
+url:site("https","www.daad.org","/en/find-funding/scholarship-database/"),
+source:"DAAD"
+},
+
+{
+name:"Schwarzman Scholars",
+category:"Scholarship",
+type:"funded",
+location:"China",
+eligibility:"Graduate applicants",
+description:"Fully funded master's-level global affairs program at Tsinghua University.",
+tags:["China","Leadership","Masters"],
+url:site("https","www.schwarzmanscholars.org","/"),
+source:"Official Schwarzman Scholars"
+},
+
+{
+name:"GitHub Student Developer Pack",
+category:"Technology",
+type:"learning",
+location:"Global",
+eligibility:"Verified students",
+description:"A large collection of developer tools, services and educational resources available to eligible students.",
+tags:["Students","Developer","Free Tools"],
+url:site("https","education.github.com","/pack"),
+source:"GitHub Education"
+},
+
+{
+name:"Erasmus+ Opportunities",
+category:"Mobility",
+type:"global",
+location:"Europe / Partner countries",
+eligibility:"Varies by program",
+description:"A major European mobility and education framework covering study, training, youth and cooperation opportunities.",
+tags:["Europe","Study","Mobility"],
+url:site("https","erasmus-plus.ec.europa.eu","/"),
+source:"European Commission"
+},
+
+{
+name:"Erasmus for Young Entrepreneurs",
+category:"Mobility",
+type:"business",
+location:"Europe",
+eligibility:"New / aspiring entrepreneurs varies",
+description:"Cross-border exchange allowing entrepreneurs to learn from experienced entrepreneurs in participating countries.",
+tags:["Entrepreneur","Europe","Exchange"],
+url:site("https","www.erasmus-entrepreneurs.eu","/"),
+source:"Erasmus for Young Entrepreneurs"
+},
+
+{
+name:"Google Summer of Code",
+category:"Internship",
+type:"career",
+location:"Global / Remote",
+eligibility:"Eligible contributors",
+description:"A global open-source development program connecting contributors with open-source organizations.",
+tags:["Open Source","Coding","Global"],
+url:site("https","summerofcode.withgoogle.com","/"),
+source:"Google Summer of Code"
+},
+
+{
+name:"SBA Funding Programs",
+category:"Funding",
+type:"funded",
+location:"United States",
+eligibility:"U.S. small businesses varies",
+description:"U.S. Small Business Administration resources covering loans, grants, investment-related programs and other funding pathways.",
+tags:["USA","Business","Funding"],
+url:site("https","www.sba.gov","/funding-programs"),
+source:"U.S. Small Business Administration"
+},
+
+{
+name:"NSF America’s Seed Fund",
+category:"Funding",
+type:"funded",
+location:"United States",
+eligibility:"Eligible technology startups",
+description:"Funding pathway for deep-tech and science-based startups developing technologies with commercial potential.",
+tags:["USA","Deep Tech","Research"],
+url:site("https","seedfund.nsf.gov","/"),
+source:"National Science Foundation"
+},
+
+{
+name:"Fulbright Foreign Student Program",
+category:"Scholarship",
+type:"funded",
+location:"United States",
+eligibility:"International students varies by country",
+description:"Graduate-level study and research opportunities in the United States for eligible international applicants.",
+tags:["USA","Graduate","International"],
+url:site("https","foreign.fulbrightonline.org","/"),
+source:"Fulbright"
+},
+
+{
+name:"Marie Skłodowska-Curie Actions",
+category:"Fellowship",
+type:"learning",
+location:"Europe / Global",
+eligibility:"Researchers varies",
+description:"European research and mobility opportunities supporting researchers at different career stages.",
+tags:["Research","Europe","Science"],
+url:site("https","marie-sklodowska-curie-actions.ec.europa.eu","/"),
+source:"European Commission"
+},
+
+{
+name:"Mozilla Foundation / Builders Programs",
+category:"Technology",
+type:"business",
+location:"Global",
+eligibility:"Varies by program",
+description:"Mozilla programs and initiatives around technology, open internet, responsible innovation and builders.",
+tags:["Technology","Open Web","Innovation"],
+url:site("https","www.mozillafoundation.org","/"),
+source:"Mozilla Foundation"
+}
+
+];
+
+
+/* =========================
+COUNT
+========================= */
+
+document.getElementById("totalCount").textContent =
+opportunities.length;
+
+
+/* =========================
+RENDER OPPORTUNITIES
+========================= */
+
+function renderOpportunities(list){
+
+const grid =
+document.getElementById("opportunityGrid");
+
+document.getElementById("resultCount").textContent =
+"Showing " + list.length + " opportunities";
+
+
+if(list.length === 0){
+
+grid.innerHTML = `
+<div class="warning">
+<h3>No opportunities found</h3>
+<p>
+There are currently no matching opportunities in this library.
+Try another category or search term.
+</p>
+</div>
+`;
+
+return;
+
+}
+
+
+grid.innerHTML =
+list.map(item => {
+
+const index =
+opportunities.indexOf(item);
+
+const saved =
+isSaved(index);
+
+return `
+
+<article class="opportunity">
+
+<div class="opportunity-top">
+
+<div class="tag">
+${item.category}
+</div>
+
+<button
+class="save ${saved ? "saved":""}"
+onclick="toggleSave(${index})"
+title="Save opportunity">
+
+${saved ? "★":"☆"}
+
+</button>
+
+</div>
+
+<h3>
+${item.name}
+</h3>
+
+<p>
+${item.description}
+</p>
+
+<div class="meta">
+
+<span>${item.location}</span>
+<span>${item.eligibility}</span>
+
+${item.tags.map(
+tag => `<span>${tag}</span>`
+).join("")}
+
+</div>
+
+<div class="opportunity-footer">
+
+<a
+href="${item.url}"
+target="_blank"
+rel="noopener noreferrer">
+
+Official Site
+
+</a>
+
+<button
+onclick="trackOpportunity('${item.name.replace(/'/g,"\\'")}')">
+
+Track
+
+</button>
+
+</div>
+
+</article>
+
+`;
+
+}).join("");
+
+}
+
+
+/* =========================
+WATCHLIST
+========================= */
+
+function getSaved(){
+
+return JSON.parse(
+localStorage.getItem(
+"opportunityAtlasSaved"
+) || "[]"
+);
+
+}
+
+
+function isSaved(index){
+
+return getSaved().includes(index);
+
+}
+
+
+function toggleSave(index){
+
+let saved =
+getSaved();
+
+if(saved.includes(index)){
+
+saved =
+saved.filter(
+item => item !== index
+);
+
+}
+else{
+
+saved.push(index);
+
+}
+
+localStorage.setItem(
+"opportunityAtlasSaved",
+JSON.stringify(saved)
+);
+
+renderSaved();
+
+renderOpportunities(opportunities);
+
+}
+
+
+function renderSaved(){
+
+const grid =
+document.getElementById("savedGrid");
+
+const saved =
+getSaved();
+
+if(saved.length === 0){
+
+grid.innerHTML = `
+<div class="warning">
+<h3>Nothing saved yet</h3>
+<p>
+Save opportunities that may become useful later.
+</p>
+</div>
+`;
+
+return;
+
+}
+
+
+grid.innerHTML =
+saved.map(index => {
+
+const item =
+opportunities[index];
+
+return `
+
+<article class="opportunity">
+
+<div class="opportunity-top">
+
+<div class="tag">
+${item.category}
+</div>
+
+<button
+class="save saved"
+onclick="toggleSave(${index})">
+
+★
+
+</button>
+
+</div>
+
+<h3>
+${item.name}
+</h3>
+
+<p>
+${item.description}
+</p>
+
+<div class="meta">
+
+<span>${item.location}</span>
+
+${item.tags.map(
+tag => `<span>${tag}</span>`
+).join("")}
+
+</div>
+
+<div class="opportunity-footer">
+
+<a
+href="${item.url}"
+target="_blank"
+rel="noopener noreferrer">
+
+Open
+
+</a>
+
+</div>
+
+</article>
+
+`;
+
+}).join("");
+
+}
+
+
+/* =========================
+APPLICATION TRACKER
+========================= */
+
+let applications =
+JSON.parse(
+localStorage.getItem(
+"opportunityAtlasApplications"
+) || "[]"
+);
+
+
+function addApplication(){
+
+const name =
+document.getElementById("trackName")
+.value.trim();
+
+const status =
+document.getElementById("trackStatus")
+.value;
+
+const date =
+document.getElementById("trackDate")
+.value;
+
+if(!name){
+
+alert(
+"Enter an opportunity name."
+);
+
+return;
+
+}
+
+applications.push({
+name,
+status,
+date
+});
+
+saveApplications();
+
+document.getElementById("trackName")
+.value = "";
+
+renderApplications();
+
+}
+
+
+function trackOpportunity(name){
+
+document.getElementById("trackName")
+.value =
+name;
+
+document
+.getElementById("trackName")
+.scrollIntoView({
+behavior:"smooth",
+block:"center"
+});
+
+}
+
+
+function saveApplications(){
+
+localStorage.setItem(
+"opportunityAtlasApplications",
+JSON.stringify(applications)
+);
+
+}
+
+
+function renderApplications(){
+
+const list =
+document.getElementById("trackerList");
+
+if(applications.length === 0){
+
+list.innerHTML =
+`
+<div class="warning">
+<h3>Your pipeline is empty</h3>
+<p>
+Track opportunities here so your search becomes a pipeline instead
+of a collection of bookmarks.
+</p>
+</div>
+`;
+
+}
+else{
+
+list.innerHTML =
+applications.map(
+(item,index) => {
+
+let cls =
+item.status
+.toLowerCase()
+.replace(" ","");
+
+return `
+
+<div class="tracker-item">
+
+<strong>
+${item.name}
+</strong>
+
+<span>
+${item.date || "No date"}
+</span>
+
+<span>
+<span class="status ${cls}">
+${item.status}
+</span>
+</span>
+
+<button
+class="danger"
+onclick="removeApplication(${index})">
+
+Remove
+
+</button>
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+
+updateTrackerStats();
+
+}
+
+
+function removeApplication(index){
+
+applications.splice(index,1);
+
+saveApplications();
+
+renderApplications();
+
+}
+
+
+function updateTrackerStats(){
+
+document.getElementById("researchCount")
+.textContent =
+applications.filter(
+x => x.status === "Researching"
+).length;
+
+document.getElementById("preparingCount")
+.textContent =
+applications.filter(
+x => x.status === "Preparing"
+).length;
+
+document.getElementById("appliedCount")
+.textContent =
+applications.filter(
+x => x.status === "Applied"
+).length;
+
+document.getElementById("wonCount")
+.textContent =
+applications.filter(
+x => x.status === "Won"
+).length;
+
+}
+
+
+/* =========================
+INITIALIZE
+========================= */
+
+renderOpportunities(opportunities);
+
+renderSaved();
+
+renderApplications();
+
+</script>
+
+</body>
+</html>
+```
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Opportunity Atlas | Find Your Next Path</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+:root{
+--bg:#10150f;
+--panel:#182018;
+--panel2:#202a1f;
+--line:#394735;
+--brown:#76543a;
+--brown-dark:#4d3828;
+--brown-light:#a9825b;
+--green:#7fb069;
+--green-bright:#9acb7b;
+--green-dark:#3f6338;
+--cream:#f5f0df;
+--cream-dark:#e3dcc8;
+--muted:#b2b8a8;
+--red:#c8786d;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+background:
+radial-gradient(circle at 10% 0%,rgba(127,176,105,.12),transparent 30%),
+radial-gradient(circle at 90% 10%,rgba(118,84,58,.14),transparent 30%),
+var(--bg);
+color:var(--cream);
+line-height:1.6;
+overflow-x:hidden;
+}
+
+.container{
+width:min(1500px,94%);
+margin:auto;
+}
+
+/* =========================
+HERO
+========================= */
+
+.hero{
+padding:80px 20px 65px;
+border-bottom:1px solid var(--line);
+background:
+linear-gradient(
+135deg,
+rgba(63,99,56,.18),
+rgba(77,56,40,.15)
+);
+}
+
+.eyebrow{
+color:var(--green-bright);
+font-size:.72rem;
+font-weight:900;
+letter-spacing:.2em;
+text-transform:uppercase;
+margin-bottom:16px;
+}
+
+.hero h1{
+font-size:clamp(2.8rem,6vw,6rem);
+line-height:.96;
+max-width:1150px;
+margin-bottom:25px;
+}
+
+.hero h1 span{
+color:var(--green-bright);
+}
+
+.hero p{
+max-width:950px;
+font-size:1.12rem;
+color:var(--muted);
+}
+
+.hero-grid{
+display:grid;
+grid-template-columns:2fr 1fr;
+gap:18px;
+margin-top:38px;
+}
+
+.hero-stat{
+background:rgba(24,32,24,.9);
+border:1px solid var(--line);
+border-radius:18px;
+padding:23px;
+}
+
+.hero-stat:first-child{
+border-left:4px solid var(--green);
+}
+
+.hero-stat:last-child{
+border-left:4px solid var(--brown-light);
+}
+
+.hero-stat strong{
+display:block;
+font-size:2.4rem;
+color:var(--green-bright);
+margin-bottom:3px;
+}
+
+.hero-stat span{
+font-size:.75rem;
+text-transform:uppercase;
+letter-spacing:.1em;
+color:var(--muted);
+}
+
+/* =========================
+MAIN
+========================= */
+
+.dashboard{
+padding:40px 0 80px;
+}
+
+.panel{
+background:
+linear-gradient(
+145deg,
+rgba(24,32,24,.98),
+rgba(16,21,15,.98)
+);
+border:1px solid var(--line);
+border-radius:20px;
+padding:28px;
+margin-bottom:22px;
+}
+
+.panel h2{
+color:var(--green-bright);
+font-size:1.3rem;
+margin-bottom:18px;
+}
+
+/* =========================
+OPPORTUNITY LIBRARY
+========================= */
+
+.opportunity-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:20px;
+margin-bottom:20px;
+}
+
+.result-count{
+font-size:.8rem;
+color:var(--muted);
+}
+
+.opportunity-grid{
+display:grid;
+grid-template-columns:repeat(3,minmax(0,1fr));
+gap:18px;
+width:100%;
+}
+
+.opportunity{
+background:
+linear-gradient(
+145deg,
+#172017,
+#111811
+);
+border:1px solid var(--line);
+border-radius:17px;
+padding:21px;
+display:flex;
+flex-direction:column;
+min-height:310px;
+height:auto;
+overflow:visible;
+word-break:normal;
+overflow-wrap:anywhere;
+transition:.2s;
+}
+
+.opportunity:hover{
+border-color:var(--green);
+transform:translateY(-2px);
+}
+
+.opportunity-top{
+display:flex;
+justify-content:space-between;
+gap:10px;
+margin-bottom:12px;
+}
+
+.tag{
+font-size:.65rem;
+font-weight:900;
+letter-spacing:.1em;
+text-transform:uppercase;
+color:var(--brown-light);
+}
+
+.save{
+background:none;
+border:0;
+padding:0;
+font-size:1.2rem;
+color:var(--muted);
+cursor:pointer;
+}
+
+.save.saved{
+color:var(--green-bright);
+}
+
+.opportunity h3{
+font-size:1.15rem;
+margin-bottom:8px;
+color:var(--cream);
+line-height:1.3;
+}
+
+.opportunity p{
+font-size:.84rem;
+color:var(--muted);
+margin-bottom:15px;
+}
+
+.meta{
+display:flex;
+flex-wrap:wrap;
+gap:6px;
+margin-bottom:16px;
+}
+
+.meta span{
+font-size:.65rem;
+padding:4px 8px;
+border-radius:20px;
+background:#253023;
+color:#d1dfc6;
+border:1px solid #344331;
+}
+
+.opportunity-footer{
+margin-top:auto;
+display:flex;
+gap:8px;
+padding-top:10px;
+}
+
+.opportunity-footer a{
+flex:1;
+text-decoration:none;
+text-align:center;
+padding:11px;
+border-radius:9px;
+font-weight:900;
+font-size:.78rem;
+background:var(--green);
+color:#10150f;
+}
+
+.opportunity-footer button{
+background:var(--brown-dark);
+color:var(--cream);
+border:1px solid var(--brown);
+}
+
+button:hover,
+.opportunity-footer a:hover{
+filter:brightness(1.1);
+}
+
+/* =========================
+DISCOVERY
+========================= */
+
+.discovery{
+display:grid;
+grid-template-columns:1.5fr 1fr;
+gap:20px;
+}
+
+.discovery-box{
+background:
+linear-gradient(
+145deg,
+#253224,
+#151c15
+);
+border:1px solid #42523d;
+border-radius:17px;
+padding:23px;
+height:100%;
+}
+
+.discovery-box h3{
+color:var(--green-bright);
+margin-bottom:8px;
+}
+
+.discovery-box p{
+color:var(--muted);
+font-size:.88rem;
+}
+
+.path-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:12px;
+margin-top:18px;
+}
+
+.path{
+background:#111811;
+border:1px solid var(--line);
+border-radius:12px;
+padding:16px;
+}
+
+.path strong{
+display:block;
+color:var(--cream);
+}
+
+.path span{
+font-size:.76rem;
+color:var(--muted);
+}
+
+/* =========================
+TRACKER
+========================= */
+
+.tracker-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:12px;
+}
+
+.tracker-stat{
+background:#172017;
+border:1px solid var(--line);
+border-radius:13px;
+padding:18px;
+}
+
+.tracker-stat strong{
+display:block;
+font-size:2rem;
+color:var(--green-bright);
+}
+
+.tracker-stat span{
+font-size:.68rem;
+color:var(--muted);
+text-transform:uppercase;
+letter-spacing:.08em;
+}
+
+.tracker-form{
+display:grid;
+grid-template-columns:2fr 1fr 1fr auto;
+gap:10px;
+margin-top:20px;
+}
+
+input,
+select{
+width:100%;
+background:#10160f;
+border:1px solid var(--line);
+border-radius:10px;
+padding:13px;
+color:var(--cream);
+font-size:.95rem;
+outline:none;
+}
+
+input:focus,
+select:focus{
+border-color:var(--green);
+}
+
+button{
+border:0;
+border-radius:10px;
+padding:12px 17px;
+font-weight:900;
+cursor:pointer;
+font-size:.88rem;
+}
+
+.primary{
+background:var(--green);
+color:#10150f;
+}
+
+.secondary{
+background:var(--brown-dark);
+color:var(--cream);
+border:1px solid var(--brown);
+}
+
+.gold{
+background:var(--brown-light);
+color:#17100a;
+}
+
+.danger{
+background:#3d2521;
+color:#ffb8b0;
+}
+
+.tracker-list{
+margin-top:18px;
+display:grid;
+gap:9px;
+}
+
+.tracker-item{
+display:grid;
+grid-template-columns:2fr 1fr 1fr auto;
+gap:10px;
+align-items:center;
+background:#172017;
+border:1px solid var(--line);
+border-radius:10px;
+padding:13px;
+}
+
+.tracker-item strong{
+color:var(--cream);
+}
+
+.tracker-item span{
+font-size:.78rem;
+color:var(--muted);
+}
+
+.status{
+display:inline-block;
+padding:4px 8px;
+border-radius:20px;
+font-size:.62rem;
+font-weight:900;
+text-transform:uppercase;
+}
+
+.research{
+background:#29402c;
+color:#b9e6a7;
+}
+
+.preparing{
+background:#4a4128;
+color:#e5d797;
+}
+
+.applied{
+background:#304338;
+color:#b9d8b0;
+}
+
+.rejected{
+background:#422625;
+color:#ffb2aa;
+}
+
+.won{
+background:#2e4b2f;
+color:#b8edaa;
+}
+
+/* =========================
+WARNING
+========================= */
+
+.warning{
+margin-top:20px;
+padding:20px;
+border-left:3px solid var(--brown-light);
+background:#1b2119;
+border-radius:10px;
+}
+
+.warning h3{
+color:var(--brown-light);
+margin-bottom:5px;
+}
+
+.warning p{
+color:var(--muted);
+font-size:.85rem;
+}
+
+/* =========================
+FOOTER
+========================= */
+
+footer{
+border-top:1px solid var(--line);
+padding:40px 20px;
+text-align:center;
+color:var(--muted);
+background:#0d120d;
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+
+@media(max-width:1100px){
+
+.opportunity-grid{
+grid-template-columns:1fr 1fr;
+}
+
+.tracker-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+.path-grid{
+grid-template-columns:1fr 1fr;
+}
+
+}
+
+@media(max-width:800px){
+
+.hero-grid,
+.discovery{
+grid-template-columns:1fr;
+}
+
+.opportunity-grid{
+grid-template-columns:1fr;
+}
+
+}
+
+@media(max-width:600px){
+
+.hero{
+padding:55px 15px 45px;
+}
+
+.dashboard{
+padding:25px 0 55px;
+}
+
+.panel{
+padding:20px 15px;
+}
+
+.hero-grid{
+grid-template-columns:1fr;
+}
+
+.path-grid,
+.tracker-grid{
+grid-template-columns:1fr;
+}
+
+.tracker-form{
+grid-template-columns:1fr;
+}
+
+.tracker-item{
+grid-template-columns:1fr;
+}
+
+.opportunity-header{
+align-items:flex-start;
+flex-direction:column;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+HERO
+========================= -->
+
+<section class="hero">
+
+<div class="container">
+
+<div class="eyebrow">
+OPPORTUNITY ATLAS
+</div>
+
+<h1>
+Build more than a career.<br>
+<span>Build options.</span>
+</h1>
+
+<p>
+A continuously searchable map of programs, pathways, funding,
+residencies, fellowships, accelerators, scholarships, mentorships,
+international mobility options, volunteering and other ways to
+change your trajectory.
+</p>
+
+<div class="hero-grid">
+
+<div class="hero-stat">
+
+<strong>Keep Multiple Paths Open</strong>
+
+<span>
+Don't allow one rejection, job, school or location to determine your future.
+</span>
+
+</div>
+
+<div class="hero-stat">
+
+<strong id="totalCount">
+0
+</strong>
+
+<span>
+Opportunities in this hub
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<main class="dashboard">
+
+<div class="container">
+
+
+<!-- =========================
+OPPORTUNITIES
+SECTION 01
+========================= -->
+
+<section class="panel">
+
+<div class="opportunity-header">
+
+<h2>
+01 / Opportunity Library
+</h2>
+
+<div class="result-count" id="resultCount">
+Showing opportunities
+</div>
+
+</div>
+
+<div
+class="opportunity-grid"
+id="opportunityGrid">
+</div>
+
+</section>
+
+
+<!-- =========================
+DISCOVERY STRATEGY
+SECTION 02
+========================= -->
+
+<section class="panel">
+
+<h2>
+02 / Opportunity Strategy
+</h2>
+
+<div class="discovery">
+
+<div class="discovery-box">
+
+<h3>
+Stop Searching in Only One Direction
+</h3>
+
+<p>
+A strong opportunity strategy uses several pipelines simultaneously.
+If employment is difficult, look at fellowships. If funding is difficult,
+look at accelerators. If credentials are weak, look at apprenticeships,
+mentorships and projects. If geography is limiting you, investigate
+international mobility pathways.
+</p>
+
+<div class="path-grid">
+
+<div class="path">
+<strong>Career</strong>
+<span>Jobs → internships → apprenticeships</span>
+</div>
+
+<div class="path">
+<strong>Education</strong>
+<span>Scholarships → fellowships → exchanges</span>
+</div>
+
+<div class="path">
+<strong>Business</strong>
+<span>Accelerators → grants → investors</span>
+</div>
+
+<div class="path">
+<strong>Global</strong>
+<span>Residencies → visas → mobility programs</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="discovery-box">
+
+<h3>
+The 5-Path Rule
+</h3>
+
+<p>
+Never let one rejection end your search. Maintain five different
+opportunity categories at different stages.
+</p>
+
+<div class="warning">
+
+<h3>
+Example Pipeline
+</h3>
+
+<p>
+1 active application<br>
+2 opportunities being prepared<br>
+3 opportunities under research<br>
+5 opportunities saved for future cycles
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+WATCHLIST
+SECTION 03
+========================= -->
+
+<section class="panel">
+
+<h2>
+03 / Your Opportunity Watchlist
+</h2>
+
+<div
+class="opportunity-grid"
+id="savedGrid">
+
+<div class="warning">
+
+<h3>
+Nothing saved yet
+</h3>
+
+<p>
+Save opportunities that are not right for you today but may become
+valuable later. Opportunity searching works better as a pipeline
+than as a one-time event.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+TRACKER
+SECTION 04
+========================= -->
+
+<section class="panel">
+
+<h2>
+04 / Application Pipeline
+</h2>
+
+<div class="tracker-grid">
+
+<div class="tracker-stat">
+<strong id="researchCount">0</strong>
+<span>Researching</span>
+</div>
+
+<div class="tracker-stat">
+<strong id="preparingCount">0</strong>
+<span>Preparing</span>
+</div>
+
+<div class="tracker-stat">
+<strong id="appliedCount">0</strong>
+<span>Applied</span>
+</div>
+
+<div class="tracker-stat">
+<strong id="wonCount">0</strong>
+<span>Won</span>
+</div>
+
+</div>
+
+
+<div class="tracker-form">
+
+<input
+id="trackName"
+placeholder="Opportunity name">
+
+<select id="trackStatus">
+
+<option>Researching</option>
+<option>Preparing</option>
+<option>Applied</option>
+<option>Rejected</option>
+<option>Won</option>
+
+</select>
+
+<input
+id="trackDate"
+type="date">
+
+<button
+class="primary"
+onclick="addApplication()">
+
+Add
+
+</button>
+
+</div>
+
+
+<div
+class="tracker-list"
+id="trackerList">
+</div>
+
+</section>
+
+
+<!-- =========================
+OPPORTUNITY INTELLIGENCE
+SECTION 05
+========================= -->
+
+<section class="panel">
+
+<h2>
+05 / Opportunity Intelligence
+</h2>
+
+<div class="discovery">
+
+<div class="discovery-box">
+
+<h3>
+A Rejection Is Data
+</h3>
+
+<p>
+If you repeatedly apply to one class of opportunity and receive no
+traction, don't simply apply harder. Change the variable: eligibility,
+experience, evidence, geography, program type, timing, or target.
+</p>
+
+</div>
+
+<div class="discovery-box">
+
+<h3>
+Search Before You Need It
+</h3>
+
+<p>
+The best time to discover an alternative pathway is before the
+current pathway fails. Build your watchlist while things are going
+well.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+</div>
+
+</main>
+
+
+<footer>
+
+Opportunity Atlas • Search Wider • Build Options • Keep Moving
+
+</footer>
+
+
+<script>
+
+/* =========================
+URL BUILDER
+========================= */
+
+function site(protocol,domain,path=""){
+return protocol + "://" + domain + path;
+}
+
+
+/* =========================
+OPPORTUNITY DATABASE
+The complete original database
+is preserved.
+========================= */
+
+const opportunities = [
+
+{
+name:"Estonia e-Residency",
+category:"Residency",
+type:"business",
+location:"Estonia / Global",
+eligibility:"International founders",
+description:"Digital identity and business infrastructure that can help eligible people establish and manage an EU company remotely.",
+tags:["EU","Business","Remote","Founder"],
+url:site("https","www.e-resident.gov.ee","/"),
+source:"Official Estonia e-Residency"
+},
+
+{
+name:"Estonia Startup Visa",
+category:"Startup",
+type:"global",
+location:"Estonia",
+eligibility:"Non-EU startup founders",
+description:"A pathway for eligible non-EU founders with innovative, scalable startups to relocate and build in Estonia.",
+tags:["Visa","Startup","Europe"],
+url:site("https","startupestonia.ee","/visa"),
+source:"Official Startup Estonia"
+},
+
+{
+name:"Techstars Accelerators",
+category:"Accelerator",
+type:"business",
+location:"Global",
+eligibility:"Early-stage startups",
+description:"Mentorship-driven accelerator programs connecting startups with mentors, investors, partners and capital.",
+tags:["Startup","Mentorship","Capital"],
+url:site("https","www.techstars.com","/accelerators"),
+source:"Official Techstars"
+},
+
+{
+name:"Antler Residency",
+category:"Residency",
+type:"business",
+location:"Multiple global locations",
+eligibility:"Founders / builders",
+description:"Founder residency programs bringing builders together to develop companies, access networks and pursue investment.",
+tags:["Founder","Residency","Investment"],
+url:site("https","www.antler.co","/"),
+source:"Official Antler"
+},
+
+{
+name:"Y Combinator",
+category:"Accelerator",
+type:"business",
+location:"Global",
+eligibility:"Startups",
+description:"One of the world's major startup accelerators. Applications are submitted online for its batches.",
+tags:["Startup","Funding","Global"],
+url:site("https","www.ycombinator.com","/apply/"),
+source:"Official Y Combinator"
+},
+
+{
+name:"Google for Startups",
+category:"Startup",
+type:"business",
+location:"Global",
+eligibility:"Startups varies by program",
+description:"Google programs, technology, communities and specialized initiatives designed to help startups build and scale.",
+tags:["Google","Startup","Technology"],
+url:site("https","startup.google.com","/"),
+source:"Official Google for Startups"
+},
+
+{
+name:"Microsoft for Startups",
+category:"Startup",
+type:"business",
+location:"Global",
+eligibility:"Eligible startups",
+description:"Startup resources including technology, AI capabilities, credits and go-to-market support.",
+tags:["Microsoft","AI","Startup"],
+url:site("https","www.microsoft.com","/en-us/startups/"),
+source:"Official Microsoft"
+},
+
+{
+name:"EIC Accelerator",
+category:"Funding",
+type:"funded",
+location:"Europe",
+eligibility:"Startups and SMEs",
+description:"European Innovation Council support combining grants and potential investment for eligible high-impact innovations.",
+tags:["Grant","Investment","Europe"],
+url:site("https","eic.ec.europa.eu","/eic-funding-opportunities/eic-accelerator_en"),
+source:"European Commission"
+},
+
+{
+name:"EIC Funding Opportunities",
+category:"Funding",
+type:"funded",
+location:"Europe",
+eligibility:"Researchers / innovators / startups varies",
+description:"A broader collection of European Innovation Council funding pathways including Pathfinder, Transition, Pre-Accelerator and Accelerator programs.",
+tags:["EU","Research","Innovation"],
+url:site("https","eic.ec.europa.eu","/funding-opportunities_en"),
+source:"European Commission"
+},
+
+{
+name:"Outreachy",
+category:"Internship",
+type:"career",
+location:"Remote / Global",
+eligibility:"Eligibility varies",
+description:"Paid, remote open-source internships covering programming, research, UX, documentation, design, data science and more.",
+tags:["Remote","Open Source","Paid"],
+url:site("https","www.outreachy.org","/"),
+source:"Official Outreachy"
+},
+
+{
+name:"Linux Foundation Mentorship",
+category:"Mentorship",
+type:"career",
+location:"Remote / Global",
+eligibility:"Developers and open-source contributors",
+description:"Structured mentorship opportunities where participants contribute to open-source projects under experienced mentors.",
+tags:["Open Source","Mentorship","Tech"],
+url:site("https","www.linuxfoundation.org","/about/mentorship-programs/"),
+source:"Linux Foundation"
+},
+
+{
+name:"UN Volunteers",
+category:"Volunteering",
+type:"global",
+location:"Global / Online",
+eligibility:"Varies by assignment",
+description:"International and online volunteering opportunities supporting UN system initiatives and development work.",
+tags:["UN","Global","Volunteer"],
+url:site("https","www.unv.org","/become-volunteer"),
+source:"United Nations Volunteers"
+},
+
+{
+name:"European Solidarity Corps",
+category:"Volunteering",
+type:"global",
+location:"Europe",
+eligibility:"Generally 18–30; humanitarian aid has different age rules",
+description:"Volunteering opportunities across fields including digital technology, health, environment and humanitarian work.",
+tags:["Europe","Volunteer","Youth"],
+url:site("https","youth.europa.eu","/solidarity_en"),
+source:"European Union"
+},
+
+{
+name:"Chevening Scholarships",
+category:"Scholarship",
+type:"funded",
+location:"United Kingdom",
+eligibility:"Applicants from participating countries",
+description:"Fully funded one-year UK master's scholarships for emerging leaders.",
+tags:["UK","Masters","Fully Funded"],
+url:site("https","www.chevening.org","/scholarships/"),
+source:"Official Chevening"
+},
+
+{
+name:"Chevening Fellowships",
+category:"Fellowship",
+type:"global",
+location:"United Kingdom",
+eligibility:"Mid-career professionals varies by program",
+description:"Fellowships for professionals and academics to pursue focused research or professional development.",
+tags:["Fellowship","UK","Research"],
+url:site("https","www.chevening.org","/fellowships/find-a-programme/"),
+source:"Official Chevening"
+},
+
+{
+name:"DAAD Scholarship Database",
+category:"Scholarship",
+type:"learning",
+location:"Germany / Global",
+eligibility:"Students, graduates and researchers varies",
+description:"Searchable database containing DAAD funding and selected external funding opportunities.",
+tags:["Germany","Study","Research"],
+url:site("https","www.daad.org","/en/find-funding/scholarship-database/"),
+source:"DAAD"
+},
+
+{
+name:"Schwarzman Scholars",
+category:"Scholarship",
+type:"funded",
+location:"China",
+eligibility:"Graduate applicants",
+description:"Fully funded master's-level global affairs program at Tsinghua University.",
+tags:["China","Leadership","Masters"],
+url:site("https","www.schwarzmanscholars.org","/"),
+source:"Official Schwarzman Scholars"
+},
+
+{
+name:"GitHub Student Developer Pack",
+category:"Technology",
+type:"learning",
+location:"Global",
+eligibility:"Verified students",
+description:"A large collection of developer tools, services and educational resources available to eligible students.",
+tags:["Students","Developer","Free Tools"],
+url:site("https","education.github.com","/pack"),
+source:"GitHub Education"
+},
+
+{
+name:"Erasmus+ Opportunities",
+category:"Mobility",
+type:"global",
+location:"Europe / Partner countries",
+eligibility:"Varies by program",
+description:"A major European mobility and education framework covering study, training, youth and cooperation opportunities.",
+tags:["Europe","Study","Mobility"],
+url:site("https","erasmus-plus.ec.europa.eu","/"),
+source:"European Commission"
+},
+
+{
+name:"Erasmus for Young Entrepreneurs",
+category:"Mobility",
+type:"business",
+location:"Europe",
+eligibility:"New / aspiring entrepreneurs varies",
+description:"Cross-border exchange allowing entrepreneurs to learn from experienced entrepreneurs in participating countries.",
+tags:["Entrepreneur","Europe","Exchange"],
+url:site("https","www.erasmus-entrepreneurs.eu","/"),
+source:"Erasmus for Young Entrepreneurs"
+},
+
+{
+name:"Google Summer of Code",
+category:"Internship",
+type:"career",
+location:"Global / Remote",
+eligibility:"Eligible contributors",
+description:"A global open-source development program connecting contributors with open-source organizations.",
+tags:["Open Source","Coding","Global"],
+url:site("https","summerofcode.withgoogle.com","/"),
+source:"Google Summer of Code"
+},
+
+{
+name:"SBA Funding Programs",
+category:"Funding",
+type:"funded",
+location:"United States",
+eligibility:"U.S. small businesses varies",
+description:"U.S. Small Business Administration resources covering loans, grants, investment-related programs and other funding pathways.",
+tags:["USA","Business","Funding"],
+url:site("https","www.sba.gov","/funding-programs"),
+source:"U.S. Small Business Administration"
+},
+
+{
+name:"NSF America’s Seed Fund",
+category:"Funding",
+type:"funded",
+location:"United States",
+eligibility:"Eligible technology startups",
+description:"Funding pathway for deep-tech and science-based startups developing technologies with commercial potential.",
+tags:["USA","Deep Tech","Research"],
+url:site("https","seedfund.nsf.gov","/"),
+source:"National Science Foundation"
+},
+
+{
+name:"Fulbright Foreign Student Program",
+category:"Scholarship",
+type:"funded",
+location:"United States",
+eligibility:"International students varies by country",
+description:"Graduate-level study and research opportunities in the United States for eligible international applicants.",
+tags:["USA","Graduate","International"],
+url:site("https","foreign.fulbrightonline.org","/"),
+source:"Fulbright"
+},
+
+{
+name:"Marie Skłodowska-Curie Actions",
+category:"Fellowship",
+type:"learning",
+location:"Europe / Global",
+eligibility:"Researchers varies",
+description:"European research and mobility opportunities supporting researchers at different career stages.",
+tags:["Research","Europe","Science"],
+url:site("https","marie-sklodowska-curie-actions.ec.europa.eu","/"),
+source:"European Commission"
+},
+
+{
+name:"Mozilla Foundation / Builders Programs",
+category:"Technology",
+type:"business",
+location:"Global",
+eligibility:"Varies by program",
+description:"Mozilla programs and initiatives around technology, open internet, responsible innovation and builders.",
+tags:["Technology","Open Web","Innovation"],
+url:site("https","www.mozillafoundation.org","/"),
+source:"Mozilla Foundation"
+}
+
+];
+
+
+/* =========================
+COUNT
+========================= */
+
+document.getElementById("totalCount").textContent =
+opportunities.length;
+
+
+/* =========================
+RENDER OPPORTUNITIES
+========================= */
+
+function renderOpportunities(list){
+
+const grid =
+document.getElementById("opportunityGrid");
+
+document.getElementById("resultCount").textContent =
+"Showing " + list.length + " opportunities";
+
+
+if(list.length === 0){
+
+grid.innerHTML = `
+<div class="warning">
+<h3>No opportunities found</h3>
+<p>
+There are currently no matching opportunities in this library.
+Try another category or search term.
+</p>
+</div>
+`;
+
+return;
+
+}
+
+
+grid.innerHTML =
+list.map(item => {
+
+const index =
+opportunities.indexOf(item);
+
+const saved =
+isSaved(index);
+
+return `
+
+<article class="opportunity">
+
+<div class="opportunity-top">
+
+<div class="tag">
+${item.category}
+</div>
+
+<button
+class="save ${saved ? "saved":""}"
+onclick="toggleSave(${index})"
+title="Save opportunity">
+
+${saved ? "★":"☆"}
+
+</button>
+
+</div>
+
+<h3>
+${item.name}
+</h3>
+
+<p>
+${item.description}
+</p>
+
+<div class="meta">
+
+<span>${item.location}</span>
+<span>${item.eligibility}</span>
+
+${item.tags.map(
+tag => `<span>${tag}</span>`
+).join("")}
+
+</div>
+
+<div class="opportunity-footer">
+
+<a
+href="${item.url}"
+target="_blank"
+rel="noopener noreferrer">
+
+Official Site
+
+</a>
+
+<button
+onclick="trackOpportunity('${item.name.replace(/'/g,"\\'")}')">
+
+Track
+
+</button>
+
+</div>
+
+</article>
+
+`;
+
+}).join("");
+
+}
+
+
+/* =========================
+WATCHLIST
+========================= */
+
+function getSaved(){
+
+return JSON.parse(
+localStorage.getItem(
+"opportunityAtlasSaved"
+) || "[]"
+);
+
+}
+
+
+function isSaved(index){
+
+return getSaved().includes(index);
+
+}
+
+
+function toggleSave(index){
+
+let saved =
+getSaved();
+
+if(saved.includes(index)){
+
+saved =
+saved.filter(
+item => item !== index
+);
+
+}
+else{
+
+saved.push(index);
+
+}
+
+localStorage.setItem(
+"opportunityAtlasSaved",
+JSON.stringify(saved)
+);
+
+renderSaved();
+
+renderOpportunities(opportunities);
+
+}
+
+
+function renderSaved(){
+
+const grid =
+document.getElementById("savedGrid");
+
+const saved =
+getSaved();
+
+if(saved.length === 0){
+
+grid.innerHTML = `
+<div class="warning">
+<h3>Nothing saved yet</h3>
+<p>
+Save opportunities that may become useful later.
+</p>
+</div>
+`;
+
+return;
+
+}
+
+
+grid.innerHTML =
+saved.map(index => {
+
+const item =
+opportunities[index];
+
+return `
+
+<article class="opportunity">
+
+<div class="opportunity-top">
+
+<div class="tag">
+${item.category}
+</div>
+
+<button
+class="save saved"
+onclick="toggleSave(${index})">
+
+★
+
+</button>
+
+</div>
+
+<h3>
+${item.name}
+</h3>
+
+<p>
+${item.description}
+</p>
+
+<div class="meta">
+
+<span>${item.location}</span>
+
+${item.tags.map(
+tag => `<span>${tag}</span>`
+).join("")}
+
+</div>
+
+<div class="opportunity-footer">
+
+<a
+href="${item.url}"
+target="_blank"
+rel="noopener noreferrer">
+
+Open
+
+</a>
+
+</div>
+
+</article>
+
+`;
+
+}).join("");
+
+}
+
+
+/* =========================
+APPLICATION TRACKER
+========================= */
+
+let applications =
+JSON.parse(
+localStorage.getItem(
+"opportunityAtlasApplications"
+) || "[]"
+);
+
+
+function addApplication(){
+
+const name =
+document.getElementById("trackName")
+.value.trim();
+
+const status =
+document.getElementById("trackStatus")
+.value;
+
+const date =
+document.getElementById("trackDate")
+.value;
+
+if(!name){
+
+alert(
+"Enter an opportunity name."
+);
+
+return;
+
+}
+
+applications.push({
+name,
+status,
+date
+});
+
+saveApplications();
+
+document.getElementById("trackName")
+.value = "";
+
+renderApplications();
+
+}
+
+
+function trackOpportunity(name){
+
+document.getElementById("trackName")
+.value =
+name;
+
+document
+.getElementById("trackName")
+.scrollIntoView({
+behavior:"smooth",
+block:"center"
+});
+
+}
+
+
+function saveApplications(){
+
+localStorage.setItem(
+"opportunityAtlasApplications",
+JSON.stringify(applications)
+);
+
+}
+
+
+function renderApplications(){
+
+const list =
+document.getElementById("trackerList");
+
+if(applications.length === 0){
+
+list.innerHTML =
+`
+<div class="warning">
+<h3>Your pipeline is empty</h3>
+<p>
+Track opportunities here so your search becomes a pipeline instead
+of a collection of bookmarks.
+</p>
+</div>
+`;
+
+}
+else{
+
+list.innerHTML =
+applications.map(
+(item,index) => {
+
+let cls =
+item.status
+.toLowerCase()
+.replace(" ","");
+
+return `
+
+<div class="tracker-item">
+
+<strong>
+${item.name}
+</strong>
+
+<span>
+${item.date || "No date"}
+</span>
+
+<span>
+<span class="status ${cls}">
+${item.status}
+</span>
+</span>
+
+<button
+class="danger"
+onclick="removeApplication(${index})">
+
+Remove
+
+</button>
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+
+updateTrackerStats();
+
+}
+
+
+function removeApplication(index){
+
+applications.splice(index,1);
+
+saveApplications();
+
+renderApplications();
+
+}
+
+
+function updateTrackerStats(){
+
+document.getElementById("researchCount")
+.textContent =
+applications.filter(
+x => x.status === "Researching"
+).length;
+
+document.getElementById("preparingCount")
+.textContent =
+applications.filter(
+x => x.status === "Preparing"
+).length;
+
+document.getElementById("appliedCount")
+.textContent =
+applications.filter(
+x => x.status === "Applied"
+).length;
+
+document.getElementById("wonCount")
+.textContent =
+applications.filter(
+x => x.status === "Won"
+).length;
+
+}
+
+
+/* =========================
+INITIALIZE
+========================= */
+
+renderOpportunities(opportunities);
+
+renderSaved();
+
+renderApplications();
+
+</script>
+
+</body>
+</html>
