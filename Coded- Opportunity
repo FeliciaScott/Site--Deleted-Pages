@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Opportunity Engine</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================
+   COLOR THEME (LIGHT GREEN)
+========================= */
+
+:root{
+--primary:#22c55e;
+--dark:#14532d;
+--soft:#f0fdf4;
+--text:#0f172a;
+--muted:#475569;
+}
+
+/* =========================
+   BASE
+========================= */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Inter, sans-serif;
+}
+
+body{
+background:var(--soft);
+color:var(--text);
+line-height:1.6;
+}
+
+/* =========================
+   HERO (CLEAN + SOFT)
+========================= */
+
+.hero{
+background:linear-gradient(135deg,#14532d,#22c55e);
+color:white;
+padding:70px 10%;
+text-align:left;
+}
+
+.hero h1{
+font-size:3rem;
+margin-bottom:10px;
+}
+
+.hero p{
+max-width:850px;
+color:#eafff0;
+margin-top:10px;
+}
+
+.hero small{
+display:block;
+margin-top:10px;
+color:#d1fae5;
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+section{
+padding:80px 10%;
+}
+
+h2{
+text-align:center;
+font-size:2.2rem;
+margin-bottom:15px;
+}
+
+.explain{
+text-align:center;
+max-width:900px;
+margin:auto;
+color:var(--muted);
+}
+
+/* =========================
+   GRID
+========================= */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:22px;
+margin-top:40px;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.card{
+background:white;
+padding:25px;
+border-radius:16px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+transition:.2s;
+border-top:4px solid var(--primary);
+}
+
+.card:hover{
+transform:translateY(-6px);
+}
+
+.card h3{
+color:var(--dark);
+margin-bottom:10px;
+}
+
+.card p{
+color:var(--muted);
+margin-bottom:15px;
+}
+
+/* =========================
+   BUTTONS (UPDATED)
+========================= */
+
+.btn{
+display:inline-block;
+padding:10px 16px;
+background:var(--primary);
+color:white;
+border-radius:8px;
+text-decoration:none;
+font-size:.9rem;
+font-weight:600;
+}
+
+.btn:hover{
+background:#16a34a;
+}
+
+/* =========================
+   TAGS
+========================= */
+
+.tags{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+justify-content:center;
+margin-top:20px;
+}
+
+.tag{
+background:#dcfce7;
+color:#166534;
+padding:6px 12px;
+border-radius:20px;
+font-size:.85rem;
+}
+
+/* =========================
+   IMAGE GRID
+========================= */
+
+.image-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+margin-top:40px;
+}
+
+.image-card{
+background:white;
+border-radius:16px;
+overflow:hidden;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.image-card img{
+width:100%;
+height:180px;
+object-fit:cover;
+}
+
+.image-card h3{
+padding:15px;
+color:var(--dark);
+}
+
+.image-card p{
+padding:0 15px 15px;
+color:var(--muted);
+}
+
+/* =========================
+   PATH TYPE CARDS
+========================= */
+
+.path-box{
+background:white;
+padding:25px;
+border-radius:16px;
+box-shadow:0 10px 20px rgba(0,0,0,.06);
+}
+
+.path-box h3{
+color:var(--dark);
+margin-bottom:10px;
+}
+
+.path-box p{
+color:var(--muted);
+}
+
+/* =========================
+   FINAL
+========================= */
+
+.final{
+background:linear-gradient(135deg,#14532d,#22c55e);
+color:white;
+text-align:center;
+padding:80px 10%;
+}
+
+.final p{
+max-width:800px;
+margin:auto;
+color:#eafff0;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+
+<h1>The Opportunity Engine</h1>
+
+
+<small>Explore options based on what you want to build — not just where you are now.</small>
+
+</section>
+
+<!-- ================= DASHBOARD ================= -->
+<section>
+
+<h2>Opportunity Dashboard</h2>
+
+<p class="explain">
+These are the major systems that move people from survival → stability → growth → freedom.
+Each category serves a different purpose depending on your situation.
+</p>
+
+
+<div class="grid">
+
+<div class="card">
+<h3>🎓 Scholarships</h3>
+<p>
+Best for people who want formal education (college, trade school, certifications).
+These reduce or eliminate tuition costs.
+</p>
+<a class="btn" href="https://www.fastweb.com" target="_blank">View Scholarships</a>
+</div>
+
+<div class="card">
+<h3>💰 Grants</h3>
+<p>
+Free funding for housing, education, business, or emergencies.
+No repayment required.
+</p>
+<a class="btn" href="https://www.grants.gov" target="_blank">View Grant Programs</a>
+</div>
+
+<div class="card">
+<h3>🛠 Apprenticeships</h3>
+<p>
+Paid training programs where you learn skills while earning income.
+Great for hands-on careers like tech, trades, healthcare.
+</p>
+<a class="btn" href="https://www.apprenticeship.gov" target="_blank">View Apprenticeships</a>
+</div>
+
+<div class="card">
+<h3>📜 Certifications</h3>
+<p>
+Fast skill-building programs that help you qualify for jobs without a degree.
+Common in tech, business, and healthcare.
+</p>
+<a class="btn" href="https://www.coursera.org" target="_blank">View Certifications</a>
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= MORE PROGRAMS ================= -->
+<section>
+
+<h2>More Programs That Build Real Opportunity</h2>
+
+<p class="explain">
+These are often overlooked systems that provide income, experience, or advancement without traditional schooling.
+</p>
+
+<div class="grid">
+
+<div class="path-box">
+<h3>🚀 Startup Incubators</h3>
+<p>Helps you turn ideas into businesses with funding, mentors, and resources.</p>
+</div>
+
+<div class="path-box">
+<h3>🌍 Remote Work Programs</h3>
+<p>Jobs you can do from anywhere (support, admin, writing, tech support).</p>
+</div>
+
+<div class="path-box">
+<h3>🎤 Fellowships</h3>
+<p>Paid leadership programs that include travel, training, and networking.</p>
+</div>
+
+<div class="path-box">
+<h3>📚 Bootcamps</h3>
+<p>Short intensive training programs that lead to jobs in tech or business.</p>
+</div>
+
+<div class="path-box">
+<h3>📊 Workforce Development</h3>
+<p>State-funded programs that train you for high-demand jobs at no cost.</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= PATH COMPARISON ================= -->
+<section>
+
+<h2>Two Paths People Can Take</h2>
+
+<div class="grid">
+
+<div class="path-box">
+<h3>🎓 Traditional Education Path</h3>
+<p>
+Scholarships → College/Trade School → Internships → Degree → Career advancement
+</p>
+</div>
+
+<div class="path-box">
+<h3>⚙ Skill-Based Path</h3>
+<p>
+Certifications → Apprenticeships → Portfolio → Remote Job → Income Growth
+</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= CATEGORIES ================= -->
+<section>
+
+<h2>Opportunity Categories</h2>
+
+<div class="image-grid">
+
+<div class="image-card">
+<img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=1000">
+<h3>Business Growth</h3>
+<p>Funding, incubators, and startup support systems.</p>
+</div>
+
+<div class="image-card">
+<img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1000">
+<h3>Leadership Programs</h3>
+<p>Fellowships, mentorships, and global exposure opportunities.</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= FINAL ================= -->
+<section class="final">
+
+<p>
+Most people don’t fail from lack of ability — they fail from lack of exposure.
+</p>
+
+<br>
+</section>
+
+</body>
+</html>
