@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Strategist Intelligence Hub</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+background:#0F1115;
+
+font-family:
+Inter,
+system-ui,
+-apple-system,
+Arial,
+sans-serif;
+
+color:#E0E0E0;
+
+line-height:1.6;
+
+padding:30px 15px;
+
+}
+
+.container{
+
+max-width:1200px;
+
+margin:auto;
+
+background:#1A1D23;
+
+border-radius:28px;
+
+padding:40px;
+
+box-shadow:
+0 30px 80px rgba(0,0,0,.5);
+
+border:1px solid rgba(255,255,255,.05);
+
+}
+
+
+/* =========================
+HEADER
+========================= */
+
+header{
+
+margin-bottom:35px;
+
+}
+
+h1{
+
+font-size:2.6rem;
+
+font-weight:800;
+
+color:#FFFFFF;
+
+letter-spacing:-1px;
+
+margin-bottom:8px;
+
+}
+
+.subtitle{
+
+color:#888;
+
+margin-bottom:25px;
+
+}
+
+
+/* =========================
+SIGNAL BAR
+========================= */
+
+.network-gate{
+
+background:
+rgba(197,160,89,.1);
+
+color:#C5A059;
+
+padding:18px;
+
+border-radius:16px;
+
+font-size:.82rem;
+
+border:
+1px solid rgba(197,160,89,.3);
+
+margin-bottom:30px;
+
+}
+
+
+/* =========================
+INTELLIGENCE CONTROL
+========================= */
+
+.control-panel{
+
+display:grid;
+
+grid-template-columns:
+1fr 1fr;
+
+gap:15px;
+
+margin-bottom:35px;
+
+}
+
+.control-box{
+
+background:#242830;
+
+padding:18px;
+
+border-radius:14px;
+
+border:1px solid rgba(255,255,255,.06);
+
+}
+
+.control-box label{
+
+display:block;
+
+font-size:.7rem;
+
+text-transform:uppercase;
+
+letter-spacing:1px;
+
+color:#C5A059;
+
+font-weight:800;
+
+margin-bottom:8px;
+
+}
+
+select{
+
+width:100%;
+
+padding:12px;
+
+background:#15181d;
+
+border:
+1px solid rgba(255,255,255,.12);
+
+border-radius:10px;
+
+color:white;
+
+font-size:.9rem;
+
+}
+
+
+/* =========================
+GRID
+========================= */
+
+.intelligence-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(300px,1fr));
+
+gap:22px;
+
+}
+
+
+/* =========================
+CARDS
+========================= */
+
+.opportunity-card{
+
+background:#242830;
+
+border-radius:20px;
+
+padding:25px;
+
+border:
+1px solid rgba(255,255,255,.04);
+
+transition:.3s;
+
+}
+
+.opportunity-card:hover{
+
+transform:translateY(-5px);
+
+border-color:
+rgba(197,160,89,.35);
+
+background:#292e36;
+
+box-shadow:
+0 15px 35px rgba(0,0,0,.3);
+
+}
+
+
+.strategy-badge{
+
+font-size:.65rem;
+
+font-weight:900;
+
+text-transform:uppercase;
+
+letter-spacing:1.5px;
+
+color:#C5A059;
+
+margin-bottom:10px;
+
+display:block;
+
+}
+
+h2{
+
+font-size:1.25rem;
+
+margin-bottom:10px;
+
+color:#FFF;
+
+}
+
+.opportunity-card > p{
+
+color:#A0A0A0;
+
+font-size:.92rem;
+
+margin-bottom:18px;
+
+}
+
+
+/* =========================
+EXPANDABLE INTELLIGENCE
+========================= */
+
+details{
+
+border-top:
+1px solid rgba(255,255,255,.08);
+
+padding-top:15px;
+
+}
+
+summary{
+
+cursor:pointer;
+
+color:#C5A059;
+
+font-weight:700;
+
+font-size:.85rem;
+
+list-style:none;
+
+}
+
+summary::-webkit-details-marker{
+
+display:none;
+
+}
+
+summary::after{
+
+content:"+";
+
+float:right;
+
+font-size:1.2rem;
+
+}
+
+details[open] summary::after{
+
+content:"−";
+
+}
+
+.insight{
+
+padding-top:15px;
+
+color:#AAA;
+
+font-size:.85rem;
+
+}
+
+.insight strong{
+
+color:#E2BC75;
+
+}
+
+
+/* =========================
+STRATEGIC MODEL
+========================= */
+
+.model{
+
+margin-top:35px;
+
+background:
+linear-gradient(
+135deg,
+rgba(197,160,89,.12),
+rgba(197,160,89,.03)
+);
+
+border:
+1px solid rgba(197,160,89,.25);
+
+border-radius:20px;
+
+padding:30px;
+
+}
+
+.model h2{
+
+color:#C5A059;
+
+margin-bottom:10px;
+
+}
+
+.model-intro{
+
+color:#999;
+
+font-size:.9rem;
+
+margin-bottom:25px;
+
+}
+
+.model-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(160px,1fr));
+
+gap:12px;
+
+}
+
+.model-step{
+
+background:#20242a;
+
+padding:18px;
+
+border-radius:12px;
+
+text-align:center;
+
+}
+
+.model-step span{
+
+display:block;
+
+font-size:.7rem;
+
+color:#C5A059;
+
+font-weight:800;
+
+margin-bottom:5px;
+
+}
+
+.model-step strong{
+
+color:white;
+
+font-size:.9rem;
+
+}
+
+
+/* =========================
+DECISION CHECK
+========================= */
+
+.decision{
+
+margin-top:25px;
+
+background:#20242a;
+
+border-radius:18px;
+
+padding:25px;
+
+}
+
+.decision h3{
+
+color:#FFF;
+
+margin-bottom:15px;
+
+}
+
+.decision-list{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(200px,1fr));
+
+gap:10px;
+
+}
+
+.decision-item{
+
+padding:15px;
+
+background:#181b20;
+
+border-radius:10px;
+
+font-size:.82rem;
+
+color:#AAA;
+
+}
+
+.decision-item strong{
+
+display:block;
+
+color:#C5A059;
+
+margin-bottom:4px;
+
+}
+
+
+/* =========================
+MOBILE
+========================= */
+
+@media(max-width:700px){
+
+body{
+
+padding:10px;
+
+}
+
+.container{
+
+padding:25px 18px;
+
+border-radius:20px;
+
+}
+
+h1{
+
+font-size:2rem;
+
+}
+
+.control-panel{
+
+grid-template-columns:1fr;
+
+}
+
+.intelligence-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<header>
+
+
+<div class="network-gate">
+
+🛡️ <strong>STRATEGIC SIGNAL:</strong>
+Focus on high-leverage information rather than information volume.
+
+</div>
+
+
+<h1>
+Strategic Command
+</h1>
+
+
+<p class="subtitle">
+
+Insight, opportunity, and the architecture of better decisions.
+
+</p>
+
+
+<!-- =========================
+CONTROL PANEL
+========================= -->
+
+<div class="control-panel">
+
+
+<div class="control-box">
+
+<label for="focus">
+
+Choose Intelligence Focus
+
+</label>
+
+<select id="focus">
+
+<option>
+All Strategic Areas
+</option>
+
+<option>
+Technology
+</option>
+
+<option>
+Career
+</option>
+
+<option>
+Innovation
+</option>
+
+<option>
+Business
+</option>
+
+<option>
+Personal Strategy
+</option>
+
+</select>
+
+</div>
+
+
+<div class="control-box">
+
+<label for="question">
+
+Choose Your Strategic Question
+
+</label>
+
+<select id="question">
+
+<option>
+What should I investigate?
+</option>
+
+<option>
+Where is leverage?
+</option>
+
+<option>
+What am I overlooking?
+</option>
+
+<option>
+What could become obsolete?
+</option>
+
+<option>
+What can I build?
+</option>
+
+<option>
+What should I stop doing?
+</option>
+
+</select>
+
+</div>
+
+
+</div>
+
+</header>
+
+
+
+<!-- =========================
+INTELLIGENCE CARDS
+========================= -->
+
+<div class="intelligence-grid">
+
+
+<!-- 1 -->
+
+<article class="opportunity-card">
+
+<span class="strategy-badge">
+Technology Leverage
+</span>
+
+<h2>
+AI-Agent Labor Force
+</h2>
+
+<p>
+
+Administrative work is increasingly becoming
+automatable. The strategic question is not simply
+whether AI can do the work, but which workflows
+should be redesigned around it.
+
+</p>
+
+
+<details>
+
+<summary>
+Open Strategic Analysis
+</summary>
+
+<div class="insight">
+
+<strong>Look for:</strong>
+
+repetitive tasks, predictable decisions,
+data movement, scheduling, reporting,
+customer communication, and internal workflows.
+
+<br><br>
+
+<strong>Strategic question:</strong>
+
+If a task happens repeatedly and follows
+recognizable rules, could the process be
+redesigned rather than simply performed faster?
+
+</div>
+
+</details>
+
+</article>
+
+
+
+<!-- 2 -->
+
+<article class="opportunity-card">
+
+<span class="strategy-badge">
+Innovation
+</span>
+
+<h2>
+Cross-Industry Synthesis
+</h2>
+
+<p>
+
+Some of the strongest ideas come from combining
+methods that normally exist in different industries.
+
+</p>
+
+
+<details>
+
+<summary>
+Open Strategic Analysis
+</summary>
+
+<div class="insight">
+
+<strong>Method:</strong>
+
+Choose one industry with an interesting system.
+
+Then ask:
+
+"What would happen if this principle were
+applied somewhere completely different?"
+
+<br><br>
+
+<strong>Example:</strong>
+
+Apply logistics optimization to personal
+productivity, or apply subscription economics
+to professional services.
+
+</div>
+
+</details>
+
+</article>
+
+
+
+<!-- 3 -->
+
+<article class="opportunity-card">
+
+<span class="strategy-badge">
+Personal Strategy
+</span>
+
+<h2>
+The Phoenix Framework
+</h2>
+
+<p>
+
+When a path stops producing useful results,
+continuing harder may be less intelligent than
+redesigning the path.
+
+</p>
+
+
+<details>
+
+<summary>
+Open Strategic Analysis
+</summary>
+
+<div class="insight">
+
+<strong>Step 1:</strong>
+Identify what is no longer working.
+
+<br><br>
+
+<strong>Step 2:</strong>
+Separate sunk costs from future value.
+
+<br><br>
+
+<strong>Step 3:</strong>
+Identify transferable skills and assets.
+
+<br><br>
+
+<strong>Step 4:</strong>
+Test a new direction before making a full commitment.
+
+</div>
+
+</details>
+
+</article>
+
+
+
+<!-- 4 -->
+
+<article class="opportunity-card">
+
+<span class="strategy-badge">
+Business Strategy
+</span>
+
+<h2>
+Micro-SaaS Acquisition Thinking
+</h2>
+
+<p>
+
+You do not always have to create an asset from
+zero. Existing small businesses can reveal
+opportunities to improve, acquire, automate,
+or combine existing systems.
+
+</p>
+
+
+<details>
+
+<summary>
+Open Strategic Analysis
+</summary>
+
+<div class="insight">
+
+<strong>Investigate:</strong>
+
+Recurring revenue, customer retention,
+operating costs, owner dependence,
+automation opportunities, and neglected
+distribution channels.
+
+<br><br>
+
+<strong>Key question:</strong>
+
+Can an existing system become significantly
+more valuable through better operations?
+
+</div>
+
+</details>
+
+</article>
+
+
+
+<!-- 5 -->
+
+<article class="opportunity-card">
+
+<span class="strategy-badge">
+Career Intelligence
+</span>
+
+<h2>
+Skill-to-Evidence Strategy
+</h2>
+
+<p>
+
+Learning something is different from proving
+you can use it. Career advancement becomes
+stronger when skills produce visible evidence.
+
+</p>
+
+
+<details>
+
+<summary>
+Open Strategic Analysis
+</summary>
+
+<div class="insight">
+
+<strong>Build the chain:</strong>
+
+Learn → Practice → Build → Document → Demonstrate.
+
+<br><br>
+
+Instead of collecting credentials indefinitely,
+create projects, analyses, case studies,
+process improvements, portfolios, or measurable
+work samples.
+
+<br><br>
+
+<strong>Goal:</strong>
+
+Make your ability easier for another person
+to evaluate.
+
+</div>
+
+</details>
+
+</article>
+
+
+
+<!-- 6 -->
+
+<article class="opportunity-card">
+
+<span class="strategy-badge">
+Decision Intelligence
+</span>
+
+<h2>
+The Leverage Point Audit
+</h2>
+
+<p>
+
+Not every problem deserves equal effort.
+The highest-value move is often finding the
+small change that influences many downstream
+results.
+
+</p>
+
+
+<details>
+
+<summary>
+Open Strategic Analysis
+</summary>
+
+<div class="insight">
+
+<strong>Ask:</strong>
+
+What repeatedly creates this problem?
+
+What decision controls the most consequences?
+
+What bottleneck limits everything else?
+
+What action could improve several outcomes
+simultaneously?
+
+<br><br>
+
+<strong>Principle:</strong>
+
+Do not automatically work harder on the visible
+problem. Investigate the system producing it.
+
+</div>
+
+</details>
+
+</article>
+
+
+</div>
+
+
+
+<!-- =========================
+STRATEGIC OPERATING MODEL
+========================= -->
+
+<section class="model">
+
+<h2>
+The Strategic Operating Model
+</h2>
+
+<p class="model-intro">
+
+Use this six-stage process whenever you encounter
+a major opportunity, problem, career decision,
+business idea, or emerging technology.
+
+</p>
+
+
+<div class="model-grid">
+
+
+<div class="model-step">
+
+<span>01</span>
+
+<strong>
+Observe
+</strong>
+
+</div>
+
+
+<div class="model-step">
+
+<span>02</span>
+
+<strong>
+Question
+</strong>
+
+</div>
+
+
+<div class="model-step">
+
+<span>03</span>
+
+<strong>
+Map
+</strong>
+
+</div>
+
+
+<div class="model-step">
+
+<span>04</span>
+
+<strong>
+Test
+</strong>
+
+</div>
+
+
+<div class="model-step">
+
+<span>05</span>
+
+<strong>
+Measure
+</strong>
+
+</div>
+
+
+<div class="model-step">
+
+<span>06</span>
+
+<strong>
+Adapt
+</strong>
+
+</div>
+
+
+</div>
+
+
+<div class="decision">
+
+<h3>
+Before Making a Major Move, Ask:
+</h3>
+
+
+<div class="decision-list">
+
+
+<div class="decision-item">
+
+<strong>Leverage</strong>
+
+What small action could create a large effect?
+
+</div>
+
+
+<div class="decision-item">
+
+<strong>Evidence</strong>
+
+What do I actually know versus assume?
+
+</div>
+
+
+<div class="decision-item">
+
+<strong>Downside</strong>
+
+What happens if this decision is wrong?
+
+</div>
+
+
+<div class="decision-item">
+
+<strong>Reversibility</strong>
+
+Can I test this before committing fully?
+
+</div>
+
+
+<div class="decision-item">
+
+<strong>Opportunity Cost</strong>
+
+What am I giving up by choosing this?
+
+</div>
+
+
+<div class="decision-item">
+
+<strong>Next Experiment</strong>
+
+What is the smallest useful test I can run?
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+</div>
+
+
+</body>
+
+</html>
