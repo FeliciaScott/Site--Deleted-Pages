@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Professional IT Resume Blueprint</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================================
+   GLOBAL LIGHT THEME
+========================================================= */
+
+:root {
+    --background: #f8fafc;
+    --background-light: #f1f5f9;
+    --surface: #ffffff;
+    --surface-light: #f8fafc;
+
+    --border: #e2e8f0;
+
+    --text: #0f172a;
+    --muted: #475569;
+
+    --accent: #2563eb;
+    --accent-dark: #1d4ed8;
+
+    --green: #16a34a;
+
+    --paper: #ffffff;
+    --paper-text: #0f172a;
+
+    --radius: 12px;
+
+    --max-width: 1180px;
+}
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--background);
+    color: var(--text);
+    font-family: "Inter", Arial, sans-serif;
+    line-height: 1.5;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.container {
+    width: min(calc(100% - 40px), var(--max-width));
+    margin: auto;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+header {
+    position: relative;
+}
+
+.hero {
+    min-height: auto;
+
+    display: flex;
+    align-items: center;
+
+    position: relative;
+    overflow: hidden;
+
+    padding: 45px 20px;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(37,99,235,.08),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(22,163,74,.05),
+            transparent 30%
+        );
+}
+
+.hero::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        linear-gradient(
+            rgba(15,23,42,.03) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(15,23,42,.03) 1px,
+            transparent 1px
+        );
+
+    background-size: 40px 40px;
+
+    pointer-events: none;
+}
+
+.hero::after {
+    content: "IT";
+
+    position: absolute;
+
+    right: 5%;
+    bottom: -40px;
+
+    font-size: clamp(120px, 20vw, 260px);
+
+    font-weight: 800;
+
+    color: rgba(37,99,235,.04);
+
+    line-height: 1;
+
+    pointer-events: none;
+}
+
+.hero > * {
+    position: relative;
+    z-index: 2;
+}
+
+.hero h1 {
+    max-width: 900px;
+
+    font-size: clamp(36px, 5vw, 64px);
+
+    line-height: 1.05;
+
+    letter-spacing: -1.5px;
+
+    margin-bottom: 12px;
+}
+
+.hero h1::after {
+    content: "BUILD PROOF.";
+
+    display: block;
+
+    color: var(--accent);
+
+    font-size: .45em;
+
+    letter-spacing: 1px;
+
+    margin-top: 8px;
+}
+
+.hero p {
+    max-width: 720px;
+
+    color: var(--muted);
+
+    font-size: 17px;
+
+    margin-bottom: 20px;
+}
+
+.button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 20px;
+
+    border-radius: 8px;
+
+    background: var(--accent);
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 20px
+        rgba(37,99,235,.2);
+}
+
+/* =========================================================
+   OBJECTIVE
+========================================================= */
+
+.objective {
+    padding: 35px 0;
+
+    background: var(--background-light);
+
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.objective h2 {
+    color: var(--accent);
+
+    font-family:
+        monospace;
+
+    font-size: 13px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 10px;
+}
+
+.objective p {
+    max-width: 900px;
+
+    font-size: clamp(20px, 3vw, 32px);
+
+    line-height: 1.25;
+
+    letter-spacing: -0.5px;
+}
+
+/* =========================================================
+   RESUME LAYOUT
+========================================================= */
+
+.resume-layout {
+    padding: 40px 0;
+
+    background: var(--background);
+}
+
+.resume-layout .container {
+    display: grid;
+
+    grid-template-columns: 320px 1fr;
+
+    gap: 20px;
+
+    align-items: start;
+}
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.card {
+    padding: 22px;
+
+    margin-bottom: 16px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    transition:
+        transform .25s ease,
+        border-color .25s ease;
+
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+}
+
+.card:hover {
+    transform: translateY(-2px);
+
+    border-color:
+        rgba(37,99,235,.3);
+}
+
+.card:last-child {
+    margin-bottom: 0;
+}
+
+.card h2 {
+    font-size: 22px;
+
+    line-height: 1.2;
+
+    margin-bottom: 20px;
+}
+
+.card h3 {
+    font-size: 16px;
+
+    margin-bottom: 14px;
+}
+
+.card ul {
+    list-style: none;
+}
+
+.card li {
+    color: var(--muted);
+
+    font-size: 13px;
+
+    padding: 6px 0;
+
+    border-bottom:
+        1px solid var(--border);
+}
+
+.card li:last-child {
+    border-bottom: none;
+}
+
+/* =========================================================
+   SKILLS
+========================================================= */
+
+.skill {
+    color: var(--text);
+
+    font-size: 13px;
+
+    margin-bottom: 12px;
+}
+
+.skill:last-child {
+    margin-bottom: 0;
+}
+
+.progress {
+    height: 6px;
+
+    margin-top: 4px;
+
+    background:
+        #e2e8f0;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+.progress span {
+    display: block;
+
+    height: 100%;
+
+    background: var(--accent);
+
+    border-radius: inherit;
+}
+
+/* =========================================================
+   JOB / EXPERIENCE
+========================================================= */
+
+.job {
+    padding: 16px 0;
+
+    border-top:
+        1px solid var(--border);
+}
+
+.job:first-of-type {
+    border-top: none;
+
+    padding-top: 0;
+}
+
+.job:last-child {
+    padding-bottom: 0;
+}
+
+.job h3 {
+    color: var(--text);
+
+    font-size: 18px;
+
+    margin-bottom: 6px;
+}
+
+.job h3::before {
+    content: "01";
+
+    display: inline-block;
+
+    margin-right: 10px;
+
+    color: var(--accent);
+
+    font-family: monospace;
+
+    font-size: 11px;
+
+    vertical-align: middle;
+}
+
+.job:nth-of-type(2) h3::before {
+    content: "02";
+}
+
+.job:nth-of-type(3) h3::before {
+    content: "03";
+}
+
+.job:nth-of-type(4) h3::before {
+    content: "04";
+}
+
+.job p {
+    color: var(--muted);
+
+    font-size: 13.5px;
+
+    max-width: 720px;
+}
+
+/* =========================================================
+   ROADMAP
+========================================================= */
+
+#roadmap {
+    padding: 40px 0;
+
+    background:
+        var(--background-light);
+}
+
+#roadmap h2 {
+    font-size: clamp(28px, 4vw, 42px);
+
+    line-height: 1.1;
+
+    letter-spacing: -1px;
+
+    margin-bottom: 25px;
+}
+
+#roadmap h2::before {
+    content: "03 / ";
+
+    color: var(--accent);
+
+    font-family: monospace;
+
+    font-size: 13px;
+
+    letter-spacing: 2px;
+
+    vertical-align: middle;
+}
+
+.timeline {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 12px;
+
+    counter-reset: roadmap;
+}
+
+.step {
+    position: relative;
+
+    min-height: auto;
+
+    padding: 18px;
+
+    background: var(--surface);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    overflow: hidden;
+
+    transition:
+        transform .25s ease,
+        border-color .25s ease;
+
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+}
+
+.step:hover {
+    transform: translateY(-3px);
+
+    border-color:
+        rgba(37,99,235,.35);
+}
+
+.step::before {
+    counter-increment: roadmap;
+
+    content: "0" counter(roadmap);
+
+    display: block;
+
+    color: var(--accent);
+
+    font-family: monospace;
+
+    font-size: 12px;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 10px;
+}
+
+.step:nth-child(n+10)::before {
+    content: counter(roadmap);
+}
+
+.step h3 {
+    font-size: 16px;
+
+    margin-bottom: 4px;
+}
+
+.step p {
+    color: var(--muted);
+
+    font-size: 12.5px;
+}
+
+/* =========================================================
+   ROADMAP CONNECTOR
+========================================================= */
+
+.timeline {
+    position: relative;
+}
+
+.timeline::before {
+    content: "";
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 0;
+    right: 0;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(37,99,235,.2),
+            transparent
+        );
+
+    pointer-events: none;
+}
+
+.step {
+    z-index: 2;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    padding: 25px 20px;
+
+    background: var(--surface);
+
+    border-top:
+        1px solid var(--border);
+
+    text-align: center;
+}
+
+footer p {
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+footer p::first-line {
+    color: var(--text);
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .resume-layout .container {
+        grid-template-columns: 1fr;
+    }
+
+    .timeline {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .timeline::before {
+        display: none;
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .hero {
+        padding: 30px 15px;
+    }
+
+    .hero h1 {
+        letter-spacing: -1px;
+    }
+
+    .hero p {
+        font-size: 15px;
+    }
+
+    .objective,
+    .resume-layout,
+    #roadmap {
+        padding: 30px 0;
+    }
+
+    .objective p {
+        font-size: 22px;
+    }
+
+    .timeline {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        padding: 16px;
+    }
+
+}
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+a:focus-visible {
+    outline: 3px solid var(--accent);
+
+    outline-offset: 4px;
+}
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+@media print {
+
+    body {
+        background: white;
+
+        color: black;
+    }
+
+    header,
+    .objective,
+    #roadmap,
+    footer {
+        display: none;
+    }
+
+    .resume-layout {
+        padding: 0;
+
+        background: white;
+    }
+
+    .resume-layout .container {
+        display: block;
+
+        width: 100%;
+    }
+
+    .card {
+        background: white;
+
+        color: black;
+
+        border: none;
+
+        box-shadow: none;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="hero">
+
+<div class="container">
+
+<h1>Professional IT Resume Blueprint</h1>
+
+<p>
+This resume is not filled with fake experience.
+Every section teaches you exactly what to accomplish until you can honestly place it on your own resume.
+</p>
+
+<a href="#roadmap" class="button">
+Start Building
+</a>
+
+</div>
+
+</div>
+
+</header>
+
+
+<section class="objective">
+
+<div class="container">
+
+<h2>Mission</h2>
+
+<p>
+Become employable before college graduates by creating undeniable proof of skill.
+Every project replaces empty experience.
+Every certification replaces uncertainty.
+Every completed milestone becomes another line on your resume.
+</p>
+
+</div>
+
+</section>
+
+
+<section class="resume-layout">
+
+<div class="container">
+
+
+<div class="left">
+
+
+<div class="card">
+
+<h3>Current Status</h3>
+
+<ul>
+
+<li>✔ High School Student</li>
+
+<li>✔ No Degree Required</li>
+
+<li>✔ Willing to Learn Daily</li>
+
+<li>✔ Building Portfolio</li>
+
+<li>✔ Creating Real Experience</li>
+
+</ul>
+
+</div>
+
+
+<div class="card">
+
+<h3>Core Technologies</h3>
+
+
+<div class="skill">
+
+HTML
+
+<div class="progress">
+
+<span style="width:5%"></span>
+
+</div>
+
+</div>
+
+
+<div class="skill">
+
+CSS
+
+<div class="progress">
+
+<span style="width:5%"></span>
+
+</div>
+
+</div>
+
+
+<div class="skill">
+
+JavaScript
+
+<div class="progress">
+
+<span style="width:5%"></span>
+
+</div>
+
+</div>
+
+
+<div class="skill">
+
+Python
+
+<div class="progress">
+
+<span style="width:0%"></span>
+
+</div>
+
+</div>
+
+
+<div class="skill">
+
+Linux
+
+<div class="progress">
+
+<span style="width:0%"></span>
+
+</div>
+
+</div>
+
+
+<div class="skill">
+
+Networking
+
+<div class="progress">
+
+<span style="width:0%"></span>
+
+</div>
+
+</div>
+
+
+<div class="skill">
+
+Cloud
+
+<div class="progress">
+
+<span style="width:0%"></span>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>Professional Habits</h3>
+
+<ul>
+
+<li>Code every day</li>
+
+<li>Read technical documentation</li>
+
+<li>Write GitHub commits</li>
+
+<li>Solve one problem daily</li>
+
+<li>Practice typing</li>
+
+<li>Document everything</li>
+
+<li>Build projects consistently</li>
+
+</ul>
+
+</div>
+
+
+</div>
+
+
+<div class="right">
+
+
+<div class="card">
+
+<h2>Professional Experience (Build These)</h2>
+
+
+<div class="job">
+
+<h3>Portfolio Website</h3>
+
+<p>
+Create a responsive portfolio using HTML and CSS.
+Host it using GitHub Pages.
+Include contact information, projects, certifications, and a professional biography.
+</p>
+
+</div>
+
+
+<div class="job">
+
+<h3>Linux Home Lab</h3>
+
+<p>
+Install Ubuntu.
+Learn the terminal.
+Create users.
+Manage files.
+Configure SSH.
+Practice permissions.
+Document everything.
+</p>
+
+</div>
+
+
+<div class="job">
+
+<h3>Networking Lab</h3>
+
+<p>
+Install Cisco Packet Tracer.
+Build small office networks.
+Learn IP addressing.
+Subnetting.
+Switches.
+Routers.
+Troubleshoot connectivity.
+</p>
+
+</div>
+
+
+<div class="job">
+
+<h3>Windows Administration</h3>
+
+<p>
+Install Windows Server.
+Practice Active Directory.
+Create users.
+Reset passwords.
+Join computers to domains.
+Manage Group Policy.
+</p>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<section id="roadmap">
+
+<div class="container">
+
+<h2>Career Roadmap</h2>
+
+<div class="timeline">
+
+
+<div class="step">
+
+<h3>Master HTML</h3>
+
+<p>
+Build semantic web pages and understand document structure.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<h3>Master CSS</h3>
+
+<p>
+Create responsive layouts, interfaces, grids, and professional designs.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<h3>Learn JavaScript</h3>
+
+<p>
+Add logic, interaction, calculations, forms, and dynamic behavior.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<h3>Learn Git</h3>
+
+<p>
+Track your work, manage versions, and create a public development history.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<h3>Linux Administration</h3>
+
+<p>
+Work with the command line, users, permissions, processes, and services.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<h3>Networking</h3>
+
+<p>
+Understand IP addresses, DNS, DHCP, routing, switching, and troubleshooting.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<h3>Cloud Computing</h3>
+
+<p>
+Learn virtual machines, storage, identity, networking, and cloud architecture.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<h3>Apply For IT Jobs</h3>
+
+<p>
+Use your projects, certifications, documentation, and portfolio as evidence.
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<footer>
+
+<p>
+<strong>Professional IT Resume Blueprint</strong><br>
+Build proof instead of promises.
+</p>
+
+</footer>
+
+</body>
+
+</html>
