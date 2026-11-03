@@ -3,835 +3,1115 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Location Power Differential Mapping · Strategy Command Center</title>
+<meta name="description" content="Map opportunities by category and location. Research grants, scholarships, jobs, business markets, education, technology, and regional resources.">
+<title>Location Power Differential Mapping | PathKeeper</title>
 
 <style>
-:root{
-    /* BROWN · BLUE · CREAM */
-    --brown-deep:#3E2723;
-    --brown:#5D4037;
-    --brown-soft:#8D6E63;
-    --blue-deep:#0D1B2A;
-    --blue:#1B3A4B;
-    --blue-mid:#2C5F7C;
-    --blue-soft:#4A7C9B;
-    --cream:#F5EDE3;
-    --cream-soft:#E8DDD0;
-    --cream-dim:#CBBEB0;
-    --gold:#D8B08C;
-
-    --bg:var(--brown-deep);
-    --surface:var(--brown);
-    --surface2:#6D4C41;
-    --panel:var(--blue);
-    --panel-deep:var(--blue-deep);
-    --text:var(--cream);
-    --muted:var(--cream-dim);
-    --border:rgba(216,176,140,.28);
-    --border-strong:rgba(216,176,140,.55);
-
-    --accent:var(--gold);
-    --accent-blue:var(--blue-soft);
-    --success:#8FBC9A;
-    --warning:#E8C98B;
-    --danger:#D99090;
-
-    --shadow:0 18px 50px rgba(0,0,0,.35);
+:root {
+  --forest: #0F2D22;
+  --green: #173A2B;
+  --green-light: #24523C;
+  --cream: #F3EBDD;
+  --gold: #D8B08C;
+  --brown: #4B2E1E;
+  --dark: #081D15;
+  --muted: #C6D4CA;
+  --border: rgba(216,176,140,.28);
 }
 
-*{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-body{
-    font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, Helvetica, sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    line-height:1.7;
-}
+html { scroll-behavior: smooth; }
 
-button,input,select,textarea{font:inherit;}
-button{cursor:pointer;}
-
-button:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible,
-a:focus-visible{
-    outline:3px solid var(--accent);
-    outline-offset:3px;
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--forest);
+  color: var(--cream);
+  line-height: 1.7;
 }
 
-a{color:var(--gold);}
+a { color: var(--gold); }
+button, input, select { font: inherit; }
 
-/* =========================
-   SCROLL PROGRESS
-========================= */
-#scrollProgress{
-    position:fixed;top:0;left:0;height:4px;width:0%;
-    background:linear-gradient(90deg,var(--gold),var(--accent-blue));
-    z-index:9999;
-}
+button, a { -webkit-tap-highlight-color: transparent; }
 
-/* =========================
-   NAV
-========================= */
-.nav{
-    position:sticky;top:0;z-index:1000;
-    background:rgba(62,39,35,.94);
-    backdrop-filter:blur(14px);
-    border-bottom:1px solid var(--border);
-}
-.nav-inner{
-    max-width:1250px;margin:auto;min-height:64px;
-    padding:10px 20px;
-    display:flex;align-items:center;justify-content:space-between;gap:20px;
-}
-.brand{
-    color:var(--gold);font-weight:900;letter-spacing:.08em;
-    text-transform:uppercase;font-size:.8rem;
-}
-.nav-actions{display:flex;gap:8px;flex-wrap:wrap;}
-
-.nav-btn,.btn{
-    border:1px solid var(--border);
-    background:var(--panel);
-    color:var(--text);
-    padding:9px 14px;border-radius:9px;
-    transition:.2s ease;text-decoration:none;display:inline-block;
-}
-.nav-btn:hover,.btn:hover{
-    border-color:var(--accent);
-    color:var(--accent);
-    transform:translateY(-1px);
-}
-.btn.primary{
-    background:var(--accent);
-    color:var(--brown-deep);
-    border-color:var(--accent);
-    font-weight:800;
-}
-.btn.primary:hover{
-    background:#E7C9A0;
-    color:var(--brown-deep);
-}
-.btn.ghost{
-    background:transparent;
-    border-color:var(--border-strong);
+.hero {
+  background: linear-gradient(160deg, #24523C, var(--forest) 75%);
+  padding: 60px 20px 45px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
 }
 
-/* =========================
-   HERO
-========================= */
-.hero{
-    min-height:640px;
-    display:grid;place-items:center;
-    padding:80px 20px 70px;
-    position:relative;overflow:hidden;
-    background:
-        radial-gradient(circle at 18% 20%,rgba(74,124,155,.22),transparent 32%),
-        radial-gradient(circle at 82% 72%,rgba(216,176,140,.14),transparent 30%),
-        linear-gradient(150deg,var(--blue-deep),var(--brown-deep) 70%,var(--brown));
-}
-.hero-grid{
-    width:100%;max-width:1250px;
-    display:grid;grid-template-columns:1.2fr .8fr;
-    gap:60px;align-items:center;
-}
-.eyebrow{
-    color:var(--gold);text-transform:uppercase;
-    letter-spacing:.18em;font-size:.75rem;font-weight:900;
-    margin-bottom:18px;
-}
-.hero h1{
-    font-size:clamp(2.7rem,6vw,5.8rem);
-    line-height:.98;max-width:850px;letter-spacing:-.055em;
-}
-.hero h1 span{color:var(--gold);}
-.hero-copy{
-    max-width:760px;color:var(--cream-dim);
-    font-size:1.08rem;margin-top:25px;
-}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px;}
-
-/* =========================
-   PLAYER CARD
-========================= */
-.player-card{
-    background:linear-gradient(155deg,var(--panel),var(--panel-deep));
-    border:1px solid var(--border-strong);
-    border-radius:24px;padding:26px;
-    box-shadow:var(--shadow);
-}
-.player-top{
-    display:flex;justify-content:space-between;
-    align-items:center;margin-bottom:22px;
-}
-.rank{
-    color:var(--gold);font-weight:900;
-    letter-spacing:.1em;font-size:.8rem;
-}
-.xp-number{font-size:2rem;font-weight:900;color:var(--cream);}
-.xp-label{color:var(--muted);font-size:.75rem;text-transform:uppercase;}
-.xp-track{
-    height:10px;background:rgba(13,27,42,.8);
-    border-radius:20px;overflow:hidden;margin:10px 0 20px;
-    border:1px solid var(--border);
-}
-.xp-fill{
-    height:100%;width:0%;
-    background:linear-gradient(90deg,var(--gold),var(--accent-blue));
-    transition:.5s ease;
-}
-.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
-.stat{
-    padding:15px;background:rgba(13,27,42,.55);
-    border:1px solid var(--border);border-radius:12px;
-}
-.stat small{
-    display:block;color:var(--muted);
-    text-transform:uppercase;font-size:.65rem;letter-spacing:.1em;
-}
-.stat strong{display:block;margin-top:3px;color:var(--gold);font-size:1.15rem;}
-
-/* =========================
-   MAIN
-========================= */
-.container{width:min(1250px,calc(100% - 40px));margin:auto;}
-section{padding:80px 0;border-bottom:1px solid var(--border);}
-
-.section-head{
-    display:flex;justify-content:space-between;
-    align-items:end;gap:25px;margin-bottom:35px;
-}
-.section-number{
-    color:var(--gold);font-size:.7rem;font-weight:900;
-    letter-spacing:.18em;
-}
-h2{
-    font-size:clamp(2rem,4vw,3.2rem);
-    line-height:1.05;letter-spacing:-.035em;margin-top:8px;
-}
-.section-intro{max-width:760px;color:var(--muted);}
-
-/* =========================
-   QUOTE
-========================= */
-.quote{
-    border:1px solid var(--border-strong);
-    background:
-        linear-gradient(135deg,rgba(74,124,155,.18),rgba(216,176,140,.08)),
-        var(--panel);
-    border-radius:22px;padding:40px;
-    font-size:1.3rem;line-height:1.5;
-    text-align:center;font-weight:700;
-}
-.quote span{color:var(--gold);}
-
-/* =========================
-   INSIGHT CARDS
-========================= */
-.insight-grid{
-    display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
-}
-.insight-card{
-    background:var(--panel);
-    border:1px solid var(--border);
-    padding:28px;border-radius:18px;
-    position:relative;overflow:hidden;transition:.25s ease;
-}
-.insight-card:hover{transform:translateY(-5px);border-color:var(--accent);}
-.insight-card .number{
-    color:var(--gold);font-size:.7rem;font-weight:900;letter-spacing:.15em;
-}
-.insight-card h3{margin:13px 0 10px;font-size:1.25rem;color:var(--gold);}
-.insight-card p{color:var(--muted);}
-.reveal{
-    max-height:0;overflow:hidden;opacity:0;transition:.35s ease;
-    color:var(--cream-soft);font-size:.95rem;
-}
-.insight-card.open .reveal{max-height:300px;opacity:1;margin-top:18px;}
-.reveal-btn{
-    margin-top:18px;background:none;color:var(--gold);
-    border:0;font-weight:800;padding:0;
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: .78rem;
+  color: var(--gold);
+  font-weight: bold;
+  margin-bottom: 12px;
 }
 
-/* =========================
-   LOCATION LAB
-========================= */
-.lab{
-    background:
-        linear-gradient(135deg,rgba(74,124,155,.15),transparent 40%),
-        var(--panel);
-    border:1px solid var(--border-strong);
-    border-radius:24px;padding:30px;box-shadow:var(--shadow);
-}
-.lab-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;}
-.form-group{margin-bottom:20px;}
-.form-group label{
-    display:flex;justify-content:space-between;
-    margin-bottom:8px;font-size:.82rem;font-weight:800;
-    color:var(--cream);
-}
-.value-display{color:var(--gold);}
-
-input[type="text"],
-input[type="number"],
-select,
-textarea{
-    width:100%;
-    background:var(--blue-deep);
-    color:var(--text);
-    border:1px solid var(--border-strong);
-    border-radius:10px;padding:13px 14px;
-}
-input[type="range"]{width:100%;accent-color:var(--gold);}
-.range-row{display:grid;grid-template-columns:1fr 65px;gap:12px;align-items:center;}
-
-.score-panel{
-    display:flex;align-items:center;justify-content:center;
-    flex-direction:column;min-height:100%;
-    background:var(--blue-deep);
-    border:1px solid var(--border-strong);
-    border-radius:18px;padding:30px;text-align:center;
-}
-.score-ring{
-    width:180px;height:180px;border-radius:50%;
-    display:grid;place-items:center;
-    background:
-        radial-gradient(circle,var(--blue-deep) 58%,transparent 59%),
-        conic-gradient(var(--gold) 0deg,#2C3E4A 0deg);
-    transition:.4s ease;
-}
-.score-ring strong{font-size:3rem;color:var(--cream);}
-.score-status{margin-top:15px;color:var(--gold);font-weight:900;}
-.score-explanation{max-width:420px;color:var(--muted);margin-top:8px;}
-
-/* =========================
-   MATRIX
-========================= */
-.matrix{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
-.matrix-item{
-    background:var(--panel);border:1px solid var(--border);
-    border-radius:16px;padding:22px;
-}
-.matrix-item h3{color:var(--gold);margin-bottom:8px;}
-.matrix-item p{color:var(--muted);}
-
-/* =========================
-   SCENARIO SIMULATOR
-========================= */
-.simulator{
-    display:grid;grid-template-columns:280px 1fr;
-    border:1px solid var(--border-strong);
-    border-radius:20px;overflow:hidden;background:var(--panel);
-}
-.scenario-menu{background:var(--blue-deep);border-right:1px solid var(--border);}
-.scenario-btn{
-    width:100%;padding:18px;background:transparent;color:var(--text);
-    border:0;border-bottom:1px solid var(--border);text-align:left;
-}
-.scenario-btn:hover,.scenario-btn.active{
-    background:var(--panel);color:var(--gold);
-}
-.scenario-content{padding:35px;}
-.scenario-panel{display:none;}
-.scenario-panel.active{display:block;}
-.scenario-panel h3{color:var(--gold);margin-bottom:10px;}
-.scenario-panel p{color:var(--cream-soft);}
-.scenario-metric{
-    display:grid;grid-template-columns:repeat(3,1fr);
-    gap:12px;margin-top:25px;
-}
-.metric{
-    background:var(--blue-deep);padding:17px;border-radius:12px;
-    border:1px solid var(--border);
-}
-.metric span{display:block;color:var(--muted);font-size:.7rem;text-transform:uppercase;}
-.metric strong{color:var(--gold);font-size:1.25rem;}
-
-/* =========================
-   AUDIT
-========================= */
-.audit{display:grid;grid-template-columns:1fr 340px;gap:25px;}
-.audit-list{display:grid;gap:10px;}
-.audit-item{
-    display:flex;gap:14px;align-items:flex-start;
-    background:var(--panel);border:1px solid var(--border);
-    padding:17px;border-radius:12px;cursor:pointer;
-}
-.audit-item input{margin-top:6px;accent-color:var(--gold);}
-.audit-item.completed{border-color:var(--success);opacity:.8;}
-.audit-item.completed span{text-decoration:line-through;}
-.audit-score{
-    background:var(--panel);border:1px solid var(--border-strong);
-    border-radius:18px;padding:25px;height:max-content;
-    position:sticky;top:90px;
-}
-.audit-score-number{font-size:3rem;font-weight:900;color:var(--gold);}
-
-/* =========================
-   STRATEGY BUILDER
-========================= */
-.builder{
-    background:var(--panel);border:1px solid var(--border-strong);
-    border-radius:22px;padding:30px;
-}
-.builder-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-.builder-output{
-    background:var(--blue-deep);border:1px dashed var(--border-strong);
-    border-radius:15px;padding:22px;min-height:280px;
-}
-.output-label{
-    color:var(--gold);font-size:.7rem;text-transform:uppercase;
-    letter-spacing:.12em;font-weight:900;margin-bottom:15px;
-}
-.output-line{
-    display:flex;justify-content:space-between;gap:20px;
-    border-bottom:1px solid var(--border);padding:12px 0;
-}
-.output-line span{color:var(--muted);}
-.output-line strong{text-align:right;max-width:60%;word-break:break-word;}
-
-/* =========================
-   PROGRESSION
-========================= */
-.progression{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;}
-.level{
-    border:1px solid var(--border);background:var(--panel);
-    border-radius:15px;padding:20px;cursor:pointer;transition:.2s;
-}
-.level:hover,.level.active{border-color:var(--accent);background:var(--blue-mid);}
-.level-number{color:var(--gold);font-weight:900;}
-.level h3{margin:8px 0;font-size:1rem;color:var(--cream);}
-.level p{color:var(--muted);font-size:.85rem;}
-.level-detail{
-    margin-top:18px;background:var(--panel);border:1px solid var(--border-strong);
-    border-radius:15px;padding:22px;min-height:100px;color:var(--cream-soft);
+.hero h1 {
+  color: var(--gold);
+  font-size: clamp(2rem, 5vw, 3.3rem);
+  line-height: 1.15;
+  margin-bottom: 18px;
 }
 
-/* =========================
-   MISSIONS
-========================= */
-.mission-board{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;}
-.mission{
-    border:1px solid var(--border);background:var(--panel);
-    border-radius:15px;padding:22px;
-}
-.mission.done{border-color:var(--success);background:var(--blue-mid);}
-.mission h3{margin-bottom:8px;color:var(--gold);}
-.mission p{color:var(--muted);font-size:.9rem;}
-.xp-tag{display:inline-block;margin-top:15px;color:var(--gold);font-weight:900;}
-
-/* =========================
-   OPPORTUNITY SEARCH
-========================= */
-.search-panel{
-    background:linear-gradient(145deg,var(--panel),var(--blue-deep));
-    border:1px solid var(--border-strong);
-    border-radius:18px;padding:clamp(20px,4vw,36px);
-}
-.search-panel > p{color:var(--muted);margin-bottom:24px;}
-.search-form{
-    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;
-}
-.field{min-width:0;}
-.field label{
-    display:block;font-weight:bold;color:var(--cream);margin-bottom:7px;
-    font-size:.85rem;
-}
-.field input,.field select{
-    width:100%;min-height:48px;padding:11px 12px;
-    background:var(--blue-deep);border:1px solid var(--border-strong);
-    border-radius:7px;color:var(--cream);
-}
-.field select option{background:var(--blue-deep);}
-.field.full{grid-column:1 / -1;}
-.search-button{
-    border:0;border-radius:8px;padding:13px 19px;
-    font-weight:bold;cursor:pointer;min-height:48px;
-    background:var(--gold);color:var(--brown-deep);width:100%;
-    transition:.2s;
-}
-.search-button:hover{background:var(--cream);}
-.search-note{margin-top:13px;color:var(--muted);font-size:.88rem;}
-
-.results{margin-top:28px;border-top:1px solid var(--border);padding-top:24px;}
-.results h3{margin-bottom:8px;color:var(--gold);}
-.results-summary{color:var(--muted);margin-bottom:18px;}
-.search-results-grid{
-    display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));
-    gap:13px;
-}
-.search-result{
-    display:flex;flex-direction:column;align-items:flex-start;
-    gap:9px;padding:18px;background:var(--blue-deep);
-    border:1px solid var(--border);border-radius:10px;
-}
-.search-result h4{color:var(--gold);font-size:1.02rem;}
-.search-result p{color:var(--muted);font-size:.9rem;flex:1;}
-.search-result a{
-    display:inline-block;padding:8px 0;font-weight:bold;
-    text-decoration:underline;color:var(--gold);
+.hero p {
+  max-width: 850px;
+  margin: auto;
+  font-size: 1.08rem;
 }
 
-.quick-categories{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px;}
-.quick-categories button{
-    background:transparent;color:var(--cream);
-    border:1px solid var(--border);padding:8px 13px;
-    border-radius:24px;cursor:pointer;transition:.2s;
-}
-.quick-categories button:hover{
-    background:var(--brown);border-color:var(--gold);
+.hero-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 25px;
 }
 
-/* =========================
-   TRIAD / FACTS
-========================= */
-.triad-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;}
-.triad-card{
-    background:var(--panel);padding:23px;border-radius:12px;
-    border:1px solid var(--border-strong);
-}
-.triad-card h3{color:var(--gold);margin-bottom:12px;font-size:1.2rem;}
-.triad-card ul{padding-left:19px;margin-top:10px;}
-.triad-card li{color:var(--muted);margin-bottom:7px;}
-
-/* =========================
-   TABLE
-========================= */
-.table-wrap{overflow-x:auto;border-radius:14px;border:1px solid var(--border);}
-table{width:100%;border-collapse:collapse;font-size:.94rem;margin:0;}
-th{background:var(--brown);text-align:left;color:var(--cream);padding:13px;}
-th,td{padding:13px;border:1px solid var(--border);vertical-align:top;}
-td{color:var(--cream-soft);}
-tr:nth-child(even){background:var(--panel);}
-tr:nth-child(odd){background:var(--blue-deep);}
-
-/* =========================
-   CHECKLIST / CALLOUT
-========================= */
-.checklist{
-    background:var(--panel);border:1px solid var(--border-strong);
-    padding:25px;border-radius:12px;
-}
-.checklist ul{padding-left:22px;}
-.checklist li{margin:9px 0;color:var(--cream-soft);}
-
-.callout{
-    border-left:4px solid var(--gold);padding:15px 18px;
-    background:rgba(27,58,75,.7);margin-top:18px;
-    border-radius:0 10px 10px 0;color:var(--cream-soft);
+.hero-nav a {
+  text-decoration: none;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  padding: 7px 15px;
+  font-size: .9rem;
 }
 
-/* =========================
-   FOOTER
-========================= */
-footer{
-    padding:80px 20px;text-align:center;
-    background:var(--blue-deep);
-    border-top:1px solid var(--border-strong);
-}
-footer h2{color:var(--gold);max-width:750px;margin:auto;border:none;padding:0;}
-footer p{color:var(--muted);max-width:750px;margin:18px auto 0;}
+.hero-nav a:hover { background: var(--green-light); }
 
-/* =========================
-   TOAST
-========================= */
-#toast{
-    position:fixed;right:20px;bottom:20px;
-    background:var(--gold);color:var(--brown-deep);
-    padding:13px 17px;border-radius:10px;
-    font-weight:800;transform:translateY(100px);
-    opacity:0;transition:.3s;z-index:9999;
-    max-width:320px;box-shadow:var(--shadow);
+.container {
+  max-width: 1180px;
+  padding: 35px 20px;
+  margin: auto;
 }
-#toast.show{transform:translateY(0);opacity:1;}
 
-/* =========================
-   RESPONSIVE
-========================= */
-@media(max-width:1000px){
-    .triad-grid{grid-template-columns:1fr;}
+section { margin-bottom: 48px; }
+
+h2 {
+  color: var(--gold);
+  font-size: clamp(1.45rem, 3vw, 1.9rem);
+  border-left: 5px solid var(--brown);
+  padding-left: 13px;
+  margin-bottom: 20px;
+  line-height: 1.3;
 }
-@media(max-width:900px){
-    .hero-grid,.lab-grid,.audit,.builder-grid{grid-template-columns:1fr;}
-    .insight-grid,.mission-board{grid-template-columns:1fr 1fr;}
-    .progression{grid-template-columns:1fr 1fr;}
-    .simulator{grid-template-columns:1fr;}
-    .scenario-menu{border-right:0;border-bottom:1px solid var(--border);}
-    .search-form{grid-template-columns:1fr;}
-    .field.full{grid-column:auto;}
+
+h3 { color: var(--gold); line-height: 1.4; }
+
+.section-intro {
+  color: var(--muted);
+  margin: -7px 0 22px;
+  max-width: 850px;
 }
-@media(max-width:650px){
-    .nav-inner{align-items:flex-start;flex-direction:column;}
-    .hero{padding-top:55px;}
-    .hero h1{font-size:2.7rem;}
-    .insight-grid,.matrix,.mission-board,.scenario-metric,.progression{grid-template-columns:1fr;}
-    .section-head{align-items:flex-start;flex-direction:column;}
-    .lab,.builder{padding:20px;}
-    .quote{padding:25px;font-size:1.08rem;}
-    .hero h1{font-size:2.2rem;}
-    th,td{padding:9px;min-width:120px;}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: 18px;
+}
+
+.card, .triad-card {
+  background: var(--green);
+  padding: 23px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  min-width: 0;
+}
+
+.card { transition: border-color .2s, transform .2s; }
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: var(--gold);
+}
+
+.card h3, .triad-card h3 {
+  font-size: 1.16rem;
+  margin-bottom: 10px;
+}
+
+.card p, .triad-card p, .triad-card li { color: var(--muted); }
+
+.card ul, .triad-card ul {
+  padding-left: 19px;
+  margin-top: 10px;
+}
+
+.card li, .triad-card li { margin-bottom: 7px; }
+
+.quote {
+  background: var(--brown);
+  border: 1px solid var(--border);
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 1.08rem;
+  font-style: italic;
+}
+
+/* OPPORTUNITY SEARCH */
+
+.search-panel {
+  background: linear-gradient(145deg, #173A2B, #10291F);
+  border: 1px solid var(--gold);
+  border-radius: 18px;
+  padding: clamp(20px, 4vw, 36px);
+}
+
+.search-panel > p {
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.search-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.field { min-width: 0; }
+
+.field label {
+  display: block;
+  font-weight: bold;
+  color: var(--cream);
+  margin-bottom: 7px;
+}
+
+.field input, .field select {
+  width: 100%;
+  min-height: 48px;
+  padding: 11px 12px;
+  background: var(--dark);
+  border: 1px solid #64806E;
+  border-radius: 7px;
+  color: var(--cream);
+}
+
+.field input:focus, .field select:focus {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.field select option { background: var(--dark); }
+
+.field.full { grid-column: 1 / -1; }
+
+.search-button, .secondary-button {
+  border: 0;
+  border-radius: 8px;
+  padding: 13px 19px;
+  font-weight: bold;
+  cursor: pointer;
+  min-height: 48px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.search-button {
+  background: var(--gold);
+  color: var(--dark);
+  width: 100%;
+}
+
+.search-button:hover { background: var(--cream); }
+
+.secondary-button {
+  background: var(--brown);
+  color: var(--cream);
+  border: 1px solid var(--border);
+}
+
+.secondary-button:hover { background: #62402B; }
+
+.search-note {
+  margin-top: 13px;
+  color: var(--muted);
+  font-size: .88rem;
+}
+
+.results {
+  margin-top: 28px;
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+}
+
+.results h3 { margin-bottom: 8px; }
+
+.results-summary {
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+
+.search-results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+  gap: 13px;
+}
+
+.search-result {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 18px;
+  background: var(--dark);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.search-result h4 { color: var(--gold); font-size: 1.02rem; }
+
+.search-result p { color: var(--muted); font-size: .9rem; flex: 1; }
+
+.search-result a {
+  display: inline-block;
+  padding: 8px 0;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.quick-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 22px;
+}
+
+.quick-categories button {
+  background: transparent;
+  color: var(--cream);
+  border: 1px solid var(--border);
+  padding: 8px 13px;
+  border-radius: 24px;
+  cursor: pointer;
+}
+
+.quick-categories button:hover {
+  background: var(--brown);
+  border-color: var(--gold);
+}
+
+.triad-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  font-size: .94rem;
+}
+
+th {
+  background: var(--brown);
+  text-align: left;
+  color: var(--cream);
+}
+
+th, td {
+  padding: 13px;
+  border: 1px solid var(--border);
+  vertical-align: top;
+}
+
+tr:nth-child(even) { background: var(--green); }
+
+.table-wrap { overflow-x: auto; }
+
+.checklist {
+  background: var(--green);
+  border: 1px solid var(--border);
+  padding: 25px;
+  border-radius: 12px;
+}
+
+.checklist ul { padding-left: 22px; }
+
+.checklist li { margin: 9px 0; }
+
+.callout {
+  border-left: 4px solid var(--gold);
+  padding: 15px 18px;
+  background: rgba(23,58,43,.7);
+  margin-top: 18px;
+}
+
+footer {
+  background: var(--dark);
+  padding: 40px 20px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+
+footer h2 {
+  border: none;
+  padding: 0;
+}
+
+footer p {
+  max-width: 760px;
+  margin: auto;
+  color: var(--muted);
+}
+
+footer a { display: inline-block; margin-top: 16px; }
+
+@media (max-width: 800px) {
+  .triad-grid { grid-template-columns: 1fr; }
+  .search-form { grid-template-columns: 1fr; }
+  .field.full { grid-column: auto; }
+}
+
+@media (max-width: 500px) {
+  .hero { padding: 42px 17px; }
+  .container { padding: 27px 15px; }
+  .card, .triad-card { padding: 19px; }
+  th, td { padding: 9px; min-width: 125px; }
 }
 </style>
 </head>
 
 <body>
 
-<div id="scrollProgress"></div>
-
-<!-- =========================
-     NAVIGATION
-========================= -->
-<nav class="nav">
-    <div class="nav-inner">
-        <div class="brand">Location Power · Strategy Lab</div>
-        <div class="nav-actions">
-            <button class="nav-btn" onclick="scrollToSection('locationLab')">Location Lab</button>
-            <button class="nav-btn" onclick="scrollToSection('opportunitySearch')">Opportunities</button>
-            <button class="nav-btn" onclick="scrollToSection('audit')">Audit</button>
-            <button class="nav-btn" onclick="scrollToSection('missions')">Missions</button>
-            <button class="nav-btn" onclick="resetProgress()">Reset</button>
-        </div>
-    </div>
-</nav>
-
-
-<!-- =========================
-     HERO
-========================= -->
 <header class="hero">
-    <div class="hero-grid">
-        <div>
-            <div class="eyebrow">Strategic Mobility &amp; Opportunity Intelligence</div>
-            <h1>
-                Location Is a
-                <span>Variable.</span>
-                Treat It Like One.
-            </h1>
-            <p class="hero-copy">
-                Location Power Differential Mapping transforms geography from a passive backdrop
-                into a decision variable. Instead of asking only where you want to live or work,
-                evaluate where your particular combination of capabilities, demand, competition,
-                infrastructure, purchasing power, and networks produces the strongest strategic position.
-                Identify geographic zones where your specialized competencies scale disproportionately,
-                maximize value capture, and escape hyper-competitive local ceilings.
-            </p>
-            <div class="hero-actions">
-                <button class="btn primary" onclick="scrollToSection('locationLab')">Run Location Analysis</button>
-                <button class="btn ghost" onclick="scrollToSection('opportunitySearch')">Search Opportunities</button>
-                <button class="btn ghost" onclick="scrollToSection('missions')">Start Missions</button>
-            </div>
-        </div>
-
-        <aside class="player-card">
-            <div class="player-top">
-                <div>
-                    <div class="rank" id="rankName">STRATEGIST I</div>
-                    <div class="xp-label">Strategic XP</div>
-                </div>
-                <div class="xp-number" id="xpNumber">0</div>
-            </div>
-            <div class="xp-track"><div class="xp-fill" id="xpFill"></div></div>
-            <div class="stat-grid">
-                <div class="stat"><small>Location Score</small><strong id="heroScore">50</strong></div>
-                <div class="stat"><small>Audit</small><strong id="heroAudit">0%</strong></div>
-                <div class="stat"><small>Missions</small><strong id="heroMissions">0/6</strong></div>
-                <div class="stat"><small>Level</small><strong id="heroLevel">01</strong></div>
-            </div>
-        </aside>
-    </div>
+  <div class="eyebrow">PathKeeper · Opportunity Intelligence</div>
+  <h1>Location Power Differential Mapping</h1>
+  <p>
+    Discover where opportunities exist, what matters in each location,
+    which resources are available, and what regional patterns can help
+    you make better career, education, business, and financial decisions.
+  </p>
+  <nav class="hero-nav" aria-label="Page navigation">
+    <a href="#opportunity-search">Search Opportunities</a>
+    <a href="#location-intelligence">Location Intelligence</a>
+    <a href="#resources">Resources</a>
+    <a href="#audit">Strategic Audit</a>
+  </nav>
 </header>
-
 
 <main class="container">
 
-<!-- =========================
-     CORE CONCEPT
-========================= -->
 <section>
-    <div class="section-head">
-        <div>
-            <div class="section-number">01 / THE MODEL</div>
-            <h2>Move From Geography to Strategy</h2>
-        </div>
-        <p class="section-intro">
-            The central question is not whether one location is universally better than another.
-            It is whether a particular environment improves the economics of your specific situation.
-        </p>
-    </div>
+  <div class="quote">
+    An opportunity is not just what exists. It is what you can access,
+    qualify for, afford to pursue, and turn into a measurable advantage.
+  </div>
+</section>
 
-    <div class="quote">
-        A location becomes strategically powerful when it improves the relationship between
-        <span>what you can produce</span>, <span>who needs it</span>, and
-        <span>what it costs to remain positioned there.</span>
-    </div>
+<!-- OPPORTUNITY SEARCH ENGINE -->
 
-    <p style="margin-top:22px;color:var(--cream-soft);max-width:900px;">
-        Location Power Differential Mapping is a strategic intelligence methodology used to evaluate how
-        different economic, geographical, and digital ecosystems alter the net return on invested human capital.
-        By examining spatial asymmetries, you can identify nodes where your specific asset mix is critically scarce.
-        Instead of attempting to out-compete hyper-dense incumbents in saturated native markets, this paradigm
-        shifts focus toward structural arbitrage—placing your abilities into high-leverage environments where the
-        cost of competition is low and the marginal utility of your output is maximized.
+<section id="opportunity-search">
+  <h2>Search Opportunities by Category and Location</h2>
+  <p class="section-intro">
+    Select what you want to find and where you want to find it.
+    Explore local, regional, national, and international opportunities,
+    then investigate the resources and conditions that affect your chances.
+  </p>
+
+  <div class="search-panel">
+    <p>
+      Start with a specific objective. You can search for funding in one
+      city, internships in another state, business opportunities in a
+      growing market, or educational programs abroad.
     </p>
-</section>
 
+    <form id="opportunityForm" class="search-form">
+      <div class="field">
+        <label for="category">Opportunity category</label>
+        <select id="category" name="category" required>
+          <option value="grants">Grants and funding</option>
+          <option value="scholarships">Scholarships</option>
+          <option value="fellowships">Fellowships and residencies</option>
+          <option value="internships">Internships</option>
+          <option value="jobs">Jobs and careers</option>
+          <option value="remote jobs">Remote work</option>
+          <option value="business opportunities">Business opportunities</option>
+          <option value="small business resources">Small business resources</option>
+          <option value="startup incubators accelerators">Startup incubators and accelerators</option>
+          <option value="business competitions pitch competitions">Competitions</option>
+          <option value="free training certificates">Training and certificates</option>
+          <option value="study abroad programs">Study abroad</option>
+          <option value="apprenticeships">Apprenticeships</option>
+          <option value="volunteer opportunities">Volunteering</option>
+          <option value="mentorship programs">Mentorship</option>
+          <option value="technology resources">Technology resources</option>
+          <option value="affordable housing assistance">Housing resources</option>
+          <option value="economic development incentives">Economic development incentives</option>
+          <option value="custom">Custom search</option>
+        </select>
+      </div>
 
-<!-- =========================
-     ADVANCED INSIGHTS
-========================= -->
-<section>
-    <div class="section-head">
-        <div>
-            <div class="section-number">02 / ADVANCED INTELLIGENCE</div>
-            <h2>The Hidden Variables</h2>
-        </div>
-        <p class="section-intro">
-            Geographic advantage rarely comes from a single number. It emerges from interactions
-            between variables that are usually evaluated separately.
+      <div class="field">
+        <label for="location">City, state, country, or region</label>
+        <input
+          id="location"
+          name="location"
+          type="text"
+          placeholder="e.g. Austin, Texas, USA"
+          autocomplete="off"
+          required
+        >
+      </div>
+
+      <div class="field" id="customCategoryField" hidden>
+        <label for="customCategory">Describe your opportunity</label>
+        <input
+          id="customCategory"
+          name="customCategory"
+          type="text"
+          placeholder="e.g. youth innovation funding"
+        >
+      </div>
+
+      <div class="field">
+        <label for="scope">Geographic scope</label>
+        <select id="scope" name="scope">
+          <option value="local">City or local area</option>
+          <option value="regional">State or region</option>
+          <option value="national">Entire country</option>
+          <option value="international">International</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="audience">Who is the opportunity for?</label>
+        <select id="audience" name="audience">
+          <option value="">All eligible audiences</option>
+          <option value="students">Students</option>
+          <option value="individuals">Individuals</option>
+          <option value="entrepreneurs">Entrepreneurs</option>
+          <option value="small businesses">Small businesses</option>
+          <option value="startups">Startups</option>
+          <option value="career changers">Career changers</option>
+          <option value="nonprofits">Nonprofits</option>
+          <option value="researchers">Researchers</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="priority">What matters most?</label>
+        <select id="priority" name="priority">
+          <option value="eligibility requirements and application deadlines">
+            Eligibility and deadlines
+          </option>
+          <option value="free and low cost opportunities">
+            Free or low-cost options
+          </option>
+          <option value="funding amounts and financial benefits">
+            Funding and financial benefits
+          </option>
+          <option value="demand competition and acceptance rates">
+            Competition and demand
+          </option>
+          <option value="official application websites">
+            Official application pages
+          </option>
+          <option value="market trends and growth potential">
+            Trends and growth potential
+          </option>
+        </select>
+      </div>
+
+      <div class="field full">
+        <button class="search-button" type="submit">
+          Search Opportunities and Resources ↗
+        </button>
+        <p class="search-note">
+          Searches open in a new tab. Results depend on the search provider
+          and may include outdated listings; verify eligibility and dates
+          on the official source.
         </p>
+      </div>
+    </form>
+
+    <div class="quick-categories" aria-label="Quick search categories">
+      <button type="button" data-category="grants">Grants</button>
+      <button type="button" data-category="scholarships">Scholarships</button>
+      <button type="button" data-category="internships">Internships</button>
+      <button type="button" data-category="remote jobs">Remote jobs</button>
+      <button type="button" data-category="business opportunities">Business</button>
+      <button type="button" data-category="free training certificates">Certificates</button>
+      <button type="button" data-category="study abroad programs">Study abroad</button>
+      <button type="button" data-category="business competitions pitch competitions">Competitions</button>
     </div>
 
-    <div class="insight-grid">
-        <article class="insight-card">
-            <div class="number">01 — DEMAND</div>
-            <h3>Demand-Skill Misalignment</h3>
-            <p>
-                A capability can appear ordinary in a large talent pool yet become unusually valuable
-                when deployed against a shortage that employers or customers cannot easily resolve.
-            </p>
-            <div class="reveal">
-                The useful metric is not simply “how many jobs exist.” Examine whether the problems being
-                purchased are growing faster than the number of people capable of solving them.
-            </div>
-            <button class="reveal-btn" onclick="toggleInsight(this)">Explore mechanism →</button>
-        </article>
-
-        <article class="insight-card">
-            <div class="number">02 — FRICTION</div>
-            <h3>Competition Is Only One Cost</h3>
-            <p>
-                Saturation affects more than visibility. It can increase customer acquisition effort,
-                salary pressure, networking requirements, and the amount of proof required before trust is established.
-            </p>
-            <div class="reveal">
-                A smaller market can therefore outperform a larger one if access costs, competitor density,
-                and customer acquisition friction are substantially lower.
-            </div>
-            <button class="reveal-btn" onclick="toggleInsight(this)">Explore mechanism →</button>
-        </article>
-
-        <article class="insight-card">
-            <div class="number">03 — NETWORK</div>
-            <h3>Proximity Changes Opportunity Flow</h3>
-            <p>
-                Certain ecosystems compress the distance between talent, capital, customers,
-                institutions, mentors, vendors, and decision-makers.
-            </p>
-            <div class="reveal">
-                Network density matters because opportunity often travels through repeated interactions.
-                A strong position can reduce the number of steps required to reach the people who can
-                accelerate your next move.
-            </div>
-            <button class="reveal-btn" onclick="toggleInsight(this)">Explore mechanism →</button>
-        </article>
+    <div id="searchResults" class="results" aria-live="polite" hidden>
+      <h3 id="resultsTitle">Your opportunity research plan</h3>
+      <p id="resultsSummary" class="results-summary"></p>
+      <div id="resultsGrid" class="search-results-grid"></div>
     </div>
+  </div>
 </section>
 
+<!-- LOCATION INTELLIGENCE -->
 
-<!-- =========================
-     LOCATION LAB
-========================= -->
-<section id="locationLab">
-    <div class="section-head">
-        <div>
-            <div class="section-number">03 / LOCATION LAB</div>
-            <h2>Build a Location Differential Score</h2>
-        </div>
-        <p class="section-intro">
-            Score a hypothetical location against your own circumstances. The tool does not declare a
-            universal “best city.” It reveals where your assumptions create leverage or friction.
-        </p>
-    </div>
+<section id="location-intelligence">
+  <h2>What Matters in Each Location?</h2>
+  <p class="section-intro">
+    A location should be evaluated as a system. Its population, industries,
+    institutions, cost structure, and rules all affect which opportunities
+    are practical.
+  </p>
 
-    <div class="lab">
-        <div class="lab-grid">
-            <div>
-                <div class="form-group">
-                    <label>Location / Scenario</label>
-                    <input id="locationName" type="text" placeholder="Example: Remote-first strategy" oninput="updateLocationScore()">
-                </div>
+  <div class="grid">
+    <article class="card">
+      <h3>1. Demand and Industry Structure</h3>
+      <p>
+        Identify the industries hiring, expanding, receiving investment,
+        or experiencing persistent unmet needs. Look for problems people
+        and organizations already spend money to solve.
+      </p>
+      <ul>
+        <li>Major local employers and growing sectors</li>
+        <li>Skills mentioned repeatedly in job postings</li>
+        <li>Public procurement and local development projects</li>
+      </ul>
+    </article>
 
-                <div class="form-group">
-                    <label>Demand Strength <span class="value-display" id="demandValue">5</span></label>
-                    <div class="range-row">
-                        <input id="demand" type="range" min="1" max="10" value="5" oninput="updateLocationScore()">
-                        <div> / 10</div>
-                    </div>
-                </div>
+    <article class="card">
+      <h3>2. Funding and Institutional Resources</h3>
+      <p>
+        Examine universities, workforce agencies, foundations, government
+        departments, business support centers, and regional development
+        organizations.
+      </p>
+      <ul>
+        <li>Grants, scholarships, and training subsidies</li>
+        <li>Business incubators and mentoring programs</li>
+        <li>Eligibility rules and application cycles</li>
+      </ul>
+    </article>
 
-                <div class="form-group">
-                    <label>Competition Advantage <span class="value-display" id="competitionValue">5</span></label>
-                    <div class="range-row">
-                        <input id="competition" type="range" min="1" max="10" value="5" oninput="updateLocationScore()">
-                        <div> / 10</div>
-                    </div>
-                </div>
+    <article class="card">
+      <h3>3. Cost and Purchasing Power</h3>
+      <p>
+        Compare what it costs to live, learn, travel, and operate against
+        the income or benefits an opportunity may generate.
+      </p>
+      <ul>
+        <li>Housing, transportation, and utilities</li>
+        <li>Local wages and typical compensation</li>
+        <li>Business operating costs and customer budgets</li>
+      </ul>
+    </article>
 
-                <div class="form-group">
-                    <label>Cost Efficiency <span class="value-display" id="costValue">5</span></label>
-                    <div class="range-row">
-                        <input id="cost" type="range" min="1" max="10" value="5" oninput="updateLocationScore()">
-                        <div> / 10</div>
-                    </div>
-                </div>
+    <article class="card">
+      <h3>4. Access and Eligibility</h3>
+      <p>
+        An opportunity can exist nearby but remain inaccessible because of
+        residency rules, qualifications, transportation, or application
+        restrictions.
+      </p>
+      <ul>
+        <li>Residency and citizenship requirements</li>
+        <li>Prerequisites and experience thresholds</li>
+        <li>Remote access and travel requirements</li>
+      </ul>
+    </article>
 
-                <div class="form-group">
-                    <label>Network Access <span class="value-display" id="networkValue">5</span></label>
-                    <div class="range-row">
-                        <input id="network" type="range" min="1" max="10" value="5" oninput="updateLocationScore()">
-                        <div> / 10</div>
-                    </div>
-                </div>
+    <article class="card">
+      <h3>5. Competition and Unmet Needs</h3>
+      <p>
+        Investigate whether demand is adequately served. A smaller market
+        may still be attractive if customers have a specific problem and
+        few credible solutions.
+      </p>
+      <ul>
+        <li>Number and quality of competing providers</li>
+        <li>Waiting lists, vacancies, and service gaps</li>
+        <li>Customer complaints and recurring difficulties</li>
+      </ul>
+    </article>
 
-                <div class="form-group">
-                    <label>Infrastructure <span class="value-display" id="infrastructureValue">5</span></label>
-                    <div class="range-row">
-                        <input id="infrastructure" type="range" min="1" max="10" value="5" oninput="updateLocationScore()">
-                        <div> / 10</div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Expansion Potential <span class="value-display" id="expansionValue">5</span></label>
-                    <div class="range-row">
-                        <input id="expansion" type="range" min="1" max="10" value="5" oninput="updateLocationScore()">
-                        <div> / 10</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="score-panel">
-                <div class="score-ring" id="scoreRing">
-                    <strong id="locationScore">50</strong>
-                </div>
-                <div class="score-status" id="scoreStatus">Neutral Position</div>
-                <p class="score-explanation" id="scoreExplanation">
-                    Your current assumptions produce a balanced strategic position. Increase the variables
-                    that create leverage rather than optimizing one category in isolation.
-                </p>
-                <button class="btn primary" style="margin-top:20px" onclick="saveLocationAnalysis()">Save Analysis</button>
-            </div>
-        </div>
-    </div>
+    <article class="card">
+      <h3>6. Networks and Distribution</h3>
+      <p>
+        Locations differ in access to decision-makers, industry
+        associations, mentors, customers, capital, and specialized
+        knowledge.
+      </p>
+      <ul>
+        <li>Professional associations and local events</li>
+        <li>Universities and industry partnerships</li>
+        <li>Online networks that reduce geographic barriers</li>
+      </ul>
+    </article>
+  </div>
 </section>
 
+<!-- RESEARCH RESOURCES -->
 
-<!-- =========================
-     DIFFERENTIAL MATRIX
-========================= -->
+<section id="resources">
+  <h2>Resource Directory: Where to Investigate</h2>
+  <p class="section-intro">
+    Use these starting points to locate authoritative information. Select
+    a resource to open its website.
+  </p>
+
+  <div class="grid">
+    <article class="card">
+      <h3>Government Grants</h3>
+      <p>Search federal grant announcements and program requirements.</p>
+      <a href="https://www.grants.gov/" target="_blank" rel="noopener noreferrer">
+        Grants.gov ↗
+      </a>
+    </article>
+
+    <article class="card">
+      <h3>Scholarships and Student Aid</h3>
+      <p>Investigate federal aid, education funding, and student eligibility.</p>
+      <a href="https://studentaid.gov/" target="_blank" rel="noopener noreferrer">
+        Federal Student Aid ↗
+      </a>
+    </article>
+
+    <article class="card">
+      <h3>Jobs and Workforce Information</h3>
+      <p>Explore occupational outlooks, employment data, and career pathways.</p>
+      <a href="https://www.careeronestop.org/" target="_blank" rel="noopener noreferrer">
+        CareerOneStop ↗
+      </a>
+    </article>
+
+    <article class="card">
+      <h3>Small Business Assistance</h3>
+      <p>Find business education, advising, and support resources.</p>
+      <a href="https://www.sba.gov/" target="_blank" rel="noopener noreferrer">
+        U.S. Small Business Administration ↗
+      </a>
+    </article>
+
+    <article class="card">
+      <h3>Regional Economic Data</h3>
+      <p>Compare employment, wages, industries, and regional economic patterns.</p>
+      <a href="https://www.bls.gov/" target="_blank" rel="noopener noreferrer">
+        Bureau of Labor Statistics ↗
+      </a>
+    </article>
+
+    <article class="card">
+      <h3>State and Local Programs</h3>
+      <p>Find official state government portals and regional services.</p>
+      <a href="https://www.usa.gov/state-governments" target="_blank" rel="noopener noreferrer">
+        State Government Directory ↗
+      </a>
+    </article>
+
+    <article class="card">
+      <h3>Research and Statistics</h3>
+      <p>Investigate population, education, housing, and local demographic data.</p>
+      <a href="https://data.census.gov/" target="_blank" rel="noopener noreferrer">
+        U.S. Census Data ↗
+      </a>
+    </article>
+
+    <article class="card">
+      <h3>Government Contracting</h3>
+      <p>Explore federal procurement opportunities and registration requirements.</p>
+      <a href="https://sam.gov/" target="_blank" rel="noopener noreferrer">
+        SAM.gov ↗
+      </a>
+    </article>
+
+    <article class="card">
+      <h3>International Education</h3>
+      <p>Explore official information on U.S. study abroad programs.</p>
+      <a href="https://studyabroad.state.gov/" target="_blank" rel="noopener noreferrer">
+        U.S. Study Abroad ↗
+      </a>
+    </article>
+  </div>
+
+  <div class="callout">
+    <strong>Important:</strong> These resources are starting points, not
+    guarantees of funding or eligibility. Some programs are restricted by
+    location, residency, income, institution, or business type.
+  </div>
+</section>
+
+<!-- FACTS AND PATTERNS -->
+
 <section>
-    <div class="section-head">
-        <div>
-            <div class="
+  <h2>Facts, Patterns, and Signals to Track</h2>
+  <p class="section-intro">
+    Separate verified facts from assumptions. A useful location analysis
+    records evidence, the date it was checked, and what that evidence
+    implies for your next decision.
+  </p>
+
+  <div class="triad-grid">
+    <article class="triad-card">
+      <h3>Verified Facts</h3>
+      <ul>
+        <li>Published wage and employment statistics</li>
+        <li>Official grant amounts and eligibility rules</li>
+        <li>Housing and business cost estimates</li>
+        <li>Application dates and program locations</li>
+        <li>Published industry and population data</li>
+      </ul>
+    </article>
+
+    <article class="triad-card">
+      <h3>Recurring Patterns</h3>
+      <ul>
+        <li>Repeated job openings for the same skills</li>
+        <li>Funding cycles that recur annually</li>
+        <li>Industries clustered around major institutions</li>
+        <li>Services frequently requested but hard to access</li>
+        <li>Growing demand across multiple independent sources</li>
+      </ul>
+    </article>
+
+    <article class="triad-card">
+      <h3>Opportunity Signals</h3>
+      <ul>
+        <li>Employers repeatedly struggling to fill roles</li>
+        <li>Programs accepting applicants with your qualifications</li>
+        <li>Customers actively paying to solve a problem</li>
+        <li>New infrastructure or economic investment</li>
+        <li>Affordable ways to gain credentials or experience</li>
+      </ul>
+    </article>
+  </div>
+
+  <div class="callout">
+    A pattern is a hypothesis until supported by evidence. Multiple job
+    listings, for example, do not automatically prove a worker shortage.
+    Check hiring volumes, wage trends, required qualifications, and
+    whether positions remain open over time.
+  </div>
+</section>
+
+<!-- COMPARISON FRAMEWORK -->
+
+<section>
+  <h2>Location Differential Framework</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Factor</th>
+          <th>What to investigate</th>
+          <th>Evidence to collect</th>
+          <th>Decision impact</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Opportunity density</td>
+          <td>How many relevant opportunities exist?</td>
+          <td>Current listings, program directories, opening dates</td>
+          <td>Shows the size of the opportunity pool.</td>
+        </tr>
+        <tr>
+          <td>Accessibility</td>
+          <td>Can you realistically qualify and participate?</td>
+          <td>Requirements, travel, schedule, residency rules</td>
+          <td>Identifies barriers before investing time.</td>
+        </tr>
+        <tr>
+          <td>Competition</td>
+          <td>How difficult is it to win or enter?</td>
+          <td>Applicant data, competing providers, qualifications</td>
+          <td>Helps estimate the effort required.</td>
+        </tr>
+        <tr>
+          <td>Economic return</td>
+          <td>What benefit remains after expenses?</td>
+          <td>Compensation, fees, transport, housing, time</td>
+          <td>Reveals the net value of an option.</td>
+        </tr>
+        <tr>
+          <td>Resource access</td>
+          <td>What support can improve your chances?</td>
+          <td>Mentors, training, funding, institutions</td>
+          <td>Identifies ways to reduce entry barriers.</td>
+        </tr>
+        <tr>
+          <td>Durability</td>
+          <td>Is the opportunity temporary or sustainable?</td>
+          <td>Industry outlook, renewal history, repeat demand</td>
+          <td>Helps distinguish a short-term gain from a durable path.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- STRATEGIC OPTIONS -->
+
+<section>
+  <h2>High-Leverage Location Strategies</h2>
+  <div class="grid">
+    <article class="card">
+      <h3>Digital Geographic Reach</h3>
+      <p>
+        Live in one location while applying for remote jobs, serving
+        customers elsewhere, or accessing online training. Confirm
+        geographic hiring and tax restrictions first.
+      </p>
+    </article>
+
+    <article class="card">
+      <h3>Underserved Market Entry</h3>
+      <p>
+        Find a specific local need that existing providers do not
+        adequately meet. Interview potential customers and test demand
+        before investing in a business.
+      </p>
+    </article>
+
+    <article class="card">
+      <h3>Institutional Access</h3>
+      <p>
+        Investigate universities, workforce centers, libraries,
+        incubators, and industry associations that provide training,
+        facilities, advising, or funding.
+      </p>
+    </article>
+
+    <article class="card">
+      <h3>Regional Comparison</h3>
+      <p>
+        Compare several locations using the same criteria rather than
+        relying on reputation, population size, or isolated success stories.
+      </p>
+    </article>
+  </div>
+</section>
+
+<!-- AUDIT -->
+
+<section id="audit">
+  <h2>Strategic Diagnostic Audit</h2>
+  <div class="checklist">
+    <ul>
+      <li>Have I identified opportunities that match my actual qualifications?</li>
+      <li>Have I checked official deadlines, requirements, and program legitimacy?</li>
+      <li>Do several independent sources support the demand or growth pattern?</li>
+      <li>Have I compared the total cost of participating across locations?</li>
+      <li>Can I access the opportunity remotely or without relocating?</li>
+      <li>What training, credential, or portfolio evidence would improve my chances?</li>
+      <li>What is the next action I can complete without a large upfront expense?</li>
+      <li>When will I revisit the evidence to check whether conditions have changed?</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Build a Repeatable Opportunity System</h2>
+  <div class="quote">
+    Do not search randomly. Search with a category, a location, a clear
+    objective, and a method for verifying what you find.
+  </div>
+  <p style="margin-top:18px;">
+    Location Power Differential Mapping turns geographic research into a
+    repeatable decision process. Identify the opportunities, verify the
+    facts, understand local patterns, compare the costs, and act where
+    the evidence supports your next move.
+  </p>
+</section>
+
+</main>
+
+<footer>
+  <h2>Make Geography Work for Your Goals</h2>
+  <p>
+    Explore opportunities beyond your immediate surroundings. Evaluate
+    each location by access, evidence, cost, demand, and the resources
+    available to help you progress.
+  </p>
+  <a href="#opportunity-search">Return to Opportunity Search ↑</a>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  const form = document.getElementById("opportunityForm");
+  const categorySelect = document.getElementById("category");
+  const customField = document.getElementById("customCategoryField");
+  const customInput = document.getElementById("customCategory");
+  const locationInput = document.getElementById("location");
+  const scopeSelect = document.getElementById("scope");
+  const audienceSelect = document.getElementById("audience");
+  const prioritySelect = document.getElementById("priority");
+
+  const results = document.getElementById("searchResults");
+  const resultsTitle = document.getElementById("resultsTitle");
+  const resultsSummary = document.getElementById("resultsSummary");
+  const resultsGrid = document.getElementById("resultsGrid");
+
+  categorySelect.addEventListener("change", function () {
+    const isCustom = categorySelect.value === "custom";
+    customField.hidden = !isCustom;
+    customInput.required = isCustom;
+
+    if (isCustom) customInput.focus();
+  });
+
+  function makeSearchUrl(query) {
+    return "https://www.google.com/search?q=" + encodeURIComponent(query);
+  }
+
+  function createResultCard(title, description, query) {
+    const article = document.createElement("article");
+    article.className = "search-result";
+
+    const heading = document.createElement("h4");
+    heading.textContent = title;
+
+    const paragraph = document.createElement("p");
+    paragraph.textContent = description;
+
+    const link = document.createElement("a");
+    link.href = makeSearchUrl(query);
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "Explore results ↗";
+    link.setAttribute("aria-label", "Search the web for " + title);
+
+    article.append(heading, paragraph, link);
+    return article;
+  }
+
+  function runSearch(category, location, scope, audience, priority) {
+    const audiencePhrase = audience ? " " + audience : "";
+
+    const scopePhrases = {
+      local: "local city community",
+      regional: "state regional",
+      national: "national countrywide",
+      international: "international global"
+    };
+
+    const area = location + " " + scopePhrases[scope];
+    const mainQuery = category + audiencePhrase + " " + area;
+
+    const searches = [
+      {
+        title: "1. Current Opportunities",
+        description:
+          "Find listings, programs, and announcements matching your category and location.",
+        query: mainQuery + " current opportunities"
+      },
+      {
+        title: "2. Official Programs and Resources",
+        description:
+          "Look for government, educational, institutional, and established program websites.",
+        query: mainQuery + " official programs resources"
+      },
+      {
+        title: "3. Eligibility and Deadlines",
+        description:
+          "Investigate qualifications, residency restrictions, closing dates, and application requirements.",
+        query: mainQuery + " eligibility requirements deadlines"
+      },
+      {
+        title: "4. Facts and Regional Data",
+        description:
+          "Look for statistics, local economic reports, population data, and industry information.",
+        query: location + " " + category + " statistics regional data trends"
+      },
+      {
+        title: "5. Demand and Competition",
+        description:
+          "Investigate how demand compares with supply and what barriers entrants face.",
+        query: location + " " + category + " demand competition market trends"
+      },
+      {
+        title: "6. Cost and Financial Requirements",
+        description:
+          "Check fees, participation costs, compensation, funding amounts, and expenses.",
+        query: mainQuery + " " + priority + " costs amounts"
+      },
+      {
+        title: "7. Local Organizations and Networks",
+        description:
+          "Identify local agencies, institutions, associations, mentors, and support organizations.",
+        query: location + " organizations associations support " + category
+      },
+      {
+        title: "8. Emerging Patterns and Growth",
+        description:
+          "Search for expansion, investment, hiring changes, new programs, and recurring opportunities.",
+        query: location + " " + category + " emerging trends growth investment"
+      }
+    ];
+
+    resultsGrid.replaceChildren();
+
+    searches.forEach(function (item) {
+      resultsGrid.appendChild(
+        createResultCard(item.title, item.description, item.query)
+      );
+    });
+
+    resultsTitle.textContent = "Research plan: " + category;
+    resultsSummary.textContent =
+      "Location: " + location +
+      " · Scope: " + scope +
+      (audience ? " · Audience: " + audience : "") +
+      ". Eight targeted searches are ready. Open each search to inspect current web results.";
+
+    results.hidden = false;
+    results.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const location = locationInput.value.trim();
+    let category = categorySelect.value;
+
+    if (category === "custom") {
+      category = customInput.value.trim();
+
+      if (!category) {
+        customInput.focus();
+        return;
+      }
+    }
+
+    if (!location) {
+      locationInput.focus();
+      return;
+    }
+
+    runSearch(
+      category,
+      location,
+      scopeSelect.value,
+      audienceSelect.value,
+      prioritySelect.value
+    );
+  });
+
+  document.querySelectorAll("[data-category]").forEach(function (button) {
+    button.addEventListener("click", function () {
+      categorySelect.value = button.dataset.category;
+      customField.hidden = true;
+      customInput.required = false;
+
+      if (!locationInput.value.trim()) {
+        locationInput.focus();
+        locationInput.scrollIntoView({ behavior: "smooth", block: "center" });
+      } else {
+        form.requestSubmit();
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
