@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Map opportunities by category and location. Research grants, scholarships, jobs, business markets, education, technology, and regional resources.">
+<title>Location Power Differential Mapping | PathKeeper</title>
+
+<style>
+:root {
+  --forest: #0F2D22;
+  --green: #173A2B;
+  --green-light: #24523C;
+  --cream: #F3EBDD;
+  --gold: #D8B08C;
+  --brown: #4B2E1E;
+  --dark: #081D15;
+  --muted: #C6D4CA;
+  --border: rgba(216,176,140,.28);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--forest);
+  color: var(--cream);
+  line-height: 1.7;
+}
+
+a { color: var(--gold); }
+button, input, select { font: inherit; }
+
+button, a { -webkit-tap-highlight-color: transparent; }
+
+.hero {
+  background: linear-gradient(160deg, #24523C, var(--forest) 75%);
+  padding: 60px 20px 45px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: .78rem;
+  color: var(--gold);
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.hero h1 {
+  color: var(--gold);
+  font-size: clamp(2rem, 5vw, 3.3rem);
+  line-height: 1.15;
+  margin-bottom: 18px;
+}
+
+.hero p {
+  max-width: 850px;
+  margin: auto;
+  font-size: 1.08rem;
+}
+
+.hero-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.hero-nav a {
+  text-decoration: none;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  padding: 7px 15px;
+  font-size: .9rem;
+}
+
+.hero-nav a:hover { background: var(--green-light); }
+
+.container {
+  max-width: 1180px;
+  padding: 35px 20px;
+  margin: auto;
+}
+
+section { margin-bottom: 48px; }
+
+h2 {
+  color: var(--gold);
+  font-size: clamp(1.45rem, 3vw, 1.9rem);
+  border-left: 5px solid var(--brown);
+  padding-left: 13px;
+  margin-bottom: 20px;
+  line-height: 1.3;
+}
+
+h3 { color: var(--gold); line-height: 1.4; }
+
+.section-intro {
+  color: var(--muted);
+  margin: -7px 0 22px;
+  max-width: 850px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: 18px;
+}
+
+.card, .triad-card {
+  background: var(--green);
+  padding: 23px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  min-width: 0;
+}
+
+.card { transition: border-color .2s, transform .2s; }
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: var(--gold);
+}
+
+.card h3, .triad-card h3 {
+  font-size: 1.16rem;
+  margin-bottom: 10px;
+}
+
+.card p, .triad-card p, .triad-card li { color: var(--muted); }
+
+.card ul, .triad-card ul {
+  padding-left: 19px;
+  margin-top: 10px;
+}
+
+.card li, .triad-card li { margin-bottom: 7px; }
+
+.quote {
+  background: var(--brown);
+  border: 1px solid var(--border);
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 1.08rem;
+  font-style: italic;
+}
+
+/* OPPORTUNITY SEARCH */
+
+.search-panel {
+  background: linear-gradient(145deg, #173A2B, #10291F);
+  border: 1px solid var(--gold);
+  border-radius: 18px;
+  padding: clamp(20px, 4vw, 36px);
+}
+
+.search-panel > p {
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.search-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.field { min-width: 0; }
+
+.field label {
+  display: block;
+  font-weight: bold;
+  color: var(--cream);
+  margin-bottom: 7px;
+}
+
+.field input, .field select {
+  width: 100%;
+  min-height: 48px;
+  padding: 11px 12px;
+  background: var(--dark);
+  border: 1px solid #64806E;
+  border-radius: 7px;
+  color: var(--cream);
+}
+
+.field input:focus, .field select:focus {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.field select option { background: var(--dark); }
+
+.field.full { grid-column: 1 / -1; }
+
+.search-button, .secondary-button {
+  border: 0;
+  border-radius: 8px;
+  padding: 13px 19px;
+  font-weight: bold;
+  cursor: pointer;
+  min-height: 48px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.search-button {
+  background: var(--gold);
+  color: var(--dark);
+  width: 100%;
+}
+
+.search-button:hover { background: var(--cream); }
+
+.secondary-button {
+  background: var(--brown);
+  color: var(--cream);
+  border: 1px solid var(--border);
+}
+
+.secondary-button:hover { background: #62402B; }
+
+.search-note {
+  margin-top: 13px;
+  color: var(--muted);
+  font-size: .88rem;
+}
+
+.results {
+  margin-top: 28px;
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+}
+
+.results h3 { margin-bottom: 8px; }
+
+.results-summary {
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+
+.search-results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+  gap: 13px;
+}
+
+.search-result {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 18px;
+  background: var(--dark);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.search-result h4 { color: var(--gold); font-size: 1.02rem; }
+
+.search-result p { color: var(--muted); font-size: .9rem; flex: 1; }
+
+.search-result a {
+  display: inline-block;
+  padding: 8px 0;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.quick-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 22px;
+}
+
+.quick-categories button {
+  background: transparent;
+  color: var(--cream);
+  border: 1px solid var(--border);
+  padding: 8px 13px;
+  border-radius: 24px;
+  cursor: pointer;
+}
+
+.quick-categories button:hover {
+  background: var(--brown);
+  border-color: var(--gold);
+}
+
+.triad-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  font-size: .94rem;
+}
+
+th {
+  background: var(--brown);
+  text-align: left;
+  color: var(--cream);
+}
+
+th, td {
+  padding: 13px;
+  border: 1px solid var(--border);
+  vertical-align: top;
+}
+
+tr:nth-child(even) { background: var(--green); }
+
+.table-wrap { overflow-x: auto; }
+
+.checklist {
+  background: var(--green);
+  border: 1px solid var(--border);
+  padding: 25px;
+  border-radius: 12px;
+}
+
+.checklist ul { padding-left: 22px; }
+
+.checklist li { margin: 9px 0; }
+
+.callout {
+  border-left: 4px solid var(--gold);
+  padding: 15px 18px;
+  background: rgba(23,58,43,.7);
+  margin-top: 18px;
+}
+
+footer {
+  background: var(--dark);
+  padding: 40px 20px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+
+footer h2 {
+  border: none;
+  padding: 0;
+}
+
+footer p {
+  max-width: 760px;
+  margin: auto;
+  color: var(--muted);
+}
+
+footer a { display: inline-block; margin-top: 16px; }
+
+@media (max-width: 800px) {
+  .triad-grid { grid-template-columns: 1fr; }
+  .search-form { grid-template-columns: 1fr; }
+  .field.full { grid-column: auto; }
+}
+
+@media (max-width: 500px) {
+  .hero { padding: 42px 17px; }
+  .container { padding: 27px 15px; }
+  .card, .triad-card { padding: 19px; }
+  th, td { padding: 9px; min-width: 125px; }
+}
+</style>
+</head>
+
+<body>
+
+<header class="hero">
+  <div class="eyebrow">PathKeeper · Opportunity Intelligence</div>
+  <h1>Location Power Differential Mapping</h1>
+  <p>
+    Discover where opportunities exist, what matters in each location,
+    which resources are available, and what regional patterns can help
+    you make better career, education, business, and financial decisions.
+  </p>
+  <nav class="hero-nav" aria-label="Page navigation">
+    <a href="#opportunity-search">Search Opportunities</a>
+    <a href="#location-intelligence">Location Intelligence</a>
+    <a href="#resources">Resources</a>
+    <a href="#audit">Strategic Audit</a>
+  </nav>
+</header>
+
+<main class="container">
+
+<section>
+  <div class="quote">
+    An opportunity is not just what exists. It is what you can access,
+    qualify for, afford to pursue, and turn into a measurable advantage.
+  </div>
+</section>
+
+<!-- OPPORTUNITY SEARCH ENGINE -->
+
+<section id="opportunity-search">
+  <h2>Search Opportunities by Category and Location</h2>
+  <p class="section-intro">
+    Select what you want to find and where you want to find it.
+    Explore local, regional, national, and international opportunities,
+    then investigate the resources and conditions that affect your chances.
+  </p>
+
+  <div class="search-panel">
+    <p>
+      Start with a specific objective. You can search for funding in one
+      city, internships in another state, business opportunities in a
+      growing market, or educational programs abroad.
+    </p>
+
+    <form id="opportunityForm" class="search-form">
+      <div class="field">
+        <label for="category">Opportunity category</label>
+        <select id="category" name="category" required>
+          <option value="grants">Grants and funding</option>
+          <option value="scholarships">Scholarships</option>
+          <option value="fellowships">Fellowships and residencies</option>
+          <option value="internships">Internships</option>
+          <option value="jobs">Jobs and careers</option>
+          <option value="remote jobs">Remote work</option>
+          <option value="business opportunities">Business opportunities</option>
+          <option value="small business resources">Small business resources</option>
+          <option value="startup incubators accelerators">Startup incubators and accelerators</option>
+          <option value="business competitions pitch competitions">Competitions</option>
+          <option value="free training certificates">Training and certificates</option>
+          <option value="study abroad programs">Study abroad</option>
+          <option value="apprenticeships">Apprenticeships</option>
+          <option value="volunteer opportunities">Volunteering</option>
+          <option value="mentorship programs">Mentorship</option>
+          <option value="technology resources">Technology resources</option>
+          <option value="affordable housing assistance">Housing resources</option>
+          <option value="economic development incentives">Economic development incentives</option>
+          <option value="custom">Custom search</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="location">City, state, country, or region</label>
+        <input
+          id="location"
+          name="location"
+          type="text"
+          placeholder="e.g. Austin, Texas, USA"
+          autocomplete="off"
+          required
+        >
+      </div>
+
+      <div class="field" id="customCategoryField" hidden>
+        <label for="customCategory">Describe your opportunity</label>
+        <input
+          id="customCategory"
+          name="customCategory"
+          type="text"
+          placeholder="e.g. youth innovation funding"
+        >
+      </div>
+
+      <div class="field">
+        <label for="scope">Geographic scope</label>
+        <select id="scope" name="scope">
+          <option value="local">City or local area</option>
+          <option value="regional">State or region</option>
+          <option value="national">Entire country</option>
+          <option value="international">International</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="audience">Who is the opportunity for?</label>
+        <select id="audience" name="audience">
+          <option value="">All eligible audiences</option>
+          <option value="students">Students</option>
+          <option value="individuals">Individuals</option>
+          <option value="entrepreneurs">Entrepreneurs</option>
+          <option value="small businesses">Small businesses</option>
+          <option value="startups">Startups</option>
+          <option value="career changers">Career changers</option>
+          <option value="nonprofits">Nonprofits</option>
+          <option value="researchers">Researchers</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="priority">What matters most?</label>
+        <select id="priority" name="priority">
+          <option value="eligibility requirements and application deadlines">
+            Eligibility and deadlines
+          </option>
+          <option value="free and low cost opportunities">
+            Free or low-cost options
+          </option>
+          <option value="funding amounts and financial benefits">
+            Funding and financial benefits
+          </option>
+          <option value="demand competition and acceptance rates">
+            Competition and demand
+          </option>
+          <option value="official application websites">
+            Official application pages
+          </option>
+          <option value="market trends and growth potential">
+            Trends and growth potential
+          </option>
+        </select>
+      </div>
+
+      <div class="field full">
+        <button class="search-button" type="submit">
+          Search Opportunities and Resources ↗
+        </button>
+        <p class="search-note">
+          Searches open in a new tab. Results depend on the search provider
+          and may include outdated listings; verify eligibility and dates
+          on the official source.
+        </p>
+      </div>
+    </form>
+
+    <div class="quick-categories" aria-label="Quick search categories">
+      <button type="button" data-category="grants">Grants</button>
+      <button type="button" data-category="scholarships">Scholarships</button>
+      <button type="button" data-category="internships">Internships</button>
+      <button type="button" data-category="remote jobs">Remote jobs</button>
+      <button type="button" data-category="business opportunities">Business</button>
+      <button type="button" data-category="free training certificates">Certificates</button>
+      <button type="button" data-category="study abroad programs">Study abroad</button>
+      <button type="button" data-category="business competitions pitch competitions">Competitions</button>
+    </div>
+
+    <div id="searchResults" class="results" aria-live="polite" hidden>
+      <h3 id="resultsTitle">Your opportunity research plan</h3>
+      <p id="resultsSummary" class="results-summary"></p>
+      <div id="resultsGrid" class="search-results-grid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION INTELLIGENCE -->
+
+<section id="location-intelligence">
+  <h2>What Matters in Each Location?</h2>
+  <p class="section-intro">
+    A location should be evaluated as a system. Its population, industries,
+    institutions, cost structure, and rules all affect which opportunities
+    are practical.
+  </p>
+
+  <div class="grid">
+    <article class="card">
+      <h3>1. Demand and Industry Structure</h3>
+      <p>
+        Identify the industries hiring, expanding, receiving investment,
+        or experiencing persistent unmet needs. Look for problems people
+        and organizations already spend money to solve.
+      </p>
+      <ul>
+        <li>Major local employers and growing sectors</li>
+        <li>Skills mentioned repeatedly in job postings</li>
+        <li>Public procurement and local development projects</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <h3>2. Funding and Institutional Resources</h3>
+      <p>
+        Examine universities, workforce agencies, foundations, government
+        departments, business support centers, and regional development
+        organizations.
+      </p>
+      <ul>
+        <li>Grants, scholarships, and training subsidies</li>
+        <li>Business incubators and mentoring programs</li>
+        <li>Eligibility rules and application cycles</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <h3>3. Cost and Purchasing Power</h3>
+      <p>
+        Compare what it costs to live, learn, travel, and operate against
+        the income or benefits an opportunity may generate.
+      </p>
+      <ul>
+        <li>Housing, transportation, and utilities</li>
+        <li>Local wages and typical compensation</li>
+        <li>Business operating costs and customer budgets</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <h3>4. Access and Eligibility</h3>
+      <p>
+        An opportunity can exist nearby but remain inaccessible because of
+        residency rules, qualifications, transportation, or application
+        restrictions.
+      </p>
+      <ul>
+        <li>Residency and citizenship requirements</li>
+        <li>Prerequisites and experience thresholds</li>
+        <li>Remote access and travel requirements</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <h3>5. Competition and Unmet Needs</h3>
+      <p>
+        Investigate whether demand is adequately served. A smaller market
+        may still be attractive if customers have a specific problem and
+        few credible solutions.
+      </p>
+      <ul>
+        <li>Number and quality of competing providers</li>
+        <li>Waiting lists, vacancies, and service gaps</li>
+        <li>Customer complaints and recurring difficulties</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <h3>6. Networks and Distribution</h3>
+      <p>
+        Locations differ in access to decision-makers, industry
+        associations, mentors, customers, capital, and specialized
+        knowledge.
+      </p>
+      <ul>
+        <li>Professional associations and local events</li>
+        <li>Universities and industry partnerships</li>
+        <li>Online networks that reduce geographic barriers</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<!-- RESEARCH RESOURCES -->
+
+<section id="resources">
+  <h2>Resource Directory: Where to Investigate</h2>
+  <p class="section-intro">
+    Use these starting points to locate authoritative information. Select
+    a resource to open its website.
+  </p>
+
+  <div class="grid">
+    <article class="card">
+      <h3>Government Grants</h3>
+      <p>Search federal grant announcements and program requirements.</p>
+      <a href="https://www.grants.gov/" target="_blank" rel="noopener noreferrer">
+        Grants.gov ↗
+      </a>
+    </article>
+
+    <article class="card">
+      <h3>Scholarships and Student Aid</h3>
+      <p>Investigate federal aid, education funding, and student eligibility.</p>
+      <a href="https://studentaid.gov/" target="_blank" rel="noopener noreferrer">
+        Federal Student Aid ↗
+      </a>
+    </article>
+
+    <article class="card">
+      <h3>Jobs and Workforce Information</h3>
+      <p>Explore occupational outlooks, employment data, and career pathways.</p>
+      <a href="https://www.careeronestop.org/" target="_blank" rel="noopener noreferrer">
+        CareerOneStop ↗
+      </a>
+    </article>
+
+    <article class="card">
+      <h3>Small Business Assistance</h3>
+      <p>Find business education, advising, and support resources.</p>
+      <a href="https://www.sba.gov/" target="_blank" rel="noopener noreferrer">
+        U.S. Small Business Administration ↗
+      </a>
+    </article>
+
+    <article class="card">
+      <h3>Regional Economic Data</h3>
+      <p>Compare employment, wages, industries, and regional economic patterns.</p>
+      <a href="https://www.bls.gov/" target="_blank" rel="noopener noreferrer">
+        Bureau of Labor Statistics ↗
+      </a>
+    </article>
+
+    <article class="card">
+      <h3>State and Local Programs</h3>
+      <p>Find official state government portals and regional services.</p>
+      <a href="https://www.usa.gov/state-governments" target="_blank" rel="noopener noreferrer">
+        State Government Directory ↗
+      </a>
+    </article>
+
+    <article class="card">
+      <h3>Research and Statistics</h3>
+      <p>Investigate population, education, housing, and local demographic data.</p>
+      <a href="https://data.census.gov/" target="_blank" rel="noopener noreferrer">
+        U.S. Census Data ↗
+      </a>
+    </article>
+
+    <article class="card">
+      <h3>Government Contracting</h3>
+      <p>Explore federal procurement opportunities and registration requirements.</p>
+      <a href="https://sam.gov/" target="_blank" rel="noopener noreferrer">
+        SAM.gov ↗
+      </a>
+    </article>
+
+    <article class="card">
+      <h3>International Education</h3>
+      <p>Explore official information on U.S. study abroad programs.</p>
+      <a href="https://studyabroad.state.gov/" target="_blank" rel="noopener noreferrer">
+        U.S. Study Abroad ↗
+      </a>
+    </article>
+  </div>
+
+  <div class="callout">
+    <strong>Important:</strong> These resources are starting points, not
+    guarantees of funding or eligibility. Some programs are restricted by
+    location, residency, income, institution, or business type.
+  </div>
+</section>
+
+<!-- FACTS AND PATTERNS -->
+
+<section>
+  <h2>Facts, Patterns, and Signals to Track</h2>
+  <p class="section-intro">
+    Separate verified facts from assumptions. A useful location analysis
+    records evidence, the date it was checked, and what that evidence
+    implies for your next decision.
+  </p>
+
+  <div class="triad-grid">
+    <article class="triad-card">
+      <h3>Verified Facts</h3>
+      <ul>
+        <li>Published wage and employment statistics</li>
+        <li>Official grant amounts and eligibility rules</li>
+        <li>Housing and business cost estimates</li>
+        <li>Application dates and program locations</li>
+        <li>Published industry and population data</li>
+      </ul>
+    </article>
+
+    <article class="triad-card">
+      <h3>Recurring Patterns</h3>
+      <ul>
+        <li>Repeated job openings for the same skills</li>
+        <li>Funding cycles that recur annually</li>
+        <li>Industries clustered around major institutions</li>
+        <li>Services frequently requested but hard to access</li>
+        <li>Growing demand across multiple independent sources</li>
+      </ul>
+    </article>
+
+    <article class="triad-card">
+      <h3>Opportunity Signals</h3>
+      <ul>
+        <li>Employers repeatedly struggling to fill roles</li>
+        <li>Programs accepting applicants with your qualifications</li>
+        <li>Customers actively paying to solve a problem</li>
+        <li>New infrastructure or economic investment</li>
+        <li>Affordable ways to gain credentials or experience</li>
+      </ul>
+    </article>
+  </div>
+
+  <div class="callout">
+    A pattern is a hypothesis until supported by evidence. Multiple job
+    listings, for example, do not automatically prove a worker shortage.
+    Check hiring volumes, wage trends, required qualifications, and
+    whether positions remain open over time.
+  </div>
+</section>
+
+<!-- COMPARISON FRAMEWORK -->
+
+<section>
+  <h2>Location Differential Framework</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Factor</th>
+          <th>What to investigate</th>
+          <th>Evidence to collect</th>
+          <th>Decision impact</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Opportunity density</td>
+          <td>How many relevant opportunities exist?</td>
+          <td>Current listings, program directories, opening dates</td>
+          <td>Shows the size of the opportunity pool.</td>
+        </tr>
+        <tr>
+          <td>Accessibility</td>
+          <td>Can you realistically qualify and participate?</td>
+          <td>Requirements, travel, schedule, residency rules</td>
+          <td>Identifies barriers before investing time.</td>
+        </tr>
+        <tr>
+          <td>Competition</td>
+          <td>How difficult is it to win or enter?</td>
+          <td>Applicant data, competing providers, qualifications</td>
+          <td>Helps estimate the effort required.</td>
+        </tr>
+        <tr>
+          <td>Economic return</td>
+          <td>What benefit remains after expenses?</td>
+          <td>Compensation, fees, transport, housing, time</td>
+          <td>Reveals the net value of an option.</td>
+        </tr>
+        <tr>
+          <td>Resource access</td>
+          <td>What support can improve your chances?</td>
+          <td>Mentors, training, funding, institutions</td>
+          <td>Identifies ways to reduce entry barriers.</td>
+        </tr>
+        <tr>
+          <td>Durability</td>
+          <td>Is the opportunity temporary or sustainable?</td>
+          <td>Industry outlook, renewal history, repeat demand</td>
+          <td>Helps distinguish a short-term gain from a durable path.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- STRATEGIC OPTIONS -->
+
+<section>
+  <h2>High-Leverage Location Strategies</h2>
+  <div class="grid">
+    <article class="card">
+      <h3>Digital Geographic Reach</h3>
+      <p>
+        Live in one location while applying for remote jobs, serving
+        customers elsewhere, or accessing online training. Confirm
+        geographic hiring and tax restrictions first.
+      </p>
+    </article>
+
+    <article class="card">
+      <h3>Underserved Market Entry</h3>
+      <p>
+        Find a specific local need that existing providers do not
+        adequately meet. Interview potential customers and test demand
+        before investing in a business.
+      </p>
+    </article>
+
+    <article class="card">
+      <h3>Institutional Access</h3>
+      <p>
+        Investigate universities, workforce centers, libraries,
+        incubators, and industry associations that provide training,
+        facilities, advising, or funding.
+      </p>
+    </article>
+
+    <article class="card">
+      <h3>Regional Comparison</h3>
+      <p>
+        Compare several locations using the same criteria rather than
+        relying on reputation, population size, or isolated success stories.
+      </p>
+    </article>
+  </div>
+</section>
+
+<!-- AUDIT -->
+
+<section id="audit">
+  <h2>Strategic Diagnostic Audit</h2>
+  <div class="checklist">
+    <ul>
+      <li>Have I identified opportunities that match my actual qualifications?</li>
+      <li>Have I checked official deadlines, requirements, and program legitimacy?</li>
+      <li>Do several independent sources support the demand or growth pattern?</li>
+      <li>Have I compared the total cost of participating across locations?</li>
+      <li>Can I access the opportunity remotely or without relocating?</li>
+      <li>What training, credential, or portfolio evidence would improve my chances?</li>
+      <li>What is the next action I can complete without a large upfront expense?</li>
+      <li>When will I revisit the evidence to check whether conditions have changed?</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Build a Repeatable Opportunity System</h2>
+  <div class="quote">
+    Do not search randomly. Search with a category, a location, a clear
+    objective, and a method for verifying what you find.
+  </div>
+  <p style="margin-top:18px;">
+    Location Power Differential Mapping turns geographic research into a
+    repeatable decision process. Identify the opportunities, verify the
+    facts, understand local patterns, compare the costs, and act where
+    the evidence supports your next move.
+  </p>
+</section>
+
+</main>
+
+<footer>
+  <h2>Make Geography Work for Your Goals</h2>
+  <p>
+    Explore opportunities beyond your immediate surroundings. Evaluate
+    each location by access, evidence, cost, demand, and the resources
+    available to help you progress.
+  </p>
+  <a href="#opportunity-search">Return to Opportunity Search ↑</a>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  const form = document.getElementById("opportunityForm");
+  const categorySelect = document.getElementById("category");
+  const customField = document.getElementById("customCategoryField");
+  const customInput = document.getElementById("customCategory");
+  const locationInput = document.getElementById("location");
+  const scopeSelect = document.getElementById("scope");
+  const audienceSelect = document.getElementById("audience");
+  const prioritySelect = document.getElementById("priority");
+
+  const results = document.getElementById("searchResults");
+  const resultsTitle = document.getElementById("resultsTitle");
+  const resultsSummary = document.getElementById("resultsSummary");
+  const resultsGrid = document.getElementById("resultsGrid");
+
+  categorySelect.addEventListener("change", function () {
+    const isCustom = categorySelect.value === "custom";
+    customField.hidden = !isCustom;
+    customInput.required = isCustom;
+
+    if (isCustom) customInput.focus();
+  });
+
+  function makeSearchUrl(query) {
+    return "https://www.google.com/search?q=" + encodeURIComponent(query);
+  }
+
+  function createResultCard(title, description, query) {
+    const article = document.createElement("article");
+    article.className = "search-result";
+
+    const heading = document.createElement("h4");
+    heading.textContent = title;
+
+    const paragraph = document.createElement("p");
+    paragraph.textContent = description;
+
+    const link = document.createElement("a");
+    link.href = makeSearchUrl(query);
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "Explore results ↗";
+    link.setAttribute("aria-label", "Search the web for " + title);
+
+    article.append(heading, paragraph, link);
+    return article;
+  }
+
+  function runSearch(category, location, scope, audience, priority) {
+    const audiencePhrase = audience ? " " + audience : "";
+
+    const scopePhrases = {
+      local: "local city community",
+      regional: "state regional",
+      national: "national countrywide",
+      international: "international global"
+    };
+
+    const area = location + " " + scopePhrases[scope];
+    const mainQuery = category + audiencePhrase + " " + area;
+
+    const searches = [
+      {
+        title: "1. Current Opportunities",
+        description:
+          "Find listings, programs, and announcements matching your category and location.",
+        query: mainQuery + " current opportunities"
+      },
+      {
+        title: "2. Official Programs and Resources",
+        description:
+          "Look for government, educational, institutional, and established program websites.",
+        query: mainQuery + " official programs resources"
+      },
+      {
+        title: "3. Eligibility and Deadlines",
+        description:
+          "Investigate qualifications, residency restrictions, closing dates, and application requirements.",
+        query: mainQuery + " eligibility requirements deadlines"
+      },
+      {
+        title: "4. Facts and Regional Data",
+        description:
+          "Look for statistics, local economic reports, population data, and industry information.",
+        query: location + " " + category + " statistics regional data trends"
+      },
+      {
+        title: "5. Demand and Competition",
+        description:
+          "Investigate how demand compares with supply and what barriers entrants face.",
+        query: location + " " + category + " demand competition market trends"
+      },
+      {
+        title: "6. Cost and Financial Requirements",
+        description:
+          "Check fees, participation costs, compensation, funding amounts, and expenses.",
+        query: mainQuery + " " + priority + " costs amounts"
+      },
+      {
+        title: "7. Local Organizations and Networks",
+        description:
+          "Identify local agencies, institutions, associations, mentors, and support organizations.",
+        query: location + " organizations associations support " + category
+      },
+      {
+        title: "8. Emerging Patterns and Growth",
+        description:
+          "Search for expansion, investment, hiring changes, new programs, and recurring opportunities.",
+        query: location + " " + category + " emerging trends growth investment"
+      }
+    ];
+
+    resultsGrid.replaceChildren();
+
+    searches.forEach(function (item) {
+      resultsGrid.appendChild(
+        createResultCard(item.title, item.description, item.query)
+      );
+    });
+
+    resultsTitle.textContent = "Research plan: " + category;
+    resultsSummary.textContent =
+      "Location: " + location +
+      " · Scope: " + scope +
+      (audience ? " · Audience: " + audience : "") +
+      ". Eight targeted searches are ready. Open each search to inspect current web results.";
+
+    results.hidden = false;
+    results.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const location = locationInput.value.trim();
+    let category = categorySelect.value;
+
+    if (category === "custom") {
+      category = customInput.value.trim();
+
+      if (!category) {
+        customInput.focus();
+        return;
+      }
+    }
+
+    if (!location) {
+      locationInput.focus();
+      return;
+    }
+
+    runSearch(
+      category,
+      location,
+      scopeSelect.value,
+      audienceSelect.value,
+      prioritySelect.value
+    );
+  });
+
+  document.querySelectorAll("[data-category]").forEach(function (button) {
+    button.addEventListener("click", function () {
+      categorySelect.value = button.dataset.category;
+      customField.hidden = true;
+      customInput.required = false;
+
+      if (!locationInput.value.trim()) {
+        locationInput.focus();
+        locationInput.scrollIntoView({ behavior: "smooth", block: "center" });
+      } else {
+        form.requestSubmit();
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
