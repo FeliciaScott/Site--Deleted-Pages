@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0A192F">
+<title>PathKeeper | Learn, Build & Advance</title>
+
+<style>
+:root {
+  --navy:#0A192F;
+  --navy-light:#152B46;
+  --brown:#8B4513;
+  --brown-light:#C87D55;
+  --gold:#C5A059;
+  --cream:#FDFBF7;
+  --cream-dark:#F0E7DC;
+  --white:#FFFFFF;
+  --text:#24354A;
+  --muted:#647084;
+  --border:#E3D6C8;
+  --success:#276749;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(10,25,47,.07);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{
+  margin:0;background:var(--cream);color:var(--text);
+  font-family:Inter,system-ui,Arial,sans-serif;line-height:1.65
+}
+button,input,select,textarea{font:inherit}
+button,a{cursor:pointer}
+a{color:inherit}
+button:focus-visible,a:focus-visible,input:focus-visible,
+select:focus-visible,textarea:focus-visible{
+  outline:3px solid var(--gold);outline-offset:3px
+}
+header{
+  position:sticky;top:0;z-index:20;background:rgba(253,251,247,.97);
+  border-bottom:1px solid var(--border);backdrop-filter:blur(12px)
+}
+.nav{
+  max-width:1250px;margin:auto;padding:12px 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:15px
+}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand-icon{
+  display:grid;place-items:center;width:43px;height:43px;
+  border-radius:12px;background:var(--navy);color:var(--gold);font-size:24px
+}
+.brand strong{display:block;color:var(--navy);font-size:1.1rem}
+.brand small{display:block;color:var(--brown);font-size:.7rem}
+nav{display:flex;flex-wrap:wrap;gap:13px}
+nav a{text-decoration:none;font-size:.78rem;font-weight:800}
+nav a:hover{color:var(--brown)}
+button,.button{
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  padding:10px 14px;border:1px solid transparent;border-radius:9px;
+  font-size:.84rem;font-weight:800;text-decoration:none;transition:.2s
+}
+button:hover,.button:hover{transform:translateY(-1px)}
+.primary{background:var(--navy);color:white}
+.primary:hover{background:var(--navy-light)}
+.brown{background:var(--brown);color:white}
+.outline{background:transparent;color:var(--navy);border-color:var(--border)}
+.small{padding:7px 10px;font-size:.76rem}
+.hero{
+  padding:65px 20px;background:linear-gradient(145deg,#F5EDE3,var(--cream) 65%);
+  border-bottom:1px solid var(--border)
+}
+.hero-inner{max-width:950px;margin:auto;text-align:center}
+.eyebrow,.tag{
+  display:inline-block;background:#F4ECE6;color:var(--brown);
+  border:1px solid #D7B69D;border-radius:99px;padding:5px 11px;
+  font-size:.69rem;font-weight:900;letter-spacing:.8px;text-transform:uppercase
+}
+h1,h2,h3,h4{line-height:1.25}
+h1{font-size:clamp(2.2rem,5vw,4rem);letter-spacing:-1.5px;color:var(--navy);margin:18px 0}
+.hero p{max-width:760px;margin:auto;color:var(--muted)}
+.hero-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:23px}
+.searchbox{
+  max-width:780px;margin:25px auto 0;padding:15px;background:white;
+  border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);text-align:left
+}
+.searchrow{display:flex;gap:8px}
+.searchrow input{flex:1;min-width:0}
+input,select,textarea{
+  width:100%;padding:11px 12px;border:1px solid #D7DDE5;
+  border-radius:9px;background:white;color:var(--navy)
+}
+label{display:block;font-size:.79rem;font-weight:850;margin-bottom:6px}
+main{max-width:1250px;margin:auto;padding:40px 20px 70px}
+section{margin-bottom:65px}
+.heading{border-left:4px solid var(--brown);padding-left:15px;margin-bottom:22px}
+.kicker{font-size:.7rem;color:var(--brown);font-weight:900;letter-spacing:1.4px;text-transform:uppercase}
+.heading h2{color:var(--navy);font-size:clamp(1.6rem,3vw,2.3rem);margin:5px 0}
+.heading p{color:var(--muted);margin:0;max-width:850px;font-size:.91rem}
+.grid{display:grid;gap:17px}
+.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{
+  min-width:0;background:white;border:1px solid var(--border);
+  border-radius:var(--radius);padding:21px;box-shadow:0 3px 12px rgba(10,25,47,.025)
+}
+.card h3,.card h4{color:var(--navy);margin:7px 0 10px}
+.card p{color:var(--muted);font-size:.87rem}
+.card-tag{
+  display:inline-block;background:#F7EEE6;color:var(--brown);
+  border-radius:6px;padding:4px 8px;font-size:.67rem;font-weight:900
+}
+.card-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}
+.callout{
+  padding:17px 20px;background:#F7F0E8;border:1px solid #E3C8AF;
+  border-radius:13px;margin:18px 0
+}
+.callout strong{color:var(--brown)}
+.filters{
+  display:grid;grid-template-columns:1.4fr 1fr;gap:12px;
+  background:white;border:1px solid var(--border);border-radius:13px;padding:15px;margin-bottom:17px
+}
+.field{margin-bottom:14px}
+.field small{display:block;color:var(--muted);font-size:.74rem;margin-top:5px}
+.hidden{display:none!important}
+.muted{color:var(--muted)}
+.tag{letter-spacing:.3px}
+.dark{
+  background:var(--navy);color:var(--cream);border-radius:20px;padding:25px
+}
+.dark h2,.dark h3,.dark h4{color:white}
+.dark p{color:#D0D8E3}
+.dark .card{background:#12253D;border-color:#2A3F57}
+.dark .card h3{color:white}
+.dark .card p{color:#D0D8E3}
+.dark .tag{background:#203854;color:#F0D7BF;border-color:#40536A}
+.lesson-layout{display:grid;grid-template-columns:280px minmax(0,1fr);gap:18px}
+.lesson-menu{align-self:start}
+.lesson-choice{
+  display:block;width:100%;text-align:left;margin:0 0 8px;
+  background:white;color:var(--navy);border:1px solid var(--border)
+}
+.lesson-choice.active{background:var(--navy);color:white;border-color:var(--navy)}
+.lesson-content{background:white;border:1px solid var(--border);border-radius:16px;padding:24px}
+.lesson-content h3{color:var(--navy)}
+.lesson-content h4{color:var(--brown);margin-bottom:5px}
+.lesson-content pre{
+  white-space:pre-wrap;overflow-wrap:anywhere;background:#101D30;
+  color:#F6EBDD;border-radius:11px;padding:17px;font-size:.85rem;overflow-x:auto
+}
+.lesson-content code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+.lesson-progress{height:8px;background:#E9E1D7;border-radius:20px;overflow:hidden;margin:12px 0}
+.lesson-progress span{display:block;height:100%;width:0;background:var(--brown);transition:width .2s}
+.quiz-option{
+  display:flex;align-items:flex-start;gap:9px;border:1px solid var(--border);
+  border-radius:10px;padding:11px;margin:8px 0;background:#FFFEFC
+}
+.quiz-option input{width:auto;margin-top:5px}
+.feedback{padding:12px;border-radius:9px;margin-top:12px}
+.good{background:#EAF5EC;color:#22543D;border:1px solid #B5D8BF}
+.bad{background:#FFF0E9;color:#873D24;border:1px solid #E7BDA9}
+.lesson-meta{display:flex;gap:10px;flex-wrap:wrap;font-size:.78rem;color:var(--muted)}
+.exercise{border-left:3px solid var(--gold);padding:12px 15px;background:#FAF5ED;margin:12px 0}
+pre.code-output{background:#F1F4F8;color:#24354A;border:1px solid #D7DDE5}
+.result{padding:17px;background:#EDF6EF;border:1px solid #B5D8BF;border-radius:12px;margin-top:16px}
+.result h3{color:#22543D}
+.result p{color:#2F4F3D;white-space:pre-wrap}
+.status{font-size:.8rem;color:var(--muted);margin-top:9px}
+.path-step{background:white;border:1px solid var(--border);padding:16px;border-radius:12px}
+.path-step strong{color:var(--brown)}
+ul{padding-left:20px}
+li{margin-bottom:5px}
+footer{background:var(--navy);color:#D4DCE6;padding:32px 20px}
+.footer-inner{max-width:1250px;margin:auto;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer a{color:#F0D7BF}
+footer p{font-size:.8rem}
+@media(max-width:950px){
+  nav{display:none}.three{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .four{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .lesson-layout{grid-template-columns:1fr}
+  .lesson-menu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+}
+@media(max-width:620px){
+  .nav{padding:10px 13px}.brand small{display:none}
+  .hero{padding:42px 15px}main{padding:28px 14px 45px}
+  .two,.three,.four,.filters{grid-template-columns:1fr}
+  .searchrow{flex-direction:column}
+  .lesson-menu{grid-template-columns:1fr}
+  .lesson-content{padding:17px}
+  .dark{padding:17px}
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="nav">
+    <a class="brand" href="#home">
+      <span class="brand-icon">⌖</span>
+      <span><strong>PathKeeper</strong><small>Learn · Build · Advance</small></span>
+    </a>
+    <nav aria-label="Main navigation">
+      <a href="#lessons">Lessons</a>
+      <a href="#practice">Practice</a>
+      <a href="#strategy">Strategy</a>
+      <a href="#atlas">Opportunities</a>
+      <a href="#planner">Action Plan</a>
+    </nav>
+    <button class="primary small" onclick="document.getElementById('lessons').scrollIntoView({behavior:'smooth'})">Start Learning</button>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <span class="eyebrow">PathKeeper Learning & Opportunity System</span>
+    <h1>Learn the System. Practice the Skill. Build the Evidence.</h1>
+    <p>
+      Build your understanding before attempting the work. Learn concepts through
+      explanations and examples, practice with guidance, test your understanding,
+      and turn what you learn into projects that demonstrate your capabilities.
+    </p>
+    <div class="hero-actions">
+      <a href="#lessons" class="button primary">Start With a Lesson</a>
+      <a href="#practice" class="button outline">Go to Practice</a>
+      <a href="#atlas" class="button brown">Explore Opportunities</a>
+    </div>
+    <div class="searchbox">
+      <label for="globalSearch">Search PathKeeper</label>
+      <div class="searchrow">
+        <input id="globalSearch" type="search" placeholder="Try JavaScript, career, automation, research..." oninput="applySearch()">
+        <button class="outline" onclick="clearSearch()">Clear</button>
+      </div>
+      <p id="searchStatus" class="status" aria-live="polite">Showing all content.</p>
+    </div>
+  </div>
+</section>
+
+<main>
+
+<!-- LESSONS COME FIRST -->
+<section id="lessons" class="searchable-section">
+  <div class="heading">
+    <span class="kicker">01 · Learn Before You Practice</span>
+    <h2>Learning Center</h2>
+    <p>Choose a lesson. Read the explanation, inspect the example, follow the walkthrough, and answer the knowledge check before moving to independent practice.</p>
+  </div>
+
+  <div class="callout">
+    <strong>Recommended learning sequence:</strong>
+    Understand the concept → Study an example → Trace the code → Answer a knowledge check → Practice independently → Test and improve.
+  </div>
+
+  <div class="lesson-layout">
+    <aside class="lesson-menu" aria-label="Choose a lesson">
+      <button class="lesson-choice active" data-lesson="variables" onclick="selectLesson('variables',this)">Lesson 1 · Variables</button>
+      <button class="lesson-choice" data-lesson="conditions" onclick="selectLesson('conditions',this)">Lesson 2 · Conditions</button>
+      <button class="lesson-choice" data-lesson="loops" onclick="selectLesson('loops',this)">Lesson 3 · Loops</button>
+      <button class="lesson-choice" data-lesson="functions" onclick="selectLesson('functions',this)">Lesson 4 · Functions</button>
+      <button class="lesson-choice" data-lesson="arrays" onclick="selectLesson('arrays',this)">Lesson 5 · Arrays</button>
+      <button class="lesson-choice" data-lesson="objects" onclick="selectLesson('objects',this)">Lesson 6 · Objects</button>
+      <button class="lesson-choice" data-lesson="methods" onclick="selectLesson('methods',this)">Lesson 7 · Array Methods</button>
+      <button class="lesson-choice" data-lesson="testing" onclick="selectLesson('testing',this)">Lesson 8 · Testing & Debugging</button>
+    </aside>
+
+    <article class="lesson-content" id="lessonContent" aria-live="polite">
+      <span class="card-tag">LESSON 1 · FOUNDATION</span>
+      <h3>Variables: Give Information a Name</h3>
+      <div class="lesson-meta"><span>Beginner</span><span>•</span><span>Estimated time: 10–15 minutes</span></div>
+      <div class="lesson-progress"><span id="lessonProgress"></span></div>
+      <p>A variable is a named place in your program where a value can be referenced. Variables help you store information and reuse it without repeatedly writing the same value.</p>
+      <h4>1. Understand the concept</h4>
+      <p>JavaScript commonly uses <code>const</code> and <code>let</code>. Use <code>const</code> when you do not intend to reassign the variable. Use <code>let</code> when its value needs to be reassigned.</p>
+      <h4>2. Study the example</h4>
+      <pre><code>const learner = "Jordan";
+let completedLessons = 1;
+
+completedLessons = completedLessons + 1;
+
+console.log(learner);
+console.log(completedLessons);</code></pre>
+      <h4>3. Walk through the code</h4>
+      <ul>
+        <li><code>const learner = "Jordan"</code> creates a variable containing text.</li>
+        <li><code>let completedLessons = 1</code> creates a variable containing a number.</li>
+        <li>The reassignment adds one to the current number.</li>
+        <li><code>console.log()</code> displays the values for inspection.</li>
+      </ul>
+      <div class="exercise"><strong>Predict the output:</strong> The code displays Jordan and then 2. The first value does not change; the second is reassigned.</div>
+      <h4>4. Knowledge check</h4>
+      <p>Which keyword is appropriate when a variable needs to be reassigned later?</p>
+      <label class="quiz-option"><input type="radio" name="lessonQuiz" value="a"> <span><code>const</code> in every situation</span></label>
+      <label class="quiz-option"><input type="radio" name="lessonQuiz" value="b"> <span><code>let</code></span></label>
+      <label class="quiz-option"><input type="radio" name="lessonQuiz" value="c"> <span><code>console.log</code></span></label>
+      <div class="card-actions">
+        <button class="primary" onclick="checkLesson()">Check Answer</button>
+        <button class="outline" onclick="markLessonComplete()">Mark Lesson Complete</button>
+      </div>
+      <div id="quizFeedback" class="hidden" aria-live="polite"></div>
+      <p class="status">You can revisit any lesson at any time. Completing a lesson is a self-check, not a formal certification.</p>
+    </article>
+  </div>
+</section>
+
+<!-- PRACTICE AFTER LESSONS -->
+<section id="practice" class="searchable-section">
+  <div class="heading">
+    <span class="kicker">02 · Apply What You Learned</span>
+    <h2>Guided Practice & Independent Work</h2>
+    <p>Use this practice area after studying a lesson. Attempt the task first, check the result, and explain why the solution works.</p>
+  </div>
+
+  <div class="grid two">
+    <article class="card searchable-card" data-search="javascript variables practice let const coding beginner">
+      <span class="card-tag">Guided Practice</span>
+      <h3>Practice 1 · Update a Value</h3>
+      <p>Goal: create a variable that stores 3 completed tasks, then increase it by 1.</p>
+      <pre><code>let tasksCompleted = 3;
+tasksCompleted = tasksCompleted + 1;
+console.log(tasksCompleted);</code></pre>
+      <p><strong>Expected result:</strong> 4</p>
+      <p>Notice that the reassignment uses the current value. The right side is evaluated first, and the result is assigned back to the variable.</p>
+      <button class="outline small" onclick="showPractice('practiceOne')">Reveal Walkthrough</button>
+      <div id="practiceOne" class="callout hidden">
+        Start with 3. Calculate 3 + 1. Assign 4 back to <code>tasksCompleted</code>. Logging the variable now displays 4.
+      </div>
+    </article>
+
+    <article class="card searchable-card" data-search="independent exercise function JavaScript return parameters practice">
+      <span class="card-tag">Independent Exercise</span>
+      <h3>Practice 2 · Build a Function</h3>
+      <p>Create a function named <code>doubleNumber</code> that accepts a number and returns that number multiplied by 2.</p>
+      <label for="practiceCode">Write or paste your code</label>
+      <textarea id="practiceCode" rows="6" placeholder="function doubleNumber(number) { ... }"></textarea>
+      <div class="card-actions">
+        <button class="primary" onclick="checkPracticeCode()">Check Structure</button>
+        <button class="outline" onclick="downloadPractice()">Download My Attempt</button>
+      </div>
+      <p id="practiceFeedback" class="status" aria-live="polite"></p>
+      <details>
+        <summary>Reveal a solution after attempting it</summary>
+        <pre><code>function doubleNumber(number) {
+  return number * 2;
+}
+
+console.log(doubleNumber(4)); // 8</code></pre>
+      </details>
+    </article>
+  </div>
+
+  <div class="callout">
+    <strong>Testing habit:</strong> A code snippet that looks correct is not proof that it works. Run it, test normal inputs and edge cases, and verify the actual result. The practice checker above checks for basic code structure; it does not execute arbitrary JavaScript.
+  </div>
+</section>
+
+<!-- STRATEGIC INTELLIGENCE -->
+<section id="strategy" class="searchable-section">
+  <div class="heading">
+    <span class="kicker">03 · Strategic Intelligence</span>
+    <h2>Strategic Command Center</h2>
+    <p>Investigate opportunities, identify constraints, challenge assumptions, and decide which small experiment is worth trying next.</p>
+  </div>
+
+  <div class="grid three">
+    <article class="card searchable-card" data-search="technology automation workflow process errors testing">
+      <span class="card-tag">Technology</span>
+      <h3>Workflow Automation</h3>
+      <p>Identify repetitive tasks that may benefit from automation.</p>
+      <ul>
+        <li>Map the current process.</li>
+        <li>Identify inputs and expected outputs.</li>
+        <li>Test one low-risk improvement.</li>
+      </ul>
+    </article>
+    <article class="card searchable-card" data-search="career skill evidence portfolio project learning">
+      <span class="card-tag">Career</span>
+      <h3>Skill-to-Evidence Strategy</h3>
+      <p>Turn learning into proof that another person can inspect.</p>
+      <p><strong>Sequence:</strong> Learn → Practice → Build → Document → Demonstrate.</p>
+    </article>
+    <article class="card searchable-card" data-search="business customer market research demand risk">
+      <span class="card-tag">Business</span>
+      <h3>Customer Problem Research</h3>
+      <p>Identify a specific problem and examine whether people already spend money or time trying to solve it.</p>
+      <p>Compare existing alternatives before investing heavily.</p>
+    </article>
+    <article class="card searchable-card" data-search="research evidence sources claims reliability">
+      <span class="card-tag">Research</span>
+      <h3>Research Quality</h3>
+      <p>Separate facts, estimates, assumptions, and unverified claims.</p>
+      <p>Record the source, date, limitations, and evidence that could contradict a claim.</p>
+    </article>
+    <article class="card searchable-card" data-search="decision bottleneck leverage opportunity cost">
+      <span class="card-tag">Decision-making</span>
+      <h3>Leverage Point Audit</h3>
+      <p>Find a bottleneck or decision that influences several downstream results.</p>
+      <p>Test a change and measure what actually improves.</p>
+    </article>
+    <article class="card searchable-card" data-search="innovation transferable skills career path redesign">
+      <span class="card-tag">Adaptation</span>
+      <h3>Path Redesign</h3>
+      <p>When a direction stops working, preserve transferable skills and test alternatives before making a major commitment.</p>
+    </article>
+  </div>
+</section>
+
+<!-- OPPORTUNITY ATLAS -->
+<section id="atlas" class="searchable-section">
+  <div class="heading">
+    <span class="kicker">04 · Opportunity Atlas</span>
+    <h2>Explore Career & Capability Pathways</h2>
+    <p>These are illustrative learning routes, not guarantees of employment or income. Choose a route and build evidence as you learn.</p>
+  </div>
+
+  <div class="filters">
+    <div>
+      <label for="domainFilter">Filter by domain</label>
+      <select id="domainFilter" onchange="filterAtlas()">
+        <option value="all">All domains</option>
+        <option value="tech">Technology & systems</option>
+        <option value="business">Business</option>
+        <option value="creative">Creative & media</option>
+        <option value="community">Community</option>
+      </select>
+    </div>
+    <div>
+      <label for="stageFilter">Filter by stage</label>
+      <select id="stageFilter" onchange="filterAtlas()">
+        <option value="all">All stages</option>
+        <option value="entry">Foundation</option>
+        <option value="advanced">Intermediate</option>
+        <option value="master">Advanced</option>
+      </select>
+    </div>
+  </div>
+  <p id="atlasCount" class="status" aria-live="polite"></p>
+
+  <div class="grid three" id="atlasGrid">
+    <article class="card atlas-card searchable-card" data-domain="tech" data-stage="entry" data-search="web development HTML CSS JavaScript coding beginner portfolio">
+      <span class="card-tag">Technology · Foundation</span>
+      <h3>Web Development Builder</h3>
+      <p>Learn HTML, CSS, JavaScript, accessibility, responsive layouts, debugging, and basic testing.</p>
+      <p><strong>Evidence project:</strong> a published interactive website with documented features.</p>
+      <button class="outline small" onclick="choosePath('Web Development Builder','Study HTML, CSS, and JavaScript in sequence. Build a small working page, test it on different screen sizes, document what works, and list remaining limitations.')">View learning route</button>
+    </article>
+    <article class="card atlas-card searchable-card" data-domain="tech" data-stage="advanced" data-search="automation workflow process improvement validation">
+      <span class="card-tag">Technology · Intermediate</span>
+      <h3>Systems Optimization Specialist</h3>
+      <p>Improve processes, document requirements, identify errors, and automate repeatable tasks.</p>
+      <p><strong>Evidence project:</strong> a workflow map, test plan, and working prototype.</p>
+      <button class="outline small" onclick="choosePath('Systems Optimization Specialist','Map an existing process, document inputs and outputs, identify a bottleneck, implement one small improvement, and compare results using defined measures.')">View learning route</button>
+    </article>
+    <article class="card atlas-card searchable-card" data-domain="business" data-stage="entry" data-search="operations data analyst spreadsheets SQL metrics reporting">
+      <span class="card-tag">Business · Foundation</span>
+      <h3>Operations Data Analyst</h3>
+      <p>Turn structured records into useful reports and evidence-based recommendations.</p>
+      <p><strong>Evidence project:</strong> a documented report with data sources and clear metrics.</p>
+      <button class="outline small" onclick="choosePath('Operations Data Analyst','Learn spreadsheet formulas, data cleaning, descriptive statistics, visualization, and introductory SQL. Create a small report with defined measures, source notes, and limitations.')">View learning route</button>
+    </article>
+    <article class="card atlas-card searchable-card" data-domain="business" data-stage="advanced" data-search="business process designer customer needs operations workflow">
+      <span class="card-tag">Business · Intermediate</span>
+      <h3>Business Process Designer</h3>
+      <p>Investigate bottlenecks and design better service and quality-control processes.</p>
+      <p><strong>Evidence project:</strong> a process map and improvement proposal.</p>
+      <button class="outline small" onclick="choosePath('Business Process Designer','Map a process, gather requirements, identify delays or errors, propose an improvement, and test it on a small scale. Document costs, benefits, risks, and maintenance needs.')">View learning route</button>
+    </article>
+    <article class="card atlas-card searchable-card" data-domain="creative" data-stage="entry" data-search="digital content design visual information learning materials">
+      <span class="card-tag">Creative · Foundation</span>
+      <h3>Digital Content Designer</h3>
+      <p>Translate complex information into useful visual resources and digital products.</p>
+      <p><strong>Evidence project:</strong> a small resource collection that solves a defined problem.</p>
+      <button class="outline small" onclick="choosePath('Digital Content Designer','Practice audience research, information hierarchy, accessible design, and usability checks. Create related resources and explain the problem each one solves.')">View learning route</button>
+    </article>
+    <article class="card atlas-card searchable-card" data-domain="community" data-stage="entry" data-search="community outreach stakeholder planning events">
+      <span class="card-tag">Community · Foundation</span>
+      <h3>Community Project Coordinator</h3>
+      <p>Organize outreach, coordinate stakeholders, and build reliable feedback channels.</p>
+      <p><strong>Evidence project:</strong> an event plan, outreach schedule, and evaluation.</p>
+      <button class="outline small" onclick="choosePath('Community Project Coordinator','Practice stakeholder communication, event planning, outreach tracking, and feedback collection. Produce a sample event plan and a post-event evaluation framework.')">View learning route</button>
+    </article>
+  </div>
+  <div id="pathResult" class="result hidden" aria-live="polite"></div>
+</section>
+
+<!-- ACTION PLANNER -->
+<section id="planner" class="searchable-section">
+  <div class="heading">
+    <span class="kicker">05 · Strategy & Backup Planning</span>
+    <h2>Turn Learning Into an Action Plan</h2>
+    <p>Use the planner to turn a lesson, career goal, business question, or technical project into a testable strategy.</p>
+  </div>
+
+  <div class="card">
+    <form id="planForm">
+      <div class="grid two">
+        <div class="field">
+          <label for="goal">Goal or problem</label>
+          <input id="goal" required placeholder="Example: Build a JavaScript project">
+        </div>
+        <div class="field">
+          <label for="area">Focus area</label>
+          <select id="area">
+            <option>Learning</option><option>Career</option><option>Technology</option>
+            <option>Business</option><option>Research</option><option>Personal strategy</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="evidence">What do you already know?</label>
+          <textarea id="evidence" rows="3" placeholder="Existing skills, facts, tools, and resources"></textarea>
+        </div>
+        <div class="field">
+          <label for="unknown">What remains uncertain?</label>
+          <textarea id="unknown" rows="3" placeholder="Assumptions, missing information, risks"></textarea>
+        </div>
+        <div class="field">
+          <label for="experiment">Smallest useful experiment</label>
+          <textarea id="experiment" rows="3" placeholder="A small test that can produce useful evidence"></textarea>
+        </div>
+        <div class="field">
+          <label for="backup">Backup plan</label>
+          <textarea id="backup" rows="3" placeholder="What will you try if the first approach fails?"></textarea>
+        </div>
+      </div>
+      <button class="primary" type="submit">Generate Strategy & Backup Plan</button>
+    </form>
+    <div id="planResult" class="result hidden" aria-live="polite">
+      <h3>Your Strategy & Backup Plan</h3>
+      <div id="planOutput"></div>
+      <div class="card-actions">
+        <button class="brown" onclick="downloadPlan()">Download Plan (.txt)</button>
+        <button class="outline" onclick="addPlanToPack()">Add Plan to Resource Pack</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESOURCE PACK -->
+<section id="resources" class="searchable-section">
+  <div class="heading">
+    <span class="kicker">06 · Proof of Work</span>
+    <h2>Build a Portfolio of Evidence</h2>
+    <p>Use these checklists to document what you learn and make your work easier for someone else to evaluate.</p>
+  </div>
+  <div class="grid three">
+    <article class="card searchable-card" data-search="proof work portfolio project screenshots documentation">
+      <span class="card-tag">Project evidence</span>
+      <h3>Proof-of-Work Checklist</h3>
+      <ul>
+        <li>State the problem and intended user.</li>
+        <li>Describe your contribution.</li>
+        <li>Include screenshots or a working demonstration.</li>
+        <li>Document tests, limitations, and next steps.</li>
+      </ul>
+      <button class="outline small" onclick="addResource('Proof-of-Work Checklist')">Add to pack</button>
+    </article>
+    <article class="card searchable-card" data-search="career skill roadmap portfolio milestones">
+      <span class="card-tag">Career</span>
+      <h3>Career Strategy Blueprint</h3>
+      <ul>
+        <li>Identify target-role requirements.</li>
+        <li>Choose one important skill gap.</li>
+        <li>Build evidence for that skill.</li>
+        <li>Set review milestones.</li>
+      </ul>
+      <button class="outline small" onclick="addResource('Career Strategy Blueprint')">Add to pack</button>
+    </article>
+    <article class="card searchable-card" data-search="testing debugging automation error quality">
+      <span class="card-tag">Technical quality</span>
+      <h3>Testing Checklist</h3>
+      <ul>
+        <li>Test expected inputs.</li>
+        <li>Test empty or invalid inputs.</li>
+        <li>Verify expected output.</li>
+        <li>Record errors and corrections.</li>
+      </ul>
+      <button class="outline small" onclick="addResource('Testing Checklist')">Add to pack</button>
+    </article>
+  </div>
+  <div class="card" style="margin-top:18px">
+    <h3>My Resource Pack</h3>
+    <p id="packCount" class="status">0 resources selected.</p>
+    <ul id="packList"></ul>
+    <div class="card-actions">
+      <button class="primary" onclick="downloadPack()">Download Resource Pack (.txt)</button>
+      <button class="outline" onclick="clearPack()">Clear Pack</button>
+    </div>
+    <p id="packStatus" class="status" aria-live="polite"></p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <strong style="color:white">PathKeeper</strong>
+      <p>Learn first. Practice deliberately. Build evidence. Refine your path.</p>
+    </div>
+    <div>
+      <a href="#lessons">Learning Center</a> ·
+      <a href="#practice">Practice</a> ·
+      <a href="#atlas">Opportunity Atlas</a> ·
+      <a href="#planner">Action Planner</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+"use strict";
+
+const lessons = {
+  variables: {
+    number:1,title:"Variables: Give Information a Name",level:"Beginner",time:"10–15 minutes",
+    intro:"A variable is a named place in your program where a value can be referenced. Variables let you store information and reuse it.",
+    concept:"Use const when you do not intend to reassign a variable. Use let when its value needs to be reassigned. The choice is about reassignment, not whether the value is an object or array.",
+    code:'const learner = "Jordan";\nlet completedLessons = 1;\ncompletedLessons = completedLessons + 1;\nconsole.log(learner);\nconsole.log(completedLessons);',
+    steps:["const learner stores text.","let completedLessons stores a number.","The expression completedLessons + 1 calculates a new number.","The reassignment stores 2 in completedLessons."],
+    exercise:"Create a variable named score with a starting value of 5. Increase it by 2 and display the result.",
+    question:"Which keyword is appropriate when a variable needs to be reassigned later?",
+    options:["const in every situation","let","console.log"],
+    answer:1,
+    explanation:"let allows reassignment. const prevents reassignment of the variable binding."
+  },
+  conditions: {
+    number:2,title:"Conditions: Let Your Program Make Decisions",level:"Beginner",time:"10–15 minutes",
+    intro:"A condition evaluates to true or false. Your program can use that result to choose which instructions to run.",
+    concept:"An if statement runs its block when the condition is true. An else block provides an alternative. Use comparison operators such as ===, >, and <= to form conditions.",
+    code:'const score = 82;\n\nif (score >= 70) {\n  console.log("Pass");\n} else {\n  console.log("Keep practicing");\n}',
+    steps:["score stores 82.","The expression score >= 70 evaluates to true.","The if block runs because the condition is true.","The else block is skipped."],
+    exercise:"Create a variable named temperature. If it is 30 or higher, display Hot; otherwise display Not hot.",
+    question:"When does an if block run?",
+    options:["Whenever the program starts","When its condition evaluates to true","Only when the else block runs"],
+    answer:1,
+    explanation:"The if block runs when its condition evaluates to true."
+  },
+  loops: {
+    number:3,title:"Loops: Repeat Work Without Repeating Code",level:"Beginner",time:"15 minutes",
+    intro:"A loop repeats a block of code. Loops are useful when processing lists, counting, or repeating a task a known number of times.",
+    concept:"A for loop commonly has an initialization, a condition, and an update. The condition is checked before each iteration.",
+    code:'for (let i = 1; i <= 3; i++) {\n  console.log(i);\n}',
+    steps:["let i = 1 initializes the counter.","i <= 3 checks whether another iteration should run.","console.log(i) displays the current value.","i++ increases i by one after each iteration."],
+    exercise:"Write a for loop that displays the numbers 1 through 5.",
+    question:"What does i++ do in this example?",
+    options:["Stops the loop immediately","Increases i by one","Multiplies i by itself"],
+    answer:1,
+    explanation:"i++ increases the counter by one after an iteration."
+  },
+  functions: {
+    number:4,title:"Functions: Package Instructions for Reuse",level:"Beginner",time:"15–20 minutes",
+    intro:"A function groups instructions under a name. You can call it when needed and supply different inputs.",
+    concept:"Parameters are names in the function definition. Arguments are the actual values supplied when calling the function. return sends a result back to the caller.",
+    code:'function doubleNumber(number) {\n  return number * 2;\n}\n\nconst result = doubleNumber(4);\nconsole.log(result);',
+    steps:["The function is named doubleNumber.","number is its parameter.","Calling doubleNumber(4) supplies 4 as the argument.","return sends back 8, which is stored in result."],
+    exercise:"Write a function named addFive that accepts a number and returns that number plus 5.",
+    question:"What does return do in a function?",
+    options:["Sends a value back to the caller","Always displays a value on screen","Repeats the function forever"],
+    answer:0,
+    explanation:"return sends a result back to the code that called the function. console.log is used to display values."
+  },
+  arrays: {
+    number:5,title:"Arrays: Store an Ordered Collection",level:"Beginner",time:"15 minutes",
+    intro:"An array stores an ordered collection of values. You can access items by their index and process them with loops or array methods.",
+    concept:"JavaScript array indexes start at 0. Therefore, the first item is at index 0, and the second is at index 1.",
+    code:'const skills = ["HTML", "CSS", "JavaScript"];\nconsole.log(skills[0]);\nconsole.log(skills.length);',
+    steps:["skills contains three strings.","skills[0] accesses the first item, HTML.","skills.length returns the number of items, which is 3."],
+    exercise:"Create an array containing three career skills. Display the second item.",
+    question:"What is the index of the first array item?",
+    options:["1","0","-1"],
+    answer:1,
+    explanation:"JavaScript arrays are zero-indexed, so the first item has index 0."
+  },
+  objects: {
+    number:6,title:"Objects: Group Related Information",level:"Beginner",time:"15 minutes",
+    intro:"An object groups related information into properties. Each property has a key and a value.",
+    concept:"Use dot notation to access a property when its name is known, such as book.title. Use bracket notation when you need a variable or a key with special characters.",
+    code:'const book = {\n  title: "Learning JavaScript",\n  pages: 240\n};\n\nconsole.log(book.title);\nconsole.log(book.pages);',
+    steps:["book is an object.","title and pages are property keys.","book.title retrieves the title value.","book.pages retrieves the number 240."],
+    exercise:"Create a person object with a name property and a skills property containing an array.",
+    question:"How do you read the title property from an object named book?",
+    options:["book.title","book->title","book(title)"],
+    answer:0,
+    explanation:"Dot notation accesses an object property using objectName.propertyName."
+  },
+  methods: {
+    number:7,title:"Array Methods: Transform and Filter Data",level:"Beginner to intermediate",time:"20 minutes",
+    intro:"Array methods let you transform, select, or summarize data without manually managing every step of a loop.",
+    concept:"map creates a new array by transforming each item. filter creates a new array containing items that pass a test. reduce combines items into one accumulated result.",
+    code:'const numbers = [1, 2, 3, 4];\nconst doubled = numbers.map(number => number * 2);\nconst large = numbers.filter(number => number > 2);\nconsole.log(doubled);\nconsole.log(large);',
+    steps:["map processes every number and doubles it.","doubled becomes [2, 4, 6, 8].","filter tests each number against number > 2.","large becomes [3, 4]."],
+    exercise:"Use filter to select only numbers greater than 10 from [4, 12, 18, 7].",
+    question:"Which method creates a new array containing only items that pass a condition?",
+    options:["filter","map","console.log"],
+    answer:0,
+    explanation:"filter returns a new array containing only items that pass its callback test."
+  },
+  testing: {
+    number:8,title:"Testing & Debugging: Verify Before You Trust",level:"Beginner to intermediate",time:"20 minutes",
+    intro:"Testing checks whether code behaves as expected. Debugging is the process of finding and correcting problems.",
+    concept:"Start with a specific expectation. Run the code, compare actual output with expected output, inspect errors, and test again after changing the code.",
+    code:'function add(a, b) {\n  return a + b;\n}\n\nconsole.assert(add(2, 3) === 5, "Expected 5");\nconsole.assert(add(-1, 1) === 0, "Expected 0");',
+    steps:["Define what the function should do.","Test an ordinary input.","Test another input, such as negative numbers.","Investigate failures and rerun tests after making a correction."],
+    exercise:"Write down three test cases for a function that divides one number by another. Include what should happen if the divisor is zero.",
+    question:"What should you do after correcting a bug?",
+    options:["Assume the fix worked","Run the relevant tests again","Delete all test cases"],
+    answer:1,
+    explanation:"Rerun the relevant tests to verify the correction and check for regressions."
+  }
+};
+
+let currentLesson = "variables";
+let completedLessons = new Set();
+let selectedResources = [];
+let latestPlan = "";
+let latestPath = "";
+
+function selectLesson(key, button) {
+  currentLesson = key;
+  document.querySelectorAll(".lesson-choice").forEach(item => item.classList.toggle("active", item.dataset.lesson === key));
+  renderLesson();
+}
+
+function renderLesson() {
+  const lesson = lessons[currentLesson];
+  const progress = Math.round(completedLessons.size / Object.keys(lessons).length * 100);
+  document.getElementById("lessonProgress").style.width = progress + "%";
+
+  const options = lesson.options.map((option, index) =>
+    '<label class="quiz-option"><input type="radio" name="lessonQuiz" value="' + index + '"><span>' + escapeHTML(option) + '</span></label>'
+  ).join("");
+
+  document.getElementById("lessonContent").innerHTML = `
+    <span class="card-tag">LESSON ${lesson.number} · ${escapeHTML(lesson.level)}</span>
+    <h3>${escapeHTML(lesson.title)}</h3>
+    <div class="lesson-meta"><span>${escapeHTML(lesson.level)}</span><span>•</span><span>${escapeHTML(lesson.time)}</span></div>
+    <div class="lesson-progress"><span id="lessonProgress" style="width:${progress}%"></span></div>
+    <h4>1. Understand the concept</h4>
+    <p>${escapeHTML(lesson.intro)}</p>
+    <p>${escapeHTML(lesson.concept)}</p>
+    <h4>2. Study the example</h4>
+    <pre><code>${escapeHTML(lesson.code)}</code></pre>
+    <h4>3. Walk through the code</h4>
+    <ul>${lesson.steps.map(step => "<li>" + escapeHTML(step) + "</li>").join("")}</ul>
+    <h4>4. Guided practice</h4>
+    <div class="exercise">${escapeHTML(lesson.exercise)}</div>
+    <h4>5. Knowledge check</h4>
+    <p>${escapeHTML(lesson.question)}</p>
+    ${options}
+    <div class="card-actions">
+      <button class="primary" onclick="checkLesson()">Check Answer</button>
+      <button class="outline" onclick="markLessonComplete()">Mark Lesson Complete</button>
+      <button class="outline" onclick="downloadCurrentLesson()">Download Lesson</button>
+    </div>
+    <div id="quizFeedback" class="hidden" aria-live="polite"></div>
+    <p class="status">${completedLessons.has(currentLesson) ? "You marked this lesson complete." : "Review the example and try the knowledge check before marking this lesson complete."}</p>
+  `;
+}
+
+function checkLesson() {
+  const selected = document.querySelector('input[name="lessonQuiz"]:checked');
+  const feedback = document.getElementById("quizFeedback");
+  if (!selected) {
+    feedback.className = "feedback bad";
+    feedback.textContent = "Choose an answer first.";
+    return;
+  }
+  const lesson = lessons[currentLesson];
+  if (Number(selected.value) === lesson.answer) {
+    feedback.className = "feedback good";
+    feedback.textContent = "Correct. " + lesson.explanation;
+  } else {
+    feedback.className = "feedback bad";
+    feedback.textContent = "Not quite. Review the concept and example, then try again. Hint: " + lesson.explanation;
+  }
+}
+
+function markLessonComplete() {
+  completedLessons.add(currentLesson);
+  renderLesson();
+  const status = document.createElement("div");
+  status.className = "feedback good";
+  status.textContent = "Lesson marked complete. You can move to the next lesson or revisit this one.";
+  document.getElementById("lessonContent").appendChild(status);
+}
+
+function downloadCurrentLesson() {
+  const lesson = lessons[currentLesson];
+  downloadText("pathkeeper-lesson-" + currentLesson + ".txt", [
+    lesson.title,
+    "",
+    "CONCEPT",
+    lesson.intro,
+    lesson.concept,
+    "",
+    "EXAMPLE",
+    lesson.code,
+    "",
+    "WALKTHROUGH",
+    ...lesson.steps.map((step, index) => (index + 1) + ". " + step),
+    "",
+    "PRACTICE",
+    lesson.exercise,
+    "",
+    "KNOWLEDGE CHECK",
+    lesson.question,
+    ...lesson.options.map((option, index) => String.fromCharCode(65 + index) + ". " + option),
+    "",
+    "ANSWER EXPLANATION",
+    lesson.explanation
+  ].join("\n"));
+}
+
+function showPractice(id) {
+  document.getElementById(id).classList.toggle("hidden");
+}
+
+function checkPracticeCode() {
+  const code = document.getElementById("practiceCode").value;
+  const feedback = document.getElementById("practiceFeedback");
+  const hasFunction = /function\s+doubleNumber\s*\(/.test(code);
+  const hasReturn = /\breturn\b/.test(code);
+  const hasMultiply = /\*/.test(code);
+  if (hasFunction && hasReturn && hasMultiply) {
+    feedback.textContent = "Your code contains the basic structure of the requested function. Run it and test values such as 4 → 8 and 0 → 0 to verify its behavior.";
+    feedback.className = "feedback good";
+  } else {
+    feedback.textContent = "Check that your function is named doubleNumber, accepts a parameter, returns a result, and multiplies the parameter by 2. This checker checks structure, not actual execution.";
+    feedback.className = "feedback bad";
+  }
+}
+
+function downloadPractice() {
+  const code = document.getElementById("practiceCode").value.trim();
+  if (!code) {
+    document.getElementById("practiceFeedback").textContent = "Write an attempt before downloading it.";
+    return;
+  }
+  downloadText("pathkeeper-practice-attempt.js", code);
+}
+
+function filterAtlas() {
+  const domain = document.getElementById("domainFilter").value;
+  const stage = document.getElementById("stageFilter").value;
+  let count = 0;
+  document.querySelectorAll(".atlas-card").forEach(card => {
+    const show = (domain === "all" || card.dataset.domain === domain) &&
+      (stage === "all" || card.dataset.stage === stage) &&
+      matchesSearch(card);
+    card.classList.toggle("hidden", !show);
+    if (show) count++;
+  });
+  document.getElementById("atlasCount").textContent = count + " pathway(s) match your filters.";
+}
+
+function matchesSearch(element) {
+  const query = document.getElementById("globalSearch").value.trim().toLowerCase();
+  return !query || (element.innerText + " " + (element.dataset.search || "")).toLowerCase().includes(query);
+}
+
+function applySearch() {
+  document.querySelectorAll(".searchable-card").forEach(card => {
+    if (card.classList.contains("atlas-card")) return;
+    card.classList.toggle("hidden", !matchesSearch(card));
+  });
+  filterAtlas();
+
+  document.querySelectorAll(".searchable-section").forEach(section => {
+    const cards = Array.from(section.querySelectorAll(".searchable-card"));
+    if (cards.length) {
+      section.classList.toggle("hidden", !cards.some(card => !card.classList.contains("hidden")));
+    } else {
+      section.classList.toggle("hidden", !matchesSearch(section));
+    }
+  });
+
+  const query = document.getElementById("globalSearch").value.trim();
+  document.getElementById("searchStatus").textContent = query
+    ? 'Filtering content for "' + query + '". Clear the search to restore all content.'
+    : "Showing all content.";
+}
+
+function clearSearch() {
+  document.getElementById("globalSearch").value = "";
+  applySearch();
+}
+
+function choosePath(title, description) {
+  latestPath = title;
+  const result = document.getElementById("pathResult");
+  result.classList.remove("hidden");
+  result.replaceChildren();
+  const heading = document.createElement("h3");
+  heading.textContent = title;
+  const paragraph = document.createElement("p");
+  paragraph.textContent = description;
+  const button = document.createElement("button");
+  button.className = "brown";
+  button.textContent = "Add route to resource pack";
+  button.onclick = () => addResource(latestPath);
+  result.append(heading, paragraph, button);
+  result.scrollIntoView({behavior:"smooth", block:"nearest"});
+}
+
+function addResource(name) {
+  if (!selectedResources.includes(name)) selectedResources.push(name);
+  updatePack();
+}
+
+function updatePack() {
+  document.getElementById("packCount").textContent = selectedResources.length + " resources selected.";
+  const list = document.getElementById("packList");
+  list.replaceChildren();
+  selectedResources.forEach((name, index) => {
+    const li = document.createElement("li");
+    li.textContent = name + " ";
+    const remove = document.createElement("button");
+    remove.className = "outline small";
+    remove.textContent = "Remove";
+    remove.onclick = () => {
+      selectedResources.splice(index, 1);
+      updatePack();
+    };
+    li.appendChild(remove);
+    list.appendChild(li);
+  });
+}
+
+function clearPack() {
+  selectedResources = [];
+  updatePack();
+  document.getElementById("packStatus").textContent = "Resource pack cleared.";
+}
+
+document.getElementById("planForm").addEventListener("submit", event => {
+  event.preventDefault();
+  const value = id => document.getElementById(id).value.trim();
+  latestPlan = [
+    "PATHKEEPER STRATEGY & BACKUP PLAN",
+    "",
+    "GOAL: " + value("goal"),
+    "FOCUS AREA: " + value("area"),
+    "",
+    "WHAT I KNOW",
+    value("evidence") || "Not yet documented. Gather relevant facts and resources.",
+    "",
+    "UNCERTAINTIES",
+    value("unknown") || "Identify and verify the most important assumptions.",
+    "",
+    "STRATEGY",
+    "1. Define the result and how it will be measured.",
+    "2. Review existing evidence and constraints.",
+    "3. Run the smallest useful experiment.",
+    "EXPERIMENT",
+    value("experiment") || "Run a small, low-risk test that produces useful evidence.",
+    "",
+    "BACKUP PLAN",
+    value("backup") || "Reduce the scope, try a lower-cost alternative, and use the results to revise the plan.",
+    "",
+    "REVIEW",
+    "Record what happened. Compare results with expectations. Decide whether to continue, revise, or stop."
+  ].join("\n");
+
+  document.getElementById("planOutput").textContent = latestPlan;
+  document.getElementById("planResult").classList.remove("hidden");
+});
+
+function downloadPlan() {
+  if (latestPlan) downloadText("pathkeeper-strategy-backup-plan.txt", latestPlan);
+}
+
+function addPlanToPack() {
+  if (!latestPlan) return;
+  addResource("Generated Strategy & Backup Plan");
+  document.getElementById("packStatus").textContent = "Plan added to your resource pack. Download the pack to include its text.";
+}
+
+function downloadPack() {
+  if (!selectedResources.length && !latestPlan) {
+    document.getElementById("packStatus").textContent = "Add a resource or generate a plan first.";
+    return;
+  }
+  const text = [
+    "PATHKEEPER RESOURCE PACK",
+    "Generated: " + new Date().toLocaleString(),
+    "",
+    "SELECTED RESOURCES",
+    ...(selectedResources.length ? selectedResources.map((item, index) => (index + 1) + ". " + item) : ["No resources selected."]),
+    "",
+    latestPlan ? latestPlan : "No strategy plan generated."
+  ].join("\n");
+  downloadText("pathkeeper-resource-pack.txt", text);
+  document.getElementById("packStatus").textContent = "Resource pack download prepared.";
+}
+
+function downloadText(filename, content) {
+  const blob = new Blob([content], {type:"text/plain;charset=utf-8"});
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  })[char]);
+}
+
+renderLesson();
+filterAtlas();
+updatePack();
+</script>
+</body>
+</html>
