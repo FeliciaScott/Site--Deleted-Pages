@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geopolitical Intelligence Center</title>
+
+<style>
+
+:root{
+--green:#143226;
+--green-light:#204737;
+--green-card:#1c3d2f;
+--cream:#F4EEE2;
+--gold:#C4A06D;
+--gold-light:#ddbc8a;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:Inter,Arial,sans-serif;
+background:var(--green);
+color:var(--cream);
+line-height:1.7;
+}
+
+/* HERO */
+
+.hero{
+padding:100px 30px;
+text-align:center;
+background:
+linear-gradient(
+rgba(20,50,38,.82),
+rgba(20,50,38,.94)
+),
+url("https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=1800&q=80");
+background-size:cover;
+background-position:center;
+border-bottom:3px solid var(--gold);
+}
+
+.hero h1{
+font-size:4rem;
+margin-bottom:20px;
+color:white;
+}
+
+.hero p{
+max-width:850px;
+margin:auto;
+font-size:1.15rem;
+opacity:.95;
+}
+
+.hero-buttons{
+margin-top:35px;
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:14px 28px;
+text-decoration:none;
+border-radius:10px;
+font-weight:700;
+transition:.3s;
+}
+
+.btn-primary{
+background:var(--gold);
+color:#111;
+}
+
+.btn-primary:hover{
+background:var(--gold-light);
+}
+
+.btn-secondary{
+border:1px solid var(--gold);
+color:var(--cream);
+}
+
+.btn-secondary:hover{
+background:rgba(255,255,255,.05);
+}
+
+/* CONTAINER */
+
+.container{
+max-width:1400px;
+margin:auto;
+padding:60px 25px;
+}
+
+/* SECTION TITLES */
+
+.section-title{
+font-size:2rem;
+margin-bottom:30px;
+color:var(--gold-light);
+border-left:5px solid var(--gold);
+padding-left:15px;
+}
+
+/* GRID */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+margin-bottom:70px;
+}
+
+/* CARDS */
+
+.card{
+background:var(--green-card);
+padding:25px;
+border-radius:18px;
+border:1px solid rgba(255,255,255,.08);
+transition:.35s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+border-color:var(--gold);
+}
+
+.card h3{
+margin-bottom:15px;
+color:var(--gold-light);
+}
+
+.card p{
+opacity:.9;
+}
+
+/* DASHBOARD */
+
+.dashboard-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:25px;
+margin-bottom:80px;
+}
+
+.intel-card{
+background:var(--green-card);
+padding:30px;
+border-radius:18px;
+text-align:center;
+border:1px solid rgba(255,255,255,.08);
+}
+
+.intel-card h3{
+margin-bottom:15px;
+color:var(--gold-light);
+}
+
+.score{
+font-size:3rem;
+font-weight:900;
+color:var(--gold);
+margin-bottom:10px;
+}
+
+/* THINKING QUESTIONS */
+
+.questions{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:25px;
+margin-bottom:80px;
+}
+
+.question-box{
+background:linear-gradient(
+135deg,
+#234737,
+#163429
+);
+padding:30px;
+border-radius:18px;
+border-left:4px solid var(--gold);
+}
+
+.question-box p{
+font-size:1.05rem;
+}
+
+/* FEED */
+
+.feed{
+display:grid;
+gap:18px;
+margin-bottom:80px;
+}
+
+.feed-item{
+background:var(--green-card);
+padding:20px;
+border-radius:12px;
+border-left:4px solid var(--gold);
+}
+
+/* SIMULATOR */
+
+.simulation-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:25px;
+margin-bottom:80px;
+}
+
+.sim-card{
+background:var(--green-card);
+padding:30px;
+border-radius:18px;
+text-align:center;
+}
+
+.sim-card h3{
+margin-bottom:15px;
+color:var(--gold-light);
+}
+
+/* TIMELINE */
+
+.timeline{
+display:grid;
+gap:25px;
+margin-bottom:80px;
+}
+
+.timeline-item{
+background:var(--green-card);
+padding:25px;
+border-radius:16px;
+position:relative;
+padding-left:35px;
+}
+
+.timeline-item::before{
+content:"";
+position:absolute;
+left:12px;
+top:28px;
+width:10px;
+height:10px;
+background:var(--gold);
+border-radius:50%;
+}
+
+/* BRIDGE */
+
+.bridge{
+text-align:center;
+background:linear-gradient(
+135deg,
+#234737,
+#173126
+);
+padding:70px 30px;
+border-radius:25px;
+margin-bottom:50px;
+}
+
+.bridge h2{
+font-size:2.3rem;
+margin-bottom:20px;
+color:var(--gold-light);
+}
+
+.bridge p{
+max-width:800px;
+margin:auto;
+margin-bottom:30px;
+}
+
+/* FOOTER */
+
+footer{
+padding:40px;
+text-align:center;
+border-top:1px solid rgba(255,255,255,.08);
+opacity:.8;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.hero h1{
+font-size:2.4rem;
+}
+
+.section-title{
+font-size:1.5rem;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+
+<h1>Geopolitical Intelligence Center</h1>
+
+<p>
+Understand the hidden forces shaping opportunity,
+wealth creation, migration, technology competition,
+resource control, labor markets, infrastructure,
+and long-term economic power.
+</p>
+
+<div class="hero-buttons">
+
+<a href="#" class="btn btn-primary">
+Open Career Intelligence Lab
+</a>
+
+<a href="#" class="btn btn-secondary">
+View Strategic Command
+</a>
+
+</div>
+
+</section>
+
+<div class="container">
+
+<h2 class="section-title">Global Strategic Dashboard</h2>
+
+<div class="dashboard-grid">
+
+<div class="intel-card">
+<h3>Population Shift Index</h3>
+<div class="score">78</div>
+<p>Migration pressure increasing globally.</p>
+</div>
+
+<div class="intel-card">
+<h3>Water Security</h3>
+<div class="score">64</div>
+<p>Infrastructure becoming a competitive edge.</p>
+</div>
+
+<div class="intel-card">
+<h3>Energy Transition</h3>
+<div class="score">91</div>
+<p>Long-term economic importance rising.</p>
+</div>
+
+<div class="intel-card">
+<h3>AI Competition</h3>
+<div class="score">95</div>
+<p>Productivity race accelerating worldwide.</p>
+</div>
+
+</div>
+
+<h2 class="section-title">Five Forces Reshaping Opportunity</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Demographic Reality</h3>
+<p>
+Many countries face aging populations while others
+have expanding workforces. Population structure
+changes labor markets, taxation, housing demand,
+and future economic growth.
+</p>
+</div>
+
+<div class="card">
+<h3>Water & Agriculture</h3>
+<p>
+Food production depends on stable water systems.
+Regions that solve water challenges gain long-term
+strategic advantages.
+</p>
+</div>
+
+<div class="card">
+<h3>Infrastructure Power</h3>
+<p>
+Ports, rail systems, roads, energy grids,
+and internet connectivity often determine
+economic competitiveness more than politics.
+</p>
+</div>
+
+<div class="card">
+<h3>Technology Sovereignty</h3>
+<p>
+Semiconductors, AI systems, automation,
+and advanced manufacturing increasingly
+shape national influence.
+</p>
+</div>
+
+<div class="card">
+<h3>Talent Competition</h3>
+<p>
+Countries compete for entrepreneurs,
+engineers, scientists, and skilled workers.
+Human capital is becoming the most valuable resource.
+</p>
+</div>
+
+<div class="card">
+<h3>Supply Chain Control</h3>
+<p>
+Control of shipping routes, logistics,
+energy networks, and critical resources
+creates enormous strategic leverage.
+</p>
+</div>
+
+</div>
+
+<h2 class="section-title">Opportunity Migration Simulator</h2>
+
+<div class="simulation-grid">
+
+<div class="sim-card">
+<h3>High Cost Economy</h3>
+<p>
+Higher wages but greater competition,
+higher taxes, and increased living costs.
+</p>
+</div>
+
+<div class="sim-card">
+<h3>Growth Economy</h3>
+<p>
+Rapid development creates opportunities
+for entrepreneurs and early adopters.
+</p>
+</div>
+
+<div class="sim-card">
+<h3>Remote Economy</h3>
+<p>
+Earn income globally while choosing
+locations based on lifestyle and affordability.
+</p>
+</div>
+
+</div>
+
+<h2 class="section-title">Strategist Thinking</h2>
+
+<div class="questions">
+
+<div class="question-box">
+<p>
+If energy costs doubled tomorrow,
+which industries would benefit?
+</p>
+</div>
+
+<div class="question-box">
+<p>
+How would declining birth rates
+change housing demand over 20 years?
+</p>
+</div>
+
+<div class="question-box">
+<p>
+Which skills become more valuable
+as AI automates routine work?
+</p>
+</div>
+
+<div class="question-box">
+<p>
+What happens to economies that
+cannot attract skilled workers?
+</p>
+</div>
+
+<div class="question-box">
+<p>
+Which regions gain from climate adaptation
+investments over the next decade?
+</p>
+</div>
+
+<div class="question-box">
+<p>
+What infrastructure creates the
+greatest long-term leverage?
+</p>
+</div>
+
+</div>
+
+<h2 class="section-title">Strategic Signals Feed</h2>
+
+<div class="feed">
+
+<div class="feed-item">
+Population shifts are changing workforce availability.
+</div>
+
+<div class="feed-item">
+AI investment is concentrating around major innovation hubs.
+</div>
+
+<div class="feed-item">
+Automation continues to reshape labor economics.
+</div>
+
+<div class="feed-item">
+New trade corridors are altering supply chains.
+</div>
+
+<div class="feed-item">
+Water infrastructure is becoming a strategic asset.
+</div>
+
+<div class="feed-item">
+Energy independence is influencing economic resilience.
+</div>
+
+</div>
+
+<h2 class="section-title">Historical Pattern Library</h2>
+
+<div class="timeline">
+
+<div class="timeline-item">
+<h3>Industrial Revolution</h3>
+<p>
+Technology transformed productivity and created entirely new industries.
+</p>
+</div>
+
+<div class="timeline-item">
+<h3>Information Age</h3>
+<p>
+Data became a strategic asset and reshaped global business.
+</p>
+</div>
+
+<div class="timeline-item">
+<h3>AI Era</h3>
+<p>
+Automation and intelligence systems are creating another productivity revolution.
+</p>
+</div>
+
+</div>
+
+<section class="bridge">
+
+<h2>Global Trends → Personal Strategy</h2>
+
+<p>
+The purpose of geopolitics is not prediction.
+It is preparation. Understanding large systems
+helps individuals position themselves where
+opportunity is growing rather than shrinking.
+</p>
+
+<a href="#" class="btn btn-primary">
+Launch Career Intelligence Lab
+</a>
+
+</section>
+
+</div>
+
+<footer>
+Geopolitical Intelligence Center • Strategic Thinking • Long-Term Opportunity • Global Systems Analysis
+</footer>
+
+</body>
+</html>
