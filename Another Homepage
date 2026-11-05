@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strategist Intelligence Hub</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  background: #0F2D22;
+  color: #F6F1E6;
+}
+
+/* HERO */
+.hero {
+  padding: 4rem 2rem;
+  text-align: center;
+  background: linear-gradient(180deg, #12392C, #0F2D22);
+  border-bottom: 1px solid rgba(246,241,230,0.15);
+}
+
+.hero h1 {
+  font-size: 2.6rem;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  opacity: 0.9;
+}
+
+.btn {
+  background: #F6F1E6;
+  color: #0F2D22;
+  padding: 0.8rem 1.4rem;
+  border-radius: 999px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+/* CONTAINER */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* GRID SECTIONS */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+/* CARDS */
+.card {
+  background: #163C2F;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(246,241,230,0.15);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 1rem;
+}
+
+.card h3 {
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+/* SECTION TITLE */
+.section-title {
+  margin-top: 3rem;
+  font-size: 1.4rem;
+}
+
+/* FOOTER CTA */
+.cta {
+  text-align: center;
+  padding: 3rem 2rem;
+  margin-top: 4rem;
+  border-top: 1px solid rgba(246,241,230,0.15);
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Strategist Intelligence Hub</h1>
+  <p>
+    A structured system for analyzing opportunities, networks, capital flows, and global positioning strategies.
+  </p>
+
+  <button class="btn">Enter System</button>
+</div>
+
+<div class="container">
+
+  <h2 class="section-title">Core Intelligence Fields</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a" alt="">
+      <div class="card-content">
+        <h3>Global Opportunities</h3>
+        <p>Residency strategies, market entry systems, and international expansion paths.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d" alt="">
+      <div class="card-content">
+        <h3>Network Intelligence</h3>
+        <p>Filtering high-value relationships and eliminating low-signal communication.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c" alt="">
+      <div class="card-content">
+        <h3>Capital Systems</h3>
+        <p>Income layering, asset compounding, and financial structure design.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df" alt="">
+      <div class="card-content">
+        <h3>Strategic Mobility</h3>
+        <p>Location independence and global optimization frameworks.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <h2 class="section-title">Featured Intelligence Nodes</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa" alt="">
+      <div class="card-content">
+        <h3>Intent Filtering Protocol</h3>
+        <p>Only high-intent communication enters your decision system.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216" alt="">
+      <div class="card-content">
+        <h3>Digital Residency Model</h3>
+        <p>Build global business presence without geographic dependency.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71" alt="">
+      <div class="card-content">
+        <h3>Income Layering Engine</h3>
+        <p>Multiple independent revenue streams working in parallel.</p>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="cta">
+  <h2>Build Strategic Clarity</h2>
+  <p>Turn decisions into structured intelligence systems.</p>
+</div>
+
+</body>
+</html>
