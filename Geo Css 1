@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geopolitical Intelligence Center</title>
+
+<style>
+
+:root{
+--green:#143226;
+--green-light:#204737;
+--green-card:#1c3d2f;
+--green-deep:#0d2119;
+--cream:#F4EEE2;
+--cream-dark:#d8cfbf;
+--gold:#C4A06D;
+--gold-light:#ddbc8a;
+--gold-dark:#8d6b3f;
+
+--low:#7fae8a;
+--emerging:#d6b65c;
+--significant:#d8934b;
+--high:#d36b5d;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:Inter,Arial,sans-serif;
+background:var(--green);
+color:var(--cream);
+line-height:1.7;
+}
+
+/* =========================
+HERO
+========================= */
+
+.hero{
+padding:100px 30px;
+text-align:center;
+background:
+linear-gradient(
+rgba(20,50,38,.82),
+rgba(20,50,38,.94)
+),
+url("https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=1800&q=80");
+background-size:cover;
+background-position:center;
+border-bottom:3px solid var(--gold);
+}
+
+.hero h1{
+font-size:clamp(2.5rem,6vw,4rem);
+margin-bottom:20px;
+color:white;
+}
+
+.hero p{
+max-width:850px;
+margin:auto;
+font-size:1.15rem;
+opacity:.95;
+}
+
+.hero-buttons{
+margin-top:35px;
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:14px 28px;
+text-decoration:none;
+border-radius:10px;
+font-weight:700;
+transition:.3s;
+display:inline-block;
+}
+
+.btn-primary{
+background:var(--gold);
+color:#111;
+}
+
+.btn-primary:hover{
+background:var(--gold-light);
+transform:translateY(-2px);
+}
+
+.btn-secondary{
+border:1px solid var(--gold);
+color:var(--cream);
+}
+
+.btn-secondary:hover{
+background:rgba(255,255,255,.08);
+}
+
+/* =========================
+CONTAINER
+========================= */
+
+.container{
+max-width:1400px;
+margin:auto;
+padding:60px 25px;
+}
+
+/* =========================
+SECTION TITLES
+========================= */
+
+.section-title{
+font-size:2rem;
+margin-bottom:15px;
+color:var(--gold-light);
+border-left:5px solid var(--gold);
+padding-left:15px;
+}
+
+.section-intro{
+max-width:850px;
+margin-bottom:30px;
+color:var(--cream-dark);
+}
+
+/* =========================
+GRID
+========================= */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+margin-bottom:70px;
+}
+
+/* =========================
+STANDARD CARDS
+========================= */
+
+.card{
+background:var(--green-card);
+padding:25px;
+border-radius:18px;
+border:1px solid rgba(255,255,255,.08);
+transition:.35s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+border-color:var(--gold);
+}
+
+.card h3{
+margin-bottom:15px;
+color:var(--gold-light);
+}
+
+.card p{
+opacity:.9;
+}
+
+/* =========================
+DASHBOARD
+========================= */
+
+.dashboard-guide{
+background:linear-gradient(
+135deg,
+#234737,
+#102a20
+);
+border:1px solid rgba(196,160,109,.35);
+border-radius:20px;
+padding:30px;
+margin-bottom:35px;
+}
+
+.dashboard-guide h3{
+color:var(--gold-light);
+margin-bottom:10px;
+font-size:1.4rem;
+}
+
+.dashboard-guide p{
+max-width:900px;
+color:var(--cream-dark);
+}
+
+.range-legend{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:12px;
+margin-top:25px;
+}
+
+.range-item{
+padding:14px;
+border-radius:10px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.07);
+}
+
+.range-item strong{
+display:block;
+margin-bottom:4px;
+}
+
+.range-low strong{
+color:var(--low);
+}
+
+.range-emerging strong{
+color:var(--emerging);
+}
+
+.range-significant strong{
+color:var(--significant);
+}
+
+.range-high strong{
+color:var(--high);
+}
+
+.dashboard-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+margin-bottom:40px;
+}
+
+.intel-card{
+background:var(--green-card);
+padding:30px;
+border-radius:20px;
+border:1px solid rgba(255,255,255,.08);
+transition:.3s;
+position:relative;
+overflow:hidden;
+}
+
+.intel-card:hover{
+transform:translateY(-6px);
+border-color:var(--gold);
+}
+
+.intel-card h3{
+margin-bottom:15px;
+color:var(--gold-light);
+font-size:1.2rem;
+}
+
+/* SCORE */
+
+.score-row{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:15px;
+margin-bottom:10px;
+}
+
+.score{
+font-size:3rem;
+font-weight:900;
+color:var(--gold);
+line-height:1;
+}
+
+.signal-status{
+padding:6px 12px;
+border-radius:30px;
+font-size:.72rem;
+font-weight:800;
+letter-spacing:.5px;
+}
+
+.status-low{
+background:rgba(127,174,138,.15);
+color:var(--low);
+border:1px solid rgba(127,174,138,.4);
+}
+
+.status-emerging{
+background:rgba(214,182,92,.12);
+color:var(--emerging);
+border:1px solid rgba(214,182,92,.4);
+}
+
+.status-significant{
+background:rgba(216,147,75,.12);
+color:var(--significant);
+border:1px solid rgba(216,147,75,.4);
+}
+
+.status-high{
+background:rgba(211,107,93,.12);
+color:var(--high);
+border:1px solid rgba(211,107,93,.4);
+}
+
+/* RANGE BAR */
+
+.range-bar{
+width:100%;
+height:9px;
+background:#0e241b;
+border-radius:20px;
+overflow:hidden;
+margin:18px 0 8px;
+}
+
+.range-fill{
+height:100%;
+border-radius:20px;
+background:linear-gradient(
+90deg,
+var(--low),
+var(--emerging),
+var(--significant),
+var(--high)
+);
+}
+
+.range-label{
+display:flex;
+justify-content:space-between;
+font-size:.72rem;
+color:rgba(244,238,226,.55);
+margin-bottom:22px;
+}
+
+/* SIGNAL INFORMATION */
+
+.signal-section{
+margin-top:18px;
+padding-top:18px;
+border-top:1px solid rgba(255,255,255,.08);
+}
+
+.signal-label{
+display:block;
+font-size:.7rem;
+letter-spacing:1.5px;
+font-weight:800;
+color:var(--gold);
+margin-bottom:5px;
+}
+
+.signal-section p{
+font-size:.92rem;
+color:var(--cream-dark);
+}
+
+/* STRATEGIC ACTION */
+
+.action-box{
+margin-top:20px;
+padding:18px;
+background:rgba(0,0,0,.12);
+border-radius:12px;
+border-left:3px solid var(--gold);
+}
+
+.action-box strong{
+display:block;
+color:var(--gold-light);
+font-size:.85rem;
+margin-bottom:6px;
+}
+
+.action-box ul{
+padding-left:18px;
+font-size:.88rem;
+color:var(--cream-dark);
+}
+
+.action-box li{
+margin-bottom:5px;
+}
+
+/* =========================
+STRATEGIC RESPONSE
+========================= */
+
+.strategy-panel{
+background:linear-gradient(
+135deg,
+#1d4434,
+#102a20
+);
+padding:45px;
+border-radius:24px;
+border:1px solid rgba(196,160,109,.25);
+margin-bottom:80px;
+}
+
+.strategy-panel h2{
+color:var(--gold-light);
+font-size:2rem;
+margin-bottom:15px;
+}
+
+.strategy-panel > p{
+max-width:900px;
+color:var(--cream-dark);
+margin-bottom:30px;
+}
+
+.strategy-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+gap:18px;
+}
+
+.strategy-step{
+background:rgba(0,0,0,.15);
+padding:22px;
+border-radius:16px;
+border:1px solid rgba(255,255,255,.06);
+}
+
+.step-number{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+width:32px;
+height:32px;
+border-radius:50%;
+background:var(--gold);
+color:#102a20;
+font-weight:900;
+font-size:.85rem;
+margin-bottom:12px;
+}
+
+.strategy-step h3{
+color:var(--gold-light);
+font-size:1.05rem;
+margin-bottom:8px;
+}
+
+.strategy-step p{
+font-size:.9rem;
+color:var(--cream-dark);
+}
+
+/* =========================
+ACTION MATRIX
+========================= */
+
+.action-matrix{
+margin-bottom:80px;
+}
+
+.matrix-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+.matrix-card{
+padding:25px;
+border-radius:18px;
+background:var(--green-card);
+border:1px solid rgba(255,255,255,.08);
+}
+
+.matrix-card h3{
+margin-bottom:12px;
+color:var(--gold-light);
+}
+
+.matrix-card ul{
+padding-left:18px;
+color:var(--cream-dark);
+font-size:.92rem;
+}
+
+.matrix-card li{
+margin-bottom:8px;
+}
+
+/* =========================
+THINKING QUESTIONS
+========================= */
+
+.questions{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:25px;
+margin-bottom:80px;
+}
+
+.question-box{
+background:linear-gradient(
+135deg,
+#234737,
+#163429
+);
+padding:30px;
+border-radius:18px;
+border-left:4px solid var(--gold);
+transition:.3s;
+}
+
+.question-box:hover{
+transform:translateY(-5px);
+}
+
+.question-box p{
+font-size:1.05rem;
+}
+
+/* =========================
+FEED
+========================= */
+
+.feed{
+display:grid;
+gap:18px;
+margin-bottom:80px;
+}
+
+.feed-item{
+background:var(--green-card);
+padding:20px;
+border-radius:12px;
+border-left:4px solid var(--gold);
+}
+
+/* =========================
+SIMULATOR
+========================= */
+
+.simulation-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:25px;
+margin-bottom:80px;
+}
+
+.sim-card{
+background:var(--green-card);
+padding:30px;
+border-radius:18px;
+text-align:center;
+transition:.3s;
+}
+
+.sim-card:hover{
+transform:translateY(-6px);
+border:1px solid var(--gold);
+}
+
+.sim-card h3{
+margin-bottom:15px;
+color:var(--gold-light);
+}
+
+/* =========================
+TIMELINE
+========================= */
+
+.timeline{
+display:grid;
+gap:25px;
+margin-bottom:80px;
+}
+
+.timeline-item{
+background:var(--green-card);
+padding:25px;
+border-radius:16px;
+position:relative;
+padding-left:35px;
+}
+
+.timeline-item::before{
+content:"";
+position:absolute;
+left:12px;
+top:28px;
+width:10px;
+height:10px;
+background:var(--gold);
+border-radius:50%;
+}
+
+/* =========================
+BRIDGE
+========================= */
+
+.bridge{
+text-align:center;
+background:linear-gradient(
+135deg,
+#234737,
+#173126
+);
+padding:70px 30px;
+border-radius:25px;
+margin-bottom:50px;
+}
+
+.bridge h2{
+font-size:2.3rem;
+margin-bottom:20px;
+color:var(--gold-light);
+}
+
+.bridge p{
+max-width:800px;
+margin:auto;
+margin-bottom:30px;
+}
+
+/* =========================
+FOOTER
+========================= */
+
+footer{
+padding:40px;
+text-align:center;
+border-top:1px solid rgba(255,255,255,.08);
+opacity:.8;
+}
+
+/* =========================
+MOBILE
+========================= */
+
+@media(max-width:768px){
+
+.hero{
+padding:80px 20px;
+}
+
+.hero h1{
+font-size:2.4rem;
+}
+
+.container{
+padding:45px 18px;
+}
+
+.section-title{
+font-size:1.5rem;
+}
+
+.strategy-panel{
+padding:28px 20px;
+}
+
+.score{
+font-size:2.5rem;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+
+<h1>Geopolitical Intelligence Center</h1>
+
+<p>
+Understand the hidden forces shaping opportunity,
+wealth creation, migration, technology competition,
+resource control, labor markets, infrastructure,
+and long-term economic power.
+</p>
+
+<div class="hero-buttons">
+
+<a href="#" class="btn btn-primary">
+Open Career Intelligence Lab
+</a>
+
+<a href="#" class="btn btn-secondary">
+View Strategic Command
+</a>
+
+</div>
+
+</section>
+
+<div class="container">
+
+<h2 class="section-title">Global Strategic Dashboard</h2>
+
+<p class="section-intro">
+These scores are not predictions. They are strategic signals designed
+to help you practice interpreting large-scale trends. The goal is not
+to memorize the number. The goal is to ask what the signal could mean
+for your skills, career, business, investments, location, or future
+opportunities.
+</p>
+
+<!-- DASHBOARD GUIDE -->
+
+<div class="dashboard-guide">
+
+<h3>How to Read the Intelligence Range</h3>
+
+<p>
+A higher score suggests that a force may have greater strategic
+importance within this learning model. The correct response is not
+always immediate action. First investigate the signal, identify the
+possible consequences, and decide whether preparation, research, or
+action makes sense.
+</p>
+
+<div class="range-legend">
+
+<div class="range-item range-low">
+<strong>0–25 • MONITOR</strong>
+Early or lower-impact signal. Continue observing.
+</div>
+
+<div class="range-item range-emerging">
+<strong>26–50 • INVESTIGATE</strong>
+A developing trend worth researching further.
+</div>
+
+<div class="range-item range-significant">
+<strong>51–75 • PREPARE</strong>
+A significant force that may justify strategic preparation.
+</div>
+
+<div class="range-item range-high">
+<strong>76–100 • HIGH IMPACT</strong>
+A major signal. Analyze possible consequences and strategic responses.
+</div>
+
+</div>
+
+</div>
+
+<div class="dashboard-grid">
+
+<!-- POPULATION -->
+
+<div class="intel-card">
+
+<h3>Population Shift Index</h3>
+
+<div class="score-row">
+<div class="score">78</div>
+<span class="signal-status status-high">HIGH IMPACT</span>
+</div>
+
+<div class="range-bar">
+<div class="range-fill" style="width:78%;"></div>
+</div>
+
+<div class="range-label">
+<span>0</span>
+<span>25</span>
+<span>50</span>
+<span>75</span>
+<span>100</span>
+</div>
+
+<div class="signal-section">
+<span class="signal-label">WHAT IT MAY SIGNAL</span>
+<p>
+Migration, aging populations, and changing workforce availability may
+reshape labor markets, housing, healthcare, and regional economic growth.
+</p>
+</div>
+
+<div class="signal-section">
+<span class="signal-label">STRATEGIC QUESTION</span>
+<p>
+Which industries, skills, or regions could experience increased demand
+because of population changes?
+</p>
+</div>
+
+<div class="action-box">
+<strong>WHAT YOU CAN DO</strong>
+<ul>
+<li>Research growing occupations.</li>
+<li>Study regions with expanding opportunity.</li>
+<li>Identify industries serving changing populations.</li>
+</ul>
+</div>
+
+</div>
+
+<!-- WATER -->
+
+<div class="intel-card">
+
+<h3>Water Security</h3>
+
+<div class="score-row">
+<div class="score">64</div>
+<span class="signal-status status-significant">PREPARE</span>
+</div>
+
+<div class="range-bar">
+<div class="range-fill" style="width:64%;"></div>
+</div>
+
+<div class="range-label">
+<span>0</span>
+<span>25</span>
+<span>50</span>
+<span>75</span>
+<span>100</span>
+</div>
+
+<div class="signal-section">
+<span class="signal-label">WHAT IT MAY SIGNAL</span>
+<p>
+Water systems and infrastructure may become increasingly important for
+agriculture, cities, manufacturing, and regional resilience.
+</p>
+</div>
+
+<div class="signal-section">
+<span class="signal-label">STRATEGIC QUESTION</span>
+<p>
+What industries could grow as governments and businesses invest in
+water efficiency, infrastructure, and resilience?
+</p>
+</div>
+
+<div class="action-box">
+<strong>WHAT YOU CAN DO</strong>
+<ul>
+<li>Research infrastructure careers.</li>
+<li>Study environmental technology.</li>
+<li>Look for companies solving resource problems.</li>
+</ul>
+</div>
+
+</div>
+
+<!-- ENERGY -->
+
+<div class="intel-card">
+
+<h3>Energy Transition</h3>
+
+<div class="score-row">
+<div class="score">91</div>
+<span class="signal-status status-high">HIGH IMPACT</span>
+</div>
+
+<div class="range-bar">
+<div class="range-fill" style="width:91%;"></div>
+</div>
+
+<div class="range-label">
+<span>0</span>
+<span>25</span>
+<span>50</span>
+<span>75</span>
+<span>100</span>
+</div>
+
+<div class="signal-section">
+<span class="signal-label">WHAT IT MAY SIGNAL</span>
+<p>
+Changes in energy production, storage, efficiency, and infrastructure
+could reshape manufacturing, transportation, construction, and technology.
+</p>
+</div>
+
+<div class="signal-section">
+<span class="signal-label">STRATEGIC QUESTION</span>
+<p>
+Which skills and businesses benefit when energy systems change?
+</p>
+</div>
+
+<div class="action-box">
+<strong>WHAT YOU CAN DO</strong>
+<ul>
+<li>Study energy-related industries.</li>
+<li>Research technical and infrastructure skills.</li>
+<li>Track companies building supporting systems.</li>
+</ul>
+</div>
+
+</div>
+
+<!-- AI -->
+
+<div class="intel-card">
+
+<h3>AI Competition</h3>
+
+<div class="score-row">
+<div class="score">95</div>
+<span class="signal-status status-high">HIGH IMPACT</span>
+</div>
+
+<div class="range-bar">
+<div class="range-fill" style="width:95%;"></div>
+</div>
+
+<div class="range-label">
+<span>0</span>
+<span>25</span>
+<span>50</span>
+<span>75</span>
+<span>100</span>
+</div>
+
+<div class="signal-section">
+<span class="signal-label">WHAT IT MAY SIGNAL</span>
+<p>
+Automation and AI adoption may change job tasks, productivity,
+business models, and the value of different skills.
+</p>
+</div>
+
+<div class="signal-section">
+<span class="signal-label">STRATEGIC QUESTION</span>
+<p>
+Which parts of your work could be automated, and which capabilities
+become more valuable when automation increases?
+</p>
+</div>
+
+<div class="action-box">
+<strong>WHAT YOU CAN DO</strong>
+<ul>
+<li>Learn to work with AI tools.</li>
+<li>Build projects demonstrating AI-assisted capability.</li>
+<li>Strengthen skills involving judgment and problem solving.</li>
+</ul>
+</div>
+
+</div>
+
+</div>
+
+<!-- STRATEGIC RESPONSE SYSTEM -->
+
+<section class="strategy-panel">
+
+<h2>Don't Just Observe the Signal. Build a Response.</h2>
+
+<p>
+The purpose of strategic intelligence is not to collect interesting
+information. Information becomes useful when it changes what you
+investigate, learn, build, prepare for, or avoid. Use every major
+signal as the beginning of a decision process.
+</p>
+
+<div class="strategy-grid">
+
+<div class="strategy-step">
+<div class="step-number">1</div>
+<h3>Observe</h3>
+<p>
+Identify the trend or recurring signal without immediately assuming
+you know what it means.
+</p>
+</div>
+
+<div class="strategy-step">
+<div class="step-number">2</div>
+<h3>Investigate</h3>
+<p>
+Look for evidence, causes, affected industries, regions, and possible
+second-order consequences.
+</p>
+</div>
+
+<div class="strategy-step">
+<div class="step-number">3</div>
+<h3>Connect</h3>
+<p>
+Ask how the trend connects to your career, skills, projects, business,
+or future opportunities.
+</p>
+</div>
+
+<div class="strategy-step">
+<div class="step-number">4</div>
+<h3>Prepare</h3>
+<p>
+Build knowledge, skills, relationships, or evidence before a trend
+becomes obvious to everyone else.
+</p>
+</div>
+
+<div class="strategy-step">
+<div class="step-number">5</div>
+<h3>Test</h3>
+<p>
+Run a small experiment. Build a project, research a market, learn a
+tool, or investigate an emerging opportunity.
+</p>
+</div>
+
+<div class="strategy-step">
+<div class="step-number">6</div>
+<h3>Review</h3>
+<p>
+Update your understanding when new information appears. Strategy is a
+continuous learning process.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- ACTION MATRIX -->
+
+<h2 class="section-title">What Should You Do With Strategic Information?</h2>
+
+<p class="section-intro">
+Different signals require different responses. A trend does not always
+mean you should immediately change careers, move, invest money, or
+start a business. The first response may simply be learning.
+</p>
+
+<div class="action-matrix">
+
+<div class="matrix-grid">
+
+<div class="matrix-card">
+<h3>Learn</h3>
+<ul>
+<li>Study the trend.</li>
+<li>Learn the vocabulary.</li>
+<li>Understand the affected systems.</li>
+<li>Identify important skills.</li>
+</ul>
+</div>
+
+<div class="matrix-card">
+<h3>Map</h3>
+<ul>
+<li>Identify industries affected.</li>
+<li>Compare regions.</li>
+<li>Find growing occupations.</li>
+<li>Track organizations involved.</li>
+</ul>
+</div>
+
+<div class="matrix-card">
+<h3>Build</h3>
+<ul>
+<li>Create a research project.</li>
+<li>Build a portfolio piece.</li>
+<li>Test a business idea.</li>
+<li>Develop relevant evidence.</li>
+</ul>
+</div>
+
+<div class="matrix-card">
+<h3>Prepare</h3>
+<ul>
+<li>Develop a useful skill.</li>
+<li>Reduce a personal constraint.</li>
+<li>Build relationships.</li>
+<li>Create more future options.</li>
+</ul>
+</div>
+
+</div>
+
+</div>
+
+<h2 class="section-title">Five Forces Reshaping Opportunity</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Demographic Reality</h3>
+<p>
+Many countries face aging populations while others have expanding
+workforces. Population structure changes labor markets, taxation,
+housing demand, and future economic growth.
+</p>
+</div>
+
+<div class="card">
+<h3>Water & Agriculture</h3>
+<p>
+Food production depends on stable water systems. Regions that solve
+water challenges may create long-term opportunities in infrastructure,
+technology, and resource management.
+</p>
+</div>
+
+<div class="card">
+<h3>Infrastructure Power</h3>
+<p>
+Ports, rail systems, roads, energy grids, and internet connectivity
+can strongly influence economic competitiveness and business activity.
+</p>
+</div>
+
+<div class="card">
+<h3>Technology Sovereignty</h3>
+<p>
+Semiconductors, AI systems, automation, and advanced manufacturing
+are increasingly important strategic capabilities.
+</p>
+</div>
+
+<div class="card">
+<h3>Talent Competition</h3>
+<p>
+Countries and organizations compete for entrepreneurs, engineers,
+scientists, and skilled workers. Human capability can create
+long-term strategic advantage.
+</p>
+</div>
+
+<div class="card">
+<h3>Supply Chain Control</h3>
+<p>
+Shipping routes, logistics, energy networks, and access to critical
+resources can create strategic leverage and economic resilience.
+</p>
+</div>
+
+</div>
+
+<h2 class="section-title">Opportunity Migration Simulator</h2>
+
+<div class="simulation-grid">
+
+<div class="sim-card">
+<h3>High Cost Economy</h3>
+<p>
+Higher wages may be balanced by greater competition and increased
+living costs. Analyze the tradeoffs rather than focusing on income alone.
+</p>
+</div>
+
+<div class="sim-card">
+<h3>Growth Economy</h3>
+<p>
+Rapid development can create opportunities for entrepreneurs,
+specialists, infrastructure providers, and early entrants.
+</p>
+</div>
+
+<div class="sim-card">
+<h3>Remote Economy</h3>
+<p>
+Global digital work can separate where income is earned from where
+someone chooses to live, depending on skills and available opportunities.
+</p>
+</div>
+
+</div>
+
+<h2 class="section-title">Think Like A Strategist</h2>
+
+<div class="questions">
+
+<div class="question-box">
+<p>If energy costs doubled tomorrow, which industries would benefit?</p>
+</div>
+
+<div class="question-box">
+<p>How would declining birth rates change housing demand over 20 years?</p>
+</div>
+
+<div class="question-box">
+<p>Which skills become more valuable as AI automates routine work?</p>
+</div>
+
+<div class="question-box">
+<p>What happens to economies that cannot attract skilled workers?</p>
+</div>
+
+<div class="question-box">
+<p>Which regions could benefit from climate adaptation investments?</p>
+</div>
+
+<div class="question-box">
+<p>What infrastructure creates the greatest long-term leverage?</p>
+</div>
+
+</div>
+
+<h2 class="section-title">Strategic Signals Feed</h2>
+
+<div class="feed">
+
+<div class="feed-item">
+Population shifts can change workforce availability and service demand.
+</div>
+
+<div class="feed-item">
+AI investment is concentrating around major innovation ecosystems.
+</div>
+
+<div class="feed-item">
+Automation continues to reshape the economics of routine work.
+</div>
+
+<div class="feed-item">
+Trade corridors and logistics networks can alter supply-chain decisions.
+</div>
+
+<div class="feed-item">
+Water infrastructure may become increasingly important for regional resilience.
+</div>
+
+<div class="feed-item">
+Energy systems can influence economic resilience and industrial competitiveness.
+</div>
+
+</div>
+
+<h2 class="section-title">Historical Pattern Library</h2>
+
+<div class="timeline">
+
+<div class="timeline-item">
+<h3>Industrial Revolution</h3>
+<p>
+Technology transformed productivity and created entirely new industries,
+skills, infrastructure, and economic relationships.
+</p>
+</div>
+
+<div class="timeline-item">
+<h3>Information Age</h3>
+<p>
+Computing and communication systems transformed how information,
+business, and economic activity could scale.
+</p>
+</div>
+
+<div class="timeline-item">
+<h3>AI Era</h3>
+<p>
+AI and automation are creating new questions about productivity,
+capability, work design, and competitive advantage.
+</p>
+</div>
+
+</div>
+
+<section class="bridge">
+
+<h2>Global Trends → Personal Strategy</h2>
+
+<p>
+The purpose of geopolitical intelligence is not to predict the future
+with certainty. It is to become more prepared for possible changes.
+Study the signal, investigate the system, identify where opportunity
+may emerge, and build capabilities that give you more options.
+</p>
+
+<a href="#" class="btn btn-primary">
+Launch Career Intelligence Lab
+</a>
+
+</section>
+
+</div>
+
+<footer>
+Geopolitical Intelligence Center • Strategic Thinking • Long-Term Opportunity • Global Systems Analysis
+</footer>
+
+</body>
+</html>
