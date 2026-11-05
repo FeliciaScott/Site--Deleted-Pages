@@ -1,0 +1,2796 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Career Intelligence Lab | Build Your Future</title>
+
+<style>
+
+:root{
+
+--dark:#17100b;
+--dark2:#25170e;
+--card:#302014;
+--gold:#d4a373;
+--gold-light:#f1d3aa;
+--cream:#fff8ed;
+--muted:#c8b9a6;
+--green:#70c48a;
+--blue:#79a9d8;
+--red:#d98282;
+--border:rgba(212,163,115,.3);
+
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+
+background:
+radial-gradient(
+circle at 85% 10%,
+rgba(212,163,115,.10),
+transparent 30%
+),
+linear-gradient(135deg,#17100b,#25170e);
+
+color:var(--cream);
+
+line-height:1.6;
+
+}
+
+.container{
+
+max-width:1400px;
+margin:auto;
+padding:40px 25px;
+
+}
+
+
+/* HERO */
+
+.hero{
+
+min-height:600px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+text-align:center;
+
+padding:50px;
+
+background:
+linear-gradient(
+rgba(23,16,11,.84),
+rgba(23,16,11,.96)
+),
+url("https://images.unsplash.com/photo-1523240795612-9a054b0db644");
+
+background-size:cover;
+
+background-position:center;
+
+border-bottom:3px solid var(--gold);
+
+}
+
+.hero h1{
+
+font-size:clamp(2.5rem,6vw,4.5rem);
+
+color:var(--gold-light);
+
+line-height:1.05;
+
+}
+
+.hero span{
+
+color:var(--gold);
+
+}
+
+.hero p{
+
+max-width:850px;
+
+margin:25px auto;
+
+font-size:1.2rem;
+
+color:var(--muted);
+
+}
+
+
+/* SECTION */
+
+.section-title{
+
+font-size:2rem;
+
+margin:50px 0 25px;
+
+color:var(--gold);
+
+border-left:5px solid var(--gold);
+
+padding-left:15px;
+
+}
+
+
+/* GRID */
+
+.grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(300px,1fr));
+
+gap:25px;
+
+}
+
+
+/* CARDS */
+
+.card{
+
+background:
+linear-gradient(
+145deg,
+#302014,
+#21140d
+);
+
+padding:30px;
+
+border-radius:18px;
+
+border:1px solid var(--border);
+
+transition:.3s;
+
+}
+
+.card:hover{
+
+transform:translateY(-6px);
+
+border-color:var(--gold);
+
+box-shadow:
+0 20px 40px rgba(0,0,0,.35);
+
+}
+
+.card h3{
+
+color:var(--gold-light);
+
+margin-bottom:15px;
+
+}
+
+.card p{
+
+color:var(--muted);
+
+}
+
+.card ul{
+
+padding-left:20px;
+
+}
+
+.card li{
+
+margin:9px 0;
+
+color:var(--muted);
+
+}
+
+
+/* BADGES */
+
+.badge{
+
+display:inline-block;
+
+padding:6px 15px;
+
+border-radius:50px;
+
+background:
+rgba(212,163,115,.15);
+
+color:var(--gold-light);
+
+font-size:.8rem;
+
+margin-bottom:15px;
+
+}
+
+
+/* SCORE */
+
+.score{
+
+font-size:3rem;
+
+font-weight:bold;
+
+color:var(--gold);
+
+}
+
+
+/* PROGRESS */
+
+.progress{
+
+height:15px;
+
+background:#4a3424;
+
+border-radius:20px;
+
+overflow:hidden;
+
+margin:15px 0;
+
+}
+
+.progress span{
+
+display:block;
+
+height:100%;
+
+background:var(--gold);
+
+transition:width .7s ease;
+
+}
+
+
+/* STARTING POINT */
+
+.starting-card{
+
+min-height:260px;
+
+}
+
+
+/* LEARNING ENGINE */
+
+.timeline{
+
+display:grid;
+
+gap:20px;
+
+}
+
+.step{
+
+background:var(--card);
+
+padding:25px;
+
+border-left:5px solid var(--gold);
+
+border-radius:10px;
+
+}
+
+.step h3{
+
+color:var(--gold-light);
+
+}
+
+
+/* CAREER LEVERAGE */
+
+.leverage-intro{
+
+background:
+linear-gradient(
+135deg,
+rgba(212,163,115,.16),
+rgba(212,163,115,.03)
+);
+
+padding:25px;
+
+border-radius:18px;
+
+border:1px solid var(--border);
+
+margin-bottom:25px;
+
+}
+
+.leverage-intro p{
+
+color:var(--muted);
+
+max-width:950px;
+
+}
+
+.leverage-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(250px,1fr));
+
+gap:18px;
+
+}
+
+.leverage-card{
+
+background:#21140d;
+
+border:1px solid var(--border);
+
+border-radius:18px;
+
+padding:25px;
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+.leverage-card::before{
+
+content:"";
+
+position:absolute;
+
+width:80px;
+
+height:80px;
+
+border-radius:50%;
+
+background:rgba(212,163,115,.07);
+
+right:-20px;
+
+top:-20px;
+
+}
+
+.leverage-number{
+
+font-size:.75rem;
+
+font-weight:bold;
+
+letter-spacing:.15em;
+
+color:var(--gold);
+
+}
+
+.leverage-card h3{
+
+margin:8px 0;
+
+color:var(--gold-light);
+
+}
+
+.leverage-card p{
+
+font-size:.9rem;
+
+color:var(--muted);
+
+margin-bottom:15px;
+
+}
+
+.leverage-card strong{
+
+color:var(--cream);
+
+}
+
+
+/* LEVERAGE MATRIX */
+
+.matrix{
+
+margin-top:25px;
+
+display:grid;
+
+grid-template-columns:
+repeat(4,1fr);
+
+border:1px solid var(--border);
+
+border-radius:15px;
+
+overflow:hidden;
+
+}
+
+.matrix div{
+
+padding:16px;
+
+border-right:1px solid var(--border);
+
+border-bottom:1px solid var(--border);
+
+background:#21140d;
+
+}
+
+.matrix div:nth-child(4n){
+
+border-right:none;
+
+}
+
+.matrix strong{
+
+display:block;
+
+color:var(--gold-light);
+
+margin-bottom:5px;
+
+}
+
+.matrix span{
+
+font-size:.78rem;
+
+color:var(--muted);
+
+}
+
+
+/* QUIZ / PLANNER */
+
+.quiz{
+
+background:
+linear-gradient(
+135deg,
+rgba(212,163,115,.2),
+rgba(212,163,115,.05)
+);
+
+padding:35px;
+
+border-radius:20px;
+
+border:1px solid var(--border);
+
+}
+
+.quiz-intro{
+
+color:var(--muted);
+
+margin-bottom:20px;
+
+max-width:900px;
+
+}
+
+.form-grid{
+
+display:grid;
+
+grid-template-columns:
+1fr 1fr;
+
+gap:20px;
+
+}
+
+.form-group{
+
+margin-bottom:5px;
+
+}
+
+.form-group label{
+
+display:block;
+
+font-size:.78rem;
+
+font-weight:bold;
+
+letter-spacing:.08em;
+
+text-transform:uppercase;
+
+color:var(--gold-light);
+
+margin-bottom:5px;
+
+}
+
+input,
+select,
+textarea{
+
+width:100%;
+
+padding:15px;
+
+margin:8px 0;
+
+background:#17100b;
+
+border:1px solid var(--border);
+
+color:white;
+
+border-radius:10px;
+
+outline:none;
+
+}
+
+textarea{
+
+min-height:120px;
+
+resize:vertical;
+
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+
+border-color:var(--gold);
+
+}
+
+
+/* BUTTON */
+
+.button{
+
+display:inline-block;
+
+background:var(--gold);
+
+color:#21140d;
+
+padding:13px 25px;
+
+border-radius:30px;
+
+text-decoration:none;
+
+font-weight:bold;
+
+border:none;
+
+cursor:pointer;
+
+margin-top:15px;
+
+}
+
+.button:hover{
+
+background:var(--gold-light);
+
+transform:translateY(-2px);
+
+}
+
+.button.secondary{
+
+background:#382619;
+
+color:var(--cream);
+
+border:1px solid var(--border);
+
+margin-left:8px;
+
+}
+
+
+/* GENERATED PLAN */
+
+.plan{
+
+display:none;
+
+margin-top:30px;
+
+}
+
+.plan.show{
+
+display:block;
+
+}
+
+.plan-header{
+
+background:
+linear-gradient(
+135deg,
+#392719,
+#21140d
+);
+
+padding:30px;
+
+border-radius:18px;
+
+border:1px solid var(--border);
+
+margin-bottom:20px;
+
+}
+
+.plan-header h2{
+
+color:var(--gold-light);
+
+margin-bottom:8px;
+
+}
+
+.plan-header p{
+
+color:var(--muted);
+
+}
+
+.readiness{
+
+display:grid;
+
+grid-template-columns:
+repeat(4,1fr);
+
+gap:15px;
+
+margin-top:20px;
+
+}
+
+.readiness-box{
+
+background:#17100b;
+
+padding:18px;
+
+border-radius:12px;
+
+border:1px solid var(--border);
+
+}
+
+.readiness-box strong{
+
+display:block;
+
+font-size:1.7rem;
+
+color:var(--gold);
+
+}
+
+.readiness-box span{
+
+font-size:.72rem;
+
+text-transform:uppercase;
+
+color:var(--muted);
+
+}
+
+
+/* PLAN PHASES */
+
+.phase{
+
+background:#21140d;
+
+padding:25px;
+
+border-radius:16px;
+
+border:1px solid var(--border);
+
+}
+
+.phase-number{
+
+font-size:.7rem;
+
+color:var(--gold);
+
+font-weight:bold;
+
+letter-spacing:.15em;
+
+}
+
+.phase h3{
+
+color:var(--gold-light);
+
+margin:7px 0 12px;
+
+}
+
+.phase ul{
+
+padding-left:20px;
+
+}
+
+.phase li{
+
+color:var(--muted);
+
+margin:8px 0;
+
+}
+
+
+/* PLAN TABLE */
+
+.plan-table{
+
+width:100%;
+
+border-collapse:collapse;
+
+margin-top:20px;
+
+}
+
+.plan-table th{
+
+text-align:left;
+
+color:var(--gold-light);
+
+background:#17100b;
+
+padding:14px;
+
+font-size:.8rem;
+
+}
+
+.plan-table td{
+
+padding:14px;
+
+border-top:1px solid var(--border);
+
+color:var(--muted);
+
+font-size:.85rem;
+
+vertical-align:top;
+
+}
+
+
+/* INSIGHT */
+
+.insight{
+
+margin-top:20px;
+
+padding:20px;
+
+background:#17100b;
+
+border-left:4px solid var(--green);
+
+border-radius:8px;
+
+}
+
+.insight strong{
+
+color:var(--green);
+
+}
+
+.insight p{
+
+color:var(--muted);
+
+margin-top:5px;
+
+}
+
+
+/* FOOTER */
+
+footer{
+
+padding:50px;
+
+text-align:center;
+
+color:var(--muted);
+
+border-top:1px solid var(--border);
+
+margin-top:40px;
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.form-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.readiness{
+
+grid-template-columns:
+1fr 1fr;
+
+}
+
+.matrix{
+
+grid-template-columns:
+1fr 1fr;
+
+}
+
+.matrix div:nth-child(4n){
+
+border-right:1px solid var(--border);
+
+}
+
+}
+
+@media(max-width:700px){
+
+.hero{
+
+min-height:500px;
+
+padding:30px;
+
+}
+
+.hero h1{
+
+font-size:2.3rem;
+
+}
+
+.container{
+
+padding:25px 18px;
+
+}
+
+.readiness{
+
+grid-template-columns:1fr;
+
+}
+
+.matrix{
+
+grid-template-columns:1fr;
+
+}
+
+.matrix div{
+
+border-right:none !important;
+
+}
+
+.button.secondary{
+
+margin-left:0;
+
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div>
+
+<h1>
+
+Career Intelligence
+<span>Lab</span>
+
+</h1>
+
+<p>
+
+A career strategy laboratory for turning knowledge into capabilities,
+capabilities into evidence, and evidence into access to better
+opportunities.
+
+</p>
+
+</div>
+
+</section>
+
+
+
+<div class="container">
+
+
+<!-- STARTING POINT -->
+
+<h2 class="section-title">
+Find Your Starting Point
+</h2>
+
+
+<div class="grid">
+
+
+<div class="card starting-card">
+
+<span class="badge">
+High School
+</span>
+
+<h3>
+Build Before Graduation
+</h3>
+
+<ul>
+
+<li>Explore industries before choosing a narrow path.</li>
+<li>Develop technology and communication skills.</li>
+<li>Create projects instead of collecting information.</li>
+<li>Earn strategically selected certifications.</li>
+<li>Build evidence before you need employment.</li>
+
+</ul>
+
+</div>
+
+
+<div class="card starting-card">
+
+<span class="badge">
+Trade School
+</span>
+
+<h3>
+Become Industry Ready
+</h3>
+
+<ul>
+
+<li>Pair technical training with business literacy.</li>
+<li>Document hands-on work.</li>
+<li>Investigate apprenticeships.</li>
+<li>Build relationships with employers.</li>
+<li>Learn how your trade connects to larger systems.</li>
+
+</ul>
+
+</div>
+
+
+<div class="card starting-card">
+
+<span class="badge">
+College
+</span>
+
+<h3>
+Turn Education Into Opportunity
+</h3>
+
+<ul>
+
+<li>Convert coursework into portfolio evidence.</li>
+<li>Seek internships before graduation.</li>
+<li>Build relationships outside the classroom.</li>
+<li>Develop complementary technical skills.</li>
+<li>Track measurable accomplishments.</li>
+
+</ul>
+
+</div>
+
+
+<div class="card starting-card">
+
+<span class="badge">
+Career Change
+</span>
+
+<h3>
+Escape Low-Growth Work
+</h3>
+
+<ul>
+
+<li>Identify transferable capabilities.</li>
+<li>Find adjacent industries rather than starting over.</li>
+<li>Build proof before abandoning current income.</li>
+<li>Close the highest-value skill gaps first.</li>
+<li>Target opportunities where existing experience creates leverage.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+
+
+<!-- GAP ANALYZER -->
+
+<h2 class="section-title">
+Career Gap Analyzer
+</h2>
+
+
+<div class="grid">
+
+
+<div class="card">
+
+<h3>
+Current Level
+</h3>
+
+<div class="score">
+35%
+</div>
+
+<p>
+A career transition becomes easier when you know what exists between
+your current capability and your target capability.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+Career Evidence
+</h3>
+
+<div class="progress">
+
+<span style="width:55%"></span>
+
+</div>
+
+<p>
+Projects, certifications, work samples, measurable results and
+demonstrated experience create evidence employers can evaluate.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+Opportunity Readiness
+</h3>
+
+<div class="progress">
+
+<span style="width:40%"></span>
+
+</div>
+
+<p>
+Readiness is more than knowing something. It includes capability,
+evidence, positioning and access to opportunities.
+</p>
+
+</div>
+
+</div>
+
+
+
+<!-- REPLACEMENT FOR CAREER TRANSFORMATION PATHS -->
+
+<h2 class="section-title">
+Career Leverage Intelligence
+</h2>
+
+
+<div class="leverage-intro">
+
+<h3 style="color:var(--gold-light);margin-bottom:10px;">
+The fastest career growth does not always come from learning more.
+</h3>
+
+<p>
+
+Sometimes the highest-value move is changing the relationship between
+what you already know, what you can prove, who needs it, and how easily
+your capability can transfer into another environment.
+
+Instead of asking only
+<strong style="color:var(--cream);">
+"What career should I choose?"
+</strong>
+ask:
+<strong style="color:var(--cream);">
+"Where does my existing capability become unusually valuable?"
+</strong>
+
+</p>
+
+</div>
+
+
+<div class="leverage-grid">
+
+
+<div class="leverage-card">
+
+<div class="leverage-number">
+01 / TRANSFERABILITY
+</div>
+
+<h3>
+Move Skills Across Industries
+</h3>
+
+<p>
+Some capabilities are portable. Communication, analytics, operations,
+customer research, project coordination and technology skills can move
+between industries.
+</p>
+
+<strong>
+Intelligence Question:
+</strong>
+
+<p>
+"What industries have problems I already know how to solve?"
+</p>
+
+</div>
+
+
+<div class="leverage-card">
+
+<div class="leverage-number">
+02 / COMPLEMENTARITY
+</div>
+
+<h3>
+Build Skill Combinations
+</h3>
+
+<p>
+A single skill may be common. A useful combination can be rare.
+Pairing domain knowledge with technology, communication or analytics
+can create stronger positioning.
+</p>
+
+<strong>
+Intelligence Question:
+</strong>
+
+<p>
+"What two or three skills become more valuable together?"
+</p>
+
+</div>
+
+
+<div class="leverage-card">
+
+<div class="leverage-number">
+03 / EVIDENCE
+</div>
+
+<h3>
+Convert Knowledge Into Proof
+</h3>
+
+<p>
+Knowing how to perform a task and demonstrating that capability are
+different career assets.
+</p>
+
+<strong>
+Intelligence Question:
+</strong>
+
+<p>
+"What artifact could prove that I can do this?"
+</p>
+
+</div>
+
+
+<div class="leverage-card">
+
+<div class="leverage-number">
+04 / PROXIMITY
+</div>
+
+<h3>
+Get Closer To Valuable Problems
+</h3>
+
+<p>
+Career opportunities often emerge around expensive problems, growing
+markets, scarce capabilities and organizations undergoing change.
+</p>
+
+<strong>
+Intelligence Question:
+</strong>
+
+<p>
+"Where is the demand moving?"
+</p>
+
+</div>
+
+
+<div class="leverage-card">
+
+<div class="leverage-number">
+05 / CREDIBILITY
+</div>
+
+<h3>
+Reduce The Cost Of Trust
+</h3>
+
+<p>
+Employers and clients face uncertainty when evaluating someone new.
+Projects, references, certifications and measurable outcomes reduce
+that uncertainty.
+</p>
+
+<strong>
+Intelligence Question:
+</strong>
+
+<p>
+"What evidence would make someone trust my capability faster?"
+</p>
+
+</div>
+
+
+<div class="leverage-card">
+
+<div class="leverage-number">
+06 / OPTIONALITY
+</div>
+
+<h3>
+Avoid One-Path Dependence
+</h3>
+
+<p>
+A resilient career can contain multiple routes to the same outcome:
+employment, contracting, freelancing, apprenticeships, projects,
+entrepreneurship or further education.
+</p>
+
+<strong>
+Intelligence Question:
+</strong>
+
+<p>
+"If Plan A disappears, what adjacent route remains?"
+</p>
+
+</div>
+
+</div>
+
+
+
+<!-- LEVERAGE MATRIX -->
+
+<div class="matrix">
+
+<div>
+
+<strong>Skill</strong>
+
+<span>
+What can you actually do?
+</span>
+
+</div>
+
+<div>
+
+<strong>Evidence</strong>
+
+<span>
+What proves you can do it?
+</span>
+
+</div>
+
+<div>
+
+<strong>Demand</strong>
+
+<span>
+Who currently values it?
+</span>
+
+</div>
+
+<div>
+
+<strong>Access</strong>
+
+<span>
+Where can you reach those people?
+</span>
+
+</div>
+
+
+<div>
+
+<strong>Transfer</strong>
+
+<span>
+Where else can the capability work?
+</span>
+
+</div>
+
+<div>
+
+<strong>Scarcity</strong>
+
+<span>
+How difficult is the combination to replace?
+</span>
+
+</div>
+
+<div>
+
+<strong>Leverage</strong>
+
+<span>
+Can one improvement create many outcomes?
+</span>
+
+</div>
+
+<div>
+
+<strong>Optionality</strong>
+
+<span>
+How many routes can the capability unlock?
+</span>
+
+</div>
+
+</div>
+
+
+
+<!-- INDEPENDENT LEARNING -->
+
+<h2 class="section-title">
+Independent Learning Engine
+</h2>
+
+
+<div class="timeline">
+
+
+<div class="step">
+
+<h3>
+1. Learn
+</h3>
+
+<p>
+Courses, books, mentors, certifications and deliberate practice
+create the initial knowledge base.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<h3>
+2. Build
+</h3>
+
+<p>
+Create something that forces the knowledge to become usable.
+Projects expose gaps that passive learning can hide.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<h3>
+3. Document
+</h3>
+
+<p>
+Turn the work into evidence: screenshots, case studies, metrics,
+reports, demos, portfolios or work samples.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<h3>
+4. Test
+</h3>
+
+<p>
+Put the capability in front of real people, real problems or realistic
+simulations. Feedback reveals what studying alone cannot.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<h3>
+5. Advance
+</h3>
+
+<p>
+Use the evidence to pursue better opportunities, higher responsibility,
+new markets or more valuable problems.
+</p>
+
+</div>
+
+
+</div>
+
+
+
+<!-- CAREER PLANNER -->
+
+<h2 class="section-title">
+Career Planning Simulator
+</h2>
+
+
+<div class="quiz">
+
+<h3>
+Build Your Career Strategy
+</h3>
+
+<p class="quiz-intro">
+
+Enter your actual situation rather than what you think sounds impressive.
+The planner will compare your current position with your target and
+generate a practical sequence of actions.
+
+</p>
+
+
+<div class="form-grid">
+
+
+<div class="form-group">
+
+<label>
+Career Goal
+</label>
+
+<select id="careerGoal">
+
+<option value="">
+Choose Career Goal
+</option>
+
+<option value="technology">
+Technology Career
+</option>
+
+<option value="business">
+Business Leadership
+</option>
+
+<option value="healthcare">
+Healthcare
+</option>
+
+<option value="trades">
+Skilled Trades
+</option>
+
+<option value="entrepreneurship">
+Entrepreneurship
+</option>
+
+<option value="creative">
+Creative / Digital Career
+</option>
+
+<option value="operations">
+Operations / Management
+</option>
+
+<option value="finance">
+Finance / Business Analysis
+</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Current Experience Level
+</label>
+
+<select id="experience">
+
+<option value="">
+Choose Experience
+</option>
+
+<option value="beginner">
+Beginner
+</option>
+
+<option value="some">
+Some Experience
+</option>
+
+<option value="intermediate">
+Intermediate
+</option>
+
+<option value="advanced">
+Advanced
+</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Current Skills
+</label>
+
+<input
+id="currentSkills"
+placeholder="Example: customer service, Excel, writing, sales">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Skills You Want To Learn
+</label>
+
+<input
+id="targetSkills"
+placeholder="Example: SQL, cloud, analytics, leadership">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Target Annual Income
+</label>
+
+<input
+id="income"
+type="number"
+placeholder="Example: 60000">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Weekly Time Available
+</label>
+
+<select id="time">
+
+<option value="">
+Choose Time
+</option>
+
+<option value="3">
+1–3 hours
+</option>
+
+<option value="7">
+4–7 hours
+</option>
+
+<option value="12">
+8–12 hours
+</option>
+
+<option value="20">
+13–20 hours
+</option>
+
+<option value="30">
+20+ hours
+</option>
+
+</select>
+
+</div>
+
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Your Biggest Constraint
+</label>
+
+<textarea
+id="constraint"
+placeholder="Example: limited money, no degree, working full-time, lack of experience, transportation, uncertainty about which career to choose..."></textarea>
+
+</div>
+
+
+<button
+class="button"
+onclick="generatePlan()">
+
+Generate My Career Plan
+
+</button>
+
+
+<button
+class="button secondary"
+onclick="resetPlanner()">
+
+Reset
+
+</button>
+
+
+<!-- GENERATED PLAN -->
+
+<div
+class="plan"
+id="generatedPlan">
+
+
+<div class="plan-header">
+
+<h2 id="planTitle">
+Your Career Strategy
+</h2>
+
+<p id="planSummary"></p>
+
+
+<div class="readiness">
+
+
+<div class="readiness-box">
+
+<strong id="readinessScore">
+0%
+</strong>
+
+<span>
+Initial Readiness
+</span>
+
+</div>
+
+
+<div class="readiness-box">
+
+<strong id="skillCount">
+0
+</strong>
+
+<span>
+Skills To Develop
+</span>
+
+</div>
+
+
+<div class="readiness-box">
+
+<strong id="weeklyHours">
+0
+</strong>
+
+<span>
+Hours / Week
+</span>
+
+</div>
+
+
+<div class="readiness-box">
+
+<strong id="planMonths">
+3
+</strong>
+
+<span>
+Initial Months
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="grid">
+
+
+<div class="phase">
+
+<div class="phase-number">
+PHASE 01
+</div>
+
+<h3>
+Foundation
+</h3>
+
+<ul id="phase1"></ul>
+
+</div>
+
+
+<div class="phase">
+
+<div class="phase-number">
+PHASE 02
+</div>
+
+<h3>
+Capability
+</h3>
+
+<ul id="phase2"></ul>
+
+</div>
+
+
+<div class="phase">
+
+<div class="phase-number">
+PHASE 03
+</div>
+
+<h3>
+Evidence
+</h3>
+
+<ul id="phase3"></ul>
+
+</div>
+
+
+<div class="phase">
+
+<div class="phase-number">
+PHASE 04
+</div>
+
+<h3>
+Opportunity
+</h3>
+
+<ul id="phase4"></ul>
+
+</div>
+
+</div>
+
+
+<div class="card" style="margin-top:20px;">
+
+<h3>
+90-Day Execution Roadmap
+</h3>
+
+
+<table class="plan-table">
+
+<thead>
+
+<tr>
+
+<th>
+Period
+</th>
+
+<th>
+Primary Objective
+</th>
+
+<th>
+Action
+</th>
+
+<th>
+Proof
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="roadmap">
+
+</tbody>
+
+</table>
+
+</div>
+
+
+<div class="card" style="margin-top:20px;">
+
+<h3>
+Weekly Operating System
+</h3>
+
+<table class="plan-table">
+
+<thead>
+
+<tr>
+
+<th>
+Activity
+</th>
+
+<th>
+Recommended Allocation
+</th>
+
+<th>
+Purpose
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="weeklySystem">
+
+</tbody>
+
+</table>
+
+</div>
+
+
+<div class="card" style="margin-top:20px;">
+
+<h3>
+Your First Evidence Project
+</h3>
+
+<p id="evidenceProject"></p>
+
+</div>
+
+
+<div class="card" style="margin-top:20px;">
+
+<h3>
+Income Strategy
+</h3>
+
+<p id="incomeStrategy"></p>
+
+</div>
+
+
+<div class="card" style="margin-top:20px;">
+
+<h3>
+Opportunity Strategy
+</h3>
+
+<p id="opportunityStrategy"></p>
+
+</div>
+
+
+<div class="insight">
+
+<strong>
+Strategic Principle
+</strong>
+
+<p id="strategicInsight"></p>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- INTELLIGENCE NOTES -->
+
+<h2 class="section-title">
+Advanced Career Intelligence
+</h2>
+
+
+<div class="grid">
+
+
+<div class="card">
+
+<span class="badge">
+Signal vs. Noise
+</span>
+
+<h3>
+Don't Confuse Credentials With Capability
+</h3>
+
+<p>
+
+A credential can signal exposure to a subject, but it does not
+automatically demonstrate performance. The strongest career assets
+combine learning with observable evidence.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<span class="badge">
+Adjacent Moves
+</span>
+
+<h3>
+Career Change Does Not Always Mean Starting Over
+</h3>
+
+<p>
+
+The highest-leverage transition may be an adjacent move that preserves
+some existing experience while adding one valuable capability.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<span class="badge">
+Opportunity Economics
+</span>
+
+<h3>
+Optimize For Access, Not Just Qualification
+</h3>
+
+<p>
+
+A person can be qualified for an opportunity and still struggle to
+access it. Networks, geography, visibility, timing, portfolio evidence
+and application strategy can influence access.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<span class="badge">
+Compounding
+</span>
+
+<h3>
+Build Assets That Keep Working
+</h3>
+
+<p>
+
+A project can become a portfolio piece. A portfolio piece can become
+an interview conversation. The interview can become employment. Design
+your learning so one action produces multiple future uses.
+
+</p>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+
+<footer>
+
+Career Intelligence Lab
+
+<br>
+
+Learn • Build • Prove • Test • Advance
+
+</footer>
+
+
+
+<script>
+
+
+/* =====================================
+   CAREER DATABASE
+===================================== */
+
+const careerData = {
+
+technology:{
+
+name:"Technology Career",
+
+skills:[
+"Digital literacy",
+"Problem solving",
+"Technical fundamentals",
+"Data or automation",
+"Communication"
+],
+
+evidence:
+"Build a practical technology project that solves a visible problem. Document the problem, process, tools used, result and lessons learned.",
+
+income:
+"Prioritize skills connected to measurable business outcomes such as automation, analytics, cybersecurity, cloud infrastructure, software development or technical operations. Compare entry-level requirements before paying for expensive training.",
+
+opportunity:
+"Search across internships, apprenticeships, junior roles, open-source projects, technology communities, contract work and project-based opportunities rather than relying only on traditional job postings.",
+
+insight:
+"Technology becomes more valuable when it is attached to a real problem. Do not optimize only for learning a tool; optimize for being able to use the tool to create an outcome."
+
+},
+
+business:{
+
+name:"Business Leadership",
+
+skills:[
+"Communication",
+"Financial literacy",
+"Project management",
+"Decision making",
+"Leadership"
+],
+
+evidence:
+"Create a business case study showing how you analyzed a problem, made a recommendation and measured a potential outcome.",
+
+income:
+"Develop capabilities tied to revenue, cost reduction, customer retention, operations or team performance. These outcomes make business skills easier to demonstrate.",
+
+opportunity:
+"Look beyond management titles. Operations, customer success, project coordination, sales operations, account management and business analysis can become stepping stones toward leadership.",
+
+insight:
+"Leadership is not simply authority. Organizations reward people who can improve outcomes while coordinating people, information and resources."
+
+},
+
+healthcare:{
+
+name:"Healthcare",
+
+skills:[
+"Healthcare fundamentals",
+"Communication",
+"Documentation",
+"Technology",
+"Professional reliability"
+],
+
+evidence:
+"Create a documented learning portfolio containing relevant coursework, simulations, certifications and practical experiences appropriate to the healthcare role.",
+
+income:
+"Different healthcare roles have dramatically different education, licensing and income requirements. Research the actual credential pathway before investing time or money.",
+
+opportunity:
+"Investigate entry-level healthcare roles, clinical pathways, allied health careers, administrative healthcare roles, apprenticeships where available and education funding.",
+
+insight:
+"In regulated careers, the shortest route is not always the fastest route. Map prerequisites first so you do not build skills that cannot move you toward the required credential."
+
+},
+
+trades:{
+
+name:"Skilled Trades",
+
+skills:[
+"Technical fundamentals",
+"Safety",
+"Hands-on practice",
+"Troubleshooting",
+"Professional reliability"
+],
+
+evidence:
+"Document practical work through project logs, photos, measurements, completed tasks, certifications and supervised experience.",
+
+income:
+"Investigate wage progression rather than only starting wages. Apprenticeship, specialization, licensing and supervisory responsibility can change long-term earning potential.",
+
+opportunity:
+"Search for apprenticeships, unions or employer-sponsored training where applicable, vocational programs, contractors, maintenance departments and specialized technical employers.",
+
+insight:
+"Trades can create powerful career capital because practical competence is directly connected to real-world outcomes. Documenting that competence increases portability."
+
+},
+
+entrepreneurship:{
+
+name:"Entrepreneurship",
+
+skills:[
+"Customer research",
+"Sales",
+"Financial management",
+"Marketing",
+"Operations"
+],
+
+evidence:
+"Build a small experiment that tests whether a real person will pay for a solution. Document the problem, offer, customer response and financial result.",
+
+income:
+"Do not begin with branding expenses. Begin by identifying a painful problem, testing demand and learning how customers make purchasing decisions.",
+
+opportunity:
+"Investigate accelerators, incubators, grants, competitions, mentorship programs, founder communities and small-business support programs.",
+
+insight:
+"An idea is not evidence of a business. Customer behavior is stronger evidence. Test demand before scaling complexity."
+
+},
+
+creative:{
+
+name:"Creative / Digital Career",
+
+skills:[
+"Creative production",
+"Communication",
+"Digital tools",
+"Audience understanding",
+"Portfolio development"
+],
+
+evidence:
+"Build a portfolio containing several pieces that demonstrate range, process, decisions and measurable outcomes where possible.",
+
+income:
+"Combine creative ability with commercial skills such as marketing, content strategy, UX, brand strategy, analytics or client management.",
+
+opportunity:
+"Use freelance projects, internships, creator communities, agencies, small businesses, portfolio challenges and contract work to create experience.",
+
+insight:
+"In creative fields, your portfolio often communicates capability faster than a list of claims. Make the work itself do part of the selling."
+
+},
+
+operations:{
+
+name:"Operations / Management",
+
+skills:[
+"Process improvement",
+"Excel or analytics",
+"Communication",
+"Project management",
+"Systems thinking"
+],
+
+evidence:
+"Map a real process, identify inefficiencies and propose an improved workflow with measurable metrics.",
+
+income:
+"Operations becomes more valuable when you can demonstrate cost reduction, time savings, quality improvements, throughput or risk reduction.",
+
+opportunity:
+"Search for operations coordinator, logistics, project coordination, business operations, supply chain and process improvement roles.",
+
+insight:
+"Operations is a leverage career because improving one process can affect many people, transactions or resources."
+
+},
+
+finance:{
+
+name:"Finance / Business Analysis",
+
+skills:[
+"Excel",
+"Financial literacy",
+"Data analysis",
+"Business reasoning",
+"Communication"
+],
+
+evidence:
+"Create a financial or business analysis project using a realistic dataset and explain your assumptions, calculations and recommendation.",
+
+income:
+"Prioritize skills that help organizations forecast, analyze performance, control costs or make better capital decisions.",
+
+opportunity:
+"Look at financial analyst, business analyst, revenue operations, accounting support, banking operations and finance-adjacent roles.",
+
+insight:
+"The strongest analysts do more than calculate. They turn numbers into decisions."
+
+}
+
+};
+
+
+/* =====================================
+   GENERATE PLAN
+===================================== */
+
+function generatePlan(){
+
+const goal =
+document.getElementById("careerGoal").value;
+
+const experience =
+document.getElementById("experience").value;
+
+const current =
+document.getElementById("currentSkills").value.trim();
+
+const target =
+document.getElementById("targetSkills").value.trim();
+
+const income =
+document.getElementById("income").value;
+
+const time =
+document.getElementById("time").value;
+
+const constraint =
+document.getElementById("constraint").value.trim();
+
+
+if(!goal || !experience || !current || !target || !income || !time){
+
+alert(
+"Complete the career goal, experience level, current skills, target skills, income target and weekly time before generating your plan."
+);
+
+return;
+
+}
+
+
+const data =
+careerData[goal];
+
+
+const currentList =
+current
+.split(",")
+.map(x => x.trim())
+.filter(Boolean);
+
+
+const targetList =
+target
+.split(",")
+.map(x => x.trim())
+.filter(Boolean);
+
+
+let readiness = 25;
+
+
+if(experience === "some"){
+readiness += 10;
+}
+
+if(experience === "intermediate"){
+readiness += 20;
+}
+
+if(experience === "advanced"){
+readiness += 30;
+}
+
+
+if(currentList.length >= 3){
+readiness += 10;
+}
+
+
+if(targetList.length >= 2){
+readiness += 5;
+}
+
+
+if(time >= 12){
+readiness += 10;
+}
+
+
+if(readiness > 95){
+readiness = 95;
+}
+
+
+document.getElementById("planTitle").textContent =
+data.name + " Strategy";
+
+
+document.getElementById("planSummary").textContent =
+
+"Your plan focuses on converting your existing capabilities into evidence, closing the highest-value gaps, and creating multiple routes toward a target income of $" +
+Number(income).toLocaleString() +
+" per year.";
+
+
+document.getElementById("readinessScore").textContent =
+readiness + "%";
+
+
+document.getElementById("skillCount").textContent =
+targetList.length;
+
+
+document.getElementById("weeklyHours").textContent =
+time;
+
+
+document.getElementById("planMonths").textContent =
+"3";
+
+
+/* PHASE 1 */
+
+setList(
+"phase1",
+[
+"Inventory your current skills: " + current,
+"Select the 2–3 target skills with the strongest connection to your goal.",
+"Research real job or opportunity requirements before purchasing training.",
+"Identify one constraint that could slow the plan and design around it."
+]
+);
+
+
+/* PHASE 2 */
+
+setList(
+"phase2",
+[
+"Study the fundamentals of " + target,
+"Practice the skills through increasingly difficult exercises.",
+"Use your existing experience to create context for the new skills.",
+"Spend less time consuming information and more time producing outputs."
+]
+);
+
+
+/* PHASE 3 */
+
+setList(
+"phase3",
+[
+data.evidence,
+"Create measurable evidence rather than simply listing skills.",
+"Document your decisions, mistakes, results and improvements.",
+"Turn the strongest project into a portfolio or case-study artifact."
+]
+);
+
+
+/* PHASE 4 */
+
+setList(
+"phase4",
+[
+"Identify 20 realistic opportunities connected to your target.",
+"Separate opportunities into immediate, developmental and long-term targets.",
+"Apply or contact people only after tailoring your evidence to the problem.",
+"Maintain multiple pathways so one rejection does not stop progress."
+]
+);
+
+
+/* ROADMAP */
+
+document.getElementById("roadmap").innerHTML = `
+
+<tr>
+
+<td><strong>Days 1–30</strong></td>
+
+<td>Build the foundation</td>
+
+<td>
+Study the highest-priority skill and complete small exercises.
+Research 10 real opportunities to understand market requirements.
+</td>
+
+<td>
+Skill notes + exercises + opportunity requirement map.
+</td>
+
+</tr>
+
+<tr>
+
+<td><strong>Days 31–60</strong></td>
+
+<td>Build capability</td>
+
+<td>
+Create a practical project combining current skills with the new
+capabilities you are developing.
+</td>
+
+<td>
+Completed project + documentation + measurable result.
+</td>
+
+</tr>
+
+<tr>
+
+<td><strong>Days 61–90</strong></td>
+
+<td>Enter the opportunity market</td>
+
+<td>
+Publish evidence, improve your positioning and begin targeted
+applications, outreach or customer experiments.
+</td>
+
+<td>
+Portfolio + applications/outreach + feedback data.
+</td>
+
+</tr>
+
+`;
+
+
+/* WEEKLY SYSTEM */
+
+const hours =
+Number(time);
+
+
+const learningHours =
+Math.max(1,Math.round(hours * .30));
+
+const buildingHours =
+Math.max(1,Math.round(hours * .40));
+
+const opportunityHours =
+Math.max(1,Math.round(hours * .20));
+
+const reviewHours =
+Math.max(1,hours -
+learningHours -
+buildingHours -
+opportunityHours);
+
+
+document.getElementById("weeklySystem").innerHTML = `
+
+<tr>
+
+<td>
+Learning
+</td>
+
+<td>
+${learningHours} hours
+</td>
+
+<td>
+Develop the specific capability required by the target.
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+Building
+</td>
+
+<td>
+${buildingHours} hours
+</td>
+
+<td>
+Convert knowledge into something observable and useful.
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+Opportunity
+</td>
+
+<td>
+${opportunityHours} hours
+</td>
+
+<td>
+Applications, outreach, networking, customer research or opportunity discovery.
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+Review
+</td>
+
+<td>
+${reviewHours} hours
+</td>
+
+<td>
+Measure progress and decide what to change next week.
+</td>
+
+</tr>
+
+`;
+
+
+/* EVIDENCE */
+
+document.getElementById("evidenceProject").textContent =
+
+data.evidence +
+" Your first project should use at least one existing skill (" +
+currentList[0] +
+") together with one target capability (" +
+targetList[0] +
+"). This creates a bridge between what you already know and what you want employers or customers to believe you can do.";
+
+
+/* INCOME */
+
+document.getElementById("incomeStrategy").textContent =
+
+data.income +
+" Your stated income target is $" +
+Number(income).toLocaleString() +
+" annually. Treat that number as a planning variable: research the actual compensation range for the target role, then identify what experience, evidence and capabilities separate the lower end from the higher end.";
+
+
+/* OPPORTUNITY */
+
+document.getElementById("opportunityStrategy").textContent =
+
+data.opportunity +
+" Your current constraint is: " +
+(
+constraint ||
+"No major constraint was entered. Continue monitoring time, money, access and experience as possible bottlenecks."
+) +
+" Design the strategy around the constraint rather than pretending it does not exist.";
+
+
+/* INSIGHT */
+
+document.getElementById("strategicInsight").textContent =
+data.insight;
+
+
+/* SHOW */
+
+document.getElementById("generatedPlan")
+.classList.add("show");
+
+
+document.getElementById("generatedPlan")
+.scrollIntoView({
+behavior:"smooth",
+block:"start"
+});
+
+}
+
+
+/* =====================================
+   LIST HELPER
+===================================== */
+
+function setList(id,items){
+
+const element =
+document.getElementById(id);
+
+element.innerHTML =
+items
+.map(item => `<li>${escapeHTML(item)}</li>`)
+.join("");
+
+}
+
+
+/* =====================================
+   BASIC HTML ESCAPING
+===================================== */
+
+function escapeHTML(value){
+
+return value
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================
+   RESET
+===================================== */
+
+function resetPlanner(){
+
+document.getElementById("careerGoal").value = "";
+
+document.getElementById("experience").value = "";
+
+document.getElementById("currentSkills").value = "";
+
+document.getElementById("targetSkills").value = "";
+
+document.getElementById("income").value = "";
+
+document.getElementById("time").value = "";
+
+document.getElementById("constraint").value = "";
+
+document.getElementById("generatedPlan")
+.classList.remove("show");
+
+}
+
+
+/* =====================================
+   SMOOTH INTERNAL NAVIGATION
+   No dead buttons are used.
+===================================== */
+
+</script>
+
+</body>
+
+</html>
