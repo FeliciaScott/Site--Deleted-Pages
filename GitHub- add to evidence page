@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Evidence Path | WorkProof</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- Design Tokens & Variables --- */
+        :root {
+            --bg-base: #f4f7f6;
+            --bg-surface: #ffffff;
+            --text-primary: #0f1c18;
+            --text-secondary: #475a53;
+            
+            /* High-Conviction Emerald Palette */
+            --brand-primary: #10b981;
+            --brand-dark: #065f46;
+            --brand-light: #ecfdf5;
+            --brand-border: #a7f3d0;
+            
+            --border-subtle: #e1e8e5;
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- Grid Dashboard Architecture --- */
+        .wp-dashboard {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            min-height: 100vh;
+        }
+
+        /* --- Nav Sidebar --- */
+        .wp-sidebar {
+            background-color: #0d1e19;
+            color: #ffffff;
+            padding: 3rem 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 3.5rem;
+            border-right: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+        }
+
+        .logo .dot {
+            color: var(--brand-primary);
+        }
+
+        .wp-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .nav-item {
+            color: #8fa39c;
+            text-decoration: none;
+            padding: 0.85rem 1.25rem;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: #ffffff;
+            background-color: #172f27;
+        }
+
+        .nav-item.active {
+            box-shadow: inset 4px 0 0 0 var(--brand-primary);
+        }
+
+        /* --- Canvas Layout & Vertical Path Line --- */
+        .wp-main {
+            padding: 4.5rem 6rem;
+            max-width: 1000px;
+            position: relative;
+        }
+
+        /* The structural path wire */
+        .wp-main::before {
+            content: '';
+            position: absolute;
+            top: 6.5rem;
+            left: 7.25rem; 
+            bottom: 8rem;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--brand-border) 0%, var(--border-subtle) 100%);
+            z-index: 1;
+        }
+
+        /* --- Path Nodes --- */
+        .path-node {
+            display: flex;
+            gap: 2.5rem;
+            position: relative;
+            margin-bottom: 5.5rem;
+            z-index: 2;
+        }
+
+        .node-indicator {
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: var(--bg-surface);
+            border: 3px solid var(--brand-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--brand-dark);
+            flex-shrink: 0;
+            box-shadow: 0 0 0 6px var(--bg-base);
+        }
+
+        .node-indicator.checkmark {
+            background-color: var(--brand-primary);
+            color: #ffffff;
+        }
+
+        .node-body {
+            flex-grow: 1;
+            padding-top: 0.15rem;
+        }
+
+        /* --- Elements & Typography --- */
+        .badge {
+            background-color: var(--brand-light);
+            color: var(--brand-dark);
+            font-weight: 600;
+            font-size: 0.75rem;
+            padding: 0.35rem 0.85rem;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            display: inline-block;
+            margin-bottom: 1.25rem;
+            border: 1px solid var(--brand-border);
+        }
+
+        h1 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.25rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 760px;
+        }
+
+        .section-intro {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 750px;
+        }
+
+        /* --- Component: The Contrast Matrix --- */
+        .contrast-matrix {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px -2px rgba(15, 28, 24, 0.04);
+        }
+
+        .matrix-header {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            background-color: #f8faf9;
+            border-bottom: 1px solid var(--border-subtle);
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .matrix-header div {
+            padding: 1rem 1.5rem;
+        }
+
+        .matrix-row {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .matrix-row:last-child {
+            border-bottom: none;
+        }
+
+        .matrix-row div {
+            padding: 1.5rem;
+        }
+
+        .cell-credential {
+            font-weight: 500;
+            color: var(--text-secondary);
+            border-right: 1px solid var(--border-subtle);
+            background-color: #fcfdfe;
+        }
+
+        .cell-credential span {
+            display: inline-block;
+            background-color: #f1f5f3;
+            padding: 0.25rem 0.65rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+        }
+
+        .cell-evidence {
+            color: var(--text-primary);
+            font-weight: 500;
+            border-left: 3px solid var(--brand-primary);
+        }
+
+        /* --- Component: The Linear Ladder --- */
+        .linear-ladder {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .ladder-tier {
+            display: flex;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            padding: 1.5rem;
+            gap: 2rem;
+            transition: all 0.2s ease;
+        }
+
+        .ladder-tier:hover {
+            border-color: var(--brand-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.08);
+        }
+
+        .tier-meta {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #94a8a0;
+            letter-spacing: 0.05em;
+            padding-top: 0.15rem;
+        }
+
+        .active-tier {
+            border-color: var(--brand-primary);
+            background-color: var(--brand-light);
+        }
+
+        .active-tier .tier-meta {
+            color: var(--brand-primary);
+        }
+
+        .tier-info h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .tier-info p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        /* --- Component: System Action Card --- */
+        .action-card {
+            background-color: #0d1e19;
+            color: #ffffff;
+            padding: 3.5rem;
+            border-radius: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 3rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .action-content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .action-content p {
+            color: #a4b8b0;
+            max-width: 540px;
+            font-size: 1.05rem;
+        }
+
+        .btn-action {
+            background-color: var(--brand-primary);
+            color: #ffffff;
+            font-family: var(--font-main);
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 1.2rem 2.2rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .btn-action:hover {
+            background-color: #059669;
+            transform: translateY(-1px);
+        }
+
+        /* --- Responsive Viewports --- */
+        @media (max-width: 1024px) {
+            .wp-dashboard { grid-template-columns: 1fr; }
+            .wp-sidebar { display: none; }
+            .wp-main { padding: 3rem 2rem; }
+            .wp-main::before { left: 3.25rem; }
+            .matrix-header, .matrix-row { grid-template-columns: 1fr; }
+            .cell-credential { border-right: none; border-bottom: 1px solid var(--border-subtle); }
+            .action-card { flex-direction: column; text-align: center; padding: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wp-dashboard">
+        <aside class="wp-sidebar">
+            <div class="logo">WorkProof<span class="dot">.</span></div>
+            <nav class="wp-nav">
+                <a href="#" class="nav-item">Overview</a>
+                <a href="#" class="nav-item active">The Evidence Path</a>
+                <a href="#" class="nav-item">Artifact Vault</a>
+                <a href="#" class="nav-item">Proof Analytics</a>
+            </nav>
+        </aside>
+
+        <main class="wp-main">
+            
+            <header class="path-node node-start">
+                <div class="node-indicator">1</div>
+                <div class="node-body">
+                    <span class="badge">Step 1: The Core Philosophy</span>
+                    <h1>Stop Claiming Capability. <br>Start Demonstrating It.</h1>
+                    <p class="subtitle">Most opportunities bypass the highly credentialed in favor of the highly proven. If you can show an artifact that exists because of your effort, you eliminate all risk for someone hiring or backing you.</p>
+                </div>
+            </header>
+
+            <section class="path-node">
+                <div class="node-indicator">2</div>
+                <div class="node-body">
+                    <span class="badge">Step 2: The Contrast Framework</span>
+                    <h2>Re-framing the Achievement Matrix</h2>
+                    <p class="section-intro">Credentials imply what you sat through. Evidence proves what you built. Notice how a simple certificate transforms when tied to a tangible project output:</p>
+                    
+                    <div class="contrast-matrix">
+                        <div class="matrix-header">
+                            <div>The Passive Credential</div>
+                            <div>The Verifiable Evidence Block</div>
+                        </div>
+                        <div class="matrix-row">
+                            <div class="cell-credential"><span>Google Analytics Certificate</span></div>
+                            <div class="cell-evidence">Analyzed live web traffic, isolated a 22% checkout drop-off, and deployed a layout fix that grew conversions by 40%.</div>
+                        </div>
+                        <div class="matrix-row">
+                            <div class="cell-credential"><span>Leadership Course Certificate</span></div>
+                            <div class="cell-evidence">Coordinated an asymmetric team of 12 volunteers to build a community program under zero budget constraints.</div>
+                        </div>
+                        <div class="matrix-row">
+                            <div class="cell-credential"><span>Coding Bootcamp Graduate</span></div>
+                            <div class="cell-evidence">Designed, architected, and deployed 3 open-source database tools addressing regional logistical tracking issues.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="path-node">
+                <div class="node-indicator">3</div>
+                <div class="node-body">
+                    <span class="badge">Step 3: Choose Your Tier</span>
+                    <h2>The Evidence Ladder</h2>
+                    <p class="section-intro">You do not need an official job to create undeniable proof. You can generate leverage across any of these seven operational tiers right now using free tools.</p>
+                    
+                    <div class="linear-ladder">
+                        <div class="ladder-tier active-tier">
+                            <div class="tier-meta">Tier 07</div>
+                            <div class="tier-info">
+                                <h3>Creating Systems</h3>
+                                <p>Building repeatable frameworks, automation flows, or architectural models that work independently.</p>
+                            </div>
+                        </div>
+                        <div class="ladder-tier">
+                            <div class="tier-meta">Tier 06</div>
+                            <div class="tier-info">
+                                <h3>Leading</h3>
+                                <p>Influencing outcomes by managing milestones, resolving operational friction, or aligning teams.</p>
+                            </div>
+                        </div>
+                        <div class="ladder-tier">
+                            <div class="tier-meta">Tier 05</div>
+                            <div class="tier-info">
+                                <h3>Teaching</h3>
+                                <p>Publishing deep-dive manuals, interactive workshops, or thorough documentation for peers.</p>
+                            </div>
+                        </div>
+                        <div class="ladder-tier">
+                            <div class="tier-meta">Tier 04</div>
+                            <div class="tier-info">
+                                <h3>Publishing</h3>
+                                <p>Moving items off your private device and exposing them to the open web for public review.</p>
+                            </div>
+                        </div>
+                        <div class="ladder-tier">
+                            <div class="tier-meta">Tier 03</div>
+                            <div class="tier-info">
+                                <h3>Building</h3>
+                                <p>Constructing distinct assets: applications, custom relational databases, or intensive market reports.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="path-node node-end">
+                <div class="node-indicator checkmark">✓</div>
+                <div class="node-body">
+                    <div class="action-card">
+                        <div class="action-content">
+                            <h2>Initialize Your Next Proof Block</h2>
+                            <p>Shift your internal narrative. Stop asking <em>"How do I convince them I have value?"</em> and instead ask <strong>"What can I manifest that makes my value clear?"</strong></p>
+                        </div>
+                        <button class="btn-action">Mint New Evidence Block</button>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+</body>
+</html>
