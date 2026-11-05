@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0A192F">
+<title>PathKeeper | Strategic Intelligence & Opportunity Atlas</title>
+
+<style>
+:root {
+  --navy: #0A192F;
+  --navy-light: #152B46;
+  --brown: #8B4513;
+  --brown-light: #C87D55;
+  --gold: #C5A059;
+  --cream: #FDFBF7;
+  --cream-dark: #F0E7DC;
+  --white: #FFFFFF;
+  --text: #24354A;
+  --muted: #647084;
+  --border: #E3D6C8;
+  --success: #276749;
+  --radius: 16px;
+  --shadow: 0 10px 30px rgba(10,25,47,.07);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 95px; }
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--text);
+  font-family: Inter, system-ui, Arial, sans-serif;
+  line-height: 1.65;
+}
+
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+a { color: inherit; }
+button:focus-visible, a:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(253,251,247,.97);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+}
+
+.nav-wrap {
+  max-width: 1280px;
+  margin: auto;
+  padding: 12px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  background: var(--navy);
+  color: var(--gold);
+  border: 1px solid var(--brown-light);
+  border-radius: 12px;
+  font-size: 24px;
+}
+.brand-name { color: var(--navy); font-size: 1.15rem; font-weight: 850; }
+.brand-sub { color: var(--brown); font-size: .7rem; display: block; }
+.nav-links { display: flex; gap: 18px; flex-wrap: wrap; }
+.nav-links a {
+  font-size: .8rem;
+  font-weight: 750;
+  text-decoration: none;
+}
+.nav-links a:hover { color: var(--brown); }
+
+.button {
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 11px 16px;
+  font-weight: 750;
+  font-size: .85rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  text-decoration: none;
+  transition: .2s;
+}
+.button:hover { transform: translateY(-1px); }
+.button-primary { background: var(--navy); color: white; }
+.button-primary:hover { background: var(--navy-light); }
+.button-brown { background: var(--brown); color: white; }
+.button-brown:hover { background: #703816; }
+.button-outline { background: transparent; color: var(--navy); border-color: var(--border); }
+.button-outline:hover { background: var(--cream-dark); }
+.button-small { padding: 8px 11px; font-size: .78rem; }
+
+.hero {
+  padding: 68px 22px 55px;
+  background: linear-gradient(145deg, #F5EDE3, var(--cream) 62%);
+  border-bottom: 1px solid var(--border);
+}
+.hero-inner { max-width: 1050px; margin: auto; text-align: center; }
+.eyebrow {
+  display: inline-block;
+  background: #F4ECE6;
+  color: var(--brown);
+  border: 1px solid #D7B69D;
+  border-radius: 99px;
+  padding: 6px 13px;
+  font-size: .7rem;
+  font-weight: 850;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+h1, h2, h3, h4 { line-height: 1.25; }
+.hero h1 {
+  color: var(--navy);
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  letter-spacing: -1.7px;
+  margin: 20px 0 15px;
+}
+.hero p { max-width: 800px; margin: auto; color: var(--muted); }
+.hero-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
+
+.search-panel {
+  max-width: 850px;
+  margin: 28px auto 0;
+  padding: 15px;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  background: white;
+  box-shadow: var(--shadow);
+  text-align: left;
+}
+.search-row { display: flex; gap: 9px; }
+.search-row input { flex: 1; min-width: 0; }
+input, select, textarea {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #D7DDE5;
+  background: white;
+  color: var(--navy);
+  border-radius: 9px;
+}
+label { display: block; font-size: .78rem; font-weight: 800; margin-bottom: 6px; }
+.quick-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; align-items: center; }
+.quick-filters button {
+  border: 1px solid var(--border);
+  background: var(--cream);
+  color: var(--navy);
+  border-radius: 99px;
+  padding: 5px 10px;
+  font-size: .72rem;
+  font-weight: 750;
+}
+.quick-filters button:hover { background: var(--cream-dark); }
+
+main { max-width: 1280px; margin: auto; padding: 45px 22px 70px; }
+.section { margin-bottom: 65px; }
+.section-heading { margin-bottom: 23px; border-left: 4px solid var(--brown); padding-left: 16px; }
+.section-kicker { color: var(--brown); text-transform: uppercase; letter-spacing: 1.5px; font-size: .7rem; font-weight: 900; }
+.section-heading h2 { color: var(--navy); font-size: clamp(1.65rem, 3vw, 2.3rem); margin: 5px 0 8px; }
+.section-heading p { color: var(--muted); font-size: .92rem; margin: 0; max-width: 850px; }
+
+.grid { display: grid; gap: 18px; }
+.grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+.grid-4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+
+.card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  box-shadow: 0 3px 12px rgba(10,25,47,.025);
+  min-width: 0;
+  transition: border-color .2s, transform .2s, box-shadow .2s;
+}
+.card:hover { border-color: #CBA98D; box-shadow: var(--shadow); transform: translateY(-2px); }
+.card h3, .card h4 { color: var(--navy); margin: 5px 0 10px; }
+.card p { color: var(--muted); font-size: .87rem; margin: 0 0 12px; }
+.card p:last-child { margin-bottom: 0; }
+.card-tag {
+  display: inline-block;
+  color: var(--brown);
+  background: #F7EEE6;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: .66rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .6px;
+}
+.card-icon {
+  width: 42px; height: 42px; display: grid; place-items: center;
+  border-radius: 11px; background: var(--cream-dark); color: var(--brown);
+  font-size: 1.25rem; margin-bottom: 13px;
+}
+.card-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.card details { border-top: 1px solid #EEE6DD; margin-top: 14px; padding-top: 12px; }
+.card summary { cursor: pointer; color: var(--brown); font-size: .82rem; font-weight: 850; }
+.card details p { margin-top: 12px; }
+
+.number {
+  display: inline-grid;
+  place-items: center;
+  width: 39px; height: 39px;
+  background: var(--cream-dark);
+  color: var(--brown);
+  border-radius: 10px;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
+.dark-panel {
+  background: var(--navy);
+  color: var(--cream);
+  border-radius: 22px;
+  padding: 28px;
+  border: 1px solid #203854;
+}
+.dark-panel h2, .dark-panel h3, .dark-panel h4 { color: white; }
+.dark-panel p { color: #D0D8E3; }
+.dark-panel .section-kicker { color: var(--gold); }
+.dark-panel .card { background: #12253D; border-color: #2A3F57; }
+.dark-panel .card h3, .dark-panel .card h4 { color: white; }
+.dark-panel .card p { color: #D0D8E3; }
+
+.callout {
+  padding: 19px 22px;
+  background: #F7F0E8;
+  border: 1px solid #E3C8AF;
+  border-radius: 14px;
+  color: var(--navy);
+  margin: 20px 0;
+}
+.callout strong { color: var(--brown); }
+
+.tab-bar { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0; }
+.tab-button {
+  border: 1px solid var(--border);
+  background: white;
+  color: var(--navy);
+  border-radius: 9px;
+  padding: 10px 13px;
+  font-weight: 800;
+  font-size: .8rem;
+}
+.tab-button.active { background: var(--brown); color: white; border-color: var(--brown); }
+.tab-panel { padding: 22px; border: 1px solid var(--border); background: white; border-radius: 15px; }
+.tab-panel h3 { color: var(--navy); }
+
+.filters {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 12px;
+  padding: 16px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  margin-bottom: 18px;
+}
+.filter-buttons { display: flex; gap: 7px; flex-wrap: wrap; align-items: center; }
+.filter-button {
+  padding: 7px 11px;
+  border: 1px solid var(--border);
+  background: var(--cream);
+  color: var(--navy);
+  border-radius: 8px;
+  font-size: .74rem;
+  font-weight: 800;
+}
+.filter-button.active { background: var(--navy); color: white; border-color: var(--navy); }
+.meta { font-size: .75rem; color: var(--brown); font-weight: 800; }
+.result-count { font-size: .8rem; color: var(--muted); margin: 10px 0; }
+
+.skill-options { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin: 16px 0; }
+.skill-option {
+  display: flex; gap: 8px; align-items: center; padding: 12px;
+  background: #12253D; border: 1px solid #2A3F57; border-radius: 10px;
+  font-size: .8rem; font-weight: 700;
+}
+.skill-option input { width: auto; accent-color: var(--gold); }
+.module-status { color: var(--gold); font-size: .68rem; font-weight: 900; }
+.module.locked { opacity: .52; }
+.module.unlocked { border-color: var(--gold); }
+.module.unlocked .module-status { color: #A8E0BB; }
+
+.model-steps { display: grid; grid-template-columns: repeat(6,1fr); gap: 10px; }
+.model-step {
+  background: white; border: 1px solid var(--border); border-radius: 12px;
+  padding: 17px 10px; text-align: center;
+}
+.model-step span { display: block; font-size: .7rem; color: var(--brown); font-weight: 900; }
+.model-step strong { color: var(--navy); display: block; margin-top: 4px; }
+
+.decision-item { background: white; padding: 15px; border: 1px solid var(--border); border-radius: 11px; }
+.decision-item strong { color: var(--brown); display: block; font-size: .8rem; margin-bottom: 4px; }
+.decision-item p { margin: 0; font-size: .82rem; color: var(--muted); }
+
+.resource-list { padding-left: 18px; font-size: .82rem; color: var(--muted); }
+.resource-list li { margin-bottom: 5px; }
+
+.form-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 15px; }
+.field { margin-bottom: 14px; }
+.field small { display: block; color: var(--muted); margin-top: 5px; font-size: .73rem; }
+.result-box { padding: 18px; background: #EDF6EF; border: 1px solid #B5D8BF; border-radius: 12px; margin-top: 18px; }
+.result-box h3 { color: #22543D; }
+.result-box p { color: #2F4F3D; }
+
+.empty-state {
+  grid-column: 1 / -1;
+  padding: 30px;
+  text-align: center;
+  background: white;
+  border: 1px dashed var(--border);
+  border-radius: 14px;
+  color: var(--muted);
+}
+.hidden { display: none !important; }
+
+footer { background: var(--navy); color: #D4DCE6; padding: 35px 22px; }
+.footer-inner { max-width: 1280px; margin: auto; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+footer a { color: #F0D7BF; text-decoration: none; }
+footer p { font-size: .8rem; }
+
+.modal-backdrop {
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(5,14,28,.78); display: grid; place-items: center;
+  padding: 18px;
+}
+.modal {
+  background: var(--cream); border-radius: 18px; padding: 25px;
+  max-width: 600px; width: 100%; max-height: 85vh; overflow-y: auto;
+  box-shadow: 0 20px 80px rgba(0,0,0,.3);
+}
+.modal h2 { color: var(--navy); }
+.modal-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 15px; }
+.modal-close { border: 0; background: transparent; color: var(--navy); font-size: 1.5rem; }
+
+.pack-list { list-style: none; padding: 0; }
+.pack-list li {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 12px; background: white; border: 1px solid var(--border);
+  border-radius: 10px; margin-bottom: 8px; font-size: .82rem;
+}
+.pack-list button { border: 0; background: transparent; color: #9B2C2C; font-weight: 800; }
+
+@media (max-width: 950px) {
+  .nav-links { display: none; }
+  .grid-4 { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .grid-3 { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .model-steps { grid-template-columns: repeat(3,1fr); }
+  .skill-options { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 620px) {
+  .nav-wrap { padding: 10px 14px; }
+  .brand-sub { display: none; }
+  .nav-wrap > .header-actions .button { padding: 9px; font-size: .73rem; }
+  .hero { padding: 45px 16px 35px; }
+  main { padding: 30px 15px 50px; }
+  .grid-2, .grid-3, .grid-4, .filters, .form-grid { grid-template-columns: 1fr; }
+  .model-steps { grid-template-columns: repeat(2,1fr); }
+  .skill-options { grid-template-columns: 1fr; }
+  .dark-panel { padding: 19px; }
+  .search-row { flex-direction: column; }
+  .hero h1 { letter-spacing: -1px; }
+}
+</style>
+</head>
+
+<body>
+
+<header class="site-header">
+  <div class="nav-wrap">
+    <a href="#home" class="brand" style="text-decoration:none">
+      <span class="brand-mark">⌖</span>
+      <span>
+        <span class="brand-name">PathKeeper</span>
+        <span class="brand-sub">Strategic Intelligence & Opportunity Atlas</span>
+      </span>
+    </a>
+
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#strategy">Strategy</a>
+      <a href="#core-pathways">Core Pathways</a>
+      <a href="#atlas">Opportunity Atlas</a>
+      <a href="#coded">Coded Systems</a>
+      <a href="#resources">Resources</a>
+    </nav>
+
+    <div class="header-actions" style="display:flex;gap:8px;align-items:center">
+      <button class="button button-outline button-small" onclick="openWizard()">Path Wizard</button>
+      <button class="button button-primary button-small" onclick="openPack()">My Pack <span id="packCount">0</span></button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <span class="eyebrow">The PathKeeper Framework Ecosystem</span>
+    <h1>Turn Information Into a Path Forward.</h1>
+    <p>
+      Explore career pathways, strategic opportunities, technical systems,
+      business ideas, and decision frameworks. Move from investigation to
+      practical action with evidence, experiments, and measurable progress.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#strategy" class="button button-primary">Explore Strategic Intelligence</a>
+      <a href="#atlas" class="button button-outline">Explore Opportunity Atlas</a>
+      <button class="button button-brown" onclick="openWizard()">Find a Starting Path</button>
+    </div>
+
+    <div class="search-panel">
+      <label for="globalSearch">Search the entire hub</label>
+      <div class="search-row">
+        <input id="globalSearch" type="search"
+          placeholder="Try automation, career, business, evidence, leadership..."
+          oninput="applyGlobalSearch()">
+        <button class="button button-outline" onclick="clearSearch()">Clear search</button>
+      </div>
+      <div class="quick-filters">
+        <span class="meta">QUICK SEARCH</span>
+        <button onclick="quickSearch('career')">Career</button>
+        <button onclick="quickSearch('technology')">Technology</button>
+        <button onclick="quickSearch('business')">Business</button>
+        <button onclick="quickSearch('automation')">Automation</button>
+        <button onclick="quickSearch('evidence')">Proof of Work</button>
+      </div>
+      <p id="searchStatus" class="result-count" aria-live="polite">Showing all available content.</p>
+    </div>
+  </div>
+</section>
+
+<main>
+
+<!-- STRATEGIC INTELLIGENCE -->
+<section class="section searchable-section" id="strategy">
+  <div class="section-heading">
+    <span class="section-kicker">Section 01 · Strategic Intelligence</span>
+    <h2>Strategic Command Center</h2>
+    <p>Investigate high-leverage opportunities, recognize patterns, challenge assumptions, and identify the next useful experiment.</p>
+  </div>
+
+  <div class="callout">
+    <strong>Strategic signal:</strong>
+    Focus on information that changes a decision. More information is not automatically better information.
+  </div>
+
+  <div class="filters">
+    <div>
+      <label for="strategyFocus">Choose an intelligence focus</label>
+      <select id="strategyFocus" onchange="filterStrategy()">
+        <option value="all">All strategic areas</option>
+        <option value="technology">Technology</option>
+        <option value="career">Career</option>
+        <option value="innovation">Innovation</option>
+        <option value="business">Business</option>
+        <option value="personal">Personal strategy</option>
+        <option value="decision">Decision intelligence</option>
+      </select>
+    </div>
+    <div>
+      <label for="strategyQuestion">Choose a strategic question</label>
+      <select id="strategyQuestion" onchange="showStrategicQuestion()">
+        <option value="">What should I investigate?</option>
+        <option value="leverage">Where is leverage?</option>
+        <option value="overlooked">What am I overlooking?</option>
+        <option value="obsolete">What could become obsolete?</option>
+        <option value="build">What can I build?</option>
+        <option value="stop">What should I stop doing?</option>
+      </select>
+    </div>
+  </div>
+  <div id="questionResult" class="callout hidden" aria-live="polite"></div>
+
+  <div class="grid grid-3" id="strategyGrid">
+    <article class="card searchable-card" data-focus="technology" data-search="technology AI agent labor automation administrative workflows process scheduling reporting">
+      <span class="card-tag">Technology leverage</span>
+      <h3>AI-Agent Labor Force</h3>
+      <p>Identify repetitive work that could be redesigned around automation instead of simply completed faster.</p>
+      <details>
+        <summary>Open strategic analysis</summary>
+        <p><strong>Investigate:</strong> repeated tasks, predictable decisions, data movement, scheduling, reporting, and customer communication.</p>
+        <p><strong>Test:</strong> document one workflow, automate one low-risk step, and compare time, quality, and error rates before and after.</p>
+      </details>
+      <button class="button button-outline button-small" onclick="addPack('AI-Agent Workflow Audit')">Add workflow audit to pack</button>
+    </article>
+
+    <article class="card searchable-card" data-focus="innovation" data-search="innovation cross industry synthesis logistics productivity subscription professional services">
+      <span class="card-tag">Innovation</span>
+      <h3>Cross-Industry Synthesis</h3>
+      <p>Find new ideas by transferring useful principles from one industry to a different problem.</p>
+      <details>
+        <summary>Open strategic analysis</summary>
+        <p>Choose an industry with an effective system. Ask how its underlying principle could solve a problem elsewhere.</p>
+        <p><strong>Example:</strong> apply logistics optimization to learning plans, or subscription design to a professional service.</p>
+      </details>
+      <button class="button button-outline button-small" onclick="addPack('Cross-Industry Idea Canvas')">Add idea canvas to pack</button>
+    </article>
+
+    <article class="card searchable-card" data-focus="personal" data-search="personal strategy Phoenix framework changing direction sunk costs transferable skills fallback">
+      <span class="card-tag">Personal strategy</span>
+      <h3>The Phoenix Framework</h3>
+      <p>Redesign a path when the current approach no longer produces useful results.</p>
+      <details>
+        <summary>Open strategic analysis</summary>
+        <p>1. Identify what is not working. 2. Separate past investment from future value. 3. Identify transferable assets. 4. Test a new direction before fully committing.</p>
+        <p><strong>Principle:</strong> preserve what is useful while changing what is ineffective.</p>
+      </details>
+      <button class="button button-outline button-small" onclick="addPack('Path Redesign Worksheet')">Add worksheet to pack</button>
+    </article>
+
+    <article class="card searchable-card" data-focus="business" data-search="business strategy micro SaaS acquisition recurring revenue customer retention operations automation">
+      <span class="card-tag">Business strategy</span>
+      <h3>Micro-SaaS Acquisition Thinking</h3>
+      <p>Explore how existing small software businesses or systems might be improved, automated, or combined.</p>
+      <details>
+        <summary>Open strategic analysis</summary>
+        <p>Investigate recurring revenue, customer retention, costs, owner dependence, customer acquisition, and operational weaknesses.</p>
+        <p><strong>Before investing:</strong> validate financial records, legal ownership, liabilities, customer concentration, and the real workload.</p>
+      </details>
+      <button class="button button-outline button-small" onclick="addPack('Small Business Evaluation Checklist')">Add checklist to pack</button>
+    </article>
+
+    <article class="card searchable-card" data-focus="career" data-search="career skill evidence portfolio projects demonstrate ability learn practice build document">
+      <span class="card-tag">Career intelligence</span>
+      <h3>Skill-to-Evidence Strategy</h3>
+      <p>Turn learning into visible proof that another person can inspect and evaluate.</p>
+      <details>
+        <summary>Open strategic analysis</summary>
+        <p><strong>Build the chain:</strong> Learn → Practice → Build → Document → Demonstrate.</p>
+        <p>Create projects, process improvements, analyses, case studies, code samples, or a portfolio. Record what you contributed and what the result shows.</p>
+      </details>
+      <button class="button button-outline button-small" onclick="addPack('Skill-to-Evidence Plan')">Add plan to pack</button>
+    </article>
+
+    <article class="card searchable-card" data-focus="decision" data-search="decision intelligence leverage point audit bottleneck root cause downstream outcomes">
+      <span class="card-tag">Decision intelligence</span>
+      <h3>The Leverage Point Audit</h3>
+      <p>Find the small change that may improve several results at once.</p>
+      <details>
+        <summary>Open strategic analysis</summary>
+        <p>Ask what repeatedly creates the problem, which decision controls the most consequences, and what bottleneck limits progress.</p>
+        <p><strong>Next step:</strong> change one controllable factor and observe the result instead of assuming the cause.</p>
+      </details>
+      <button class="button button-outline button-small" onclick="addPack('Leverage Point Audit')">Add audit to pack</button>
+    </article>
+  </div>
+</section>
+
+<!-- CORE PATHWAYS -->
+<section class="section searchable-section" id="core-pathways">
+  <div class="section-heading">
+    <span class="section-kicker">Section 02 · Core Pathways</span>
+    <h2>The Core Opportunity Framework</h2>
+    <p>A practical progression from discovering options to aligning a direction, executing useful work, and refining the result.</p>
+  </div>
+
+  <div class="grid grid-4">
+    <article class="card searchable-card" data-search="discovery strengths needs opportunities research capabilities">
+      <span class="number">01</span><h3>Discovery</h3>
+      <p>Identify your interests, existing capabilities, unmet needs, constraints, and possible directions before committing resources.</p>
+    </article>
+    <article class="card searchable-card" data-search="alignment career goals strengths resources institutions priorities">
+      <span class="number">02</span><h3>Alignment</h3>
+      <p>Connect personal strengths and goals with real opportunities, available resources, market needs, and strategic partnerships.</p>
+    </article>
+    <article class="card searchable-card" data-search="execution projects workflow action measurable output">
+      <span class="number">03</span><h3>Execution</h3>
+      <p>Turn decisions into projects, weekly actions, experiments, and measurable outputs.</p>
+    </article>
+    <article class="card searchable-card" data-search="mastery improvement iteration automation scale feedback">
+      <span class="number">04</span><h3>Mastery</h3>
+      <p>Review evidence, improve quality, strengthen repeatable processes, and expand the value of what works.</p>
+    </article>
+  </div>
+
+  <div class="card" style="margin-top:20px">
+    <h3>Choose a detailed pathway</h3>
+    <p>Each pathway has a different emphasis. Use the tabs to explore its operating method.</p>
+    <div class="tab-bar" role="tablist" aria-label="Core pathways">
+      <button class="tab-button active" role="tab" aria-selected="true" onclick="switchTab('careerTrack',this)">Career scaling</button>
+      <button class="tab-button" role="tab" aria-selected="false" onclick="switchTab('leadershipTrack',this)">Leadership expansion</button>
+      <button class="tab-button" role="tab" aria-selected="false" onclick="switchTab('ecosystemTrack',this)">Ecosystem synergy</button>
+    </div>
+
+    <div id="careerTrack" class="tab-panel" role="tabpanel">
+      <h3>Career Scaling & Technical Mobility</h3>
+      <p>Develop skills, complete projects, and document measurable evidence that supports your next career move.</p>
+      <div class="grid grid-2">
+        <div><strong>Phase A — Skill mapping</strong><p>Compare current ability with target-role requirements. Identify the smallest important skill gap.</p></div>
+        <div><strong>Phase B — Leverage projects</strong><p>Build a practical project that demonstrates the skill and creates an inspectable result.</p></div>
+        <div><strong>Phase C — Evidence</strong><p>Document the problem, process, decisions, output, and limitations.</p></div>
+        <div><strong>Phase D — Opportunity</strong><p>Use the evidence to improve applications, interviews, promotion discussions, or client proposals.</p></div>
+      </div>
+    </div>
+
+    <div id="leadershipTrack" class="tab-panel hidden" role="tabpanel">
+      <h3>Leadership Expansion & Organizational Design</h3>
+      <p>Move from completing individual tasks to helping a team make better decisions and produce reliable outcomes.</p>
+      <div class="grid grid-2">
+        <div><strong>Systemic mentorship</strong><p>Create repeatable onboarding guides, training resources, and feedback loops.</p></div>
+        <div><strong>Strategic alignment</strong><p>Connect daily responsibilities to team objectives and longer-term priorities.</p></div>
+        <div><strong>Delegation architecture</strong><p>Clarify ownership, decision rights, quality standards, and escalation paths.</p></div>
+        <div><strong>Feedback</strong><p>Use observable results and team input to refine the operating model.</p></div>
+      </div>
+    </div>
+
+    <div id="ecosystemTrack" class="tab-panel hidden" role="tabpanel">
+      <h3>Ecosystem Synergy & Enterprise Innovation</h3>
+      <p>Explore how partnerships, institutions, and communities can contribute resources that are difficult to assemble alone.</p>
+      <div class="grid grid-2">
+        <div><strong>Cross-sector alliances</strong><p>Identify complementary capabilities across academic, business, community, and open-source settings.</p></div>
+        <div><strong>Value exchange</strong><p>Clarify what each partner contributes, receives, and remains responsible for.</p></div>
+        <div><strong>Small collaboration test</strong><p>Start with a limited shared project before making a large commitment.</p></div>
+        <div><strong>Governance</strong><p>Agree on ownership, permissions, measures, communication, and exit conditions.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPPORTUNITY ATLAS -->
+<section class="section searchable-section" id="atlas">
+  <div class="section-heading">
+    <span class="section-kicker">Section 03 · Opportunity Atlas</span>
+    <h2>Explore Opportunity Pathways</h2>
+    <p>Compare illustrative career and capability tracks by domain and experience stage. Time estimates are planning examples, not guarantees of employment or mastery.</p>
+  </div>
+
+  <div class="filters">
+    <div>
+      <label>Filter by domain</label>
+      <div class="filter-buttons" id="domainButtons">
+        <button class="filter-button active" data-domain="all" onclick="setDomain('all',this)">All</button>
+        <button class="filter-button" data-domain="tech" onclick="setDomain('tech',this)">Tech & systems</button>
+        <button class="filter-button" data-domain="creative" onclick="setDomain('creative',this)">Creative & media</button>
+        <button class="filter-button" data-domain="business" onclick="setDomain('business',this)">Business</button>
+        <button class="filter-button" data-domain="community" onclick="setDomain('community',this)">Community</button>
+      </div>
+    </div>
+    <div>
+      <label for="atlasLevel">Filter by stage</label>
+      <select id="atlasLevel" onchange="filterAtlas()">
+        <option value="all">All stages</option>
+        <option value="entry">Entry / foundation</option>
+        <option value="advanced">Advanced</option>
+        <option value="master">Architect / leadership</option>
+      </select>
+    </div>
+  </div>
+  <p class="result-count" id="atlasCount" aria-live="polite"></p>
+
+  <div class="grid grid-3" id="atlasGrid">
+    <article class="card atlas-card searchable-card" data-domain="tech" data-level="entry" data-search="technology systems optimization specialist workflow software database automation entry">
+      <span class="card-tag">Tech · Entry</span>
+      <h3>Systems Optimization Specialist</h3>
+      <p>Improve software workflows, document processes, identify errors, and automate repeatable tasks.</p>
+      <p class="meta">Planning example: 6–12 months</p>
+      <button class="button button-outline button-small" onclick="showDetails('Systems Optimization Specialist','Start with process mapping, spreadsheet or database fundamentals, basic scripting, and testing. Build a before-and-after workflow case study. Possible evidence: process diagrams, documented tests, and a working automation prototype.')">View pathway</button>
+    </article>
+
+    <article class="card atlas-card searchable-card" data-domain="business" data-level="advanced" data-search="business market expansion architect regional strategy financial modeling partnerships">
+      <span class="card-tag">Business · Advanced</span>
+      <h3>Market Expansion Architect</h3>
+      <p>Research customer segments, compare regions, evaluate distribution, and model expansion options.</p>
+      <p class="meta">Planning example: 12–18 months</p>
+      <button class="button button-outline button-small" onclick="showDetails('Market Expansion Architect','Build capability in market research, customer segmentation, unit economics, financial modeling, and risk analysis. Create a sourced market comparison and a staged expansion proposal.')">View pathway</button>
+    </article>
+
+    <article class="card atlas-card searchable-card" data-domain="creative" data-level="master" data-search="creative media transmedia ecosystem director storytelling brand content network">
+      <span class="card-tag">Creative · Architect</span>
+      <h3>Transmedia Ecosystem Director</h3>
+      <p>Coordinate connected storytelling, brand systems, and content across multiple platforms.</p>
+      <p class="meta">Planning example: 24+ months</p>
+      <button class="button button-outline button-small" onclick="showDetails('Transmedia Ecosystem Director','Study narrative design, audience research, editorial systems, intellectual-property permissions, and channel measurement. Build a sample cross-platform campaign with a consistent narrative and distinct platform adaptations.')">View pathway</button>
+    </article>
+
+    <article class="card atlas-card searchable-card" data-domain="community" data-level="entry" data-search="community regional mobilization lead stakeholders workshops outreach events">
+      <span class="card-tag">Community · Entry</span>
+      <h3>Regional Mobilization Lead</h3>
+      <p>Organize outreach, coordinate local stakeholders, and create reliable feedback channels.</p>
+      <p class="meta">Planning example: 3–6 months</p>
+      <button class="button button-outline button-small" onclick="showDetails('Regional Mobilization Lead','Practice event planning, stakeholder communication, outreach tracking, and feedback collection. Produce a sample event plan, outreach calendar, and post-event evaluation.')">View pathway</button>
+    </article>
+
+    <article class="card atlas-card searchable-card" data-domain="tech" data-level="master" data-search="technology algorithmic systems architect software testing pipelines data structures">
+      <span class="card-tag">Tech · Architect</span>
+      <h3>Algorithmic Systems Architect</h3>
+      <p>Design dependable software workflows, integration patterns, tests, and data-driven decision systems.</p>
+      <p class="meta">Planning example: 18–24 months</p>
+      <button class="button button-outline button-small" onclick="showDetails('Algorithmic Systems Architect','Develop programming fundamentals, data structures, API design, databases, testing, security, and deployment knowledge. Build a documented application with automated tests, a system diagram, and failure-handling rules.')">View pathway</button>
+    </article>
+
+    <article class="card atlas-card searchable-card" data-domain="business" data-level="entry" data-search="business operations data analyst KPI SQL reporting trends entry">
+      <span class="card-tag">Business · Entry</span>
+      <h3>Operations Data Analyst</h3>
+      <p>Turn operational records into useful reports, indicators, and evidence-based recommendations.</p>
+      <p class="meta">Planning example: 3–6 months</p>
+      <button class="button button-outline button-small" onclick="showDetails('Operations Data Analyst','Practice spreadsheets, data cleaning, descriptive statistics, visualization, and SQL basics. Create a sample dashboard with clearly defined metrics, source notes, and recommendations.')">View pathway</button>
+    </article>
+
+    <article class="card atlas-card searchable-card" data-domain="tech" data-level="entry" data-search="technology web developer coding HTML CSS JavaScript portfolio">
+      <span class="card-tag">Tech · Entry</span>
+      <h3>Web Development Builder</h3>
+      <p>Create accessible websites, interactive interfaces, and practical tools for real users.</p>
+      <p class="meta">Planning example: ongoing project-based learning</p>
+      <button class="button button-outline button-small" onclick="showDetails('Web Development Builder','Learn HTML, CSS, JavaScript, responsive design, accessibility, Git, debugging, and basic testing. Build and publish small projects with clear instructions and a record of what each project demonstrates.')">View pathway</button>
+    </article>
+
+    <article class="card atlas-card searchable-card" data-domain="business" data-level="advanced" data-search="business small business operations automation service design process improvement">
+      <span class="card-tag">Business · Advanced</span>
+      <h3>Business Process Designer</h3>
+      <p>Find operational bottlenecks and design better service, workflow, and quality-control systems.</p>
+      <p class="meta">Planning example: 6–12 months</p>
+      <button class="button button-outline button-small" onclick="showDetails('Business Process Designer','Map the current process, gather user requirements, measure delays or errors, propose a change, and test it on a small scale. Document cost, benefit, risks, and maintenance needs.')">View pathway</button>
+    </article>
+
+    <article class="card atlas-card searchable-card" data-domain="creative" data-level="entry" data-search="creative media content designer visual communication digital products">
+      <span class="card-tag">Creative · Entry</span>
+      <h3>Digital Content Designer</h3>
+      <p>Translate information into useful visual resources, digital products, and learning materials.</p>
+      <p class="meta">Planning example: 3–6 months</p>
+      <button class="button button-outline button-small" onclick="showDetails('Digital Content Designer','Practice audience research, information hierarchy, visual consistency, accessible layouts, and usability checks. Produce a small set of related resources and explain the problem each one solves.')">View pathway</button>
+    </article>
+  </div>
+</section>
+
+<!-- CODED SYSTEMS -->
+<section class="section searchable-section" id="coded">
+  <div class="section-heading">
+    <span class="section-kicker">Section 04 · Coded Systems</span>
+    <h2>Logic-Driven Pathway Unlocker</h2>
+    <p>Select the competencies you currently have and use the results to choose a sensible next learning project. This is a planning aid, not a formal skills assessment.</p>
+  </div>
+
+  <div class="dark-panel">
+    <div style="display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;align-items:center">
+      <div>
+        <span class="section-kicker">PATHKEEPER_CODED_V3</span>
+        <h2 style="margin:8px 0">Your Technical System Map</h2>
+        <p style="margin:0">Select the skills you can currently demonstrate.</p>
+      </div>
+      <div style="border:1px solid #40536A;padding:13px 17px;border-radius:12px">
+        <span style="font-size:.7rem;display:block">SELECTED SKILLS</span>
+        <strong id="skillCount" style="font-size:1.5rem;color:var(--gold)">0 / 4</strong>
+      </div>
+    </div>
+
+    <div class="skill-options">
+      <label class="skill-option"><input type="checkbox" class="skill-check" value="scripting" onchange="recalculateSkills()"> Scripting & logic</label>
+      <label class="skill-option"><input type="checkbox" class="skill-check" value="api" onchange="recalculateSkills()"> API integrations</label>
+      <label class="skill-option"><input type="checkbox" class="skill-check" value="database" onchange="recalculateSkills()"> Database concepts</label>
+      <label class="skill-option"><input type="checkbox" class="skill-check" value="automation" onchange="recalculateSkills()"> Testing & automation</label>
+    </div>
+
+    <div class="grid grid-2" id="moduleGrid">
+      <article class="card module locked" data-requires="scripting automation">
+        <span class="module-status">NOT YET SELECTED</span>
+        <h3>01 · Automated Workflows</h3>
+        <p>Build a repeatable process with clear inputs, outputs, validation, and error handling.</p>
+      </article>
+      <article class="card module locked" data-requires="database scripting">
+        <span class="module-status">NOT YET SELECTED</span>
+        <h3>02 · Structured Knowledge Systems</h3>
+        <p>Organize data so it can be searched, checked, updated, and reused reliably.</p>
+      </article>
+      <article class="card module locked" data-requires="api scripting">
+        <span class="module-status">NOT YET SELECTED</span>
+        <h3>03 · API Integration</h3>
+        <p>Connect software services while handling authentication, response validation, and failures.</p>
+      </article>
+      <article class="card module locked" data-requires="automation database">
+        <span class="module-status">NOT YET SELECTED</span>
+        <h3>04 · Decision Pipelines</h3>
+        <p>Combine data, rules, and tests to produce explainable recommendations.</p>
+      </article>
+    </div>
+    <p id="skillAdvice" aria-live="polite" style="margin-top:18px">Select a competency to see which learning modules it supports.</p>
+  </div>
+</section>
+
+<!-- STRATEGIC OPERATING MODEL -->
+<section class="section searchable-section" id="operating-model">
+  <div class="section-heading">
+    <span class="section-kicker">Section 05 · Operating Model</span>
+    <h2>The Strategic Operating Model</h2>
+    <p>Use this six-stage cycle for a career decision, a business idea, a technical project, or a new opportunity.</p>
+  </div>
+
+  <div class="model-steps">
+    <div class="model-step"><span>01</span><strong>Observe</strong><p style="font-size:.75rem">Gather signals.</p></div>
+    <div class="model-step"><span>02</span><strong>Question</strong><p style="font-size:.75rem">Challenge assumptions.</p></div>
+    <div class="model-step"><span>03</span><strong>Map</strong><p style="font-size:.75rem">Identify causes and options.</p></div>
+    <div class="model-step"><span>04</span><strong>Test</strong><p style="font-size:.75rem">Run a small experiment.</p></div>
+    <div class="model-step"><span>05</span><strong>Measure</strong><p style="font-size:.75rem">Review the evidence.</p></div>
+    <div class="model-step"><span>06</span><strong>Adapt</strong><p style="font-size:.75rem">Improve the next action.</p></div>
+  </div>
+
+  <h3 style="color:var(--navy);margin-top:28px">Before making a major move</h3>
+  <div class="grid grid-3">
+    <div class="decision-item"><strong>Leverage</strong><p>What small action could create several useful effects?</p></div>
+    <div class="decision-item"><strong>Evidence</strong><p>What do I know, and what am I assuming?</p></div>
+    <div class="decision-item"><strong>Downside</strong><p>What happens if the decision fails?</p></div>
+    <div class="decision-item"><strong>Reversibility</strong><p>Can I test the idea before fully committing?</p></div>
+    <div class="decision-item"><strong>Opportunity cost</strong><p>What am I giving up by choosing this?</p></div>
+    <div class="decision-item"><strong>Next experiment</strong><p>What is the smallest useful test I can run?</p></div>
+  </div>
+  <button class="button button-brown" style="margin-top:18px" onclick="addPack('Strategic Decision Review')">Add decision review to my pack</button>
+</section>
+
+<!-- DECISION PLANNER -->
+<section class="section searchable-section" id="planner">
+  <div class="section-heading">
+    <span class="section-kicker">Section 06 · Action Planning</span>
+    <h2>Turn a Strategic Question Into an Action Plan</h2>
+    <p>Write down the decision, what you know, the main uncertainty, and a small experiment. Generate a plan you can save.</p>
+  </div>
+
+  <div class="card">
+    <form id="planForm" onsubmit="generatePlan(event)">
+      <div class="form-grid">
+        <div class="field">
+          <label for="planGoal">Goal or problem</label>
+          <input id="planGoal" required placeholder="Example: Build a portfolio project">
+        </div>
+        <div class="field">
+          <label for="planArea">Focus area</label>
+          <select id="planArea">
+            <option>Career</option><option>Technology</option><option>Business</option>
+            <option>Personal strategy</option><option>Education</option><option>Research</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="planEvidence">What do you already know?</label>
+          <textarea id="planEvidence" rows="3" placeholder="Facts, resources, existing skills, constraints..."></textarea>
+        </div>
+        <div class="field">
+          <label for="planUnknown">What remains uncertain?</label>
+          <textarea id="planUnknown" rows="3" placeholder="Missing information, risks, assumptions..."></textarea>
+        </div>
+        <div class="field">
+          <label for="planExperiment">Smallest useful experiment</label>
+          <textarea id="planExperiment" rows="3" placeholder="A test you can complete before making a larger commitment"></textarea>
+        </div>
+        <div class="field">
+          <label for="planFallback">Backup plan</label>
+          <textarea id="planFallback" rows="3" placeholder="What will you try if the first approach fails?"></textarea>
+        </div>
+      </div>
+      <button class="button button-primary" type="submit">Generate Strategy & Backup Plan</button>
+    </form>
+    <div id="generatedPlan" class="result-box hidden" aria-live="polite">
+      <h3>Your Strategy & Backup Plan</h3>
+      <div id="planOutput"></div>
+      <div class="card-actions">
+        <button class="button button-brown" onclick="downloadPlan()">Download Plan (.txt)</button>
+        <button class="button button-outline" onclick="addPlanToPack()">Add Plan to My Pack</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESOURCES -->
+<section class="section searchable-section" id="resources">
+  <div class="section-heading">
+    <span class="section-kicker">Section 07 · Opportunity Pack</span>
+    <h2>Build Your Resource Pack</h2>
+    <p>Select useful planning resources. The pack builder generates a downloadable checklist of your selections; it does not pretend to provide files that have not been created.</p>
+  </div>
+
+  <div class="grid grid-3">
+    <article class="card searchable-card" data-search="career strategy blueprint value audit milestone portfolio interview career">
+      <div class="card-icon">▤</div>
+      <h3>Career Strategy Blueprint</h3>
+      <p>Organize target roles, skill gaps, evidence, milestones, and the next career action.</p>
+      <ul class="resource-list"><li>Value and skill audit</li><li>Project evidence checklist</li><li>Milestone tracker</li></ul>
+      <button class="button button-outline" onclick="addPack('Career Strategy Blueprint')">Add to pack</button>
+    </article>
+
+    <article class="card searchable-card" data-search="automation workflow starter pack process scripts testing API system">
+      <div class="card-icon">⚙</div>
+      <h3>Automation & Workflow Pack</h3>
+      <p>Plan a repeatable workflow before building or automating it.</p>
+      <ul class="resource-list"><li>Workflow mapping</li><li>Input and output checks</li><li>Error-handling checklist</li></ul>
+      <button class="button button-outline" onclick="addPack('Automation & Workflow Pack')">Add to pack</button>
+    </article>
+
+    <article class="card searchable-card" data-search="opportunity extension strategy guide partnerships market expansion governance">
+      <div class="card-icon">⌖</div>
+      <h3>Opportunity Extension Guide</h3>
+      <p>Evaluate expansion, partnerships, and opportunities that cross traditional boundaries.</p>
+      <ul class="resource-list"><li>Opportunity comparison</li><li>Partnership questions</li><li>Risk and reversibility check</li></ul>
+      <button class="button button-outline" onclick="addPack('Opportunity Extension Guide')">Add to pack</button>
+    </article>
+
+    <article class="card searchable-card" data-search="research source quality information filtering evidence assumptions">
+      <div class="card-icon">⌕</div>
+      <h3>Research Quality Checklist</h3>
+      <p>Separate facts, estimates, assumptions, and unverified claims before making decisions.</p>
+      <ul class="resource-list"><li>Source reliability</li><li>Claim verification</li><li>Evidence gaps</li></ul>
+      <button class="button button-outline" onclick="addPack('Research Quality Checklist')">Add to pack</button>
+    </article>
+
+    <article class="card searchable-card" data-search="leverage point audit decision opportunity cost risk experiment">
+      <div class="card-icon">↗</div>
+      <h3>Leverage Point Audit</h3>
+      <p>Identify the bottleneck or decision that could improve multiple downstream outcomes.</p>
+      <ul class="resource-list"><li>Root-cause questions</li><li>Downside assessment</li><li>Small-test planner</li></ul>
+      <button class="button button-outline" onclick="addPack('Leverage Point Audit')">Add to pack</button>
+    </article>
+
+    <article class="card searchable-card" data-search="skill evidence portfolio project proof of work documentation">
+      <div class="card-icon">✓</div>
+      <h3>Proof-of-Work Checklist</h3>
+      <p>Make a project easier to evaluate by recording what was built and what it demonstrates.</p>
+      <ul class="resource-list"><li>Project purpose</li><li>Evidence and screenshots</li><li>Limitations and next steps</li></ul>
+      <button class="button button-outline" onclick="addPack('Proof-of-Work Checklist')">Add to pack</button>
+    </article>
+  </div>
+
+  <div class="callout">
+    <strong>Resource note:</strong> These buttons assemble a downloadable list of selected resources and any generated plan. They do not represent existing PDFs, scripts, or templates unless you create and link those actual files separately.
+  </div>
+  <button class="button button-primary" onclick="openPack()">Review and Download My Pack</button>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <strong style="font-size:1.1rem;color:white">PathKeeper</strong>
+      <p>Strategic intelligence, opportunity discovery, career pathways, and practical systems for action.</p>
+    </div>
+    <div>
+      <strong style="color:white">Explore</strong>
+      <p><a href="#strategy">Strategic Intelligence</a> · <a href="#atlas">Opportunity Atlas</a> · <a href="#coded">Coded Systems</a></p>
+      <p><a href="#planner">Action Planner</a> · <a href="#resources">Resource Pack</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- PATH WIZARD -->
+<div id="wizardModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="wizardTitle" onclick="backdropClose(event,'wizardModal')">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <span class="section-kicker">PathKeeper tool</span>
+        <h2 id="wizardTitle">Opportunity Path Wizard</h2>
+        <p>Choose a focus and experience stage to get a suggested starting route.</p>
+      </div>
+      <button class="modal-close" aria-label="Close wizard" onclick="closeWizard()">×</button>
+    </div>
+    <div class="field">
+      <label for="wizardGoal">Primary focus</label>
+      <select id="wizardGoal">
+        <option value="career">Career development</option>
+        <option value="coded">Technical systems and automation</option>
+        <option value="business">Business and market strategy</option>
+        <option value="research">Research and decision intelligence</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="wizardStage">Current experience stage</label>
+      <select id="wizardStage">
+        <option value="entry">Foundation / starting out</option>
+        <option value="advanced">Some experience</option>
+        <option value="master">Experienced / leading systems</option>
+      </select>
+    </div>
+    <button class="button button-primary" onclick="calculatePath()">Calculate my starting path</button>
+    <div id="wizardResult" class="result-box hidden" aria-live="polite">
+      <h3 id="wizardResultTitle"></h3>
+      <p id="wizardResultDesc"></p>
+      <button class="button button-brown" onclick="addWizardPath()">Add recommendation to pack</button>
+    </div>
+  </div>
+</div>
+
+<!-- PATHWAY DETAILS -->
+<div id="detailsModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="detailsTitle" onclick="backdropClose(event,'detailsModal')">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="detailsTitle">Pathway details</h2>
+      <button class="modal-close" aria-label="Close details" onclick="closeDetails()">×</button>
+    </div>
+    <p id="detailsBody"></p>
+    <button class="button button-primary" onclick="closeDetails()">Close</button>
+  </div>
+</div>
+
+<!-- RESOURCE PACK -->
+<div id="packModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="packTitle" onclick="backdropClose(event,'packModal')">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <span class="section-kicker">Your selections</span>
+        <h2 id="packTitle">My Opportunity Pack</h2>
+      </div>
+      <button class="modal-close" aria-label="Close pack" onclick="closePack()">×</button>
+    </div>
+    <p>Review the selected items below. Downloading creates a text file with the item names and practical guidance.</p>
+    <ul id="packItems" class="pack-list"></ul>
+    <p id="emptyPack" class="hidden">Your pack is empty. Add resources from the page first.</p>
+    <div class="card-actions">
+      <button class="button button-brown" onclick="downloadPack()">Download My Pack (.txt)</button>
+      <button class="button button-outline" onclick="clearPack()">Clear pack</button>
+    </div>
+    <p id="packStatus" class="result-count" aria-live="polite"></p>
+  </div>
+</div>
+
+<script>
+"use strict";
+
+const selectedPackItems = [];
+let latestPlanText = "";
+let latestWizardPath = "";
+let activeDomain = "all";
+
+const strategyQuestions = {
+  leverage: "Map the workflow or problem. Identify the bottleneck, the decision that influences the most outcomes, and one small change you can safely test.",
+  overlooked: "List assumptions, missing stakeholders, hidden costs, dependencies, maintenance requirements, and evidence that could contradict your current view.",
+  obsolete: "Identify which tasks, tools, skills, or assumptions depend on conditions that may change. Look for transferable skills and low-cost ways to test alternatives.",
+  build: "Start with a specific user and problem. Define a small useful result, the evidence that would validate it, and the minimum version you can test.",
+  stop: "Review activities that consume resources without producing meaningful progress. Pause or reduce one low-value activity and measure what changes."
+};
+
+function switchTab(panelId, button) {
+  document.querySelectorAll("#core-pathways .tab-panel").forEach(panel => panel.classList.add("hidden"));
+  document.querySelectorAll("#core-pathways .tab-button").forEach(btn => {
+    btn.classList.remove("active");
+    btn.setAttribute("aria-selected", "false");
+  });
+  document.getElementById(panelId).classList.remove("hidden");
+  button.classList.add("active");
+  button.setAttribute("aria-selected", "true");
+}
+
+function filterStrategy() {
+  const focus = document.getElementById("strategyFocus").value;
+  document.querySelectorAll("#strategyGrid .searchable-card").forEach(card => {
+    const matchesFocus = focus === "all" || card.dataset.focus === focus;
+    const matchesSearch = matchesGlobalSearch(card);
+    card.classList.toggle("hidden", !(matchesFocus && matchesSearch));
+  });
+}
+
+function showStrategicQuestion() {
+  const value = document.getElementById("strategyQuestion").value;
+  const box = document.getElementById("questionResult");
+  if (!value) {
+    box.classList.add("hidden");
+    box.textContent = "";
+    return;
+  }
+  box.textContent = strategyQuestions[value] || "";
+  box.classList.remove("hidden");
+}
+
+function setDomain(domain, button) {
+  activeDomain = domain;
+  document.querySelectorAll("#domainButtons .filter-button").forEach(btn => btn.classList.remove("active"));
+  button.classList.add("active");
+  filterAtlas();
+}
+
+function filterAtlas() {
+  const level = document.getElementById("atlasLevel").value;
+  let visible = 0;
+  document.querySelectorAll(".atlas-card").forEach(card => {
+    const matchesDomain = activeDomain === "all" || card.dataset.domain === activeDomain;
+    const matchesLevel = level === "all" || card.dataset.level === level;
+    const matchesSearch = matchesGlobalSearch(card);
+    const show = matchesDomain && matchesLevel && matchesSearch;
+    card.classList.toggle("hidden", !show);
+    if (show) visible++;
+  });
+  document.getElementById("atlasCount").textContent = visible + " pathway(s) match your filters.";
+}
+
+function matchesGlobalSearch(element) {
+  const query = document.getElementById("globalSearch").value.trim().toLowerCase();
+  if (!query) return true;
+  return (element.innerText + " " + (element.dataset.search || "")).toLowerCase().includes(query);
+}
+
+function applyGlobalSearch() {
+  filterStrategy();
+  filterAtlas();
+
+  document.querySelectorAll(".searchable-card").forEach(card => {
+    if (card.closest("#strategyGrid") || card.classList.contains("atlas-card")) return;
+    card.classList.toggle("hidden", !matchesGlobalSearch(card));
+  });
+
+  document.querySelectorAll(".searchable-section").forEach(section => {
+    const cards = section.querySelectorAll(".searchable-card");
+    if (!cards.length) {
+      section.classList.toggle("hidden", !matchesGlobalSearch(section));
+      return;
+    }
+    const anyVisible = Array.from(cards).some(card => !card.classList.contains("hidden"));
+    section.classList.toggle("hidden", !anyVisible);
+  });
+
+  const query = document.getElementById("globalSearch").value.trim();
+  document.getElementById("searchStatus").textContent = query
+    ? 'Filtering content for "' + query + '". Use Clear search to restore everything.'
+    : "Showing all available content.";
+}
+
+function quickSearch(term) {
+  document.getElementById("globalSearch").value = term;
+  applyGlobalSearch();
+  document.getElementById("home").scrollIntoView({ behavior: "smooth" });
+}
+
+function clearSearch() {
+  document.getElementById("globalSearch").value = "";
+  applyGlobalSearch();
+}
+
+function recalculateSkills() {
+  const selected = Array.from(document.querySelectorAll(".skill-check:checked")).map(input => input.value);
+  document.getElementById("skillCount").textContent = selected.length + " / 4";
+
+  document.querySelectorAll(".module").forEach(module => {
+    const required = module.dataset.requires.split(" ");
+    const unlocked = required.every(skill => selected.includes(skill));
+    module.classList.toggle("unlocked", unlocked);
+    module.classList.toggle("locked", !unlocked);
+    module.querySelector(".module-status").textContent = unlocked ? "READY TO EXPLORE" : "MORE SKILLS NEEDED";
+  });
+
+  const advice = selected.length === 0
+    ? "Start by selecting a skill you can demonstrate. If you are new to all four areas, begin with scripting and logic fundamentals."
+    : selected.length === 4
+      ? "All four competencies are selected. Consider a small integrated project with validation, error handling, documentation, and tests."
+      : "Your next step is to build a small project that combines " + selected.join(", ") + ". Add a test and document what works and what remains incomplete.";
+
+  document.getElementById("skillAdvice").textContent = advice;
+}
+
+function openWizard() {
+  document.getElementById("wizardModal").classList.remove("hidden");
+}
+function closeWizard() {
+  document.getElementById("wizardModal").classList.add("hidden");
+}
+function calculatePath() {
+  const goal = document.getElementById("wizardGoal").value;
+  const stage = document.getElementById("wizardStage").value;
+
+  const routes = {
+    career: {
+      entry: ["Career Foundation & Evidence Path", "Identify a target role, compare its requirements with your current skills, and create one small project or work sample that demonstrates a needed capability."],
+      advanced: ["Career Scaling & Project Ownership", "Choose a skill gap that limits progress, own a measurable project, and document the outcome to strengthen your portfolio or promotion case."],
+      master: ["Leadership & Strategic Influence", "Improve a team-level system, clarify decision rights, and document how your changes affect quality, time, cost, or reliability."]
+    },
+    coded: {
+      entry: ["Coding Fundamentals & Small Projects", "Start with HTML, CSS, JavaScript, data structures, and debugging. Build small working tools before adding complex automation."],
+      advanced: ["Software Integration & Testing", "Connect components through clear interfaces. Add input validation, error handling, tests, and documentation."],
+      master: ["Systems Architecture & Reliability", "Design system boundaries, data flows, security assumptions, monitoring, and recovery paths. Validate architecture through prototypes."]
+    },
+    business: {
+      entry: ["Business Research & Customer Problems", "Choose a specific customer problem. Interview or research potential users, compare alternatives, and test demand before spending heavily."],
+      advanced: ["Operations & Market Strategy", "Analyze customer needs, unit economics, workflow bottlenecks, and regional differences. Test one improvement with a defined measure."],
+      master: ["Business Systems & Expansion", "Assess strategic fit, risk, operating capacity, and partnerships. Expand in stages with clear success and stop conditions."]
+    },
+    research: {
+      entry: ["Research Fundamentals", "Define one question, gather credible sources, record claims and dates, and separate facts from assumptions."],
+      advanced: ["Evidence Synthesis & Decision Analysis", "Compare sources, identify disagreement, estimate uncertainty, and explain how the evidence changes your decision."],
+      master: ["Strategic Intelligence Architecture", "Build a repeatable research process with source standards, review checkpoints, decision records, and feedback from outcomes."]
+    }
+  };
+
+  const route = routes[goal][stage];
+  latestWizardPath = route[0];
+  document.getElementById("wizardResultTitle").textContent = route[0];
+  document.getElementById("wizardResultDesc").textContent = route[1];
+  document.getElementById("wizardResult").classList.remove("hidden");
+}
+function addWizardPath() {
+  if (latestWizardPath) {
+    addPack(latestWizardPath);
+    document.getElementById("wizardResultDesc").textContent += " Recommendation added to your pack.";
+  }
+}
+
+function showDetails(title, body) {
+  document.getElementById("detailsTitle").textContent = title;
+  document.getElementById("detailsBody").textContent = body;
+  document.getElementById("detailsModal").classList.remove("hidden");
+}
+function closeDetails() {
+  document.getElementById("detailsModal").classList.add("hidden");
+}
+
+function addPack(name) {
+  if (!selectedPackItems.includes(name)) selectedPackItems.push(name);
+  updatePackUI();
+}
+function removePack(name) {
+  const index = selectedPackItems.indexOf(name);
+  if (index !== -1) selectedPackItems.splice(index, 1);
+  updatePackUI();
+}
+function clearPack() {
+  selectedPackItems.length = 0;
+  updatePackUI();
+  document.getElementById("packStatus").textContent = "Your pack has been cleared.";
+}
+function updatePackUI() {
+  document.getElementById("packCount").textContent = selectedPackItems.length;
+  const list = document.getElementById("packItems");
+  list.replaceChildren();
+  document.getElementById("emptyPack").classList.toggle("hidden", selectedPackItems.length > 0);
+
+  selectedPackItems.forEach(name => {
+    const li = document.createElement("li");
+    const span = document.createElement("span");
+    span.textContent = name;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.textContent = "Remove";
+    button.addEventListener("click", () => removePack(name));
+    li.append(span, button);
+    list.appendChild(li);
+  });
+}
+function openPack() {
+  updatePackUI();
+  document.getElementById("packModal").classList.remove("hidden");
+}
+function closePack() {
+  document.getElementById("packModal").classList.add("hidden");
+}
+
+function downloadText(filename, text) {
+  const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+}
+
+function downloadPack() {
+  if (selectedPackItems.length === 0) {
+    document.getElementById("packStatus").textContent = "Add at least one resource before downloading.";
+    return;
+  }
+
+  const content = [
+    "PATHKEEPER OPPORTUNITY PACK",
+    "Generated: " + new Date().toLocaleString(),
+    "",
+    "SELECTED RESOURCES",
+    ...selectedPackItems.map((item, index) => (index + 1) + ". " + item),
+    "",
+    "HOW TO USE THIS PACK",
+    "1. Choose one resource that matches your current goal.",
+    "2. Define a result you can observe or inspect.",
+    "3. Record your evidence, assumptions, risks, and next action.",
+    "4. Review the result and adjust your plan.",
+    "",
+    latestPlanText ? "LATEST STRATEGY & BACKUP PLAN\n" + latestPlanText : "No strategy plan has been generated yet.",
+    "",
+    "Note: This file lists selected resources and guidance. It does not contain separate PDF files or software templates unless those are provided independently."
+  ].join("\n");
+
+  downloadText("pathkeeper-opportunity-pack.txt", content);
+  document.getElementById("packStatus").textContent = "Your text pack has been prepared.";
+}
+
+function generatePlan(event) {
+  event.preventDefault();
+
+  const goal = document.getElementById("planGoal").value.trim();
+  const area = document.getElementById("planArea").value;
+  const evidence = document.getElementById("planEvidence").value.trim() || "Not yet documented. Gather the relevant facts and existing resources.";
+  const unknown = document.getElementById("planUnknown").value.trim() || "List the main assumptions and verify the most important one.";
+  const experiment = document.getElementById("planExperiment").value.trim() || "Run the smallest low-risk test that can produce useful evidence.";
+  const fallback = document.getElementById("planFallback").value.trim() || "Reduce the scope, choose a lower-cost alternative, and reassess using what the first test taught you.";
+
+  latestPlanText = [
+    "GOAL: " + goal,
+    "FOCUS AREA: " + area,
+    "",
+    "STRATEGY",
+    "1. Define the desired outcome and how you will recognize progress.",
+    "2. Review current evidence: " + evidence,
+    "3. Investigate uncertainty: " + unknown,
+    "4. Run the experiment: " + experiment,
+    "5. Record results, costs, time, quality, and unexpected effects.",
+    "",
+    "BACKUP PLAN",
+    fallback,
+    "",
+    "REVIEW CHECKPOINT",
+    "After the experiment, decide whether to continue, revise, or stop. Do not treat an untested assumption as a proven result."
+  ].join("\n");
+
+  const output = document.getElementById("planOutput");
+  output.replaceChildren();
+  latestPlanText.split("\n").forEach(line => {
+    const p = document.createElement("p");
+    p.style.margin = "6px 0";
+    p.textContent = line;
+    output.appendChild(p);
+  });
+  document.getElementById("generatedPlan").classList.remove("hidden");
+}
+
+function downloadPlan() {
+  if (!latestPlanText) return;
+  downloadText("pathkeeper-strategy-backup-plan.txt", latestPlanText);
+}
+function addPlanToPack() {
+  if (!latestPlanText) return;
+  addPack("Generated Strategy & Backup Plan");
+  document.getElementById("planOutput").insertAdjacentText("beforeend", "\nPlan added to your resource pack.");
+}
+
+function backdropClose(event, modalId) {
+  if (event.target.id === modalId) {
+    document.getElementById(modalId).classList.add("hidden");
+  }
+}
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    ["wizardModal", "detailsModal", "packModal"].forEach(id => {
+      document.getElementById(id).classList.add("hidden");
+    });
+  }
+});
+
+updatePackUI();
+recalculateSkills();
+filterAtlas();
+</script>
+</body>
+</html>
