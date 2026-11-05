@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geopolitical Intelligence Center</title>
+
+<style>
+
+/* =========================
+   DESIGN SYSTEM
+========================= */
+
+:root{
+--green:#143226;
+--green-dark:#0d2119;
+--green-light:#204737;
+--green-card:#1c3d2f;
+--green-soft:#294f3d;
+--cream:#F4EEE2;
+--cream-dark:#d9d0c2;
+--gold:#C4A06D;
+--gold-light:#ddbc8a;
+--gold-dark:#9f7c4d;
+--white:#ffffff;
+--signal-low:#8bbf8b;
+--signal-watch:#d8c36a;
+--signal-high:#d99b5f;
+--signal-critical:#d86b63;
+}
+
+/* =========================
+   RESET
+========================= */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:Inter,Arial,sans-serif;
+background:var(--green);
+color:var(--cream);
+line-height:1.7;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+padding:110px 30px;
+text-align:center;
+background:
+linear-gradient(
+rgba(20,50,38,.82),
+rgba(13,33,25,.96)
+),
+url("https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=1800&q=80");
+background-size:cover;
+background-position:center;
+border-bottom:3px solid var(--gold);
+}
+
+.hero h1{
+font-size:clamp(2.7rem,6vw,4.5rem);
+margin-bottom:20px;
+color:var(--white);
+line-height:1.15;
+}
+
+.hero p{
+max-width:850px;
+margin:auto;
+font-size:1.15rem;
+opacity:.95;
+}
+
+.hero-buttons{
+margin-top:35px;
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn{
+display:inline-block;
+padding:14px 28px;
+text-decoration:none;
+border-radius:10px;
+font-weight:700;
+transition:.3s;
+}
+
+.btn-primary{
+background:var(--gold);
+color:#111;
+}
+
+.btn-primary:hover{
+background:var(--gold-light);
+transform:translateY(-2px);
+}
+
+.btn-secondary{
+border:1px solid var(--gold);
+color:var(--cream);
+}
+
+.btn-secondary:hover{
+background:rgba(255,255,255,.08);
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container{
+max-width:1400px;
+margin:auto;
+padding:70px 25px;
+}
+
+/* =========================
+   SECTION TITLES
+========================= */
+
+.section-title{
+font-size:clamp(1.7rem,3vw,2.2rem);
+margin-bottom:15px;
+color:var(--gold-light);
+border-left:5px solid var(--gold);
+padding-left:15px;
+}
+
+.section-intro{
+max-width:850px;
+margin-bottom:35px;
+color:var(--cream-dark);
+}
+
+/* =========================
+   RANGE LEGEND
+========================= */
+
+.range-legend{
+display:flex;
+flex-wrap:wrap;
+gap:12px;
+margin-bottom:30px;
+padding:18px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.08);
+border-radius:14px;
+}
+
+.legend-item{
+display:flex;
+align-items:center;
+gap:8px;
+font-size:.85rem;
+}
+
+.legend-dot{
+width:11px;
+height:11px;
+border-radius:50%;
+}
+
+.low{
+background:var(--signal-low);
+}
+
+.watch{
+background:var(--signal-watch);
+}
+
+.high{
+background:var(--signal-high);
+}
+
+.critical{
+background:var(--signal-critical);
+}
+
+/* =========================
+   DASHBOARD
+========================= */
+
+.dashboard-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
+margin-bottom:35px;
+}
+
+.intel-card{
+background:var(--green-card);
+padding:28px;
+border-radius:18px;
+border:1px solid rgba(255,255,255,.08);
+position:relative;
+overflow:hidden;
+transition:.3s;
+}
+
+.intel-card:hover{
+transform:translateY(-6px);
+border-color:var(--gold);
+}
+
+.intel-card::after{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:3px;
+background:var(--gold);
+}
+
+.intel-card h3{
+margin-bottom:10px;
+color:var(--gold-light);
+}
+
+.score-row{
+display:flex;
+justify-content:space-between;
+align-items:end;
+margin-bottom:15px;
+}
+
+.score{
+font-size:3.3rem;
+font-weight:900;
+color:var(--gold);
+line-height:1;
+}
+
+.signal-status{
+font-size:.72rem;
+font-weight:800;
+padding:5px 9px;
+border-radius:20px;
+text-transform:uppercase;
+letter-spacing:1px;
+}
+
+.status-watch{
+background:rgba(216,195,106,.16);
+color:var(--signal-watch);
+}
+
+.status-high{
+background:rgba(217,155,95,.16);
+color:var(--signal-high);
+}
+
+.status-critical{
+background:rgba(216,107,99,.16);
+color:var(--signal-critical);
+}
+
+.intel-card p{
+font-size:.95rem;
+color:var(--cream-dark);
+}
+
+/* =========================
+   SCORE RANGE
+========================= */
+
+.score-range{
+margin:18px 0;
+}
+
+.range-track{
+height:8px;
+width:100%;
+background:#10271e;
+border-radius:20px;
+overflow:hidden;
+}
+
+.range-fill{
+height:100%;
+background:linear-gradient(
+90deg,
+var(--signal-low),
+var(--signal-watch),
+var(--signal-high),
+var(--signal-critical)
+);
+border-radius:20px;
+}
+
+.fill-64{
+width:64%;
+}
+
+.fill-78{
+width:78%;
+}
+
+.fill-91{
+width:91%;
+}
+
+.fill-95{
+width:95%;
+}
+
+.range-labels{
+display:flex;
+justify-content:space-between;
+font-size:.7rem;
+opacity:.65;
+margin-top:5px;
+}
+
+/* =========================
+   SIGNAL INTERPRETATION
+========================= */
+
+.signal-action{
+margin-top:15px;
+padding-top:15px;
+border-top:1px solid rgba(255,255,255,.08);
+}
+
+.signal-action strong{
+display:block;
+color:var(--gold-light);
+font-size:.82rem;
+margin-bottom:5px;
+}
+
+.signal-action span{
+font-size:.9rem;
+color:var(--cream-dark);
+}
+
+/* =========================
+   DASHBOARD INSTRUCTIONS
+========================= */
+
+.dashboard-guide{
+background:linear-gradient(135deg,#234737,#163429);
+padding:35px;
+border-radius:20px;
+margin-bottom:80px;
+border:1px solid rgba(196,160,109,.25);
+}
+
+.dashboard-guide h3{
+color:var(--gold-light);
+font-size:1.5rem;
+margin-bottom:12px;
+}
+
+.dashboard-guide > p{
+max-width:850px;
+margin-bottom:25px;
+color:var(--cream-dark);
+}
+
+.guide-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:18px;
+}
+
+.guide-step{
+background:rgba(0,0,0,.16);
+padding:22px;
+border-radius:14px;
+}
+
+.guide-number{
+width:35px;
+height:35px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:50%;
+background:var(--gold);
+color:#111;
+font-weight:900;
+margin-bottom:12px;
+}
+
+.guide-step h4{
+color:var(--cream);
+margin-bottom:8px;
+}
+
+.guide-step p{
+font-size:.9rem;
+color:var(--cream-dark);
+}
+
+/* =========================
+   STRATEGIC RESPONSE MATRIX
+========================= */
+
+.response-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:22px;
+margin-bottom:80px;
+}
+
+.response-card{
+background:var(--green-card);
+padding:25px;
+border-radius:18px;
+border:1px solid rgba(255,255,255,.08);
+}
+
+.response-card h3{
+color:var(--gold-light);
+margin-bottom:12px;
+}
+
+.response-card p{
+color:var(--cream-dark);
+margin-bottom:15px;
+}
+
+.response-card ul{
+padding-left:18px;
+color:var(--cream-dark);
+}
+
+.response-card li{
+margin-bottom:8px;
+}
+
+/* =========================
+   GRID
+========================= */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+margin-bottom:80px;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.card{
+background:var(--green-card);
+padding:25px;
+border-radius:18px;
+border:1px solid rgba(255,255,255,.08);
+transition:.35s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+border-color:var(--gold);
+}
+
+.card h3{
+margin-bottom:15px;
+color:var(--gold-light);
+}
+
+.card p{
+opacity:.9;
+}
+
+/* =========================
+   SIMULATION
+========================= */
+
+.simulation-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:25px;
+margin-bottom:80px;
+}
+
+.sim-card{
+background:var(--green-card);
+padding:30px;
+border-radius:18px;
+text-align:center;
+border:1px solid rgba(255,255,255,.08);
+}
+
+.sim-card h3{
+margin-bottom:15px;
+color:var(--gold-light);
+}
+
+/* =========================
+   THINKING QUESTIONS
+========================= */
+
+.questions{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:25px;
+margin-bottom:80px;
+}
+
+.question-box{
+background:linear-gradient(
+135deg,
+#234737,
+#163429
+);
+padding:30px;
+border-radius:18px;
+border-left:4px solid var(--gold);
+transition:.3s;
+}
+
+.question-box:hover{
+transform:translateY(-4px);
+}
+
+.question-box p{
+font-size:1.05rem;
+}
+
+/* =========================
+   FEED
+========================= */
+
+.feed{
+display:grid;
+gap:18px;
+margin-bottom:80px;
+}
+
+.feed-item{
+background:var(--green-card);
+padding:20px;
+border-radius:12px;
+border-left:4px solid var(--gold);
+}
+
+/* =========================
+   TIMELINE
+========================= */
+
+.timeline{
+display:grid;
+gap:25px;
+margin-bottom:80px;
+}
+
+.timeline-item{
+background:var(--green-card);
+padding:25px;
+border-radius:16px;
+position:relative;
+padding-left:40px;
+}
+
+.timeline-item::before{
+content:"";
+position:absolute;
+left:14px;
+top:30px;
+width:10px;
+height:10px;
+background:var(--gold);
+border-radius:50%;
+}
+
+/* =========================
+   PERSONAL STRATEGY
+========================= */
+
+.strategy-board{
+background:#10271e;
+padding:40px;
+border-radius:24px;
+margin-bottom:80px;
+border:1px solid rgba(196,160,109,.25);
+}
+
+.strategy-board h2{
+color:var(--gold-light);
+margin-bottom:12px;
+font-size:2rem;
+}
+
+.strategy-board > p{
+max-width:850px;
+color:var(--cream-dark);
+margin-bottom:30px;
+}
+
+.strategy-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+gap:18px;
+}
+
+.strategy-item{
+background:var(--green-card);
+padding:22px;
+border-radius:16px;
+}
+
+.strategy-item span{
+display:block;
+font-size:.75rem;
+letter-spacing:1.5px;
+font-weight:800;
+color:var(--gold);
+margin-bottom:8px;
+}
+
+.strategy-item h3{
+margin-bottom:10px;
+color:var(--cream);
+font-size:1.05rem;
+}
+
+.strategy-item p{
+font-size:.9rem;
+color:var(--cream-dark);
+}
+
+/* =========================
+   BRIDGE
+========================= */
+
+.bridge{
+text-align:center;
+background:linear-gradient(
+135deg,
+#234737,
+#173126
+);
+padding:70px 30px;
+border-radius:25px;
+margin-bottom:50px;
+}
+
+.bridge h2{
+font-size:clamp(1.8rem,4vw,2.5rem);
+margin-bottom:20px;
+color:var(--gold-light);
+}
+
+.bridge p{
+max-width:800px;
+margin:auto;
+margin-bottom:30px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+padding:40px;
+text-align:center;
+border-top:1px solid rgba(255,255,255,.08);
+opacity:.8;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:768px){
+
+.hero{
+padding:80px 20px;
+}
+
+.container{
+padding:50px 18px;
+}
+
+.dashboard-guide,
+.strategy-board{
+padding:25px;
+}
+
+.score{
+font-size:2.8rem;
+}
+
+.section-title{
+font-size:1.5rem;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<h1>Geopolitical Intelligence Center</h1>
+
+<p>
+Understand the large systems shaping opportunity, migration,
+technology competition, resource control, labor markets,
+infrastructure, and long-term economic power.
+</p>
+
+<div class="hero-buttons">
+
+<a href="#strategy" class="btn btn-primary">
+Build Personal Strategy
+</a>
+
+<a href="#dashboard" class="btn btn-secondary">
+Read Strategic Signals
+</a>
+
+</div>
+
+</section>
+
+<div class="container">
+
+<!-- DASHBOARD -->
+
+<section id="dashboard">
+
+<h2 class="section-title">Global Strategic Dashboard</h2>
+
+<p class="section-intro">
+These scores are not predictions and should not be treated as instructions
+by themselves. The purpose of the dashboard is to help users identify
+important signals, investigate what may be changing, and ask how those
+changes could affect their skills, career, business, location, or strategy.
+</p>
+
+<div class="range-legend">
+<div class="legend-item"><span class="legend-dot low"></span>0–39 Monitor</div>
+<div class="legend-item"><span class="legend-dot watch"></span>40–69 Watch</div>
+<div class="legend-item"><span class="legend-dot high"></span>70–89 High Signal</div>
+<div class="legend-item"><span class="legend-dot critical"></span>90–100 Major Strategic Signal</div>
+</div>
+
+<div class="dashboard-grid">
+
+<div class="intel-card">
+
+<h3>Population Shift Index</h3>
+
+<div class="score-row">
+<div class="score">78</div>
+<span class="signal-status status-high">High Signal</span>
+</div>
+
+<div class="score-range">
+<div class="range-track">
+<div class="range-fill fill-78"></div>
+</div>
+<div class="range-labels">
+<span>0</span>
+<span>25</span>
+<span>50</span>
+<span>75</span>
+<span>100</span>
+</div>
+</div>
+
+<p>Population shifts may affect labor availability, housing, migration, and demand for services.</p>
+
+<div class="signal-action">
+<strong>STRATEGIC QUESTION</strong>
+<span>Which industries could gain or lose from changing population structures?</span>
+</div>
+
+</div>
+
+<div class="intel-card">
+
+<h3>Water Security</h3>
+
+<div class="score-row">
+<div class="score">64</div>
+<span class="signal-status status-watch">Watch</span>
+</div>
+
+<div class="score-range">
+<div class="range-track">
+<div class="range-fill fill-64"></div>
+</div>
+<div class="range-labels">
+<span>0</span>
+<span>25</span>
+<span>50</span>
+<span>75</span>
+<span>100</span>
+</div>
+</div>
+
+<p>Water infrastructure and efficient resource management may become increasingly important.</p>
+
+<div class="signal-action">
+<strong>STRATEGIC QUESTION</strong>
+<span>What businesses, technologies, and careers solve resource-efficiency problems?</span>
+</div>
+
+</div>
+
+<div class="intel-card">
+
+<h3>Energy Transition</h3>
+
+<div class="score-row">
+<div class="score">91</div>
+<span class="signal-status status-critical">Major Signal</span>
+</div>
+
+<div class="score-range">
+<div class="range-track">
+<div class="range-fill fill-91"></div>
+</div>
+<div class="range-labels">
+<span>0</span>
+<span>25</span>
+<span>50</span>
+<span>75</span>
+<span>100</span>
+</div>
+</div>
+
+<p>Energy systems may influence infrastructure investment, manufacturing, transportation, and new industries.</p>
+
+<div class="signal-action">
+<strong>STRATEGIC QUESTION</strong>
+<span>Which skills support the industries building, maintaining, or improving future energy systems?</span>
+</div>
+
+</div>
+
+<div class="intel-card">
+
+<h3>AI Competition</h3>
+
+<div class="score-row">
+<div class="score">95</div>
+<span class="signal-status status-critical">Major Signal</span>
+</div>
+
+<div class="score-range">
+<div class="range-track">
+<div class="range-fill fill-95"></div>
+</div>
+<div class="range-labels">
+<span>0</span>
+<span>25</span>
+<span>50</span>
+<span>75</span>
+<span>100</span>
+</div>
+</div>
+
+<p>AI development may change productivity, job tasks, business models, and demand for technical capability.</p>
+
+<div class="signal-action">
+<strong>STRATEGIC QUESTION</strong>
+<span>Which parts of my current work could be improved, redesigned, or complemented by AI?</span>
+</div>
+
+</div>
+
+</div>
+
+<!-- HOW TO USE -->
+
+<div class="dashboard-guide">
+
+<h3>What Should You Do With This Information?</h3>
+
+<p>
+A dashboard should not simply make people aware of trends. The purpose is
+to move from signal to investigation and from investigation to a possible
+strategic response.
+</p>
+
+<div class="guide-grid">
+
+<div class="guide-step">
+<div class="guide-number">1</div>
+<h4>Notice the Signal</h4>
+<p>
+Identify trends that appear important enough to investigate rather than
+reacting to every headline.
+</p>
+</div>
+
+<div class="guide-step">
+<div class="guide-number">2</div>
+<h4>Ask Who Is Affected</h4>
+<p>
+Consider which industries, regions, careers, businesses, and communities
+could experience change.
+</p>
+</div>
+
+<div class="guide-step">
+<div class="guide-number">3</div>
+<h4>Find the Mechanism</h4>
+<p>
+Ask how the trend could actually create consequences. Look for causes,
+constraints, incentives, and dependencies.
+</p>
+</div>
+
+<div class="guide-step">
+<div class="guide-number">4</div>
+<h4>Choose a Response</h4>
+<p>
+Learn a skill, research an industry, build a project, monitor the trend,
+or prepare for possible changes.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- RESPONSE MATRIX -->
+
+<h2 class="section-title">Signal → Investigation → Response</h2>
+
+<p class="section-intro">
+The purpose of strategic intelligence is not to predict the future perfectly.
+It is to improve the quality of preparation.
+</p>
+
+<div class="response-grid">
+
+<div class="response-card">
+<h3>AI Signal</h3>
+<p>Rapid technological development may change how work is performed.</p>
+<ul>
+<li>Map tasks likely to change.</li>
+<li>Learn complementary skills.</li>
+<li>Experiment with AI tools.</li>
+<li>Build evidence of practical capability.</li>
+</ul>
+</div>
+
+<div class="response-card">
+<h3>Population Signal</h3>
+<p>Demographic changes may reshape demand and labor availability.</p>
+<ul>
+<li>Research growing populations.</li>
+<li>Study industries with changing demand.</li>
+<li>Track housing and labor trends.</li>
+<li>Look for underserved needs.</li>
+</ul>
+</div>
+
+<div class="response-card">
+<h3>Resource Signal</h3>
+<p>Scarcity or infrastructure pressure can create both risks and opportunities.</p>
+<ul>
+<li>Identify important dependencies.</li>
+<li>Study efficiency technologies.</li>
+<li>Monitor infrastructure investment.</li>
+<li>Research businesses solving the constraint.</li>
+</ul>
+</div>
+
+<div class="response-card">
+<h3>Economic Signal</h3>
+<p>Economic changes can alter costs, consumer behavior, and employment.</p>
+<ul>
+<li>Build adaptable skills.</li>
+<li>Reduce unnecessary dependencies.</li>
+<li>Strengthen multiple options.</li>
+<li>Monitor changes before making major decisions.</li>
+</ul>
+</div>
+
+</div>
+
+<!-- FIVE FORCES -->
+
+<h2 class="section-title">Five Forces Reshaping Opportunity</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Demographic Reality</h3>
+<p>
+Population structure can influence labor markets, taxation,
+housing demand, healthcare needs, and economic growth.
+</p>
+</div>
+
+<div class="card">
+<h3>Water & Agriculture</h3>
+<p>
+Food production and communities depend on reliable resource systems.
+Efficiency and infrastructure may create important opportunities.
+</p>
+</div>
+
+<div class="card">
+<h3>Infrastructure Power</h3>
+<p>
+Ports, rail systems, roads, energy grids, and digital connectivity
+can shape long-term economic competitiveness.
+</p>
+</div>
+
+<div class="card">
+<h3>Technology Sovereignty</h3>
+<p>
+AI, semiconductors, automation, and advanced manufacturing
+may increasingly influence national and economic capabilities.
+</p>
+</div>
+
+<div class="card">
+<h3>Talent Competition</h3>
+<p>
+Regions and organizations compete for skilled workers, entrepreneurs,
+engineers, scientists, and other forms of human capability.
+</p>
+</div>
+
+<div class="card">
+<h3>Supply Chain Control</h3>
+<p>
+Shipping routes, logistics, energy networks, and critical resources
+can create strategic dependencies and leverage.
+</p>
+</div>
+
+</div>
+
+<!-- SIMULATOR -->
+
+<h2 class="section-title">Opportunity Migration Simulator</h2>
+
+<div class="simulation-grid">
+
+<div class="sim-card">
+<h3>High Cost Economy</h3>
+<p>
+Higher wages may exist alongside greater competition and higher living costs.
+Ask whether income growth exceeds the cost of participation.
+</p>
+</div>
+
+<div class="sim-card">
+<h3>Growth Economy</h3>
+<p>
+Rapid development may create opportunities for people who identify
+new needs, industries, and infrastructure gaps.
+</p>
+</div>
+
+<div class="sim-card">
+<h3>Remote Economy</h3>
+<p>
+Global work can potentially separate income location from living location,
+creating new strategic choices around cost and opportunity.
+</p>
+</div>
+
+</div>
+
+<!-- QUESTIONS -->
+
+<h2 class="section-title">Think Like a Strategist</h2>
+
+<div class="questions">
+
+<div class="question-box">
+<p>If energy costs doubled tomorrow, which industries would benefit and which would face greater pressure?</p>
+</div>
+
+<div class="question-box">
+<p>How could declining birth rates change housing demand over the next 20 years?</p>
+</div>
+
+<div class="question-box">
+<p>Which skills could become more valuable as routine tasks become increasingly automated?</p>
+</div>
+
+<div class="question-box">
+<p>What happens to an economy when it struggles to attract or retain skilled workers?</p>
+</div>
+
+<div class="question-box">
+<p>Which regions could benefit from increased investment in climate adaptation?</p>
+</div>
+
+<div class="question-box">
+<p>What infrastructure creates the greatest long-term leverage for businesses and communities?</p>
+</div>
+
+</div>
+
+<!-- FEED -->
+
+<h2 class="section-title">Strategic Signals Feed</h2>
+
+<div class="feed">
+
+<div class="feed-item">
+Population shifts may change workforce availability and demand for essential services.
+</div>
+
+<div class="feed-item">
+AI investment may concentrate around major innovation hubs and technical infrastructure.
+</div>
+
+<div class="feed-item">
+Automation may continue changing which tasks are performed by people and machines.
+</div>
+
+<div class="feed-item">
+Trade routes and supply chains can change when infrastructure, costs, and strategic relationships change.
+</div>
+
+<div class="feed-item">
+Water infrastructure may become increasingly important where resource pressure grows.
+</div>
+
+<div class="feed-item">
+Energy resilience can influence long-term infrastructure and economic planning.
+</div>
+
+</div>
+
+<!-- HISTORY -->
+
+<h2 class="section-title">Historical Pattern Library</h2>
+
+<div class="timeline">
+
+<div class="timeline-item">
+<h3>Industrial Revolution</h3>
+<p>
+Technology transformed productivity, changed labor systems, and created entirely new industries.
+</p>
+</div>
+
+<div class="timeline-item">
+<h3>Information Age</h3>
+<p>
+Computing and networks made information increasingly valuable and reshaped communication and business.
+</p>
+</div>
+
+<div class="timeline-item">
+<h3>AI Era</h3>
+<p>
+AI systems may change productivity, decision support, automation, and how organizations structure work.
+</p>
+</div>
+
+</div>
+
+<!-- PERSONAL STRATEGY -->
+
+<section class="strategy-board" id="strategy">
+
+<h2>Global Trends → Personal Strategy</h2>
+
+<p>
+The final purpose of this lab is not to watch the world passively.
+Use large-scale signals to ask better questions about your own positioning,
+skills, opportunities, and preparation.
+</p>
+
+<div class="strategy-grid">
+
+<div class="strategy-item">
+<span>QUESTION 01</span>
+<h3>What Is Growing?</h3>
+<p>
+Identify industries, capabilities, needs, or infrastructure receiving increasing attention and investment.
+</p>
+</div>
+
+<div class="strategy-item">
+<span>QUESTION 02</span>
+<h3>What Is Declining?</h3>
+<p>
+Look for shrinking demand, outdated processes, or capabilities becoming easier to automate.
+</p>
+</div>
+
+<div class="strategy-item">
+<span>QUESTION 03</span>
+<h3>What Skill Should I Build?</h3>
+<p>
+Choose skills connected to problems, opportunities, or systems you expect to remain valuable.
+</p>
+</div>
+
+<div class="strategy-item">
+<span>QUESTION 04</span>
+<h3>What Can I Create?</h3>
+<p>
+Turn learning into evidence by building a project, analysis, case study, portfolio, or experiment.
+</p>
+</div>
+
+<div class="strategy-item">
+<span>QUESTION 05</span>
+<h3>What Should I Monitor?</h3>
+<p>
+Not every trend requires immediate action. Some signals should simply be tracked over time.
+</p>
+</div>
+
+<div class="strategy-item">
+<span>QUESTION 06</span>
+<h3>What Should I Improve Next?</h3>
+<p>
+Use what you learn to begin another cycle of research, experimentation, capability building, and improvement.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- BRIDGE -->
+
+<section class="bridge">
+
+<h2>From Global Signals to Better Decisions</h2>
+
+<p>
+The purpose of geopolitical intelligence is not to know the future.
+It is to understand systems well enough to notice change, investigate
+important signals, and prepare more intelligently for multiple possible outcomes.
+</p>
+
+<a href="#dashboard" class="btn btn-primary">
+Return to Strategic Dashboard
+</a>
+
+</section>
+
+</div>
+
+<footer>
+Geopolitical Intelligence Center • Strategic Thinking • Systems Analysis • Opportunity Research • Portfolio Demonstration
+</footer>
+
+</body>
+</html>
