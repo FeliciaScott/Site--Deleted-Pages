@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Default Action Architecture Optimization Studio</title>
+    <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js for 30-Day Simulation Visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* COLOR PALETTE & DESIGN SYSTEM */
+        :root {
+            --bg-deep-teal: #0B2B26;
+            --teal-surface: #133D37;
+            --teal-card: #1A4D45;
+            --teal-border: #236359;
+            --electric-jade: #20FC8F;
+            --jade-glow: rgba(32, 252, 143, 0.25);
+            --bright-mint: #80FFD3;
+            --soft-lavender: #EAE6F8;
+            --charcoal-slate: #1A2321;
+            --dark-card: #121A18;
+            --text-light: #F4FBF9;
+            --text-dim: #A0C0B9;
+            --text-lavender: #D5CEF2;
+            --coral-alert: #FF6B6B;
+            --amber-warn: #FFB800;
+            
+            --font-display: 'Outfit', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+            
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 24px;
+            --shadow-jade: 0 0 20px rgba(32, 252, 143, 0.2);
+            --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--charcoal-slate);
+            color: var(--text-light);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* TYPOGRAPHY */
+        h1, h2, h3, h4, .font-display {
+            font-family: var(--font-display);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        /* HEADER & NAVIGATION */
+        header {
+            background-color: var(--bg-deep-teal);
+            border-bottom: 2px solid var(--teal-border);
+            padding: 1.1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--text-light);
+            text-decoration: none;
+            font-family: var(--font-display);
+        }
+
+        .brand-badge {
+            background: linear-gradient(135deg, var(--electric-jade), var(--bright-mint));
+            color: var(--charcoal-slate);
+            padding: 0.25rem 0.6rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 0.5rem;
+            background-color: var(--dark-card);
+            padding: 0.4rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--teal-border);
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            padding: 0.65rem 1.25rem;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .nav-btn:hover {
+            color: var(--text-light);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-btn.active {
+            background-color: var(--electric-jade);
+            color: var(--charcoal-slate);
+            font-weight: 700;
+            box-shadow: var(--shadow-jade);
+        }
+
+        /* LAYOUT CONTAINER */
+        .app-container {
+            max-width: 1600px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 2rem;
+            flex: 1;
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 2rem;
+        }
+
+        /* LEFT SIDEBAR: LIVE DIAGNOSTIC MONITOR */
+        .sidebar-panel {
+            background-color: var(--bg-deep-teal);
+            border: 1px solid var(--teal-border);
+            border-radius: var(--radius-lg);
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.75rem;
+            height: fit-content;
+        }
+
+        .panel-title {
+            font-size: 1.05rem;
+            color: var(--bright-mint);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stat-card-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .metric-box {
+            background-color: var(--teal-surface);
+            border: 1px solid var(--teal-border);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: var(--electric-jade);
+        }
+
+        .metric-val {
+            font-size: 2.2rem;
+            font-family: var(--font-display);
+            font-weight: 800;
+            color: var(--text-light);
+            line-height: 1.1;
+        }
+
+        .metric-label {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-top: 0.35rem;
+        }
+
+        .status-pill {
+            display: inline-block;
+            margin-top: 0.5rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .action-btn-primary {
+            background: linear-gradient(135deg, var(--electric-jade), var(--bright-mint));
+            color: var(--charcoal-slate);
+            border: none;
+            padding: 0.9rem;
+            border-radius: var(--radius-md);
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: var(--shadow-jade);
+            width: 100%;
+        }
+
+        .action-btn-primary:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.05);
+        }
+
+        /* RIGHT CONTENT AREA */
+        .content-area {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .view-panel {
+            display: none;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .view-panel.active {
+            display: flex;
+        }
+
+        .card-panel {
+            background-color: var(--bg-deep-teal);
+            border: 1px solid var(--teal-border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+        }
+
+        /* MODULE 1: FRICTION & CHOICE OVERLOAD AUDIT */
+        .audit-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-dim);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .form-control, select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background-color: var(--dark-card);
+            border: 1px solid var(--teal-border);
+            border-radius: var(--radius-sm);
+            color: var(--text-light);
+            font-family: inherit;
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-control:focus, select:focus {
+            border-color: var(--electric-jade);
+            box-shadow: 0 0 0 2px var(--jade-glow);
+        }
+
+        .audit-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .audit-item {
+            background-color: var(--teal-surface);
+            border: 1px solid var(--teal-border);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            transition: var(--transition);
+        }
+
+        .audit-item.resolved {
+            border-color: var(--electric-jade);
+            opacity: 0.85;
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.3rem 0.75rem;
+            border-radius: 50px;
+            text-transform: uppercase;
+        }
+
+        .badge-danger { background-color: rgba(255, 107, 107, 0.2); color: var(--coral-alert); }
+        .badge-warn { background-color: rgba(255, 184, 0, 0.2); color: var(--amber-warn); }
+        .badge-success { background-color: rgba(32, 252, 143, 0.2); color: var(--electric-jade); }
+
+        /* MODULE 2: DEFAULT PIPELINE ARCHITECT */
+        .pipeline-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .pipeline-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .pipeline-card {
+            background-color: var(--teal-surface);
+            border: 1px solid var(--teal-border);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            transition: var(--transition);
+        }
+
+        .pipeline-card:hover {
+            border-color: var(--electric-jade);
+            transform: translateY(-2px);
+        }
+
+        .pipeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .rule-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+        }
+
+        .rule-pill {
+            padding: 0.3rem 0.75rem;
+            border-radius: 6px;
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .pill-trigger { background-color: rgba(255, 184, 0, 0.15); color: var(--amber-warn); border: 1px solid rgba(255, 184, 0, 0.3); }
+        .pill-action { background-color: rgba(32, 252, 143, 0.15); color: var(--electric-jade); border: 1px solid rgba(32, 252, 143, 0.3); }
+        .pill-cue { background-color: rgba(234, 230, 248, 0.15); color: var(--soft-lavender); border: 1px solid rgba(234, 230, 248, 0.3); }
+
+        /* MODULE 3: HABIT & PIPELINE SIMULATOR */
+        .sim-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .chart-container {
+            background-color: var(--dark-card);
+            border: 1px solid var(--teal-border);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            position: relative;
+            height: 380px;
+        }
+
+        .sim-metrics-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .sim-stat-card {
+            background-color: var(--teal-surface);
+            border: 1px solid var(--teal-border);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            text-align: center;
+        }
+
+        /* MODULE 4: EXPORTABLE MASTER PLAN */
+        .export-grid {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 2rem;
+        }
+
+        .code-preview {
+            background-color: var(--dark-card);
+            border: 1px solid var(--teal-border);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            font-family: 'Courier New', Courier, monospace;
+            color: var(--bright-mint);
+            font-size: 0.85rem;
+            white-space: pre-wrap;
+            word-break: break-all;
+            max-height: 480px;
+            overflow-y: auto;
+        }
+
+        .export-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .btn-secondary {
+            background-color: var(--teal-surface);
+            color: var(--text-light);
+            border: 1px solid var(--teal-border);
+            padding: 0.8rem 1.2rem;
+            border-radius: var(--radius-md);
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--electric-jade);
+            color: var(--electric-jade);
+        }
+
+        .toast-msg {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--electric-jade);
+            color: var(--charcoal-slate);
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--radius-md);
+            font-family: var(--font-display);
+            font-weight: 700;
+            box-shadow: var(--shadow-jade);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: var(--transition);
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .toast-msg.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--bg-deep-teal);
+            border-top: 1px solid var(--teal-border);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-top: auto;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 1100px) {
+            .app-container {
+                grid-template-columns: 1fr;
+            }
+
+            .audit-grid, .pipeline-grid, .export-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sim-metrics-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem;
+            }
+
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-tabs {
+                width: 100%;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- APP HEADER -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="brand-logo">
+                <span class="brand-badge">DAA STUDIO</span>
+                <span>Default Action Architecture</span>
+            </a>
+            <nav class="nav-tabs">
+                <button class="nav-btn active" onclick="switchTab('audit', this)">1. Friction Audit</button>
+                <button class="nav-btn" onclick="switchTab('architect', this)">2. Pipeline Architect</button>
+                <button class="nav-btn" onclick="switchTab('simulator', this)">3. 30-Day Simulator</button>
+                <button class="nav-btn" onclick="switchTab('exporter', this)">4. Master Plan Exporter</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN APP WORKSPACE -->
+    <main class="app-container">
+
+        <!-- LEFT SIDEBAR: LIVE DIAGNOSTICS -->
+        <aside class="sidebar-panel">
+            <div class="panel-title">
+                <span>⚡</span> System Diagnostics
+            </div>
+
+            <div class="stat-card-stack">
+                <div class="metric-box">
+                    <div class="metric-val" id="actionDefaultIndex">42%</div>
+                    <div class="metric-label">Action Default Index (ADI)</div>
+                    <span class="status-pill" id="adiStatusBadge" style="background-color: rgba(255, 107, 107, 0.2); color: var(--coral-alert);">High Resistance</span>
+                </div>
+
+                <div class="metric-box" style="--electric-rose: var(--bright-mint);">
+                    <div class="metric-val" id="activePipelinesCount">3 Refactored</div>
+                    <div class="metric-label">Active Default Pipelines</div>
+                </div>
+
+                <div class="metric-box">
+                    <div class="metric-val" id="decisionFatigueSaved">2.4 hrs</div>
+                    <div class="metric-label">Est. Daily Cognitive Energy Saved</div>
+                </div>
+            </div>
+
+            <button class="action-btn-primary" onclick="switchTab('architect', document.querySelectorAll('.nav-btn')[1])">
+                <span>+</span> Refactor New Bottleneck
+            </button>
+        </aside>
+
+        <!-- RIGHT MAIN WORKSPACE PANELS -->
+        <section class="content-area">
+
+            <!-- MODULE 1: FRICTION & CHOICE OVERLOAD AUDIT -->
+            <div id="audit" class="view-panel active">
+                <div class="card-panel">
+                    <h2>Choice Overload & Decision Fatigue Audit</h2>
+                    <p style="color: var(--text-dim); margin-bottom: 1.5rem;">
+                        Identify friction bottlenecks in your study and career routines where manual decision-making causes paralysis or procrastination.
+                    </p>
+
+                    <div class="audit-grid">
+                        <!-- FORM TO ADD BOTTLENECK -->
+                        <div>
+                            <h3 style="margin-bottom: 1rem; color: var(--bright-mint);">Log Routine Bottleneck</h3>
+                            <form onsubmit="addAuditItem(event)">
+                                <div class="form-group">
+                                    <label>Routine / Goal Area</label>
+                                    <input type="text" id="auditTitle" class="form-control" placeholder="e.g. Daily Tech Interview Practice" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Primary Friction Source</label>
+                                    <select id="auditFrictionType" class="form-control">
+                                        <option value="Decision Fatigue">Decision Fatigue (Too many options)</option>
+                                        <option value="Choice Paralysis">Choice Paralysis (Unclear starting point)</option>
+                                        <option value="Manual Friction">Manual Effort (Scattered tools/tabs)</option>
+                                        <option value="Ambiguous Cue">Ambiguous Cue (No exact start time)</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Severity Rating (1-10)</label>
+                                    <input type="number" id="auditSeverity" class="form-control" min="1" max="10" value="8" required>
+                                </div>
+
+                                <button type="submit" class="action-btn-primary">Add Bottleneck to Diagnostic</button>
+                            </form>
+                        </div>
+
+                        <!-- LIST OF LOGGED BOTTLENECKS -->
+                        <div>
+                            <h3 style="margin-bottom: 1rem; color: var(--bright-mint);">Detected Friction Nodes</h3>
+                            <div class="audit-list" id="auditListContainer">
+                                <!-- Dynamically rendered -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODULE 2: DEFAULT PIPELINE ARCHITECT -->
+            <div id="architect" class="view-panel">
+                <div class="card-panel">
+                    <h2>Default Pipeline Architect</h2>
+                    <p style="color: var(--text-dim); margin-bottom: 1.5rem;">
+                        Convert high-friction choices into frictionless, automatic default rules using environmental cues and trigger-action pipelines.
+                    </p>
+
+                    <div class="pipeline-grid">
+                        <!-- FORM BUILDER -->
+                        <div>
+                            <h3 style="margin-bottom: 1rem; color: var(--electric-jade);">Construct High-Yield Default Rule</h3>
+                            <form onsubmit="addPipelineRule(event)">
+                                <div class="form-group">
+                                    <label>IF (Automatic Cue / Environmental Trigger)</label>
+                                    <input type="text" id="ruleTrigger" class="form-control" placeholder="e.g. Laptops lid opens at 8:30 AM" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>THEN DEFAULT TO (Zero-Choice Action)</label>
+                                    <input type="text" id="ruleAction" class="form-control" placeholder="e.g. Automatically launches LeetCode Problem #1" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>ENVIRONMENTAL CUE PREPARATION</label>
+                                    <input type="text" id="ruleCue" class="form-control" placeholder="e.g. Primary browser tab pinned to curriculum page" required>
+                                </div>
+
+                                <button type="submit" class="action-btn-primary">Deploy Pipeline Rule</button>
+                            </form>
+                        </div>
+
+                        <!-- ACTIVE PIPELINES -->
+                        <div>
+                            <h3 style="margin-bottom: 1rem; color: var(--electric-jade);">Active Default Architecture</h3>
+                            <div class="pipeline-stack" id="pipelineContainer">
+                                <!-- Dynamically rendered -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODULE 3: HABIT & PIPELINE EXECUTION SIMULATOR -->
+            <div id="simulator" class="view-panel">
+                <div class="card-panel">
+                    <h2>30-Day Architecture Execution Simulator</h2>
+                    <p style="color: var(--text-dim); margin-bottom: 1.5rem;">
+                        Project execution consistency over 30 days, comparing traditional "Willpower-Driven" attempts against your "Default-Driven" Architecture.
+                    </p>
+
+                    <div class="sim-grid">
+                        <div class="sim-metrics-row">
+                            <div class="sim-stat-card">
+                                <div style="font-size: 0.85rem; color: var(--text-dim);">Willpower System Completion</div>
+                                <div style="font-size: 1.8rem; font-family: var(--font-display); font-weight: 800; color: var(--coral-alert); margin-top: 0.3rem;" id="willpowerCompletionRate">28.4%</div>
+                            </div>
+                            <div class="sim-stat-card">
+                                <div style="font-size: 0.85rem; color: var(--text-dim);">Default Architecture Completion</div>
+                                <div style="font-size: 1.8rem; font-family: var(--font-display); font-weight: 800; color: var(--electric-jade); margin-top: 0.3rem;" id="defaultCompletionRate">91.2%</div>
+                            </div>
+                            <div class="sim-stat-card">
+                                <div style="font-size: 0.85rem; color: var(--text-dim);">Execution Reliability Gain</div>
+                                <div style="font-size: 1.8rem; font-family: var(--font-display); font-weight: 800; color: var(--bright-mint); margin-top: 0.3rem;" id="reliabilityGain">+3.2x</div>
+                            </div>
+                        </div>
+
+                        <div class="chart-container">
+                            <canvas id="simulationChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODULE 4: EXPORTABLE DEFAULT MASTER PLAN -->
+            <div id="exporter" class="view-panel">
+                <div class="card-panel">
+                    <h2>Exportable Default Master Plan</h2>
+                    <p style="color: var(--text-dim); margin-bottom: 1.5rem;">
+                        Export your optimized default rules and architecture blueprint into standard protocol formats for integration into your personal documentation or automated tools.
+                    </p>
+
+                    <div class="export-grid">
+                        <div>
+                            <h3 style="margin-bottom: 1rem; color: var(--bright-mint);">Generated Master Protocol JSON</h3>
+                            <div class="code-preview" id="jsonPreviewBox">
+                                <!-- Rendered dynamically -->
+                            </div>
+                        </div>
+
+                        <div class="export-actions">
+                            <h3 style="margin-bottom: 1rem; color: var(--bright-mint);">Export Options</h3>
+                            <button class="action-btn-primary" onclick="downloadJSON()">
+                                <span>📥</span> Download Master Blueprint (.json)
+                            </button>
+                            <button class="btn-secondary" onclick="copyToClipboard()">
+                                <span>📋</span> Copy JSON to Clipboard
+                            </button>
+                            <button class="btn-secondary" onclick="downloadTXT()">
+                                <span>📄</span> Download Quick Ref Card (.txt)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- TOAST NOTIFICATION -->
+    <div class="toast-msg" id="toastMsg">Protocol copied to clipboard!</div>
+
+    <!-- FOOTER -->
+    <footer>
+        Default Action Architecture Optimization Studio — Frictionless High-Performance Execution System
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
+    <script>
+        // GLOBAL APP STATE
+        let auditItems = [
+            { id: 1, title: "Tech Skill Upgrading", frictionType: "Decision Fatigue", severity: 8, resolved: false },
+            { id: 2, title: "Daily Deep Study", frictionType: "Manual Friction", severity: 7, resolved: true },
+            { id: 3, title: "Portfolio Documentation", frictionType: "Choice Paralysis", severity: 9, resolved: false }
+        ];
+
+        let pipelineRules = [
+            {
+                id: 1,
+                trigger: "8:00 AM Desk Sit",
+                action: "Launch IDE & load 25-minute study sprint",
+                cue: "IDE stays full screen overnight"
+            },
+            {
+                id: 2,
+                trigger: "Browser Open",
+                action: "Default homepage opens course dashboard directly",
+                cue: "Bookmarks bar hidden except course shortcut"
+            },
+            {
+                id: 3,
+                trigger: "Work Session End",
+                action: "Auto-clear desktop & queue tomorrow's 1st priority file",
+                cue: "Sticky note placed on trackpad"
+            }
+        ];
+
+        let simChartInstance = null;
+
+        // 1. NAVIGATION TAB SWITCHING
+        function switchTab(tabId, btn) {
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.view-panel').forEach(p => p.classList.remove('active'));
+
+            btn.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+
+            if (tabId === 'simulator') {
+                renderSimulationChart();
+            } else if (tabId === 'exporter') {
+                renderExportPreview();
+            }
+        }
+
+        // 2. FRICTION AUDIT LOGIC
+        function renderAuditList() {
+            const container = document.getElementById('auditListContainer');
+            container.innerHTML = '';
+
+            auditItems.forEach(item => {
+                const el = document.createElement('div');
+                el.className = `audit-item ${item.resolved ? 'resolved' : ''}`;
+                
+                let badgeClass = 'badge-danger';
+                if (item.severity <= 4) badgeClass = 'badge-success';
+                else if (item.severity <= 7) badgeClass = 'badge-warn';
+
+                el.innerHTML = `
+                    <div>
+                        <div style="font-weight: 700; font-size: 1rem;">${escapeHtml(item.title)}</div>
+                        <div style="font-size: 0.8rem; color: var(--text-dim); margin-top: 0.2rem;">
+                            Type: ${escapeHtml(item.frictionType)}
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                        <span class="badge ${badgeClass}">Severity ${item.severity}/10</span>
+                        <button style="background: none; border: none; color: var(--text-dim); cursor: pointer; font-size: 1.1rem;" onclick="deleteAuditItem(${item.id})">✕</button>
+                    </div>
+                `;
+                container.appendChild(el);
+            });
+
+            recalculateDiagnostics();
+        }
+
+        function addAuditItem(e) {
+            e.preventDefault();
+            const title = document.getElementById('auditTitle').value;
+            const frictionType = document.getElementById('auditFrictionType').value;
+            const severity = parseInt(document.getElementById('auditSeverity').value);
+
+            if (title) {
+                auditItems.push({
+                    id: Date.now(),
+                    title: title,
+                    frictionType: frictionType,
+                    severity: severity,
+                    resolved: false
+                });
+
+                document.getElementById('auditTitle').value = '';
+                renderAuditList();
+            }
+        }
+
+        function deleteAuditItem(id) {
+            auditItems = auditItems.filter(i => i.id !== id);
+            renderAuditList();
+        }
+
+        // 3. PIPELINE ARCHITECT LOGIC
+        function renderPipelineList() {
+            const container = document.getElementById('pipelineContainer');
+            container.innerHTML = '';
+
+            pipelineRules.forEach(rule => {
+                const el = document.createElement('div');
+                el.className = 'pipeline-card';
+                el.innerHTML = `
+                    <div class="pipeline-header">
+                        <span style="font-family: var(--font-display); font-weight: 700; color: var(--bright-mint); font-size: 0.95rem;">
+                            Pipeline Rule #${rule.id}
+                        </span>
+                        <button style="background: none; border: none; color: var(--text-dim); cursor: pointer; font-size: 1rem;" onclick="deletePipelineRule(${rule.id})">✕</button>
+                    </div>
+                    <div class="rule-row">
+                        <span class="rule-pill pill-trigger">IF: ${escapeHtml(rule.trigger)}</span>
+                        <span style="color: var(--text-dim); font-weight:700;">➔</span>
+                        <span class="rule-pill pill-action">THEN DEFAULT: ${escapeHtml(rule.action)}</span>
+                    </div>
+                    <div class="rule-row" style="margin-top: 0.25rem;">
+                        <span class="rule-pill pill-cue">CUE: ${escapeHtml(rule.cue)}</span>
+                    </div>
+                `;
+                container.appendChild(el);
+            });
+
+            recalculateDiagnostics();
+        }
+
+        function addPipelineRule(e) {
+            e.preventDefault();
+            const trigger = document.getElementById('ruleTrigger').value;
+            const action = document.getElementById('ruleAction').value;
+            const cue = document.getElementById('ruleCue').value;
+
+            if (trigger && action) {
+                pipelineRules.push({
+                    id: pipelineRules.length + 1,
+                    trigger: trigger,
+                    action: action,
+                    cue: cue || "Environment aligned"
+                });
+
+                document.getElementById('ruleTrigger').value = '';
+                document.getElementById('ruleAction').value = '';
+                document.getElementById('ruleCue').value = '';
+                renderPipelineList();
+            }
+        }
+
+        function deletePipelineRule(id) {
+            pipelineRules = pipelineRules.filter(r => r.id !== id);
+            renderPipelineList();
+        }
+
+        // 4. CALCULATE DIAGNOSTIC METRICS
+        function recalculateDiagnostics() {
+            // Action Default Index calculation logic
+            const totalAuditSeverity = auditItems.reduce((acc, curr) => acc + curr.severity, 0);
+            const pipelineBonus = pipelineRules.length * 15;
+            let adiScore = Math.min(98, Math.max(12, 100 - (totalAuditSeverity * 3) + pipelineBonus));
+
+            document.getElementById('actionDefaultIndex').innerText = `${adiScore}%`;
+
+            const badge = document.getElementById('adiStatusBadge');
+            if (adiScore > 75) {
+                badge.innerText = "Frictionless Default";
+                badge.style.backgroundColor = "rgba(32, 252, 143, 0.2)";
+                badge.style.color = "var(--electric-jade)";
+            } else if (adiScore > 45) {
+                badge.innerText = "Moderate Friction";
+                badge.style.backgroundColor = "rgba(255, 184, 0, 0.2)";
+                badge.style.color = "var(--amber-warn)";
+            } else {
+                badge.innerText = "High Resistance";
+                badge.style.backgroundColor = "rgba(255, 107, 107, 0.2)";
+                badge.style.color = "var(--coral-alert)";
+            }
+
+            document.getElementById('activePipelinesCount').innerText = `${pipelineRules.length} Refactored`;
+            const savedHours = (pipelineRules.length * 0.8).toFixed(1);
+            document.getElementById('decisionFatigueSaved').innerText = `${savedHours} hrs`;
+        }
+
+        // 5. 30-DAY SIMULATION CHART
+        function renderSimulationChart() {
+            const ctx = document.getElementById('simulationChart').getContext('2d');
+
+            if (simChartInstance) {
+                simChartInstance.destroy();
+            }
+
+            const days = Array.from({length: 30}, (_, i) => `Day ${i + 1}`);
+            
+            // Generate simulated completion data
+            let willpowerData = [];
+            let defaultData = [];
+            let currentWillpower = 100;
+            let currentDefault = 90;
+
+            for (let i = 0; i < 30; i++) {
+                // Willpower degrades rapidly over time due to cognitive fatigue
+                currentWillpower = Math.max(10, currentWillpower - Math.random() * 4.5);
+                willpowerData.push(Math.round(currentWillpower));
+
+                // Default architecture maintains consistency with minor fluctuation
+                currentDefault = Math.min(99, Math.max(82, currentDefault + (Math.random() * 2 - 0.8)));
+                defaultData.push(Math.round(currentDefault));
+            }
+
+            // Calculate averages for stat cards
+            const wpAvg = (willpowerData.reduce((a, b) => a + b, 0) / 30).toFixed(1);
+            const defAvg = (defaultData.reduce((a, b) => a + b, 0) / 30).toFixed(1);
+            const gain = (defAvg / wpAvg).toFixed(1);
+
+            document.getElementById('willpowerCompletionRate').innerText = `${wpAvg}%`;
+            document.getElementById('defaultCompletionRate').innerText = `${defAvg}%`;
+            document.getElementById('reliabilityGain').innerText = `+${gain}x`;
+
+            simChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: days,
+                    datasets: [
+                        {
+                            label: 'Default-Driven Architecture',
+                            data: defaultData,
+                            borderColor: '#20FC8F',
+                            backgroundColor: 'rgba(32, 252, 143, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.3,
+                            fill: true
+                        },
+                        {
+                            label: 'Willpower-Driven Execution',
+                            data: willpowerData,
+                            borderColor: '#FF6B6B',
+                            backgroundColor: 'rgba(255, 107, 107, 0.05)',
+                            borderWidth: 2,
+                            borderDash: [5, 5],
+                            tension: 0.3,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            min: 0,
+                            max: 100,
+                            grid: { color: 'rgba(35, 99, 89, 0.3)' },
+                            ticks: { color: '#A0C0B9' }
+                        },
+                        x: {
+                            grid: { color: 'rgba(35, 99, 89, 0.1)' },
+                            ticks: { color: '#A0C0B9' }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: { color: '#F4FBF9', font: { family: 'Outfit', size: 12 } }
+                        }
+                    }
+                }
+            });
+        }
+
+        // 6. EXPORTABLE MASTER PLAN LOGIC
+        function generateBlueprintObject() {
+            return {
+                title: "Default Action Architecture Blueprint",
+                generatedAt: new Date().toISOString(),
+                metrics: {
+                    actionDefaultIndex: document.getElementById('actionDefaultIndex').innerText,
+                    activePipelines: pipelineRules.length,
+                    estimatedDailySavedHours: document.getElementById('decisionFatigueSaved').innerText
+                },
+                diagnosedBottlenecks: auditItems,
+                defaultPipelines: pipelineRules
+            };
+        }
+
+        function renderExportPreview() {
+            const blueprint = generateBlueprintObject();
+            document.getElementById('jsonPreviewBox').innerText = JSON.stringify(blueprint, null, 2);
+        }
+
+        function downloadJSON() {
+            const blueprint = generateBlueprintObject();
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(blueprint, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", `Default_Architecture_Blueprint_${Date.now()}.json`);
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+        }
+
+        function downloadTXT() {
+            const blueprint = generateBlueprintObject();
+            let txtContent = `=================================================\n`;
+            txtContent += `DEFAULT ACTION ARCHITECTURE MASTER PROTOCOL CARD\n`;
+            txtContent += `=================================================\n\n`;
+            txtContent += `Action Default Index: ${blueprint.metrics.actionDefaultIndex}\n`;
+            txtContent += `Daily Saved Energy: ${blueprint.metrics.estimatedDailySavedHours}\n\n`;
+            txtContent += `-------------------------------------------------\n`;
+            txtContent += `ACTIVE DEFAULT PIPELINES\n`;
+            txtContent += `-------------------------------------------------\n\n`;
+
+            blueprint.defaultPipelines.forEach((p, idx) => {
+                txtContent += `Rule #${idx + 1}:\n`;
+                txtContent += `  [IF]: ${p.trigger}\n`;
+                txtContent += `  [THEN DEFAULT]: ${p.action}\n`;
+                txtContent += `  [CUE]: ${p.cue}\n\n`;
+            });
+
+            const dataStr = "data:text/plain;charset=utf-8," + encodeURIComponent(txtContent);
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", `Default_Action_Protocol_${Date.now()}.txt`);
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+        }
+
+        function copyToClipboard() {
+            const blueprint = generateBlueprintObject();
+            const jsonText = JSON.stringify(blueprint, null, 2);
+
+            // Using fallback for clipboard copy inside iframe environments
+            const tempTextArea = document.createElement("textarea");
+            tempTextArea.value = jsonText;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempTextArea);
+
+            showToast("Blueprint copied to clipboard!");
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toastMsg');
+            toast.innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        function escapeHtml(str) {
+            return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+
+        // INITIALIZE ON DOM LOAD
+        window.addEventListener('DOMContentLoaded', () => {
+            renderAuditList();
+            renderPipelineList();
+        });
+    </script>
+</body>
+</html>
