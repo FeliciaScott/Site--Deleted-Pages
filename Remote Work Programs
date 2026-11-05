@@ -1,0 +1,1756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Remote Career Programs & Strategy Guide</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --green:#43a978;
+    --green-dark:#24704e;
+    --dark:#153243;
+    --dark-2:#0f2633;
+    --light:#f5fff9;
+    --accent:#e8fff1;
+    --cream:#fffdf7;
+    --text:#333;
+    --muted:#65727a;
+    --white:#ffffff;
+    --border:#dce9e2;
+    --warning:#fff6dc;
+    --warning-border:#e4c66d;
+    --danger:#fff0ed;
+    --danger-border:#e0a59a;
+    --shadow:0 12px 30px rgba(0,0,0,.07);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:var(--light);
+    color:var(--text);
+    line-height:1.7;
+}
+
+a{
+    color:inherit;
+}
+
+header{
+    background:linear-gradient(135deg,#153243,#24704e);
+    color:white;
+    text-align:center;
+    padding:90px 8%;
+}
+
+header .eyebrow{
+    display:inline-block;
+    background:rgba(255,255,255,.12);
+    padding:7px 16px;
+    border-radius:30px;
+    margin-bottom:20px;
+    font-size:.85rem;
+    font-weight:600;
+    letter-spacing:.5px;
+}
+
+header h1{
+    font-size:clamp(2.2rem,5vw,4rem);
+    line-height:1.15;
+    max-width:950px;
+    margin:0 auto 20px;
+}
+
+header p{
+    max-width:800px;
+    margin:auto;
+    font-size:1.08rem;
+    opacity:.93;
+}
+
+.hero-actions{
+    margin-top:30px;
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    display:inline-block;
+    padding:13px 22px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:600;
+    transition:.2s;
+}
+
+.btn-primary{
+    background:white;
+    color:var(--dark);
+}
+
+.btn-secondary{
+    border:1px solid rgba(255,255,255,.5);
+    color:white;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+.intro{
+    padding:65px 8%;
+    text-align:center;
+    background:var(--white);
+}
+
+.intro h2{
+    color:var(--dark);
+    margin-bottom:15px;
+    font-size:2rem;
+}
+
+.intro p{
+    max-width:850px;
+    margin:auto;
+    color:var(--muted);
+}
+
+.container{
+    padding:70px 8%;
+    max-width:1400px;
+    margin:auto;
+}
+
+.section-title{
+    text-align:center;
+    color:var(--dark);
+    margin-bottom:15px;
+    font-size:2.2rem;
+}
+
+.section-description{
+    text-align:center;
+    max-width:800px;
+    margin:0 auto 45px;
+    color:var(--muted);
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(290px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    transition:.25s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 18px 40px rgba(0,0,0,.10);
+}
+
+.card-header{
+    background:var(--green);
+    color:white;
+    padding:18px 20px;
+    font-size:1.15rem;
+    font-weight:600;
+}
+
+.card-body{
+    padding:22px;
+}
+
+.card-body p{
+    color:var(--muted);
+    margin-bottom:12px;
+}
+
+.card-body ul{
+    padding-left:20px;
+    margin-bottom:18px;
+}
+
+.card-body li{
+    margin-bottom:6px;
+}
+
+.tag{
+    display:inline-block;
+    background:var(--accent);
+    color:var(--green-dark);
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:.75rem;
+    font-weight:600;
+    margin:3px;
+}
+
+.sources{
+    margin-top:18px;
+    background:var(--accent);
+    padding:13px;
+    border-radius:10px;
+}
+
+.sources h4{
+    margin-bottom:8px;
+    color:var(--dark);
+}
+
+.sources a{
+    display:block;
+    color:var(--dark);
+    text-decoration:none;
+    margin-bottom:6px;
+    font-weight:500;
+}
+
+.sources a:hover{
+    text-decoration:underline;
+}
+
+/* STRATEGY */
+
+.strategy{
+    background:var(--dark);
+    color:white;
+}
+
+.strategy .section-title{
+    color:white;
+}
+
+.strategy .section-description{
+    color:#d9e7e1;
+}
+
+.strategy-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:20px;
+}
+
+.strategy-card{
+    background:#1c4050;
+    border:1px solid rgba(255,255,255,.1);
+    padding:25px;
+    border-radius:16px;
+}
+
+.strategy-number{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:#62c994;
+    color:#153243;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    margin-bottom:15px;
+}
+
+.strategy-card h3{
+    margin-bottom:10px;
+}
+
+.strategy-card p{
+    color:#d9e7e1;
+}
+
+/* TIMELINE */
+
+.timeline-section{
+    background:var(--cream);
+}
+
+.timeline{
+    max-width:950px;
+    margin:auto;
+    position:relative;
+}
+
+.timeline::before{
+    content:"";
+    position:absolute;
+    left:22px;
+    top:0;
+    bottom:0;
+    width:3px;
+    background:#b9dcca;
+}
+
+.timeline-item{
+    position:relative;
+    padding-left:65px;
+    margin-bottom:30px;
+}
+
+.timeline-dot{
+    position:absolute;
+    left:8px;
+    top:4px;
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    background:var(--green);
+    border:5px solid var(--cream);
+}
+
+.timeline-content{
+    background:white;
+    border:1px solid var(--border);
+    padding:23px;
+    border-radius:14px;
+    box-shadow:var(--shadow);
+}
+
+.timeline-content h3{
+    color:var(--dark);
+    margin-bottom:8px;
+}
+
+.timeline-content strong{
+    color:var(--green-dark);
+}
+
+/* SCORECARD */
+
+.score-section{
+    background:white;
+}
+
+.scorecard{
+    max-width:1000px;
+    margin:auto;
+    overflow-x:auto;
+}
+
+.scorecard table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+}
+
+.scorecard th,
+.scorecard td{
+    padding:15px;
+    border:1px solid var(--border);
+    text-align:left;
+}
+
+.scorecard th{
+    background:var(--dark);
+    color:white;
+}
+
+.scorecard tr:nth-child(even){
+    background:#f8fcfa;
+}
+
+/* FAILURE PLAN */
+
+.failure{
+    background:#fffaf0;
+}
+
+.failure-box{
+    max-width:1050px;
+    margin:auto;
+    background:white;
+    border:1px solid var(--warning-border);
+    border-radius:18px;
+    padding:30px;
+    box-shadow:var(--shadow);
+}
+
+.failure-box h3{
+    color:#715719;
+    margin-bottom:12px;
+}
+
+.failure-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+    margin-top:25px;
+}
+
+.failure-card{
+    padding:20px;
+    border-radius:12px;
+    background:#fffdf7;
+    border:1px solid #eadfbd;
+}
+
+.failure-card h4{
+    color:var(--dark);
+    margin-bottom:8px;
+}
+
+/* DECISION */
+
+.decision{
+    background:var(--light);
+}
+
+.decision-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:20px;
+}
+
+.decision-card{
+    padding:25px;
+    border-radius:16px;
+    background:white;
+    border:1px solid var(--border);
+}
+
+.decision-card h3{
+    color:var(--dark);
+    margin-bottom:10px;
+}
+
+.keep{
+    border-top:5px solid var(--green);
+}
+
+.pivot{
+    border-top:5px solid #d5a72d;
+}
+
+.stop{
+    border-top:5px solid #c55c4e;
+}
+
+/* CHECKLIST */
+
+.checklist{
+    background:var(--dark-2);
+    color:white;
+}
+
+.checklist .section-title{
+    color:white;
+}
+
+.checklist ul{
+    max-width:850px;
+    margin:auto;
+    list-style:none;
+}
+
+.checklist li{
+    background:#173545;
+    margin-bottom:12px;
+    padding:16px 20px;
+    border-radius:10px;
+}
+
+.checklist li::before{
+    content:"✓";
+    color:#69d49b;
+    font-weight:bold;
+    margin-right:12px;
+}
+
+/* CTA */
+
+.cta{
+    background:linear-gradient(135deg,#43a978,#24704e);
+    color:white;
+    text-align:center;
+    padding:80px 8%;
+}
+
+.cta h2{
+    font-size:2.3rem;
+    margin-bottom:15px;
+}
+
+.cta p{
+    max-width:750px;
+    margin:auto;
+    opacity:.95;
+}
+
+/* FOOTER */
+
+footer{
+    background:#0b1d28;
+    color:#d6e3df;
+    text-align:center;
+    padding:30px 8%;
+}
+
+footer p{
+    margin-bottom:6px;
+}
+
+@media(max-width:700px){
+
+    header{
+        padding:65px 6%;
+    }
+
+    .container{
+        padding:55px 6%;
+    }
+
+    .timeline::before{
+        left:15px;
+    }
+
+    .timeline-item{
+        padding-left:48px;
+    }
+
+    .timeline-dot{
+        left:1px;
+    }
+
+    .scorecard{
+        font-size:.85rem;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+
+<header>
+
+    <span class="eyebrow">REMOTE CAREER STRATEGY GUIDE</span>
+
+    <h1>
+        A Certification is Not the Career    </h1>
+
+    <div class="hero-actions">
+        <a href="#when_work_is_hard_to_find" class="btn btn-secondary">When Work is Hard to Find</a>
+    </div>
+
+</header>
+
+
+<!-- INTRO -->
+
+<section class="intro">
+
+<!-- FREE PROGRAMS -->
+
+<section class="container" id="programs">
+
+    <h2 class="section-title">Free & Low-Cost Starting Points</h2>
+
+    <p class="section-description">
+        Start here when you are unsure which career direction is right.
+        Your first goal is not to become an expert. Your first goal is to
+        discover whether you can tolerate and perform the work.
+    </p>
+
+    <div class="grid">
+
+        <div class="card">
+            <div class="card-header">HubSpot Academy</div>
+            <div class="card-body">
+
+                <p>
+                    Marketing, CRM, sales, customer communication, and business systems.
+                </p>
+
+                <span class="tag">CRM</span>
+                <span class="tag">Marketing</span>
+                <span class="tag">Sales</span>
+
+                <ul>
+                    <li>Email marketing</li>
+                    <li>CRM fundamentals</li>
+                    <li>Sales funnels</li>
+                    <li>Content strategy</li>
+                    <li>Customer relationship management</li>
+                </ul>
+
+                <div class="sources">
+                    <h4>Explore</h4>
+                    <a href="https://academy.hubspot.com" target="_blank">
+                        HubSpot Academy
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="card-header">Meta Blueprint</div>
+            <div class="card-body">
+
+                <p>
+                    Digital marketing, social media, advertising, and audience development.
+                </p>
+
+                <span class="tag">Marketing</span>
+                <span class="tag">Advertising</span>
+                <span class="tag">Social Media</span>
+
+                <ul>
+                    <li>Social media marketing</li>
+                    <li>Digital advertising</li>
+                    <li>Campaign strategy</li>
+                    <li>Audience targeting</li>
+                    <li>Content creation</li>
+                </ul>
+
+                <div class="sources">
+                    <h4>Explore</h4>
+                    <a href="https://www.facebook.com/business/learn" target="_blank">
+                        Meta Blueprint
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="card-header">freeCodeCamp</div>
+            <div class="card-body">
+
+                <p>
+                    A strong starting point for people exploring web development and programming.
+                </p>
+
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">JavaScript</span>
+
+                <ul>
+                    <li>Responsive web design</li>
+                    <li>JavaScript</li>
+                    <li>Front-end development</li>
+                    <li>Programming fundamentals</li>
+                    <li>Portfolio projects</li>
+                </ul>
+
+                <div class="sources">
+                    <h4>Explore</h4>
+                    <a href="https://www.freecodecamp.org" target="_blank">
+                        freeCodeCamp
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="card-header">Google Career Certificates</div>
+            <div class="card-body">
+
+                <p>
+                    Entry-level training across technology, data, project management,
+                    UX, cybersecurity, and related fields.
+                </p>
+
+                <span class="tag">Technology</span>
+                <span class="tag">Data</span>
+                <span class="tag">Business</span>
+
+                <ul>
+                    <li>IT support</li>
+                    <li>Data analytics</li>
+                    <li>Project management</li>
+                    <li>UX design</li>
+                    <li>Cybersecurity</li>
+                </ul>
+
+                <div class="sources">
+                    <h4>Explore</h4>
+                    <a href="https://grow.google/certificates/" target="_blank">
+                        Google Career Certificates
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="card-header">Microsoft Learn</div>
+            <div class="card-body">
+
+                <p>
+                    Free learning paths covering cloud, data, security,
+                    Microsoft products, and technical fundamentals.
+                </p>
+
+                <span class="tag">Cloud</span>
+                <span class="tag">IT</span>
+                <span class="tag">Data</span>
+
+                <ul>
+                    <li>Azure fundamentals</li>
+                    <li>Microsoft 365</li>
+                    <li>Cloud concepts</li>
+                    <li>Security fundamentals</li>
+                    <li>Data technologies</li>
+                </ul>
+
+                <div class="sources">
+                    <h4>Explore</h4>
+                    <a href="https://learn.microsoft.com/training/" target="_blank">
+                        Microsoft Learn
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="card-header">Salesforce Trailhead</div>
+            <div class="card-body">
+
+                <p>
+                    Hands-on learning for CRM, Salesforce administration,
+                    automation, data, and business processes.
+                </p>
+
+                <span class="tag">CRM</span>
+                <span class="tag">Salesforce</span>
+                <span class="tag">Business Systems</span>
+
+                <ul>
+                    <li>CRM fundamentals</li>
+                    <li>Salesforce administration</li>
+                    <li>Data management</li>
+                    <li>Automation</li>
+                    <li>Business workflows</li>
+                </ul>
+
+                <div class="sources">
+                    <h4>Explore</h4>
+                    <a href="https://trailhead.salesforce.com" target="_blank">
+                        Salesforce Trailhead
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- AFFORDABLE -->
+
+<section class="container">
+
+    <h2 class="section-title">Affordable Structured Programs</h2>
+
+    <p class="section-description">
+        Consider paid programs only after you have tested the general career
+        direction and understand what employers are actually requesting.
+    </p>
+
+    <div class="grid">
+
+        <div class="card">
+            <div class="card-header">Coursera Career Paths</div>
+
+            <div class="card-body">
+
+                <p>
+                    Structured programs covering technology, business, data,
+                    marketing, and professional skills.
+                </p>
+
+                <span class="tag">Career Certificates</span>
+                <span class="tag">Technology</span>
+                <span class="tag">Business</span>
+
+                <ul>
+                    <li>Google IT Support</li>
+                    <li>Google Data Analytics</li>
+                    <li>Meta Marketing</li>
+                    <li>IBM programs</li>
+                    <li>Project management</li>
+                </ul>
+
+                <div class="sources">
+                    <h4>Explore</h4>
+                    <a href="https://www.coursera.org" target="_blank">
+                        Coursera
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="card-header">LinkedIn Learning</div>
+
+            <div class="card-body">
+
+                <p>
+                    Short-form professional training that can help fill
+                    specific skill gaps.
+                </p>
+
+                <span class="tag">Business</span>
+                <span class="tag">Technology</span>
+                <span class="tag">Communication</span>
+
+                <ul>
+                    <li>Excel and data skills</li>
+                    <li>Business communication</li>
+                    <li>Project management</li>
+                    <li>Leadership</li>
+                    <li>Technology fundamentals</li>
+                </ul>
+
+                <div class="sources">
+                    <h4>Explore</h4>
+                    <a href="https://www.linkedin.com/learning" target="_blank">
+                        LinkedIn Learning
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="card-header">CompTIA Pathways</div>
+
+            <div class="card-body">
+
+                <p>
+                    Industry-recognized IT certifications covering foundational
+                    technology, networking, security, cloud, and infrastructure.
+                </p>
+
+                <span class="tag">IT</span>
+                <span class="tag">Networking</span>
+                <span class="tag">Security</span>
+
+                <ul>
+                    <li>A+ fundamentals</li>
+                    <li>Network+</li>
+                    <li>Security+</li>
+                    <li>Cloud+</li>
+                    <li>IT infrastructure</li>
+                </ul>
+
+                <div class="sources">
+                    <h4>Explore</h4>
+                    <a href="https://www.comptia.org" target="_blank">
+                        CompTIA
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="card-header">AWS Skill Builder</div>
+
+            <div class="card-body">
+
+                <p>
+                    Cloud computing training for people exploring infrastructure,
+                    cloud support, and technical careers.
+                </p>
+
+                <span class="tag">Cloud</span>
+                <span class="tag">AWS</span>
+                <span class="tag">Infrastructure</span>
+
+                <ul>
+                    <li>Cloud fundamentals</li>
+                    <li>AWS services</li>
+                    <li>Cloud architecture</li>
+                    <li>Security concepts</li>
+                    <li>Cloud operations</li>
+                </ul>
+
+                <div class="sources">
+                    <h4>Explore</h4>
+                    <a href="https://skillbuilder.aws" target="_blank">
+                        AWS Skill Builder
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="card-header">Google Cloud Skills</div>
+
+            <div class="card-body">
+
+                <p>
+                    Training and learning resources for cloud computing,
+                    data, infrastructure, and AI-related technology.
+                </p>
+
+                <span class="tag">Cloud</span>
+                <span class="tag">Data</span>
+                <span class="tag">AI</span>
+
+                <ul>
+                    <li>Cloud fundamentals</li>
+                    <li>Data technologies</li>
+                    <li>Infrastructure</li>
+                    <li>AI fundamentals</li>
+                    <li>Cloud career exploration</li>
+                </ul>
+
+                <div class="sources">
+                    <h4>Explore</h4>
+                    <a href="https://www.cloudskillsboost.google" target="_blank">
+                        Google Cloud Skills
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="card-header">IBM SkillsBuild</div>
+
+            <div class="card-body">
+
+                <p>
+                    Career-oriented learning covering technology, AI,
+                    cybersecurity, data, and workplace skills.
+                </p>
+
+                <span class="tag">AI</span>
+                <span class="tag">Cybersecurity</span>
+                <span class="tag">Data</span>
+
+                <ul>
+                    <li>Artificial intelligence</li>
+                    <li>Cybersecurity</li>
+                    <li>Data fundamentals</li>
+                    <li>Professional skills</li>
+                    <li>Technology foundations</li>
+                </ul>
+
+                <div class="sources">
+                    <h4>Explore</h4>
+                    <a href="https://skillsbuild.org" target="_blank">
+                        IBM SkillsBuild
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- HIGH VALUE OPTIONS -->
+
+<section class="container">
+
+    <h2 class="section-title">Career Paths to Investigate</h2>
+
+    <p class="section-description">
+        Do not automatically choose the highest-paying field.
+        Choose the field where your interests, abilities, available training,
+        job demand, and evidence-building opportunities overlap.
+    </p>
+
+    <div class="grid">
+
+        <div class="card">
+            <div class="card-header">Cloud & Infrastructure</div>
+
+            <div class="card-body">
+
+                <p>
+                    A pathway for people interested in systems, infrastructure,
+                    cloud platforms, and technical problem solving.
+                </p>
+
+                <ul>
+                    <li>Cloud fundamentals</li>
+                    <li>Networking</li>
+                    <li>Linux</li>
+                    <li>Identity and access</li>
+                    <li>Cloud administration</li>
+                </ul>
+
+                <strong>Potential next steps:</strong>
+                <p>Cloud fundamentals → projects → junior cloud/IT roles</p>
+
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="card-header">Cybersecurity</div>
+
+            <div class="card-body">
+
+                <p>
+                    A field involving security controls, monitoring,
+                    risk management, systems, and investigation.
+                </p>
+
+                <ul>
+                    <li>Security fundamentals</li>
+                    <li>Networking</li>
+                    <li>Identity management</li>
+                    <li>Security monitoring</li>
+                    <li>Risk management</li>
+                </ul>
+
+                <strong>Potential next steps:</strong>
+                <p>IT fundamentals → security fundamentals → labs → entry-level security/IT</p>
+
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="card-header">Web Development</div>
+
+            <div class="card-body">
+
+                <p>
+                    A portfolio-driven field where projects can demonstrate
+                    ability before professional experience is extensive.
+                </p>
+
+                <ul>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>JavaScript</li>
+                    <li>Git/GitHub</li>
+                    <li>Responsive design</li>
+                </ul>
+
+                <strong>Potential next steps:</strong>
+                <p>Learn fundamentals → build projects → portfolio → freelance/junior roles</p>
+
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="card-header">Data Analytics</div>
+
+            <div class="card-body">
+
+                <p>
+                    A pathway for people who enjoy numbers, patterns,
+                    business questions, and explaining findings.
+                </p>
+
+                <ul>
+                    <li>Excel</li>
+                    <li>SQL</li>
+                    <li>Data visualization</li>
+                    <li>Statistics</li>
+                    <li>Business analysis</li>
+                </ul>
+
+                <strong>Potential next steps:</strong>
+                <p>Excel → SQL → dashboards → portfolio → analyst applications</p>
+
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="card-header">CRM & Business Systems</div>
+
+            <div class="card-body">
+
+                <p>
+                    A strong option for people who enjoy business processes,
+                    customer data, organization, automation, and technology.
+                </p>
+
+                <ul>
+                    <li>CRM administration</li>
+                    <li>Sales operations</li>
+                    <li>Customer data</li>
+                    <li>Workflow automation</li>
+                    <li>Reporting</li>
+                </ul>
+
+                <strong>Potential next steps:</strong>
+                <p>CRM fundamentals → sandbox projects → portfolio → operations/CRM roles</p>
+
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="card-header">Digital Marketing</div>
+
+            <div class="card-body">
+
+                <p>
+                    A practical path for people interested in customer behavior,
+                    content, advertising, analytics, and business growth.
+                </p>
+
+                <ul>
+                    <li>SEO</li>
+                    <li>Email marketing</li>
+                    <li>Paid advertising</li>
+                    <li>Analytics</li>
+                    <li>Content strategy</li>
+                </ul>
+
+                <strong>Potential next steps:</strong>
+                <p>Learn → create campaigns → produce case studies → apply to marketing roles</p>
+
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="card-header">UX/UI Design</div>
+
+            <div class="card-body">
+
+                <p>
+                    A design-focused field involving user research,
+                    interfaces, usability, and product experiences.
+                </p>
+
+                <ul>
+                    <li>Wireframes</li>
+                    <li>User research</li>
+                    <li>Interface design</li>
+                    <li>Prototyping</li>
+                    <li>Usability testing</li>
+                </ul>
+
+                <strong>Potential next steps:</strong>
+                <p>Design fundamentals → 3 case studies → portfolio → applications</p>
+
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="card-header">Project Coordination</div>
+
+            <div class="card-body">
+
+                <p>
+                    A potential entry point for organized people who enjoy
+                    planning, communication, tracking, and execution.
+                </p>
+
+                <ul>
+                    <li>Project planning</li>
+                    <li>Task tracking</li>
+                    <li>Documentation</li>
+                    <li>Stakeholder communication</li>
+                    <li>Process improvement</li>
+                </ul>
+
+                <strong>Potential next steps:</strong>
+                <p>Project fundamentals → sample project → project portfolio → coordinator roles</p>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- STRATEGY -->
+
+<section class="container strategy" id="strategy">
+
+    <h2 class="section-title">The Sample Before You Commit Strategy</h2>
+
+    <p class="section-description">
+        Before spending hundreds or thousands of dollars, test the career
+        like an experiment. Your goal is to gather evidence before making
+        a large commitment.
+    </p>
+
+    <div class="strategy-grid">
+
+        <div class="strategy-card">
+            <div class="strategy-number">1</div>
+            <h3>Study the Jobs First</h3>
+            <p>
+                Look at 20–30 real job postings. Record repeated skills,
+                software, certifications, experience requirements, salary
+                ranges, and job titles.
+            </p>
+        </div>
+
+        <div class="strategy-card">
+            <div class="strategy-number">2</div>
+            <h3>Sample the Skill</h3>
+            <p>
+                Spend 7–14 days learning the basics through free resources.
+                Do not buy an expensive program yet.
+            </p>
+        </div>
+
+        <div class="strategy-card">
+            <div class="strategy-number">3</div>
+            <h3>Build Something</h3>
+            <p>
+                Create a small project that demonstrates the skill.
+                Employers should be able to see evidence rather than only
+                seeing a certificate.
+            </p>
+        </div>
+
+        <div class="strategy-card">
+            <div class="strategy-number">4</div>
+            <h3>Test the Market</h3>
+            <p>
+                Begin applying to appropriate positions while continuing
+                to learn. Measure responses rather than assuming your
+                strategy is working.
+            </p>
+        </div>
+
+        <div class="strategy-card">
+            <div class="strategy-number">5</div>
+            <h3>Improve the Weak Link</h3>
+            <p>
+                If applications receive no response, investigate the resume,
+                job targeting, experience gap, portfolio, interview ability,
+                or certification relevance.
+            </p>
+        </div>
+
+        <div class="strategy-card">
+            <div class="strategy-number">6</div>
+            <h3>Only Then Invest</h3>
+            <p>
+                Pay for a certification or structured program when your
+                evidence suggests the credential will solve an actual gap.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- TIMELINE -->
+
+<section class="container timeline-section">
+
+    <h2 class="section-title">12-Week Career Testing Timeline</h2>
+
+    <p class="section-description">
+        This is a sample framework. The exact timeline can change depending
+        on the field, your available time, and the complexity of the skill.
+    </p>
+
+    <div class="timeline">
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-content">
+                <h3>Week 1 — Career Research</h3>
+
+                <p>
+                    Choose 2–3 possible career paths. Examine approximately
+                    20–30 job postings for each path.
+                </p>
+
+                <p>
+                    <strong>Deliverable:</strong> A list of the 5–10 most
+                    frequently requested skills.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-content">
+                <h3>Weeks 2–3 — Skill Sampling</h3>
+
+                <p>
+                    Use free resources to experience the actual work.
+                    Complete beginner exercises rather than watching videos
+                    passively.
+                </p>
+
+                <p>
+                    <strong>Deliverable:</strong> One small completed project.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-content">
+                <h3>Weeks 4–5 — Evidence Building</h3>
+
+                <p>
+                    Build one stronger project that resembles something an
+                    employer might actually ask an employee to do.
+                </p>
+
+                <p>
+                    <strong>Deliverable:</strong> Portfolio project,
+                    case study, GitHub repository, dashboard, campaign,
+                    documentation, or other appropriate proof.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-content">
+                <h3>Weeks 6–7 — Resume & Application Testing</h3>
+
+                <p>
+                    Create a targeted resume and begin applying to realistic
+                    positions. Do not wait until you feel completely ready.
+                </p>
+
+                <p>
+                    <strong>Measure:</strong> Applications sent,
+                    responses, recruiter messages, assessments, and interviews.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-content">
+                <h3>Weeks 8–9 — Certification Decision</h3>
+
+                <p>
+                    Now ask whether a certification actually fills a gap
+                    identified in job postings or employer feedback.
+                </p>
+
+                <p>
+                    <strong>Decision:</strong> Continue free learning,
+                    purchase targeted training, or change direction.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-content">
+                <h3>Weeks 10–12 — Market Validation</h3>
+
+                <p>
+                    Continue applying while improving your evidence and
+                    interviewing skills.
+                </p>
+
+                <p>
+                    <strong>Goal:</strong> Determine whether the combination
+                    of skill + evidence + resume + interview preparation is
+                    producing better opportunities.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SCORECARD -->
+
+<section class="container score-section">
+
+    <h2 class="section-title">Track Whether the Strategy Is Working</h2>
+
+    <p class="section-description">
+        Do not judge your career strategy based on feelings alone.
+        Track the funnel from applications to interviews.
+    </p>
+
+    <div class="scorecard">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Metric</th>
+                    <th>What It Tells You</th>
+                    <th>Warning Sign</th>
+                    <th>Possible Adjustment</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>Applications</td>
+                    <td>How much effort is entering the pipeline</td>
+                    <td>Very few applications</td>
+                    <td>Increase targeted applications</td>
+                </tr>
+
+                <tr>
+                    <td>Employer Responses</td>
+                    <td>Whether your profile is attracting attention</td>
+                    <td>Almost no responses</td>
+                    <td>Improve targeting, resume, evidence, or qualifications</td>
+                </tr>
+
+                <tr>
+                    <td>Interviews</td>
+                    <td>Whether your application converts into conversations</td>
+                    <td>Many applications but few interviews</td>
+                    <td>Investigate resume, experience, portfolio, and job fit</td>
+                </tr>
+
+                <tr>
+                    <td>Interview Progression</td>
+                    <td>Whether interviews turn into later stages</td>
+                    <td>Repeated rejection after interviews</td>
+                    <td>Improve interview preparation and technical examples</td>
+                </tr>
+
+                <tr>
+                    <td>Offers</td>
+                    <td>Whether the entire strategy produces employment</td>
+                    <td>No offers after substantial testing</td>
+                    <td>Reassess role targeting, skills, evidence, and market demand</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- FAILURE STRATEGY -->
+
+<section class="container failure">
+
+    <h2 class="section-title">What If the Certification Doesn't Work?</h2>
+
+    <p class="section-description">
+        A certification not producing interviews does not automatically mean
+        you failed. It means you need to determine which part of the system
+        is failing.
+    </p>
+
+    <div class="failure-box">
+
+        <h3>Do Not Immediately Buy Another Certification</h3>
+
+        <p>
+            Repeatedly purchasing credentials without diagnosing the problem
+            can create a cycle of spending money while the underlying issue
+            remains unchanged.
+        </p>
+
+        <div class="failure-grid">
+
+            <div class="failure-card">
+
+                <h4>Problem: No Interviews</h4>
+
+                <p>
+                    If you are submitting many targeted applications and
+                    receiving almost no interviews, examine the resume,
+                    job targeting, experience level, keywords, portfolio,
+                    and whether the credential is actually requested.
+                </p>
+
+            </div>
+
+
+            <div class="failure-card">
+
+                <h4>Problem: Interviews But No Offers</h4>
+
+                <p>
+                    The credential may have done its job by getting you into
+                    the conversation. The next bottleneck may be interviewing,
+                    technical demonstrations, communication, or insufficient
+                    examples of past work.
+                </p>
+
+            </div>
+
+
+            <div class="failure-card">
+
+                <h4>Problem: Employers Want Experience</h4>
+
+                <p>
+                    Build experience substitutes: projects, volunteer work,
+                    freelance work, nonprofit projects, internships,
+                    simulations, documentation, and realistic portfolio work.
+                </p>
+
+            </div>
+
+
+            <div class="failure-card">
+
+                <h4>Problem: Certification Isn't Requested</h4>
+
+                <p>
+                    Stop treating the certification as the centerpiece.
+                    Shift toward the skills and evidence repeatedly requested
+                    in actual job postings.
+                </p>
+
+            </div>
+
+
+            <div class="failure-card">
+
+                <h4>Problem: Market Is Too Competitive</h4>
+
+                <p>
+                    Consider adjacent roles where your existing skills are
+                    more useful. A related entry point can sometimes be more
+                    realistic than attempting to enter the most competitive
+                    role immediately.
+                </p>
+
+            </div>
+
+
+            <div class="failure-card">
+
+                <h4>Problem: You Dislike the Work</h4>
+
+                <p>
+                    Treat that as valuable information. Do not spend months
+                    forcing yourself into a career simply because someone
+                    said it pays well.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- DECISION TREE -->
+
+<section class="container decision">
+
+    <h2 class="section-title">Your Continue, Pivot, or Stop Decision</h2>
+
+    <p class="section-description">
+        After a meaningful testing period, make a deliberate decision instead
+        of endlessly accumulating courses.
+    </p>
+
+    <div class="decision-grid">
+
+        <div class="decision-card keep">
+
+            <h3>CONTINUE</h3>
+
+            <p>
+                Continue when you see evidence that the path is improving.
+            </p>
+
+            <ul>
+                <li>Interview opportunities are increasing</li>
+                <li>Your skills are improving</li>
+                <li>Employers recognize your evidence</li>
+                <li>You enjoy enough of the work to continue</li>
+                <li>You can identify a clear next skill</li>
+            </ul>
+
+        </div>
+
+
+        <div class="decision-card pivot">
+
+            <h3>PIVOT</h3>
+
+            <p>
+                Change your approach when the career may still be viable
+                but your current entry strategy is weak.
+            </p>
+
+            <ul>
+                <li>Applications produce little response</li>
+                <li>Your target roles require experience you don't have</li>
+                <li>An adjacent role is more accessible</li>
+                <li>You need stronger projects</li>
+                <li>You need a different specialization</li>
+            </ul>
+
+        </div>
+
+
+        <div class="decision-card stop">
+
+            <h3>STOP</h3>
+
+            <p>
+                Stop investing heavily when evidence consistently indicates
+                the path is a poor fit.
+            </p>
+
+            <ul>
+                <li>You dislike the actual work</li>
+                <li>The training is financially damaging</li>
+                <li>The credential isn't relevant to target jobs</li>
+                <li>Multiple strategy changes produce no improvement</li>
+                <li>A different path has substantially stronger evidence</li>
+            </ul>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- EMERGENCY CAREER PLAN -->
+
+<section class="container checklist">
+
+    <h2 class="section-title">If Money Is Tight, Use This Order</h2>
+
+    <ul>
+
+        <li>
+            Research the job market before buying training.
+        </li>
+
+        <li>
+            Use free learning resources first.
+        </li>
+
+        <li>
+            Build one small project before buying a major program.
+        </li>
+
+        <li>
+            Begin applying when you have enough evidence to demonstrate beginner ability.
+        </li>
+
+        <li>
+            Track applications, responses, interviews, and rejections.
+        </li>
+
+        <li>
+            Fix the bottleneck before purchasing another credential.
+        </li>
+
+        <li>
+            Prefer targeted credentials requested by employers over collecting unrelated certificates.
+        </li>
+
+        <li>
+            Build experience through projects, volunteer work, freelance work,
+            apprenticeships, internships, contract work, or practical simulations.
+        </li>
+
+        <li>
+            Keep one career path as the primary experiment and one adjacent
+            path as a backup rather than constantly starting over.
+        </li>
+
+    </ul>
+
+</section>
+
+
+<!-- CTA -->
+
+<section class="cta">
+
+    <h2>Build a Career Experiment, Not a Certification Collection</h2>
+
+    <p>
+        Your objective is not to accumulate the most certificates.
+        Your objective is to become more employable. Learn the skill,
+        produce evidence, test the market, measure the results, identify
+        the bottleneck, and change your strategy when the evidence tells you to.
+    </p>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>
+        Remote Career Programs Guide
+    </p>
+
+    <p>
+        Skills • Evidence • Applications • Measurement • Adaptation
+    </p>
+
+</footer>
+
+</body>
+</html>
