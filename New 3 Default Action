@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Default Action Architecture | PathKeeper</title>
+<style>
+:root{
+  --night:#151A2D;
+  --panel:#202841;
+  --panel2:#29334F;
+  --copper:#E6A875;
+  --lavender:#D9D3F2;
+  --paper:#F5F3FA;
+  --muted:#B4BCD2;
+  --line:#414B68;
+  --green:#A7D9BD;
+  --red:#F2A7AE;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--night);color:var(--paper);
+  font-family:Inter,Arial,sans-serif;line-height:1.65;
+}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+a{color:var(--copper)}
+.shell{max-width:1160px;margin:auto;padding:0 25px}
+.topbar{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:16px;padding:22px 0;border-bottom:1px solid var(--line);
+}
+.brand{font-weight:800;letter-spacing:2px;color:var(--copper)}
+.topbar small{color:var(--muted)}
+.hero{padding:74px 0 60px;max-width:900px}
+.eyebrow{
+  color:var(--copper);font-size:.76rem;font-weight:800;
+  letter-spacing:2px;text-transform:uppercase;
+}
+h1{font-size:clamp(2.8rem,7vw,5.8rem);line-height:1.01;
+  letter-spacing:-3px;margin:17px 0 25px}
+h2{font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.15}
+h3{line-height:1.3}
+.hero p,.intro{color:var(--muted);font-size:1.08rem;max-width:740px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{
+  border:1px solid var(--copper);border-radius:8px;
+  padding:12px 18px;background:var(--copper);color:var(--night);
+  font-weight:800;text-decoration:none;display:inline-block;
+}
+.btn.secondary{background:transparent;color:var(--paper);
+  border-color:var(--line)}
+.btn:hover{filter:brightness(1.1)}
+section{padding:55px 0;border-top:1px solid var(--line)}
+.section-head{display:flex;justify-content:space-between;gap:24px;
+  align-items:end;margin-bottom:28px}
+.section-head p{color:var(--muted);max-width:500px}
+.kicker{color:var(--copper);font-size:.78rem;font-weight:800;
+  letter-spacing:1.5px;text-transform:uppercase}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.card{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:14px;padding:23px;min-width:0;
+}
+.card p,.muted{color:var(--muted)}
+.card .number{color:var(--copper);font-size:.8rem;font-weight:800}
+.card h3{margin:8px 0}
+.rule{border-left:3px solid var(--copper);padding:10px 16px;
+  background:var(--panel);margin:18px 0}
+.flow{
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:8px;margin-top:25px;
+}
+.flow div{
+  padding:16px 10px;text-align:center;background:var(--panel);
+  border:1px solid var(--line);border-radius:10px;font-size:.9rem;
+}
+.flow strong{display:block;color:var(--copper);margin-bottom:6px}
+.lab{background:var(--panel);border:1px solid var(--line);
+  padding:clamp(20px,4vw,36px);border-radius:16px}
+label{display:block;font-weight:700;margin:15px 0 7px}
+input,select,textarea{
+  width:100%;background:var(--night);border:1px solid var(--line);
+  color:var(--paper);padding:12px;border-radius:7px;
+}
+textarea{min-height:90px;resize:vertical}
+button:focus-visible,a:focus-visible,input:focus-visible,
+select:focus-visible,textarea:focus-visible{
+  outline:3px solid var(--lavender);outline-offset:3px;
+}
+.output{
+  margin-top:20px;padding:18px;border-radius:10px;
+  background:var(--night);border:1px solid var(--line);
+}
+.output h3{color:var(--copper);margin-top:0}
+.output p{white-space:pre-wrap}
+.good{color:var(--green)}
+.warn{color:var(--copper)}
+.bad{color:var(--red)}
+.lesson{margin-bottom:12px}
+.lesson summary{
+  cursor:pointer;font-weight:800;padding:18px;
+  background:var(--panel);border:1px solid var(--line);border-radius:9px;
+}
+.lesson[open] summary{border-radius:9px 9px 0 0;color:var(--copper)}
+.lesson-content{
+  background:var(--panel);padding:20px;border:1px solid var(--line);
+  border-top:0;border-radius:0 0 9px 9px;color:var(--muted);
+}
+.lesson-content strong{color:var(--paper)}
+.scenario-options{display:grid;gap:10px;margin-top:18px}
+.choice{
+  text-align:left;background:var(--night);color:var(--paper);
+  border:1px solid var(--line);border-radius:9px;padding:15px;
+}
+.choice:hover{border-color:var(--copper)}
+.choice:focus-visible{outline:3px solid var(--lavender)}
+footer{padding:32px 0 50px;color:var(--muted);font-size:.9rem}
+.small{font-size:.88rem}
+@media(max-width:800px){
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .flow{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .section-head{display:block}
+}
+@media(max-width:540px){
+  .shell{padding:0 17px}
+  .grid{grid-template-columns:1fr}
+  .hero{padding:52px 0 40px}
+  h1{letter-spacing:-1.8px}
+  .topbar{align-items:flex-start;flex-direction:column}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="topbar">
+  <div class="brand">PATHKEEPER / SYSTEMS LAB</div>
+  <small>Decision infrastructure · Field guide 02</small>
+</header>
+
+<main>
+  <header class="hero">
+    <div class="eyebrow">Operational intelligence / 02</div>
+    <h1>Default Action Architecture</h1>
+    <p>
+      What should happen when nobody knows what to do next?
+      Design the fallback decisions that keep projects moving,
+      prevent avoidable damage, and make intelligent action possible
+      under pressure.
+    </p>
+    <div class="hero-actions">
+      <a class="btn" href="#architecture">Design a default</a>
+      <a class="btn secondary" href="#simulator">Stress-test a decision</a>
+    </div>
+  </header>
+
+  <section id="architecture">
+    <div class="section-head">
+      <div>
+        <div class="kicker">01 / The architecture</div>
+        <h2>Make the next move explicit.</h2>
+      </div>
+      <p>
+        A default is not merely a habit or a convenient choice.
+        It is a preselected response to a defined condition,
+        designed before that condition occurs.
+      </p>
+    </div>
+
+    <div class="grid">
+      <article class="card">
+        <div class="number">LAYER 01</div>
+        <h3>Trigger</h3>
+        <p>What observable event activates the rule? Examples include a missed deadline, missing information, a full queue, or an unanswered request.</p>
+      </article>
+      <article class="card">
+        <div class="number">LAYER 02</div>
+        <h3>Eligibility</h3>
+        <p>Under what conditions is the default safe to execute? Specify prerequisites, exclusions, and who or what is authorized to act.</p>
+      </article>
+      <article class="card">
+        <div class="number">LAYER 03</div>
+        <h3>Fallback action</h3>
+        <p>Define the smallest useful action that preserves progress without creating disproportionate cost or irreversible consequences.</p>
+      </article>
+      <article class="card">
+        <div class="number">LAYER 04</div>
+        <h3>Escalation</h3>
+        <p>Specify which conditions require a human decision, additional evidence, or a pause rather than automatic execution.</p>
+      </article>
+      <article class="card">
+        <div class="number">LAYER 05</div>
+        <h3>Recovery</h3>
+        <p>When better information arrives, determine how to correct, resume, reverse, or replace the temporary decision.</p>
+      </article>
+      <article class="card">
+        <div class="number">LAYER 06</div>
+        <h3>Verification</h3>
+        <p>Measure whether the default actually improved outcomes. Record failures, overrides, delays, and unintended consequences.</p>
+      </article>
+    </div>
+
+    <div class="flow" aria-label="Default action decision sequence">
+      <div><strong>01</strong>Detect condition</div>
+      <div><strong>02</strong>Check constraints</div>
+      <div><strong>03</strong>Act or pause</div>
+      <div><strong>04</strong>Verify result</div>
+      <div><strong>05</strong>Adapt rule</div>
+    </div>
+
+    <div class="rule">
+      <strong>Design rule:</strong> Automate routine, reversible decisions.
+      Require stronger evidence and explicit authorization for decisions
+      with high potential harm or difficult-to-reverse consequences.
+    </div>
+  </section>
+
+  <section id="simulator">
+    <div class="section-head">
+      <div>
+        <div class="kicker">02 / Decision simulation</div>
+        <h2>What should the system do?</h2>
+      </div>
+      <p>
+        Test a response against uncertainty, urgency, reversibility,
+        and potential loss. These scenarios illustrate the method;
+        they are not a substitute for domain-specific safety rules.
+      </p>
+    </div>
+
+    <div class="lab">
+      <label for="situation">Choose a situation</label>
+      <select id="situation">
+        <option value="missing">Required information is missing</option>
+        <option value="deadline">A deadline is approaching</option>
+        <option value="failure">A process has failed twice</option>
+        <option value="urgent">An urgent request has unclear authority</option>
+        <option value="overload">The work queue is overloaded</option>
+      </select>
+
+      <label for="impact">Potential impact if the action is wrong</label>
+      <select id="impact">
+        <option value="low">Low — easy to correct</option>
+        <option value="medium">Medium — costly to correct</option>
+        <option value="high">High — serious or irreversible consequences</option>
+      </select>
+
+      <label for="reversible">Can the action be reversed?</label>
+      <select id="reversible">
+        <option value="yes">Yes, easily</option>
+        <option value="partial">Partially or with significant cost</option>
+        <option value="no">No, or not reliably</option>
+      </select>
+
+      <label for="urgency">Time pressure</label>
+      <select id="urgency">
+        <option value="normal">Normal — time to investigate</option>
+        <option value="high">High — a timely response matters</option>
+      </select>
+
+      <button class="btn" id="analyze" type="button">Generate default protocol</button>
+
+      <div class="output" id="simulationOutput" aria-live="polite">
+        <h3>Decision protocol</h3>
+        <p>Select the conditions and generate a protocol to see a suggested fallback action.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div>
+        <div class="kicker">03 / Applied intelligence</div>
+        <h2>Design for reality, not ideal conditions.</h2>
+      </div>
+      <p>Strong architectures anticipate human behavior, system failures, and the temptation to keep moving when stopping is wiser.</p>
+    </div>
+
+    <details class="lesson">
+      <summary>Lesson A — The asymmetry of mistakes</summary>
+      <div class="lesson-content">
+        <p><strong>Core idea:</strong> Two possible mistakes may have radically different costs. Acting too soon may be more damaging than waiting, or waiting may destroy a time-sensitive opportunity.</p>
+        <p><strong>Method:</strong> Estimate the cost of a false action, the cost of delay, the reversibility of each outcome, and the value of additional information.</p>
+        <p><strong>Advanced insight:</strong> Optimize for expected loss and worst-case exposure, not just the probability of being correct. When potential harm is catastrophic, a low probability may still justify a strict safeguard.</p>
+        <p><strong>Exercise:</strong> List three decisions you make repeatedly. For each, identify which mistake is more expensive and design a default that reflects that asymmetry.</p>
+      </div>
+    </details>
+
+    <details class="lesson">
+      <summary>Lesson B — Option preservation and reversibility</summary>
+      <div class="lesson-content">
+        <p><strong>Core idea:</strong> Under uncertainty, a small reversible step can be more intelligent than a large commitment.</p>
+        <p><strong>Method:</strong> Prefer drafts before publication, pilots before full deployment, short experiments before long contracts, and backups before destructive changes.</p>
+        <p><strong>Advanced insight:</strong> A reversible action creates information while preserving future choices. This is valuable when uncertainty is high and the cost of waiting for perfect knowledge is also high.</p>
+        <p><strong>Exercise:</strong> Take one stalled project and redesign its next step so it can produce evidence within 24 hours without locking you into a costly path.</p>
+      </div>
+    </details>
+
+    <details class="lesson">
+      <summary>Lesson C — The value of information</summary>
+      <div class="lesson-content">
+        <p><strong>Core idea:</strong> More information is not always worth obtaining. Information is valuable when it can change the decision enough to justify its cost.</p>
+        <p><strong>Method:</strong> Ask three questions: What decision depends on this information? What would I do differently depending on the answer? Is the expected improvement worth the time and resources?</p>
+        <p><strong>Advanced insight:</strong> Information gathering has diminishing returns. Establish a stopping rule before research expands indefinitely.</p>
+        <p><strong>Exercise:</strong> Before your next research session, write down the decision, the key uncertainty, and the evidence threshold that would be sufficient to act.</p>
+      </div>
+    </details>
+
+    <details class="lesson">
+      <summary>Lesson D — Defaults change behavior</summary>
+      <div class="lesson-content">
+        <p><strong>Core idea:</strong> People often follow the path that requires the least effort. A default therefore influences behavior even when alternatives technically remain available.</p>
+        <p><strong>Method:</strong> Make beneficial routine actions easy, make important consequences visible, and preserve informed choice where possible.</p>
+        <p><strong>Advanced insight:</strong> A default is a form of power. Examine who benefits, who bears the risk, whether opting out is practical, and whether the choice is transparent.</p>
+        <p><strong>Exercise:</strong> Inspect a workflow you use. Identify its default behavior, the person who benefits from it, and the person who pays when it fails.</p>
+      </div>
+    </details>
+
+    <details class="lesson">
+      <summary>Lesson E — Failure containment and graceful degradation</summary>
+      <div class="lesson-content">
+        <p><strong>Core idea:</strong> A resilient system does not need every component to work perfectly. It needs failures to remain contained and core functions to continue safely.</p>
+        <p><strong>Method:</strong> Define a minimum viable operating state, a safe pause condition, a fallback channel, and a recovery procedure.</p>
+        <p><strong>Advanced insight:</strong> Avoid cascading failure. If one dependency fails, do not allow downstream components to proceed as if valid input had been received.</p>
+        <p><strong>Exercise:</strong> Draw the steps of a project. Remove one critical dependency and identify which actions can continue, which must stop, and what evidence permits recovery.</p>
+      </div>
+    </details>
+
+    <details class="lesson">
+      <summary>Lesson F — Feedback, drift, and adaptive defaults</summary>
+      <div class="lesson-content">
+        <p><strong>Core idea:</strong> A once-effective default can become harmful when the environment changes.</p>
+        <p><strong>Method:</strong> Track outcomes, exceptions, override frequency, and changes in operating conditions. Review rules on a defined schedule or when a trigger threshold is reached.</p>
+        <p><strong>Advanced insight:</strong> Frequent overrides may signal a bad default, changed circumstances, poor training, or an incentive conflict. Do not automatically treat human overrides as errors.</p>
+        <p><strong>Exercise:</strong> Define one metric that would reveal your default is failing and one threshold that would trigger a review.</p>
+      </div>
+    </details>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div>
+        <div class="kicker">04 / Architecture workshop</div>
+        <h2>Build your own default rule.</h2>
+      </div>
+      <p>Turn a recurring decision into a documented, testable operating rule.</p>
+    </div>
+
+    <div class="lab">
+      <label for="trigger">1. Trigger — What condition starts the rule?</label>
+      <input id="trigger" placeholder="Example: No response 24 hours before a deadline">
+
+      <label for="objective">2. Objective — What must the default protect?</label>
+      <input id="objective" placeholder="Example: Preserve delivery without sacrificing quality">
+
+      <label for="action">3. Default action — What should happen?</label>
+      <textarea id="action" placeholder="Example: Prepare the current draft and identify unresolved items"></textarea>
+
+      <label for="guardrail">4. Guardrail — When must the system stop or escalate?</label>
+      <textarea id="guardrail" placeholder="Example: Do not publish externally without approval"></textarea>
+
+      <label for="recovery">5. Recovery — What happens when new information arrives?</label>
+      <textarea id="recovery" placeholder="Example: Reassess the draft, update assumptions, and notify affected people"></textarea>
+
+      <label for="metric">6. Verification — How will you measure success?</label>
+      <input id="metric" placeholder="Example: On-time completion rate and number of rework incidents">
+
+      <button class="btn" id="build" type="button">Create architecture specification</button>
+      <button class="btn secondary" id="copy" type="button">Copy specification</button>
+      <div class="output" id="blueprintOutput" aria-live="polite">
+        <h3>Your system specification</h3>
+        <p>Complete the fields and create your architecture.</p>
+      </div>
+      <p class="small muted">Your specification is generated in this page. It is not automatically saved to an account or sent to a server.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div>
+        <div class="kicker">05 / Stress testing</div>
+        <h2>Can your default survive pressure?</h2>
+      </div>
+      <p>A default that works only under ideal conditions is not a reliable architecture.</p>
+    </div>
+
+    <div class="grid">
+      <article class="card">
+        <h3>Missing data</h3>
+        <p>Does the rule distinguish unknown values from zero, false, or confirmed absence?</p>
+      </article>
+      <article class="card">
+        <h3>Repeated failure</h3>
+        <p>Does the system stop repeating the same failed action without investigating the cause?</p>
+      </article>
+      <article class="card">
+        <h3>Conflicting goals</h3>
+        <p>When speed and quality conflict, is the priority explicit or left to guesswork?</p>
+      </article>
+      <article class="card">
+        <h3>Adversarial behavior</h3>
+        <p>Could someone exploit the fallback, manipulate its trigger, or benefit from an unsafe default?</p>
+      </article>
+      <article class="card">
+        <h3>Resource exhaustion</h3>
+        <p>What happens when time, budget, attention, or system capacity is nearly depleted?</p>
+      </article>
+      <article class="card">
+        <h3>Recovery and accountability</h3>
+        <p>Can the decision be audited, corrected, and attributed to the right person or process?</p>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker">06 / Field assessment</div>
+    <h2>Test your understanding.</h2>
+    <p class="intro">A project system automatically publishes a report whenever its scheduled time arrives. One day, a critical data source is unavailable. The report could still be published with missing figures.</p>
+    <div class="lab">
+      <p><strong>Which default is best designed?</strong></p>
+      <div class="scenario-options">
+        <button class="choice" data-answer="a">A. Publish anyway because the schedule takes priority.</button>
+        <button class="choice" data-answer="b">B. Invent estimates for the missing figures to keep the report complete.</button>
+        <button class="choice" data-answer="c">C. Mark the data unavailable, prevent misleading publication, notify the owner, and provide a recovery path.</button>
+        <button class="choice" data-answer="d">D. Stop every unrelated process until the data source returns.</button>
+      </div>
+      <div class="output" id="quizOutput" aria-live="polite">
+        <h3>Reason through the trade-off</h3>
+        <p>Choose an answer to reveal the analysis.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <strong>PATHKEEPER</strong> · Build the rules that make progress repeatable.
+  <p>Learning note: Default actions must be adapted to the real risks, legal requirements, and people affected by the system. High-impact decisions require appropriate human oversight.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+
+  $('analyze').addEventListener('click', function(){
+    const situation = $('situation').value;
+    const impact = $('impact').value;
+    const reversible = $('reversible').value;
+    const urgency = $('urgency').value;
+
+    const situations = {
+      missing: {
+        trigger:'A required input is unavailable.',
+        action:'Identify the missing input, label uncertainty explicitly, and continue only with independent tasks that do not depend on it.',
+        review:'Set an information-retrieval deadline and assign an owner.'
+      },
+      deadline: {
+        trigger:'A deadline is approaching.',
+        action:'Identify the minimum acceptable deliverable, verify essential requirements, and communicate any limitation before the deadline.',
+        review:'Reassess scope and communicate the next checkpoint.'
+      },
+      failure: {
+        trigger:'The same process has failed twice.',
+        action:'Stop automatic repetition, preserve diagnostic evidence, and investigate the failure before another attempt.',
+        review:'Require a changed condition or corrective action before retrying.'
+      },
+      urgent: {
+        trigger:'A time-sensitive request has unclear authority.',
+        action:'Acknowledge the request, verify authorization, and prepare safe reversible work without committing to an unapproved action.',
+        review:'Escalate to the authorized decision-maker.'
+      },
+      overload: {
+        trigger:'Incoming work exceeds available capacity.',
+        action:'Protect critical obligations, pause lower-priority intake where possible, and communicate realistic delivery times.',
+        review:'Reprioritize using explicit impact and deadline criteria.'
+      }
+    };
+
+    const s = situations[situation];
+    let response = '';
+    let caution = '';
+
+    if(impact === 'high' || reversible === 'no'){
+      response = 'SAFE DEFAULT: Pause the consequential or irreversible action. Preserve evidence, protect affected parties, and require qualified authorization before proceeding.';
+      caution = 'High impact or low reversibility overrides ordinary convenience. Urgency alone is not permission to bypass a critical safeguard.';
+    } else if(impact === 'medium' || reversible === 'partial'){
+      response = 'CONTROLLED DEFAULT: Choose a limited, documented step. Set a clear review point and obtain confirmation before expanding the commitment.';
+      caution = 'Use a bounded action and monitor its consequences before scaling.';
+    } else {
+      response = 'LOW-RISK DEFAULT: Take the smallest useful reversible action, record the assumption, and inspect the result.';
+      caution = 'Reversibility reduces the cost of learning, but does not eliminate the need for verification.';
+    }
+
+    if(urgency === 'high'){
+      response += '\n\nTime-pressure adjustment: shorten the decision window, notify the responsible person promptly, and prioritize protective action. Do not invent missing evidence.';
+    }
+
+    $('simulationOutput').innerHTML =
+      '<h3>Suggested protocol</h3>' +
+      '<p><strong>Trigger:</strong> '+s.trigger+'</p>' +
+      '<p><strong>Context-specific action:</strong> '+s.action+'</p>' +
+      '<p><strong>Risk response:</strong> '+response+'</p>' +
+      '<p><strong>Review condition:</strong> '+s.review+'</p>' +
+      '<p class="warn">'+caution+'</p>' +
+      '<p class="small muted">Decision aid only. Confirm domain-specific requirements before implementing this protocol.</p>';
+  });
+
+  let latestSpecification = '';
+
+  $('build').addEventListener('click', function(){
+    const fields = [
+      ['Trigger','trigger'],
+      ['Objective','objective'],
+      ['Default action','action'],
+      ['Guardrail / escalation','guardrail'],
+      ['Recovery procedure','recovery'],
+      ['Success metric','metric']
+    ];
+    const values = fields.map(([label,id]) => ({
+      label,
+      value:$(id).value.trim()
+    }));
+
+    const missing = values.filter(item => !item.value);
+    latestSpecification =
+      'DEFAULT ACTION ARCHITECTURE\n\n' +
+      values.map(item => item.label+':\n'+(item.value || '[To be defined]')).join('\n\n');
+
+    $('blueprintOutput').innerHTML =
+      '<h3>Architecture specification</h3>' +
+      '<p>'+escapeHtml(latestSpecification)+'</p>' +
+      (missing.length
+        ? '<p class="warn">Incomplete specification: define '+missing.map(x=>x.label).join(', ')+'.</p>'
+        : '<p class="good">All six design fields are populated. Next, test failure conditions and assign an owner for review.</p>');
+  });
+
+  $('copy').addEventListener('click', async function(){
+    if(!latestSpecification){
+      $('build').click();
+    }
+    try{
+      await navigator.clipboard.writeText(latestSpecification);
+      $('blueprintOutput').insertAdjacentHTML('beforeend',
+        '<p class="good">Specification copied.</p>');
+    }catch(error){
+      $('blueprintOutput').insertAdjacentHTML('beforeend',
+        '<p class="warn">Automatic copying is unavailable in this environment. Select and copy the specification text manually.</p>');
+    }
+  });
+
+  function escapeHtml(value){
+    return value.replace(/[&<>"']/g, char => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[char]));
+  }
+
+  document.querySelectorAll('[data-answer]').forEach(button => {
+    button.addEventListener('click', function(){
+      const correct = this.dataset.answer === 'c';
+      $('quizOutput').innerHTML = correct
+        ? '<h3 class="good">Correct — contain the failure.</h3><p>Option C preserves data integrity, makes uncertainty visible, prevents a misleading publication, assigns responsibility, and defines a path to recovery. It protects quality without unnecessarily stopping unrelated work.</p><p><strong>Architectural lesson:</strong> The best default is often a safe degraded state, not total shutdown or blind continuation.</p>'
+        : '<h3 class="warn">Examine the failure mode.</h3><p>This choice either prioritizes schedule over truth, introduces unsupported information, or interrupts work that may be independent of the failed dependency. A better default contains the failure and makes recovery explicit.</p><p>Try again by selecting the option that preserves data integrity while keeping safe work moving.</p>';
+    });
+  });
+})();
+</script>
+</body>
+</html>
