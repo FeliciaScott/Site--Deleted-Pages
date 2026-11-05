@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Remote Work Opportunity Hub | Build Skills & Career Evidence</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --green:#5bbf8a;
+    --green-dark:#34845d;
+    --dark:#153243;
+    --light:#f5fff9;
+    --accent:#e8fff1;
+    --cream:#fffaf0;
+    --text:#333;
+    --shadow:0 8px 22px rgba(0,0,0,.07);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:var(--light);
+    color:var(--text);
+    line-height:1.6;
+}
+
+header{
+    background:linear-gradient(135deg,#5bbf8a,#7fe3b0);
+    color:white;
+    text-align:center;
+    padding:55px 7%;
+}
+
+header h1{
+    font-size:2.6rem;
+    margin-bottom:12px;
+}
+
+header p{
+    max-width:850px;
+    margin:auto;
+    font-size:1rem;
+}
+
+.education{
+    padding:45px 7%;
+    max-width:1200px;
+    margin:auto;
+}
+
+.education h2{
+    text-align:center;
+    color:var(--dark);
+    margin-bottom:18px;
+}
+
+.education > p{
+    max-width:900px;
+    margin:0 auto 12px;
+}
+
+.career-grid,
+.myth-grid,
+.program-grid,
+.strategy-grid,
+.evidence-grid,
+.timeline-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+    gap:18px;
+    margin-top:22px;
+}
+
+.career-grid div,
+.myth-grid div,
+.strategy-card,
+.evidence-card,
+.timeline-card{
+    background:white;
+    padding:20px;
+    border-radius:13px;
+    box-shadow:var(--shadow);
+}
+
+.career-grid h3,
+.myth-grid h3,
+.strategy-card h3,
+.evidence-card h3,
+.timeline-card h3{
+    color:var(--dark);
+    margin-bottom:7px;
+}
+
+.career-grid p,
+.myth-grid p,
+.strategy-card p,
+.evidence-card p,
+.timeline-card p{
+    margin-bottom:8px;
+}
+
+.section-title{
+    text-align:center;
+    color:var(--dark);
+    margin-bottom:25px;
+}
+
+/* CAREER STRATEGY */
+
+.strategy-section{
+    background:var(--cream);
+    padding:50px 7%;
+}
+
+.strategy-section > div{
+    max-width:1200px;
+    margin:auto;
+}
+
+.strategy-intro{
+    text-align:center;
+    max-width:850px;
+    margin:0 auto 25px;
+}
+
+.strategy-intro h2{
+    color:var(--dark);
+    margin-bottom:12px;
+}
+
+.strategy-number{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:var(--green);
+    color:white;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.strategy-card ul,
+.evidence-card ul,
+.timeline-card ul{
+    padding-left:18px;
+    margin-top:7px;
+}
+
+.formula{
+    margin:25px auto 0;
+    max-width:850px;
+    background:var(--dark);
+    color:white;
+    padding:22px;
+    border-radius:15px;
+    text-align:center;
+}
+
+.formula h3{
+    margin-bottom:8px;
+}
+
+.formula p{
+    font-size:1.05rem;
+}
+
+/* EVIDENCE */
+
+.evidence-section{
+    padding:50px 7%;
+}
+
+.evidence-section > div{
+    max-width:1200px;
+    margin:auto;
+}
+
+.evidence-card{
+    border-top:4px solid var(--green);
+}
+
+/* TIMELINE */
+
+.timeline-section{
+    background:var(--accent);
+    padding:50px 7%;
+}
+
+.timeline-section > div{
+    max-width:1200px;
+    margin:auto;
+}
+
+.timeline-card span{
+    display:block;
+    color:var(--green-dark);
+    font-weight:700;
+    margin-bottom:5px;
+}
+
+/* PROGRAMS */
+
+.programs{
+    padding:50px 7%;
+    max-width:1200px;
+    margin:auto;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+}
+
+.card-header{
+    background:var(--green);
+    color:white;
+    padding:16px 20px;
+}
+
+.card-body{
+    padding:20px;
+}
+
+.card-body ul{
+    padding-left:18px;
+    margin-top:7px;
+}
+
+.sources{
+    margin-top:15px;
+    background:var(--accent);
+    padding:13px;
+    border-radius:9px;
+}
+
+.sources h4{
+    color:var(--dark);
+    margin-bottom:6px;
+    margin-top:8px;
+}
+
+.sources h4:first-child{
+    margin-top:0;
+}
+
+.sources a{
+    display:block;
+    text-decoration:none;
+    color:var(--dark);
+    margin-bottom:5px;
+    font-weight:500;
+}
+
+.sources a:hover{
+    color:var(--green-dark);
+}
+
+/* WARNING */
+
+.warning{
+    background:#fff7e6;
+    padding:45px 7%;
+}
+
+.warning-inner{
+    max-width:950px;
+    margin:auto;
+}
+
+.warning h2{
+    text-align:center;
+    color:var(--dark);
+    margin-bottom:15px;
+}
+
+.warning ul{
+    max-width:800px;
+    margin:auto;
+    padding-left:22px;
+}
+
+/* CTA */
+
+.cta{
+    background:var(--dark);
+    color:white;
+    text-align:center;
+    padding:55px 7%;
+}
+
+.cta h2{
+    margin-bottom:12px;
+}
+
+.cta p{
+    max-width:850px;
+    margin:0 auto 10px;
+}
+
+footer{
+    background:#0f2230;
+    color:white;
+    text-align:center;
+    padding:18px;
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+    header{
+        padding:45px 6%;
+    }
+
+    header h1{
+        font-size:2.1rem;
+    }
+
+    .education,
+    .programs,
+    .evidence-section,
+    .timeline-section,
+    .strategy-section,
+    .warning{
+        padding:38px 6%;
+    }
+
+    .career-grid,
+    .myth-grid,
+    .program-grid,
+    .strategy-grid,
+    .evidence-grid,
+    .timeline-grid{
+        gap:15px;
+        margin-top:18px;
+    }
+
+    .career-grid div,
+    .myth-grid div,
+    .strategy-card,
+    .evidence-card,
+    .timeline-card{
+        padding:18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h1>Remote Work Opportunity Hub</h1>
+
+<p>
+Remote work is no longer limited to software engineers.
+Opportunities exist in customer service, administration,
+marketing, recruiting, bookkeeping, project management,
+technology, healthcare support, sales, operations, and many
+other fields.
+</p>
+
+</header>
+
+
+<!-- INTRODUCTION -->
+
+<section class="education">
+
+<h2>What Is Remote Work?</h2>
+
+<p>
+Remote work means performing job responsibilities outside
+of a traditional office. Workers may complete their duties
+from home, coworking spaces, libraries, or other suitable
+locations.
+</p>
+
+<p>
+Many remote careers focus heavily on practical skills,
+communication, reliability, technology proficiency, and
+evidence that a person can perform the work.
+</p>
+
+</section>
+
+
+<!-- CREDENTIAL PROBLEM -->
+
+<section class="education">
+
+<h2>The Credential Problem</h2>
+
+<p>
+A certificate can show that you studied something.
+It does not automatically prove that you can perform the job.
+</p>
+
+<p>
+Someone with five certificates and no evidence of applying
+those skills may still be difficult for an employer to evaluate.
+Meanwhile, someone with fewer credentials who can demonstrate
+real projects, documented results, practical exercises, and
+professional work samples may present a much stronger case.
+</p>
+
+<div class="myth-grid">
+
+<div>
+<h3>Certificate</h3>
+<p>
+Shows that you completed training or passed an assessment.
+</p>
+</div>
+
+<div>
+<h3>Skill</h3>
+<p>
+Shows that you understand how to perform a particular task.
+</p>
+</div>
+
+<div>
+<h3>Evidence</h3>
+<p>
+Shows an employer what you can actually produce.
+</p>
+</div>
+
+<div>
+<h3>Experience</h3>
+<p>
+Shows that you have applied your skills in a real or
+realistic work environment.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- MYTHS -->
+
+<section class="education">
+
+<h2>Common Myths About Remote Work</h2>
+
+<div class="myth-grid">
+
+<div>
+<h3>Myth: I Need A Degree</h3>
+<p>
+Many employers value skills, certifications,
+experience, and communication abilities.
+</p>
+</div>
+
+<div>
+<h3>Myth: Remote Work Is Only Tech</h3>
+<p>
+Customer service, bookkeeping, recruiting,
+sales, marketing, and operations can all offer
+remote opportunities.
+</p>
+</div>
+
+<div>
+<h3>Myth: Remote Jobs Pay Less</h3>
+<p>
+Many remote careers offer competitive salaries
+and benefits.
+</p>
+</div>
+
+<div>
+<h3>Myth: Certificates Are Enough</h3>
+<p>
+A certificate can demonstrate learning, but employers
+also want evidence that you can apply the skills.
+Build projects, work samples, and documented results
+alongside your training.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CAREER STRATEGY -->
+
+<section class="strategy-section">
+
+<div>
+
+<div class="strategy-intro">
+
+<h2>Build A Career Without Traditional Credentials</h2>
+
+<p>
+If you do not have a degree, previous job experience, or
+strong professional credentials, do not simply collect
+certificates. Build a career evidence system.
+</p>
+
+<p>
+Your objective is to gradually replace the question
+<strong>"Where have you worked?"</strong> with evidence that
+answers <strong>"What can you do?"</strong>
+</p>
+
+</div>
+
+
+<div class="strategy-grid">
+
+<div class="strategy-card">
+
+<span class="strategy-number">1</span>
+
+<h3>Choose One Target Career</h3>
+
+<p>
+Do not begin by collecting random certificates.
+Choose one career direction first.
+</p>
+
+<ul>
+<li>IT Support</li>
+<li>Digital Marketing</li>
+<li>Customer Success</li>
+<li>CRM Administration</li>
+<li>Project Coordination</li>
+<li>Bookkeeping</li>
+<li>Data Analysis</li>
+<li>Sales Operations</li>
+</ul>
+
+</div>
+
+
+<div class="strategy-card">
+
+<span class="strategy-number">2</span>
+
+<h3>Study Job Descriptions</h3>
+
+<p>
+Find 20–30 real job postings for your target career.
+Record the skills employers repeatedly request.
+</p>
+
+<p>
+Those repeated requirements become your learning roadmap.
+</p>
+
+</div>
+
+
+<div class="strategy-card">
+
+<span class="strategy-number">3</span>
+
+<h3>Identify The Skill Gaps</h3>
+
+<p>
+Separate the job requirements into three categories:
+</p>
+
+<ul>
+<li><strong>Know:</strong> concepts you need to understand</li>
+<li><strong>Do:</strong> tasks you need to perform</li>
+<li><strong>Prove:</strong> evidence you need to show</li>
+</ul>
+
+</div>
+
+
+<div class="strategy-card">
+
+<span class="strategy-number">4</span>
+
+<h3>Choose Certificates Strategically</h3>
+
+<p>
+Certificates should support your career plan rather than
+become the plan itself.
+</p>
+
+<p>
+Choose credentials that repeatedly appear in the job postings
+you are targeting or that teach skills you can demonstrate.
+</p>
+
+</div>
+
+
+<div class="strategy-card">
+
+<span class="strategy-number">5</span>
+
+<h3>Stop Collecting At The Right Time</h3>
+
+<p>
+A common mistake is spending months collecting certificates
+while producing nothing employers can see.
+</p>
+
+<p>
+Once you have enough foundational knowledge to perform useful
+work, shift your time toward building evidence.
+</p>
+
+</div>
+
+
+<div class="strategy-card">
+
+<span class="strategy-number">6</span>
+
+<h3>Build Proof Of Ability</h3>
+
+<p>
+Turn what you learned into projects, simulations, work samples,
+case studies, audits, websites, dashboards, reports, campaigns,
+or other artifacts relevant to your target career.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="formula">
+
+<h3>The Career Evidence Formula</h3>
+
+<p>
+<strong>
+Training + Practice + Projects + Documentation + Applications = Career Evidence
+</strong>
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CERTIFICATE STRATEGY -->
+
+<section class="education">
+
+<h2>How Much Time Should You Spend On Certificates?</h2>
+
+<p>
+There is no universal number of certificates required for a
+career. The better question is whether the certificate is
+closing an important skill gap.
+</p>
+
+<div class="timeline-grid">
+
+<div class="timeline-card">
+
+<span>Stage 1</span>
+
+<h3>Foundation</h3>
+
+<p>
+Spend enough time learning the basic vocabulary, tools,
+concepts, and workflows of the career.
+</p>
+
+<p>
+<strong>Goal:</strong> Understand the field.
+</p>
+
+</div>
+
+
+<div class="timeline-card">
+
+<span>Stage 2</span>
+
+<h3>One Strong Credential</h3>
+
+<p>
+Complete one relevant certificate or structured training
+program that teaches practical skills.
+</p>
+
+<p>
+<strong>Goal:</strong> Establish structured knowledge.
+</p>
+
+</div>
+
+
+<div class="timeline-card">
+
+<span>Stage 3</span>
+
+<h3>Build Evidence</h3>
+
+<p>
+Begin creating projects using the skills you learned.
+Do not wait until you have a perfect resume.
+</p>
+
+<p>
+<strong>Goal:</strong> Demonstrate ability.
+</p>
+
+</div>
+
+
+<div class="timeline-card">
+
+<span>Stage 4</span>
+
+<h3>Add Another Credential Only If Needed</h3>
+
+<p>
+Pursue another certificate when it teaches a missing skill,
+is commonly requested by employers, or meaningfully improves
+your qualifications.
+</p>
+
+<p>
+<strong>Goal:</strong> Close a specific gap.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- EVIDENCE -->
+
+<section class="evidence-section">
+
+<div>
+
+<h2 class="section-title">What Can Replace Missing Experience?</h2>
+
+<p style="text-align:center;max-width:850px;margin:0 auto;">
+You cannot manufacture years of employment experience.
+But you can create credible evidence that demonstrates
+how you think, work, communicate, solve problems, and use
+the tools required for the job.
+</p>
+
+<div class="evidence-grid">
+
+<div class="evidence-card">
+
+<h3>Portfolio Projects</h3>
+
+<p>
+Create realistic projects that resemble the work performed
+in the target career.
+</p>
+
+<ul>
+<li>Build a sample CRM system</li>
+<li>Create a marketing campaign</li>
+<li>Analyze a dataset</li>
+<li>Create a business dashboard</li>
+<li>Build a website</li>
+<li>Create a project plan</li>
+</ul>
+
+</div>
+
+
+<div class="evidence-card">
+
+<h3>Case Studies</h3>
+
+<p>
+Explain a problem, your reasoning, the solution, the tools
+you used, and the outcome.
+</p>
+
+<p>
+A case study turns a project into a professional story.
+</p>
+
+</div>
+
+
+<div class="evidence-card">
+
+<h3>Simulated Work</h3>
+
+<p>
+Create realistic assignments based on actual job duties.
+</p>
+
+<ul>
+<li>Respond to customer scenarios</li>
+<li>Organize a mock project</li>
+<li>Create a sales pipeline</li>
+<li>Audit a website</li>
+<li>Build an Excel report</li>
+<li>Resolve a technical support scenario</li>
+</ul>
+
+</div>
+
+
+<div class="evidence-card">
+
+<h3>Public Work Samples</h3>
+
+<p>
+Create a simple portfolio where employers can inspect your
+work instead of relying only on your resume.
+</p>
+
+<ul>
+<li>Portfolio website</li>
+<li>GitHub projects</li>
+<li>Business case studies</li>
+<li>Reports</li>
+<li>Dashboards</li>
+<li>Design samples</li>
+</ul>
+
+</div>
+
+
+<div class="evidence-card">
+
+<h3>Volunteer & Small Business Projects</h3>
+
+<p>
+Offer to solve a small, clearly defined problem for a nonprofit,
+community organization, small business, or other legitimate
+organization.
+</p>
+
+<p>
+Document what you were asked to do, what you produced, and
+what changed.
+</p>
+
+</div>
+
+
+<div class="evidence-card">
+
+<h3>Performance Documentation</h3>
+
+<p>
+Keep records of measurable outcomes whenever possible.
+</p>
+
+<ul>
+<li>Time saved</li>
+<li>Errors reduced</li>
+<li>Leads generated</li>
+<li>Customers helped</li>
+<li>Processes improved</li>
+<li>Tasks completed</li>
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- 90 DAY CAREER MAP -->
+
+<section class="timeline-section">
+
+<div>
+
+<h2 class="section-title">A Simple 120-Day Career Map</h2>
+
+<div class="timeline-grid">
+
+<div class="timeline-card">
+
+<span>Days 1–30</span>
+
+<h3>Learn</h3>
+
+<ul>
+<li>Choose one career</li>
+<li>Analyze job postings</li>
+<li>Identify required skills</li>
+<li>Begin one relevant training program</li>
+<li>Practice the core tools</li>
+</ul>
+
+</div>
+
+
+<div class="timeline-card">
+
+<span>Days 31–60</span>
+
+<h3>Build</h3>
+
+<ul>
+<li>Complete your first project</li>
+<li>Create a second realistic work sample</li>
+<li>Document your process</li>
+<li>Create a portfolio</li>
+<li>Identify remaining skill gaps</li>
+</ul>
+
+</div>
+
+
+<div class="timeline-card">
+
+<span>Days 61–90</span>
+
+<h3>Prove & Apply</h3>
+
+<ul>
+<li>Finish your strongest projects</li>
+<li>Create case studies</li>
+<li>Improve your resume</li>
+<li>Begin targeted applications</li>
+<li>Ask for feedback</li>
+<li>Improve weak areas</li>
+</ul>
+
+</div>
+
+
+<div class="timeline-card">
+
+<span>Days 91–120</span>
+
+<h3>Target & Improve</h3>
+
+<ul>
+<li>Apply to better-matched positions</li>
+<li>Practice interviews</li>
+<li>Strengthen weak portfolio pieces</li>
+<li>Track application results</li>
+<li>Improve skills based on employer feedback</li>
+<li>Expand professional connections</li>
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SCORECARD -->
+
+<section class="education">
+
+<h2>Your Career Readiness Scorecard</h2>
+
+<p>
+Before collecting another certificate, evaluate whether you
+are actually becoming more employable.
+</p>
+
+<div class="career-grid">
+
+<div>
+<h3>Knowledge</h3>
+<p>
+Can you explain the important concepts of the career without
+reading directly from a course?
+</p>
+</div>
+
+<div>
+<h3>Skill</h3>
+<p>
+Can you perform the core tasks using the tools employers use?
+</p>
+</div>
+
+<div>
+<h3>Evidence</h3>
+<p>
+Can an employer inspect something you created?
+</p>
+</div>
+
+<div>
+<h3>Communication</h3>
+<p>
+Can you clearly explain your decisions, process, and results?
+</p>
+</div>
+
+<div>
+<h3>Professionalism</h3>
+<p>
+Can you meet deadlines, follow instructions, organize work,
+and communicate problems?
+</p>
+</div>
+
+<div>
+<h3>Application</h3>
+<p>
+Are you actually applying to jobs and learning from rejection
+and interview feedback?
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CAREER TYPES -->
+
+<section class="education">
+
+<h2>Types Of Remote Careers</h2>
+
+<div class="career-grid">
+
+<div>
+<h3>Customer Service</h3>
+<p>
+Help customers through phone, email, and chat.
+</p>
+</div>
+
+<div>
+<h3>Virtual Assistance</h3>
+<p>
+Provide administrative support to businesses.
+</p>
+</div>
+
+<div>
+<h3>Digital Marketing</h3>
+<p>
+Manage social media, content, email, SEO, and campaigns.
+</p>
+</div>
+
+<div>
+<h3>Sales</h3>
+<p>
+Generate leads, communicate with prospects, and support revenue.
+</p>
+</div>
+
+<div>
+<h3>Technology</h3>
+<p>
+Software development, IT support, cloud, and cybersecurity.
+</p>
+</div>
+
+<div>
+<h3>Project Management</h3>
+<p>
+Coordinate projects, schedules, tasks, and teams remotely.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SKILLS -->
+
+<section class="education">
+
+<h2>Skills That Increase Remote Opportunities</h2>
+
+<ul>
+<li>Written communication</li>
+<li>Customer service</li>
+<li>Time management</li>
+<li>Google Workspace</li>
+<li>Microsoft Office</li>
+<li>Project management</li>
+<li>CRM software</li>
+<li>Digital marketing</li>
+<li>Artificial intelligence tools</li>
+<li>Remote collaboration software</li>
+<li>Problem solving</li>
+<li>Research and information management</li>
+</ul>
+
+</section>
+
+
+<!-- PROGRAMS -->
+
+<section class="programs">
+
+<h2 class="section-title">Remote Work Programs & Platforms</h2>
+
+<div class="program-grid">
+
+
+<div class="card">
+
+<div class="card-header">
+<h3>Google Career Certificates</h3>
+</div>
+
+<div class="card-body">
+
+<p>
+Industry-focused training programs designed to help people
+build job-relevant skills.
+</p>
+
+<ul>
+<li>IT Support</li>
+<li>Data Analytics</li>
+<li>UX Design</li>
+<li>Project Management</li>
+</ul>
+
+<div class="sources">
+
+<h4>Possible Career Directions</h4>
+
+<ul>
+<li>Remote tech support</li>
+<li>Data analyst roles</li>
+<li>Project coordinator positions</li>
+<li>Entry-level technology careers</li>
+</ul>
+
+<h4>Learn More</h4>
+
+<a href="https://grow.google" target="_blank">
+grow.google
+</a>
+
+<a href="https://coursera.org" target="_blank">
+coursera.org
+</a>
+
+</div>
+
+</div>
+</div>
+
+
+<div class="card">
+
+<div class="card-header">
+<h3>HubSpot Academy</h3>
+</div>
+
+<div class="card-body">
+
+<p>
+Free marketing and business certifications that can support
+remote career development.
+</p>
+
+<ul>
+<li>Email marketing</li>
+<li>Sales software</li>
+<li>Content marketing</li>
+<li>CRM systems</li>
+</ul>
+
+<div class="sources">
+
+<h4>Possible Career Directions</h4>
+
+<ul>
+<li>Marketing assistant</li>
+<li>CRM specialist</li>
+<li>Content coordinator</li>
+<li>Sales support roles</li>
+</ul>
+
+<h4>Learn More</h4>
+
+<a href="https://academy.hubspot.com" target="_blank">
+academy.hubspot.com
+</a>
+
+</div>
+
+</div>
+</div>
+
+
+<div class="card">
+
+<div class="card-header">
+<h3>LinkedIn Learning</h3>
+</div>
+
+<div class="card-body">
+
+<p>
+Professional training for business, technology,
+operations, and leadership skills.
+</p>
+
+<ul>
+<li>Excel</li>
+<li>Leadership</li>
+<li>Project Management</li>
+<li>Business Analysis</li>
+</ul>
+
+<div class="sources">
+
+<h4>Possible Career Directions</h4>
+
+<ul>
+<li>Administrative careers</li>
+<li>Business analyst roles</li>
+<li>Operations support</li>
+<li>Project support</li>
+</ul>
+
+<h4>Learn More</h4>
+
+<a href="https://www.linkedin.com/learning" target="_blank">
+linkedin.com/learning
+</a>
+
+</div>
+
+</div>
+</div>
+
+
+<div class="card">
+
+<div class="card-header">
+<h3>Microsoft Learn</h3>
+</div>
+
+<div class="card-body">
+
+<p>
+Free training and hands-on learning resources for
+technology, business applications, data, cloud,
+and workplace productivity.
+</p>
+
+<ul>
+<li>Microsoft 365</li>
+<li>Azure</li>
+<li>Power Platform</li>
+<li>Data & AI</li>
+</ul>
+
+<div class="sources">
+
+<h4>Possible Career Directions</h4>
+
+<ul>
+<li>IT support</li>
+<li>Cloud support</li>
+<li>Business applications</li>
+<li>Data and technology roles</li>
+</ul>
+
+<h4>Learn More</h4>
+
+<a href="https://learn.microsoft.com" target="_blank">
+learn.microsoft.com
+</a>
+
+</div>
+
+</div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SCAM WARNING -->
+
+<section class="warning">
+
+<div class="warning-inner">
+
+<h2>Remote Work Scam Warning Signs</h2>
+
+<ul>
+<li>Promises of extremely high income for little work</li>
+<li>Requests for money before employment</li>
+<li>No legitimate company website</li>
+<li>Poor or inconsistent communication</li>
+<li>Pressure to act immediately</li>
+<li>Requests for sensitive information too early</li>
+<li>Requests to purchase equipment through an unknown seller</li>
+<li>Requests to deposit or transfer money on behalf of an employer</li>
+</ul>
+
+</div>
+
+</section>
+
+
+<!-- CTA -->
+
+<section class="cta">
+
+<h2>Don't Just Collect Credentials. Build Evidence.</h2>
+
+<p>
+A certificate can help you learn. A project can demonstrate
+that you can apply what you learned. A portfolio can allow
+an employer to inspect your work. A documented result can
+make your ability easier to understand.
+</p>
+
+<p>
+Your career plan should move from
+<strong>learning → practicing → building → documenting → applying.</strong>
+</p>
+
+</section>
+
+
+<footer>
+
+<p>
+Remote Work Opportunity Hub • Helping people discover
+career pathways beyond traditional employment.
+</p>
+
+</footer>
+
+</body>
+</html>
