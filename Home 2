@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PathKeeper | Strategist Intelligence Hub</title>
+
+<style>
+:root {
+  /* CREAM */
+  --cream: #F7F2E8;
+  --cream-light: #FCFAF5;
+  --cream-dark: #EDE3D4;
+  --cream-deep: #E2D2B9;
+
+  /* BLUE */
+  --blue: #294F6D;
+  --blue-deep: #203E57;
+  --blue-mid: #3D6F91;
+  --blue-light: #729BB5;
+  --blue-pale: #DCEAF1;
+
+  /* BROWN */
+  --brown: #49352A;
+  --brown-mid: #765A45;
+  --brown-light: #A18468;
+  --brown-pale: #E8DDCD;
+
+  /* SUPPORTING */
+  --text: #342B26;
+  --muted: #67594E;
+  --border: #D7C9B7;
+  --shadow: 0 15px 35px rgba(73,53,42,.09);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at top right, var(--blue-pale), transparent 35%),
+    var(--cream);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+}
+
+/* NAVIGATION */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--cream-light);
+  border-bottom: 1px solid var(--border);
+  padding: 15px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.brand {
+  color: var(--blue);
+  font-weight: 900;
+  font-size: 1rem;
+  letter-spacing: .06em;
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.nav-links a {
+  color: var(--brown);
+  text-decoration: none;
+  font-size: .82rem;
+  font-weight: 700;
+}
+
+.nav-links a:hover {
+  color: var(--blue-mid);
+}
+
+/* HERO */
+
+.hero {
+  position: relative;
+  padding: 95px 6% 85px;
+  background:
+    radial-gradient(circle at 85% 20%, rgba(114,155,181,.25), transparent 30%),
+    linear-gradient(125deg, var(--blue-deep), var(--blue) 60%, var(--brown));
+  color: var(--cream);
+  overflow: hidden;
+}
+
+.hero:before,
+.hero:after {
+  content: "";
+  position: absolute;
+  border: 1px solid rgba(247,242,232,.15);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero:before {
+  width: 420px;
+  height: 420px;
+  top: -190px;
+  right: -100px;
+}
+
+.hero:after {
+  width: 250px;
+  height: 250px;
+  top: -100px;
+  right: -15px;
+}
+
+.hero-inner {
+  max-width: 1150px;
+  margin: auto;
+  position: relative;
+  z-index: 2;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--cream-deep);
+  font-size: .73rem;
+  font-weight: 800;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.eyebrow span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--cream-deep);
+}
+
+.hero h1 {
+  font-size: clamp(2.7rem, 6vw, 5rem);
+  line-height: 1.04;
+  max-width: 900px;
+  letter-spacing: -.045em;
+}
+
+.hero h1 strong {
+  color: var(--blue-pale);
+}
+
+.hero p {
+  max-width: 740px;
+  margin-top: 24px;
+  font-size: 1.08rem;
+  color: var(--cream);
+}
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.meta {
+  padding: 8px 14px;
+  border: 1px solid rgba(247,242,232,.35);
+  border-radius: 999px;
+  font-size: .76rem;
+  color: var(--cream);
+  background: rgba(247,242,232,.07);
+}
+
+/* PAGE CONTAINER */
+
+.container {
+  max-width: 1150px;
+  margin: auto;
+  padding: 45px 24px 75px;
+}
+
+/* FEATURED PRINCIPLE */
+
+.featured {
+  margin-bottom: 65px;
+  padding: 32px;
+  background: var(--cream-light);
+  border: 1px solid var(--border);
+  border-left: 6px solid var(--blue);
+  border-radius: 14px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 25px;
+  align-items: center;
+  box-shadow: var(--shadow);
+}
+
+.featured-label {
+  color: var(--brown-mid);
+  font-size: .72rem;
+  font-weight: 900;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.featured h2 {
+  color: var(--blue);
+  font-size: 1.55rem;
+  margin-bottom: 9px;
+}
+
+.featured p {
+  color: var(--muted);
+  max-width: 750px;
+}
+
+.framework-number {
+  width: 78px;
+  height: 78px;
+  border: 2px solid var(--blue-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--brown);
+  background: var(--blue-pale);
+}
+
+/* SECTIONS */
+
+.section {
+  margin-top: 65px;
+  scroll-margin-top: 90px;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 20px;
+  margin-bottom: 24px;
+  padding-bottom: 13px;
+  border-bottom: 2px solid var(--border);
+}
+
+.section-heading h2 {
+  font-size: 1.4rem;
+  color: var(--blue);
+}
+
+.section-heading p {
+  font-size: .82rem;
+  color: var(--muted);
+  text-align: right;
+}
+
+/* CARD GRID */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+/* CARDS */
+
+.card {
+  position: relative;
+  background: var(--cream-light);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 24px;
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition:
+    transform .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease;
+}
+
+.card:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 0;
+  background: var(--blue);
+  transition: height .3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--blue-light);
+  box-shadow: 0 18px 35px rgba(73,53,42,.14);
+}
+
+.card:hover:before {
+  height: 100%;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.number {
+  font-size: .73rem;
+  font-weight: 900;
+  color: var(--brown-mid);
+  letter-spacing: .08em;
+}
+
+.badge {
+  font-size: .64rem;
+  font-weight: 800;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--blue-pale);
+  color: var(--blue);
+  border: 1px solid var(--blue-light);
+}
+
+.card h3 {
+  font-size: 1.12rem;
+  line-height: 1.35;
+  margin-bottom: 11px;
+  color: var(--blue);
+}
+
+.card p {
+  font-size: .88rem;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+/* WORKING PAGE LINKS */
+
+.card-link {
+  margin-top: auto;
+  padding-top: 22px;
+  font-size: .78rem;
+  font-weight: 900;
+  color: var(--brown-mid);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: color .2s ease;
+}
+
+.card-link span {
+  transition: transform .2s ease;
+  font-size: 1rem;
+}
+
+.card:hover .card-link span {
+  transform: translateX(5px);
+}
+
+.card-link:hover {
+  color: var(--blue);
+  text-decoration: underline;
+}
+
+.card-resource {
+  margin-top: auto;
+  padding-top: 22px;
+  font-size: .76rem;
+  font-weight: 800;
+  color: var(--blue-mid);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* SECTION DIVIDER */
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 75px 0 15px;
+  color: var(--brown-mid);
+  font-size: .72rem;
+  font-weight: 900;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+
+.divider:before,
+.divider:after {
+  content: "";
+  height: 1px;
+  background: var(--border);
+  flex: 1;
+}
+
+/* BOTTOM PRINCIPLE */
+
+.principle {
+  margin-top: 80px;
+  padding: 45px 30px;
+  border: 1px solid var(--border);
+  background: linear-gradient(125deg, var(--blue), var(--brown));
+  border-radius: 16px;
+  text-align: center;
+}
+
+.principle-label {
+  font-size: .7rem;
+  font-weight: 900;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--cream-deep);
+  margin-bottom: 17px;
+}
+
+.principle h2 {
+  max-width: 800px;
+  margin: auto;
+  font-size: clamp(1.5rem, 3vw, 2.3rem);
+  line-height: 1.3;
+  color: var(--cream);
+}
+
+.principle p {
+  max-width: 700px;
+  margin: 18px auto 0;
+  font-size: .92rem;
+  color: var(--cream);
+}
+
+/* FOOTER */
+
+footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 20px;
+  text-align: center;
+  color: var(--brown-mid);
+  font-size: .76rem;
+  background: var(--cream-dark);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:850px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .featured {
+    grid-template-columns: 1fr;
+  }
+
+  .framework-number {
+    display: none;
+  }
+}
+
+@media(max-width:600px) {
+  .navbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .nav-links {
+    gap: 10px 15px;
+  }
+
+  .hero {
+    padding: 65px 22px 55px;
+  }
+
+  .container {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-heading {
+    display: block;
+  }
+
+  .section-heading p {
+    margin-top: 6px;
+    text-align: left;
+  }
+
+  .card {
+    min-height: 230px;
+  }
+
+  .featured {
+    padding: 23px;
+  }
+
+  .principle {
+    padding: 32px 20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+
+<nav class="navbar">
+  <div class="brand">PATHKEEPER | STRATEGIST INTELLIGENCE</div>
+
+  <div class="nav-links">
+    <a href="#cognitive">Cognitive Systems</a>
+    <a href="#leverage">Leverage</a>
+    <a href="#behavior">Behavioral Architecture</a>
+    <a href="#principle">Strategic Principle</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+
+<header class="hero">
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <span></span>
+      Strategic Intelligence System
+    </div>
+
+    <h1>
+      Think Deeper.<br>
+      <strong>See the System.</strong>
+    </h1>
+
+    <p>
+      A strategic learning environment for understanding attention,
+      behavior, decisions, leverage, positioning, and the systems that
+      shape real-world outcomes.
+    </p>
+
+    <div class="hero-meta">
+      <div class="meta">Attention</div>
+      <div class="meta">Decision Intelligence</div>
+      <div class="meta">Behavior</div>
+      <div class="meta">Leverage</div>
+      <div class="meta">Systems Thinking</div>
+    </div>
+
+  </div>
+</header>
+
+<main class="container">
+
+<!-- FEATURED PRINCIPLE -->
+
+<section class="featured">
+
+  <div>
+    <div class="featured-label">Core Principle</div>
+
+    <h2>
+      Don't just react to events. Learn to analyze the system behind them.
+    </h2>
+
+    <p>
+      Strong strategic thinking means identifying patterns, understanding
+      constraints, recognizing leverage points, and making decisions that
+      remain useful under changing conditions.
+    </p>
+  </div>
+
+  <div class="framework-number">01</div>
+
+</section>
+
+<!-- COGNITIVE SYSTEMS -->
+
+<section class="section" id="cognitive">
+
+  <div class="section-heading">
+    <h2>01 — Cognitive Systems</h2>
+    <p>Control the quality of your thinking environment.</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- COGNITIVE ENVIRONMENT -->
+
+    <article class="card">
+
+      <div class="card-top">
+        <span class="number">01.01</span>
+        <span class="badge">Environment</span>
+      </div>
+
+      <h3>Cognitive Environment Design</h3>
+
+      <p>
+        Structure physical and digital environments to reduce unnecessary
+        decision fatigue and make productive behavior easier.
+      </p>
+
+      <a
+        href="https://sites.google.com/view/pathkeeper/single-cognitive-environment"
+        class="card-link"
+        target="_blank"
+        rel="noopener noreferrer">
+        Explore System <span>→</span>
+      </a>
+
+    </article>
+
+    <!-- ATTENTION -->
+
+    <article class="card">
+
+      <div class="card-top">
+        <span class="number">01.02</span>
+        <span class="badge">Attention</span>
+      </div>
+
+      <h3>Attention Fragmentation Control</h3>
+
+      <p>
+        Understand the cost of constant switching and create boundaries
+        that protect sustained attention.
+      </p>
+
+      <a
+        href="https://sites.google.com/view/pathkeeper/link-attention-fragmentation-control"
+        class="card-link"
+        target="_blank"
+        rel="noopener noreferrer">
+        Explore System <span>→</span>
+      </a>
+
+    </article>
+
+    <!-- PRE-COMMITMENT -->
+
+    <article class="card">
+
+      <div class="card-top">
+        <span class="number">01.03</span>
+        <span class="badge">Decision</span>
+      </div>
+
+      <h3>Pre-Commitment Decision Mapping</h3>
+
+      <p>
+        Design decision rules before emotional pressure arrives so that
+        important choices are not made entirely in the moment.
+      </p>
+
+      <a
+        href="https://sites.google.com/view/pathkeeper/single-pre-commitment"
+        class="card-link"
+        target="_blank"
+        rel="noopener noreferrer">
+        Explore System <span>→</span>
+      </a>
+
+    </article>
+
+  </div>
+</section>
+
+<!-- LEVERAGE AND POSITIONING -->
+
+<section class="section" id="leverage">
+
+  <div class="section-heading">
+    <h2>02 — Leverage & Positioning</h2>
+    <p>Increase the value produced by limited resources.</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- ASYMMETRIC VALUE -->
+
+    <article class="card">
+
+      <div class="card-top">
+        <span class="number">02.01</span>
+        <span class="badge">Economics</span>
+      </div>
+
+      <h3>Asymmetric Value Positioning</h3>
+
+      <p>
+        Identify actions where the potential value created is significantly
+        greater than the resources required to execute them.
+      </p>
+
+      <a
+        href="https://sites.google.com/view/pathkeeper/single-asymmetric"
+        class="card-link"
+        target="_blank"
+        rel="noopener noreferrer">
+        Explore System <span>→</span>
+      </a>
+
+    </article>
+
+    <!-- LOCATION -->
+
+    <article class="card">
+
+      <div class="card-top">
+        <span class="number">02.02</span>
+        <span class="badge">Mobility</span>
+      </div>
+
+      <h3>Location Power Differential Mapping</h3>
+
+      <p>
+        Analyze environments where the same skills, resources, or experience
+        can produce dramatically different opportunities.
+      </p>
+
+      <a
+        href="https://sites.google.com/view/pathkeeper/location-power-differential-mapping"
+        class="card-link"
+        target="_blank"
+        rel="noopener noreferrer">
+        Explore System <span>→</span>
+      </a>
+
+    </article>
+
+    <!-- SKILL RARITY -->
+
+    <article class="card">
+
+      <div class="card-top">
+        <span class="number">02.03</span>
+        <span class="badge">Skills</span>
+      </div>
+
+      <h3>Skill Rarity Engineering</h3>
+
+      <p>
+        Combine complementary capabilities to create a more distinctive
+        professional value proposition.
+      </p>
+
+      <a
+        href="https://sites.google.com/view/pathkeeper/skill-rarity-engineering"
+        class="card-link"
+        target="_blank"
+        rel="noopener noreferrer">
+        Explore System <span>→</span>
+      </a>
+
+    </article>
+
+  </div>
+</section>
+
+<div class="divider">
+  Strategic Architecture
+</div>
+
+<!-- BEHAVIORAL ARCHITECTURE -->
+
+<section class="section" id="behavior">
+
+  <div class="section-heading">
+    <h2>03 — Behavioral Architecture</h2>
+    <p>Understand how information and environments influence action.</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- INFORMATION QUALITY -->
+
+    <article class="card">
+
+      <div class="card-top">
+        <span class="number">03.01</span>
+        <span class="badge">Signal</span>
+      </div>
+
+      <h3>Information Quality Filtering</h3>
+
+      <p>
+        Create rules for deciding which information deserves attention
+        and which inputs create noise without improving decisions.
+      </p>
+
+      <a
+        href="https://sites.google.com/view/pathkeeper/single-information-quality-filter"
+        class="card-link"
+        target="_blank"
+        rel="noopener noreferrer">
+        Explore System <span>→</span>
+      </a>
+
+    </article>
+
+    <!-- DEFAULT ACTION -->
+
+    <article class="card">
+
+      <div class="card-top">
+        <span class="number">03.02</span>
+        <span class="badge">Behavior</span>
+      </div>
+
+      <h3>Default Action Architecture</h3>
+
+      <p>
+        Design environments and cues that make desired behaviors easier
+        to repeat without relying entirely on willpower.
+      </p>
+
+      <a
+        href="https://sites.google.com/view/pathkeeper/single-action-default"
+        class="card-link"
+        target="_blank"
+        rel="noopener noreferrer">
+        Explore System <span>→</span>
+      </a>
+
+    </article>
+
+    <!-- MULTI-OUTCOME -->
+
+    <article class="card">
+
+      <div class="card-top">
+        <span class="number">03.03</span>
+        <span class="badge">Thinking</span>
+      </div>
+
+      <h3>Multi-Outcome Scenario Thinking</h3>
+
+      <p>
+        Evaluate decisions across positive, expected, and negative futures
+        instead of depending entirely on one prediction.
+      </p>
+
+      <div class="card-resource">
+        Strategic Thinking Resource <span>◆</span>
+      </div>
+
+    </article>
+
+  </div>
+</section>
+
+<!-- STRATEGIC PRINCIPLE -->
+
+<section class="principle" id="principle">
+
+  <div class="principle-label">
+    Strategic Principle
+  </div>
+
+  <h2>
+    What receives sustained attention receives the opportunity
+    to shape thought, behavior, and outcomes.
+  </h2>
+
+  <p>
+    The goal is not to control people or predict everything.
+    The goal is to become more deliberate about what receives
+    your attention, how you interpret information, and how you act.
+  </p>
+
+</section>
+
+</main>
+
+<!-- FOOTER -->
+
+<footer>
+  PathKeeper | Strategist Intelligence Hub<br>
+  Think clearly. Analyze deeply. Act deliberately.
+</footer>
+
+</body>
+</html>
