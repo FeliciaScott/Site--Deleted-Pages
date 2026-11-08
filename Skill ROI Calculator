@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill ROI Calculator</title>
+    <style>
+        :root {
+            --bg-color: #f4f6f9;
+            --card-bg: #ffffff;
+            --text-main: #2d3748;
+            --text-muted: #718096;
+            --primary: #3182ce;
+            --primary-hover: #2b6cb0;
+            --success: #38a169;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        header h1 {
+            font-size: 2.25rem;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .wrapper {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--border-color);
+        }
+
+        .card h2 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .prefix {
+            position: absolute;
+            left: 1rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        button {
+            width: 100%;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 1rem;
+        }
+
+        button:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Results Styling */
+        .results-display {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .roi-metric {
+            text-align: center;
+            background: #f0fff4;
+            border: 2px dashed var(--success);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .roi-metric .label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .roi-metric .value {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--success);
+            line-height: 1.2;
+            margin-top: 0.25rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .stat-box {
+            background: var(--bg-color);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-box .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-box .stat-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .note {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Skill ROI Calculator</h1>
+        <p>Measure the financial return of upgrading your skill set or taking a certification.</p>
+    </header>
+
+    <div class="wrapper">
+        <div class="card">
+            <h2>Investment & Projections</h2>
+            <form id="roiForm" onsubmit="calculateROI(event)">
+                <div class="form-group">
+                    <label for="courseCost">Cost of Training / Course</label>
+                    <div class="input-wrapper">
+                        <span class="prefix">$</span>
+                        <input type="number" id="courseCost" value="1500" min="0" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="currentSalary">Current Annual Salary</label>
+                    <div class="input-wrapper">
+                        <span class="prefix">$</span>
+                        <input type="number" id="currentSalary" value="65000" min="0" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="expectedRaise">Expected Annual Salary Post-Skill</label>
+                    <div class="input-wrapper">
+                        <span class="prefix">$</span>
+                        <input type="number" id="expectedRaise" value="78000" min="0" required>
+                    </div>
+                </div>
+
+                <button type="submit">Calculate ROI</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>Your Financial Return</h2>
+            <div class="results-display">
+                <div>
+                    <div class="roi-metric">
+                        <div class="label">First Year ROI</div>
+                        <div class="value" id="roiResult">767%</div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <div class="stat-label">Total Upfront Cost</div>
+                            <div class="stat-value" id="costResult">$1,500</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Annual Pay Increase</div>
+                            <div class="stat-value" id="gainResult">$13,000</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Time to Payback</div>
+                            <div class="stat-value" id="paybackResult">1.4 Months</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">3-Year Net Return</div>
+                            <div class="stat-value" id="threeYearResult">$37,500</div>
+                        </div>
+                    </div>
+                </div>
+                <p class="note">Calculations assume immediate career transition or raise post-upskilling.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function calculateROI(event) {
+        event.preventDefault();
+
+        // Get Input Values
+        const cost = parseFloat(document.getElementById('courseCost').value) || 0;
+        const currentSalary = parseFloat(document.getElementById('currentSalary').value) || 0;
+        const newSalary = parseFloat(document.getElementById('expectedRaise').value) || 0;
+
+        // Calculations
+        const annualGain = newSalary - currentSalary;
+        
+        let roi = 0;
+        let paybackMonths = 0;
+        let threeYearNet = 0;
+
+        if (cost > 0) {
+            roi = (annualGain / cost) * 100;
+            paybackMonths = (cost / annualGain) * 12;
+            threeYearNet = (annualGain * 3) - cost;
+        } else if (annualGain > 0 && cost === 0) {
+            roi = Infinity; 
+            paybackMonths = 0;
+            threeYearNet = annualGain * 3;
+        }
+
+        // Format and Update UI
+        document.getElementById('roiResult').innerText = roi === Infinity ? '∞' : Math.round(roi) + '%';
+        document.getElementById('costResult').innerText = '$' + cost.toLocaleString();
+        document.getElementById('gainResult').innerText = '$' + annualGain.toLocaleString();
+        
+        if (annualGain <= 0) {
+            document.getElementById('roiResult').innerText = '0%';
+            document.getElementById('paybackResult').innerText = 'Never';
+            document.getElementById('threeYearResult').innerText = '$' + (-cost).toLocaleString();
+        } else {
+            document.getElementById('paybackResult').innerText = paybackMonths < 1 
+                ? 'Less than 1 Month' 
+                : paybackMonths.toFixed(1) + ' Months';
+            document.getElementById('threeYearResult').innerText = '$' + threeYearNet.toLocaleString();
+        }
+    }
+</script>
+
+</body>
+</html>
