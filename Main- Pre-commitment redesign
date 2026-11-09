@@ -1,0 +1,2058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pre-Commitment Decision Mapping</title>
+
+<style>
+
+/* =====================================================
+   PRE-COMMITMENT DECISION MAPPING
+   INTERACTIVE DASHBOARD
+===================================================== */
+
+#pcdm-app {
+    --green: #0F2C23;
+    --pink: #F4C2C2;
+    --cream: #F7F9F7;
+    --sage: #7A9A8B;
+    --dark: #081A14;
+    --card: #14372C;
+    --card2: #194336;
+
+    width: 100%;
+    background: var(--green);
+    color: var(--cream);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+    overflow: hidden;
+}
+
+#pcdm-app *,
+#pcdm-app *::before,
+#pcdm-app *::after {
+    box-sizing: border-box;
+}
+
+#pcdm-app button,
+#pcdm-app input,
+#pcdm-app textarea,
+#pcdm-app select {
+    font-family: inherit;
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.pcdm-hero {
+    min-height: 650px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 85% 20%, rgba(244,194,194,.13), transparent 25%),
+        radial-gradient(circle at 10% 90%, rgba(122,154,139,.12), transparent 30%),
+        linear-gradient(135deg, #0F2C23 0%, #12382C 100%);
+}
+
+.pcdm-hero-inner {
+    width: min(1200px, 92%);
+    margin: auto;
+    padding: 80px 0;
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.pcdm-kicker {
+    display: inline-flex;
+    padding: 8px 12px;
+    border: 1px solid rgba(244,194,194,.4);
+    border-radius: 30px;
+    color: var(--pink);
+    font-size: .72rem;
+    font-weight: bold;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.pcdm-hero h1 {
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    line-height: .95;
+    letter-spacing: -0.055em;
+    margin: 0 0 25px;
+}
+
+.pcdm-hero h1 span {
+    color: var(--pink);
+}
+
+.pcdm-hero-description {
+    max-width: 760px;
+    color: #d8e4df;
+    font-size: 1.08rem;
+}
+
+.pcdm-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.pcdm-btn {
+    border: 0;
+    padding: 14px 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.pcdm-btn:hover {
+    transform: translateY(-2px);
+}
+
+.pcdm-btn-primary {
+    background: var(--pink);
+    color: var(--green);
+}
+
+.pcdm-btn-secondary {
+    background: transparent;
+    color: var(--cream);
+    border: 1px solid var(--sage);
+}
+
+
+/* =====================================================
+   HERO VISUAL
+===================================================== */
+
+.pcdm-system {
+    position: relative;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pcdm-ring {
+    position: absolute;
+    border: 1px solid rgba(244,194,194,.25);
+    border-radius: 50%;
+}
+
+.pcdm-ring-1 {
+    width: 350px;
+    height: 350px;
+}
+
+.pcdm-ring-2 {
+    width: 255px;
+    height: 255px;
+}
+
+.pcdm-ring-3 {
+    width: 160px;
+    height: 160px;
+}
+
+.pcdm-core {
+    width: 105px;
+    height: 105px;
+    border-radius: 50%;
+    background: var(--pink);
+    color: var(--green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: .82rem;
+    font-weight: bold;
+    position: relative;
+    z-index: 5;
+    box-shadow: 0 0 55px rgba(244,194,194,.18);
+}
+
+.pcdm-node {
+    position: absolute;
+    z-index: 10;
+    padding: 9px 13px;
+    border-radius: 8px;
+    background: var(--card2);
+    border: 1px solid var(--sage);
+    color: var(--cream);
+    font-size: .72rem;
+}
+
+.pcdm-node-1 {
+    top: 25px;
+    right: 15px;
+}
+
+.pcdm-node-2 {
+    right: -5px;
+    bottom: 60px;
+}
+
+.pcdm-node-3 {
+    left: 10px;
+    bottom: 35px;
+}
+
+.pcdm-node-4 {
+    left: 0;
+    top: 70px;
+}
+
+
+/* =====================================================
+   MAIN CONTAINER
+===================================================== */
+
+.pcdm-container {
+    width: min(1200px, 92%);
+    margin: auto;
+    padding: 75px 0;
+}
+
+.pcdm-section {
+    margin-bottom: 85px;
+}
+
+.pcdm-section-label {
+    color: var(--sage);
+    text-transform: uppercase;
+    letter-spacing: .16em;
+    font-size: .72rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.pcdm-section h2 {
+    margin: 0 0 18px;
+    color: var(--cream);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.08;
+}
+
+.pcdm-section h2 span {
+    color: var(--pink);
+}
+
+.pcdm-intro {
+    max-width: 800px;
+    color: #c9d9d2;
+    margin-bottom: 30px;
+}
+
+
+/* =====================================================
+   PRINCIPLE
+===================================================== */
+
+.pcdm-principle {
+    padding: 35px;
+    border-radius: 18px;
+    border: 1px solid rgba(122,154,139,.35);
+    background: linear-gradient(
+        135deg,
+        rgba(244,194,194,.07),
+        rgba(122,154,139,.05)
+    );
+}
+
+.pcdm-principle-text {
+    font-size: 1.25rem;
+    font-style: italic;
+    max-width: 950px;
+}
+
+
+/* =====================================================
+   ARCHITECTURE CARDS
+===================================================== */
+
+.pcdm-architecture {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.pcdm-architecture-card {
+    border: 1px solid rgba(122,154,139,.35);
+    background: var(--card);
+    border-radius: 17px;
+    padding: 25px;
+    cursor: pointer;
+    transition: .25s ease;
+    min-height: 270px;
+}
+
+.pcdm-architecture-card:hover {
+    border-color: var(--pink);
+    transform: translateY(-5px);
+}
+
+.pcdm-architecture-card.active {
+    border-color: var(--pink);
+    background: var(--card2);
+    box-shadow: 0 15px 40px rgba(0,0,0,.18);
+}
+
+.pcdm-card-number {
+    color: var(--pink);
+    font-size: .72rem;
+    font-weight: bold;
+    letter-spacing: .14em;
+}
+
+.pcdm-architecture-card h3 {
+    margin: 12px 0;
+    font-size: 1.3rem;
+}
+
+.pcdm-architecture-card p {
+    color: #cbdad4;
+}
+
+.pcdm-card-details {
+    display: none;
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(122,154,139,.3);
+}
+
+.pcdm-architecture-card.active .pcdm-card-details {
+    display: block;
+}
+
+.pcdm-card-details ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.pcdm-card-details li {
+    margin-bottom: 7px;
+}
+
+.pcdm-click {
+    display: block;
+    margin-top: 20px;
+    color: var(--pink);
+    font-size: .75rem;
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   DECISION BUILDER
+===================================================== */
+
+.pcdm-builder {
+    border: 1px solid rgba(122,154,139,.4);
+    background: var(--card);
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.pcdm-builder-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.pcdm-field {
+    margin-bottom: 18px;
+}
+
+.pcdm-field label {
+    display: block;
+    color: var(--sage);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-size: .72rem;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+.pcdm-field input,
+.pcdm-field textarea,
+.pcdm-field select {
+    width: 100%;
+    border: 1px solid rgba(122,154,139,.4);
+    background: var(--dark);
+    color: var(--cream);
+    border-radius: 9px;
+    padding: 13px;
+    outline: none;
+}
+
+.pcdm-field input:focus,
+.pcdm-field textarea:focus,
+.pcdm-field select:focus {
+    border-color: var(--pink);
+}
+
+.pcdm-field textarea {
+    min-height: 115px;
+    resize: vertical;
+}
+
+.pcdm-generate {
+    background: var(--pink);
+    color: var(--green);
+    border: 0;
+    padding: 14px 20px;
+    border-radius: 9px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.pcdm-result {
+    display: none;
+    margin-top: 25px;
+    background: var(--dark);
+    border: 1px dashed var(--sage);
+    border-radius: 15px;
+    padding: 25px;
+}
+
+.pcdm-result.visible {
+    display: block;
+}
+
+.pcdm-result-title {
+    color: var(--pink);
+    text-transform: uppercase;
+    font-size: .72rem;
+    letter-spacing: .12em;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.pcdm-rule-line {
+    margin-bottom: 12px;
+}
+
+.pcdm-rule-line strong {
+    color: var(--pink);
+}
+
+
+/* =====================================================
+   DECISION FLOW
+===================================================== */
+
+.pcdm-flow {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+}
+
+.pcdm-flow-step {
+    background: var(--card);
+    border: 1px solid rgba(122,154,139,.35);
+    border-radius: 14px;
+    padding: 20px;
+    cursor: pointer;
+    transition: .2s;
+    text-align: center;
+}
+
+.pcdm-flow-step:hover,
+.pcdm-flow-step.active {
+    border-color: var(--pink);
+    background: var(--card2);
+}
+
+.pcdm-flow-number {
+    color: var(--pink);
+    font-weight: bold;
+    font-size: .72rem;
+}
+
+.pcdm-flow-step h3 {
+    margin: 8px 0;
+}
+
+.pcdm-flow-info {
+    margin-top: 25px;
+    padding: 25px;
+    border-left: 4px solid var(--pink);
+    background: rgba(244,194,194,.05);
+    color: #d8e4df;
+}
+
+
+/* =====================================================
+   MATRIX
+===================================================== */
+
+.pcdm-table-wrap {
+    overflow-x: auto;
+    border: 1px solid rgba(122,154,139,.35);
+    border-radius: 15px;
+}
+
+.pcdm-table {
+    width: 100%;
+    min-width: 800px;
+    border-collapse: collapse;
+}
+
+.pcdm-table th {
+    padding: 16px;
+    text-align: left;
+    background: var(--dark);
+    color: var(--pink);
+}
+
+.pcdm-table td {
+    padding: 16px;
+    border-top: 1px solid rgba(122,154,139,.25);
+    color: #d6e2dc;
+}
+
+.pcdm-table tr:hover td {
+    background: rgba(244,194,194,.04);
+}
+
+
+/* =====================================================
+   DOMAINS
+===================================================== */
+
+.pcdm-domains {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.pcdm-domain {
+    background: var(--card);
+    border: 1px solid rgba(122,154,139,.35);
+    border-radius: 15px;
+    padding: 23px;
+}
+
+.pcdm-domain h3 {
+    color: var(--pink);
+    margin-bottom: 8px;
+}
+
+.pcdm-domain p {
+    color: #cbdad4;
+}
+
+
+/* =====================================================
+   AUDIT
+===================================================== */
+
+.pcdm-audit-layout {
+    display: grid;
+    grid-template-columns: 1fr 290px;
+    gap: 25px;
+}
+
+.pcdm-audit-list {
+    display: grid;
+    gap: 10px;
+}
+
+.pcdm-audit-item {
+    display: flex;
+    gap: 13px;
+    padding: 17px;
+    background: var(--card);
+    border: 1px solid rgba(122,154,139,.3);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.pcdm-audit-item:hover {
+    border-color: var(--sage);
+}
+
+.pcdm-audit-item.checked {
+    border-color: var(--pink);
+    background: rgba(244,194,194,.07);
+}
+
+.pcdm-audit-item input {
+    margin-top: 5px;
+    accent-color: var(--pink);
+}
+
+.pcdm-audit-score {
+    background: var(--card);
+    border: 1px solid rgba(122,154,139,.35);
+    border-radius: 17px;
+    padding: 25px;
+    height: max-content;
+}
+
+.pcdm-score-circle {
+    width: 145px;
+    height: 145px;
+    border-radius: 50%;
+    border: 8px solid var(--pink);
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.pcdm-score-circle strong {
+    font-size: 2rem;
+}
+
+.pcdm-score-circle span {
+    font-size: .7rem;
+    color: var(--sage);
+}
+
+.pcdm-progress {
+    height: 8px;
+    background: var(--dark);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.pcdm-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--pink);
+    transition: .3s ease;
+}
+
+#pcdm-score-message {
+    color: #cbdad4;
+    font-size: .9rem;
+    margin-top: 18px;
+}
+
+
+/* =====================================================
+   FINAL
+===================================================== */
+
+.pcdm-final {
+    text-align: center;
+    padding: 70px 30px;
+    border: 1px solid rgba(122,154,139,.35);
+    border-radius: 22px;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(244,194,194,.10),
+            transparent 45%
+        ),
+        var(--card);
+}
+
+.pcdm-final h2 {
+    max-width: 800px;
+    margin: auto;
+}
+
+.pcdm-final p {
+    max-width: 750px;
+    margin: 20px auto 0;
+    color: #cbdad4;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.pcdm-footer {
+    background: var(--dark);
+    border-top: 1px solid rgba(122,154,139,.25);
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--sage);
+}
+
+.pcdm-footer strong {
+    color: var(--pink);
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:950px) {
+
+    .pcdm-hero-inner {
+        grid-template-columns: 1fr;
+    }
+
+    .pcdm-system {
+        max-width: 500px;
+        margin: auto;
+    }
+
+    .pcdm-architecture,
+    .pcdm-domains {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .pcdm-flow {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .pcdm-flow-step:last-child {
+        grid-column: 1 / -1;
+    }
+}
+
+
+@media(max-width:700px) {
+
+    .pcdm-hero {
+        min-height: auto;
+    }
+
+    .pcdm-hero-inner {
+        padding: 60px 0;
+    }
+
+    .pcdm-system {
+        height: 300px;
+        transform: scale(.85);
+    }
+
+    .pcdm-architecture,
+    .pcdm-domains,
+    .pcdm-builder-grid,
+    .pcdm-audit-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .pcdm-flow {
+        grid-template-columns: 1fr;
+    }
+
+    .pcdm-flow-step:last-child {
+        grid-column: auto;
+    }
+
+    .pcdm-container {
+        padding: 55px 0;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div id="pcdm-app">
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<header class="pcdm-hero">
+
+    <div class="pcdm-hero-inner">
+
+        <div>
+
+            <div class="pcdm-kicker">
+                Decision Architecture
+            </div>
+
+            <h1>
+                Pre-Commitment
+                <span>Decision Mapping</span>
+            </h1>
+
+            <p class="pcdm-hero-description">
+                Design important decisions before pressure arrives.
+                Create rules, boundaries, checkpoints, and environmental
+                structures that make strategic execution easier when
+                circumstances become difficult.
+            </p>
+
+            <div class="pcdm-buttons">
+
+                <button
+                    class="pcdm-btn pcdm-btn-primary"
+                    onclick="pcdmScroll('pcdm-builder')">
+                    Build a Decision Rule
+                </button>
+
+                <button
+                    class="pcdm-btn pcdm-btn-secondary"
+                    onclick="pcdmScroll('pcdm-audit')">
+                    Run System Audit
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="pcdm-system">
+
+            <div class="pcdm-ring pcdm-ring-1"></div>
+            <div class="pcdm-ring pcdm-ring-2"></div>
+            <div class="pcdm-ring pcdm-ring-3"></div>
+
+            <div class="pcdm-core">
+                PRE-<br>COMMIT
+            </div>
+
+            <div class="pcdm-node pcdm-node-1">
+                TRIGGER
+            </div>
+
+            <div class="pcdm-node pcdm-node-2">
+                ACTION
+            </div>
+
+            <div class="pcdm-node pcdm-node-3">
+                REVIEW
+            </div>
+
+            <div class="pcdm-node pcdm-node-4">
+                RULE
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<main class="pcdm-container">
+
+
+<!-- =====================================================
+     PRINCIPLE
+===================================================== -->
+
+<section class="pcdm-section">
+
+    <div class="pcdm-section-label">
+        01 / Core Principle
+    </div>
+
+    <h2>
+        Design the decision
+        <span>before the decision.</span>
+    </h2>
+
+    <p class="pcdm-intro">
+        Pre-Commitment Decision Mapping translates important future
+        decisions into explicit rules before stress, distraction,
+        fatigue, urgency, or changing circumstances can distort the
+        original intention.
+    </p>
+
+    <div class="pcdm-principle">
+
+        <div class="pcdm-principle-text">
+            "The objective is not to eliminate future judgment.
+            It is to decide in advance which decisions deserve
+            predetermined rules and which decisions should remain open."
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ARCHITECTURE
+===================================================== -->
+
+<section class="pcdm-section" id="pcdm-mechanics">
+
+    <div class="pcdm-section-label">
+        02 / Architecture
+    </div>
+
+    <h2>
+        Three mechanisms for
+        <span>better execution.</span>
+    </h2>
+
+    <p class="pcdm-intro">
+        Click any card to inspect the mechanism.
+    </p>
+
+
+    <div class="pcdm-architecture">
+
+
+        <div
+            class="pcdm-architecture-card"
+            onclick="pcdmToggleCard(this)">
+
+            <div class="pcdm-card-number">
+                01 — TIME
+            </div>
+
+            <h3>
+                Temporal Discounting
+            </h3>
+
+            <p>
+                Protect long-term priorities from being displaced by
+                immediate convenience.
+            </p>
+
+            <div class="pcdm-card-details">
+
+                <ul>
+                    <li>Define future value before pressure arrives.</li>
+                    <li>Create predetermined thresholds.</li>
+                    <li>Separate temporary discomfort from strategic failure.</li>
+                </ul>
+
+            </div>
+
+            <span class="pcdm-click">
+                CLICK TO EXPLORE +
+            </span>
+
+        </div>
+
+
+        <div
+            class="pcdm-architecture-card"
+            onclick="pcdmToggleCard(this)">
+
+            <div class="pcdm-card-number">
+                02 — COGNITION
+            </div>
+
+            <h3>
+                Heuristic Interruption
+            </h3>
+
+            <p>
+                Insert a checkpoint between a trigger and an automatic
+                reaction.
+            </p>
+
+            <div class="pcdm-card-details">
+
+                <ul>
+                    <li>Identify predictable reaction patterns.</li>
+                    <li>Require verification before consequential action.</li>
+                    <li>Use scenario testing instead of immediate interpretation.</li>
+                </ul>
+
+            </div>
+
+            <span class="pcdm-click">
+                CLICK TO EXPLORE +
+            </span>
+
+        </div>
+
+
+        <div
+            class="pcdm-architecture-card"
+            onclick="pcdmToggleCard(this)">
+
+            <div class="pcdm-card-number">
+                03 — ENVIRONMENT
+            </div>
+
+            <h3>
+                Choice Architecture
+            </h3>
+
+            <p>
+                Change the environment so desired actions become easier
+                and unwanted actions require more effort.
+            </p>
+
+            <div class="pcdm-card-details">
+
+                <ul>
+                    <li>Make high-value actions easier to access.</li>
+                    <li>Add friction to predictable distractions.</li>
+                    <li>Use defaults, schedules, and boundaries.</li>
+                </ul>
+
+            </div>
+
+            <span class="pcdm-click">
+                CLICK TO EXPLORE +
+            </span>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     INTERACTIVE DECISION BUILDER
+===================================================== -->
+
+<section class="pcdm-section" id="pcdm-builder">
+
+    <div class="pcdm-section-label">
+        03 / Interactive Tool
+    </div>
+
+    <h2>
+        Build a
+        <span>decision rule.</span>
+    </h2>
+
+    <p class="pcdm-intro">
+        Turn a future problem into a practical trigger → rule → action
+        system.
+    </p>
+
+
+    <div class="pcdm-builder">
+
+        <div class="pcdm-builder-grid">
+
+
+            <div>
+
+                <div class="pcdm-field">
+
+                    <label>
+                        Future Situation
+                    </label>
+
+                    <input
+                        id="pcdm-situation"
+                        type="text"
+                        placeholder="Example: An unexpected expense appears">
+
+                </div>
+
+
+                <div class="pcdm-field">
+
+                    <label>
+                        Risk
+                    </label>
+
+                    <input
+                        id="pcdm-risk"
+                        type="text"
+                        placeholder="Example: Panic spending">
+
+                </div>
+
+
+                <div class="pcdm-field">
+
+                    <label>
+                        Pre-Commitment
+                    </label>
+
+                    <textarea
+                        id="pcdm-commitment"
+                        placeholder="What rule will you establish before this happens?"></textarea>
+
+                </div>
+
+            </div>
+
+
+            <div>
+
+                <div class="pcdm-field">
+
+                    <label>
+                        Required Action
+                    </label>
+
+                    <textarea
+                        id="pcdm-action"
+                        placeholder="What will you do when the situation occurs?"></textarea>
+
+                </div>
+
+
+                <div class="pcdm-field">
+
+                    <label>
+                        Review Period
+                    </label>
+
+                    <select id="pcdm-review">
+
+                        <option value="24 hours">
+                            24 hours
+                        </option>
+
+                        <option value="48 hours">
+                            48 hours
+                        </option>
+
+                        <option value="7 days">
+                            7 days
+                        </option>
+
+                        <option value="30 days">
+                            30 days
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button
+                    class="pcdm-generate"
+                    onclick="pcdmGenerateRule()">
+
+                    GENERATE DECISION RULE
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="pcdm-result"
+            class="pcdm-result">
+
+            <div class="pcdm-result-title">
+                Your Decision Architecture
+            </div>
+
+            <div id="pcdm-rule-output"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FLOW
+===================================================== -->
+
+<section class="pcdm-section">
+
+    <div class="pcdm-section-label">
+        04 / Operating Logic
+    </div>
+
+    <h2>
+        Follow the
+        <span>decision chain.</span>
+    </h2>
+
+    <p class="pcdm-intro">
+        Click each stage to understand what happens at that point.
+    </p>
+
+
+    <div class="pcdm-flow">
+
+
+        <div
+            class="pcdm-flow-step active"
+            onclick="pcdmFlow(1, this)">
+
+            <div class="pcdm-flow-number">
+                01
+            </div>
+
+            <h3>Trigger</h3>
+
+            <p>
+                Something happens.
+            </p>
+
+        </div>
+
+
+        <div
+            class="pcdm-flow-step"
+            onclick="pcdmFlow(2, this)">
+
+            <div class="pcdm-flow-number">
+                02
+            </div>
+
+            <h3>Pause</h3>
+
+            <p>
+                Reaction is interrupted.
+            </p>
+
+        </div>
+
+
+        <div
+            class="pcdm-flow-step"
+            onclick="pcdmFlow(3, this)">
+
+            <div class="pcdm-flow-number">
+                03
+            </div>
+
+            <h3>Rule</h3>
+
+            <p>
+                Criteria are checked.
+            </p>
+
+        </div>
+
+
+        <div
+            class="pcdm-flow-step"
+            onclick="pcdmFlow(4, this)">
+
+            <div class="pcdm-flow-number">
+                04
+            </div>
+
+            <h3>Action</h3>
+
+            <p>
+                The response occurs.
+            </p>
+
+        </div>
+
+
+        <div
+            class="pcdm-flow-step"
+            onclick="pcdmFlow(5, this)">
+
+            <div class="pcdm-flow-number">
+                05
+            </div>
+
+            <h3>Review</h3>
+
+            <p>
+                The system learns.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <div
+        id="pcdm-flow-info"
+        class="pcdm-flow-info">
+
+        A predictable situation activates the architecture.
+        The trigger tells the system that it is time to use the
+        predefined decision process.
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     DECISION MATRIX
+===================================================== -->
+
+<section class="pcdm-section">
+
+    <div class="pcdm-section-label">
+        05 / Decision Matrix
+    </div>
+
+    <h2>
+        Convert situations into
+        <span>predefined responses.</span>
+    </h2>
+
+
+    <div class="pcdm-table-wrap">
+
+        <table class="pcdm-table">
+
+            <thead>
+
+                <tr>
+                    <th>Situation</th>
+                    <th>Pre-Commitment</th>
+                    <th>Result</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+
+                    <td>
+                        Unexpected Expense
+                    </td>
+
+                    <td>
+                        Follow predefined spending priorities
+                        before accessing reserves.
+                    </td>
+
+                    <td>
+                        Less panic-driven decision-making.
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        Attention Disruption
+                    </td>
+
+                    <td>
+                        Use protected work periods and
+                        predetermined interruption rules.
+                    </td>
+
+                    <td>
+                        Greater continuity.
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        High-Stakes Negotiation
+                    </td>
+
+                    <td>
+                        Define boundaries and cooling-off
+                        requirements beforehand.
+                    </td>
+
+                    <td>
+                        Reduced pressure-based concessions.
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        New Opportunity
+                    </td>
+
+                    <td>
+                        Compare the opportunity against
+                        predetermined criteria.
+                    </td>
+
+                    <td>
+                        Reduced impulsive pivots.
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     DEPLOYMENT
+===================================================== -->
+
+<section class="pcdm-section">
+
+    <div class="pcdm-section-label">
+        06 / Deployment
+    </div>
+
+    <h2>
+        Where decision architecture
+        <span>creates leverage.</span>
+    </h2>
+
+
+    <div class="pcdm-domains">
+
+
+        <div class="pcdm-domain">
+
+            <h3>
+                Capital
+            </h3>
+
+            <p>
+                Establish spending boundaries, emergency rules,
+                and approval thresholds before financial pressure
+                influences behavior.
+            </p>
+
+        </div>
+
+
+        <div class="pcdm-domain">
+
+            <h3>
+                Strategy
+            </h3>
+
+            <p>
+                Define milestone dependencies so new opportunities
+                do not automatically displace important objectives.
+            </p>
+
+        </div>
+
+
+        <div class="pcdm-domain">
+
+            <h3>
+                Learning
+            </h3>
+
+            <p>
+                Create study schedules, evidence requirements,
+                and progression checkpoints.
+            </p>
+
+        </div>
+
+
+        <div class="pcdm-domain">
+
+            <h3>
+                Operations
+            </h3>
+
+            <p>
+                Build backup procedures and alternate pathways
+                before primary systems fail.
+            </p>
+
+        </div>
+
+
+        <div class="pcdm-domain">
+
+            <h3>
+                Information
+            </h3>
+
+            <p>
+                Control notifications, communication windows,
+                and high-distraction information sources.
+            </p>
+
+        </div>
+
+
+        <div class="pcdm-domain">
+
+            <h3>
+                Personal Systems
+            </h3>
+
+            <p>
+                Create practical routines that can survive
+                ordinary disruptions instead of requiring perfect
+                conditions.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     AUDIT
+===================================================== -->
+
+<section
+    class="pcdm-section"
+    id="pcdm-audit">
+
+    <div class="pcdm-section-label">
+        07 / System Audit
+    </div>
+
+    <h2>
+        Stress-test your
+        <span>architecture.</span>
+    </h2>
+
+    <p class="pcdm-intro">
+        Check each component you have clearly defined.
+        Your score updates immediately.
+    </p>
+
+
+    <div class="pcdm-audit-layout">
+
+
+        <div class="pcdm-audit-list">
+
+
+            <label class="pcdm-audit-item">
+
+                <input
+                    type="checkbox"
+                    onchange="pcdmAudit()">
+
+                <span>
+                    The objective behind the decision rule is clearly defined.
+                </span>
+
+            </label>
+
+
+            <label class="pcdm-audit-item">
+
+                <input
+                    type="checkbox"
+                    onchange="pcdmAudit()">
+
+                <span>
+                    The trigger that activates the rule is identifiable.
+                </span>
+
+            </label>
+
+
+            <label class="pcdm-audit-item">
+
+                <input
+                    type="checkbox"
+                    onchange="pcdmAudit()">
+
+                <span>
+                    The most likely failure pattern has been identified.
+                </span>
+
+            </label>
+
+
+            <label class="pcdm-audit-item">
+
+                <input
+                    type="checkbox"
+                    onchange="pcdmAudit()">
+
+                <span>
+                    A specific response has already been established.
+                </span>
+
+            </label>
+
+
+            <label class="pcdm-audit-item">
+
+                <input
+                    type="checkbox"
+                    onchange="pcdmAudit()">
+
+                <span>
+                    Friction exists to reduce impulsive deviations.
+                </span>
+
+            </label>
+
+
+            <label class="pcdm-audit-item">
+
+                <input
+                    type="checkbox"
+                    onchange="pcdmAudit()">
+
+                <span>
+                    There is a clear exception or falsification condition.
+                </span>
+
+            </label>
+
+
+            <label class="pcdm-audit-item">
+
+                <input
+                    type="checkbox"
+                    onchange="pcdmAudit()">
+
+                <span>
+                    The system can operate under resource constraints.
+                </span>
+
+            </label>
+
+
+            <label class="pcdm-audit-item">
+
+                <input
+                    type="checkbox"
+                    onchange="pcdmAudit()">
+
+                <span>
+                    The rule has a scheduled review mechanism.
+                </span>
+
+            </label>
+
+
+        </div>
+
+
+        <aside class="pcdm-audit-score">
+
+            <div class="pcdm-section-label">
+                System Readiness
+            </div>
+
+            <div class="pcdm-score-circle">
+
+                <strong id="pcdm-score">
+                    0%
+                </strong>
+
+                <span>
+                    COMPLETE
+                </span>
+
+            </div>
+
+
+            <div class="pcdm-progress">
+
+                <div
+                    id="pcdm-progress-bar"
+                    class="pcdm-progress-bar">
+                </div>
+
+            </div>
+
+
+            <div id="pcdm-score-message">
+
+                Begin the audit.
+
+            </div>
+
+        </aside>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FINAL
+===================================================== -->
+
+<section class="pcdm-section">
+
+    <div class="pcdm-final">
+
+        <div class="pcdm-section-label">
+            Final Principle
+        </div>
+
+        <h2>
+            Build systems that help your future self
+            <span>execute your current intentions.</span>
+        </h2>
+
+        <p>
+            Strong pre-commitment systems do not attempt to control
+            every future decision. They identify recurring situations
+            where deliberate preparation can improve consistency,
+            reduce avoidable errors, and preserve strategic priorities.
+        </p>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<footer class="pcdm-footer">
+
+    <p>
+        <strong>Pre-Commitment Decision Mapping</strong>
+        — Decision architecture for intentional execution.
+    </p>
+
+</footer>
+
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   SCROLL
+===================================================== */
+
+function pcdmScroll(id) {
+
+    var element = document.getElementById(id);
+
+    if (element) {
+
+        element.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    }
+
+}
+
+
+/* =====================================================
+   ARCHITECTURE CARD INTERACTION
+===================================================== */
+
+function pcdmToggleCard(card) {
+
+    var cards = document.querySelectorAll(
+        ".pcdm-architecture-card"
+    );
+
+    cards.forEach(function(item) {
+
+        if (item !== card) {
+            item.classList.remove("active");
+        }
+
+    });
+
+    card.classList.toggle("active");
+
+    var clickText = card.querySelector(
+        ".pcdm-click"
+    );
+
+    if (card.classList.contains("active")) {
+
+        clickText.textContent =
+            "CLICK TO COLLAPSE −";
+
+    } else {
+
+        clickText.textContent =
+            "CLICK TO EXPLORE +";
+
+    }
+
+}
+
+
+/* =====================================================
+   DECISION RULE BUILDER
+===================================================== */
+
+function pcdmGenerateRule() {
+
+    var situation =
+        document.getElementById(
+            "pcdm-situation"
+        ).value.trim();
+
+    var risk =
+        document.getElementById(
+            "pcdm-risk"
+        ).value.trim();
+
+    var commitment =
+        document.getElementById(
+            "pcdm-commitment"
+        ).value.trim();
+
+    var action =
+        document.getElementById(
+            "pcdm-action"
+        ).value.trim();
+
+    var review =
+        document.getElementById(
+            "pcdm-review"
+        ).value;
+
+
+    if (
+        situation === "" ||
+        commitment === "" ||
+        action === ""
+    ) {
+
+        alert(
+            "Please complete the Future Situation, Pre-Commitment, and Required Action fields."
+        );
+
+        return;
+
+    }
+
+
+    if (risk === "") {
+
+        risk =
+            "an identified risk or failure pattern";
+
+    }
+
+
+    var output =
+
+        "<div class='pcdm-rule-line'>" +
+        "<strong>WHEN:</strong> " +
+        pcdmSafe(situation) +
+        "</div>" +
+
+        "<div class='pcdm-rule-line'>" +
+        "<strong>WATCH FOR:</strong> " +
+        pcdmSafe(risk) +
+        "</div>" +
+
+        "<div class='pcdm-rule-line'>" +
+        "<strong>PRE-COMMITMENT:</strong> " +
+        pcdmSafe(commitment) +
+        "</div>" +
+
+        "<div class='pcdm-rule-line'>" +
+        "<strong>ACTION:</strong> " +
+        pcdmSafe(action) +
+        "</div>" +
+
+        "<div class='pcdm-rule-line'>" +
+        "<strong>REVIEW:</strong> Reassess this rule after " +
+        pcdmSafe(review) +
+        "." +
+        "</div>";
+
+
+    document.getElementById(
+        "pcdm-rule-output"
+    ).innerHTML = output;
+
+
+    document.getElementById(
+        "pcdm-result"
+    ).classList.add("visible");
+
+
+    document.getElementById(
+        "pcdm-result"
+    ).scrollIntoView({
+        behavior: "smooth",
+        block: "nearest"
+    });
+
+}
+
+
+/* =====================================================
+   SECURITY FOR USER INPUT
+===================================================== */
+
+function pcdmSafe(text) {
+
+    return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* =====================================================
+   FLOW INTERACTION
+===================================================== */
+
+function pcdmFlow(number, element) {
+
+    var steps = document.querySelectorAll(
+        ".pcdm-flow-step"
+    );
+
+    steps.forEach(function(step) {
+
+        step.classList.remove("active");
+
+    });
+
+
+    element.classList.add("active");
+
+
+    var messages = {
+
+        1:
+        "A predictable situation activates the architecture. The trigger tells the system that it is time to use the predefined decision process.",
+
+        2:
+        "The pause creates distance between the event and the reaction. This is where automatic behavior can be interrupted.",
+
+        3:
+        "The predetermined rule is checked against the actual circumstances. The objective is to avoid changing the rule simply because pressure has appeared.",
+
+        4:
+        "The predefined response is executed when the criteria are satisfied. The decision becomes an implementation problem rather than a debate.",
+
+        5:
+        "The result is reviewed. If reality has changed, the architecture can be deliberately modified rather than randomly abandoned."
+    };
+
+
+    document.getElementById(
+        "pcdm-flow-info"
+    ).textContent = messages[number];
+
+}
+
+
+/* =====================================================
+   AUDIT
+===================================================== */
+
+function pcdmAudit() {
+
+    var checkboxes =
+        document.querySelectorAll(
+            ".pcdm-audit-item input"
+        );
+
+    var checked =
+        document.querySelectorAll(
+            ".pcdm-audit-item input:checked"
+        );
+
+
+    var total = checkboxes.length;
+
+    var completed = checked.length;
+
+    var percentage =
+        Math.round(
+            (completed / total) * 100
+        );
+
+
+    document.getElementById(
+        "pcdm-score"
+    ).textContent =
+        percentage + "%";
+
+
+    document.getElementById(
+        "pcdm-progress-bar"
+    ).style.width =
+        percentage + "%";
+
+
+    var items =
+        document.querySelectorAll(
+            ".pcdm-audit-item"
+        );
+
+
+    items.forEach(function(item) {
+
+        var checkbox =
+            item.querySelector("input");
+
+        if (checkbox.checked) {
+
+            item.classList.add("checked");
+
+        } else {
+
+            item.classList.remove("checked");
+
+        }
+
+    });
+
+
+    var message;
+
+
+    if (percentage === 0) {
+
+        message =
+            "Begin the audit by identifying the components your system needs.";
+
+    } else if (percentage < 40) {
+
+        message =
+            "Early architecture. Several important decision variables remain undefined.";
+
+    } else if (percentage < 70) {
+
+        message =
+            "Developing architecture. The system is becoming more explicit.";
+
+    } else if (percentage < 100) {
+
+        message =
+            "Strong architecture. Close the remaining gaps.";
+
+    } else {
+
+        message =
+            "Architecture complete. Review the system periodically as circumstances change.";
+
+    }
+
+
+    document.getElementById(
+        "pcdm-score-message"
+    ).textContent = message;
+
+}
+
+</script>
+
+</body>
+</html>
