@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PathKeeper | Personal Strategy Builder</title>
+
+<style>
+:root {
+  --forest: #173d30;
+  --forest-light: #285744;
+  --cream: #f7f4ec;
+  --paper: #fffdf8;
+  --tan: #d8b58b;
+  --brown: #604737;
+  --ink: #26342e;
+  --muted: #68766e;
+  --line: #dce4dc;
+  --soft-green: #e9f1e9;
+  --soft-tan: #f5ecdf;
+  --white: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
+
+button, input, select, textarea { font: inherit; }
+
+button { cursor: pointer; }
+
+.page {
+  max-width: 1050px;
+  margin: auto;
+  padding: 22px;
+}
+
+.hero {
+  background: linear-gradient(135deg, var(--forest), #10271f);
+  color: white;
+  padding: 44px 30px;
+  border-radius: 22px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 210px;
+  height: 210px;
+  border: 1px solid rgba(216,181,139,.45);
+  border-radius: 50%;
+  right: -70px;
+  top: -70px;
+  box-shadow: 0 0 0 25px rgba(216,181,139,.05),
+              0 0 0 55px rgba(216,181,139,.04);
+}
+
+.brand {
+  color: var(--tan);
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.hero h1 {
+  font-size: clamp(30px, 5vw, 48px);
+  line-height: 1.1;
+  max-width: 700px;
+  margin: 18px 0;
+}
+
+.hero p {
+  max-width: 680px;
+  color: #e0e9e1;
+  font-size: 17px;
+}
+
+.hero-note {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 9px 13px;
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 30px;
+  color: #f4dfc3;
+  font-size: 13px;
+}
+
+.intro-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 13px;
+  margin: 20px 0 28px;
+}
+
+.intro-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 18px;
+  border-radius: 14px;
+}
+
+.intro-card .number {
+  color: var(--brown);
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.intro-card h3 {
+  margin: 7px 0;
+  font-size: 17px;
+}
+
+.intro-card p {
+  color: var(--muted);
+  font-size: 14px;
+  margin: 0;
+}
+
+.progress-card {
+  background: var(--paper);
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+.progress-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.progress-track {
+  height: 9px;
+  background: #e7e9e1;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--forest-light);
+  transition: width .2s ease;
+}
+
+.section {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  margin: 18px 0;
+  padding: 26px;
+}
+
+.section-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 23px;
+}
+
+.section-number {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  background: var(--forest);
+  color: white;
+  border-radius: 12px;
+  font-weight: bold;
+}
+
+.section-heading h2 {
+  margin: 0 0 4px;
+  color: var(--forest);
+  font-size: 23px;
+}
+
+.section-heading p {
+  color: var(--muted);
+  margin: 0;
+  font-size: 14px;
+}
+
+.question {
+  padding: 17px 0;
+  border-top: 1px solid #edf0e9;
+}
+
+.question:first-of-type { border-top: 0; }
+
+.question label,
+.question .question-label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.question .hint {
+  display: block;
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+  width: 100%;
+  border: 1px solid #cbd6cc;
+  background: white;
+  border-radius: 10px;
+  padding: 12px 13px;
+  color: var(--ink);
+  min-height: 47px;
+}
+
+textarea {
+  min-height: 95px;
+  resize: vertical;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: 2px solid #93b7a0;
+  outline-offset: 2px;
+}
+
+.choice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.choice {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  padding: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: normal !important;
+  margin: 0 !important;
+}
+
+.choice:has(input:checked) {
+  background: var(--soft-green);
+  border-color: #6c967b;
+}
+
+.choice input {
+  margin-top: 4px;
+  accent-color: var(--forest);
+  flex-shrink: 0;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.btn {
+  border: 0;
+  border-radius: 10px;
+  padding: 13px 19px;
+  font-weight: bold;
+  transition: transform .15s, opacity .15s;
+}
+
+.btn:hover { transform: translateY(-1px); }
+
+.btn-primary {
+  background: var(--forest);
+  color: white;
+}
+
+.btn-secondary {
+  background: var(--soft-tan);
+  color: var(--brown);
+  border: 1px solid #e3d1b8;
+}
+
+.btn-outline {
+  background: white;
+  color: var(--forest);
+  border: 1px solid #b7c8bb;
+}
+
+.notice {
+  padding: 14px 16px;
+  background: var(--soft-green);
+  border-left: 4px solid var(--forest-light);
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--forest);
+  margin: 16px 0;
+}
+
+.results {
+  display: none;
+  margin-top: 32px;
+}
+
+.results.visible { display: block; }
+
+.results-hero {
+  background: var(--forest);
+  color: white;
+  border-radius: 18px;
+  padding: 28px;
+}
+
+.results-hero h2 {
+  font-size: 29px;
+  margin: 8px 0;
+}
+
+.results-hero p { color: #e0e9e1; }
+
+.result-label {
+  color: var(--tan);
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+}
+
+.result-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  padding: 22px;
+  margin-top: 15px;
+  overflow-wrap: anywhere;
+}
+
+.result-card h3 {
+  color: var(--forest);
+  margin-top: 0;
+}
+
+.result-card h4 {
+  margin-bottom: 5px;
+  color: var(--brown);
+}
+
+.result-card ul, .result-card ol { padding-left: 22px; }
+
+.result-card li { margin: 7px 0; }
+
+.result-meta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.meta-box {
+  background: rgba(255,255,255,.09);
+  padding: 13px;
+  border-radius: 10px;
+}
+
+.meta-box span {
+  display: block;
+  color: #dbe6dc;
+  font-size: 12px;
+}
+
+.meta-box strong {
+  display: block;
+  margin-top: 4px;
+}
+
+.result-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.small-print {
+  color: var(--muted);
+  font-size: 12px;
+  margin: 22px 0;
+}
+
+.footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  padding: 26px 8px;
+}
+
+[hidden] { display: none !important; }
+
+@media (max-width: 650px) {
+  .page { padding: 12px; }
+  .hero { padding: 30px 21px; }
+  .intro-grid { grid-template-columns: 1fr; }
+  .choice-grid { grid-template-columns: 1fr; }
+  .section { padding: 19px; }
+  .result-meta { grid-template-columns: 1fr; }
+  .section-heading h2 { font-size: 20px; }
+}
+
+@media print {
+  body { background: white; }
+  .page { max-width: 100%; padding: 0; }
+  .hero { border-radius: 0; }
+  .progress-card, #questionnaire, .intro-grid,
+  .result-actions, .footer, .form-actions { display: none !important; }
+  .results { display: block !important; }
+  .result-card, .results-hero { break-inside: avoid; }
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+  <header class="hero">
+    <div class="brand">PathKeeper · Your Next Chapter</div>
+    <h1>Turn your goals into a plan you can actually use.</h1>
+    <p>
+      You do not need to have everything figured out. Answer a few questions
+      about where you are, what you want to accomplish, and what is getting
+      in your way. PathKeeper will turn your answers into a practical strategy
+      and a backup plan you can take with you.
+    </p>
+    <div class="hero-note">Personal planning · Practical action · Flexible pathways</div>
+  </header>
+
+  <div class="intro-grid">
+    <div class="intro-card">
+      <div class="number">01 · CLARIFY</div>
+      <h3>Understand your starting point</h3>
+      <p>Identify your goal, available time, current skills, and biggest obstacles.</p>
+    </div>
+    <div class="intro-card">
+      <div class="number">02 · BUILD</div>
+      <h3>Create your strategy</h3>
+      <p>Turn your answers into priorities, milestones, and manageable actions.</p>
+    </div>
+    <div class="intro-card">
+      <div class="number">03 · ADAPT</div>
+      <h3>Prepare another route</h3>
+      <p>Plan what to do if time, money, access, or circumstances change.</p>
+    </div>
+  </div>
+
+  <div class="progress-card">
+    <div class="progress-top">
+      <span>Your planning progress</span>
+      <span id="progressText">0 of 24 answered</span>
+    </div>
+    <div class="progress-track" role="progressbar"
+         aria-label="Questionnaire completion"
+         aria-valuemin="0" aria-valuemax="24" aria-valuenow="0"
+         id="progressBar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <p class="small-print">
+      Take your time. You can leave questions blank and still generate a plan.
+      Do not enter passwords, financial account numbers, or other sensitive information.
+    </p>
+  </div>
+
+  <form id="questionnaire">
+
+    <section class="section">
+      <div class="section-heading">
+        <div class="section-number">01</div>
+        <div>
+          <h2>Your direction</h2>
+          <p>What are you trying to change, build, or accomplish?</p>
+        </div>
+      </div>
+
+      <div class="question">
+        <label for="q1">1. What would you most like help with?</label>
+        <select id="q1" name="q1">
+          <option value="">Choose your main goal</option>
+          <option value="career">Choosing or changing a career</option>
+          <option value="skills">Learning a valuable skill or earning a certificate</option>
+          <option value="education">Education, scholarships, or studying abroad</option>
+          <option value="business">Starting or growing a business</option>
+          <option value="funding">Finding grants, funding, or financial opportunities</option>
+          <option value="employment">Finding a job, internship, or work experience</option>
+          <option value="portfolio">Building a portfolio or proving my abilities</option>
+          <option value="personal">Building a personal development plan</option>
+          <option value="other">Another goal</option>
+        </select>
+      </div>
+
+      <div class="question">
+        <label for="q2">2. Describe the result you want.</label>
+        <textarea id="q2" name="q2" placeholder="Example: Build a portfolio that helps me qualify for entry-level web development work."></textarea>
+      </div>
+
+      <div class="question">
+        <label for="q3">3. When would you ideally like to see meaningful progress?</label>
+        <select id="q3" name="q3">
+          <option value="">Choose a timeframe</option>
+          <option value="7 days">Within 7 days</option>
+          <option value="30 days">Within 30 days</option>
+          <option value="90 days">Within 90 days</option>
+          <option value="6 months">Within 6 months</option>
+          <option value="12 months">Within a year</option>
+          <option value="flexible">I am exploring; my timeframe is flexible</option>
+        </select>
+      </div>
+
+      <div class="question">
+        <label for="q4">4. Why does this goal matter to you?</label>
+        <textarea id="q4" name="q4" placeholder="What could improve if you reach this goal?"></textarea>
+      </div>
+
+      <div class="question">
+        <label for="q5">5. How clear is your direction right now?</label>
+        <select id="q5" name="q5">
+          <option value="">Choose one</option>
+          <option value="clear">I know what I want and need a plan.</option>
+          <option value="somewhat">I have a general direction but need to compare options.</option>
+          <option value="exploring">I am still discovering what is possible.</option>
+          <option value="stuck">I have a goal but feel stuck.</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <div class="section-number">02</div>
+        <div>
+          <h2>Your current position</h2>
+          <p>Build from what you already know and have.</p>
+        </div>
+      </div>
+
+      <div class="question">
+        <label for="q6">6. Where are you starting from?</label>
+        <select id="q6" name="q6">
+          <option value="">Choose one</option>
+          <option value="beginner">I am a beginner.</option>
+          <option value="some">I have some experience or foundational knowledge.</option>
+          <option value="experienced">I have relevant experience or established skills.</option>
+          <option value="restart">I am restarting after a setback or change.</option>
+          <option value="unsure">I am not sure how to assess my current level.</option>
+        </select>
+      </div>
+
+      <div class="question">
+        <label for="q7">7. Which strengths or skills can you build on?</label>
+        <textarea id="q7" name="q7" placeholder="Examples: communication, customer service, research, coding, organizing, problem-solving, creativity."></textarea>
+      </div>
+
+      <div class="question">
+        <label for="q8">8. What evidence of your abilities do you already have?</label>
+        <select id="q8" name="q8">
+          <option value="">Choose one</option>
+          <option value="none">I have not collected evidence yet.</option>
+          <option value="learning">Coursework, certificates, or practice exercises.</option>
+          <option value="projects">Projects, work samples, or a portfolio.</option>
+          <option value="experience">Work experience, references, or measurable results.</option>
+          <option value="mixed">A combination of these.</option>
+        </select>
+      </div>
+
+      <div class="question">
+        <label for="q9">9. What resources can you currently access?</label>
+        <div class="choice-grid">
+          <label class="choice"><input type="checkbox" name="q9" value="Internet and a device"> Internet and a device</label>
+          <label class="choice"><input type="checkbox" name="q9" value="Learning materials"> Learning materials</label>
+          <label class="choice"><input type="checkbox" name="q9" value="Mentors or helpful contacts"> Mentors or helpful contacts</label>
+          <label class="choice"><input type="checkbox" name="q9" value="Work samples or equipment"> Work samples or equipment</label>
+          <label class="choice"><input type="checkbox" name="q9" value="Transportation or local access"> Transportation or local access</label>
+          <label class="choice"><input type="checkbox" name="q9" value="A supportive community"> A supportive community</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <label for="q10">10. What is your most important existing advantage?</label>
+        <textarea id="q10" name="q10" placeholder="A skill, experience, relationship, resource, insight, or opportunity."></textarea>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <div class="section-number">03</div>
+        <div>
+          <h2>Your constraints and challenges</h2>
+          <p>A realistic plan works with your circumstances instead of ignoring them.</p>
+        </div>
+      </div>
+
+      <div class="question">
+        <label for="q11">11. What is your biggest obstacle right now?</label>
+        <select id="q11" name="q11">
+          <option value="">Choose the main obstacle</option>
+          <option value="time">Limited time or a demanding schedule</option>
+          <option value="money">Limited money or funding</option>
+          <option value="knowledge">Not knowing what to learn or do next</option>
+          <option value="experience">Not enough experience or proof of ability</option>
+          <option value="access">Limited access to people, tools, or opportunities</option>
+          <option value="confidence">Uncertainty, confidence, or fear of failure</option>
+          <option value="consistency">Difficulty maintaining momentum</option>
+          <option value="competition">Competition or rejection</option>
+          <option value="other">Something else</option>
+        </select>
+      </div>
+
+      <div class="question">
+        <label for="q12">12. How much time can you realistically commit each week?</label>
+        <select id="q12" name="q12">
+          <option value="">Choose your available time</option>
+          <option value="1-2 hours">1–2 hours</option>
+          <option value="3-5 hours">3–5 hours</option>
+          <option value="6-10 hours">6–10 hours</option>
+          <option value="11+ hours">11 or more hours</option>
+          <option value="variable">My schedule changes from week to week</option>
+        </select>
+      </div>
+
+      <div class="question">
+        <label for="q13">13. What budget can you safely dedicate to this goal?</label>
+        <select id="q13" name="q13">
+          <option value="">Choose one</option>
+          <option value="zero">I need a no-cost approach.</option>
+          <option value="small">A small amount, only if necessary.</option>
+          <option value="moderate">I have a limited but planned budget.</option>
+          <option value="flexible">I can invest if the value is clear.</option>
+          <option value="unknown">I need to assess the costs first.</option>
+        </select>
+        <span class="hint">Never spend money you need for essentials just to pursue an opportunity.</span>
+      </div>
+
+      <div class="question">
+        <label for="q14">14. What tends to interrupt your progress?</label>
+        <select id="q14" name="q14">
+          <option value="">Choose one</option>
+          <option value="overload">Taking on too much at once</option>
+          <option value="uncertainty">Unclear next steps</option>
+          <option value="resources">Losing access to time, money, or tools</option>
+          <option value="motivation">Losing momentum or confidence</option>
+          <option value="feedback">Not receiving useful feedback</option>
+          <option value="external">Unexpected changes outside my control</option>
+          <option value="none">No consistent pattern yet</option>
+        </select>
+      </div>
+
+      <div class="question">
+        <label for="q15">15. What other limitation should your plan account for?</label>
+        <textarea id="q15" name="q15" placeholder="Share only what you are comfortable sharing."></textarea>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <div class="section-number">04</div>
+        <div>
+          <h2>Choose your pathway</h2>
+          <p>Identify the actions and opportunities most likely to move you forward.</p>
+        </div>
+      </div>
+
+      <div class="question">
+        <label for="q16">16. Which kind of next step would help you most?</label>
+        <select id="q16" name="q16">
+          <option value="">Choose one</option>
+          <option value="research">Research options and compare requirements.</option>
+          <option value="learn">Learn or practice a specific skill.</option>
+          <option value="apply">Apply for jobs, programs, or funding.</option>
+          <option value="create">Build a project or portfolio.</option>
+          <option value="connect">Find mentors, collaborators, or contacts.</option>
+          <option value="test">Test an idea before committing resources.</option>
+          <option value="organize">Organize my schedule and follow-through.</option>
+        </select>
+      </div>
+
+      <div class="question">
+        <label for="q17">17. Which opportunity categories interest you?</label>
+        <div class="choice-grid">
+          <label class="choice"><input type="checkbox" name="q17" value="Jobs and internships"> Jobs and internships</label>
+          <label class="choice"><input type="checkbox" name="q17" value="Scholarships and education"> Scholarships and education</label>
+          <label class="choice"><input type="checkbox" name="q17" value="Grants and funding"> Grants and funding</label>
+          <label class="choice"><input type="checkbox" name="q17" value="Business and entrepreneurship"> Business and entrepreneurship</label>
+          <label class="choice"><input type="checkbox" name="q17" value="Certificates and skill development"> Certificates and skill development</label>
+          <label class="choice"><input type="checkbox" name="q17" value="Competitions and challenges"> Competitions and challenges</label>
+          <label class="choice"><input type="checkbox" name="q17" value="Mentorship and networking"> Mentorship and networking</label>
+          <label class="choice"><input type="checkbox" name="q17" value="Study abroad and relocation"> Study abroad and relocation</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <label for="q18">18. What kind of learning or work fits you best?</label>
+        <select id="q18" name="q18">
+          <option value="">Choose one</option>
+          <option value="hands-on">Hands-on projects and practice</option>
+          <option value="structured">Structured courses and lessons</option>
+          <option value="independent">Independent research and self-study</option>
+          <option value="collaborative">Group work and guided feedback</option>
+          <option value="mixed">A mix of different approaches</option>
+        </select>
+      </div>
+
+      <div class="question">
+        <label for="q19">19. How will you know you are making progress?</label>
+        <select id="q19" name="q19">
+          <option value="">Choose one</option>
+          <option value="completion">Completing lessons, applications, or milestones</option>
+          <option value="evidence">Creating work samples or measurable evidence</option>
+          <option value="feedback">Getting feedback or responses from others</option>
+          <option value="results">Achieving a job, funding, income, or admission result</option>
+          <option value="consistency">Following a consistent weekly routine</option>
+          <option value="unsure">I need help choosing a measure.</option>
+        </select>
+      </div>
+
+      <div class="question">
+        <label for="q20">20. What would make you more likely to follow through?</label>
+        <select id="q20" name="q20">
+          <option value="">Choose one</option>
+          <option value="small-steps">Small steps and a clear checklist</option>
+          <option value="deadlines">Deadlines and milestones</option>
+          <option value="accountability">Accountability or feedback from someone</option>
+          <option value="flexibility">A flexible plan that adapts to my schedule</option>
+          <option value="visible-progress">Visible progress and completed work</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <div class="section-number">05</div>
+        <div>
+          <h2>Build resilience into your plan</h2>
+          <p>Think ahead about uncertainty, alternatives, and the next decision.</p>
+        </div>
+      </div>
+
+      <div class="question">
+        <label for="q21">21. If your first approach does not work, what could you change?</label>
+        <select id="q21" name="q21">
+          <option value="">Choose one</option>
+          <option value="method">Change the method or learning approach</option>
+          <option value="target">Target a different role, program, or opportunity</option>
+          <option value="timeline">Extend the timeline and work in smaller stages</option>
+          <option value="support">Seek feedback, mentorship, or collaboration</option>
+          <option value="scope">Start with a smaller version of the goal</option>
+          <option value="unknown">I need help identifying alternatives.</option>
+        </select>
+      </div>
+
+      <div class="question">
+        <label for="q22">22. What is a realistic alternative route you would consider?</label>
+        <textarea id="q22" name="q22" placeholder="Example: If a paid program is not affordable, I will use free lessons and build a project first."></textarea>
+      </div>
+
+      <div class="question">
+        <label for="q23">23. What is the smallest useful action you could take in the next 48 hours?</label>
+        <textarea id="q23" name="q23" placeholder="Make it small enough that you could realistically complete it."></textarea>
+      </div>
+
+      <div class="question">
+        <label for="q24">24. Is there anything else your strategy should take into account?</label>
+        <textarea id="q24" name="q24" placeholder="Optional: additional goals, concerns, preferences, or conditions for success."></textarea>
+      </div>
+    </section>
+
+    <div class="notice">
+      <strong>Your answers create a planning guide, not a guarantee.</strong>
+      Verify deadlines, eligibility requirements, costs, and opportunity details
+      with the organization offering them before making commitments.
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Generate My Strategy</button>
+      <button type="button" class="btn btn-secondary" id="clearBtn">Start Over</button>
+    </div>
+  </form>
+
+  <section class="results" id="results" aria-live="polite">
+    <div class="results-hero">
+      <div class="result-label">Your personalized plan</div>
+      <h2 id="resultTitle">Your PathKeeper Strategy</h2>
+      <p id="resultSummary"></p>
+      <div class="result-meta">
+        <div class="meta-box">
+          <span>Primary focus</span>
+          <strong id="metaGoal">Not specified</strong>
+        </div>
+        <div class="meta-box">
+          <span>Planning horizon</span>
+          <strong id="metaTime">Flexible</strong>
+        </div>
+        <div class="meta-box">
+          <span>Weekly commitment</span>
+          <strong id="metaHours">To be decided</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="result-card">
+      <h3>1. Your starting-point assessment</h3>
+      <div id="assessment"></div>
+    </div>
+
+    <div class="result-card">
+      <h3>2. Your recommended strategy</h3>
+      <p id="strategyIntro"></p>
+      <ol id="strategySteps"></ol>
+    </div>
+
+    <div class="result-card">
+      <h3>3. Your first 7 days</h3>
+      <p>Use these steps to begin without waiting for perfect conditions.</p>
+      <ol id="weekPlan"></ol>
+    </div>
+
+    <div class="result-card">
+      <h3>4. Your 30-day milestones</h3>
+      <ol id="milestones"></ol>
+    </div>
+
+    <div class="result-card">
+      <h3>5. Your backup and recovery plan</h3>
+      <p id="backupIntro"></p>
+      <ol id="backupSteps"></ol>
+    </div>
+
+    <div class="result-card">
+      <h3>6. Progress checks</h3>
+      <ul id="progressChecks"></ul>
+    </div>
+
+    <div class="result-card">
+      <h3>7. Your personal notes</h3>
+      <div id="personalNotes"></div>
+    </div>
+
+    <div class="result-actions">
+      <button type="button" class="btn btn-primary" id="downloadPlan">Download Strategy + Backup Plan (.txt)</button>
+      <button type="button" class="btn btn-secondary" id="downloadJson">Save My Answers (.json)</button>
+      <button type="button" class="btn btn-outline" id="printPlan">Print / Save as PDF</button>
+      <button type="button" class="btn btn-outline" id="editAnswers">Edit My Answers</button>
+    </div>
+
+    <p class="small-print">
+      Your plan is generated from the answers entered on this page. Download
+      a copy before closing or refreshing if you want to keep it. This page
+      does not automatically save your answers between visits.
+    </p>
+  </section>
+
+  <footer class="footer">
+    <strong>PathKeeper</strong><br>
+    Discover possibilities. Build skills. Create evidence. Keep moving.
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  const form = document.getElementById("questionnaire");
+  const results = document.getElementById("results");
+  let latestPlanText = "";
+  let latestAnswers = {};
+
+  const labels = {
+    career: "Career direction or career change",
+    skills: "Skill development or certification",
+    education: "Education, scholarships, or study abroad",
+    business: "Starting or growing a business",
+    funding: "Funding and financial opportunities",
+    employment: "Employment or work experience",
+    portfolio: "Portfolio and proof of ability",
+    personal: "Personal development",
+    other: "A personal goal",
+    "7 days": "7 days",
+    "30 days": "30 days",
+    "90 days": "90 days",
+    "6 months": "6 months",
+    "12 months": "12 months",
+    flexible: "Flexible",
+    "1-2 hours": "1–2 hours per week",
+    "3-5 hours": "3–5 hours per week",
+    "6-10 hours": "6–10 hours per week",
+    "11+ hours": "11+ hours per week",
+    variable: "Variable weekly schedule"
+  };
+
+  function getValue(id) {
+    const el = document.getElementById(id);
+    return el ? el.value.trim() : "";
+  }
+
+  function getChecked(name) {
+    return Array.from(form.querySelectorAll(
+      'input[name="' + name + '"]:checked'
+    )).map(el => el.value);
+  }
+
+  function answerLabel(value) {
+    return labels[value] || value || "Not provided";
+  }
+
+  function safeText(value) {
+    return String(value || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function putText(id, value) {
+    document.getElementById(id).textContent = value;
+  }
+
+  function putList(id, items) {
+    const list = document.getElementById(id);
+    list.replaceChildren();
+
+    items.forEach(item => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      list.appendChild(li);
+    });
+  }
+
+  function putParagraphs(id, items) {
+    const container = document.getElementById(id);
+    container.replaceChildren();
+
+    items.forEach(item => {
+      if (!item) return;
+      const p = document.createElement("p");
+      p.textContent = item;
+      container.appendChild(p);
+    });
+  }
+
+  function collectAnswers() {
+    const answers = {};
+
+    for (let i = 1; i <= 24; i++) {
+      const id = "q" + i;
+      const el = document.getElementById(id);
+
+      if (!el) continue;
+
+      if (el.type === "checkbox") {
+        answers[id] = getChecked(id);
+      } else {
+        answers[id] = el.value.trim();
+      }
+    }
+
+    answers.q9 = getChecked("q9");
+    answers.q17 = getChecked("q17");
+
+    return answers;
+  }
+
+  function goalStrategy(goal) {
+    const strategies = {
+      career: [
+        "Identify two or three roles that match your interests, strengths, and practical needs.",
+        "Compare real job descriptions to identify repeated skills, qualifications, and entry requirements.",
+        "Choose one skill gap to address and build a small work sample that demonstrates progress.",
+        "Prepare a targeted resume or professional profile and begin a manageable application routine.",
+        "Review employer feedback and adjust your target roles or evidence where necessary."
+      ],
+      skills: [
+        "Choose one specific skill and define what you should be able to do with it.",
+        "Compare free or affordable learning resources before paying for a course or certificate.",
+        "Schedule short practice sessions and complete exercises rather than only consuming lessons.",
+        "Create a project or demonstration that proves you can apply the skill.",
+        "Review your work, seek feedback, and choose the next skill based on the gaps you discover."
+      ],
+      education: [
+        "Identify suitable programs, institutions, scholarships, or study-abroad routes.",
+        "Record eligibility rules, deadlines, costs, required documents, and official application links.",
+        "Compare total costs and requirements before committing to an option.",
+        "Prepare one application component at a time, such as a resume, essay, transcript request, or recommendation request.",
+        "Track deadlines and maintain alternative programs or funding sources."
+      ],
+      business: [
+        "Define one specific customer problem and the people who experience it.",
+        "Research existing solutions, competitors, and evidence that customers pay to solve this problem.",
+        "Test a small version of your offer before investing heavily in tools, inventory, or advertising.",
+        "Ask potential customers for feedback and refine the offer based on what you learn.",
+        "Track interest, costs, and actual results before deciding whether to expand."
+      ],
+      funding: [
+        "Define what the funding would support and the amount or type of support required.",
+        "Search official funder, institution, government, and organization sources for current opportunities.",
+        "Check eligibility, location rules, deadlines, allowed uses, and application costs.",
+        "Prepare reusable materials such as a short goal statement, budget, resume, or project summary.",
+        "Track submissions and develop additional eligible funding routes instead of relying on one award."
+      ],
+      employment: [
+        "Identify a focused set of roles that fit your current experience and practical requirements.",
+        "Review job postings to find common qualifications and the evidence employers request.",
+        "Tailor your resume and application materials to the role rather than using one generic version for everything.",
+        "Set a realistic weekly target for applications, networking, or employer follow-up.",
+        "Track responses and use them to improve targeting and application quality."
+      ],
+      portfolio: [
+        "Choose the type of opportunity your portfolio should support and identify the evidence it requires.",
+        "Select one manageable project that demonstrates a relevant skill or solves a clear problem.",
+        "Document your process, decisions, finished work, and measurable results where available.",
+        "Ask for feedback and revise the project to improve clarity and quality.",
+        "Publish or organize your best evidence in a portfolio that is easy to review."
+      ],
+      personal: [
+        "Turn your broad goal into one observable outcome you can work toward.",
+        "Identify the habits, skills, resources, and environmental changes that could support it.",
+        "Choose a small weekly routine that fits your real schedule.",
+        "Record actions completed and obstacles encountered without treating setbacks as total failure.",
+        "Review what works and adjust the plan based on evidence."
+      ],
+      other: [
+        "Define the desired result in clear, observable terms.",
+        "Research the requirements, options, and resources connected to the goal.",
+        "Choose a small action that tests your assumptions or builds useful information.",
+        "Create evidence of progress and ask for feedback when appropriate.",
+        "Review your findings and choose the next action based on what you learned."
+      ]
+    };
+
+    return strategies[goal] || strategies.other;
+  }
+
+  function firstAction(goal, action, answer23) {
+    if (answer23) return answer23;
+
+    const actions = {
+      career: "Find three real job descriptions for roles you may want and list the skills they share.",
+      skills: "Choose one skill and complete one short practice exercise.",
+      education: "Find one official program or scholarship page and record its eligibility and deadline.",
+      business: "Write down one customer problem and speak with or research three people who experience it.",
+      funding: "Find one official funding opportunity and verify its eligibility rules.",
+      employment: "Identify one suitable opening and improve your resume for its requirements.",
+      portfolio: "Choose one small project and write down what the finished evidence should demonstrate.",
+      personal: "Write one specific outcome you want to achieve and one action you can take this week.",
+      other: "Write down the smallest action that would give you useful information about your goal."
+    };
+
+    return actions[goal] || actions.other;
+  }
+
+  function obstacleAdvice(obstacle) {
+    const advice = {
+      time: "Use short, scheduled work sessions. Protect one repeatable block each week and define a smaller version of every task.",
+      money: "Start with no-cost research and learning. Verify total costs, avoid unnecessary purchases, and look for legitimate support before committing funds.",
+      knowledge: "Turn uncertainty into a research task. Compare official requirements, record unanswered questions, and resolve one question at a time.",
+      experience: "Create small, relevant work samples or practical projects. Seek feedback and document what you can demonstrate.",
+      access: "Look for remote, public, community, library, or institution-based alternatives. Identify which parts of the goal do not require the unavailable resource.",
+      confidence: "Use low-risk experiments. Measure completed actions and evidence rather than waiting until you feel completely ready.",
+      consistency: "Reduce the weekly workload, attach tasks to a regular routine, and use a visible checklist to restart after interruptions.",
+      competition: "Broaden your list of suitable opportunities, improve the evidence you present, and maintain several realistic routes.",
+      other: "Describe the obstacle more specifically, identify what is within your control, and test one practical response."
+    };
+
+    return advice[obstacle] || advice.other;
+  }
+
+  function backupAdvice(method) {
+    const advice = {
+      method: "Keep the same overall goal but test a different method, resource, or practice schedule.",
+      target: "Identify adjacent roles, programs, customers, or opportunities that use similar skills and lead toward a related outcome.",
+      timeline: "Extend the timeline, reduce the weekly workload, and preserve the most valuable actions.",
+      support: "Ask a knowledgeable person for feedback, use a peer community, or request clarification from the organization responsible.",
+      scope: "Create a smaller version of the goal that can be completed with current resources, then expand after it works.",
+      unknown: "List two alternative routes, compare their costs and requirements, and choose the least risky option to test first."
+    };
+
+    return advice[method] || advice.unknown;
+  }
+
+  function timeAdvice(time) {
+    const advice = {
+      "1-2 hours": "Limit the plan to one priority task and one short review each week.",
+      "3-5 hours": "Schedule two or three focused sessions per week, with one concrete output from each session.",
+      "6-10 hours": "Divide time between learning, producing evidence, and researching or pursuing opportunities.",
+      "11+ hours": "Use a structured weekly schedule with work blocks, review time, and breaks to prevent overload.",
+      variable: "Create a minimum version of your plan for busy weeks and a larger version for weeks with more time."
+    };
+
+    return advice[time] || "Choose a realistic weekly commitment and adjust it after observing your actual schedule.";
+  }
+
+  function budgetAdvice(budget) {
+    const advice = {
+      zero: "Prioritize free learning materials, official opportunity pages, public resources, and projects that use tools you already have.",
+      small: "Set a firm spending limit and pay only for a clearly identified need that cannot reasonably be met another way.",
+      moderate: "Write down expected costs and compare the value of each expense before spending.",
+      flexible: "Set a budget and verify the value, legitimacy, and alternatives for each purchase before committing.",
+      unknown: "Estimate the full cost of the goal, including fees, equipment, travel, and recurring expenses, before choosing a route."
+    };
+
+    return advice[budget] || advice.unknown;
+  }
+
+  function makePlan(answers) {
+    const goal = answers.q1 || "other";
+    const goalName = answerLabel(goal);
+    const horizon = answers.q3 || "flexible";
+    const hours = answers.q12 || "variable";
+    const obstacle = answers.q11 || "other";
+    const method = answers.q21 || "unknown";
+    const budget = answers.q13 || "unknown";
+    const first = firstAction(goal, answers.q16, answers.q23);
+
+    const strategy = goalStrategy(goal);
+    strategy[0] = answers.q2
+      ? "Use this desired result as the target: " + answers.q2
+      : strategy[0];
+
+    const week = [
+      "Day 1: Define the desired outcome and write down what success would look like.",
+      "Days 2–3: " + first,
+      "Days 4–5: Identify the main requirements, cost, deadline, or skill gap connected to your goal.",
+      "Days 6–7: Complete one small deliverable, review what you learned, and schedule the next week."
+    ];
+
+    const milestones = [
+      "Week 1 — Clarity: define your target, confirm basic requirements, and complete your first useful action.",
+      "Week 2 — Preparation: gather resources, address one key knowledge gap, and set up a workable routine.",
+      "Week 3 — Evidence: create a project, application component, practice result, outreach attempt, or other tangible output.",
+      "Week 4 — Review: compare your progress with your target, gather feedback where possible, and select the next milestone."
+    ];
+
+    const backup = [
+      "Trigger for switching: if the current approach repeatedly fails, becomes unaffordable, or no longer fits your circumstances, pause and review what is blocking progress.",
+      backupAdvice(method),
+      obstacleAdvice(obstacle),
+      budgetAdvice(budget),
+      "Protect your progress: keep copies of completed work, notes, research, application materials, and useful feedback.",
+      answers.q22
+        ? "Your stated alternative route: " + answers.q22
+        : "Prepare at least one alternative route that uses similar skills but has different requirements, costs, or access conditions.",
+      "Restart rule: choose one small action you can complete within 48 hours of a setback. Review the result before making a larger commitment."
+    ];
+
+    const checks = [
+      "Did I complete the most important action I planned this week?",
+      "Did I create or improve something I can show as evidence?",
+      "Did I verify important requirements with an official source?",
+      "Did I stay within my available time and safe budget?",
+      "What blocked progress, and what adjustment will I test next week?"
+    ];
+
+    const assessment = [
+      "Starting level: " + answerLabel(answers.q6),
+      "Current direction: " + answerLabel(answers.q5),
+      "Existing evidence: " + answerLabel(answers.q8),
+      "Main obstacle: " + answerLabel(obstacle),
+      "Available time: " + answerLabel(hours),
+      "Budget approach: " + answerLabel(budget),
+      "Best initial adjustment: " + obstacleAdvice(obstacle)
+    ];
+
+    const selectedResources = answers.q9 || [];
+    const interests = answers.q17 || [];
+
+    const notes = [
+      answers.q4 ? "Why this matters: " + answers.q4 : "",
+      answers.q7 ? "Skills to build on: " + answers.q7 : "",
+      answers.q10 ? "Existing advantage: " + answers.q10 : "",
+      answers.q15 ? "Additional limitation: " + answers.q15 : "",
+      answers.q24 ? "Additional planning notes: " + answers.q24 : "",
+      selectedResources.length
+        ? "Available resources: " + selectedResources.join(", ")
+        : "Available resources: not specified.",
+      interests.length
+        ? "Opportunity interests: " + interests.join(", ")
+        : "Opportunity interests: not specified.",
+      answers.q18 ? "Preferred learning style: " + answerLabel(answers.q18) : "",
+      answers.q19 ? "Preferred progress measure: " + answerLabel(answers.q19) : "",
+      answers.q20 ? "Follow-through preference: " + answerLabel(answers.q20) : "",
+      answers.q16 ? "Preferred next-step type: " + answerLabel(answers.q16) : ""
+    ].filter(Boolean);
+
+    return {
+      goalName,
+      horizon,
+      hours,
+      strategy,
+      week,
+      milestones,
+      backup,
+      checks,
+      assessment,
+      notes,
+      first
+    };
+  }
+
+  function renderPlan(plan) {
+    putText("resultTitle", "Your PathKeeper Strategy");
+    putText(
+      "resultSummary",
+      "Your plan starts with " + plan.goalName.toLowerCase() +
+      ". Focus on manageable actions, useful evidence, and an alternative route if circumstances change."
+    );
+
+    putText("metaGoal", plan.goalName);
+    putText("metaTime", answerLabel(plan.horizon));
+    putText("metaHours", answerLabel(plan.hours));
+
+    putList("assessment", plan.assessment);
+    putText(
+      "strategyIntro",
+      "Recommended approach: focus on one primary outcome, work within your available resources, and adjust based on evidence rather than assumptions."
+    );
+    putList("strategySteps", plan.strategy);
+    putList("weekPlan", plan.week);
+    putList("milestones", plan.milestones);
+
+    putText(
+      "backupIntro",
+      "A backup plan is not giving up. It is a prepared response that helps you protect your progress and choose a different route when the original one is blocked."
+    );
+    putList("backupSteps", plan.backup);
+    putList("progressChecks", plan.checks);
+    putList("personalNotes", plan.notes.length ? plan.notes : [
+      "You did not add optional notes. You can still use the action plan and add your own details later."
+    ]);
+
+    latestPlanText = buildTextReport(plan, latestAnswers);
+    results.classList.add("visible");
+    results.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function buildTextReport(plan, answers) {
+    const lines = [
+      "PATHKEEPER — PERSONAL STRATEGY AND BACKUP PLAN",
+      "Generated: " + new Date().toLocaleDateString(),
+      "",
+      "PRIMARY GOAL: " + plan.goalName,
+      "TIMEFRAME: " + answerLabel(plan.horizon),
+      "WEEKLY TIME: " + answerLabel(plan.hours),
+      "",
+      "DESIRED RESULT",
+      answers.q2 || "Not specified",
+      "",
+      "WHY THIS MATTERS",
+      answers.q4 || "Not specified",
+      "",
+      "STARTING-POINT ASSESSMENT",
+      ...plan.assessment.map((x, i) => (i + 1) + ". " + x),
+      "",
+      "RECOMMENDED STRATEGY",
+      ...plan.strategy.map((x, i) => (i + 1) + ". " + x),
+      "",
+      "FIRST 7 DAYS",
+      ...plan.week.map((x, i) => (i + 1) + ". " + x),
+      "",
+      "30-DAY MILESTONES",
+      ...plan.milestones.map((x, i) => (i + 1) + ". " + x),
+      "",
+      "BACKUP AND RECOVERY PLAN",
+      ...plan.backup.map((x, i) => (i + 1) + ". " + x),
+      "",
+      "WEEKLY PROGRESS CHECKS",
+      ...plan.checks.map((x, i) => (i + 1) + ". " + x),
+      "",
+      "PERSONAL NOTES",
+      ...plan.notes.map(x => "- " + x),
+      "",
+      "IMPORTANT",
+      "This is a planning guide, not a guarantee of an outcome. Verify deadlines, eligibility, costs, and opportunity details with official sources.",
+      "Keep your own copy of this report and any supporting documents."
+    ];
+
+    return lines.join("\n");
+  }
+
+  function downloadFile(filename, content, mimeType) {
+    const blob = new Blob([content], { type: mimeType });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  function updateProgress() {
+    let answered = 0;
+
+    for (let i = 1; i <= 24; i++) {
+      const el = document.getElementById("q" + i);
+      if (!el) continue;
+
+      if (el.type === "checkbox") {
+        if (getChecked("q" + i).length) answered++;
+      } else if (el.value.trim()) {
+        answered++;
+      }
+    }
+
+    // Treat each checkbox question as one question, not each option.
+    const percentage = Math.round((answered / 24) * 100);
+    document.getElementById("progressText").textContent =
+      answered + " of 24 answered (" + percentage + "%)";
+    document.getElementById("progressFill").style.width = percentage + "%";
+    document.getElementById("progressBar").setAttribute("aria-valuenow", answered);
+  }
+
+  form.addEventListener("input", updateProgress);
+  form.addEventListener("change", updateProgress);
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    latestAnswers = collectAnswers();
+    const plan = makePlan(latestAnswers);
+    renderPlan(plan);
+  });
+
+  document.getElementById("downloadPlan").addEventListener("click", function () {
+    if (!latestPlanText) return;
+    downloadFile("PathKeeper-Strategy-and-Backup-Plan.txt", latestPlanText, "text/plain;charset=utf-8");
+  });
+
+  document.getElementById("downloadJson").addEventListener("click", function () {
+    if (!latestAnswers || !Object.keys(latestAnswers).length) return;
+
+    const backupFile = {
+      title: "PathKeeper Questionnaire Answers",
+      exportedAt: new Date().toISOString(),
+      answers: latestAnswers
+    };
+
+    downloadFile(
+      "PathKeeper-My-Answers.json",
+      JSON.stringify(backupFile, null, 2),
+      "application/json;charset=utf-8"
+    );
+  });
+
+  document.getElementById("printPlan").addEventListener("click", function () {
+    if (!latestPlanText) {
+      alert("Generate your strategy first.");
+      return;
+    }
+    window.print();
+  });
+
+  document.getElementById("editAnswers").addEventListener("click", function () {
+    form.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  document.getElementById("clearBtn").addEventListener("click", function () {
+    const confirmed = window.confirm(
+      "Clear your answers and start a new plan? Download your current plan first if you want to keep it."
+    );
+
+    if (!confirmed) return;
+
+    form.reset();
+    results.classList.remove("visible");
+    latestPlanText = "";
+    latestAnswers = {};
+    updateProgress();
+    form.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  updateProgress();
+})();
+</script>
+</body>
+</html>
