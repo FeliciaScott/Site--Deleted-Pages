@@ -1,0 +1,3494 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Portfolio Operator | Gamified Career System</title>
+
+<style>
+
+:root{
+    --bg:#070b10;
+    --surface:#101720;
+    --surface2:#151f2b;
+    --surface3:#0c131b;
+
+    --green:#22c55e;
+    --lime:#a3e635;
+    --blue:#38bdf8;
+    --gold:#facc15;
+    --red:#f87171;
+
+    --text:#f8fafc;
+    --muted:#94a3b8;
+    --border:#243241;
+
+    --shadow:0 15px 45px rgba(0,0,0,.35);
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:"Segoe UI",Arial,sans-serif;
+    background:
+        radial-gradient(circle at 10% 0%,rgba(34,197,94,.08),transparent 30%),
+        radial-gradient(circle at 90% 10%,rgba(56,189,248,.07),transparent 30%),
+        var(--bg);
+    color:var(--text);
+    line-height:1.65;
+}
+
+button{
+    font-family:inherit;
+}
+
+.container{
+    width:min(1150px,92%);
+    margin:auto;
+}
+
+/* =========================
+PLAYER BAR
+========================= */
+
+.player-bar{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(7,11,16,.94);
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid var(--border);
+}
+
+.player-inner{
+    width:min(1150px,92%);
+    margin:auto;
+    min-height:72px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:20px;
+}
+
+.player-brand{
+    font-weight:900;
+    letter-spacing:.05em;
+}
+
+.player-brand span{
+    color:var(--lime);
+}
+
+.player-stats{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.stat{
+    text-align:center;
+}
+
+.stat strong{
+    display:block;
+    color:var(--lime);
+    font-size:1.05rem;
+}
+
+.stat small{
+    color:var(--muted);
+    font-size:.65rem;
+    text-transform:uppercase;
+}
+
+.rank{
+    padding:7px 12px;
+    border:1px solid rgba(163,230,53,.4);
+    color:var(--lime);
+    border-radius:20px;
+    font-size:.7rem;
+    font-weight:900;
+}
+
+/* =========================
+HERO
+========================= */
+
+.hero{
+    padding:100px 20px 70px;
+    text-align:center;
+}
+
+.kicker{
+    display:inline-block;
+    color:var(--lime);
+    font-size:.72rem;
+    font-weight:900;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    max-width:900px;
+    margin:auto;
+
+    font-size:clamp(3rem,7vw,5.8rem);
+    line-height:.98;
+
+    letter-spacing:-.05em;
+}
+
+.hero h1 span{
+    background:linear-gradient(
+        90deg,
+        var(--lime),
+        var(--green),
+        var(--blue)
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+    max-width:750px;
+    margin:30px auto;
+
+    color:var(--muted);
+    font-size:1.1rem;
+}
+
+.hero-actions{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    border:0;
+    cursor:pointer;
+
+    padding:15px 25px;
+
+    border-radius:10px;
+
+    font-weight:800;
+
+    text-decoration:none;
+
+    display:inline-block;
+
+    transition:.25s;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+}
+
+.btn-primary{
+    color:#07100b;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--lime),
+            var(--green)
+        );
+}
+
+.btn-secondary{
+    color:white;
+
+    background:var(--surface2);
+
+    border:1px solid var(--border);
+}
+
+/* =========================
+DASHBOARD
+========================= */
+
+.dashboard{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:15px;
+    margin-bottom:70px;
+}
+
+.dashboard-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:22px;
+}
+
+.dashboard-card small{
+    color:var(--muted);
+    text-transform:uppercase;
+    font-size:.65rem;
+    letter-spacing:.1em;
+}
+
+.dashboard-card strong{
+    display:block;
+    font-size:1.8rem;
+    margin-top:5px;
+    color:var(--lime);
+}
+
+.dashboard-card p{
+    color:var(--muted);
+    font-size:.78rem;
+}
+
+/* =========================
+XP
+========================= */
+
+.progress-panel{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:25px;
+    margin-bottom:70px;
+    box-shadow:var(--shadow);
+}
+
+.progress-top{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:12px;
+}
+
+.progress-top strong{
+    color:var(--lime);
+}
+
+.progress-track{
+    height:14px;
+    background:#05090d;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-fill{
+    height:100%;
+    width:0%;
+    background:linear-gradient(
+        90deg,
+        var(--green),
+        var(--lime)
+    );
+    transition:.6s;
+}
+
+/* =========================
+SECTION
+========================= */
+
+section{
+    margin-bottom:90px;
+}
+
+.section-heading{
+    margin-bottom:30px;
+}
+
+.section-heading small{
+    color:var(--lime);
+    text-transform:uppercase;
+    font-weight:900;
+    letter-spacing:.12em;
+    font-size:.7rem;
+}
+
+.section-heading h2{
+    font-size:2.4rem;
+    margin-top:5px;
+}
+
+.section-heading p{
+    color:var(--muted);
+    max-width:750px;
+}
+
+/* =========================
+MISSIONS
+========================= */
+
+.mission-board{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(260px,1fr));
+    gap:18px;
+}
+
+.mission{
+    position:relative;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:25px;
+    transition:.3s;
+}
+
+.mission:hover{
+    transform:translateY(-5px);
+    border-color:var(--green);
+    box-shadow:
+        0 10px 35px
+        rgba(34,197,94,.08);
+}
+
+.mission.complete{
+    border-color:var(--lime);
+
+    background:
+        linear-gradient(
+            145deg,
+            #111d17,
+            #101720
+        );
+}
+
+.mission.complete::after{
+    content:"✓ COMPLETE";
+
+    position:absolute;
+
+    top:15px;
+    right:15px;
+
+    color:var(--lime);
+
+    font-size:.62rem;
+
+    font-weight:900;
+}
+
+.mission-number{
+    color:var(--green);
+    font-weight:900;
+    font-size:.72rem;
+    letter-spacing:.1em;
+}
+
+.mission h3{
+    margin:12px 0 8px;
+}
+
+.mission p{
+    color:var(--muted);
+    font-size:.88rem;
+}
+
+.mission-reward{
+    display:inline-block;
+    margin-top:18px;
+    color:var(--gold);
+    font-size:.75rem;
+    font-weight:900;
+}
+
+.mission button{
+    margin-top:18px;
+    width:100%;
+    background:var(--surface2);
+    color:white;
+    border:1px solid var(--border);
+    padding:10px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.mission button:hover{
+    border-color:var(--lime);
+}
+
+.mission button:disabled{
+    opacity:.6;
+    cursor:default;
+}
+
+/* =========================
+LEVEL ROADMAP
+========================= */
+
+.level-roadmap{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(180px,1fr));
+    gap:12px;
+}
+
+.level-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:20px;
+    position:relative;
+    transition:.3s;
+}
+
+.level-card.current{
+    border-color:var(--lime);
+    box-shadow:
+        0 0 25px
+        rgba(163,230,53,.08);
+}
+
+.level-card.unlocked{
+    opacity:1;
+}
+
+.level-card.locked{
+    opacity:.4;
+}
+
+.level-card small{
+    color:var(--muted);
+    text-transform:uppercase;
+    font-size:.65rem;
+}
+
+.level-card h3{
+    margin:6px 0;
+    color:var(--lime);
+}
+
+.level-card p{
+    color:var(--muted);
+    font-size:.78rem;
+}
+
+/* =========================
+SCORE
+========================= */
+
+.score-layout{
+    display:grid;
+    grid-template-columns:320px 1fr;
+    gap:25px;
+}
+
+.score-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:35px;
+    text-align:center;
+}
+
+.score-circle{
+    width:190px;
+    height:190px;
+    border-radius:50%;
+    margin:auto auto 25px;
+    display:grid;
+    place-items:center;
+
+    background:
+        radial-gradient(
+            circle,
+            var(--surface) 62%,
+            transparent 63%
+        ),
+        conic-gradient(
+            var(--lime) 0deg,
+            #1c2934 0deg
+        );
+}
+
+.score-number{
+    font-size:3.3rem;
+    font-weight:900;
+}
+
+.score-label{
+    color:var(--muted);
+    font-size:.75rem;
+    text-transform:uppercase;
+}
+
+.score-bars{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.score-row{
+    background:var(--surface);
+    border:1px solid var(--border);
+    padding:18px;
+    border-radius:12px;
+}
+
+.score-row-top{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:8px;
+}
+
+.score-row-top span{
+    color:var(--muted);
+    font-size:.85rem;
+}
+
+.mini-track{
+    height:8px;
+    background:#05090d;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.mini-fill{
+    height:100%;
+    width:0;
+    background:var(--green);
+    transition:.6s;
+}
+
+/* =========================
+BLUEPRINT
+========================= */
+
+.blueprint{
+    display:grid;
+    gap:15px;
+}
+
+.blueprint-step{
+    display:grid;
+    grid-template-columns:70px 1fr auto;
+    gap:20px;
+    align-items:center;
+    background:var(--surface);
+    border:1px solid var(--border);
+    padding:22px;
+    border-radius:14px;
+}
+
+.blueprint-num{
+    width:48px;
+    height:48px;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    background:#102318;
+    border:1px solid var(--green);
+    color:var(--lime);
+    font-weight:900;
+}
+
+.blueprint-step p{
+    color:var(--muted);
+    font-size:.9rem;
+}
+
+.tag{
+    padding:5px 9px;
+    border-radius:20px;
+    background:#15221b;
+    color:var(--lime);
+    font-size:.7rem;
+    font-weight:800;
+}
+
+/* =========================
+EXPLORER
+========================= */
+
+.explorer{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:25px;
+}
+
+.tabs{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-bottom:25px;
+}
+
+.tab{
+    padding:10px 15px;
+    border-radius:8px;
+    background:var(--surface3);
+    border:1px solid var(--border);
+    color:var(--muted);
+    cursor:pointer;
+    font-weight:700;
+}
+
+.tab.active{
+    background:var(--green);
+    color:#061008;
+    border-color:var(--green);
+}
+
+.explorer-grid{
+    display:grid;
+    grid-template-columns:
+        repeat(3,1fr);
+    gap:15px;
+}
+
+.explorer-card{
+    background:var(--surface3);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:20px;
+}
+
+.explorer-card small{
+    color:var(--lime);
+    font-weight:900;
+}
+
+.explorer-card h3{
+    margin:10px 0;
+}
+
+.explorer-card p{
+    color:var(--muted);
+    font-size:.88rem;
+}
+
+.takeaway{
+    margin-top:15px;
+    border-left:3px solid var(--green);
+    padding-left:10px;
+    color:#dce7df;
+    font-size:.78rem;
+}
+
+/* =========================
+ACHIEVEMENTS
+========================= */
+
+.achievements{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(200px,1fr));
+    gap:15px;
+}
+
+.achievement{
+    background:var(--surface);
+    border:1px solid var(--border);
+    padding:22px;
+    border-radius:14px;
+    opacity:.4;
+    filter:grayscale(1);
+    transition:.4s;
+}
+
+.achievement.unlocked{
+    opacity:1;
+    filter:none;
+    border-color:var(--lime);
+    box-shadow:
+        0 0 25px
+        rgba(163,230,53,.08);
+}
+
+.achievement-icon{
+    font-size:2rem;
+    margin-bottom:10px;
+}
+
+.achievement h3{
+    font-size:1rem;
+}
+
+.achievement p{
+    color:var(--muted);
+    font-size:.8rem;
+}
+
+/* =========================
+AUDIT
+========================= */
+
+.audit{
+    background:
+        linear-gradient(
+            145deg,
+            #101a16,
+            #101720
+        );
+
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:30px;
+}
+
+.audit-item{
+    display:flex;
+    gap:15px;
+    padding:18px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.audit-item:last-child{
+    border-bottom:0;
+}
+
+.audit-item input{
+    width:20px;
+    height:20px;
+    accent-color:var(--green);
+}
+
+.audit-item label{
+    cursor:pointer;
+}
+
+.audit-item strong{
+    display:block;
+}
+
+.audit-item span{
+    color:var(--muted);
+    font-size:.82rem;
+}
+
+/* =========================
+7 DAY CHALLENGE
+========================= */
+
+.challenge{
+    background:
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(163,230,53,.12),
+            transparent 35%
+        ),
+        var(--surface);
+
+    border:1px solid var(--green);
+    border-radius:22px;
+    padding:45px;
+    text-align:center;
+}
+
+.challenge h2{
+    font-size:2.6rem;
+}
+
+.challenge p{
+    color:var(--muted);
+    max-width:700px;
+    margin:15px auto 25px;
+}
+
+.challenge-grid{
+    display:grid;
+    grid-template-columns:
+        repeat(4,1fr);
+    gap:12px;
+    margin:30px 0;
+}
+
+.challenge-day{
+    background:var(--surface3);
+    padding:20px;
+    border-radius:12px;
+    border:1px solid var(--border);
+    cursor:pointer;
+    transition:.25s;
+}
+
+.challenge-day:hover{
+    transform:translateY(-3px);
+    border-color:var(--green);
+}
+
+.challenge-day.done{
+    border-color:var(--lime);
+    background:#122018;
+}
+
+.challenge-day strong{
+    color:var(--lime);
+    display:block;
+    margin-bottom:5px;
+}
+
+.challenge-day span{
+    color:var(--muted);
+    font-size:.8rem;
+}
+
+/* =========================
+BOSS
+========================= */
+
+.boss{
+    background:
+        linear-gradient(
+            145deg,
+            #20150b,
+            #101720
+        );
+
+    border:1px solid var(--gold);
+    border-radius:22px;
+    padding:40px;
+    text-align:center;
+}
+
+.boss .boss-icon{
+    font-size:3.5rem;
+}
+
+.boss h2{
+    color:var(--gold);
+    font-size:2.5rem;
+    margin:10px 0;
+}
+
+.boss p{
+    max-width:700px;
+    margin:15px auto;
+    color:var(--muted);
+}
+
+/* =========================
+RESET
+========================= */
+
+.reset-area{
+    text-align:center;
+    margin:30px 0 70px;
+}
+
+.reset-btn{
+    background:transparent;
+    color:var(--red);
+    border:1px solid rgba(248,113,113,.35);
+    padding:10px 16px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:.75rem;
+}
+
+.reset-btn:hover{
+    background:rgba(248,113,113,.08);
+}
+
+/* =========================
+TOAST
+========================= */
+
+.toast{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    z-index:2000;
+
+    background:#101a15;
+    border:1px solid var(--lime);
+    color:white;
+
+    padding:16px 20px;
+
+    border-radius:12px;
+
+    box-shadow:var(--shadow);
+
+    transform:translateY(120px);
+    opacity:0;
+
+    transition:.4s;
+
+    pointer-events:none;
+
+    max-width:320px;
+}
+
+.toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+.toast strong{
+    color:var(--lime);
+    display:block;
+}
+
+/* =========================
+FOOTER
+========================= */
+
+footer{
+    border-top:1px solid var(--border);
+    padding:60px 20px;
+    text-align:center;
+}
+
+footer h2{
+    font-size:2rem;
+}
+
+footer p{
+    color:var(--muted);
+    max-width:650px;
+    margin:15px auto;
+}
+
+/* =========================
+MOBILE
+========================= */
+
+@media(max-width:800px){
+
+    .player-stats{
+        gap:8px;
+    }
+
+    .player-stats .stat:nth-child(2),
+    .player-stats .stat:nth-child(3){
+        display:none;
+    }
+
+    .dashboard{
+        grid-template-columns:1fr;
+    }
+
+    .score-layout{
+        grid-template-columns:1fr;
+    }
+
+    .explorer-grid{
+        grid-template-columns:1fr;
+    }
+
+    .blueprint-step{
+        grid-template-columns:55px 1fr;
+    }
+
+    .blueprint-step .tag{
+        grid-column:2;
+        width:max-content;
+    }
+
+    .challenge-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+
+@media(max-width:500px){
+
+    .challenge-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero{
+        padding-top:70px;
+    }
+
+    .section-heading h2{
+        font-size:2rem;
+    }
+
+    .challenge{
+        padding:30px 20px;
+    }
+
+    .challenge h2{
+        font-size:2rem;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav class="player-bar">
+
+<div class="player-inner">
+
+<div class="player-brand">
+PORTFOLIO<span>OS</span>
+</div>
+
+<div class="player-stats">
+
+<div class="stat">
+<strong id="xp">0</strong>
+<small>Proof XP</small>
+</div>
+
+<div class="stat">
+<strong id="level">1</strong>
+<small>Level</small>
+</div>
+
+<div class="stat">
+<strong id="completed">0/8</strong>
+<small>Missions</small>
+</div>
+
+<div class="rank" id="rank">
+STARTER
+</div>
+
+</div>
+
+</div>
+
+</nav>
+
+<main class="container">
+
+<header class="hero">
+
+<div class="kicker">
+Portfolio Operator Training System
+</div>
+
+<h1>
+Build Work That Is
+<span>Impossible to Ignore.</span>
+</h1>
+
+<p>
+A portfolio is not a collection of pretty pages.
+It is an evidence system that makes your ability visible.
+Complete missions, create proof, strengthen your portfolio,
+and progress from learner to verified operator.
+</p>
+
+<div class="hero-actions">
+
+<button
+class="btn btn-primary"
+onclick="scrollToSection('missions')">
+Begin Portfolio Mission </button>
+
+<button
+class="btn btn-secondary"
+onclick="scrollToSection('audit')">
+Run Portfolio Audit </button>
+
+</div>
+
+</header>
+
+<!-- DASHBOARD -->
+
+<div class="dashboard">
+
+<div class="dashboard-card">
+
+<small>Current Objective</small>
+
+<strong id="objective">
+Define the Battlefield
+</strong>
+
+<p>
+Complete your next available mission.
+</p>
+
+</div>
+
+<div class="dashboard-card">
+
+<small>Portfolio Strength</small>
+
+<strong>
+<span id="dashboardScore">0</span>/100
+</strong>
+
+<p>
+Evidence-based portfolio score.
+</p>
+
+</div>
+
+<div class="dashboard-card">
+
+<small>Streak</small>
+
+<strong>
+🔥 <span id="streak">0</span> Days
+</strong>
+
+<p>
+Keep building consistently.
+</p>
+
+</div>
+
+</div>
+
+<!-- XP -->
+
+<div class="progress-panel">
+
+<div class="progress-top">
+
+<span>
+Level <span id="currentLevel">1</span> Progress
+</span>
+
+<strong>
+<span id="xpProgress">0</span> /
+<span id="nextXP">200</span> XP
+</strong>
+
+</div>
+
+<div class="progress-track">
+
+<div
+class="progress-fill"
+id="progressFill">
+</div>
+
+</div>
+
+</div>
+
+<!-- MISSIONS -->
+
+<section id="missions">
+
+<div class="section-heading">
+
+<small>Mission Control</small>
+
+<h2>Complete the Portfolio Missions</h2>
+
+<p>
+Stop reading passively. Each mission produces evidence
+that can become part of a professional case study.
+</p>
+
+</div>
+
+<div class="mission-board">
+
+<div class="mission" data-xp="100">
+
+<div class="mission-number">MISSION 01</div>
+
+<h3>Define the Battlefield</h3>
+
+<p>
+Document the original problem, constraints, resources,
+knowledge gaps, and conditions you started with.
+</p>
+
+<span class="mission-reward">+100 Proof XP</span>
+
+<button onclick="completeMission(this)">
+Complete Mission
+</button>
+
+</div>
+
+<div class="mission" data-xp="100">
+
+<div class="mission-number">MISSION 02</div>
+
+<h3>Expose the Friction</h3>
+
+<p>
+Identify the specific obstacle that prevented the desired
+result and explain why it mattered.
+</p>
+
+<span class="mission-reward">+100 Proof XP</span>
+
+<button onclick="completeMission(this)">
+Complete Mission
+</button>
+
+</div>
+
+<div class="mission" data-xp="100">
+
+<div class="mission-number">MISSION 03</div>
+
+<h3>Log the Work</h3>
+
+<p>
+Create a visible record of iterations, mistakes, corrections,
+experiments, and decisions.
+</p>
+
+<span class="mission-reward">+100 Proof XP</span>
+
+<button onclick="completeMission(this)">
+Complete Mission
+</button>
+
+</div>
+
+<div class="mission" data-xp="100">
+
+<div class="mission-number">MISSION 04</div>
+
+<h3>Ship the Artifact</h3>
+
+<p>
+Produce something functional: a website, system, analysis,
+design, research output, repair, or operational improvement.
+</p>
+
+<span class="mission-reward">+100 Proof XP</span>
+
+<button onclick="completeMission(this)">
+Complete Mission
+</button>
+
+</div>
+
+<div class="mission" data-xp="100">
+
+<div class="mission-number">MISSION 05</div>
+
+<h3>Measure the Result</h3>
+
+<p>
+Find numbers, before-and-after comparisons, performance data,
+or other evidence showing what changed.
+</p>
+
+<span class="mission-reward">+100 Proof XP</span>
+
+<button onclick="completeMission(this)">
+Complete Mission
+</button>
+
+</div>
+
+<div class="mission" data-xp="100">
+
+<div class="mission-number">MISSION 06</div>
+
+<h3>Explain the Decision</h3>
+
+<p>
+Show why you selected your approach and what trade-offs
+you considered.
+</p>
+
+<span class="mission-reward">+100 Proof XP</span>
+
+<button onclick="completeMission(this)">
+Complete Mission
+</button>
+
+</div>
+
+<div class="mission" data-xp="100">
+
+<div class="mission-number">MISSION 07</div>
+
+<h3>Make It Verifiable</h3>
+
+<p>
+Attach screenshots, links, repositories, documentation,
+photos, datasets, or other inspectable evidence.
+</p>
+
+<span class="mission-reward">+100 Proof XP</span>
+
+<button onclick="completeMission(this)">
+Complete Mission
+</button>
+
+</div>
+
+<div class="mission" data-xp="100">
+
+<div class="mission-number">MISSION 08</div>
+
+<h3>Publish the Case Study</h3>
+
+<p>
+Turn the entire process into a concise story that lets an
+evaluator understand your capability quickly.
+</p>
+
+<span class="mission-reward">+100 Proof XP</span>
+
+<button onclick="completeMission(this)">
+Complete Mission
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- LEVEL ROADMAP -->
+
+<section>
+
+<div class="section-heading">
+
+<small>Career Progression</small>
+
+<h2>Operator Level Roadmap</h2>
+
+<p>
+Your rank changes as you accumulate evidence, not as you
+consume more information.
+</p>
+
+</div>
+
+<div class="level-roadmap">
+
+<div class="level-card" id="levelCard1">
+<small>Level 1</small>
+<h3>Starter</h3>
+<p>Begin building evidence.</p>
+</div>
+
+<div class="level-card" id="levelCard2">
+<small>Level 2</small>
+<h3>Apprentice</h3>
+<p>Demonstrate consistent execution.</p>
+</div>
+
+<div class="level-card" id="levelCard3">
+<small>Level 3</small>
+<h3>Builder</h3>
+<p>Produce meaningful artifacts.</p>
+</div>
+
+<div class="level-card" id="levelCard4">
+<small>Level 4</small>
+<h3>Operator</h3>
+<p>Show repeatable capability.</p>
+</div>
+
+<div class="level-card" id="levelCard5">
+<small>Level 5</small>
+<h3>Unignorable</h3>
+<p>Present a complete evidence system.</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- SCORE -->
+
+<section>
+
+<div class="section-heading">
+
+<small>Player Intelligence</small>
+
+<h2>Your Portfolio Strength</h2>
+
+<p>
+Your score measures how much evidence your portfolio contains,
+not how impressive your claims sound.
+</p>
+
+</div>
+
+<div class="score-layout">
+
+<div class="score-card">
+
+<div class="score-circle" id="scoreCircle">
+
+<div>
+
+<div
+class="score-number"
+id="portfolioScore">
+0
+</div>
+
+<div class="score-label">
+Strength Score
+</div>
+
+</div>
+
+</div>
+
+<h3 id="scoreMessage">
+Portfolio Under Construction
+</h3>
+
+<p>
+Complete missions and audits to increase your evidence strength.
+</p>
+
+</div>
+
+<div class="score-bars">
+
+<div class="score-row">
+
+<div class="score-row-top">
+<strong>Context</strong>
+<span id="contextValue">0%</span>
+</div>
+
+<div class="mini-track">
+<div class="mini-fill" id="contextBar"></div>
+</div>
+
+</div>
+
+<div class="score-row">
+
+<div class="score-row-top">
+<strong>Execution Evidence</strong>
+<span id="executionValue">0%</span>
+</div>
+
+<div class="mini-track">
+<div class="mini-fill" id="executionBar"></div>
+</div>
+
+</div>
+
+<div class="score-row">
+
+<div class="score-row-top">
+<strong>Production Output</strong>
+<span id="productionValue">0%</span>
+</div>
+
+<div class="mini-track">
+<div class="mini-fill" id="productionBar"></div>
+</div>
+
+</div>
+
+<div class="score-row">
+
+<div class="score-row-top">
+<strong>Verification</strong>
+<span id="verificationValue">0%</span>
+</div>
+
+<div class="mini-track">
+<div class="mini-fill" id="verificationBar"></div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- BLUEPRINT -->
+
+<section>
+
+<div class="section-heading">
+
+<small>Build Sequence</small>
+
+<h2>The Unignorable Portfolio Blueprint</h2>
+
+<p>
+Build evidence in this order.
+</p>
+
+</div>
+
+<div class="blueprint">
+
+<div class="blueprint-step">
+<div class="blueprint-num">01</div>
+<div>
+<h3>Raw Starting Point</h3>
+<p>Show the conditions before your intervention.</p>
+</div>
+<span class="tag">CONTEXT</span>
+</div>
+
+<div class="blueprint-step">
+<div class="blueprint-num">02</div>
+<div>
+<h3>Problem Definition</h3>
+<p>Explain the friction you needed to overcome.</p>
+</div>
+<span class="tag">PROBLEM</span>
+</div>
+
+<div class="blueprint-step">
+<div class="blueprint-num">03</div>
+<div>
+<h3>Execution Trail</h3>
+<p>Show iterations, failures, corrections, and decisions.</p>
+</div>
+<span class="tag">PROCESS</span>
+</div>
+
+<div class="blueprint-step">
+<div class="blueprint-num">04</div>
+<div>
+<h3>Production Artifact</h3>
+<p>Display the actual thing you built or produced.</p>
+</div>
+<span class="tag">OUTPUT</span>
+</div>
+
+<div class="blueprint-step">
+<div class="blueprint-num">05</div>
+<div>
+<h3>Measured Result</h3>
+<p>Provide evidence of what improved.</p>
+</div>
+<span class="tag">RESULT</span>
+</div>
+
+<div class="blueprint-step">
+<div class="blueprint-num">06</div>
+<div>
+<h3>Verification Layer</h3>
+<p>Make your claims inspectable by another person.</p>
+</div>
+<span class="tag">PROOF</span>
+</div>
+
+</div>
+
+</section>
+
+<!-- INDUSTRY EXPLORER -->
+
+<section>
+
+<div class="section-heading">
+
+<small>Choose Your Arena</small>
+
+<h2>Sweat Equity Explorer</h2>
+
+<p>
+The definition of strong evidence changes by industry.
+</p>
+
+</div>
+
+<div class="explorer">
+
+<div class="tabs">
+
+<button class="tab active"
+onclick="showIndustry('tech',this)">
+Tech </button>
+
+<button class="tab"
+onclick="showIndustry('trades',this)">
+Skilled Trades </button>
+
+<button class="tab"
+onclick="showIndustry('business',this)">
+Business </button>
+
+<button class="tab"
+onclick="showIndustry('academic',this)">
+Academia </button>
+
+</div>
+
+<div
+class="explorer-grid"
+id="industryContent">
+</div>
+
+</div>
+
+</section>
+
+<!-- ACHIEVEMENTS -->
+
+<section>
+
+<div class="section-heading">
+
+<small>Achievement System</small>
+
+<h2>Unlock Your Portfolio Badges</h2>
+
+<p>
+Badges unlock automatically as you build evidence.
+</p>
+
+</div>
+
+<div class="achievements">
+
+<div class="achievement" id="badge1">
+<div class="achievement-icon">🔎</div>
+<h3>Problem Hunter</h3>
+<p>Complete your first mission.</p>
+</div>
+
+<div class="achievement" id="badge2">
+<div class="achievement-icon">🧱</div>
+<h3>Builder</h3>
+<p>Complete four missions.</p>
+</div>
+
+<div class="achievement" id="badge3">
+<div class="achievement-icon">📊</div>
+<h3>Evidence Analyst</h3>
+<p>Reach a strength score of 50.</p>
+</div>
+
+<div class="achievement" id="badge4">
+<div class="achievement-icon">⚙️</div>
+<h3>Operator</h3>
+<p>Complete six missions.</p>
+</div>
+
+<div class="achievement" id="badge5">
+<div class="achievement-icon">🏆</div>
+<h3>Unignorable</h3>
+<p>Complete every mission.</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- AUDIT -->
+
+<section id="audit">
+
+<div class="section-heading">
+
+<small>Final Inspection</small>
+
+<h2>Portfolio Readiness Audit</h2>
+
+<p>
+Each completed audit item adds evidence XP.
+</p>
+
+</div>
+
+<div class="audit">
+
+<div class="audit-item">
+
+<input type="checkbox" class="auditCheck" id="audit1">
+
+<label for="audit1">
+
+<strong>The starting problem is obvious</strong>
+
+<span>
+An evaluator can understand the original challenge quickly.
+</span>
+
+</label>
+
+</div>
+
+<div class="audit-item">
+
+<input type="checkbox" class="auditCheck" id="audit2">
+
+<label for="audit2">
+
+<strong>Your personal contribution is obvious</strong>
+
+<span>
+The viewer can distinguish what you personally built or changed.
+</span>
+
+</label>
+
+</div>
+
+<div class="audit-item">
+
+<input type="checkbox" class="auditCheck" id="audit3">
+
+<label for="audit3">
+
+<strong>The process contains evidence</strong>
+
+<span>
+There is a visible trail showing how you reached the result.
+</span>
+
+</label>
+
+</div>
+
+<div class="audit-item">
+
+<input type="checkbox" class="auditCheck" id="audit4">
+
+<label for="audit4">
+
+<strong>The final output can be inspected</strong>
+
+<span>
+Links, files, screenshots, demonstrations, or documentation exist.
+</span>
+
+</label>
+
+</div>
+
+<div class="audit-item">
+
+<input type="checkbox" class="auditCheck" id="audit5">
+
+<label for="audit5">
+
+<strong>The result contains measurable evidence</strong>
+
+<span>
+The case study includes useful metrics or meaningful comparisons.
+</span>
+
+</label>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- 7 DAY CHALLENGE -->
+
+<section>
+
+<div class="challenge">
+
+<small class="kicker">
+7-Day Portfolio Sprint
+</small>
+
+<h2>Turn One Project Into Proof.</h2>
+
+<p>
+Choose one real project and spend seven days turning
+your work into a documented demonstration of capability.
+Click each day when the work is completed.
+</p>
+
+<div class="challenge-grid">
+
+<div class="challenge-day" onclick="completeDay(this)">
+<strong>DAY 01</strong>
+<span>Define the problem</span>
+</div>
+
+<div class="challenge-day" onclick="completeDay(this)">
+<strong>DAY 02</strong>
+<span>Document constraints</span>
+</div>
+
+<div class="challenge-day" onclick="completeDay(this)">
+<strong>DAY 03</strong>
+<span>Record your process</span>
+</div>
+
+<div class="challenge-day" onclick="completeDay(this)">
+<strong>DAY 04</strong>
+<span>Capture the artifact</span>
+</div>
+
+<div class="challenge-day" onclick="completeDay(this)">
+<strong>DAY 05</strong>
+<span>Measure the result</span>
+</div>
+
+<div class="challenge-day" onclick="completeDay(this)">
+<strong>DAY 06</strong>
+<span>Build the case study</span>
+</div>
+
+<div class="challenge-day" onclick="completeDay(this)">
+<strong>DAY 07</strong>
+<span>Publish the evidence</span>
+</div>
+
+<div class="challenge-day" onclick="completeDay(this)">
+<strong>FINAL</strong>
+<span>Run the audit</span>
+</div>
+
+</div>
+
+<button
+class="btn btn-primary"
+onclick="startChallenge()">
+Start 7-Day Sprint </button>
+
+</div>
+
+</section>
+
+<!-- FINAL BOSS -->
+
+<section>
+
+<div class="boss">
+
+<div class="boss-icon">
+👑
+</div>
+
+<h2>FINAL BOSS: THE UNIGNORABLE PORTFOLIO</h2>
+
+<p>
+You have completed the learning phase.
+Now prove that you can turn knowledge into a professional
+evidence system.
+</p>
+
+<p>
+To defeat the final boss, complete all 8 missions,
+finish the audit, and reach a portfolio strength score of 80+.
+</p>
+
+<button
+class="btn btn-primary"
+onclick="attemptBoss()">
+Challenge Final Boss </button>
+
+</div>
+
+</section>
+
+<div class="reset-area">
+
+<button
+class="reset-btn"
+onclick="resetProgress()">
+Reset All Progress </button>
+
+</div>
+
+</main>
+
+<footer>
+
+<h2>Your Portfolio Is Your Evidence System.</h2>
+
+<p>
+Don't ask an employer to imagine what you can do.
+Give them enough evidence that they can see it.
+</p>
+
+<p>
+© 2026 Portfolio Operator • Build. Document. Verify.
+</p>
+
+</footer>
+
+<div class="toast" id="toast">
+
+<strong id="toastTitle">
++100 XP
+</strong>
+
+<span id="toastMessage">
+Mission completed.
+</span>
+
+</div>
+
+<script>
+
+/* =====================================================
+   PORTFOLIO OPERATOR
+   COMPLETE APPLICATION LOGIC
+===================================================== */
+
+
+/* =====================================================
+   DEFAULT STATE
+===================================================== */
+
+const DEFAULT_STATE = {
+
+    xp: 0,
+
+    completed: 0,
+
+    audit: [],
+
+    streak: 0,
+
+    challenge: [],
+
+    missions: [],
+
+    lastActivity: null,
+
+    bossDefeated: false
+
+};
+
+
+/* =====================================================
+   LOAD STATE
+===================================================== */
+
+function loadState(){
+
+    try{
+
+        const saved =
+            localStorage.getItem(
+                "portfolioOperator"
+            );
+
+        if(!saved){
+
+            return {
+                ...DEFAULT_STATE
+            };
+
+        }
+
+        const parsed =
+            JSON.parse(saved);
+
+        return {
+
+            ...DEFAULT_STATE,
+
+            ...parsed,
+
+            audit:
+                Array.isArray(parsed.audit)
+                ? parsed.audit
+                : [],
+
+            missions:
+                Array.isArray(parsed.missions)
+                ? parsed.missions
+                : [],
+
+            challenge:
+                Array.isArray(parsed.challenge)
+                ? parsed.challenge
+                : []
+
+        };
+
+    }catch(error){
+
+        console.error(
+            "Could not load progress:",
+            error
+        );
+
+        return {
+            ...DEFAULT_STATE
+        };
+
+    }
+
+}
+
+
+let state = loadState();
+
+
+/* =====================================================
+   SAVE STATE
+===================================================== */
+
+function saveState(){
+
+    localStorage.setItem(
+        "portfolioOperator",
+        JSON.stringify(state)
+    );
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+let toastTimer;
+
+function showToast(
+    title,
+    message
+){
+
+    const box =
+        document.getElementById(
+            "toast"
+        );
+
+    document.getElementById(
+        "toastTitle"
+    ).textContent = title;
+
+    document.getElementById(
+        "toastMessage"
+    ).textContent = message;
+
+    box.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer =
+        setTimeout(
+            function(){
+
+                box.classList.remove(
+                    "show"
+                );
+
+            },
+            2800
+        );
+
+}
+
+
+/* =====================================================
+   SCROLL
+===================================================== */
+
+function scrollToSection(id){
+
+    const element =
+        document.getElementById(id);
+
+    if(!element){
+
+        return;
+
+    }
+
+    element.scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+    });
+
+}
+
+
+/* =====================================================
+   LEVEL CALCULATION
+===================================================== */
+
+function getLevel(){
+
+    return Math.min(
+        Math.floor(
+            state.xp / 200
+        ) + 1,
+        5
+    );
+
+}
+
+
+/* =====================================================
+   RANK
+===================================================== */
+
+function getRank(){
+
+    if(state.xp >= 800){
+
+        return "UNIGNORABLE";
+
+    }
+
+    if(state.xp >= 600){
+
+        return "OPERATOR";
+
+    }
+
+    if(state.xp >= 400){
+
+        return "BUILDER";
+
+    }
+
+    if(state.xp >= 200){
+
+        return "APPRENTICE";
+
+    }
+
+    return "STARTER";
+
+}
+
+
+/* =====================================================
+   UPDATE PLAYER BAR
+===================================================== */
+
+function updatePlayer(){
+
+    const level =
+        getLevel();
+
+    document.getElementById("xp")
+        .textContent =
+        state.xp;
+
+    document.getElementById("level")
+        .textContent =
+        level;
+
+    document.getElementById("completed")
+        .textContent =
+        `${state.completed}/8`;
+
+    document.getElementById("rank")
+        .textContent =
+        getRank();
+
+    document.getElementById("streak")
+        .textContent =
+        state.streak;
+
+}
+
+
+/* =====================================================
+   UPDATE XP PROGRESS
+===================================================== */
+
+function updateProgress(){
+
+    const level =
+        getLevel();
+
+    const levelStart =
+        (level - 1) * 200;
+
+    const progress =
+        Math.min(
+            (
+                (
+                    state.xp -
+                    levelStart
+                ) / 200
+            ) * 100,
+            100
+        );
+
+    const nextXP =
+        level === 5
+        ? 1000
+        : level * 200;
+
+    document.getElementById(
+        "currentLevel"
+    ).textContent =
+        level;
+
+    document.getElementById(
+        "xpProgress"
+    ).textContent =
+        state.xp;
+
+    document.getElementById(
+        "nextXP"
+    ).textContent =
+        nextXP;
+
+    document.getElementById(
+        "progressFill"
+    ).style.width =
+        progress + "%";
+
+}
+
+
+/* =====================================================
+   OBJECTIVE
+===================================================== */
+
+function updateObjective(){
+
+    const missions =
+        document.querySelectorAll(
+            ".mission"
+        );
+
+    let nextMission = null;
+
+    missions.forEach(
+        function(mission){
+
+            if(
+                !mission.classList.contains(
+                    "complete"
+                ) &&
+                !nextMission
+            ){
+
+                const heading =
+                    mission.querySelector(
+                        "h3"
+                    );
+
+                if(heading){
+
+                    nextMission =
+                        heading.textContent;
+
+                }
+
+            }
+
+        }
+    );
+
+    const objective =
+        document.getElementById(
+            "objective"
+        );
+
+    if(nextMission){
+
+        objective.textContent =
+            nextMission;
+
+    }else{
+
+        objective.textContent =
+            state.bossDefeated
+            ? "Portfolio Complete"
+            : "Final Boss";
+
+    }
+
+}
+
+
+/* =====================================================
+   PORTFOLIO SCORE
+===================================================== */
+
+function calculateScore(){
+
+    const missionScore =
+        state.completed * 7.5;
+
+    const auditScore =
+        state.audit.length * 4;
+
+    const challengeScore =
+        state.challenge.length * 1.5;
+
+    return Math.min(
+        Math.round(
+            missionScore +
+            auditScore +
+            challengeScore
+        ),
+        100
+    );
+
+}
+
+
+/* =====================================================
+   SCORE DISPLAY
+===================================================== */
+
+function updateScore(){
+
+    const score =
+        calculateScore();
+
+    document.getElementById(
+        "portfolioScore"
+    ).textContent =
+        score;
+
+    document.getElementById(
+        "dashboardScore"
+    ).textContent =
+        score;
+
+    const degrees =
+        score * 3.6;
+
+    document.getElementById(
+        "scoreCircle"
+    ).style.background =
+        `
+        radial-gradient(
+            circle,
+            var(--surface) 62%,
+            transparent 63%
+        ),
+        conic-gradient(
+            var(--lime) ${degrees}deg,
+            #1c2934 ${degrees}deg
+        )
+        `;
+
+
+    let message =
+        "Portfolio Under Construction";
+
+
+    if(score >= 80){
+
+        message =
+            "Unignorable Portfolio";
+
+    }else if(score >= 60){
+
+        message =
+            "Strong Evidence System";
+
+    }else if(score >= 40){
+
+        message =
+            "Portfolio Taking Shape";
+
+    }else if(score >= 20){
+
+        message =
+            "Evidence Emerging";
+
+    }
+
+
+    document.getElementById(
+        "scoreMessage"
+    ).textContent =
+        message;
+
+
+    /* Score dimensions */
+
+    const context =
+        Math.min(
+            state.completed * 20,
+            100
+        );
+
+    const execution =
+        Math.min(
+            state.completed * 15,
+            100
+        );
+
+    const production =
+        Math.min(
+            Math.max(
+                state.completed - 2,
+                0
+            ) * 20,
+            100
+        );
+
+    const verification =
+        Math.min(
+            state.audit.length * 20,
+            100
+        );
+
+
+    setBar(
+        "contextBar",
+        "contextValue",
+        context
+    );
+
+    setBar(
+        "executionBar",
+        "executionValue",
+        execution
+    );
+
+    setBar(
+        "productionBar",
+        "productionValue",
+        production
+    );
+
+    setBar(
+        "verificationBar",
+        "verificationValue",
+        verification
+    );
+
+}
+
+
+/* =====================================================
+   SCORE BAR
+===================================================== */
+
+function setBar(
+    barId,
+    valueId,
+    amount
+){
+
+    document.getElementById(
+        barId
+    ).style.width =
+        amount + "%";
+
+    document.getElementById(
+        valueId
+    ).textContent =
+        amount + "%";
+
+}
+
+
+/* =====================================================
+   COMPLETE MISSION
+===================================================== */
+
+function completeMission(button){
+
+    const mission =
+        button.closest(
+            ".mission"
+        );
+
+    if(!mission){
+
+        return;
+
+    }
+
+    const missions =
+        [
+            ...document.querySelectorAll(
+                ".mission"
+            )
+        ];
+
+    const index =
+        missions.indexOf(
+            mission
+        );
+
+
+    if(
+        state.missions.includes(
+            index
+        )
+    ){
+
+        return;
+
+    }
+
+
+    const reward =
+        Number(
+            mission.dataset.xp
+        ) || 100;
+
+
+    state.xp += reward;
+
+    state.completed =
+        state.missions.length + 1;
+
+    state.missions.push(
+        index
+    );
+
+
+    registerActivity();
+
+
+    mission.classList.add(
+        "complete"
+    );
+
+
+    button.textContent =
+        "Mission Complete";
+
+    button.disabled = true;
+
+
+    showToast(
+        `+${reward} XP`,
+        "Mission completed. Evidence strength increased."
+    );
+
+
+    saveState();
+
+    updateAll();
+
+}
+
+
+/* =====================================================
+   REGISTER ACTIVITY
+===================================================== */
+
+function registerActivity(){
+
+    const today =
+        new Date()
+        .toISOString()
+        .split("T")[0];
+
+
+    if(
+        state.lastActivity ===
+        today
+    ){
+
+        return;
+
+    }
+
+
+    if(
+        state.lastActivity
+    ){
+
+        const previous =
+            new Date(
+                state.lastActivity
+            );
+
+        const current =
+            new Date(
+                today
+            );
+
+        const difference =
+            Math.round(
+                (
+                    current -
+                    previous
+                ) /
+                (
+                    1000 *
+                    60 *
+                    60 *
+                    24
+                )
+            );
+
+
+        if(
+            difference === 1
+        ){
+
+            state.streak++;
+
+        }else{
+
+            state.streak = 1;
+
+        }
+
+    }else{
+
+        state.streak = 1;
+
+    }
+
+
+    state.lastActivity =
+        today;
+
+}
+
+
+/* =====================================================
+   UPDATE LEVEL ROADMAP
+===================================================== */
+
+function updateLevels(){
+
+    const level =
+        getLevel();
+
+    for(
+        let i = 1;
+        i <= 5;
+        i++
+    ){
+
+        const card =
+            document.getElementById(
+                "levelCard" + i
+            );
+
+        card.classList.remove(
+            "current",
+            "locked",
+            "unlocked"
+        );
+
+
+        if(
+            i < level
+        ){
+
+            card.classList.add(
+                "unlocked"
+            );
+
+        }
+
+
+        if(
+            i === level
+        ){
+
+            card.classList.add(
+                "current"
+            );
+
+        }
+
+
+        if(
+            i > level
+        ){
+
+            card.classList.add(
+                "locked"
+            );
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   ACHIEVEMENTS
+===================================================== */
+
+function updateAchievements(){
+
+    const score =
+        calculateScore();
+
+
+    unlockBadge(
+        "badge1",
+        state.completed >= 1
+    );
+
+    unlockBadge(
+        "badge2",
+        state.completed >= 4
+    );
+
+    unlockBadge(
+        "badge3",
+        score >= 50
+    );
+
+    unlockBadge(
+        "badge4",
+        state.completed >= 6
+    );
+
+    unlockBadge(
+        "badge5",
+        state.completed >= 8
+    );
+
+}
+
+
+function unlockBadge(
+    id,
+    condition
+){
+
+    const badge =
+        document.getElementById(id);
+
+    if(!badge){
+
+        return;
+
+    }
+
+    if(condition){
+
+        badge.classList.add(
+            "unlocked"
+        );
+
+    }else{
+
+        badge.classList.remove(
+            "unlocked"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   AUDIT SYSTEM
+===================================================== */
+
+function setupAudit(){
+
+    const checks =
+        document.querySelectorAll(
+            ".auditCheck"
+        );
+
+
+    checks.forEach(
+        function(check,index){
+
+            check.addEventListener(
+                "change",
+                function(){
+
+                    if(
+                        this.checked
+                    ){
+
+                        if(
+                            !state.audit.includes(
+                                index
+                            )
+                        ){
+
+                            state.audit.push(
+                                index
+                            );
+
+                            state.xp += 25;
+
+                            registerActivity();
+
+                            showToast(
+                                "+25 XP",
+                                "Audit evidence verified."
+                            );
+
+                        }
+
+                    }else{
+
+                        const position =
+                            state.audit.indexOf(
+                                index
+                            );
+
+                        if(
+                            position !== -1
+                        ){
+
+                            state.audit.splice(
+                                position,
+                                1
+                            );
+
+                            state.xp =
+                                Math.max(
+                                    state.xp - 25,
+                                    0
+                                );
+
+                            showToast(
+                                "Audit Updated",
+                                "Verification item removed."
+                            );
+
+                        }
+
+                    }
+
+
+                    saveState();
+
+                    updateAll();
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   RESTORE AUDIT
+===================================================== */
+
+function restoreAudit(){
+
+    const checks =
+        document.querySelectorAll(
+            ".auditCheck"
+        );
+
+
+    checks.forEach(
+        function(check,index){
+
+            check.checked =
+                state.audit.includes(
+                    index
+                );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   7 DAY CHALLENGE
+===================================================== */
+
+function completeDay(day){
+
+    const days =
+        [
+            ...document.querySelectorAll(
+                ".challenge-day"
+            )
+        ];
+
+    const index =
+        days.indexOf(
+            day
+        );
+
+
+    if(index === -1){
+
+        return;
+
+    }
+
+
+    if(
+        state.challenge.includes(
+            index
+        )
+    ){
+
+        return;
+
+    }
+
+
+    state.challenge.push(
+        index
+    );
+
+    state.xp += 25;
+
+    registerActivity();
+
+
+    day.classList.add(
+        "done"
+    );
+
+
+    showToast(
+        "+25 XP",
+        "Sprint day completed."
+    );
+
+
+    saveState();
+
+    updateAll();
+
+}
+
+
+/* =====================================================
+   RESTORE CHALLENGE
+===================================================== */
+
+function restoreChallenge(){
+
+    const days =
+        document.querySelectorAll(
+            ".challenge-day"
+        );
+
+
+    days.forEach(
+        function(day,index){
+
+            if(
+                state.challenge.includes(
+                    index
+                )
+            ){
+
+                day.classList.add(
+                    "done"
+                );
+
+            }else{
+
+                day.classList.remove(
+                    "done"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   START CHALLENGE
+===================================================== */
+
+function startChallenge(){
+
+    scrollToSection(
+        "missions"
+    );
+
+    showToast(
+        "SPRINT ACTIVATED",
+        "Choose one real project and begin documenting it."
+    );
+
+}
+
+
+/* =====================================================
+   FINAL BOSS
+===================================================== */
+
+function attemptBoss(){
+
+    const score =
+        calculateScore();
+
+
+    const missionsComplete =
+        state.completed >= 8;
+
+    const auditComplete =
+        state.audit.length >= 5;
+
+    const scoreComplete =
+        score >= 80;
+
+
+    if(
+        missionsComplete &&
+        auditComplete &&
+        scoreComplete
+    ){
+
+        state.bossDefeated =
+            true;
+
+        saveState();
+
+        updateAll();
+
+
+        showToast(
+            "🏆 BOSS DEFEATED",
+            "You built an Unignorable Portfolio."
+        );
+
+
+        setTimeout(
+            function(){
+
+                alert(
+                    "FINAL BOSS DEFEATED!\n\n" +
+                    "You completed all 8 missions, " +
+                    "finished the readiness audit, " +
+                    "and reached a portfolio strength of " +
+                    score +
+                    "/100."
+                );
+
+            },
+            400
+        );
+
+
+        return;
+
+    }
+
+
+    const remaining = [];
+
+
+    if(!missionsComplete){
+
+        remaining.push(
+            `${8 - state.completed} missions remaining`
+        );
+
+    }
+
+
+    if(!auditComplete){
+
+        remaining.push(
+            `${5 - state.audit.length} audit items remaining`
+        );
+
+    }
+
+
+    if(!scoreComplete){
+
+        remaining.push(
+            `${80 - score} score points remaining`
+        );
+
+    }
+
+
+    showToast(
+        "FINAL BOSS LOCKED",
+        remaining.join(" • ")
+    );
+
+}
+
+
+/* =====================================================
+   INDUSTRY DATA
+===================================================== */
+
+const industries = {
+
+    tech:[
+
+        {
+            label:"STRUCTURE",
+            title:"Clean Infrastructure",
+            desc:
+                "Show repositories, deployment structure, environment configuration and architectural organization.",
+            takeaway:
+                "Proof that you understand systems, not just code."
+        },
+
+        {
+            label:"PROCESS",
+            title:"Iteration History",
+            desc:
+                "Show meaningful commits, debugging decisions, refactoring and architectural changes.",
+            takeaway:
+                "Proof of problem-solving behavior."
+        },
+
+        {
+            label:"OUTPUT",
+            title:"Working Product",
+            desc:
+                "Provide a live deployment alongside source code and documentation.",
+            takeaway:
+                "Make your capability inspectable."
+        }
+
+    ],
+
+
+    trades:[
+
+        {
+            label:"STRUCTURE",
+            title:"Workspace Precision",
+            desc:
+                "Document tools, measurements, materials, safety procedures and technical preparation.",
+            takeaway:
+                "Proof of operational discipline."
+        },
+
+        {
+            label:"PROCESS",
+            title:"Revision Trail",
+            desc:
+                "Show adjustments, troubleshooting and corrections made during construction.",
+            takeaway:
+                "Proof of practical problem solving."
+        },
+
+        {
+            label:"OUTPUT",
+            title:"Finished Work",
+            desc:
+                "Use photographs, measurements and specifications to document the final result.",
+            takeaway:
+                "Proof that the work meets a standard."
+        }
+
+    ],
+
+
+    business:[
+
+        {
+            label:"STRUCTURE",
+            title:"Operating Model",
+            desc:
+                "Explain the process, customer problem, resources and constraints.",
+            takeaway:
+                "Proof of strategic thinking."
+        },
+
+        {
+            label:"PROCESS",
+            title:"Experiment Log",
+            desc:
+                "Document tests, campaigns, revisions, customer feedback and decisions.",
+            takeaway:
+                "Proof that decisions came from evidence."
+        },
+
+        {
+            label:"OUTPUT",
+            title:"Business Result",
+            desc:
+                "Show revenue, efficiency, conversion, retention or another meaningful result.",
+            takeaway:
+                "Proof that the work created value."
+        }
+
+    ],
+
+
+    academic:[
+
+        {
+            label:"STRUCTURE",
+            title:"Research Method",
+            desc:
+                "Define hypotheses, variables, controls, sources and methodological boundaries.",
+            takeaway:
+                "Proof of analytical discipline."
+        },
+
+        {
+            label:"PROCESS",
+            title:"Research Trail",
+            desc:
+                "Document literature reviews, datasets, revisions and negative findings.",
+            takeaway:
+                "Proof of rigorous investigation."
+        },
+
+        {
+            label:"OUTPUT",
+            title:"Replicable Result",
+            desc:
+                "Publish models, calculations, datasets or technical documentation.",
+            takeaway:
+                "Proof that another person can inspect the work."
+        }
+
+    ]
+
+};
+
+
+/* =====================================================
+   INDUSTRY DISPLAY
+===================================================== */
+
+function showIndustry(
+    industry,
+    button
+){
+
+    document
+        .querySelectorAll(
+            ".tab"
+        )
+        .forEach(
+            function(tab){
+
+                tab.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+
+    if(button){
+
+        button.classList.add(
+            "active"
+        );
+
+    }
+
+
+    const container =
+        document.getElementById(
+            "industryContent"
+        );
+
+
+    if(
+        !industries[industry]
+    ){
+
+        return;
+
+    }
+
+
+    container.innerHTML = "";
+
+
+    industries[industry]
+        .forEach(
+            function(item){
+
+                const card =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                card.className =
+                    "explorer-card";
+
+
+                card.innerHTML = `
+
+                    <small>
+                        ${item.label}
+                    </small>
+
+                    <h3>
+                        ${item.title}
+                    </h3>
+
+                    <p>
+                        ${item.desc}
+                    </p>
+
+                    <div class="takeaway">
+                        ${item.takeaway}
+                    </div>
+
+                `;
+
+
+                container.appendChild(
+                    card
+                );
+
+            }
+        );
+
+}
+
+
+/* =====================================================
+   RESTORE MISSIONS
+===================================================== */
+
+function restoreMissions(){
+
+    const missions =
+        document.querySelectorAll(
+            ".mission"
+        );
+
+
+    missions.forEach(
+        function(mission,index){
+
+            const button =
+                mission.querySelector(
+                    "button"
+                );
+
+
+            if(
+                state.missions.includes(
+                    index
+                )
+            ){
+
+                mission.classList.add(
+                    "complete"
+                );
+
+                button.textContent =
+                    "Mission Complete";
+
+                button.disabled =
+                    true;
+
+            }else{
+
+                mission.classList.remove(
+                    "complete"
+                );
+
+                button.textContent =
+                    "Complete Mission";
+
+                button.disabled =
+                    false;
+
+            }
+
+        }
+    );
+
+
+    state.completed =
+        state.missions.length;
+
+}
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+function resetProgress(){
+
+    const confirmed =
+        confirm(
+            "Reset all Portfolio Operator progress?\n\n" +
+            "This will remove XP, missions, badges, audit progress, " +
+            "challenge progress, and your streak."
+        );
+
+
+    if(!confirmed){
+
+        return;
+
+    }
+
+
+    state = {
+        ...DEFAULT_STATE
+    };
+
+
+    saveState();
+
+    location.reload();
+
+}
+
+
+/* =====================================================
+   UPDATE EVERYTHING
+===================================================== */
+
+function updateAll(){
+
+    updatePlayer();
+
+    updateProgress();
+
+    updateObjective();
+
+    updateScore();
+
+    updateAchievements();
+
+    updateLevels();
+
+}
+
+
+/* =====================================================
+   INITIALIZATION
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        restoreMissions();
+
+        restoreAudit();
+
+        restoreChallenge();
+
+        setupAudit();
+
+        const firstTab =
+            document.querySelector(
+                ".tab"
+            );
+
+        showIndustry(
+            "tech",
+            firstTab
+        );
+
+        updateAll();
+
+    }
+);
+
+</script>
+
+</body>
+</html>
