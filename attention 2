@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Attention Fragmentation Control</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Arial, Helvetica, sans-serif;
+background:#0F2D22;
+color:#F3EBDD;
+line-height:1.8;
+}
+
+
+/* HERO */
+
+.hero{
+
+background:linear-gradient(180deg,#194936,#0F2D22);
+padding:80px 20px;
+text-align:center;
+
+}
+
+.hero h1{
+
+font-size:3rem;
+color:#D8B08C;
+margin-bottom:20px;
+
+}
+
+
+.hero p{
+
+max-width:850px;
+margin:auto;
+font-size:1.1rem;
+
+}
+
+
+
+/* CONTAINER */
+
+.container{
+
+max-width:1150px;
+margin:auto;
+padding:60px 20px;
+
+}
+
+
+section{
+
+margin-bottom:60px;
+
+}
+
+
+h2{
+
+color:#D8B08C;
+font-size:2rem;
+border-left:5px solid #4B2E1E;
+padding-left:15px;
+margin-bottom:25px;
+
+}
+
+
+
+/* CARDS */
+
+.grid{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
+
+}
+
+
+.card{
+
+background:#173A2B;
+border:1px solid rgba(216,176,140,.25);
+padding:25px;
+border-radius:15px;
+transition:.3s;
+
+}
+
+
+.card:hover{
+
+transform:translateY(-6px);
+border-color:#D8B08C;
+
+}
+
+
+.card h3{
+
+color:#D8B08C;
+margin-bottom:12px;
+
+}
+
+
+
+/* QUOTE */
+
+.quote{
+
+background:#4B2E1E;
+padding:30px;
+border-radius:15px;
+text-align:center;
+font-size:1.2rem;
+font-style:italic;
+
+}
+
+
+
+/* TABLE */
+
+table{
+
+width:100%;
+border-collapse:collapse;
+
+}
+
+
+th{
+
+background:#4B2E1E;
+padding:15px;
+
+}
+
+
+td{
+
+padding:15px;
+border:1px solid rgba(255,255,255,.15);
+
+}
+
+
+tr:nth-child(even){
+
+background:#173A2B;
+
+}
+
+
+
+/* CHECKLIST */
+
+.checklist{
+
+background:#173A2B;
+padding:30px;
+border-radius:15px;
+
+}
+
+
+.checklist li{
+
+margin:12px;
+
+}
+
+
+
+/* FOOTER */
+
+footer{
+
+background:#081D15;
+padding:60px 20px;
+text-align:center;
+
+}
+
+
+footer h2{
+
+border:none;
+
+}
+
+
+
+@media(max-width:700px){
+
+.hero h1{
+
+font-size:2.2rem;
+
+}
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header class="hero">
+
+<h1>Attention Fragmentation Control</h1>
+
+<p>
+
+Reduce mental switching costs by designing strict input boundaries.
+Your attention is constantly being shaped by your environment, technology,
+and information choices. The ability to protect focus has become one of
+the most valuable skills in a distracted world.
+
+</p>
+
+</header>
+
+
+
+
+<div class="container">
+
+
+
+<section>
+
+<div class="quote">
+
+"Your attention is the gateway to your thoughts. Protect the gateway,
+and you protect your ability to create."
+
+</div>
+
+</section>
+
+
+
+
+<section>
+
+<h2>Understanding Attention Fragmentation</h2>
+
+
+<p>
+
+Attention fragmentation happens when your focus is repeatedly divided
+between competing inputs. Messages, notifications, social media,
+emails, open browser tabs, and constant task switching force your brain
+to repeatedly change direction.
+
+</p>
+
+
+<p>
+
+The hidden cost is not only lost time. Each interruption creates a
+recovery period where your mind must rebuild context before returning
+to meaningful work.
+
+</p>
+
+
+</section>
+
+
+
+
+
+
+<section>
+
+
+<h2>The Modern Attention Problem (link)</h2>
+
+
+<div class="grid">
+
+
+<div class="card">
+
+<h3>Information Overload</h3>
+
+<p>
+
+The average person encounters thousands of pieces of information daily.
+Without filters, everything begins competing for importance.
+
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>Constant Availability</h3>
+
+<p>
+
+Being reachable at all times can create the expectation that every
+message deserves immediate attention.
+
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>Reactive Thinking</h3>
+
+<p>
+
+When your attention is controlled by outside inputs, your day becomes
+a reaction system instead of an intentional system.
+
+</p>
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<section>
+
+
+<h2>Design Strict Input Boundaries</h2>
+
+
+<div class="grid">
+
+
+<div class="card">
+
+<h3>Create Communication Windows</h3>
+
+<p>
+
+Choose specific times to review email, messages, and updates instead
+of checking continuously.
+
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>Separate Creation From Consumption (link)</h3>
+
+<p>
+
+Do not mix deep work with constant information intake. Creating requires
+a different mental state than browsing.
+
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>Control Your Information Sources</h3>
+
+<p>
+
+Follow fewer but higher-quality sources. More information does not always
+create better decisions.
+
+</p>
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<section>
+
+
+<h2>Attention Protection Framework</h2>
+
+
+<table>
+
+
+<tr>
+
+<th>Attention Leak</th>
+
+<th>Boundary Solution</th>
+
+</tr>
+
+
+<tr>
+
+<td>Phone notifications</td>
+
+<td>Create silent periods and remove unnecessary alerts.</td>
+
+</tr>
+
+
+<tr>
+
+<td>Multiple unfinished tasks</td>
+
+<td>Use priority lists and complete important work before switching.</td>
+
+</tr>
+
+
+<tr>
+
+<td>Constant news consumption</td>
+
+<td>Create scheduled learning periods instead of continuous checking.</td>
+
+</tr>
+
+
+<tr>
+
+<td>Digital clutter</td>
+
+<td>Organize files, apps, and tools intentionally.</td>
+
+</tr>
+
+
+<tr>
+
+<td>Unplanned meetings</td>
+
+<td>Protect blocks of uninterrupted thinking time.</td>
+
+</tr>
+
+
+</table>
+
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+
+<h2>Building a High-Focus Environment</h2>
+
+
+<div class="grid">
+
+
+<div class="card">
+
+<h3>Physical Design</h3>
+
+<p>
+
+Remove unnecessary objects from your workspace. Keep only the tools
+connected to your current goal.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>Digital Design</h3>
+
+<p>
+
+Organize your devices so important information is easy to find and
+distractions require extra steps.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>Mental Design</h3>
+
+<p>
+
+Create clear priorities so your brain knows what deserves attention
+and what can wait.
+
+</p>
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+
+<h2>Daily Attention Audit</h2>
+
+
+<div class="checklist">
+
+
+<ul>
+
+<li>What interrupted my focus today?</li>
+
+<li>Which inputs improved my thinking?</li>
+
+<li>Which activities created unnecessary distraction?</li>
+
+<li>Did I spend time on my highest-value tasks?</li>
+
+<li>What boundary can I strengthen tomorrow?</li>
+
+<li>Did I intentionally choose what received my attention?</li>
+
+</ul>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<section>
+
+
+<h2>The Attention Advantage</h2>
+
+
+<div class="quote">
+
+The future belongs to people who can think deeply in a world designed
+to keep them distracted.
+
+</div>
+
+
+<p style="margin-top:25px;">
+
+Attention is not only a productivity tool. It influences learning,
+relationships, creativity, decision-making, and personal growth.
+By designing stronger boundaries around your inputs, you create more
+space for meaningful work and higher-quality thinking.
+
+</p>
+
+
+</section>
+
+
+
+</div>
+
+
+
+
+<footer>
+
+
+<h2>Protect Your Most Valuable Resource</h2>
+
+
+<p>
+
+Your attention determines what ideas enter your mind, what skills you
+develop, and what future you create. Manage it intentionally.
+
+</p>
+
+
+</footer>
+
+
+
+</body>
+
+</html>
