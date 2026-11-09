@@ -1,0 +1,2257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Intelligence Lab | Strategic Thinking & Decision Systems</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+:root{
+--deep:#102A22;
+--deep2:#173A2F;
+--deep3:#214437;
+--deep4:#285040;
+--gold:#C7A25A;
+--gold2:#E0C783;
+--cream:#F5EFE2;
+--cream2:#FBF7EF;
+--ink:#18251f;
+--muted:#68766e;
+--line:#d9d1c2;
+--white:#ffffff;
+}
+
+body{
+font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+background:var(--deep);
+color:var(--cream);
+line-height:1.7;
+}
+
+/* =========================
+HERO
+========================= */
+
+.hero{
+padding:90px 30px 80px;
+background:
+radial-gradient(circle at 15% 20%,rgba(199,162,90,.10),transparent 30%),
+radial-gradient(circle at 85% 70%,rgba(80,140,110,.12),transparent 30%),
+linear-gradient(180deg,#173A2F,#102A22);
+border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.hero-inner{
+max-width:1250px;
+margin:auto;
+}
+
+.eyebrow{
+font-size:.72rem;
+font-weight:900;
+letter-spacing:.18em;
+text-transform:uppercase;
+color:var(--gold);
+margin-bottom:18px;
+}
+
+.hero h1{
+font-size:clamp(3rem,7vw,6rem);
+line-height:.95;
+letter-spacing:-.055em;
+max-width:1000px;
+margin-bottom:28px;
+}
+
+.hero h1 span{
+color:var(--gold);
+}
+
+.hero p{
+max-width:900px;
+font-size:1.15rem;
+color:#d8d2c7;
+}
+
+.hero-principle{
+margin-top:40px;
+max-width:1000px;
+padding:25px 0;
+border-top:1px solid rgba(199,162,90,.35);
+border-bottom:1px solid rgba(199,162,90,.35);
+font-size:1.05rem;
+color:#e9e1d3;
+}
+
+.hero-principle strong{
+color:var(--gold);
+}
+
+/* =========================
+NAV
+========================= */
+
+.intel-nav{
+position:sticky;
+top:0;
+z-index:10;
+background:rgba(16,42,34,.96);
+border-bottom:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(12px);
+}
+
+.nav-inner{
+max-width:1400px;
+margin:auto;
+padding:13px 20px;
+display:flex;
+gap:22px;
+overflow-x:auto;
+}
+
+.nav-inner a{
+color:#cfc8bc;
+text-decoration:none;
+font-size:.78rem;
+font-weight:800;
+white-space:nowrap;
+}
+
+.nav-inner a:hover{
+color:var(--gold);
+}
+
+/* =========================
+MAIN
+========================= */
+
+.dashboard{
+max-width:1400px;
+margin:auto;
+padding:65px 25px;
+}
+
+/* =========================
+SECTION INTRO
+========================= */
+
+.section{
+margin-bottom:90px;
+scroll-margin-top:80px;
+}
+
+.section-intro{
+max-width:900px;
+margin-bottom:35px;
+}
+
+.section-number{
+font-size:.7rem;
+font-weight:900;
+letter-spacing:.18em;
+color:var(--gold);
+text-transform:uppercase;
+margin-bottom:10px;
+}
+
+.section-title{
+font-size:clamp(2rem,4vw,3rem);
+line-height:1.05;
+letter-spacing:-.035em;
+margin-bottom:15px;
+}
+
+.section-intro p{
+color:#bfc5bd;
+font-size:1rem;
+}
+
+/* =========================
+TEACHING BLOCKS
+========================= */
+
+.teaching-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:24px;
+}
+
+.teaching-card{
+background:var(--deep2);
+border:1px solid rgba(255,255,255,.08);
+border-radius:20px;
+padding:30px;
+}
+
+.teaching-card h3{
+font-size:1.25rem;
+color:var(--gold);
+margin-bottom:12px;
+}
+
+.teaching-card p{
+color:#d4d1c8;
+font-size:.92rem;
+}
+
+.teaching-card p+p{
+margin-top:12px;
+}
+
+.lesson-label{
+display:inline-block;
+font-size:.62rem;
+font-weight:900;
+letter-spacing:.13em;
+text-transform:uppercase;
+color:var(--gold);
+background:rgba(199,162,90,.1);
+padding:5px 8px;
+border-radius:5px;
+margin-bottom:15px;
+}
+
+/* =========================
+CORE IDEA
+========================= */
+
+.core-idea{
+background:var(--cream2);
+color:var(--ink);
+border-radius:25px;
+padding:40px;
+margin:30px 0;
+}
+
+.core-idea .lesson-label{
+color:#80652e;
+background:#eee4cd;
+}
+
+.core-idea h3{
+font-size:1.8rem;
+line-height:1.2;
+margin-bottom:15px;
+}
+
+.core-idea p{
+color:#58655e;
+max-width:950px;
+}
+
+/* =========================
+FRAMEWORK
+========================= */
+
+.framework{
+margin-top:28px;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:12px;
+}
+
+.framework-step{
+background:var(--deep3);
+padding:20px;
+border-radius:14px;
+border-top:3px solid var(--gold);
+}
+
+.framework-step .num{
+font-size:.65rem;
+font-weight:900;
+color:var(--gold);
+}
+
+.framework-step h4{
+margin:6px 0;
+font-size:.95rem;
+}
+
+.framework-step p{
+font-size:.78rem;
+color:#c5ccc5;
+}
+
+/* =========================
+FORMULA
+========================= */
+
+.formula{
+background:#0b211a;
+border:1px solid rgba(199,162,90,.25);
+padding:25px;
+border-radius:15px;
+margin-top:25px;
+font-family:Georgia,serif;
+font-size:1.15rem;
+color:#ead9ad;
+}
+
+.formula small{
+display:block;
+font-family:Inter,sans-serif;
+font-size:.75rem;
+color:#9ca99f;
+margin-top:8px;
+}
+
+/* =========================
+MATRIX
+========================= */
+
+.matrix{
+overflow-x:auto;
+margin-top:30px;
+}
+
+.matrix table{
+width:100%;
+border-collapse:collapse;
+min-width:700px;
+background:var(--deep2);
+border-radius:15px;
+overflow:hidden;
+}
+
+.matrix th,
+.matrix td{
+padding:16px;
+text-align:left;
+border-bottom:1px solid rgba(255,255,255,.08);
+font-size:.82rem;
+vertical-align:top;
+}
+
+.matrix th{
+color:var(--gold);
+font-size:.7rem;
+text-transform:uppercase;
+letter-spacing:.08em;
+background:#132f26;
+}
+
+.matrix td{
+color:#d0d2cc;
+}
+
+/* =========================
+CASE STUDY
+========================= */
+
+.case{
+background:var(--deep2);
+border:1px solid rgba(199,162,90,.22);
+border-radius:24px;
+overflow:hidden;
+margin-top:30px;
+}
+
+.case-header{
+padding:28px 30px;
+background:linear-gradient(90deg,#214437,#173A2F);
+border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.case-header span{
+font-size:.65rem;
+font-weight:900;
+letter-spacing:.14em;
+text-transform:uppercase;
+color:var(--gold);
+}
+
+.case-header h3{
+font-size:1.5rem;
+margin-top:8px;
+}
+
+.case-body{
+padding:30px;
+}
+
+.case-body>p{
+color:#d5d3cb;
+max-width:950px;
+}
+
+.analysis-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+margin-top:25px;
+}
+
+.analysis{
+background:var(--deep3);
+padding:20px;
+border-radius:14px;
+}
+
+.analysis h4{
+color:var(--gold);
+font-size:.9rem;
+margin-bottom:7px;
+}
+
+.analysis p{
+font-size:.78rem;
+color:#c5cbc5;
+}
+
+/* =========================
+SCENARIO ANALYSIS
+========================= */
+
+.scenario-list{
+display:grid;
+gap:18px;
+margin-top:30px;
+}
+
+.scenario-item{
+display:grid;
+grid-template-columns:70px 1fr;
+gap:20px;
+padding:25px;
+background:var(--deep2);
+border-radius:18px;
+border-left:3px solid var(--gold);
+}
+
+.scenario-number{
+font-size:2rem;
+font-weight:900;
+color:var(--gold);
+line-height:1;
+}
+
+.scenario-item h3{
+font-size:1.1rem;
+margin-bottom:7px;
+}
+
+.scenario-item p{
+font-size:.84rem;
+color:#c9cdc7;
+}
+
+.reasoning{
+margin-top:14px;
+padding:15px;
+background:#102A22;
+border-radius:10px;
+font-size:.78rem;
+color:#d7d3c8;
+}
+
+.reasoning strong{
+color:var(--gold);
+}
+
+/* =========================
+OPPORTUNITY MAP
+========================= */
+
+.opportunity-map{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:10px;
+margin-top:30px;
+}
+
+.map-stage{
+padding:22px 15px;
+background:var(--deep2);
+border-radius:14px;
+text-align:center;
+border-bottom:3px solid var(--gold);
+}
+
+.map-stage strong{
+display:block;
+font-size:.8rem;
+color:var(--gold);
+margin-bottom:7px;
+}
+
+.map-stage span{
+font-size:.72rem;
+color:#c7cdc6;
+}
+
+/* =========================
+BEHAVIOR SYSTEM
+========================= */
+
+.behavior-equation{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:10px;
+margin:30px 0;
+}
+
+.behavior-factor{
+background:var(--cream2);
+color:var(--ink);
+padding:20px 12px;
+border-radius:12px;
+text-align:center;
+}
+
+.behavior-factor strong{
+display:block;
+color:#70582c;
+font-size:.8rem;
+}
+
+.behavior-factor span{
+font-size:.68rem;
+color:#68736d;
+}
+
+/* =========================
+AUDIT
+========================= */
+
+.audit{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+margin-top:25px;
+}
+
+.audit-item{
+padding:22px;
+background:var(--deep2);
+border-radius:15px;
+}
+
+.audit-item strong{
+display:block;
+color:var(--gold);
+margin-bottom:6px;
+}
+
+.audit-item p{
+font-size:.8rem;
+color:#c5cbc5;
+}
+
+/* =========================
+PORTFOLIO
+========================= */
+
+.evidence-chain{
+display:grid;
+grid-template-columns:repeat(6,1fr);
+gap:8px;
+margin-top:30px;
+}
+
+.evidence{
+padding:18px 10px;
+background:var(--deep3);
+border-radius:10px;
+text-align:center;
+}
+
+.evidence strong{
+display:block;
+font-size:.75rem;
+color:var(--gold);
+}
+
+.evidence span{
+font-size:.65rem;
+color:#bec7bf;
+}
+
+/* =========================
+GEOPOLITICAL
+========================= */
+
+.signal-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+margin-top:30px;
+}
+
+.signal{
+background:var(--deep2);
+padding:22px;
+border-radius:15px;
+border-top:2px solid var(--gold);
+}
+
+.signal h3{
+color:var(--gold);
+font-size:1rem;
+margin-bottom:7px;
+}
+
+.signal p{
+font-size:.78rem;
+color:#c7cdc7;
+}
+
+/* =========================
+FUTURE BOARD
+========================= */
+
+.future-board{
+background:
+linear-gradient(135deg,#173A2F,#102A22);
+border:1px solid rgba(199,162,90,.2);
+border-radius:25px;
+padding:40px;
+}
+
+.future-board h2{
+color:var(--gold);
+font-size:2rem;
+margin-bottom:10px;
+}
+
+.future-board>p{
+color:#c5cbc5;
+max-width:800px;
+}
+
+.future-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:14px;
+margin-top:30px;
+}
+
+.future-item{
+background:#214437;
+padding:25px;
+border-radius:14px;
+}
+
+.future-item strong{
+display:block;
+color:var(--gold);
+margin-bottom:6px;
+}
+
+.future-item p{
+font-size:.76rem;
+color:#c5ccc6;
+}
+
+/* =========================
+FINAL PRINCIPLE
+========================= */
+
+.final-principle{
+margin-top:70px;
+background:var(--gold);
+color:var(--deep);
+padding:45px;
+border-radius:25px;
+}
+
+.final-principle h2{
+font-size:2rem;
+line-height:1.15;
+margin-bottom:12px;
+}
+
+.final-principle p{
+max-width:900px;
+font-size:.92rem;
+}
+
+/* =========================
+FOOTER
+========================= */
+
+footer{
+padding:60px 25px;
+text-align:center;
+color:#8f9c94;
+font-size:.75rem;
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+
+@media(max-width:1000px){
+
+.framework{
+grid-template-columns:repeat(2,1fr);
+}
+
+.opportunity-map{
+grid-template-columns:repeat(2,1fr);
+}
+
+.behavior-equation{
+grid-template-columns:repeat(2,1fr);
+}
+
+.evidence-chain{
+grid-template-columns:repeat(3,1fr);
+}
+
+.signal-grid,
+.analysis-grid{
+grid-template-columns:1fr 1fr;
+}
+
+}
+
+@media(max-width:700px){
+
+.hero{
+padding:65px 20px;
+}
+
+.dashboard{
+padding:45px 18px;
+}
+
+.teaching-grid,
+.audit,
+.signal-grid,
+.analysis-grid{
+grid-template-columns:1fr;
+}
+
+.framework,
+.opportunity-map,
+.behavior-equation{
+grid-template-columns:1fr;
+}
+
+.evidence-chain{
+grid-template-columns:repeat(2,1fr);
+}
+
+.scenario-item{
+grid-template-columns:1fr;
+gap:10px;
+}
+
+.core-idea,
+.case-body,
+.case-header,
+.future-board{
+padding:25px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+<!-- =========================================================
+HERO
+========================================================= -->
+
+<section class="hero">
+
+<div class="hero-inner">
+
+<div class="eyebrow">
+Strategic Intelligence Education
+</div>
+
+<h1>
+Don't just find information.<br>
+<span>Learn how to think with it.</span>
+</h1>
+
+<p>
+The Intelligence Lab teaches decision systems, opportunity detection,
+behavior analysis, environmental analysis, evidence construction,
+experimentation, and long-range strategic thinking.
+</p>
+
+<div class="hero-principle">
+
+<strong>Central idea:</strong>
+Intelligence is not the amount of information you possess.
+It is your ability to distinguish signals from noise, understand
+relationships, identify leverage points, estimate consequences,
+and convert uncertainty into better action.
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+NAV
+========================================================= -->
+
+<nav class="intel-nav">
+
+<div class="nav-inner">
+
+<a href="#decision">DECISION INTELLIGENCE</a>
+<a href="#opportunity">OPPORTUNITY DETECTION</a>
+<a href="#behavior">BEHAVIOR</a>
+<a href="#environment">ENVIRONMENT</a>
+<a href="#evidence">EVIDENCE</a>
+<a href="#experiments">EXPERIMENTS</a>
+<a href="#geopolitics">SYSTEM SIGNALS</a>
+<a href="#future">FUTURES</a>
+
+</div>
+
+</nav>
+
+
+<main class="dashboard">
+
+
+<!-- =========================================================
+INTRODUCTION
+========================================================= -->
+
+<section class="section">
+
+<div class="section-intro">
+
+<div class="section-number">
+00 / Foundation
+</div>
+
+<h2 class="section-title">
+What Strategic Intelligence Actually Does
+</h2>
+
+<p>
+Strategic thinking becomes valuable when the obvious answer is not
+necessarily the correct answer. Instead of asking only "What should
+I do?", intelligence asks what is happening, why it is happening,
+what could change it, what evidence is missing, and which action
+creates the most useful information at the lowest unnecessary cost.
+</p>
+
+</div>
+
+<div class="core-idea">
+
+<div class="lesson-label">
+Core Lesson
+</div>
+
+<h3>
+The quality of a decision depends partly on the quality of the model behind it.
+</h3>
+
+<p>
+If your model of a situation is wrong, more effort can simply produce
+a more sophisticated version of the wrong answer. Strategic intelligence
+therefore begins with diagnosis. Before solving a problem, determine
+whether you understand the system that produced it.
+</p>
+
+</div>
+
+<div class="framework">
+
+<div class="framework-step">
+<div class="num">01</div>
+<h4>Observe</h4>
+<p>What is actually happening rather than what you expected to happen?</p>
+</div>
+
+<div class="framework-step">
+<div class="num">02</div>
+<h4>Separate</h4>
+<p>Which facts, assumptions, interpretations and predictions are being mixed together?</p>
+</div>
+
+<div class="framework-step">
+<div class="num">03</div>
+<h4>Model</h4>
+<p>What relationships could explain the observed result?</p>
+</div>
+
+<div class="framework-step">
+<div class="num">04</div>
+<h4>Act</h4>
+<p>What action creates useful progress while preserving future options?</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+DECISION INTELLIGENCE
+========================================================= -->
+
+<section class="section" id="decision">
+
+<div class="section-intro">
+
+<div class="section-number">
+01 / Decision Intelligence
+</div>
+
+<h2 class="section-title">
+A Decision Is More Than a Choice
+</h2>
+
+<p>
+A weak decision process compares options. A stronger process examines
+the structure of the decision itself.
+</p>
+
+</div>
+
+<div class="teaching-grid">
+
+<div class="teaching-card">
+
+<div class="lesson-label">Lesson 01</div>
+
+<h3>Distinguish Reversible From Irreversible Decisions</h3>
+
+<p>
+A reversible decision can be corrected relatively cheaply. An irreversible
+decision is expensive, difficult or impossible to undo.
+</p>
+
+<p>
+The mistake is treating both types with the same level of commitment.
+Small reversible decisions often deserve speed. Large irreversible
+decisions deserve stronger evidence.
+</p>
+
+</div>
+
+<div class="teaching-card">
+
+<div class="lesson-label">Lesson 02</div>
+
+<h3>Separate Decision Quality From Outcome Quality</h3>
+
+<p>
+A good decision can produce a bad outcome because of randomness.
+A bad decision can occasionally produce a good outcome.
+</p>
+
+<p>
+Evaluate the reasoning using the information available at the time,
+not merely by looking backward at what happened.
+</p>
+
+</div>
+
+<div class="teaching-card">
+
+<div class="lesson-label">Lesson 03</div>
+
+<h3>Identify the Cost of Waiting</h3>
+
+<p>
+Waiting is not neutral. Delaying action can preserve resources, but
+it can also allow opportunities to disappear, problems to compound,
+or competitors to move first.
+</p>
+
+<p>
+Every decision should therefore include two questions:
+"What happens if I act?" and "What happens if I do nothing?"
+</p>
+
+</div>
+
+<div class="teaching-card">
+
+<div class="lesson-label">Lesson 04</div>
+
+<h3>Look for the Option That Buys Information</h3>
+
+<p>
+Sometimes the best next step is not the action with the highest immediate
+return. It is the action that teaches you something important without
+requiring a large commitment.
+</p>
+
+<p>
+A pilot, prototype, interview, small purchase, trial workflow or limited
+launch can transform uncertainty into evidence.
+</p>
+
+</div>
+
+</div>
+
+<div class="formula">
+
+Expected Value ≈ Probability × Potential Benefit − Probability × Potential Loss
+
+<small>
+This is a reasoning aid, not a prediction machine. The goal is to force explicit thinking about upside, downside and uncertainty.
+</small>
+
+</div>
+
+<div class="case">
+
+<div class="case-header">
+
+<span>Case Study</span>
+
+<h3>The New Technology Problem</h3>
+
+</div>
+
+<div class="case-body">
+
+<p>
+A company discovers an AI system that appears capable of reducing
+administrative work by 40%. The vendor promises major productivity
+gains. The technology has not yet been tested on the company's actual
+workflow.
+</p>
+
+<div class="analysis-grid">
+
+<div class="analysis">
+<h4>Weak Response</h4>
+<p>
+Replace the existing process immediately because the projected savings look attractive.
+</p>
+</div>
+
+<div class="analysis">
+<h4>Better Response</h4>
+<p>
+Run the technology against a bounded workflow and compare actual time,
+error rate, cost and quality against the existing process.
+</p>
+</div>
+
+<div class="analysis">
+<h4>Strategic Insight</h4>
+<p>
+The pilot is valuable because it reduces uncertainty while limiting
+the cost of being wrong.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+OPPORTUNITY DETECTION
+========================================================= -->
+
+<section class="section" id="opportunity">
+
+<div class="section-intro">
+
+<div class="section-number">
+02 / Opportunity Detection
+</div>
+
+<h2 class="section-title">
+Opportunities Hide Inside Friction
+</h2>
+
+<p>
+Instead of teaching people to search endlessly for "opportunities,"
+teach them how to recognize conditions that repeatedly produce them.
+</p>
+
+</div>
+
+<div class="core-idea">
+
+<div class="lesson-label">
+High-Value Lesson
+</div>
+
+<h3>
+Repeated inconvenience is market information.
+</h3>
+
+<p>
+A single complaint may be noise. A repeated complaint from multiple
+people, especially when money, time, risk or status is involved,
+is more interesting. The strategic question is not simply "Is this
+annoying?" It is "Who is paying the cost of this problem, how often
+does it occur, and what are they currently doing about it?"
+</p>
+
+</div>
+
+<div class="opportunity-map">
+
+<div class="map-stage">
+<strong>FRICTION</strong>
+<span>Something is difficult, slow, confusing or expensive.</span>
+</div>
+
+<div class="map-stage">
+<strong>FREQUENCY</strong>
+<span>The problem occurs repeatedly.</span>
+</div>
+
+<div class="map-stage">
+<strong>COST</strong>
+<span>The problem consumes money, time, attention or opportunity.</span>
+</div>
+
+<div class="map-stage">
+<strong>WORKAROUND</strong>
+<span>People already improvise ways to solve it.</span>
+</div>
+
+<div class="map-stage">
+<strong>VALUE</strong>
+<span>A better solution could justify payment or adoption.</span>
+</div>
+
+</div>
+
+<div class="teaching-grid" style="margin-top:25px;">
+
+<div class="teaching-card">
+
+<div class="lesson-label">Detection Method</div>
+
+<h3>Watch the Workaround</h3>
+
+<p>
+People reveal the value of a problem through the solutions they invent.
+Spreadsheets created to compensate for bad software, employees keeping
+private tracking systems, repeated manual copying, or customers calling
+for help can all reveal system weaknesses.
+</p>
+
+</div>
+
+<div class="teaching-card">
+
+<div class="lesson-label">Detection Method</div>
+
+<h3>Look for Expensive Inefficiency</h3>
+
+<p>
+The strongest opportunities are not necessarily the most interesting.
+They are often connected to measurable waste: lost hours, abandoned
+customers, preventable errors, unnecessary inventory, duplicated work,
+delays or revenue leakage.
+</p>
+
+</div>
+
+<div class="teaching-card">
+
+<div class="lesson-label">Detection Method</div>
+
+<h3>Find the Unserved Middle</h3>
+
+<p>
+Markets are not always divided into "nothing" and "premium."
+There can be people who need a meaningful solution but cannot justify
+the price, complexity or expertise required by existing providers.
+</p>
+
+</div>
+
+<div class="teaching-card">
+
+<div class="lesson-label">Detection Method</div>
+
+<h3>Look for Transfer Problems</h3>
+
+<p>
+Whenever responsibility moves between people, departments, companies
+or software systems, information can be lost. Handoffs are therefore
+excellent places to investigate delays, errors and accountability gaps.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+BEHAVIOR
+========================================================= -->
+
+<section class="section" id="behavior">
+
+<div class="section-intro">
+
+<div class="section-number">
+03 / Behavior Intelligence
+</div>
+
+<h2 class="section-title">
+People Respond to Systems, Not Just Instructions
+</h2>
+
+<p>
+When behavior repeatedly differs from what leaders expect, the first
+question should not always be "Why are people failing?" It may be
+that the environment is producing the behavior.
+</p>
+
+</div>
+
+<div class="behavior-equation">
+
+<div class="behavior-factor">
+<strong>INCENTIVES</strong>
+<span>What gets rewarded?</span>
+</div>
+
+<div class="behavior-factor">
+<strong>CONSTRAINTS</strong>
+<span>What is difficult or impossible?</span>
+</div>
+
+<div class="behavior-factor">
+<strong>INFORMATION</strong>
+<span>What does the person know?</span>
+</div>
+
+<div class="behavior-factor">
+<strong>EXPECTATIONS</strong>
+<span>What does the person believe will happen?</span>
+</div>
+
+<div class="behavior-factor">
+<strong>CONSEQUENCES</strong>
+<span>What happens afterward?</span>
+</div>
+
+</div>
+
+<div class="teaching-grid">
+
+<div class="teaching-card">
+
+<div class="lesson-label">Behavior Lesson</div>
+
+<h3>Incentives Can Defeat Intentions</h3>
+
+<p>
+An organization may tell employees to prioritize quality while measuring
+them almost exclusively on speed. The stated objective and the operational
+objective are then different.
+</p>
+
+<p>
+When behavior seems irrational, inspect what the system actually rewards.
+</p>
+
+</div>
+
+<div class="teaching-card">
+
+<div class="lesson-label">Behavior Lesson</div>
+
+<h3>People Optimize What They Can See</h3>
+
+<p>
+If a person is evaluated using one visible metric, they may optimize that
+metric even when it damages another part of the system.
+</p>
+
+<p>
+This is why measurement design is itself a strategic decision.
+</p>
+
+</div>
+
+</div>
+
+<div class="case">
+
+<div class="case-header">
+
+<span>Case Study</span>
+
+<h3>The Employee Bottleneck</h3>
+
+</div>
+
+<div class="case-body">
+
+<p>
+A high-performing employee has become essential to a company's workflow.
+Nearly every difficult decision passes through this person. Leadership
+sees the employee as highly valuable, but work increasingly stops whenever
+that person is unavailable.
+</p>
+
+<div class="analysis-grid">
+
+<div class="analysis">
+<h4>Visible Problem</h4>
+<p>
+One employee is overloaded.
+</p>
+</div>
+
+<div class="analysis">
+<h4>System Problem</h4>
+<p>
+Knowledge, authority and process ownership have become concentrated in one node.
+</p>
+</div>
+
+<div class="analysis">
+<h4>Strategic Intervention</h4>
+<p>
+Map decisions, document procedures, distribute knowledge and redesign
+the workflow so the employee becomes a multiplier rather than a bottleneck.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+ENVIRONMENT
+========================================================= -->
+
+<section class="section" id="environment">
+
+<div class="section-intro">
+
+<div class="section-number">
+04 / Environmental Intelligence
+</div>
+
+<h2 class="section-title">
+Your Environment Is a Silent Decision-Making System
+</h2>
+
+<p>
+People often attempt to improve behavior through willpower while ignoring
+the environment that repeatedly triggers the behavior.
+</p>
+
+</div>
+
+<div class="audit">
+
+<div class="audit-item">
+<strong>What does the environment make easy?</strong>
+<p>
+Easy actions tend to happen more often. Identify behaviors that require
+little effort because the environment supports them.
+</p>
+</div>
+
+<div class="audit-item">
+<strong>What does it make difficult?</strong>
+<p>
+Friction can suppress useful behavior. Determine whether the desired action
+requires unnecessary steps, travel, waiting or mental effort.
+</p>
+</div>
+
+<div class="audit-item">
+<strong>What does it make visible?</strong>
+<p>
+People respond to what captures attention. Visibility can influence what
+gets remembered, considered and acted upon.
+</p>
+</div>
+
+<div class="audit-item">
+<strong>What does it reward?</strong>
+<p>
+The environment may reward speed, convenience, social approval, spending,
+avoidance or immediate gratification.
+</p>
+</div>
+
+<div class="audit-item">
+<strong>What does it hide?</strong>
+<p>
+Hidden costs are dangerous because they remain outside normal decision-making.
+Look for delayed fees, opportunity costs and downstream consequences.
+</p>
+</div>
+
+<div class="audit-item">
+<strong>What does it repeatedly trigger?</strong>
+<p>
+Repeated cues can create repeated behavior. Identify places, people,
+interfaces and routines associated with unwanted outcomes.
+</p>
+</div>
+
+</div>
+
+<div class="core-idea">
+
+<div class="lesson-label">
+Strategic Application
+</div>
+
+<h3>
+Change the default before demanding more discipline.
+</h3>
+
+<p>
+If the same failure happens repeatedly, redesign the conditions around
+the behavior. Reduce friction for the desired action. Increase friction
+for costly mistakes. Make important information visible at the moment
+it is needed.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+PORTFOLIO INTELLIGENCE
+========================================================= -->
+
+<section class="section" id="evidence">
+
+<div class="section-intro">
+
+<div class="section-number">
+05 / Evidence Intelligence
+</div>
+
+<h2 class="section-title">
+Credentials Say You Learned. Evidence Shows What You Can Do.
+</h2>
+
+<p>
+A powerful career strategy is to turn activities into evidence that another
+person can evaluate.
+</p>
+
+</div>
+
+<div class="evidence-chain">
+
+<div class="evidence">
+<strong>PROBLEM</strong>
+<span>What needed improvement?</span>
+</div>
+
+<div class="evidence">
+<strong>ACTION</strong>
+<span>What did you actually do?</span>
+</div>
+
+<div class="evidence">
+<strong>METHOD</strong>
+<span>How did you approach it?</span>
+</div>
+
+<div class="evidence">
+<strong>OUTPUT</strong>
+<span>What did you produce?</span>
+</div>
+
+<div class="evidence">
+<strong>RESULT</strong>
+<span>What changed?</span>
+</div>
+
+<div class="evidence">
+<strong>LEARNING</strong>
+<span>What did the evidence teach you?</span>
+</div>
+
+</div>
+
+<div class="matrix">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Weak Evidence</th>
+<th>Stronger Evidence</th>
+<th>Strategic Signal</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+<td>"Completed a leadership course."</td>
+<td>Designed and documented a workflow improvement using leadership principles.</td>
+<td>Can transfer knowledge into action.</td>
+</tr>
+
+<tr>
+<td>"Learned Excel."</td>
+<td>Built a working tracker that reduced manual reporting time.</td>
+<td>Can use a technical skill to solve a problem.</td>
+</tr>
+
+<tr>
+<td>"Interested in marketing."</td>
+<td>Created a campaign hypothesis, tested messaging and documented the results.</td>
+<td>Understands experimentation.</td>
+</tr>
+
+<tr>
+<td>"Good communicator."</td>
+<td>Created a communication process that reduced repeated clarification requests.</td>
+<td>Can convert communication ability into organizational value.</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<div class="core-idea">
+
+<div class="lesson-label">
+Career Intelligence
+</div>
+
+<h3>
+Build evidence at the same time you build credentials.
+</h3>
+
+<p>
+A credential can establish that you studied something. A portfolio can
+establish that you applied it. The strongest career signal is often the
+combination: targeted learning + practical work + documented reasoning
++ measurable result.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+EXPERIMENTS
+========================================================= -->
+
+<section class="section" id="experiments">
+
+<div class="section-intro">
+
+<div class="section-number">
+06 / Experimental Intelligence
+</div>
+
+<h2 class="section-title">
+Stop Debating What You Can Test
+</h2>
+
+<p>
+When uncertainty is high, arguments can become substitutes for evidence.
+An experiment changes that dynamic.
+</p>
+
+</div>
+
+<div class="framework">
+
+<div class="framework-step">
+<div class="num">01</div>
+<h4>Hypothesis</h4>
+<p>What do you believe will happen?</p>
+</div>
+
+<div class="framework-step">
+<div class="num">02</div>
+<h4>Variable</h4>
+<p>What will you change?</p>
+</div>
+
+<div class="framework-step">
+<div class="num">03</div>
+<h4>Measure</h4>
+<p>What observable result matters?</p>
+</div>
+
+<div class="framework-step">
+<div class="num">04</div>
+<h4>Decision Rule</h4>
+<p>What result changes your next action?</p>
+</div>
+
+</div>
+
+<div class="teaching-grid" style="margin-top:25px;">
+
+<div class="teaching-card">
+
+<div class="lesson-label">Experiment Design</div>
+
+<h3>Do Not Change Everything at Once</h3>
+
+<p>
+If you simultaneously change price, messaging, audience, product and
+distribution, you may get a different result without knowing what caused it.
+</p>
+
+<p>
+Good experiments isolate important variables whenever practical.
+</p>
+
+</div>
+
+<div class="teaching-card">
+
+<div class="lesson-label">Experiment Design</div>
+
+<h3>Predefine What Would Change Your Mind</h3>
+
+<p>
+An experiment becomes weak when every result can be explained away.
+Define in advance what evidence would support, weaken or reject the hypothesis.
+</p>
+
+</div>
+
+<div class="teaching-card">
+
+<div class="lesson-label">Experiment Design</div>
+
+<h3>Measure Behavior, Not Just Opinions</h3>
+
+<p>
+People can sincerely say they like an idea without using it or paying for it.
+Observed behavior is often stronger evidence than stated preference.
+</p>
+
+</div>
+
+<div class="teaching-card">
+
+<div class="lesson-label">Experiment Design</div>
+
+<h3>Use Small Experiments to Protect Optionality</h3>
+
+<p>
+A small test allows you to learn without fully committing. This is especially
+valuable when the downside of being wrong is large.
+</p>
+
+</div>
+
+</div>
+
+<div class="case">
+
+<div class="case-header">
+
+<span>Experiment Example</span>
+
+<h3>Falling Sales</h3>
+
+</div>
+
+<div class="case-body">
+
+<p>
+Sales have declined for three consecutive months. Leadership wants to
+immediately cut marketing spending.
+</p>
+
+<div class="analysis-grid">
+
+<div class="analysis">
+<h4>Do Not Assume</h4>
+<p>
+That marketing caused the problem simply because sales declined.
+</p>
+</div>
+
+<div class="analysis">
+<h4>Decompose</h4>
+<p>
+Examine traffic, conversion, price, product demand, retention, customer
+mix, competition and market conditions.
+</p>
+</div>
+
+<div class="analysis">
+<h4>Test</h4>
+<p>
+Identify which variable changed and test targeted interventions before
+making broad cuts.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+THOUGHT EXPERIMENTS
+========================================================= -->
+
+<section class="section">
+
+<div class="section-intro">
+
+<div class="section-number">
+07 / Strategic Thought Experiments
+</div>
+
+<h2 class="section-title">
+Train Yourself to See Second-Order Effects
+</h2>
+
+<p>
+Strategic intelligence improves when you stop looking only at immediate
+effects and start asking what happens next.
+</p>
+
+</div>
+
+<div class="scenario-list">
+
+<div class="scenario-item">
+
+<div class="scenario-number">01</div>
+
+<div>
+
+<h3>Every Employee Documents One Improvement Per Week</h3>
+
+<p>
+What happens if every employee becomes responsible for identifying one
+small improvement every week?
+</p>
+
+<div class="reasoning">
+<strong>Think beyond the obvious:</strong>
+The result is not merely "more ideas." Consider knowledge capture,
+employee ownership, management attention, implementation capacity,
+measurement overload and whether the organization can distinguish
+valuable improvements from noise.
+</div>
+
+</div>
+
+</div>
+
+<div class="scenario-item">
+
+<div class="scenario-number">02</div>
+
+<div>
+
+<h3>AI Removes 80% of Administrative Work</h3>
+
+<p>
+What becomes more valuable when routine administrative labor becomes
+cheap or automated?
+</p>
+
+<div class="reasoning">
+<strong>Think beyond automation:</strong>
+Judgment, verification, trust, relationship management, domain knowledge,
+problem definition and accountability may become more important rather
+than less important.
+</div>
+
+</div>
+
+</div>
+
+<div class="scenario-item">
+
+<div class="scenario-number">03</div>
+
+<div>
+
+<h3>A City Becomes Extremely Easy to Work Remotely From</h3>
+
+<p>
+What happens to housing, local businesses, transportation, labor markets
+and competition for desirable neighborhoods?
+</p>
+
+<div class="reasoning">
+<strong>Think in systems:</strong>
+One improvement can change demand elsewhere. A benefit to remote workers
+can eventually create pressure on housing and local costs.
+</div>
+
+</div>
+
+</div>
+
+<div class="scenario-item">
+
+<div class="scenario-number">04</div>
+
+<div>
+
+<h3>Information Becomes Nearly Free</h3>
+
+<p>
+If everyone can instantly access enormous amounts of information,
+what becomes scarce?
+</p>
+
+<div class="reasoning">
+<strong>Strategic answer:</strong>
+Attention, judgment, verification, prioritization, trust, context,
+execution and the ability to distinguish important information from
+irrelevant information become more valuable.
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+SYSTEM SIGNALS
+========================================================= -->
+
+<section class="section" id="geopolitics">
+
+<div class="section-intro">
+
+<div class="section-number">
+08 / System Signals
+</div>
+
+<h2 class="section-title">
+Read the Forces Behind the Event
+</h2>
+
+<p>
+Strategic intelligence is not memorizing headlines. It is learning to
+connect forces that influence one another.
+</p>
+
+</div>
+
+<div class="signal-grid">
+
+<div class="signal">
+<h3>Technology</h3>
+<p>
+Automation, AI, infrastructure, computing, cybersecurity and changing
+technical capabilities can alter the economics of entire industries.
+</p>
+</div>
+
+<div class="signal">
+<h3>Demographics</h3>
+<p>
+Population growth, aging, migration, household formation and workforce
+composition can reshape demand and labor availability.
+</p>
+</div>
+
+<div class="signal">
+<h3>Capital</h3>
+<p>
+Interest rates, investment flows, credit conditions and access to capital
+affect which businesses and projects can expand.
+</p>
+</div>
+
+<div class="signal">
+<h3>Regulation</h3>
+<p>
+Rules can change the cost, legality, speed or structure of business activity.
+</p>
+</div>
+
+<div class="signal">
+<h3>Supply Chains</h3>
+<p>
+Dependence on concentrated suppliers, transportation routes or scarce
+inputs can create hidden vulnerabilities.
+</p>
+</div>
+
+<div class="signal">
+<h3>Energy</h3>
+<p>
+Energy availability and cost influence transportation, manufacturing,
+data centers, infrastructure and household economics.
+</p>
+</div>
+
+<div class="signal">
+<h3>Labor</h3>
+<p>
+Skill shortages, workforce participation, productivity and occupational
+change influence wages and employer behavior.
+</p>
+</div>
+
+<div class="signal">
+<h3>Geopolitics</h3>
+<p>
+Trade relationships, alliances, conflicts and national policy can alter
+markets far beyond the countries directly involved.
+</p>
+</div>
+
+<div class="signal">
+<h3>Infrastructure</h3>
+<p>
+Transportation, communications, housing, water, electricity and digital
+systems determine what economic activity is practical.
+</p>
+</div>
+
+</div>
+
+<div class="core-idea">
+
+<div class="lesson-label">
+Signal Intelligence
+</div>
+
+<h3>
+Do not ask only "What happened?" Ask "What changed underneath it?"
+</h3>
+
+<p>
+An event is often the visible surface of a deeper system. A company may
+lose customers because of a competitor, but the deeper cause may be a
+technology shift, changing customer expectations, a cost structure,
+a distribution change or a new substitute.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+FUTURE
+========================================================= -->
+
+<section class="section" id="future">
+
+<div class="section-intro">
+
+<div class="section-number">
+09 / Future Intelligence
+</div>
+
+<h2 class="section-title">
+Prepare for Possibilities, Not Predictions
+</h2>
+
+<p>
+The goal of scenario planning is not to predict the future perfectly.
+It is to become less surprised by plausible changes.
+</p>
+
+</div>
+
+<div class="future-board">
+
+<h2>Scenario Fields</h2>
+
+<p>
+Use these as starting points for deeper analysis. For each scenario,
+ask what becomes cheaper, more expensive, scarce, abundant, regulated,
+valuable or obsolete.
+</p>
+
+<div class="future-grid">
+
+<div class="future-item">
+<strong>AI-Assisted Entrepreneurship</strong>
+<p>
+If individuals can perform work that previously required teams,
+what new businesses become economically viable?
+</p>
+</div>
+
+<div class="future-item">
+<strong>Personal Knowledge Economies</strong>
+<p>
+What happens when expertise, reputation and accumulated knowledge become
+directly monetizable assets?
+</p>
+</div>
+
+<div class="future-item">
+<strong>Remote Global Work</strong>
+<p>
+How does competition change when employers can access talent across
+national boundaries?
+</p>
+</div>
+
+<div class="future-item">
+<strong>Portfolio Careers</strong>
+<p>
+What happens when one person's career consists of employment, projects,
+businesses, teaching and independent work rather than one occupation?
+</p>
+</div>
+
+<div class="future-item">
+<strong>Cognitive Performance Markets</strong>
+<p>
+What products and services emerge around attention, learning, decision
+quality and mental performance?
+</p>
+</div>
+
+<div class="future-item">
+<strong>Distributed Learning</strong>
+<p>
+What happens when people can assemble education from projects,
+communities, apprenticeships, credentials and independent study?
+</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+ADVANCED LESSONS
+========================================================= -->
+
+<section class="section">
+
+<div class="section-intro">
+
+<div class="section-number">
+10 / Advanced Intelligence
+</div>
+
+<h2 class="section-title">
+Lessons That Change How You Analyze Problems
+</h2>
+
+</div>
+
+<div class="teaching-grid">
+
+<div class="teaching-card">
+
+<div class="lesson-label">Lesson</div>
+
+<h3>The Most Visible Problem May Not Be the Most Important Problem</h3>
+
+<p>
+Symptoms attract attention because they are visible. Causes are often
+less visible. Strategic analysis asks what process repeatedly produces
+the symptom.
+</p>
+
+</div>
+
+<div class="teaching-card">
+
+<div class="lesson-label">Lesson</div>
+
+<h3>Optimization Can Create Fragility</h3>
+
+<p>
+Removing every form of redundancy can make a system efficient under normal
+conditions while making it dangerously fragile under disruption.
+</p>
+
+</div>
+
+<div class="teaching-card">
+
+<div class="lesson-label">Lesson</div>
+
+<h3>The Best Metric Can Become a Bad Target</h3>
+
+<p>
+Once a metric becomes the objective, people may optimize the number rather
+than the underlying outcome. Metrics should inform judgment, not replace it.
+</p>
+
+</div>
+
+<div class="teaching-card">
+
+<div class="lesson-label">Lesson</div>
+
+<h3>Every System Has Bottlenecks</h3>
+
+<p>
+Improving a non-bottleneck may produce little overall improvement. Find
+the constraint that limits the entire system before optimizing everything else.
+</p>
+
+</div>
+
+<div class="teaching-card">
+
+<div class="lesson-label">Lesson</div>
+
+<h3>Information Has a Timing Problem</h3>
+
+<p>
+Information can be accurate but arrive too late to be useful. Intelligence
+therefore includes not just accuracy but speed, relevance and decision timing.
+</p>
+
+</div>
+
+<div class="teaching-card">
+
+<div class="lesson-label">Lesson</div>
+
+<h3>Optionality Has Economic Value</h3>
+
+<p>
+An action that preserves several future choices can be more valuable than
+an action that commits you to one path prematurely.
+</p>
+
+</div>
+
+<div class="teaching-card">
+
+<div class="lesson-label">Lesson</div>
+
+<h3>Second-Order Effects Often Matter More Than First-Order Effects</h3>
+
+<p>
+A policy, product or decision changes behavior. That behavior changes the
+system again. Strong analysis follows the chain rather than stopping at
+the immediate result.
+</p>
+
+</div>
+
+<div class="teaching-card">
+
+<div class="lesson-label">Lesson</div>
+
+<h3>Attention Is a Resource</h3>
+
+<p>
+A strategy can fail because it demands more attention than the person or
+organization can sustainably provide. Complexity has a cognitive cost.
+</p>
+
+</div>
+
+<div class="teaching-card">
+
+<div class="lesson-label">Lesson</div>
+
+<h3>Constraints Can Become Design Inputs</h3>
+
+<p>
+Limited money, time, transportation, staff or expertise are not merely
+obstacles. They can determine what kind of solution is viable.
+</p>
+
+</div>
+
+<div class="teaching-card">
+
+<div class="lesson-label">Lesson</div>
+
+<h3>Evidence Should Change Your Plan</h3>
+
+<p>
+Collecting evidence without allowing it to alter the decision is not
+really learning. A strong intelligence system contains explicit points
+where new evidence can change the strategy.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+FINAL
+========================================================= -->
+
+<div class="final-principle">
+
+<h2>
+The purpose of intelligence is not to know everything.
+</h2>
+
+<p>
+It is to become harder to fool, harder to surprise, and better able to
+act under uncertainty. Learn to identify the system, locate the constraint,
+separate assumptions from evidence, recognize leverage points, test what
+can be tested, and preserve options when the future is unclear.
+</p>
+
+</div>
+
+</main>
+
+
+<footer>
+
+Intelligence Lab • Decision Systems • Opportunity Detection •
+Behavior Intelligence • Evidence • Experimentation • Systems Thinking
+
+</footer>
+
+</body>
+</html>
