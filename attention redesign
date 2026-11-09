@@ -1,0 +1,4679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Attention Fragmentation Control | Attention Control Lab</title>
+
+<style>
+
+/* =========================================================
+   ATTENTION CONTROL LAB
+   COLOR SYSTEM
+========================================================= */
+
+:root{
+    --midnight:#0D1B2A;
+    --coral:#FEC89A;
+    --ice:#E0E1DD;
+    --steel:#1B263B;
+
+    --steel-light:#263750;
+    --steel-dark:#131F31;
+
+    --success:#FEC89A;
+    --muted:rgba(224,225,221,.68);
+    --faint:rgba(224,225,221,.10);
+    --border:rgba(254,200,154,.22);
+
+    --shadow:0 25px 70px rgba(0,0,0,.30);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    background:var(--midnight);
+    color:var(--ice);
+    line-height:1.7;
+    overflow-x:hidden;
+}
+
+button,
+input,
+select,
+textarea{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible{
+    outline:2px solid var(--coral);
+    outline-offset:3px;
+}
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+.page{
+    width:100%;
+}
+
+.container{
+    width:min(1180px,calc(100% - 40px));
+    margin:auto;
+}
+
+.section{
+    padding:95px 0;
+}
+
+.eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    color:var(--coral);
+    font-size:.72rem;
+    font-weight:900;
+    text-transform:uppercase;
+    letter-spacing:.18em;
+    margin-bottom:18px;
+}
+
+.eyebrow::before{
+    content:"";
+    width:30px;
+    height:1px;
+    background:var(--coral);
+}
+
+h1,
+h2,
+h3{
+    letter-spacing:-.035em;
+}
+
+h2{
+    font-size:clamp(2rem,4vw,3.4rem);
+    line-height:1.05;
+    margin-bottom:18px;
+}
+
+h3{
+    line-height:1.2;
+}
+
+.muted{
+    color:var(--muted);
+}
+
+.small{
+    font-size:.82rem;
+}
+
+/* =========================================================
+   SCROLL PROGRESS
+========================================================= */
+
+.scroll-line{
+    position:fixed;
+    top:0;
+    left:0;
+    width:0%;
+    height:4px;
+    background:var(--coral);
+    z-index:9999;
+    box-shadow:0 0 20px rgba(254,200,154,.45);
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:900;
+
+    background:rgba(13,27,42,.92);
+    backdrop-filter:blur(16px);
+
+    border-bottom:1px solid var(--faint);
+}
+
+.header-inner{
+    width:min(1180px,calc(100% - 40px));
+    min-height:72px;
+    margin:auto;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.logo{
+    color:var(--ice);
+    text-decoration:none;
+    font-size:.82rem;
+    font-weight:900;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+}
+
+.logo span{
+    color:var(--coral);
+}
+
+.header-nav{
+    display:flex;
+    gap:5px;
+}
+
+.header-nav button{
+    border:1px solid transparent;
+    background:none;
+    color:var(--muted);
+    padding:9px 12px;
+    border-radius:999px;
+    font-size:.76rem;
+    transition:.2s;
+}
+
+.header-nav button:hover{
+    color:var(--coral);
+    border-color:var(--border);
+    background:rgba(254,200,154,.04);
+}
+
+.header-xp{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    border:1px solid var(--border);
+    background:var(--steel);
+    padding:8px 13px;
+    border-radius:999px;
+    color:var(--coral);
+    font-size:.75rem;
+    font-weight:900;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    position:relative;
+    min-height:760px;
+    display:flex;
+    align-items:center;
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at 78% 35%,
+            rgba(254,200,154,.08),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(224,225,221,.035),
+            transparent 28%
+        ),
+        var(--midnight);
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    width:650px;
+    height:650px;
+    right:-300px;
+    top:60px;
+    border:1px solid rgba(254,200,154,.12);
+    border-radius:50%;
+}
+
+.hero::after{
+    content:"";
+    position:absolute;
+    width:440px;
+    height:440px;
+    right:-190px;
+    top:165px;
+    border:1px dashed rgba(224,225,221,.12);
+    border-radius:50%;
+}
+
+.hero-grid{
+    width:min(1180px,calc(100% - 40px));
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:70px;
+    align-items:center;
+
+    position:relative;
+    z-index:2;
+}
+
+.hero h1{
+    font-size:clamp(3.2rem,7vw,6.5rem);
+    line-height:.93;
+    max-width:760px;
+}
+
+.hero h1 span{
+    color:var(--coral);
+}
+
+.hero-copy{
+    max-width:650px;
+    color:var(--muted);
+    font-size:1.05rem;
+    margin:25px 0 32px;
+}
+
+.hero-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.primary{
+    border:1px solid var(--coral);
+    background:var(--coral);
+    color:var(--midnight);
+
+    padding:14px 22px;
+    border-radius:999px;
+
+    font-weight:900;
+    transition:.25s;
+}
+
+.primary:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 35px rgba(254,200,154,.15);
+}
+
+.secondary{
+    border:1px solid var(--border);
+    background:transparent;
+    color:var(--ice);
+
+    padding:14px 22px;
+    border-radius:999px;
+
+    font-weight:800;
+    transition:.25s;
+}
+
+.secondary:hover{
+    border-color:var(--coral);
+    color:var(--coral);
+}
+
+/* =========================================================
+   HERO CONTROL CORE
+========================================================= */
+
+.control-core{
+    width:min(420px,90vw);
+    height:420px;
+    margin:auto;
+    position:relative;
+
+    display:grid;
+    place-items:center;
+}
+
+.core-ring{
+    position:absolute;
+    border-radius:50%;
+    border:1px solid var(--border);
+}
+
+.core-ring.one{
+    width:100%;
+    height:100%;
+    animation:spin 25s linear infinite;
+}
+
+.core-ring.two{
+    width:72%;
+    height:72%;
+    border-style:dashed;
+    animation:spinReverse 18s linear infinite;
+}
+
+.core-ring.three{
+    width:45%;
+    height:45%;
+    border-color:rgba(224,225,221,.15);
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+@keyframes spinReverse{
+    to{
+        transform:rotate(-360deg);
+    }
+}
+
+.core{
+    width:150px;
+    height:150px;
+
+    border-radius:50%;
+    background:var(--steel);
+
+    border:2px solid var(--coral);
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    box-shadow:
+        0 0 0 20px rgba(254,200,154,.03),
+        0 0 70px rgba(254,200,154,.10);
+
+    text-align:center;
+}
+
+.core-number{
+    color:var(--coral);
+    font-size:2.7rem;
+    font-weight:900;
+    line-height:1;
+}
+
+.core-label{
+    color:var(--muted);
+    font-size:.7rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    font-weight:800;
+}
+
+.core-node{
+    position:absolute;
+
+    width:112px;
+    height:112px;
+
+    border-radius:50%;
+    background:var(--steel);
+
+    border:1px solid var(--border);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    font-size:.75rem;
+    font-weight:800;
+
+    transition:.25s;
+}
+
+.core-node:hover{
+    border-color:var(--coral);
+    color:var(--coral);
+    transform:scale(1.06);
+}
+
+.node-input{
+    top:-5px;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+.node-switch{
+    right:-5px;
+    top:50%;
+    transform:translateY(-50%);
+}
+
+.node-recovery{
+    bottom:-5px;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+.node-output{
+    left:-5px;
+    top:50%;
+    transform:translateY(-50%);
+}
+
+/* =========================================================
+   QUOTE
+========================================================= */
+
+.quote{
+    padding:35px 40px;
+
+    border:1px solid var(--border);
+    border-radius:24px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(254,200,154,.06),
+            rgba(27,38,59,.65)
+        );
+
+    box-shadow:var(--shadow);
+}
+
+.quote p{
+    font-size:clamp(1.3rem,3vw,2rem);
+    font-style:italic;
+    max-width:900px;
+    margin:auto;
+    text-align:center;
+}
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+.dashboard{
+    margin-top:-70px;
+    position:relative;
+    z-index:20;
+}
+
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:1.25fr .75fr;
+    gap:18px;
+}
+
+.dashboard-card{
+    background:var(--steel);
+    border:1px solid var(--border);
+    border-radius:22px;
+    padding:25px;
+    box-shadow:var(--shadow);
+}
+
+.dashboard-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:20px;
+}
+
+.dashboard-title h3{
+    font-size:1.1rem;
+}
+
+.status{
+    color:var(--coral);
+    font-size:.7rem;
+    font-weight:900;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+}
+
+.metric-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+.metric{
+    background:rgba(13,27,42,.5);
+    border:1px solid var(--faint);
+    border-radius:14px;
+    padding:17px;
+}
+
+.metric strong{
+    display:block;
+    color:var(--coral);
+    font-size:1.5rem;
+}
+
+.metric span{
+    color:var(--muted);
+    font-size:.7rem;
+}
+
+.level{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.level-badge{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+
+    display:grid;
+    place-items:center;
+
+    border:2px solid var(--coral);
+    color:var(--coral);
+
+    font-weight:900;
+}
+
+.level-info{
+    flex:1;
+}
+
+.level-info strong{
+    display:block;
+    margin-bottom:8px;
+}
+
+.xp-track{
+    height:8px;
+    background:var(--midnight);
+    border-radius:999px;
+    overflow:hidden;
+}
+
+.xp-fill{
+    width:0%;
+    height:100%;
+    background:var(--coral);
+    transition:.4s;
+}
+
+/* =========================================================
+   SECTION HEADING
+========================================================= */
+
+.section-heading{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:30px;
+    margin-bottom:35px;
+}
+
+.section-heading p{
+    max-width:520px;
+    color:var(--muted);
+}
+
+/* =========================================================
+   SYSTEM MODEL
+========================================================= */
+
+.model{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+}
+
+.model-step{
+    position:relative;
+    background:var(--steel);
+    border:1px solid var(--faint);
+    border-radius:20px;
+    padding:25px;
+    min-height:230px;
+    transition:.3s;
+}
+
+.model-step:hover{
+    transform:translateY(-6px);
+    border-color:var(--border);
+}
+
+.model-number{
+    color:var(--coral);
+    font-size:.7rem;
+    font-weight:900;
+    letter-spacing:.15em;
+}
+
+.model-step h3{
+    margin:35px 0 12px;
+}
+
+.model-step p{
+    color:var(--muted);
+    font-size:.88rem;
+}
+
+.model-arrow{
+    position:absolute;
+    right:-18px;
+    top:50%;
+    transform:translateY(-50%);
+    color:var(--coral);
+    z-index:5;
+}
+
+/* =========================================================
+   LEAK SCANNER
+========================================================= */
+
+.scanner{
+    display:grid;
+    grid-template-columns:.8fr 1.2fr;
+    gap:20px;
+}
+
+.scanner-intro{
+    background:
+        linear-gradient(
+            145deg,
+            var(--steel),
+            var(--steel-dark)
+        );
+
+    border:1px solid var(--border);
+    border-radius:24px;
+    padding:32px;
+}
+
+.scanner-intro h3{
+    font-size:2rem;
+    margin-bottom:15px;
+}
+
+.scanner-intro p{
+    color:var(--muted);
+}
+
+.scanner-score{
+    margin-top:35px;
+    font-size:4rem;
+    color:var(--coral);
+    font-weight:900;
+    line-height:1;
+}
+
+.scanner-score small{
+    font-size:.75rem;
+    color:var(--muted);
+    display:block;
+    margin-top:8px;
+}
+
+.leak-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+}
+
+.leak-card{
+    border:1px solid var(--faint);
+    border-radius:18px;
+    background:var(--steel);
+    padding:22px;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.leak-card:hover{
+    border-color:var(--border);
+}
+
+.leak-card.selected{
+    border-color:var(--coral);
+    background:rgba(254,200,154,.06);
+}
+
+.leak-card strong{
+    display:block;
+    margin-bottom:8px;
+}
+
+.leak-card p{
+    color:var(--muted);
+    font-size:.8rem;
+}
+
+.leak-level{
+    margin-top:14px;
+    display:flex;
+    gap:5px;
+}
+
+.leak-dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--midnight);
+    border:1px solid var(--coral);
+}
+
+.leak-card.selected .leak-dot{
+    background:var(--coral);
+}
+
+/* =========================================================
+   BOUNDARY BUILDER
+========================================================= */
+
+.boundary-builder{
+    background:var(--steel);
+    border:1px solid var(--border);
+    border-radius:25px;
+    overflow:hidden;
+}
+
+.boundary-tabs{
+    display:flex;
+    overflow-x:auto;
+    border-bottom:1px solid var(--faint);
+}
+
+.boundary-tab{
+    flex:1;
+    min-width:150px;
+    padding:18px;
+    border:0;
+    background:transparent;
+    color:var(--muted);
+    font-weight:800;
+}
+
+.boundary-tab.active{
+    color:var(--coral);
+    background:rgba(254,200,154,.05);
+    box-shadow:inset 0 -2px var(--coral);
+}
+
+.boundary-panel{
+    display:none;
+    padding:30px;
+}
+
+.boundary-panel.active{
+    display:block;
+}
+
+.boundary-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+.control-group{
+    padding:22px;
+    border:1px solid var(--faint);
+    border-radius:17px;
+    background:rgba(13,27,42,.35);
+}
+
+.control-group label{
+    display:block;
+    font-weight:800;
+    margin-bottom:10px;
+}
+
+.control-group small{
+    color:var(--muted);
+    display:block;
+    margin-bottom:15px;
+}
+
+select,
+input[type="text"],
+textarea{
+    width:100%;
+    border:1px solid var(--border);
+    background:var(--midnight);
+    color:var(--ice);
+    padding:12px 14px;
+    border-radius:10px;
+}
+
+textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+.boundary-save{
+    margin-top:22px;
+}
+
+/* =========================================================
+   MISSIONS
+========================================================= */
+
+.mission-board{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.mission{
+    position:relative;
+    background:var(--steel);
+    border:1px solid var(--faint);
+    border-radius:20px;
+    padding:25px;
+    transition:.3s;
+}
+
+.mission:hover{
+    border-color:var(--border);
+    transform:translateY(-4px);
+}
+
+.mission.completed{
+    border-color:var(--coral);
+    opacity:.72;
+}
+
+.mission.completed::after{
+    content:"COMPLETED";
+    position:absolute;
+    top:15px;
+    right:15px;
+    font-size:.58rem;
+    color:var(--coral);
+    font-weight:900;
+    letter-spacing:.1em;
+}
+
+.mission-icon{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    background:var(--midnight);
+    border:1px solid var(--border);
+    display:grid;
+    place-items:center;
+    color:var(--coral);
+    font-weight:900;
+    margin-bottom:20px;
+}
+
+.mission h3{
+    margin-bottom:10px;
+}
+
+.mission p{
+    color:var(--muted);
+    font-size:.85rem;
+    min-height:80px;
+}
+
+.mission-footer{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-top:20px;
+}
+
+.reward{
+    color:var(--coral);
+    font-size:.75rem;
+    font-weight:900;
+}
+
+.complete-mission{
+    border:1px solid var(--border);
+    background:transparent;
+    color:var(--ice);
+    padding:8px 12px;
+    border-radius:999px;
+    font-size:.75rem;
+}
+
+.complete-mission:hover{
+    background:var(--coral);
+    color:var(--midnight);
+}
+
+/* =========================================================
+   FOCUS TIMER
+========================================================= */
+
+.timer{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.timer-display{
+    background:
+        radial-gradient(
+            circle,
+            rgba(254,200,154,.08),
+            transparent 60%
+        ),
+        var(--steel);
+
+    border:1px solid var(--border);
+    border-radius:25px;
+    padding:45px;
+    text-align:center;
+}
+
+.timer-label{
+    color:var(--muted);
+    text-transform:uppercase;
+    letter-spacing:.15em;
+    font-size:.7rem;
+}
+
+.time{
+    font-size:clamp(4rem,8vw,7rem);
+    font-weight:900;
+    color:var(--coral);
+    line-height:1;
+    margin:20px 0 25px;
+    font-variant-numeric:tabular-nums;
+}
+
+.timer-controls{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.timer-settings{
+    background:var(--steel);
+    border:1px solid var(--faint);
+    border-radius:25px;
+    padding:30px;
+}
+
+.timer-settings h3{
+    margin-bottom:20px;
+}
+
+.duration-buttons{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+    margin-bottom:25px;
+}
+
+.duration-button{
+    border:1px solid var(--faint);
+    background:var(--midnight);
+    color:var(--muted);
+    padding:12px;
+    border-radius:10px;
+}
+
+.duration-button.active{
+    border-color:var(--coral);
+    color:var(--coral);
+}
+
+/* =========================================================
+   AUDIT
+========================================================= */
+
+.audit{
+    background:var(--steel);
+    border:1px solid var(--border);
+    border-radius:25px;
+    overflow:hidden;
+}
+
+.audit-progress{
+    height:6px;
+    background:var(--midnight);
+}
+
+.audit-progress-fill{
+    width:0%;
+    height:100%;
+    background:var(--coral);
+    transition:.3s;
+}
+
+.audit-content{
+    padding:35px;
+}
+
+.audit-question{
+    display:none;
+}
+
+.audit-question.active{
+    display:block;
+}
+
+.audit-question h3{
+    font-size:1.7rem;
+    margin-bottom:25px;
+}
+
+.audit-options{
+    display:grid;
+    gap:9px;
+}
+
+.audit-option{
+    width:100%;
+    text-align:left;
+    border:1px solid var(--faint);
+    background:var(--midnight);
+    color:var(--ice);
+    padding:16px;
+    border-radius:12px;
+    transition:.2s;
+}
+
+.audit-option:hover{
+    border-color:var(--coral);
+}
+
+.audit-option.selected{
+    background:rgba(254,200,154,.08);
+    border-color:var(--coral);
+    color:var(--coral);
+}
+
+.audit-controls{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    margin-top:30px;
+}
+
+.audit-result{
+    display:none;
+    text-align:center;
+    padding:30px;
+}
+
+.audit-result.show{
+    display:block;
+}
+
+.audit-result-score{
+    font-size:5rem;
+    color:var(--coral);
+    font-weight:900;
+}
+
+/* =========================================================
+   ENVIRONMENT MATRIX
+========================================================= */
+
+.environment-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.environment-card{
+    background:var(--steel);
+    border:1px solid var(--faint);
+    border-radius:22px;
+    padding:28px;
+}
+
+.environment-card h3{
+    color:var(--coral);
+    margin-bottom:12px;
+}
+
+.environment-card p{
+    color:var(--muted);
+    font-size:.88rem;
+}
+
+.environment-check{
+    margin-top:20px;
+}
+
+.environment-check label{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:var(--ice);
+    font-size:.82rem;
+    margin:9px 0;
+    cursor:pointer;
+}
+
+.environment-check input{
+    accent-color:var(--coral);
+}
+
+/* =========================================================
+   INSIGHT PANEL
+========================================================= */
+
+.insight{
+    border:1px solid var(--border);
+    border-radius:26px;
+    padding:40px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(254,200,154,.07),
+            rgba(27,38,59,.8)
+        );
+}
+
+.insight-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+}
+
+.insight h3{
+    font-size:1.4rem;
+    color:var(--coral);
+    margin-bottom:12px;
+}
+
+.insight p{
+    color:var(--muted);
+}
+
+.insight-stat{
+    border-left:2px solid var(--coral);
+    padding-left:18px;
+}
+
+/* =========================================================
+   FINAL CTA
+========================================================= */
+
+.final{
+    text-align:center;
+    padding:100px 20px;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(254,200,154,.08),
+            transparent 45%
+        );
+}
+
+.final h2{
+    max-width:850px;
+    margin:0 auto 20px;
+}
+
+.final h2 span{
+    color:var(--coral);
+}
+
+.final p{
+    max-width:700px;
+    margin:0 auto 30px;
+    color:var(--muted);
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+    border-top:1px solid var(--faint);
+    background:var(--steel-dark);
+    padding:45px 20px;
+}
+
+.footer-inner{
+    width:min(1180px,100%);
+    margin:auto;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:30px;
+}
+
+.footer-inner h3{
+    color:var(--ice);
+}
+
+.footer-inner p{
+    color:var(--muted);
+    max-width:550px;
+}
+
+/* =========================================================
+   RESET
+========================================================= */
+
+.reset-progress{
+    margin-top:20px;
+    border:0;
+    background:none;
+    color:var(--muted);
+    text-decoration:underline;
+    font-size:.75rem;
+}
+
+.reset-progress:hover{
+    color:var(--coral);
+}
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:9999;
+
+    background:var(--steel);
+    border:1px solid var(--coral);
+    color:var(--ice);
+
+    padding:15px 20px;
+    border-radius:12px;
+
+    box-shadow:var(--shadow);
+
+    transform:translateY(130px);
+    opacity:0;
+
+    transition:.3s;
+}
+
+.toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+/* =========================================================
+   BACK TO TOP
+========================================================= */
+
+.back-top{
+    position:fixed;
+    right:20px;
+    bottom:85px;
+
+    width:45px;
+    height:45px;
+
+    border-radius:50%;
+    border:1px solid var(--coral);
+
+    background:var(--midnight);
+    color:var(--coral);
+
+    opacity:0;
+    pointer-events:none;
+
+    transition:.25s;
+
+    z-index:800;
+}
+
+.back-top.show{
+    opacity:1;
+    pointer-events:auto;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1000px){
+
+    .hero-grid{
+        grid-template-columns:1fr;
+        text-align:center;
+    }
+
+    .hero-copy{
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .hero-actions{
+        justify-content:center;
+    }
+
+    .dashboard-grid{
+        grid-template-columns:1fr;
+    }
+
+    .model{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .model-arrow{
+        display:none;
+    }
+
+    .scanner{
+        grid-template-columns:1fr;
+    }
+
+    .mission-board{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:750px){
+
+    .header-nav{
+        display:none;
+    }
+
+    .container,
+    .header-inner,
+    .hero-grid{
+        width:min(100% - 28px,1180px);
+    }
+
+    .section{
+        padding:65px 0;
+    }
+
+    .section-heading{
+        display:block;
+    }
+
+    .section-heading p{
+        margin-top:15px;
+    }
+
+    .model,
+    .environment-grid,
+    .mission-board,
+    .timer,
+    .insight-grid{
+        grid-template-columns:1fr;
+    }
+
+    .boundary-grid{
+        grid-template-columns:1fr;
+    }
+
+    .leak-grid{
+        grid-template-columns:1fr;
+    }
+
+    .metric-grid{
+        grid-template-columns:1fr 1fr 1fr;
+    }
+
+    .control-core{
+        transform:scale(.82);
+        margin:-25px auto;
+    }
+
+    .footer-inner{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+}
+
+@media(max-width:480px){
+
+    .header-xp{
+        display:none;
+    }
+
+    .hero{
+        min-height:700px;
+    }
+
+    .control-core{
+        transform:scale(.67);
+        margin:-60px auto;
+    }
+
+    .metric-grid{
+        grid-template-columns:1fr;
+    }
+
+    .quote{
+        padding:25px;
+    }
+
+    .scanner-score{
+        font-size:3.5rem;
+    }
+
+    .duration-buttons{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="page">
+
+<div class="scroll-line" id="scrollLine"></div>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+    <div class="header-inner">
+
+        <a href="#top" class="logo">
+            ATTENTION <span>CONTROL</span>
+        </a>
+
+        <nav class="header-nav">
+
+            <button data-target="diagnosis">
+                Diagnosis
+            </button>
+
+            <button data-target="boundaries">
+                Boundaries
+            </button>
+
+            <button data-target="missions">
+                Missions
+            </button>
+
+            <button data-target="focus">
+                Focus
+            </button>
+
+            <button data-target="audit">
+                Audit
+            </button>
+
+        </nav>
+
+        <div class="header-xp">
+            XP <span id="headerXP">0</span>
+        </div>
+
+    </div>
+
+</header>
+
+
+<main id="top">
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+    <div class="hero-grid">
+
+        <div>
+
+            <div class="eyebrow">
+                Attention Control Lab
+            </div>
+
+            <h1>
+                Stop letting your environment
+                <span>choose your focus.</span>
+            </h1>
+
+            <p class="hero-copy">
+                Attention becomes more reliable when the environment
+                surrounding it becomes more deliberate. Instead of
+                relying on willpower alone, design the flow of inputs,
+                interruptions, recovery periods, and priorities.
+            </p>
+
+            <div class="hero-actions">
+
+                <button class="primary" data-target="diagnosis">
+                    Scan My Attention →
+                </button>
+
+                <button class="secondary" data-target="focus">
+                    Start Focus Session
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="control-core">
+
+            <div class="core-ring one"></div>
+            <div class="core-ring two"></div>
+            <div class="core-ring three"></div>
+
+            <div class="core">
+
+                <div class="core-number" id="heroScore">
+                    0
+                </div>
+
+                <div class="core-label">
+                    Control Score
+                </div>
+
+            </div>
+
+            <div class="core-node node-input">
+                INPUT
+            </div>
+
+            <div class="core-node node-switch">
+                SWITCHING
+            </div>
+
+            <div class="core-node node-recovery">
+                RECOVERY
+            </div>
+
+            <div class="core-node node-output">
+                OUTPUT
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     DASHBOARD
+===================================================== -->
+
+<section class="dashboard">
+
+    <div class="container">
+
+        <div class="dashboard-grid">
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-title">
+
+                    <h3>
+                        Attention Command Center
+                    </h3>
+
+                    <span class="status" id="systemStatus">
+                        Initializing
+                    </span>
+
+                </div>
+
+                <div class="metric-grid">
+
+                    <div class="metric">
+                        <strong id="xpMetric">0</strong>
+                        <span>Total XP</span>
+                    </div>
+
+                    <div class="metric">
+                        <strong id="missionMetric">0</strong>
+                        <span>Missions</span>
+                    </div>
+
+                    <div class="metric">
+                        <strong id="boundaryMetric">0</strong>
+                        <span>Boundaries</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <div class="level">
+
+                    <div class="level-badge">
+                        <span id="levelNumber">1</span>
+                    </div>
+
+                    <div class="level-info">
+
+                        <strong id="levelName">
+                            Observer
+                        </strong>
+
+                        <div class="xp-track">
+                            <div
+                                class="xp-fill"
+                                id="xpFill">
+                            </div>
+                        </div>
+
+                        <div class="small muted" id="xpLabel">
+                            0 / 100 XP
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CORE MODEL
+===================================================== -->
+
+<section class="section" id="model">
+
+<div class="container">
+
+    <div class="section-heading">
+
+        <div>
+
+            <div class="eyebrow">
+                The Operating Model
+            </div>
+
+            <h2>
+                Attention Is a Flow System
+            </h2>
+
+        </div>
+
+        <p>
+            Fragmentation is easier to understand when attention is
+            treated as a system rather than a character trait. Every
+            input creates a demand, every switch creates a transition,
+            and every transition has a recovery requirement.
+        </p>
+
+    </div>
+
+
+    <div class="model">
+
+        <article class="model-step">
+
+            <div class="model-number">
+                01 / INPUT
+            </div>
+
+            <h3>
+                Information enters
+            </h3>
+
+            <p>
+                Notifications, conversations, headlines, open tabs,
+                requests, and environmental cues all compete to become
+                the next object of attention.
+            </p>
+
+            <span class="model-arrow">→</span>
+
+        </article>
+
+
+        <article class="model-step">
+
+            <div class="model-number">
+                02 / SWITCH
+            </div>
+
+            <h3>
+                Context changes
+            </h3>
+
+            <p>
+                Moving between unrelated activities requires the mind
+                to abandon one context and establish another.
+            </p>
+
+            <span class="model-arrow">→</span>
+
+        </article>
+
+
+        <article class="model-step">
+
+            <div class="model-number">
+                03 / RECOVER
+            </div>
+
+            <h3>
+                Context rebuilds
+            </h3>
+
+            <p>
+                Returning to the original task is not instantaneous.
+                The mind must reconstruct what it was doing, why it
+                mattered, and what comes next.
+            </p>
+
+            <span class="model-arrow">→</span>
+
+        </article>
+
+
+        <article class="model-step">
+
+            <div class="model-number">
+                04 / OUTPUT
+            </div>
+
+            <h3>
+                Work quality emerges
+            </h3>
+
+            <p>
+                The quality of learning, decisions, creativity, and
+                execution depends partly on how much uninterrupted
+                cognitive capacity remains.
+            </p>
+
+        </article>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     DIAGNOSIS
+===================================================== -->
+
+<section class="section" id="diagnosis">
+
+<div class="container">
+
+    <div class="section-heading">
+
+        <div>
+
+            <div class="eyebrow">
+                Attention Diagnosis
+            </div>
+
+            <h2>
+                Find Your Largest Attention Leaks
+            </h2>
+
+        </div>
+
+        <p>
+            Select the conditions that currently interfere with your
+            concentration. The scanner converts your selections into
+            a simple intervention priority.
+        </p>
+
+    </div>
+
+
+    <div class="scanner">
+
+        <div class="scanner-intro">
+
+            <h3>
+                Fragmentation Scanner
+            </h3>
+
+            <p>
+                Do not treat every distraction equally. The highest-value
+                intervention is usually the boundary that removes a
+                recurring source of interruption rather than the boundary
+                that merely makes you feel more disciplined.
+            </p>
+
+            <div class="scanner-score" id="leakScore">
+                0
+                <small>
+                    selected pressure points
+                </small>
+            </div>
+
+        </div>
+
+
+        <div class="leak-grid">
+
+
+            <article class="leak-card" data-leak="notifications">
+
+                <strong>
+                    Notification Pressure
+                </strong>
+
+                <p>
+                    Alerts repeatedly compete for immediate response.
+                </p>
+
+                <div class="leak-level">
+                    <span class="leak-dot"></span>
+                    <span class="leak-dot"></span>
+                    <span class="leak-dot"></span>
+                </div>
+
+            </article>
+
+
+            <article class="leak-card" data-leak="tasks">
+
+                <strong>
+                    Open-Loop Tasks
+                </strong>
+
+                <p>
+                    Multiple unfinished obligations remain mentally active.
+                </p>
+
+                <div class="leak-level">
+                    <span class="leak-dot"></span>
+                    <span class="leak-dot"></span>
+                    <span class="leak-dot"></span>
+                </div>
+
+            </article>
+
+
+            <article class="leak-card" data-leak="news">
+
+                <strong>
+                    Information Checking
+                </strong>
+
+                <p>
+                    News, feeds, and updates create repeated intake cycles.
+                </p>
+
+                <div class="leak-level">
+                    <span class="leak-dot"></span>
+                    <span class="leak-dot"></span>
+                    <span class="leak-dot"></span>
+                </div>
+
+            </article>
+
+
+            <article class="leak-card" data-leak="communication">
+
+                <strong>
+                    Availability Pressure
+                </strong>
+
+                <p>
+                    Other people's requests frequently determine your
+                    next activity.
+                </p>
+
+                <div class="leak-level">
+                    <span class="leak-dot"></span>
+                    <span class="leak-dot"></span>
+                    <span class="leak-dot"></span>
+                </div>
+
+            </article>
+
+
+            <article class="leak-card" data-leak="environment">
+
+                <strong>
+                    Environmental Noise
+                </strong>
+
+                <p>
+                    Physical surroundings repeatedly pull attention away.
+                </p>
+
+                <div class="leak-level">
+                    <span class="leak-dot"></span>
+                    <span class="leak-dot"></span>
+                    <span class="leak-dot"></span>
+                </div>
+
+            </article>
+
+
+            <article class="leak-card" data-leak="digital">
+
+                <strong>
+                    Digital Clutter
+                </strong>
+
+                <p>
+                    Too many applications, tabs, files, or tools increase
+                    search and switching costs.
+                </p>
+
+                <div class="leak-level">
+                    <span class="leak-dot"></span>
+                    <span class="leak-dot"></span>
+                    <span class="leak-dot"></span>
+                </div>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     BOUNDARY BUILDER
+===================================================== -->
+
+<section class="section" id="boundaries">
+
+<div class="container">
+
+    <div class="section-heading">
+
+        <div>
+
+            <div class="eyebrow">
+                Boundary Engineering
+            </div>
+
+            <h2>
+                Design Your Input Rules
+            </h2>
+
+        </div>
+
+        <p>
+            A boundary becomes useful when it converts an abstract
+            intention into a repeatable operating rule.
+        </p>
+
+    </div>
+
+
+    <div class="boundary-builder">
+
+        <div class="boundary-tabs">
+
+            <button
+                class="boundary-tab active"
+                data-panel="communicationPanel">
+                Communication
+            </button>
+
+            <button
+                class="boundary-tab"
+                data-panel="informationPanel">
+                Information
+            </button>
+
+            <button
+                class="boundary-tab"
+                data-panel="digitalPanel">
+                Digital
+            </button>
+
+            <button
+                class="boundary-tab"
+                data-panel="workspacePanel">
+                Workspace
+            </button>
+
+        </div>
+
+
+        <!-- COMMUNICATION -->
+
+        <div
+            class="boundary-panel active"
+            id="communicationPanel">
+
+            <div class="boundary-grid">
+
+                <div class="control-group">
+
+                    <label>
+                        Communication window
+                    </label>
+
+                    <small>
+                        Decide when incoming communication receives
+                        deliberate attention.
+                    </small>
+
+                    <select id="communicationWindow">
+
+                        <option value="">
+                            Choose a window
+                        </option>
+
+                        <option value="Morning review">
+                            Morning review
+                        </option>
+
+                        <option value="Midday review">
+                            Midday review
+                        </option>
+
+                        <option value="Afternoon review">
+                            Afternoon review
+                        </option>
+
+                        <option value="Two scheduled reviews">
+                            Two scheduled reviews
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="control-group">
+
+                    <label>
+                        Urgent-contact rule
+                    </label>
+
+                    <small>
+                        Define what actually deserves immediate interruption.
+                    </small>
+
+                    <textarea
+                        id="urgentRule"
+                        placeholder="Example: Only active emergencies interrupt a focus block.">
+                    </textarea>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- INFORMATION -->
+
+        <div
+            class="boundary-panel"
+            id="informationPanel">
+
+            <div class="boundary-grid">
+
+                <div class="control-group">
+
+                    <label>
+                        Information intake
+                    </label>
+
+                    <small>
+                        Decide when research, news, and updates enter
+                        your day.
+                    </small>
+
+                    <select id="informationWindow">
+
+                        <option value="">
+                            Choose a rule
+                        </option>
+
+                        <option value="Scheduled research block">
+                            Scheduled research block
+                        </option>
+
+                        <option value="One daily information review">
+                            One daily information review
+                        </option>
+
+                        <option value="Two weekly deep reviews">
+                            Two weekly deep reviews
+                        </option>
+
+                        <option value="Project-specific intake">
+                            Project-specific intake
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="control-group">
+
+                    <label>
+                        Source filter
+                    </label>
+
+                    <small>
+                        Write the standard that determines whether a source
+                        earns your attention.
+                    </small>
+
+                    <textarea
+                        id="sourceRule"
+                        placeholder="Example: Useful, credible, relevant to a current goal.">
+                    </textarea>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- DIGITAL -->
+
+        <div
+            class="boundary-panel"
+            id="digitalPanel">
+
+            <div class="boundary-grid">
+
+                <div class="control-group">
+
+                    <label>
+                        Distraction friction
+                    </label>
+
+                    <small>
+                        Make low-value actions require additional effort.
+                    </small>
+
+                    <select id="digitalFriction">
+
+                        <option value="">
+                            Choose a strategy
+                        </option>
+
+                        <option value="Remove unnecessary notifications">
+                            Remove unnecessary notifications
+                        </option>
+
+                        <option value="Close unused applications">
+                            Close unused applications
+                        </option>
+
+                        <option value="Remove distracting shortcuts">
+                            Remove distracting shortcuts
+                        </option>
+
+                        <option value="Create a dedicated work environment">
+                            Create a dedicated work environment
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="control-group">
+
+                    <label>
+                        Open-loop rule
+                    </label>
+
+                    <small>
+                        Decide what happens to unfinished work.
+                    </small>
+
+                    <textarea
+                        id="openLoopRule"
+                        placeholder="Example: Capture it in one task system instead of keeping it open in my head.">
+                    </textarea>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- WORKSPACE -->
+
+        <div
+            class="boundary-panel"
+            id="workspacePanel">
+
+            <div class="boundary-grid">
+
+                <div class="control-group">
+
+                    <label>
+                        Current work surface
+                    </label>
+
+                    <small>
+                        Define what is allowed to remain visible.
+                    </small>
+
+                    <select id="workspaceRule">
+
+                        <option value="">
+                            Choose a rule
+                        </option>
+
+                        <option value="Only current project materials">
+                            Only current project materials
+                        </option>
+
+                        <option value="One active task at a time">
+                            One active task at a time
+                        </option>
+
+                        <option value="Clear desk before focus work">
+                            Clear desk before focus work
+                        </option>
+
+                        <option value="Dedicated creation station">
+                            Dedicated creation station
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="control-group">
+
+                    <label>
+                        Mental priority
+                    </label>
+
+                    <small>
+                        State the question that should determine your
+                        next meaningful action.
+                    </small>
+
+                    <textarea
+                        id="priorityRule"
+                        placeholder="Example: What action produces the greatest progress on my current objective?">
+                    </textarea>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="boundary-save">
+
+            <div class="container" style="width:100%;">
+
+                <button class="primary" id="saveBoundaries">
+                    Save My Boundaries →
+                </button>
+
+                <button class="reset-progress" id="clearBoundaries">
+                    Clear saved boundary rules
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     MISSIONS
+===================================================== -->
+
+<section class="section" id="missions">
+
+<div class="container">
+
+    <div class="section-heading">
+
+        <div>
+
+            <div class="eyebrow">
+                Progression System
+            </div>
+
+            <h2>
+                Complete Attention Missions
+            </h2>
+
+        </div>
+
+        <p>
+            The objective is not perfect concentration. The objective
+            is to repeatedly improve the conditions under which useful
+            concentration becomes easier.
+        </p>
+
+    </div>
+
+
+    <div class="mission-board">
+
+
+        <article class="mission" data-mission="notifications">
+
+            <div class="mission-icon">
+                01
+            </div>
+
+            <h3>
+                Silence the Noise
+            </h3>
+
+            <p>
+                Remove or disable unnecessary alerts from the device
+                you use most frequently.
+            </p>
+
+            <div class="mission-footer">
+
+                <span class="reward">
+                    +40 XP
+                </span>
+
+                <button class="complete-mission">
+                    Complete
+                </button>
+
+            </div>
+
+        </article>
+
+
+        <article class="mission" data-mission="single-task">
+
+            <div class="mission-icon">
+                02
+            </div>
+
+            <h3>
+                Single-Task Trial
+            </h3>
+
+            <p>
+                Work on one meaningful task without opening an unrelated
+                application or switching to another project.
+            </p>
+
+            <div class="mission-footer">
+
+                <span class="reward">
+                    +50 XP
+                </span>
+
+                <button class="complete-mission">
+                    Complete
+                </button>
+
+            </div>
+
+        </article>
+
+
+        <article class="mission" data-mission="information">
+
+            <div class="mission-icon">
+                03
+            </div>
+
+            <h3>
+                Information Gate
+            </h3>
+
+            <p>
+                Choose one information source you can stop checking
+                continuously and move it into a scheduled review.
+            </p>
+
+            <div class="mission-footer">
+
+                <span class="reward">
+                    +45 XP
+                </span>
+
+                <button class="complete-mission">
+                    Complete
+                </button>
+
+            </div>
+
+        </article>
+
+
+        <article class="mission" data-mission="workspace">
+
+            <div class="mission-icon">
+                04
+            </div>
+
+            <h3>
+                Clear the Launchpad
+            </h3>
+
+            <p>
+                Remove visual objects, tabs, applications, and materials
+                unrelated to your next important task.
+            </p>
+
+            <div class="mission-footer">
+
+                <span class="reward">
+                    +35 XP
+                </span>
+
+                <button class="complete-mission">
+                    Complete
+                </button>
+
+            </div>
+
+        </article>
+
+
+        <article class="mission" data-mission="communication">
+
+            <div class="mission-icon">
+                05
+            </div>
+
+            <h3>
+                Create a Response Window
+            </h3>
+
+            <p>
+                Establish a defined period for messages and email so
+                incoming communication does not automatically dictate
+                your next action.
+            </p>
+
+            <div class="mission-footer">
+
+                <span class="reward">
+                    +50 XP
+                </span>
+
+                <button class="complete-mission">
+                    Complete
+                </button>
+
+            </div>
+
+        </article>
+
+
+        <article class="mission" data-mission="priority">
+
+            <div class="mission-icon">
+                06
+            </div>
+
+            <h3>
+                Protect the Highest-Value Task
+            </h3>
+
+            <p>
+                Identify the task with the greatest consequence for your
+                current objective and give it a protected work period.
+            </p>
+
+            <div class="mission-footer">
+
+                <span class="reward">
+                    +60 XP
+                </span>
+
+                <button class="complete-mission">
+                    Complete
+                </button>
+
+            </div>
+
+        </article>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     FOCUS TIMER
+===================================================== -->
+
+<section class="section" id="focus">
+
+<div class="container">
+
+    <div class="section-heading">
+
+        <div>
+
+            <div class="eyebrow">
+                Focus Protocol
+            </div>
+
+            <h2>
+                Run a Protected Focus Session
+            </h2>
+
+        </div>
+
+        <p>
+            Use a timer as an environmental commitment device. The goal
+            is to create a defined interval in which unnecessary inputs
+            are deliberately excluded.
+        </p>
+
+    </div>
+
+
+    <div class="timer">
+
+        <div class="timer-display">
+
+            <div class="timer-label">
+                Protected Work Period
+            </div>
+
+            <div class="time" id="timeDisplay">
+                25:00
+            </div>
+
+            <div class="timer-controls">
+
+                <button class="primary" id="startTimer">
+                    Start
+                </button>
+
+                <button class="secondary" id="pauseTimer">
+                    Pause
+                </button>
+
+                <button class="secondary" id="resetTimer">
+                    Reset
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="timer-settings">
+
+            <h3>
+                Select Duration
+            </h3>
+
+            <div class="duration-buttons">
+
+                <button
+                    class="duration-button active"
+                    data-minutes="25">
+                    25 min
+                </button>
+
+                <button
+                    class="duration-button"
+                    data-minutes="45">
+                    45 min
+                </button>
+
+                <button
+                    class="duration-button"
+                    data-minutes="60">
+                    60 min
+                </button>
+
+            </div>
+
+
+            <p class="muted small">
+                When the session reaches zero, you receive XP and the
+                session is recorded in your dashboard.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     AUDIT
+===================================================== -->
+
+<section class="section" id="audit">
+
+<div class="container">
+
+    <div class="section-heading">
+
+        <div>
+
+            <div class="eyebrow">
+                Daily Diagnostic
+            </div>
+
+            <h2>
+                Run an Attention Audit
+            </h2>
+
+        </div>
+
+        <p>
+            Evaluate the structure of your day instead of judging yourself
+            by how busy or productive you felt.
+        </p>
+
+    </div>
+
+
+    <div class="audit">
+
+        <div class="audit-progress">
+
+            <div
+                class="audit-progress-fill"
+                id="auditProgress">
+            </div>
+
+        </div>
+
+
+        <div class="audit-content">
+
+            <div class="audit-question active" data-question="0">
+
+                <h3>
+                    How often did outside inputs determine what you worked
+                    on next?
+                </h3>
+
+                <div class="audit-options">
+
+                    <button class="audit-option" data-score="4">
+                        Rarely
+                    </button>
+
+                    <button class="audit-option" data-score="3">
+                        Occasionally
+                    </button>
+
+                    <button class="audit-option" data-score="2">
+                        Frequently
+                    </button>
+
+                    <button class="audit-option" data-score="1">
+                        Constantly
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="audit-question" data-question="1">
+
+                <h3>
+                    How often did you switch before finishing a meaningful
+                    piece of work?
+                </h3>
+
+                <div class="audit-options">
+
+                    <button class="audit-option" data-score="4">
+                        Rarely
+                    </button>
+
+                    <button class="audit-option" data-score="3">
+                        Occasionally
+                    </button>
+
+                    <button class="audit-option" data-score="2">
+                        Frequently
+                    </button>
+
+                    <button class="audit-option" data-score="1">
+                        Constantly
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="audit-question" data-question="2">
+
+                <h3>
+                    How predictable were your communication periods?
+                </h3>
+
+                <div class="audit-options">
+
+                    <button class="audit-option" data-score="4">
+                        Highly predictable
+                    </button>
+
+                    <button class="audit-option" data-score="3">
+                        Mostly predictable
+                    </button>
+
+                    <button class="audit-option" data-score="2">
+                        Somewhat unpredictable
+                    </button>
+
+                    <button class="audit-option" data-score="1">
+                        Completely reactive
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="audit-question" data-question="3">
+
+                <h3>
+                    How much unnecessary information entered your attention
+                    today?
+                </h3>
+
+                <div class="audit-options">
+
+                    <button class="audit-option" data-score="4">
+                        Very little
+                    </button>
+
+                    <button class="audit-option" data-score="3">
+                        Some
+                    </button>
+
+                    <button class="audit-option" data-score="2">
+                        A lot
+                    </button>
+
+                    <button class="audit-option" data-score="1">
+                        Constantly
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="audit-question" data-question="4">
+
+                <h3>
+                    How clearly did you know what deserved your attention?
+                </h3>
+
+                <div class="audit-options">
+
+                    <button class="audit-option" data-score="4">
+                        Extremely clear
+                    </button>
+
+                    <button class="audit-option" data-score="3">
+                        Mostly clear
+                    </button>
+
+                    <button class="audit-option" data-score="2">
+                        Unclear at times
+                    </button>
+
+                    <button class="audit-option" data-score="1">
+                        Rarely clear
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="audit-question" data-question="5">
+
+                <h3>
+                    How effectively did your environment support the work
+                    you wanted to accomplish?
+                </h3>
+
+                <div class="audit-options">
+
+                    <button class="audit-option" data-score="4">
+                        Strongly supported me
+                    </button>
+
+                    <button class="audit-option" data-score="3">
+                        Generally supported me
+                    </button>
+
+                    <button class="audit-option" data-score="2">
+                        Often worked against me
+                    </button>
+
+                    <button class="audit-option" data-score="1">
+                        Consistently worked against me
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="audit-controls">
+
+                <button
+                    class="secondary"
+                    id="auditBack">
+                    Back
+                </button>
+
+                <button
+                    class="primary"
+                    id="auditNext">
+                    Next
+                </button>
+
+            </div>
+
+
+            <div
+                class="audit-result"
+                id="auditResult">
+
+                <div
+                    class="audit-result-score"
+                    id="auditScore">
+                    0
+                </div>
+
+                <h3 id="auditTitle">
+                    Audit Complete
+                </h3>
+
+                <p
+                    class="muted"
+                    id="auditDescription">
+                </p>
+
+                <br>
+
+                <button
+                    class="primary"
+                    id="auditRestart">
+                    Run Again
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     ENVIRONMENT
+===================================================== -->
+
+<section class="section">
+
+<div class="container">
+
+    <div class="section-heading">
+
+        <div>
+
+            <div class="eyebrow">
+                Environment Engineering
+            </div>
+
+            <h2>
+                Build a Workspace That Supports the Goal
+            </h2>
+
+        </div>
+
+        <p>
+            Focus becomes easier when the environment reduces the number
+            of decisions required to begin and continue useful work.
+        </p>
+
+    </div>
+
+
+    <div class="environment-grid">
+
+
+        <article class="environment-card">
+
+            <h3>
+                Physical Design
+            </h3>
+
+            <p>
+                Reduce visible objects that belong to unrelated activities.
+                Make the materials for the current objective immediately
+                accessible.
+            </p>
+
+            <div class="environment-check">
+
+                <label>
+                    <input type="checkbox" data-env="physical1">
+                    Current project is visible
+                </label>
+
+                <label>
+                    <input type="checkbox" data-env="physical2">
+                    Unrelated materials removed
+                </label>
+
+                <label>
+                    <input type="checkbox" data-env="physical3">
+                    Workspace has a clear purpose
+                </label>
+
+            </div>
+
+        </article>
+
+
+        <article class="environment-card">
+
+            <h3>
+                Digital Design
+            </h3>
+
+            <p>
+                Reduce unnecessary pathways to low-value information and
+                make important tools easier to access.
+            </p>
+
+            <div class="environment-check">
+
+                <label>
+                    <input type="checkbox" data-env="digital1">
+                    Unnecessary alerts removed
+                </label>
+
+                <label>
+                    <input type="checkbox" data-env="digital2">
+                    Unused tabs closed
+                </label>
+
+                <label>
+                    <input type="checkbox" data-env="digital3">
+                    Important files are easy to locate
+                </label>
+
+            </div>
+
+        </article>
+
+
+        <article class="environment-card">
+
+            <h3>
+                Mental Design
+            </h3>
+
+            <p>
+                Reduce ambiguity by defining the priority, next action,
+                and stopping point before beginning important work.
+            </p>
+
+            <div class="environment-check">
+
+                <label>
+                    <input type="checkbox" data-env="mental1">
+                    Highest-value task identified
+                </label>
+
+                <label>
+                    <input type="checkbox" data-env="mental2">
+                    Next action is clear
+                </label>
+
+                <label>
+                    <input type="checkbox" data-env="mental3">
+                    Lower priorities are captured elsewhere
+                </label>
+
+            </div>
+
+        </article>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     ADVANCED INSIGHT
+===================================================== -->
+
+<section class="section">
+
+<div class="container">
+
+    <div class="insight">
+
+        <div class="insight-grid">
+
+            <div>
+
+                <div class="eyebrow">
+                    Advanced Insight
+                </div>
+
+                <h2>
+                    The Real Problem Is Not Distraction.
+                    It Is Uncontrolled Allocation.
+                </h2>
+
+                <p>
+                    A useful attention system does not attempt to eliminate
+                    every interruption. Some interruptions carry genuine
+                    value. The strategic problem is allowing every incoming
+                    signal to compete on equal terms.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <div class="insight-stat">
+
+                    <h3>
+                        Input volume is only one variable.
+                    </h3>
+
+                    <p>
+                        Two people can receive the same number of inputs
+                        while experiencing very different cognitive costs.
+                        The difference can come from timing, predictability,
+                        relevance, switching frequency, and the amount of
+                        context that must be reconstructed afterward.
+                    </p>
+
+                </div>
+
+                <br>
+
+                <div class="insight-stat">
+
+                    <h3>
+                        Boundaries create selection mechanisms.
+                    </h3>
+
+                    <p>
+                        A strong boundary does not merely say “ignore this.”
+                        It determines when an input is eligible to compete
+                        for attention. That transforms attention management
+                        from self-control into system design.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     FINAL
+===================================================== -->
+
+<section class="final">
+
+    <div class="eyebrow">
+        Attention Advantage
+    </div>
+
+    <h2>
+        Protect the conditions that allow
+        <span>deep thinking to happen.</span>
+    </h2>
+
+    <p>
+        Attention influences what gets learned, what gets remembered,
+        which problems receive sustained analysis, and which ideas are
+        developed far enough to become useful. A deliberately designed
+        environment gives important work a stronger chance of surviving
+        the competition for your mind.
+    </p>
+
+    <button class="primary" data-target="missions">
+        Begin Your Next Mission →
+    </button>
+
+</section>
+
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="footer-inner">
+
+        <h3>
+            Attention Control Lab
+        </h3>
+
+        <p>
+            Manage the conditions around your attention so your most
+            important work does not have to compete equally with every
+            incoming signal.
+        </p>
+
+        <button
+            class="reset-progress"
+            id="resetAll">
+            Reset all game progress
+        </button>
+
+    </div>
+
+</footer>
+
+
+<button
+    class="back-top"
+    id="backTop">
+    ↑
+</button>
+
+
+<div
+    class="toast"
+    id="toast">
+</div>
+
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   ATTENTION CONTROL LAB ENGINE
+========================================================= */
+
+const STORAGE_KEY = "attentionControlLab";
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let state = {
+
+    xp:0,
+
+    completedMissions:[],
+
+    selectedLeaks:[],
+
+    completedFocusSessions:0,
+
+    boundariesSaved:0,
+
+    auditScore:0,
+
+    environmentChecks:0
+
+};
+
+
+/* =========================================================
+   LOAD STATE
+========================================================= */
+
+function loadState(){
+
+    const saved = localStorage.getItem(STORAGE_KEY);
+
+    if(saved){
+
+        try{
+
+            const parsed = JSON.parse(saved);
+
+            state = {
+                ...state,
+                ...parsed
+            };
+
+        }catch(error){
+
+            console.log("Unable to load saved progress.");
+
+        }
+
+    }
+
+    updateDashboard();
+
+}
+
+
+function saveState(){
+
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(state)
+    );
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+const toast =
+    document.getElementById("toast");
+
+
+let toastTimer;
+
+
+function showToast(message){
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer = setTimeout(function(){
+
+        toast.classList.remove("show");
+
+    },2800);
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+document.querySelectorAll("[data-target]")
+.forEach(function(button){
+
+    button.addEventListener("click",function(){
+
+        const targetID =
+            button.getAttribute("data-target");
+
+        const target =
+            document.getElementById(targetID);
+
+        if(target){
+
+            target.scrollIntoView({
+                behavior:"smooth",
+                block:"start"
+            });
+
+        }
+
+    });
+
+});
+
+
+/* =========================================================
+   SCROLL PROGRESS
+========================================================= */
+
+const scrollLine =
+    document.getElementById("scrollLine");
+
+const backTop =
+    document.getElementById("backTop");
+
+
+window.addEventListener("scroll",function(){
+
+    const scrollTop =
+        window.scrollY;
+
+    const maxScroll =
+        document.documentElement.scrollHeight
+        - window.innerHeight;
+
+    const percentage =
+        maxScroll > 0
+        ? (scrollTop / maxScroll) * 100
+        : 0;
+
+    scrollLine.style.width =
+        percentage + "%";
+
+
+    if(scrollTop > 600){
+
+        backTop.classList.add("show");
+
+    }else{
+
+        backTop.classList.remove("show");
+
+    }
+
+});
+
+
+backTop.addEventListener("click",function(){
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+});
+
+
+/* =========================================================
+   LEVEL SYSTEM
+========================================================= */
+
+function getLevel(xp){
+
+    if(xp >= 1000) return {
+        number:10,
+        name:"Attention Architect",
+        base:900
+    };
+
+    if(xp >= 800) return {
+        number:9,
+        name:"Cognitive Strategist",
+        base:700
+    };
+
+    if(xp >= 650) return {
+        number:8,
+        name:"Boundary Engineer",
+        base:550
+    };
+
+    if(xp >= 500) return {
+        number:7,
+        name:"Focus Operator",
+        base:400
+    };
+
+    if(xp >= 350) return {
+        number:6,
+        name:"Environment Designer",
+        base:275
+    };
+
+    if(xp >= 250) return {
+        number:5,
+        name:"Attention Protector",
+        base:175
+    };
+
+    if(xp >= 150) return {
+        number:4,
+        name:"Pattern Recognizer",
+        base:100
+    };
+
+    if(xp >= 75) return {
+        number:3,
+        name:"Boundary Builder",
+        base:50
+    };
+
+    if(xp >= 25) return {
+        number:2,
+        name:"Signal Observer",
+        base:25
+    };
+
+    return {
+        number:1,
+        name:"Observer",
+        base:0
+    };
+
+}
+
+
+function updateDashboard(){
+
+    const level =
+        getLevel(state.xp);
+
+
+    document.getElementById("headerXP")
+        .textContent = state.xp;
+
+
+    document.getElementById("xpMetric")
+        .textContent = state.xp;
+
+
+    document.getElementById("missionMetric")
+        .textContent =
+        state.completedMissions.length;
+
+
+    document.getElementById("boundaryMetric")
+        .textContent =
+        state.boundariesSaved;
+
+
+    document.getElementById("levelNumber")
+        .textContent =
+        level.number;
+
+
+    document.getElementById("levelName")
+        .textContent =
+        level.name;
+
+
+    const nextLevelXP =
+        level.number === 10
+        ? 1000
+        : (
+            level.number === 1 ? 25 :
+            level.number === 2 ? 75 :
+            level.number === 3 ? 150 :
+            level.number === 4 ? 250 :
+            level.number === 5 ? 350 :
+            level.number === 6 ? 500 :
+            level.number === 7 ? 650 :
+            level.number === 8 ? 800 :
+            1000
+        );
+
+
+    const currentBase =
+        level.base;
+
+
+    const range =
+        nextLevelXP - currentBase;
+
+
+    const currentProgress =
+        state.xp - currentBase;
+
+
+    const percentage =
+        level.number === 10
+        ? 100
+        : Math.min(
+            100,
+            Math.max(
+                0,
+                (currentProgress / range) * 100
+            )
+        );
+
+
+    document.getElementById("xpFill")
+        .style.width =
+        percentage + "%";
+
+
+    document.getElementById("xpLabel")
+        .textContent =
+        level.number === 10
+        ? "Maximum level reached"
+        : state.xp +
+          " / " +
+          nextLevelXP +
+          " XP";
+
+
+    updateControlScore();
+
+}
+
+
+/* =========================================================
+   XP
+========================================================= */
+
+function addXP(amount,message){
+
+    state.xp += amount;
+
+    saveState();
+
+    updateDashboard();
+
+    showToast(
+        "+" + amount + " XP — " + message
+    );
+
+}
+
+
+/* =========================================================
+   CONTROL SCORE
+========================================================= */
+
+function updateControlScore(){
+
+    let score = 0;
+
+
+    const leakPenalty =
+        state.selectedLeaks.length * 7;
+
+
+    const missionBonus =
+        Math.min(
+            30,
+            state.completedMissions.length * 5
+        );
+
+
+    const boundaryBonus =
+        Math.min(
+            20,
+            state.boundariesSaved * 5
+        );
+
+
+    const focusBonus =
+        Math.min(
+            15,
+            state.completedFocusSessions * 5
+        );
+
+
+    const environmentBonus =
+        Math.min(
+            15,
+            state.environmentChecks * 2
+        );
+
+
+    score =
+        45
+        - leakPenalty
+        + missionBonus
+        + boundaryBonus
+        + focusBonus
+        + environmentBonus;
+
+
+    if(state.auditScore > 0){
+
+        score +=
+            Math.round(
+                state.auditScore * .15
+            );
+
+    }
+
+
+    score =
+        Math.max(
+            0,
+            Math.min(100,Math.round(score))
+        );
+
+
+    document.getElementById("heroScore")
+        .textContent = score;
+
+
+    let status =
+        "Reactive";
+
+
+    if(score >= 80){
+
+        status = "Controlled";
+
+    }else if(score >= 60){
+
+        status = "Stabilizing";
+
+    }else if(score >= 40){
+
+        status = "Developing";
+
+    }
+
+
+    document.getElementById("systemStatus")
+        .textContent = status;
+
+}
+
+
+/* =========================================================
+   LEAK SCANNER
+========================================================= */
+
+document.querySelectorAll(".leak-card")
+.forEach(function(card){
+
+    card.addEventListener("click",function(){
+
+        const leak =
+            card.getAttribute("data-leak");
+
+
+        const index =
+            state.selectedLeaks.indexOf(leak);
+
+
+        if(index === -1){
+
+            state.selectedLeaks.push(leak);
+
+            card.classList.add("selected");
+
+            addXP(
+                5,
+                "Attention leak identified"
+            );
+
+        }else{
+
+            state.selectedLeaks.splice(
+                index,
+                1
+            );
+
+            card.classList.remove("selected");
+
+        }
+
+
+        document.getElementById("leakScore")
+            .childNodes[0]
+            .nodeValue =
+            state.selectedLeaks.length;
+
+
+        saveState();
+
+        updateControlScore();
+
+    });
+
+});
+
+
+/* Restore selected leaks */
+
+state.selectedLeaks.forEach(function(leak){
+
+    const card =
+        document.querySelector(
+            '[data-leak="' + leak + '"]'
+        );
+
+    if(card){
+        card.classList.add("selected");
+    }
+
+});
+
+
+/* =========================================================
+   BOUNDARY TABS
+========================================================= */
+
+document.querySelectorAll(".boundary-tab")
+.forEach(function(tab){
+
+    tab.addEventListener("click",function(){
+
+        document.querySelectorAll(".boundary-tab")
+        .forEach(function(item){
+
+            item.classList.remove("active");
+
+        });
+
+
+        document.querySelectorAll(".boundary-panel")
+        .forEach(function(panel){
+
+            panel.classList.remove("active");
+
+        });
+
+
+        tab.classList.add("active");
+
+
+        const panelID =
+            tab.getAttribute("data-panel");
+
+
+        document.getElementById(panelID)
+            .classList.add("active");
+
+    });
+
+});
+
+
+/* =========================================================
+   BOUNDARY STORAGE
+========================================================= */
+
+const boundaryFields = [
+
+    "communicationWindow",
+    "urgentRule",
+    "informationWindow",
+    "sourceRule",
+    "digitalFriction",
+    "openLoopRule",
+    "workspaceRule",
+    "priorityRule"
+
+];
+
+
+function saveBoundaries(){
+
+    let count = 0;
+
+
+    boundaryFields.forEach(function(id){
+
+        const element =
+            document.getElementById(id);
+
+
+        if(
+            element &&
+            element.value.trim() !== ""
+        ){
+
+            count++;
+
+        }
+
+    });
+
+
+    if(count === 0){
+
+        showToast(
+            "Create at least one boundary before saving."
+        );
+
+        return;
+
+    }
+
+
+    const previous =
+        state.boundariesSaved;
+
+
+    state.boundariesSaved =
+        Math.min(4,Math.ceil(count / 2));
+
+
+    if(previous === 0){
+
+        addXP(
+            30,
+            "Boundary system created"
+        );
+
+    }else{
+
+        saveState();
+
+        updateDashboard();
+
+        showToast(
+            "Boundary system updated."
+        );
+
+    }
+
+}
+
+
+document.getElementById("saveBoundaries")
+    .addEventListener(
+        "click",
+        saveBoundaries
+    );
+
+
+document.getElementById("clearBoundaries")
+    .addEventListener("click",function(){
+
+        boundaryFields.forEach(function(id){
+
+            const element =
+                document.getElementById(id);
+
+            if(element){
+                element.value = "";
+            }
+
+        });
+
+
+        state.boundariesSaved = 0;
+
+        saveState();
+
+        updateDashboard();
+
+        showToast(
+            "Boundary rules cleared."
+        );
+
+    });
+
+
+/* =========================================================
+   MISSIONS
+========================================================= */
+
+const missionRewards = {
+
+    notifications:40,
+    "single-task":50,
+    information:45,
+    workspace:35,
+    communication:50,
+    priority:60
+
+};
+
+
+document.querySelectorAll(".mission")
+.forEach(function(mission){
+
+    const id =
+        mission.getAttribute("data-mission");
+
+    const button =
+        mission.querySelector(
+            ".complete-mission"
+        );
+
+
+    if(
+        state.completedMissions.includes(id)
+    ){
+
+        mission.classList.add("completed");
+
+        button.textContent = "Completed";
+
+        button.disabled = true;
+
+    }
+
+
+    button.addEventListener("click",function(){
+
+        if(
+            state.completedMissions.includes(id)
+        ){
+
+            return;
+
+        }
+
+
+        state.completedMissions.push(id);
+
+        mission.classList.add("completed");
+
+        button.textContent = "Completed";
+
+        button.disabled = true;
+
+
+        addXP(
+            missionRewards[id],
+            "Mission completed"
+        );
+
+    });
+
+});
+
+
+/* =========================================================
+   FOCUS TIMER
+========================================================= */
+
+let selectedMinutes = 25;
+
+let remainingSeconds =
+    selectedMinutes * 60;
+
+let timerInterval = null;
+
+let timerRunning = false;
+
+
+const timeDisplay =
+    document.getElementById("timeDisplay");
+
+
+function renderTimer(){
+
+    const minutes =
+        Math.floor(
+            remainingSeconds / 60
+        );
+
+    const seconds =
+        remainingSeconds % 60;
+
+
+    timeDisplay.textContent =
+        String(minutes).padStart(2,"0")
+        + ":" +
+        String(seconds).padStart(2,"0");
+
+}
+
+
+function startTimer(){
+
+    if(timerRunning){
+        return;
+    }
+
+
+    timerRunning = true;
+
+
+    timerInterval =
+        setInterval(function(){
+
+            remainingSeconds--;
+
+            renderTimer();
+
+
+            if(remainingSeconds <= 0){
+
+                clearInterval(
+                    timerInterval
+                );
+
+                timerInterval = null;
+
+                timerRunning = false;
+
+                remainingSeconds =
+                    selectedMinutes * 60;
+
+                renderTimer();
+
+
+                state.completedFocusSessions++;
+
+                addXP(
+                    selectedMinutes >= 60
+                    ? 75
+                    : selectedMinutes >= 45
+                    ? 55
+                    : 35,
+                    "Focus session completed"
+                );
+
+            }
+
+        },1000);
+
+}
+
+
+function pauseTimer(){
+
+    if(!timerRunning){
+        return;
+    }
+
+
+    clearInterval(
+        timerInterval
+    );
+
+    timerInterval = null;
+
+    timerRunning = false;
+
+    showToast(
+        "Focus session paused."
+    );
+
+}
+
+
+function resetTimer(){
+
+    clearInterval(
+        timerInterval
+    );
+
+    timerInterval = null;
+
+    timerRunning = false;
+
+    remainingSeconds =
+        selectedMinutes * 60;
+
+    renderTimer();
+
+    showToast(
+        "Focus session reset."
+    );
+
+}
+
+
+document.getElementById("startTimer")
+    .addEventListener(
+        "click",
+        startTimer
+    );
+
+
+document.getElementById("pauseTimer")
+    .addEventListener(
+        "click",
+        pauseTimer
+    );
+
+
+document.getElementById("resetTimer")
+    .addEventListener(
+        "click",
+        resetTimer
+    );
+
+
+document.querySelectorAll(".duration-button")
+.forEach(function(button){
+
+    button.addEventListener("click",function(){
+
+        document.querySelectorAll(".duration-button")
+        .forEach(function(item){
+
+            item.classList.remove("active");
+
+        });
+
+
+        button.classList.add("active");
+
+
+        selectedMinutes =
+            Number(
+                button.getAttribute(
+                    "data-minutes"
+                )
+            );
+
+
+        resetTimer();
+
+    });
+
+});
+
+
+/* =========================================================
+   AUDIT SYSTEM
+========================================================= */
+
+let auditIndex = 0;
+
+let auditAnswers = [];
+
+const auditQuestions =
+    document.querySelectorAll(
+        ".audit-question"
+    );
+
+
+function showAuditQuestion(){
+
+    auditQuestions.forEach(function(question,index){
+
+        question.classList.toggle(
+            "active",
+            index === auditIndex
+        );
+
+    });
+
+
+    const percentage =
+        ((auditIndex + 1) /
+        auditQuestions.length) * 100;
+
+
+    document.getElementById("auditProgress")
+        .style.width =
+        percentage + "%";
+
+
+    document.getElementById("auditBack")
+        .style.visibility =
+        auditIndex === 0
+        ? "hidden"
+        : "visible";
+
+
+    document.getElementById("auditNext")
+        .textContent =
+        auditIndex === auditQuestions.length - 1
+        ? "Finish Audit"
+        : "Next";
+
+}
+
+
+document.querySelectorAll(".audit-option")
+.forEach(function(option){
+
+    option.addEventListener("click",function(){
+
+        const question =
+            option.closest(
+                ".audit-question"
+            );
+
+
+        question.querySelectorAll(
+            ".audit-option"
+        ).forEach(function(item){
+
+            item.classList.remove(
+                "selected"
+            );
+
+        });
+
+
+        option.classList.add("selected");
+
+
+        const questionIndex =
+            Number(
+                question.getAttribute(
+                    "data-question"
+                )
+            );
+
+
+        auditAnswers[questionIndex] =
+            Number(
+                option.getAttribute(
+                    "data-score"
+                )
+            );
+
+    });
+
+});
+
+
+document.getElementById("auditNext")
+    .addEventListener("click",function(){
+
+        if(
+            typeof auditAnswers[auditIndex]
+            === "undefined"
+        ){
+
+            showToast(
+                "Choose an answer before continuing."
+            );
+
+            return;
+
+        }
+
+
+        if(
+            auditIndex <
+            auditQuestions.length - 1
+        ){
+
+            auditIndex++;
+
+            showAuditQuestion();
+
+            return;
+
+        }
+
+
+        completeAudit();
+
+    });
+
+
+document.getElementById("auditBack")
+    .addEventListener("click",function(){
+
+        if(auditIndex > 0){
+
+            auditIndex--;
+
+            showAuditQuestion();
+
+        }
+
+    });
+
+
+function completeAudit(){
+
+    const total =
+        auditAnswers.reduce(
+            function(sum,value){
+                return sum + value;
+            },
+            0
+        );
+
+
+    const score =
+        Math.round(
+            (total / 24) * 100
+        );
+
+
+    state.auditScore = score;
+
+    saveState();
+
+    updateControlScore();
+
+
+    document.querySelector(".audit-content")
+        .querySelectorAll(".audit-question")
+        .forEach(function(question){
+
+            question.style.display = "none";
+
+        });
+
+
+    document.querySelector(".audit-controls")
+        .style.display = "none";
+
+
+    document.getElementById("auditProgress")
+        .style.width = "100%";
+
+
+    document.getElementById("auditResult")
+        .classList.add("show");
+
+
+    document.getElementById("auditScore")
+        .textContent = score;
+
+
+    let title =
+        "Attention system needs redesign.";
+
+
+    let description =
+        "Your current structure leaves substantial room for environmental and behavioral improvements.";
+
+
+    if(score >= 80){
+
+        title =
+            "Strong attention architecture.";
+
+        description =
+            "Your day already contains several protective mechanisms. Focus on maintaining them while improving the weakest remaining boundary.";
+
+    }else if(score >= 60){
+
+        title =
+            "Your system is stabilizing.";
+
+        description =
+            "You have useful controls in place, but recurring inputs still appear capable of taking over portions of your attention.";
+
+    }else if(score >= 40){
+
+        title =
+            "Your system is vulnerable.";
+
+        description =
+            "The largest opportunity is reducing the number of situations in which incoming signals automatically determine what happens next.";
+
+    }
+
+
+    document.getElementById("auditTitle")
+        .textContent = title;
+
+
+    document.getElementById("auditDescription")
+        .textContent = description;
+
+
+    addXP(
+        25,
+        "Attention audit completed"
+    );
+
+}
+
+
+document.getElementById("auditRestart")
+    .addEventListener("click",function(){
+
+        auditIndex = 0;
+
+        auditAnswers = [];
+
+        document.getElementById("auditResult")
+            .classList.remove("show");
+
+
+        document.querySelector(".audit-controls")
+            .style.display = "flex";
+
+
+        document.querySelectorAll(
+            ".audit-option"
+        ).forEach(function(option){
+
+            option.classList.remove(
+                "selected"
+            );
+
+        });
+
+
+        showAuditQuestion();
+
+    });
+
+
+/* =========================================================
+   ENVIRONMENT CHECKS
+========================================================= */
+
+document.querySelectorAll(
+    ".environment-check input"
+)
+.forEach(function(checkbox){
+
+    const key =
+        checkbox.getAttribute("data-env");
+
+
+    const saved =
+        localStorage.getItem(
+            "attentionEnv_" + key
+        );
+
+
+    if(saved === "true"){
+
+        checkbox.checked = true;
+
+    }
+
+
+    checkbox.addEventListener(
+        "change",
+        function(){
+
+            localStorage.setItem(
+                "attentionEnv_" + key,
+                checkbox.checked
+            );
+
+
+            if(checkbox.checked){
+
+                state.environmentChecks++;
+
+                addXP(
+                    3,
+                    "Environment improvement logged"
+                );
+
+            }else{
+
+                state.environmentChecks =
+                    Math.max(
+                        0,
+                        state.environmentChecks - 1
+                    );
+
+                saveState();
+
+                updateDashboard();
+
+            }
+
+        }
+    );
+
+});
+
+
+/* =========================================================
+   RESET EVERYTHING
+========================================================= */
+
+document.getElementById("resetAll")
+    .addEventListener("click",function(){
+
+        const confirmed =
+            confirm(
+                "Reset all Attention Control Lab progress?"
+            );
+
+
+        if(!confirmed){
+            return;
+        }
+
+
+        localStorage.removeItem(
+            STORAGE_KEY
+        );
+
+
+        Object.keys(localStorage)
+        .forEach(function(key){
+
+            if(
+                key.indexOf(
+                    "attentionEnv_"
+                ) === 0
+            ){
+
+                localStorage.removeItem(key);
+
+            }
+
+        });
+
+
+        location.reload();
+
+    });
+
+
+/* =========================================================
+   INITIALIZATION
+========================================================= */
+
+loadState();
+
+renderTimer();
+
+showAuditQuestion();
+
+
+/* Restore mission state */
+
+state.completedMissions
+.forEach(function(id){
+
+    const mission =
+        document.querySelector(
+            '[data-mission="' + id + '"]'
+        );
+
+
+    if(mission){
+
+        mission.classList.add(
+            "completed"
+        );
+
+
+        const button =
+            mission.querySelector(
+                ".complete-mission"
+            );
+
+
+        button.textContent =
+            "Completed";
+
+        button.disabled = true;
+
+    }
+
+});
+
+
+/* Restore environment count accurately */
+
+let restoredEnvironmentCount = 0;
+
+
+document.querySelectorAll(
+    ".environment-check input"
+)
+.forEach(function(checkbox){
+
+    if(checkbox.checked){
+
+        restoredEnvironmentCount++;
+
+    }
+
+});
+
+
+state.environmentChecks =
+    restoredEnvironmentCount;
+
+
+saveState();
+
+updateDashboard();
+
+
+</script>
+
+</body>
+</html>
