@@ -1,0 +1,2349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Lead With Speaking | Grant Proposal Asset</title>
+
+<style>
+:root{
+  --bg:#0E201D;
+  --accent:#FFB5A7;
+  --text:#E8F1F0;
+  --card:#1A332F;
+
+  --muted:#A8BCB8;
+  --border:#31504A;
+  --deep:#091714;
+  --accent-soft:rgba(255,181,167,.09);
+  --accent-border:rgba(255,181,167,.28);
+  --success:#BDEDD7;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:transparent;
+  color:var(--text);
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+  line-height:1.5;
+}
+
+button,
+input,
+select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.grant-page{
+  width:100%;
+  max-width:1050px;
+  margin:auto;
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 25px 70px rgba(0,0,0,.3);
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 28px;
+  background:#0A1715;
+  border-bottom:1px solid var(--border);
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:var(--text);
+  font-size:.8rem;
+  font-weight:800;
+  letter-spacing:.05em;
+}
+
+.brand-mark{
+  width:29px;
+  height:29px;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--accent);
+  color:var(--bg);
+  font-size:.7rem;
+  font-weight:900;
+}
+
+.status{
+  color:var(--muted);
+  font-size:.7rem;
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero{
+  padding:65px 55px 55px;
+  position:relative;
+  overflow:hidden;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  width:350px;
+  height:350px;
+  border-radius:50%;
+  right:-130px;
+  top:-170px;
+  background:rgba(255,181,167,.06);
+  filter:blur(15px);
+}
+
+.hero-content{
+  max-width:790px;
+  position:relative;
+  z-index:1;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 11px;
+  border-radius:999px;
+  background:var(--accent-soft);
+  border:1px solid var(--accent-border);
+  color:var(--accent);
+  font-size:.68rem;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin-bottom:17px;
+}
+
+.badge::before{
+  content:"";
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--accent);
+}
+
+.hero h1{
+  font-size:clamp(2.3rem,6vw,4.3rem);
+  line-height:1.03;
+  letter-spacing:-.055em;
+  margin-bottom:18px;
+}
+
+.hero h1 span{
+  color:var(--accent);
+}
+
+.hero p{
+  max-width:710px;
+  color:var(--muted);
+  font-size:1rem;
+  line-height:1.75;
+}
+
+.hero-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:28px;
+}
+
+.btn{
+  border-radius:9px;
+  padding:12px 17px;
+  border:1px solid transparent;
+  font-size:.82rem;
+  font-weight:800;
+  transition:.2s ease;
+}
+
+.btn-primary{
+  background:var(--accent);
+  color:var(--bg);
+}
+
+.btn-primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 25px rgba(255,181,167,.15);
+}
+
+.btn-outline{
+  background:transparent;
+  color:var(--accent);
+  border-color:var(--border);
+}
+
+.btn-outline:hover{
+  background:var(--accent-soft);
+  border-color:var(--accent);
+}
+
+
+/* =====================================================
+   QUICK STATS
+===================================================== */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+
+.stat{
+  padding:22px 26px;
+  border-right:1px solid var(--border);
+}
+
+.stat:last-child{
+  border-right:none;
+}
+
+.stat-number{
+  color:var(--accent);
+  font-size:1.4rem;
+  font-weight:900;
+}
+
+.stat-label{
+  color:var(--muted);
+  font-size:.73rem;
+}
+
+
+/* =====================================================
+   SECTIONS
+===================================================== */
+
+.section{
+  padding:55px;
+  border-bottom:1px solid var(--border);
+}
+
+.section-heading{
+  max-width:720px;
+  margin-bottom:28px;
+}
+
+.kicker{
+  color:var(--accent);
+  font-size:.67rem;
+  font-weight:900;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+
+.section-heading h2{
+  font-size:clamp(1.65rem,4vw,2.35rem);
+  line-height:1.15;
+  letter-spacing:-.035em;
+  margin-bottom:9px;
+}
+
+.section-heading p{
+  color:var(--muted);
+  font-size:.88rem;
+  line-height:1.65;
+}
+
+
+/* =====================================================
+   OVERVIEW
+===================================================== */
+
+.overview{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:14px;
+}
+
+.overview-main,
+.overview-side{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:24px;
+}
+
+.overview-main h3,
+.overview-side h3{
+  font-size:.92rem;
+  margin-bottom:10px;
+}
+
+.overview-main p{
+  color:var(--muted);
+  font-size:.81rem;
+  line-height:1.7;
+}
+
+.overview-side ul{
+  list-style:none;
+}
+
+.overview-side li{
+  display:flex;
+  gap:9px;
+  padding:9px 0;
+  border-bottom:1px solid rgba(255,255,255,.06);
+  color:var(--muted);
+  font-size:.77rem;
+}
+
+.overview-side li:last-child{
+  border-bottom:none;
+}
+
+.overview-side li::before{
+  content:"✓";
+  color:var(--accent);
+  font-weight:900;
+}
+
+
+/* =====================================================
+   FUNDING ALLOCATION
+===================================================== */
+
+.funding-layout{
+  display:grid;
+  grid-template-columns:1fr .75fr;
+  gap:18px;
+  align-items:start;
+}
+
+.table-wrapper{
+  border:1px solid var(--border);
+  border-radius:14px;
+  overflow:hidden;
+  background:var(--card);
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th{
+  text-align:left;
+  color:var(--accent);
+  background:#142824;
+  padding:13px 15px;
+  font-size:.7rem;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+}
+
+td{
+  padding:14px 15px;
+  color:var(--muted);
+  font-size:.77rem;
+  border-top:1px solid var(--border);
+  vertical-align:top;
+}
+
+td:first-child{
+  color:var(--text);
+  font-weight:700;
+}
+
+.share{
+  color:var(--accent);
+  font-weight:900;
+  white-space:nowrap;
+}
+
+
+/* =====================================================
+   FUNDING CALCULATOR
+===================================================== */
+
+.calculator{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:23px;
+}
+
+.calculator h3{
+  font-size:.95rem;
+  margin-bottom:6px;
+}
+
+.calculator-intro{
+  color:var(--muted);
+  font-size:.74rem;
+  line-height:1.5;
+  margin-bottom:18px;
+}
+
+.amount-row{
+  display:flex;
+  gap:8px;
+  margin-bottom:20px;
+}
+
+.amount-input{
+  width:100%;
+  background:#10211E;
+  color:var(--text);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:11px;
+  outline:none;
+}
+
+.amount-input:focus{
+  border-color:var(--accent);
+}
+
+.allocation-list{
+  display:grid;
+  gap:9px;
+}
+
+.allocation{
+  padding-bottom:10px;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.allocation:last-child{
+  border-bottom:none;
+}
+
+.allocation-top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  font-size:.72rem;
+  margin-bottom:5px;
+}
+
+.allocation-name{
+  color:var(--text);
+}
+
+.allocation-value{
+  color:var(--accent);
+  font-weight:800;
+}
+
+.bar{
+  height:5px;
+  background:#0D1C19;
+  border-radius:999px;
+  overflow:hidden;
+}
+
+.bar-fill{
+  height:100%;
+  background:var(--accent);
+  border-radius:999px;
+  width:0;
+  transition:width .3s ease;
+}
+
+
+/* =====================================================
+   PROPOSAL COMPONENTS
+===================================================== */
+
+.components{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:11px;
+}
+
+.component{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:18px;
+  cursor:pointer;
+  transition:.2s ease;
+}
+
+.component:hover{
+  border-color:#49655F;
+}
+
+.component.complete{
+  border-color:var(--accent);
+  background:var(--accent-soft);
+}
+
+.component-top{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.component h3{
+  font-size:.83rem;
+  margin-bottom:4px;
+}
+
+.component p{
+  color:var(--muted);
+  font-size:.74rem;
+  line-height:1.5;
+}
+
+.component-check{
+  width:22px;
+  height:22px;
+  flex:0 0 22px;
+  border:1px solid var(--border);
+  border-radius:6px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:transparent;
+  font-size:.7rem;
+}
+
+.component.complete .component-check{
+  background:var(--accent);
+  color:var(--bg);
+  border-color:var(--accent);
+}
+
+
+/* =====================================================
+   PROPOSAL BUILDER
+===================================================== */
+
+.builder{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:25px;
+}
+
+.builder-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+.form-group{
+  margin-bottom:15px;
+}
+
+.form-group.full{
+  grid-column:1 / -1;
+}
+
+label{
+  display:block;
+  color:var(--text);
+  font-size:.74rem;
+  font-weight:800;
+  margin-bottom:6px;
+}
+
+.input,
+.select,
+.textarea{
+  width:100%;
+  background:#10211E;
+  color:var(--text);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:11px 12px;
+  outline:none;
+  font-size:.8rem;
+}
+
+.textarea{
+  min-height:110px;
+  resize:vertical;
+}
+
+.input::placeholder,
+.textarea::placeholder{
+  color:#6F8580;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(255,181,167,.06);
+}
+
+
+/* =====================================================
+   CHECKLIST
+===================================================== */
+
+.progress-box{
+  margin-bottom:20px;
+}
+
+.progress-top{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:7px;
+}
+
+.progress-label{
+  color:var(--muted);
+  font-size:.73rem;
+}
+
+.progress-value{
+  color:var(--accent);
+  font-size:.73rem;
+  font-weight:800;
+}
+
+.progress-track{
+  height:7px;
+  background:#0B1916;
+  border-radius:999px;
+  overflow:hidden;
+}
+
+.progress-fill{
+  width:0;
+  height:100%;
+  background:var(--accent);
+  transition:.3s ease;
+}
+
+
+/* =====================================================
+   COPY AREA
+===================================================== */
+
+.copy-area{
+  margin-top:22px;
+  padding-top:22px;
+  border-top:1px solid var(--border);
+}
+
+.copy-preview{
+  background:#0D1B18;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:16px;
+  color:var(--muted);
+  font-family:monospace;
+  font-size:.7rem;
+  line-height:1.6;
+  white-space:pre-wrap;
+  max-height:220px;
+  overflow:auto;
+  margin-bottom:12px;
+}
+
+.copy-btn{
+  width:100%;
+}
+
+
+/* =====================================================
+   FAQ
+===================================================== */
+
+.faq{
+  border-top:1px solid var(--border);
+}
+
+.faq-item{
+  border-bottom:1px solid var(--border);
+}
+
+.faq-question{
+  width:100%;
+  background:none;
+  border:none;
+  color:var(--text);
+  padding:17px 0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  text-align:left;
+  font-size:.82rem;
+  font-weight:800;
+}
+
+.faq-symbol{
+  color:var(--accent);
+  font-size:1rem;
+}
+
+.faq-answer{
+  display:none;
+  padding:0 35px 17px 0;
+  color:var(--muted);
+  font-size:.76rem;
+  line-height:1.65;
+}
+
+.faq-item.open .faq-answer{
+  display:block;
+}
+
+
+/* =====================================================
+   FINAL CTA
+===================================================== */
+
+.final{
+  padding:52px 55px;
+  text-align:center;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,181,167,.08),
+      rgba(255,181,167,.015)
+    );
+}
+
+.final h2{
+  font-size:clamp(1.6rem,4vw,2.4rem);
+  margin-bottom:9px;
+}
+
+.final p{
+  max-width:650px;
+  margin:0 auto 22px;
+  color:var(--muted);
+  font-size:.84rem;
+  line-height:1.65;
+}
+
+.saved{
+  display:none;
+  margin-top:12px;
+  color:var(--success);
+  font-size:.76rem;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:850px){
+
+  .hero,
+  .section{
+    padding-left:28px;
+    padding-right:28px;
+  }
+
+  .overview,
+  .funding-layout{
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:650px){
+
+  .topbar{
+    padding:14px 18px;
+  }
+
+  .status{
+    display:none;
+  }
+
+  .hero{
+    padding:45px 22px;
+  }
+
+  .section{
+    padding:42px 22px;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .stat{
+    border-right:none;
+    border-bottom:1px solid var(--border);
+  }
+
+  .stat:last-child{
+    border-bottom:none;
+  }
+
+  .components,
+  .builder-grid{
+    grid-template-columns:1fr;
+  }
+
+  .form-group.full{
+    grid-column:auto;
+  }
+
+  .final{
+    padding:42px 22px;
+  }
+}
+
+@media(max-width:480px){
+
+  .hero-actions{
+    flex-direction:column;
+  }
+
+  .hero-actions .btn{
+    width:100%;
+  }
+
+  .table-wrapper{
+    overflow-x:auto;
+  }
+
+  table{
+    min-width:600px;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="grant-page">
+
+
+<!-- =====================================================
+     TOP BAR
+===================================================== -->
+
+<header class="topbar">
+
+  <div class="brand">
+
+    <div class="brand-mark">
+      LW
+    </div>
+
+    LEAD WITH SPEAKING
+
+  </div>
+
+  <div class="status">
+    Grant Application Asset
+  </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+  <div class="hero-content">
+
+    <div class="badge">
+      Grant Application Asset
+    </div>
+
+    <h1>
+      Build a reusable
+      <span>The request foundation.</span>
+    </h1>
+
+    <p>
+      A structured master asset for developing monthly,
+      rolling, and other grant submissions around the
+      Lead With Speaking initiative, its web operations,
+      digital assets, and planned funding allocation.
+    </p>
+
+    <div class="hero-actions">
+
+      <button
+        class="btn btn-primary"
+        onclick="scrollToFunding()">
+
+        Explore Funding Plan
+
+      </button>
+
+      <button
+        class="btn btn-outline"
+        onclick="scrollToBuilder()">
+
+        Build Proposal
+
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     STATS
+===================================================== -->
+
+<div class="stats">
+
+  <div class="stat">
+
+    <div class="stat-number">
+      35%
+    </div>
+
+    <div class="stat-label">
+      Hardware & Technology
+    </div>
+
+  </div>
+
+
+  <div class="stat">
+
+    <div class="stat-number">
+      25%
+    </div>
+
+    <div class="stat-label">
+      Software & Tools
+    </div>
+
+  </div>
+
+
+  <div class="stat">
+
+    <div class="stat-number">
+      20%
+    </div>
+
+    <div class="stat-label">
+      Targeted Marketing
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     BUSINESS OVERVIEW
+===================================================== -->
+
+<section class="section">
+
+  <div class="section-heading">
+
+    <div class="kicker">
+      The Foundation
+    </div>
+
+    <h2>
+      Business Overview
+    </h2>
+
+    <p>
+      The request establishes the business context
+      before moving into how funding would be deployed.
+    </p>
+
+  </div>
+
+
+  <div class="overview">
+
+
+    <div class="overview-main">
+
+      <h3>
+        Lead With Speaking 
+      </h3>
+
+      <p>
+        Digital content and web operations initiative
+        providing responsive website builds, CMS
+        maintenance, and media asset pipelines for
+        independent speakers and service providers.
+      </p>
+
+    </div>
+
+
+    <div class="overview-side">
+
+      <h3>
+        Core Activity Areas
+      </h3>
+
+      <ul>
+
+        <li>
+          Responsive website builds
+        </li>
+
+        <li>
+          CMS maintenance
+        </li>
+
+        <li>
+          Media asset pipelines
+        </li>
+
+        <li>
+          Digital content operations
+        </li>
+
+        <li>
+          Support for service providers
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FUNDING PLAN
+===================================================== -->
+
+<section
+  class="section"
+  id="funding">
+
+  <div class="section-heading">
+
+    <div class="kicker">
+      Funding Allocation Plan
+    </div>
+
+    <h2>
+      See where the funding is designed to go.
+    </h2>
+
+    <p>
+      The allocation below preserves the original
+      proposal percentages while providing an interactive
+      way to test those percentages against a hypothetical
+      grant amount.
+    </p>
+
+  </div>
+
+
+  <div class="funding-layout">
+
+
+    <!-- TABLE -->
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Category
+            </th>
+
+            <th>
+              Share
+            </th>
+
+            <th>
+              Purpose
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr>
+
+            <td>
+              Hardware & Tech
+            </td>
+
+            <td class="share">
+              35%
+            </td>
+
+            <td>
+              Development workstation & test environment
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              Software & Tools
+            </td>
+
+            <td class="share">
+              25%
+            </td>
+
+            <td>
+              CMS plugins, cloud hosting & domain security
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              Targeted Marketing
+            </td>
+
+            <td class="share">
+              20%
+            </td>
+
+            <td>
+              Portfolio assets & local Austin outreach
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              Support Staffing
+            </td>
+
+            <td class="share">
+              10%
+            </td>
+
+            <td>
+              Contract copyediting & asset transcription
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              Operational Base
+            </td>
+
+            <td class="share">
+              10%
+            </td>
+
+            <td>
+              Essential overhead & baseline stability
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+
+    <!-- CALCULATOR -->
+
+    <div class="calculator">
+
+      <h3>
+        Funding Allocation Calculator
+      </h3>
+
+      <p class="calculator-intro">
+        Enter a hypothetical grant amount to see how
+        the existing allocation percentages translate
+        into dollar amounts.
+      </p>
+
+
+      <div class="amount-row">
+
+        <input
+          id="grantAmount"
+          class="amount-input"
+          type="number"
+          min="0"
+          step="100"
+          value="10000"
+          placeholder="Grant amount"
+          oninput="calculateFunding()">
+
+      </div>
+
+
+      <div class="allocation-list">
+
+
+        <div class="allocation">
+
+          <div class="allocation-top">
+
+            <span class="allocation-name">
+              Hardware & Tech
+            </span>
+
+            <span
+              id="hardwareValue"
+              class="allocation-value">
+              $3,500
+            </span>
+
+          </div>
+
+          <div class="bar">
+            <div
+              id="hardwareBar"
+              class="bar-fill"
+              style="width:35%;">
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="allocation">
+
+          <div class="allocation-top">
+
+            <span class="allocation-name">
+              Software & Tools
+            </span>
+
+            <span
+              id="softwareValue"
+              class="allocation-value">
+              $2,500
+            </span>
+
+          </div>
+
+          <div class="bar">
+            <div
+              id="softwareBar"
+              class="bar-fill"
+              style="width:25%;">
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="allocation">
+
+          <div class="allocation-top">
+
+            <span class="allocation-name">
+              Targeted Marketing
+            </span>
+
+            <span
+              id="marketingValue"
+              class="allocation-value">
+              $2,000
+            </span>
+
+          </div>
+
+          <div class="bar">
+            <div
+              id="marketingBar"
+              class="bar-fill"
+              style="width:20%;">
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="allocation">
+
+          <div class="allocation-top">
+
+            <span class="allocation-name">
+              Support Staffing
+            </span>
+
+            <span
+              id="staffValue"
+              class="allocation-value">
+              $1,000
+            </span>
+
+          </div>
+
+          <div class="bar">
+            <div
+              id="staffBar"
+              class="bar-fill"
+              style="width:10%;">
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="allocation">
+
+          <div class="allocation-top">
+
+            <span class="allocation-name">
+              Operational Base
+            </span>
+
+            <span
+              id="operationsValue"
+              class="allocation-value">
+              $1,000
+            </span>
+
+          </div>
+
+          <div class="bar">
+            <div
+              id="operationsBar"
+              class="bar-fill"
+              style="width:10%;">
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PROPOSAL CHECKLIST
+===================================================== -->
+
+<section class="section">
+
+  <div class="section-heading">
+
+    <div class="kicker">
+      Readiness
+    </div>
+
+    <h2>
+      Check the core proposal components.
+    </h2>
+
+    <p>
+      Use this checklist to track whether the major
+      components of the reusable proposal asset have
+      been reviewed.
+    </p>
+
+  </div>
+
+
+  <div class="progress-box">
+
+    <div class="progress-top">
+
+      <span class="progress-label">
+        Proposal readiness
+      </span>
+
+      <span
+        class="progress-value"
+        id="progressText">
+
+        0 / 6 complete
+
+      </span>
+
+    </div>
+
+    <div class="progress-track">
+
+      <div
+        class="progress-fill"
+        id="progressFill">
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="components">
+
+
+    <div
+      class="component"
+      onclick="toggleComponent(this)">
+
+      <div class="component-top">
+
+        <div>
+
+          <h3>
+            Business Overview
+          </h3>
+
+          <p>
+            Defines the initiative and the primary
+            activity areas.
+          </p>
+
+        </div>
+
+        <div class="component-check">
+          ✓
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="component"
+      onclick="toggleComponent(this)">
+
+      <div class="component-top">
+
+        <div>
+
+          <h3>
+            Funding Allocation
+          </h3>
+
+          <p>
+            Establishes how the requested funding
+            would be distributed.
+          </p>
+
+        </div>
+
+        <div class="component-check">
+          ✓
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="component"
+      onclick="toggleComponent(this)">
+
+      <div class="component-top">
+
+        <div>
+
+          <h3>
+            Hardware & Technology
+          </h3>
+
+          <p>
+            Covers the development workstation
+            and test environment allocation.
+          </p>
+
+        </div>
+
+        <div class="component-check">
+          ✓
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="component"
+      onclick="toggleComponent(this)">
+
+      <div class="component-top">
+
+        <div>
+
+          <h3>
+            Software & Tools
+          </h3>
+
+          <p>
+            Covers CMS, hosting, and domain
+            security-related tools.
+          </p>
+
+        </div>
+
+        <div class="component-check">
+          ✓
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="component"
+      onclick="toggleComponent(this)">
+
+      <div class="component-top">
+
+        <div>
+
+          <h3>
+            Marketing
+          </h3>
+
+          <p>
+            Addresses portfolio assets and
+            local outreach.
+          </p>
+
+        </div>
+
+        <div class="component-check">
+          ✓
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="component"
+      onclick="toggleComponent(this)">
+
+      <div class="component-top">
+
+        <div>
+
+          <h3>
+            Staffing & Operations
+          </h3>
+
+          <p>
+            Covers contractor support and
+            operational stability.
+          </p>
+
+        </div>
+
+        <div class="component-check">
+          ✓
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PROPOSAL BUILDER
+===================================================== -->
+
+<section
+  class="section"
+  id="builder">
+
+  <div class="section-heading">
+
+    <div class="kicker">
+      The Builder
+    </div>
+
+    <h2>
+      Create a reusable submission draft.
+    </h2>
+
+    <p>
+      Enter the variables that change from one application
+      to another. The page will construct a copy-ready
+      summary without changing the underlying allocation model.
+    </p>
+
+  </div>
+
+
+  <div class="builder">
+
+    <div class="builder-grid">
+
+
+      <div class="form-group">
+
+        <label for="organization">
+          Organization / Applicant
+        </label>
+
+        <input
+          class="input"
+          id="organization"
+          placeholder="Enter applicant name">
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="grantProgram">
+          Grant Program
+        </label>
+
+        <input
+          class="input"
+          id="grantProgram"
+          placeholder="Enter grant name">
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="requestedAmount">
+          Requested Amount
+        </label>
+
+        <input
+          class="input"
+          id="requestedAmount"
+          type="number"
+          placeholder="Example: 10000"
+          oninput="updateProposalPreview()">
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="timeline">
+          Submission / Project Timing
+        </label>
+
+        <select
+          class="select"
+          id="timeline"
+          onchange="updateProposalPreview()">
+
+          <option value="">
+            Select timing
+          </option>
+
+          <option value="Monthly">
+            Monthly
+          </option>
+
+          <option value="Rolling">
+            Rolling
+          </option>
+
+          <option value="Specific Grant Cycle">
+            Specific Grant Cycle
+          </option>
+
+          <option value="Other">
+            Other
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-group full">
+
+        <label for="proposalNotes">
+          Grant-specific notes
+        </label>
+
+        <textarea
+          class="textarea"
+          id="proposalNotes"
+          placeholder="Add information that needs to change for this particular application..."
+          oninput="updateProposalPreview()">
+        </textarea>
+
+      </div>
+
+    </div>
+
+
+    <!-- COPY PREVIEW -->
+
+    <div class="copy-area">
+
+      <div
+        id="copyPreview"
+        class="copy-preview">
+LEAD WITH SPEAKING — GRANT SUMMARY
+
+Business Overview:
+Digital content and web operations initiative providing responsive website builds, CMS maintenance, and media asset pipelines for independent speakers and service providers.
+
+Funding Deployment:
+35% Hardware & Technology
+25% Software & Tools
+20% Targeted Marketing
+10% Support Staffing
+10% Operational Base
+      </div>
+
+
+      <button
+        class="btn btn-primary copy-btn"
+        onclick="copyProposal()">
+
+        Copy Proposal Summary
+
+      </button>
+
+
+      <div
+        id="savedMessage"
+        class="saved">
+
+        Proposal summary copied to clipboard.
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FAQ
+===================================================== -->
+
+<section class="section">
+
+  <div class="section-heading">
+
+    <div class="kicker">
+      Proposal Notes
+    </div>
+
+    <h2>
+      How to use this asset.
+    </h2>
+
+  </div>
+
+
+  <div class="faq">
+
+
+    <div class="faq-item">
+
+      <button
+        class="faq-question"
+        onclick="toggleFAQ(this)">
+
+        What is the purpose of this template?
+
+        <span class="faq-symbol">
+          +
+        </span>
+
+      </button>
+
+      <div class="faq-answer">
+
+        It is designed as a reusable master asset for
+        monthly and rolling grant submissions. The
+        business overview and funding allocation provide
+        the foundation, while the proposal builder allows
+        grant-specific information to be added.
+
+      </div>
+
+    </div>
+
+
+    <div class="faq-item">
+
+      <button
+        class="faq-question"
+        onclick="toggleFAQ(this)">
+
+        Does the calculator change the funding percentages?
+
+        <span class="faq-symbol">
+          +
+        </span>
+
+      </button>
+
+      <div class="faq-answer">
+
+        No. It simply translates the existing percentages
+        into hypothetical dollar amounts based on the
+        grant amount entered.
+
+      </div>
+
+    </div>
+
+
+    <div class="faq-item">
+
+      <button
+        class="faq-question"
+        onclick="toggleFAQ(this)">
+
+        Does the proposal builder submit an application?
+
+        <span class="faq-symbol">
+          +
+        </span>
+
+      </button>
+
+      <div class="faq-answer">
+
+        No. The builder creates a copy-ready proposal
+        summary. It does not claim to submit information
+        to a grantmaker or external application system.
+
+      </div>
+
+    </div>
+
+
+    <div class="faq-item">
+
+      <button
+        class="faq-question"
+        onclick="toggleFAQ(this)">
+
+        Can the same proposal be adapted for different grants?
+
+        <span class="faq-symbol">
+          +
+        </span>
+
+      </button>
+
+      <div class="faq-answer">
+
+        Yes. The applicant, grant program, requested amount,
+        timing, and grant-specific notes can be changed
+        while the underlying proposal foundation remains
+        available as a reusable starting point.
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FINAL CTA
+===================================================== -->
+
+<section class="final">
+
+  <h2>
+    Build the next submission from the same foundation.
+  </h2>
+
+  <p>
+    Use the funding model, proposal checklist, and
+    copy-ready builder to create a more consistent
+    starting point for future grant applications.
+  </p>
+
+  <button
+    class="btn btn-primary"
+    onclick="scrollToBuilder()">
+
+    Open Proposal Builder →
+
+  </button>
+
+</section>
+
+
+</div>
+
+
+
+<script>
+
+/* =====================================================
+   FUNDING CALCULATOR
+===================================================== */
+
+function calculateFunding(){
+
+  const amount =
+    Number(
+      document.getElementById(
+        "grantAmount"
+      ).value
+    ) || 0;
+
+
+  const allocations = [
+
+    {
+      value:amount * .35,
+      valueId:"hardwareValue",
+      barId:"hardwareBar",
+      percent:35
+    },
+
+    {
+      value:amount * .25,
+      valueId:"softwareValue",
+      barId:"softwareBar",
+      percent:25
+    },
+
+    {
+      value:amount * .20,
+      valueId:"marketingValue",
+      barId:"marketingBar",
+      percent:20
+    },
+
+    {
+      value:amount * .10,
+      valueId:"staffValue",
+      barId:"staffBar",
+      percent:10
+    },
+
+    {
+      value:amount * .10,
+      valueId:"operationsValue",
+      barId:"operationsBar",
+      percent:10
+    }
+
+  ];
+
+
+  allocations.forEach(item => {
+
+    document.getElementById(
+      item.valueId
+    ).textContent =
+      formatCurrency(item.value);
+
+
+    document.getElementById(
+      item.barId
+    ).style.width =
+      item.percent + "%";
+
+  });
+
+}
+
+
+function formatCurrency(number){
+
+  return new Intl.NumberFormat(
+    "en-US",
+    {
+      style:"currency",
+      currency:"USD",
+      maximumFractionDigits:0
+    }
+  ).format(number);
+
+}
+
+
+/* =====================================================
+   PROPOSAL CHECKLIST
+===================================================== */
+
+function toggleComponent(component){
+
+  component.classList.toggle(
+    "complete"
+  );
+
+  updateProgress();
+
+}
+
+
+function updateProgress(){
+
+  const total =
+    document.querySelectorAll(
+      ".component"
+    ).length;
+
+  const completed =
+    document.querySelectorAll(
+      ".component.complete"
+    ).length;
+
+
+  const percentage =
+    total
+      ? (completed / total) * 100
+      : 0;
+
+
+  document.getElementById(
+    "progressFill"
+  ).style.width =
+    percentage + "%";
+
+
+  document.getElementById(
+    "progressText"
+  ).textContent =
+    `${completed} / ${total} complete`;
+
+}
+
+
+/* =====================================================
+   PROPOSAL PREVIEW
+===================================================== */
+
+function updateProposalPreview(){
+
+  const organization =
+    document.getElementById(
+      "organization"
+    ).value.trim();
+
+  const grantProgram =
+    document.getElementById(
+      "grantProgram"
+    ).value.trim();
+
+  const requestedAmount =
+    document.getElementById(
+      "requestedAmount"
+    ).value;
+
+  const timeline =
+    document.getElementById(
+      "timeline"
+    ).value;
+
+  const notes =
+    document.getElementById(
+      "proposalNotes"
+    ).value.trim();
+
+
+  let text =
+`LEAD WITH SPEAKING — GRANT SUMMARY
+
+Applicant:
+${organization || "[Applicant name]"}
+
+Grant Program:
+${grantProgram || "[Grant program]"}
+
+Business Overview:
+Digital content and web operations initiative providing responsive website builds, CMS maintenance, and media asset pipelines for independent speakers and service providers.
+
+Funding Deployment:
+- 35% Hardware & Technology
+- 25% Software, Hosting & Security Tools
+- 20% Targeted Marketing & Austin Outreach
+- 10% Specialized Contractor Staffing
+- 10% Working Capital & Base Operational Stability`;
+
+
+  if(requestedAmount){
+
+    text +=
+      `\n\nRequested Amount:\n${formatCurrency(Number(requestedAmount))}`;
+
+  }
+
+
+  if(timeline){
+
+    text +=
+      `\n\nSubmission / Project Timing:\n${timeline}`;
+
+  }
+
+
+  if(notes){
+
+    text +=
+      `\n\nGrant-Specific Notes:\n${notes}`;
+
+  }
+
+
+  document.getElementById(
+    "copyPreview"
+  ).textContent =
+    text;
+
+}
+
+
+/* =====================================================
+   COPY PROPOSAL
+===================================================== */
+
+async function copyProposal(){
+
+  const text =
+    document.getElementById(
+      "copyPreview"
+    ).textContent;
+
+
+  try{
+
+    await navigator.clipboard.writeText(
+      text
+    );
+
+    showSavedMessage(
+      "Proposal summary copied to clipboard."
+    );
+
+  }catch(error){
+
+    /*
+      Fallback for environments where
+      navigator.clipboard is unavailable.
+    */
+
+    const area =
+      document.createElement("textarea");
+
+    area.value = text;
+
+    document.body.appendChild(area);
+
+    area.select();
+
+    document.execCommand("copy");
+
+    area.remove();
+
+    showSavedMessage(
+      "Proposal summary copied."
+    );
+
+  }
+
+}
+
+
+function showSavedMessage(message){
+
+  const element =
+    document.getElementById(
+      "savedMessage"
+    );
+
+  element.textContent =
+    message;
+
+  element.style.display =
+    "block";
+
+
+  setTimeout(() => {
+
+    element.style.display =
+      "none";
+
+  },3500);
+
+}
+
+
+/* =====================================================
+   FAQ
+===================================================== */
+
+function toggleFAQ(button){
+
+  const item =
+    button.closest(
+      ".faq-item"
+    );
+
+  const wasOpen =
+    item.classList.contains(
+      "open"
+    );
+
+
+  document
+    .querySelectorAll(".faq-item")
+    .forEach(other => {
+
+      other.classList.remove(
+        "open"
+      );
+
+      const symbol =
+        other.querySelector(
+          ".faq-symbol"
+        );
+
+      if(symbol){
+        symbol.textContent =
+          "+";
+      }
+
+    });
+
+
+  if(!wasOpen){
+
+    item.classList.add(
+      "open"
+    );
+
+    const symbol =
+      item.querySelector(
+        ".faq-symbol"
+      );
+
+    if(symbol){
+      symbol.textContent =
+        "−";
+    }
+
+  }
+
+}
+
+
+/* =====================================================
+   SCROLLING
+===================================================== */
+
+function scrollToFunding(){
+
+  document
+    .getElementById("funding")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+}
+
+
+function scrollToBuilder(){
+
+  document
+    .getElementById("builder")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+}
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+calculateFunding();
+updateProgress();
+updateProposalPreview();
+
+</script>
+
+</body>
+</html>
