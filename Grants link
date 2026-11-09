@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grants You Didn't Know Existed</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --green:#5bbf8a;
+    --dark:#16354a;
+    --light:#f5fff9;
+    --accent:#e8fff0;
+    --white:#ffffff;
+    --text:#333;
+    --shadow:0 12px 30px rgba(0,0,0,.08);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:var(--light);
+    color:var(--text);
+    line-height:1.7;
+}
+
+header{
+    background:linear-gradient(135deg,#5bbf8a,#86e2b1);
+    color:white;
+    text-align:center;
+    padding:90px 8%;
+}
+
+header h1{
+    font-size:3rem;
+    margin-bottom:20px;
+}
+
+header p{
+    max-width:900px;
+    margin:auto;
+    font-size:1.1rem;
+}
+
+.quick-links{
+    padding:70px 8%;
+    text-align:center;
+}
+
+.quick-links h2{
+    color:var(--dark);
+    margin-bottom:40px;
+}
+
+.link-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.link-card{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:var(--shadow);
+}
+
+.link-card h3{
+    color:var(--green);
+    margin-bottom:10px;
+}
+
+.link-card a{
+    text-decoration:none;
+    color:var(--dark);
+    font-weight:600;
+}
+
+.intro{
+    padding:40px 8%;
+    text-align:center;
+}
+
+.intro h2{
+    color:var(--dark);
+    margin-bottom:20px;
+}
+
+.categories{
+    padding:80px 8%;
+}
+
+.categories h2{
+    text-align:center;
+    margin-bottom:50px;
+    color:var(--dark);
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+    gap:30px;
+}
+
+.card{
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card img{
+    width:100%;
+    height:230px;
+    object-fit:cover;
+}
+
+.card-header{
+    background:var(--green);
+    color:white;
+    padding:20px;
+}
+
+.card-body{
+    padding:25px;
+}
+
+.card-body p{
+    margin-bottom:15px;
+}
+
+.card-body ul{
+    padding-left:20px;
+    margin-bottom:20px;
+}
+
+.card-body li{
+    margin-bottom:8px;
+}
+
+.sources{
+    background:var(--accent);
+    padding:15px;
+    border-radius:10px;
+}
+
+.sources h4{
+    color:var(--dark);
+    margin-bottom:10px;
+}
+
+.sources a{
+    display:block;
+    text-decoration:none;
+    color:var(--dark);
+    margin-bottom:8px;
+    font-weight:500;
+}
+
+.cta{
+    background:var(--dark);
+    color:white;
+    text-align:center;
+    padding:90px 8%;
+}
+
+.cta h2{
+    margin-bottom:20px;
+}
+
+footer{
+    background:#102634;
+    color:white;
+    text-align:center;
+    padding:30px;
+}
+
+</style>
+</head>
+<body>
+
+<header>
+
+<h1>Grants You Didn't Know Existed</h1>
+
+<p>
+Most people think grants are only for nonprofits or large organizations.
+In reality, grants exist for entrepreneurs, artists, tradespeople, farmers,
+career changers, veterans, homeowners, innovators, creators, and many others.
+This guide helps you discover opportunities you may never have considered.
+</p>
+
+</header>
+
+<section class="quick-links">
+
+<h2>Popular Grant Search Websites</h2>
+
+<div class="link-grid">
+
+<div class="link-card">
+<h3>Federal Grants</h3>
+<a href="https://www.grants.gov" target="_blank">www.grants.gov</a>
+</div>
+
+<div class="link-card">
+<h3>Business Funding</h3>
+<a href="https://www.sba.gov" target="_blank">www.sba.gov</a>
+</div>
+
+<div class="link-card">
+<h3>Foundation Grants</h3>
+<a href="https://www.candid.org" target="_blank">www.candid.org</a>
+</div>
+
+<div class="link-card">
+<h3>Career Training</h3>
+<a href="https://www.careeronestop.org" target="_blank">www.careeronestop.org</a>
+</div>
+
+<div class="link-card">
+<h3>Apprenticeships</h3>
+<a href="https://www.apprenticeship.gov" target="_blank">www.apprenticeship.gov</a>
+</div>
+
+<div class="link-card">
+<h3>Rural Development</h3>
+<a href="https://www.rd.usda.gov" target="_blank">www.rd.usda.gov</a>
+</div>
+
+</div>
+
+</section>
+
+<section class="intro">
+
+<h2>Funding Opportunities Beyond Traditional Loans</h2>
+
+<p>
+Many grants never receive enough applications because people assume they
+don't qualify. Explore categories that match your career goals,
+business ideas, hobbies, community involvement, and life experiences.
+</p>
+
+</section>
+
+<section class="categories">
+
+<h2>Explore Grant Categories</h2>
+
+<div class="grid">
+
+<!-- SMALL BUSINESS -->
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80" alt="Small Business Grants">
+
+<div class="card-header">
+<h3>Small Business Grants</h3>
+</div>
+
+<div class="card-body">
+
+<p>
+Funding opportunities for startups, side hustles,
+home businesses, and growing companies.
+</p>
+
+<ul>
+<li>Startup Businesses</li>
+<li>Home-Based Businesses</li>
+<li>Women-Owned Businesses</li>
+<li>Veteran-Owned Businesses</li>
+<li>Minority-Owned Businesses</li>
+<li>Online Businesses</li>
+</ul>
+
+<div class="sources">
+<h4>Common Sources</h4>
+
+<a href="https://www.sba.gov" target="_blank">sba.gov</a>
+<a href="https://www.grants.gov" target="_blank">grants.gov</a>
+<a href="https://www.score.org" target="_blank">score.org</a>
+<a href="https://www.candid.org" target="_blank">candid.org</a>
+
+</div>
+
+</div>
+</div>
+
+<!-- CAREER TRAINING -->
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=1200&q=80" alt="Career Training Grants">
+
+<div class="card-header">
+<h3>Career Training Grants</h3>
+</div>
+
+<div class="card-body">
+
+<p>
+Support for trade schools, certifications,
+apprenticeships, and workforce development.
+</p>
+
+<ul>
+<li>Trade School Programs</li>
+<li>IT Certifications</li>
+<li>Healthcare Training</li>
+<li>CDL Programs</li>
+<li>Construction Training</li>
+<li>Workforce Re-Entry Programs</li>
+</ul>
+
+<div class="sources">
+
+<h4>Common Sources</h4>
+
+<a href="https://www.careeronestop.org" target="_blank">careeronestop.org</a>
+
+<a href="https://www.apprenticeship.gov" target="_blank">apprenticeship.gov</a>
+
+<a href="https://www.dol.gov" target="_blank">dol.gov</a>
+
+<a href="https://www.jobcorps.gov" target="_blank">jobcorps.gov</a>
+
+</div>
+
+</div>
+</div>
+
+<!-- TECHNOLOGY -->
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" alt="Technology Grants">
+
+<div class="card-header">
+<h3>Technology & Innovation Grants</h3>
+</div>
+
+<div class="card-body">
+
+<p>
+Funding opportunities for technology projects,
+software development, research, and innovation.
+</p>
+
+<ul>
+<li>Artificial Intelligence</li>
+<li>Cybersecurity</li>
+<li>Software Development</li>
+<li>STEM Initiatives</li>
+<li>Research Projects</li>
+<li>Technology Startups</li>
+</ul>
+
+<div class="sources">
+
+<h4>Common Sources</h4>
+
+<a href="https://www.sbir.gov" target="_blank">sbir.gov</a>
+
+<a href="https://www.nsf.gov" target="_blank">nsf.gov</a>
+
+<a href="https://www.nist.gov" target="_blank">nist.gov</a>
+
+<a href="https://www.grants.gov" target="_blank">grants.gov</a>
+
+</div>
+
+</div>
+</div>
+
+<!-- AGRICULTURE -->
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=1200&q=80" alt="Agriculture Grants">
+
+<div class="card-header">
+<h3>Agriculture Grants</h3>
+</div>
+
+<div class="card-body">
+
+<ul>
+<li>Farm Startups</li>
+<li>Urban Farming</li>
+<li>Community Gardens</li>
+<li>Sustainable Agriculture</li>
+<li>Agricultural Equipment</li>
+<li>Food Production</li>
+</ul>
+
+<div class="sources">
+
+<h4>Common Sources</h4>
+
+<a href="https://www.usda.gov" target="_blank">usda.gov</a>
+
+<a href="https://www.farmers.gov" target="_blank">farmers.gov</a>
+
+<a href="https://www.rd.usda.gov" target="_blank">rd.usda.gov</a>
+
+<a href="https://www.sare.org" target="_blank">sare.org</a>
+
+</div>
+
+</div>
+</div>
+
+<!-- CREATIVE -->
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=1200&q=80" alt="Creative Grants">
+
+<div class="card-header">
+<h3>Creative & Arts Grants</h3>
+</div>
+
+<div class="card-body">
+
+<ul>
+<li>Writers</li>
+<li>Musicians</li>
+<li>Artists</li>
+<li>Photographers</li>
+<li>Filmmakers</li>
+<li>Content Creators</li>
+</ul>
+
+<div class="sources">
+
+<h4>Common Sources</h4>
+
+<a href="https://www.arts.gov" target="_blank">arts.gov</a>
+
+<a href="https://www.poetswriters.org" target="_blank">poetswriters.org</a>
+
+<a href="https://creative-capital.org" target="_blank">creative-capital.org</a>
+
+<a href="https://www.candid.org" target="_blank">candid.org</a>
+
+</div>
+
+</div>
+</div>
+
+<!-- HOUSING -->
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80" alt="Housing Grants">
+
+<div class="card-header">
+<h3>Housing & Homeownership Grants</h3>
+</div>
+
+<div class="card-body">
+
+<ul>
+<li>First-Time Home Buyers</li>
+<li>Down Payment Assistance</li>
+<li>Home Repairs</li>
+<li>Energy Efficiency Upgrades</li>
+<li>Accessibility Improvements</li>
+</ul>
+
+<div class="sources">
+
+<h4>Common Sources</h4>
+
+<a href="https://www.hud.gov" target="_blank">hud.gov</a>
+
+<a href="https://www.rd.usda.gov" target="_blank">rd.usda.gov</a>
+
+<a href="https://www.benefits.gov" target="_blank">benefits.gov</a>
+
+<a href="https://www.habitat.org" target="_blank">habitat.org</a>
+
+</div>
+
+</div>
+</div>
+
+</div>
+
+</section>
+
+<section class="cta">
+
+<h2>Stop Assuming Grants Are For Someone Else</h2>
+
+<p>
+Whether you're building a business, learning a trade,
+starting a farm, creating art, developing technology,
+or improving your community, there may be funding opportunities
+available to help support your goals.
+</p>
+
+</section>
+
+<footer>
+
+<p>
+Grant Opportunity Directory • Helping people discover funding
+sources beyond traditional loans.
+</p>
+
+</footer>
+
+</body>
+</html>
