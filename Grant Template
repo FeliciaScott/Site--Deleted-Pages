@@ -1,0 +1,2100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Grant Intelligence & Application Planner</title>
+
+<style>
+:root{
+  --navy:#101827;
+  --navy2:#172338;
+  --blue:#2563eb;
+  --blue2:#dbeafe;
+  --green:#16805c;
+  --green2:#dff7ec;
+  --gold:#c58b18;
+  --gold2:#fff4d2;
+  --red:#b42318;
+  --red2:#fee4e2;
+  --cream:#f8f6f0;
+  --white:#ffffff;
+  --text:#263242;
+  --muted:#687587;
+  --border:#d9e0e8;
+  --shadow:0 12px 30px rgba(16,24,39,.08);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:var(--cream);
+  color:var(--text);
+  line-height:1.5;
+}
+
+button,
+input,
+textarea,
+select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.container{
+  width:min(1180px,94%);
+  margin:auto;
+}
+
+/* HEADER */
+
+.hero{
+  background:
+    linear-gradient(135deg,var(--navy),var(--navy2));
+  color:white;
+  padding:46px 0 38px;
+}
+
+.hero-inner{
+  display:grid;
+  grid-template-columns:1.5fr .8fr;
+  gap:30px;
+  align-items:center;
+}
+
+.badge{
+  display:inline-block;
+  padding:6px 12px;
+  border-radius:999px;
+  background:#263754;
+  color:#dbeafe;
+  font-size:.75rem;
+  font-weight:800;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  margin-bottom:14px;
+}
+
+.hero h1{
+  font-size:clamp(2rem,4vw,3.5rem);
+  line-height:1.05;
+  margin-bottom:14px;
+}
+
+.hero p{
+  color:#d4dce8;
+  max-width:760px;
+  font-size:1.03rem;
+}
+
+.hero-score{
+  background:#ffffff12;
+  border:1px solid #ffffff20;
+  border-radius:18px;
+  padding:25px;
+  text-align:center;
+}
+
+.score-number{
+  font-size:3.5rem;
+  font-weight:800;
+  line-height:1;
+}
+
+.score-label{
+  color:#cbd5e1;
+  margin-top:7px;
+}
+
+/* NAV */
+
+.nav{
+  background:white;
+  border-bottom:1px solid var(--border);
+  position:sticky;
+  top:0;
+  z-index:50;
+}
+
+.nav-inner{
+  display:flex;
+  gap:7px;
+  overflow-x:auto;
+  padding:9px 0;
+}
+
+.nav button{
+  border:0;
+  background:transparent;
+  padding:9px 13px;
+  border-radius:8px;
+  color:var(--muted);
+  white-space:nowrap;
+  font-weight:700;
+}
+
+.nav button:hover{
+  background:#eef3f8;
+  color:var(--navy);
+}
+
+/* MAIN */
+
+main{
+  padding:30px 0 70px;
+}
+
+.panel{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:25px;
+  margin-bottom:24px;
+  box-shadow:var(--shadow);
+}
+
+.panel-header{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  align-items:flex-start;
+  margin-bottom:20px;
+}
+
+.panel-header h2{
+  color:var(--navy);
+  font-size:1.45rem;
+}
+
+.panel-header p{
+  color:var(--muted);
+  margin-top:4px;
+}
+
+/* GRID */
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+}
+
+.grid-3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+
+/* FORM */
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.field label{
+  font-weight:750;
+  color:var(--navy);
+  font-size:.88rem;
+}
+
+.field input,
+.field textarea,
+.field select{
+  width:100%;
+  border:1px solid var(--border);
+  border-radius:9px;
+  padding:11px 12px;
+  background:white;
+  color:var(--text);
+  outline:none;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus{
+  border-color:var(--blue);
+  box-shadow:0 0 0 3px #2563eb18;
+}
+
+.field textarea{
+  min-height:115px;
+  resize:vertical;
+}
+
+/* CARDS */
+
+.info-card{
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:18px;
+  background:#fbfcfd;
+}
+
+.info-card h3{
+  font-size:1rem;
+  color:var(--navy);
+  margin-bottom:8px;
+}
+
+.info-card p{
+  color:var(--muted);
+  font-size:.92rem;
+}
+
+.fit-card{
+  border-left:5px solid var(--green);
+  background:var(--green2);
+  padding:17px;
+  border-radius:9px;
+}
+
+.warning-card{
+  border-left:5px solid var(--gold);
+  background:var(--gold2);
+  padding:17px;
+  border-radius:9px;
+}
+
+.danger-card{
+  border-left:5px solid var(--red);
+  background:var(--red2);
+  padding:17px;
+  border-radius:9px;
+}
+
+/* TABLE */
+
+.table-wrap{
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th,
+td{
+  padding:12px 11px;
+  border-bottom:1px solid var(--border);
+  text-align:left;
+  vertical-align:top;
+  font-size:.9rem;
+}
+
+th{
+  background:#f4f7fa;
+  color:var(--navy);
+  font-size:.8rem;
+  text-transform:uppercase;
+  letter-spacing:.03em;
+}
+
+td input{
+  width:100%;
+  min-width:100px;
+  padding:8px;
+  border:1px solid var(--border);
+  border-radius:7px;
+}
+
+/* PROGRESS */
+
+.progress{
+  height:12px;
+  background:#e9eef3;
+  border-radius:999px;
+  overflow:hidden;
+}
+
+.progress-bar{
+  height:100%;
+  width:0;
+  background:var(--blue);
+  transition:.3s;
+}
+
+/* CHECKLIST */
+
+.checklist{
+  display:grid;
+  gap:9px;
+}
+
+.check-item{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:12px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  background:#fbfcfd;
+}
+
+.check-item input{
+  width:18px;
+  height:18px;
+  accent-color:var(--green);
+}
+
+.check-item span{
+  font-size:.92rem;
+}
+
+/* TIMELINE */
+
+.timeline{
+  display:grid;
+  gap:12px;
+}
+
+.timeline-item{
+  display:grid;
+  grid-template-columns:130px 1fr;
+  gap:15px;
+  padding:15px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:#fbfcfd;
+}
+
+.timeline-date{
+  font-weight:800;
+  color:var(--blue);
+}
+
+/* BUTTONS */
+
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:20px;
+}
+
+.btn{
+  border:0;
+  border-radius:9px;
+  padding:11px 16px;
+  font-weight:800;
+}
+
+.btn-primary{
+  background:var(--blue);
+  color:white;
+}
+
+.btn-primary:hover{
+  background:#1d4ed8;
+}
+
+.btn-secondary{
+  background:#e9eef4;
+  color:var(--navy);
+}
+
+.btn-green{
+  background:var(--green);
+  color:white;
+}
+
+.btn-danger{
+  background:#fee4e2;
+  color:var(--red);
+}
+
+/* STATUS */
+
+.status{
+  display:inline-block;
+  padding:5px 10px;
+  border-radius:999px;
+  font-size:.75rem;
+  font-weight:800;
+}
+
+.status-green{
+  background:var(--green2);
+  color:var(--green);
+}
+
+.status-yellow{
+  background:var(--gold2);
+  color:#8a6200;
+}
+
+.status-red{
+  background:var(--red2);
+  color:var(--red);
+}
+
+/* METRICS */
+
+.metric{
+  padding:20px;
+  background:#f7f9fb;
+  border:1px solid var(--border);
+  border-radius:12px;
+}
+
+.metric-number{
+  font-size:1.8rem;
+  font-weight:850;
+  color:var(--navy);
+}
+
+.metric-label{
+  color:var(--muted);
+  font-size:.84rem;
+}
+
+/* FOOTER */
+
+footer{
+  text-align:center;
+  color:var(--muted);
+  padding:20px;
+  font-size:.82rem;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:850px){
+  .hero-inner,
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .grid-3{
+    grid-template-columns:1fr;
+  }
+
+  .timeline-item{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:600px){
+  body{
+    padding:0;
+  }
+
+  .panel{
+    padding:18px;
+    border-radius:12px;
+  }
+
+  .hero{
+    padding:32px 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="hero">
+  <div class="container hero-inner">
+
+    <div>
+      <span class="badge">Grant Intelligence Template</span>
+
+      <h1>Grant Application & Funding Planner</h1>
+
+      <p>
+        A reusable system for evaluating a grant, proving project fit,
+        planning the use of funds, preparing the application, measuring
+        outcomes, and tracking readiness from opportunity discovery
+        through submission.
+      </p>
+    </div>
+
+    <div class="hero-score">
+      <div class="score-number" id="readinessScore">0%</div>
+      <div class="score-label">Application Readiness</div>
+
+      <div class="progress" style="margin-top:15px;">
+        <div class="progress-bar" id="readinessBar"></div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <button onclick="goTo('opportunity')">Opportunity</button>
+    <button onclick="goTo('business')">Project</button>
+    <button onclick="goTo('fit')">Grant Fit</button>
+    <button onclick="goTo('budget')">Budget</button>
+    <button onclick="goTo('plan')">Project Plan</button>
+    <button onclick="goTo('outcomes')">Outcomes</button>
+    <button onclick="goTo('requirements')">Requirements</button>
+    <button onclick="goTo('timeline')">Timeline</button>
+    <button onclick="goTo('summary')">Summary</button>
+  </div>
+</nav>
+
+
+<main class="container">
+
+<!-- ======================================================
+OPPORTUNITY
+====================================================== -->
+
+<section class="panel" id="opportunity">
+
+  <div class="panel-header">
+    <div>
+      <h2>1. Grant Opportunity Intelligence</h2>
+      <p>
+        Enter the information for each grant before investing significant
+        time into an application.
+      </p>
+    </div>
+
+    <span class="status status-yellow" id="grantStatus">
+      Researching
+    </span>
+  </div>
+
+  <div class="grid">
+
+    <div class="field">
+      <label>Grant Name</label>
+      <input
+        id="grantName"
+        value="Sample Grant Opportunity"
+        oninput="saveData();updateAll();">
+    </div>
+
+    <div class="field">
+      <label>Funder / Organization</label>
+      <input
+        id="funder"
+        value="Enter Funding Organization"
+        oninput="saveData();updateAll();">
+    </div>
+
+    <div class="field">
+      <label>Grant Amount Available</label>
+      <input
+        id="grantAmount"
+        type="number"
+        value="25000"
+        oninput="calculateBudget();saveData();updateAll();">
+    </div>
+
+    <div class="field">
+      <label>Application Deadline</label>
+      <input
+        id="deadline"
+        type="date"
+        oninput="saveData();updateAll();">
+    </div>
+
+    <div class="field">
+      <label>Official Grant URL</label>
+      <input
+        id="grantUrl"
+        placeholder="Paste official grant page here"
+        oninput="saveData();">
+    </div>
+
+    <div class="field">
+      <label>Application Status</label>
+      <select id="applicationStatus" onchange="saveData();updateAll();">
+        <option>Researching</option>
+        <option>Potential Fit</option>
+        <option>Preparing</option>
+        <option>Ready to Submit</option>
+        <option>Submitted</option>
+        <option>Declined</option>
+        <option>Awarded</option>
+      </select>
+    </div>
+
+  </div>
+
+  <div class="grid" style="margin-top:18px;">
+
+    <div class="info-card">
+      <h3>What this section answers</h3>
+      <p>
+        Who is providing the money? How much is available? When is it due?
+        What are the eligibility rules? What documents are required?
+      </p>
+    </div>
+
+    <div class="warning-card">
+      <strong>Verification rule</strong>
+      <p>
+        Do not treat the sample grant amount, deadline, eligibility,
+        or allowable expenses as confirmed until they are verified
+        against the funder's current guidelines.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ======================================================
+BUSINESS / PROJECT
+====================================================== -->
+
+<section class="panel" id="business">
+
+  <div class="panel-header">
+    <div>
+      <h2>2. Business & Project Definition</h2>
+      <p>
+        Define exactly what the grant would help build, improve, or scale.
+      </p>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Business / Initiative Overview</label>
+
+    <textarea
+      id="businessOverview"
+      oninput="saveData();updateAll();">A digital education and web-platform initiative focused on helping organizations replace overly subjective decision-making with structured, measurable, systemized approaches to hiring, retention, performance, operations, and growth.</textarea>
+  </div>
+
+  <div class="grid" style="margin-top:18px;">
+
+    <div class="info-card">
+      <h3>Primary Website</h3>
+      <p>
+        A business education platform teaching companies how to use
+        structured systems and measurable approaches to improve
+        profitability and organizational decision-making.
+      </p>
+    </div>
+
+    <div class="info-card">
+      <h3>Education Opportunity Platform</h3>
+      <p>
+        A planned website helping students and individuals navigate
+        higher education, certificates, competitions, studying abroad,
+        and other educational opportunities.
+      </p>
+    </div>
+
+    <div class="info-card">
+      <h3>Parent Resource Platform</h3>
+      <p>
+        A planned website providing useful products, resources,
+        information, and practical tools for parents.
+      </p>
+    </div>
+
+    <div class="info-card">
+      <h3>Growth Infrastructure</h3>
+      <p>
+        The grant would help move existing projects from development
+        toward stronger functionality, scalability, visibility,
+        and audience reach.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="field" style="margin-top:18px;">
+    <label>Why Funding Is Needed</label>
+
+    <textarea
+      id="fundingNeed"
+      oninput="saveData();updateAll();">Funding would accelerate the transition from developing concepts and digital assets to stronger, more functional, scalable platforms. Experienced developers can improve technical functionality and infrastructure, while marketing professionals can strengthen audience strategy, visibility, positioning, and reach.</textarea>
+  </div>
+
+</section>
+
+
+<!-- ======================================================
+FIT
+====================================================== -->
+
+<section class="panel" id="fit">
+
+  <div class="panel-header">
+    <div>
+      <h2>3. Grant Fit Analysis</h2>
+      <p>
+        A grant should be evaluated against the actual project rather than
+        forcing the project to become something it is not.
+      </p>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <div class="fit-card">
+      <strong>Strong Potential Fit</strong>
+      <p>
+        Grants supporting small-business growth, digital transformation,
+        entrepreneurship, technology development, workforce development,
+        education, community resources, or economic opportunity may
+        potentially align with the project.
+      </p>
+    </div>
+
+    <div class="danger-card">
+      <strong>Potential Mismatch</strong>
+      <p>
+        A grant should not be treated as a fit merely because money is
+        available. Restrictions on for-profit businesses, technology,
+        contractor expenses, marketing, staffing, geography, or
+        pre-existing projects can eliminate eligibility.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="table-wrap" style="margin-top:20px;">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Grant Requirement</th>
+          <th>Project Evidence</th>
+          <th>Fit</th>
+          <th>Verification Needed</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td>Business / Applicant Eligibility</td>
+          <td>Existing digital business initiative</td>
+          <td>
+            <select onchange="saveData()">
+              <option>Verify</option>
+              <option>Strong</option>
+              <option>Partial</option>
+              <option>No</option>
+            </select>
+          </td>
+          <td>Confirm funder's applicant rules</td>
+        </tr>
+
+        <tr>
+          <td>Technology / Development</td>
+          <td>Experienced developers to improve platforms</td>
+          <td>
+            <select onchange="saveData()">
+              <option>Verify</option>
+              <option>Strong</option>
+              <option>Partial</option>
+              <option>No</option>
+            </select>
+          </td>
+          <td>Check whether contractor development is allowable</td>
+        </tr>
+
+        <tr>
+          <td>Marketing / Outreach</td>
+          <td>Audience strategy and visibility</td>
+          <td>
+            <select onchange="saveData()">
+              <option>Verify</option>
+              <option>Strong</option>
+              <option>Partial</option>
+              <option>No</option>
+            </select>
+          </td>
+          <td>Check marketing restrictions</td>
+        </tr>
+
+        <tr>
+          <td>Economic / Business Impact</td>
+          <td>Improved systems, reach, products and operations</td>
+          <td>
+            <select onchange="saveData()">
+              <option>Verify</option>
+              <option>Strong</option>
+              <option>Partial</option>
+              <option>No</option>
+            </select>
+          </td>
+          <td>Define measurable outcomes</td>
+        </tr>
+
+        <tr>
+          <td>Community / Beneficiary Impact</td>
+          <td>Entrepreneurs, students, parents and other users</td>
+          <td>
+            <select onchange="saveData()">
+              <option>Verify</option>
+              <option>Strong</option>
+              <option>Partial</option>
+              <option>No</option>
+            </select>
+          </td>
+          <td>Define target beneficiaries</td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+<!-- ======================================================
+BUDGET
+====================================================== -->
+
+<section class="panel" id="budget">
+
+  <div class="panel-header">
+    <div>
+      <h2>4. Funding Allocation & Budget Builder</h2>
+      <p>
+        Build the budget around actual project requirements rather than
+        arbitrary percentages.
+      </p>
+    </div>
+  </div>
+
+  <div class="grid-3">
+
+    <div class="metric">
+      <div class="metric-number" id="budgetTotal">$0</div>
+      <div class="metric-label">Planned Grant Spending</div>
+    </div>
+
+    <div class="metric">
+      <div class="metric-number" id="budgetRemaining">$0</div>
+      <div class="metric-label">Grant Funds Remaining</div>
+    </div>
+
+    <div class="metric">
+      <div class="metric-number" id="budgetPercent">0%</div>
+      <div class="metric-label">Budget Allocated</div>
+    </div>
+
+  </div>
+
+  <div class="table-wrap" style="margin-top:20px;">
+
+    <table id="budgetTable">
+
+      <thead>
+        <tr>
+          <th>Expense</th>
+          <th>Estimated Cost</th>
+          <th>Grant Portion</th>
+          <th>Purpose / Justification</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td>
+            <strong>Experienced Developers</strong>
+          </td>
+
+          <td>
+            <input
+              class="cost"
+              type="number"
+              value="10000"
+              oninput="calculateBudget();saveData();">
+          </td>
+
+          <td>
+            <input
+              class="grantCost"
+              type="number"
+              value="10000"
+              oninput="calculateBudget();saveData();">
+          </td>
+
+          <td>
+            Improve functionality, infrastructure, usability,
+            scalability and technical reliability.
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <strong>Marketing Professionals</strong>
+          </td>
+
+          <td>
+            <input
+              class="cost"
+              type="number"
+              value="6000"
+              oninput="calculateBudget();saveData();">
+          </td>
+
+          <td>
+            <input
+              class="grantCost"
+              type="number"
+              value="6000"
+              oninput="calculateBudget();saveData();">
+          </td>
+
+          <td>
+            Develop audience strategies, positioning, outreach,
+            visibility and marketing systems.
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <strong>Technology & Infrastructure</strong>
+          </td>
+
+          <td>
+            <input
+              class="cost"
+              type="number"
+              value="3500"
+              oninput="calculateBudget();saveData();">
+          </td>
+
+          <td>
+            <input
+              class="grantCost"
+              type="number"
+              value="3500"
+              oninput="calculateBudget();saveData();">
+          </td>
+
+          <td>
+            Hosting, development infrastructure, testing,
+            security and required digital services.
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <strong>Content & Digital Assets</strong>
+          </td>
+
+          <td>
+            <input
+              class="cost"
+              type="number"
+              value="2500"
+              oninput="calculateBudget();saveData();">
+          </td>
+
+          <td>
+            <input
+              class="grantCost"
+              type="number"
+              value="2500"
+              oninput="calculateBudget();saveData();">
+          </td>
+
+          <td>
+            Educational resources, product assets,
+            documentation and supporting materials.
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <strong>Other Approved Expenses</strong>
+          </td>
+
+          <td>
+            <input
+              class="cost"
+              type="number"
+              value="3000"
+              oninput="calculateBudget();saveData();">
+          </td>
+
+          <td>
+            <input
+              class="grantCost"
+              type="number"
+              value="3000"
+              oninput="calculateBudget();saveData();">
+          </td>
+
+          <td>
+            Reserved for eligible project expenses identified
+            by the specific grant guidelines.
+          </td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+  <div class="warning-card" style="margin-top:18px;">
+    <strong>Important:</strong>
+    The categories above are a planning model, not a claim that every
+    grant permits these expenses. Replace, remove, or redistribute
+    categories according to the actual grant rules.
+  </div>
+
+</section>
+
+
+<!-- ======================================================
+PROJECT PLAN
+====================================================== -->
+
+<section class="panel" id="plan">
+
+  <div class="panel-header">
+    <div>
+      <h2>5. Grant-Funded Project Plan</h2>
+      <p>
+        Connect every major expense to a specific action and deliverable.
+      </p>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Phase</th>
+          <th>Action</th>
+          <th>Responsible Party</th>
+          <th>Deliverable</th>
+          <th>Evidence of Completion</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td>1. Technical Audit</td>
+          <td>Review existing websites, systems and technical weaknesses</td>
+          <td>Developer</td>
+          <td>Technical improvement plan</td>
+          <td>Written audit + prioritized task list</td>
+        </tr>
+
+        <tr>
+          <td>2. Development</td>
+          <td>Improve functionality and infrastructure</td>
+          <td>Developer</td>
+          <td>Functional platform improvements</td>
+          <td>Working features + testing results</td>
+        </tr>
+
+        <tr>
+          <td>3. Content Systems</td>
+          <td>Strengthen educational resources and digital products</td>
+          <td>Project Owner / Contractors</td>
+          <td>Expanded resource library</td>
+          <td>Published resources and product inventory</td>
+        </tr>
+
+        <tr>
+          <td>4. Marketing Strategy</td>
+          <td>Develop audience segmentation and outreach systems</td>
+          <td>Marketing Professional</td>
+          <td>Marketing strategy</td>
+          <td>Campaign plan + audience metrics</td>
+        </tr>
+
+        <tr>
+          <td>5. Launch / Growth</td>
+          <td>Increase visibility and reach</td>
+          <td>Project Team</td>
+          <td>Growth campaign</td>
+          <td>Traffic, engagement and conversion data</td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+<!-- ======================================================
+OUTCOMES
+====================================================== -->
+
+<section class="panel" id="outcomes">
+
+  <div class="panel-header">
+    <div>
+      <h2>6. Outcomes & Measurement</h2>
+      <p>
+        Convert the proposal from “I will spend money” into
+        “funding will produce measurable results.”
+      </p>
+    </div>
+  </div>
+
+  <div class="grid-3">
+
+    <div class="info-card">
+      <h3>Technology</h3>
+      <p>
+        More functional and reliable digital platforms,
+        improved user experience, stronger infrastructure,
+        and greater scalability.
+      </p>
+    </div>
+
+    <div class="info-card">
+      <h3>Audience Growth</h3>
+      <p>
+        Greater visibility among entrepreneurs, students,
+        parents and other intended beneficiaries.
+      </p>
+    </div>
+
+    <div class="info-card">
+      <h3>Business Development</h3>
+      <p>
+        Stronger systems for turning educational content,
+        resources and digital products into sustainable
+        business activity.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="table-wrap" style="margin-top:20px;">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Current Baseline</th>
+          <th>Target</th>
+          <th>How It Will Be Measured</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td>Functional Platforms</td>
+          <td><input value="Existing development stage"></td>
+          <td><input value="Production-ready improvements"></td>
+          <td>Feature completion / testing</td>
+        </tr>
+
+        <tr>
+          <td>Website Reach</td>
+          <td><input value="Enter current traffic"></td>
+          <td><input value="Set target"></td>
+          <td>Analytics</td>
+        </tr>
+
+        <tr>
+          <td>Educational Resources</td>
+          <td><input value="Existing resources"></td>
+          <td><input value="Set target"></td>
+          <td>Published resource count</td>
+        </tr>
+
+        <tr>
+          <td>Beneficiary Engagement</td>
+          <td><input value="Establish baseline"></td>
+          <td><input value="Set target"></td>
+          <td>Usage / engagement metrics</td>
+        </tr>
+
+        <tr>
+          <td>Business Opportunities</td>
+          <td><input value="Current baseline"></td>
+          <td><input value="Set target"></td>
+          <td>Leads, customers, partnerships or other defined measure</td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+<!-- ======================================================
+REQUIREMENTS
+====================================================== -->
+
+<section class="panel" id="requirements">
+
+  <div class="panel-header">
+    <div>
+      <h2>7. Application Requirements</h2>
+      <p>
+        Track whether the application can actually be submitted.
+      </p>
+    </div>
+  </div>
+
+  <div class="checklist">
+
+    <label class="check-item">
+      <input type="checkbox" class="requirement">
+      <span>Grant eligibility has been verified.</span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" class="requirement">
+      <span>Business / applicant status meets the funder's requirements.</span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" class="requirement">
+      <span>Project purpose matches the grant's stated priorities.</span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" class="requirement">
+      <span>All allowable and prohibited expenses have been reviewed.</span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" class="requirement">
+      <span>Grant-specific application questions have been identified.</span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" class="requirement">
+      <span>Project narrative has been prepared.</span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" class="requirement">
+      <span>Budget has been prepared and justified.</span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" class="requirement">
+      <span>Outcome metrics have been defined.</span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" class="requirement">
+      <span>Required attachments have been collected.</span>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" class="requirement">
+      <span>Final application has been reviewed before submission.</span>
+    </label>
+
+  </div>
+
+  <div style="margin-top:20px;">
+
+    <strong id="requirementText">
+      0 of 10 requirements completed
+    </strong>
+
+    <div class="progress" style="margin-top:8px;">
+      <div
+        class="progress-bar"
+        id="requirementBar">
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ======================================================
+TIMELINE
+====================================================== -->
+
+<section class="panel" id="timeline">
+
+  <div class="panel-header">
+    <div>
+      <h2>8. Application Timeline</h2>
+      <p>
+        Prevent the deadline from becoming the project plan.
+      </p>
+    </div>
+  </div>
+
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-date">Stage 1</div>
+      <div>
+        <strong>Opportunity Screening</strong>
+        <p>Confirm eligibility, funding purpose, geography, deadlines and restrictions.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Stage 2</div>
+      <div>
+        <strong>Project Fit</strong>
+        <p>Map the proposed project to the funder's priorities and explain the problem being addressed.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Stage 3</div>
+      <div>
+        <strong>Budget Development</strong>
+        <p>Connect every requested dollar to a legitimate project activity and expected result.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Stage 4</div>
+      <div>
+        <strong>Narrative & Evidence</strong>
+        <p>Prepare the project explanation, outcomes, evidence, attachments and supporting information.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Stage 5</div>
+      <div>
+        <strong>Final Review</strong>
+        <p>Check eligibility, numbers, attachments, formatting, answers and submission instructions.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Stage 6</div>
+      <div>
+        <strong>Submission & Tracking</strong>
+        <p>Record submission date, confirmation, expected decision date and follow-up requirements.</p>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ======================================================
+APPLICATION QUESTIONS
+====================================================== -->
+
+<section class="panel">
+
+  <div class="panel-header">
+    <div>
+      <h2>9. Grant Question Builder</h2>
+      <p>
+        Prepare reusable answers without blindly copying the same narrative
+        into every application.
+      </p>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <div class="field">
+      <label>What problem does the project address?</label>
+      <textarea
+        id="problem"
+        oninput="saveData()">Many organizations and individuals make important decisions using inconsistent or overly subjective processes. The project develops accessible digital education and structured resources that can help users approach decisions, operations, growth and opportunity navigation more systematically.</textarea>
+    </div>
+
+    <div class="field">
+      <label>What will funding change?</label>
+      <textarea
+        id="change"
+        oninput="saveData()">Funding would allow the initiative to move beyond development constraints by bringing in experienced technical and marketing support, improving functionality, strengthening infrastructure, expanding reach and establishing more effective systems for serving intended audiences.</textarea>
+    </div>
+
+    <div class="field">
+      <label>Who benefits?</label>
+      <textarea
+        id="beneficiaries"
+        oninput="saveData()">The intended beneficiaries include entrepreneurs and business owners, students and individuals seeking educational opportunities, parents seeking practical resources, and other people who can benefit from structured information, tools and digital resources.</textarea>
+    </div>
+
+    <div class="field">
+      <label>Why is funding important now?</label>
+      <textarea
+        id="timing"
+        oninput="saveData()">The projects have moved beyond the idea stage but require additional technical and marketing capacity to become stronger, more functional and more scalable. Funding at this stage would help convert existing development work into more usable and visible platforms.</textarea>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ======================================================
+SUMMARY
+====================================================== -->
+
+<section class="panel" id="summary">
+
+  <div class="panel-header">
+    <div>
+      <h2>10. Grant Submission Summary</h2>
+      <p>
+        Generate a reusable working summary from the information entered above.
+      </p>
+    </div>
+  </div>
+
+  <div
+    id="generatedSummary"
+    style="
+      background:#f6f8fa;
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:20px;
+      white-space:pre-wrap;
+      line-height:1.65;
+    ">
+  </div>
+
+  <div class="actions">
+
+    <button
+      class="btn btn-primary"
+      onclick="copySummary()">
+      Copy Grant Summary
+    </button>
+
+    <button
+      class="btn btn-green"
+      onclick="saveData()">
+      Save Progress
+    </button>
+
+    <button
+      class="btn btn-secondary"
+      onclick="window.print()">
+      Print / Save PDF
+    </button>
+
+    <button
+      class="btn btn-danger"
+      onclick="resetPlanner()">
+      Reset Planner
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- ======================================================
+DECISION FRAMEWORK
+====================================================== -->
+
+<section class="panel">
+
+  <div class="panel-header">
+    <div>
+      <h2>11. Grant Decision Framework</h2>
+      <p>
+        Not every grant deserves an application.
+      </p>
+    </div>
+  </div>
+
+  <div class="grid-3">
+
+    <div class="info-card">
+      <h3>Apply</h3>
+      <p>
+        Eligibility is confirmed, project fit is strong,
+        expenses are allowable, outcomes can be measured,
+        and the application can be completed on time.
+      </p>
+    </div>
+
+    <div class="info-card">
+      <h3>Investigate</h3>
+      <p>
+        The opportunity appears promising but one or more
+        critical facts—eligibility, expenses, geography,
+        deadline or documentation—remain unverified.
+      </p>
+    </div>
+
+    <div class="info-card">
+      <h3>Reject</h3>
+      <p>
+        The applicant or project clearly fails a major
+        requirement, the funding cannot be used for the
+        proposed purpose, or the application effort is
+        unlikely to justify the opportunity.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<footer>
+  Grant Intelligence & Application Planner · Reusable planning template
+</footer>
+
+
+<script>
+
+/* ======================================================
+NAVIGATION
+====================================================== */
+
+function goTo(id){
+  const element=document.getElementById(id);
+
+  if(element){
+    element.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+  }
+}
+
+
+/* ======================================================
+LOCAL STORAGE
+====================================================== */
+
+const STORAGE_KEY="grantIntelligencePlanner";
+
+function saveData(){
+
+  const data={};
+
+  document.querySelectorAll("input, textarea, select").forEach((el,index)=>{
+
+    if(el.type==="checkbox"){
+      data["checkbox_"+index]=el.checked;
+    }else{
+      data["field_"+index]=el.value;
+    }
+
+  });
+
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
+
+  updateAll();
+}
+
+
+function loadData(){
+
+  const saved=localStorage.getItem(STORAGE_KEY);
+
+  if(!saved) return;
+
+  try{
+
+    const data=JSON.parse(saved);
+
+    document.querySelectorAll("input, textarea, select").forEach((el,index)=>{
+
+      if(el.type==="checkbox"){
+
+        if(data["checkbox_"+index]!==undefined){
+          el.checked=data["checkbox_"+index];
+        }
+
+      }else{
+
+        if(data["field_"+index]!==undefined){
+          el.value=data["field_"+index];
+        }
+
+      }
+
+    });
+
+  }catch(error){
+
+    console.log("Saved planner data could not be loaded.");
+
+  }
+
+}
+
+
+/* ======================================================
+BUDGET CALCULATOR
+====================================================== */
+
+function calculateBudget(){
+
+  let total=0;
+
+  document.querySelectorAll(".grantCost").forEach(input=>{
+
+    total += Number(input.value)||0;
+
+  });
+
+  const grantAmount=
+    Number(document.getElementById("grantAmount").value)||0;
+
+  const remaining=grantAmount-total;
+
+  const percent=
+    grantAmount>0
+    ? Math.round((total/grantAmount)*100)
+    : 0;
+
+  document.getElementById("budgetTotal").textContent=
+    money(total);
+
+  document.getElementById("budgetRemaining").textContent=
+    money(remaining);
+
+  document.getElementById("budgetPercent").textContent=
+    percent+"%";
+
+}
+
+
+/* ======================================================
+MONEY
+====================================================== */
+
+function money(number){
+
+  return new Intl.NumberFormat("en-US",{
+    style:"currency",
+    currency:"USD",
+    maximumFractionDigits:0
+  }).format(number);
+
+}
+
+
+/* ======================================================
+REQUIREMENT SCORE
+====================================================== */
+
+function updateRequirements(){
+
+  const items=
+    document.querySelectorAll(".requirement");
+
+  const completed=
+    [...items].filter(item=>item.checked).length;
+
+  const total=items.length;
+
+  const percent=
+    total
+    ? Math.round((completed/total)*100)
+    : 0;
+
+  document.getElementById("requirementText").textContent=
+    completed+" of "+total+" requirements completed";
+
+  document.getElementById("requirementBar").style.width=
+    percent+"%";
+
+}
+
+
+/* ======================================================
+READINESS SCORE
+====================================================== */
+
+function calculateReadiness(){
+
+  let score=0;
+
+  let possible=0;
+
+
+  /* Requirements */
+
+  const requirements=
+    document.querySelectorAll(".requirement");
+
+  if(requirements.length){
+
+    const completed=
+      [...requirements].filter(item=>item.checked).length;
+
+    score += completed;
+    possible += requirements.length;
+
+  }
+
+
+  /* Grant information */
+
+  const importantFields=[
+    "grantName",
+    "funder",
+    "grantAmount",
+    "deadline",
+    "businessOverview",
+    "fundingNeed",
+    "problem",
+    "change",
+    "beneficiaries",
+    "timing"
+  ];
+
+  importantFields.forEach(id=>{
+
+    const el=document.getElementById(id);
+
+    if(el && el.value.trim()!==""){
+      score++;
+    }
+
+    possible++;
+
+  });
+
+
+  /* Budget */
+
+  let budgetRows=
+    document.querySelectorAll(".grantCost");
+
+  if(budgetRows.length){
+
+    let budgetTotal=0;
+
+    budgetRows.forEach(input=>{
+      budgetTotal+=Number(input.value)||0;
+    });
+
+    const grantAmount=
+      Number(document.getElementById("grantAmount").value)||0;
+
+    if(
+      grantAmount>0 &&
+      budgetTotal>0 &&
+      budgetTotal<=grantAmount
+    ){
+      score++;
+    }
+
+    possible++;
+
+  }
+
+
+  const percent=
+    possible
+    ? Math.round((score/possible)*100)
+    : 0;
+
+  document.getElementById("readinessScore").textContent=
+    percent+"%";
+
+  document.getElementById("readinessBar").style.width=
+    percent+"%";
+
+}
+
+
+/* ======================================================
+GENERATE SUMMARY
+====================================================== */
+
+function generateSummary(){
+
+  const grantName=
+    document.getElementById("grantName").value;
+
+  const funder=
+    document.getElementById("funder").value;
+
+  const grantAmount=
+    Number(document.getElementById("grantAmount").value)||0;
+
+  const deadline=
+    document.getElementById("deadline").value ||
+    "Not entered";
+
+  const business=
+    document.getElementById("businessOverview").value;
+
+  const need=
+    document.getElementById("fundingNeed").value;
+
+  const problem=
+    document.getElementById("problem").value;
+
+  const change=
+    document.getElementById("change").value;
+
+  const beneficiaries=
+    document.getElementById("beneficiaries").value;
+
+  const timing=
+    document.getElementById("timing").value;
+
+
+  let budgetTotal=0;
+
+  document.querySelectorAll(".grantCost").forEach(input=>{
+    budgetTotal+=Number(input.value)||0;
+  });
+
+
+  const remaining=
+    grantAmount-budgetTotal;
+
+
+  const summary=
+
+`${grantName.toUpperCase()}
+
+FUNDER
+${funder}
+
+REQUESTED FUNDING
+${money(grantAmount)}
+
+APPLICATION DEADLINE
+${deadline}
+
+PROJECT OVERVIEW
+${business}
+
+PROBLEM / NEED
+${problem}
+
+WHY FUNDING IS NEEDED
+${need}
+
+WHAT FUNDING WILL CHANGE
+${change}
+
+INTENDED BENEFICIARIES
+${beneficiaries}
+
+WHY NOW
+${timing}
+
+PLANNED FUNDING USE
+${money(budgetTotal)}
+
+REMAINING / UNALLOCATED GRANT FUNDS
+${money(remaining)}
+
+PROJECT STRUCTURE
+1. Conduct technical review and identify priority improvements.
+2. Hire experienced development support for functionality and scalability.
+3. Strengthen digital content and educational resources.
+4. Hire or engage qualified marketing support.
+5. Develop stronger audience and outreach strategies.
+6. Measure platform usage, audience growth, engagement and business outcomes.
+
+PRIMARY EXPECTED RESULTS
+• Stronger digital functionality
+• Improved scalability
+• Expanded educational resources
+• Stronger audience strategy
+• Greater visibility
+• Increased reach among entrepreneurs, students, parents and other intended beneficiaries
+• More measurable and sustainable business activity
+
+APPLICATION PRINCIPLE
+The final proposal, budget and claims must be adjusted to the specific grant's eligibility rules, allowable expenses, application questions and evaluation criteria.`;
+
+
+  document.getElementById("generatedSummary").textContent=
+    summary;
+
+  return summary;
+
+}
+
+
+/* ======================================================
+COPY SUMMARY
+====================================================== */
+
+function copySummary(){
+
+  const text=generateSummary();
+
+  if(navigator.clipboard){
+
+    navigator.clipboard.writeText(text)
+      .then(()=>{
+        alert("Grant summary copied to clipboard.");
+      })
+      .catch(()=>{
+        fallbackCopy(text);
+      });
+
+  }else{
+
+    fallbackCopy(text);
+
+  }
+
+}
+
+
+function fallbackCopy(text){
+
+  const textarea=document.createElement("textarea");
+
+  textarea.value=text;
+
+  document.body.appendChild(textarea);
+
+  textarea.select();
+
+  document.execCommand("copy");
+
+  textarea.remove();
+
+  alert("Grant summary copied to clipboard.");
+
+}
+
+
+/* ======================================================
+STATUS
+====================================================== */
+
+function updateStatus(){
+
+  const status=
+    document.getElementById("applicationStatus").value;
+
+  const element=
+    document.getElementById("grantStatus");
+
+  element.textContent=status;
+
+  element.className="status";
+
+  if(
+    status==="Submitted" ||
+    status==="Awarded"
+  ){
+
+    element.classList.add("status-green");
+
+  }else if(
+    status==="Preparing" ||
+    status==="Ready to Submit"
+  ){
+
+    element.classList.add("status-yellow");
+
+  }else{
+
+    element.classList.add("status-yellow");
+
+  }
+
+}
+
+
+/* ======================================================
+UPDATE EVERYTHING
+====================================================== */
+
+function updateAll(){
+
+  calculateBudget();
+
+  updateRequirements();
+
+  calculateReadiness();
+
+  generateSummary();
+
+  updateStatus();
+
+}
+
+
+/* ======================================================
+RESET
+====================================================== */
+
+function resetPlanner(){
+
+  const confirmed=
+    confirm(
+      "Reset the entire grant planner? Saved information will be removed."
+    );
+
+  if(!confirmed) return;
+
+  localStorage.removeItem(STORAGE_KEY);
+
+  location.reload();
+
+}
+
+
+/* ======================================================
+AUTO-SAVE CHECKBOXES
+====================================================== */
+
+document.addEventListener("change",function(event){
+
+  if(
+    event.target.classList.contains("requirement")
+  ){
+
+    saveData();
+
+  }
+
+});
+
+
+/* ======================================================
+INITIALIZE
+====================================================== */
+
+loadData();
+
+updateAll();
+
+</script>
+
+</body>
+</html>
