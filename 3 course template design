@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Year-Long Skill Mastery Dashboard</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter & Material Symbols -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            google: {
+              blue: '#1a73e8',
+              blueHover: '#1557b0',
+              blueLight: '#e8f0fe',
+              green: '#1e8e3e',
+              greenLight: '#e6f4ea',
+              yellow: '#f9ab00',
+              yellowLight: '#fef7e0',
+              red: '#d93025',
+              gray: '#5f6368',
+              bg: '#f8f9fa',
+              border: '#dadce0',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Google Material Style Scrollbar & Utilities */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #f1f3f4; }
+    ::-webkit-scrollbar-thumb { background: #dadce0; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #bdc1c6; }
+    .material-symbols-outlined { font-size: 20px; vertical-align: middle; }
+  </style>
+</head>
+<body class="bg-google-bg text-gray-800 font-sans p-2 sm:p-4 md:p-6 min-h-screen">
+
+  <div class="max-w-6xl mx-auto space-y-4">
+
+    <!-- Top App Bar / Banner -->
+    <header class="bg-white rounded-xl shadow-sm border border-google-border p-4 md:p-6 transition-all">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 text-google-blue font-semibold text-sm mb-1">
+            <span class="material-symbols-outlined">school</span>
+            <span>Self-Directed Mastery Program</span>
+          </div>
+          <h1 class="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight" id="courseTitle">UX Content Strategy Curriculum</h1>
+          <p class="text-sm text-google-gray mt-1">Structured 52-Week Learning Plan & Dynamic Portfolio Builder</p>
+        </div>
+
+        <!-- Domain Switcher Dropdown -->
+        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-2 bg-google-bg p-2 rounded-lg border border-google-border">
+          <label for="domainSelect" class="text-xs font-semibold text-google-gray uppercase tracking-wider pl-1">Track:</label>
+          <select id="domainSelect" onchange="switchDomain(this.value)" class="bg-white text-gray-900 text-sm font-medium rounded-md px-3 py-1.5 border border-google-border focus:ring-2 focus:ring-google-blue focus:outline-none w-full sm:w-auto cursor-pointer">
+            <option value="ux">UX Content Strategy</option>
+            <option value="tech-writing">Technical & Business Writing</option>
+            <option value="design">Graphic Design & Branding</option>
+            <option value="audio">Audio Editing & Sound Design</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Overall Progress Metrics Bar -->
+      <div class="mt-6 pt-4 border-t border-google-border grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-google-blueLight p-3 rounded-lg border border-blue-100">
+          <div class="text-xs font-medium text-google-blue uppercase">Total Completed</div>
+          <div class="text-xl md:text-2xl font-bold text-google-blue mt-0.5" id="completionPercent">0%</div>
+          <div class="w-full bg-blue-200 h-1.5 rounded-full mt-2 overflow-hidden">
+            <div id="progressBar" class="bg-google-blue h-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <div class="bg-google-greenLight p-3 rounded-lg border border-green-100">
+          <div class="text-xs font-medium text-google-green uppercase">Target Hours</div>
+          <div class="text-xl md:text-2xl font-bold text-google-green mt-0.5"><span id="loggedHours">0</span> / 520 hrs</div>
+          <div class="text-xs text-green-700 mt-1">10 hrs/week target</div>
+        </div>
+
+        <div class="bg-google-yellowLight p-3 rounded-lg border border-yellow-200">
+          <div class="text-xs font-medium text-amber-800 uppercase">Milestones</div>
+          <div class="text-xl md:text-2xl font-bold text-amber-900 mt-0.5"><span id="completedMilestonesCount">0</span> / <span id="totalMilestonesCount">16</span></div>
+          <div class="text-xs text-amber-800 mt-1">Key Deliverables</div>
+        </div>
+
+        <div class="bg-purple-50 p-3 rounded-lg border border-purple-100">
+          <div class="text-xs font-medium text-purple-700 uppercase">Active Phase</div>
+          <div class="text-base md:text-lg font-bold text-purple-900 mt-0.5 truncate" id="activeQuarterLabel">Q1: Foundations</div>
+          <div class="text-xs text-purple-700 mt-1" id="activeQuarterMonths">Jan – Mar</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Yearly 4-Quarter Overview Cards -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      <!-- Q1 Card -->
+      <div onclick="scrollToQuarter('q1')" class="bg-white p-4 rounded-xl border border-google-border shadow-sm hover:shadow-md cursor-pointer transition-all hover:border-google-blue group">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-bold text-google-blue bg-google-blueLight px-2 py-0.5 rounded-full">Q1 (Jan–Mar)</span>
+          <span class="text-xs text-google-gray font-medium" id="q1Percent">0%</span>
+        </div>
+        <h3 class="font-semibold text-gray-900 group-hover:text-google-blue transition-colors text-sm">Foundations & Principles</h3>
+        <p class="text-xs text-google-gray mt-1 line-clamp-2" id="q1Desc">Core rules, audit teardowns, and framework basics.</p>
+      </div>
+
+      <!-- Q2 Card -->
+      <div onclick="scrollToQuarter('q2')" class="bg-white p-4 rounded-xl border border-google-border shadow-sm hover:shadow-md cursor-pointer transition-all hover:border-google-blue group">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-bold text-google-green bg-google-greenLight px-2 py-0.5 rounded-full">Q2 (Apr–Jun)</span>
+          <span class="text-xs text-google-gray font-medium" id="q2Percent">0%</span>
+        </div>
+        <h3 class="font-semibold text-gray-900 group-hover:text-google-blue transition-colors text-sm">Applied Workflows</h3>
+        <p class="text-xs text-google-gray mt-1 line-clamp-2" id="q2Desc">Tooling integration, component drafting, and execution.</p>
+      </div>
+
+      <!-- Q3 Card -->
+      <div onclick="scrollToQuarter('q3')" class="bg-white p-4 rounded-xl border border-google-border shadow-sm hover:shadow-md cursor-pointer transition-all hover:border-google-blue group">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-bold text-amber-800 bg-google-yellowLight px-2 py-0.5 rounded-full">Q3 (Jul–Sep)</span>
+          <span class="text-xs text-google-gray font-medium" id="q3Percent">0%</span>
+        </div>
+        <h3 class="font-semibold text-gray-900 group-hover:text-google-blue transition-colors text-sm">Specialization & Testing</h3>
+        <p class="text-xs text-google-gray mt-1 line-clamp-2" id="q3Desc">User feedback, edge case handling, and system tuning.</p>
+      </div>
+
+      <!-- Q4 Card -->
+      <div onclick="scrollToQuarter('q4')" class="bg-white p-4 rounded-xl border border-google-border shadow-sm hover:shadow-md cursor-pointer transition-all hover:border-google-blue group">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-bold text-purple-800 bg-purple-50 px-2 py-0.5 rounded-full">Q4 (Oct–Dec)</span>
+          <span class="text-xs text-google-gray font-medium" id="q4Percent">0%</span>
+        </div>
+        <h3 class="font-semibold text-gray-900 group-hover:text-google-blue transition-colors text-sm">Capstone & Launch</h3>
+        <p class="text-xs text-google-gray mt-1 line-clamp-2" id="q4Desc">Full case study compilation, polish, and public release.</p>
+      </div>
+    </section>
+
+    <!-- Interactive Accordions for Quarters -->
+    <main class="space-y-4" id="syllabusContainer">
+      <!-- Dynamic Quarters render here via JS -->
+    </main>
+
+    <!-- Google Drive & Google Docs Resource Hub Section -->
+    <section class="bg-white rounded-xl border border-google-border p-5 shadow-sm mt-6">
+      <div class="flex items-center gap-2 mb-3">
+        <span class="material-symbols-outlined text-google-blue">folder_shared</span>
+        <h2 class="text-base font-bold text-gray-900">Google Sites Workspace & Quick Links</h2>
+      </div>
+      <p class="text-xs text-google-gray mb-4">Access external course materials, template files, or turn in weekly deliverables using these mock links.</p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <a href="javascript:void(0)" onclick="alert('Mock Link: Redirecting to shared Google Drive Folder for syllabus templates.')" class="flex items-center gap-3 p-3 rounded-lg border border-google-border hover:bg-google-bg transition-colors group">
+          <div class="w-9 h-9 rounded-md bg-blue-50 text-google-blue flex items-center justify-center font-bold">
+            <span class="material-symbols-outlined">folder</span>
+          </div>
+          <div>
+            <div class="text-xs font-semibold text-gray-900 group-hover:text-google-blue">Google Drive Assets</div>
+            <div class="text-[11px] text-google-gray">Templates & Readings</div>
+          </div>
+        </a>
+
+        <a href="javascript:void(0)" onclick="alert('Mock Link: Redirecting to Google Docs Case Study Worksheet.')" class="flex items-center gap-3 p-3 rounded-lg border border-google-border hover:bg-google-bg transition-colors group">
+          <div class="w-9 h-9 rounded-md bg-blue-50 text-google-blue flex items-center justify-center font-bold">
+            <span class="material-symbols-outlined">description</span>
+          </div>
+          <div>
+            <div class="text-xs font-semibold text-gray-900 group-hover:text-google-blue">Case Study Doc</div>
+            <div class="text-[11px] text-google-gray">Interactive Workbook</div>
+          </div>
+        </a>
+
+        <a href="javascript:void(0)" onclick="alert('Mock Link: Redirecting to Google Form for weekly milestone submission.')" class="flex items-center gap-3 p-3 rounded-lg border border-google-border hover:bg-google-bg transition-colors group">
+          <div class="w-9 h-9 rounded-md bg-green-50 text-google-green flex items-center justify-center font-bold">
+            <span class="material-symbols-outlined">assignment_turned_in</span>
+          </div>
+          <div>
+            <div class="text-xs font-semibold text-gray-900 group-hover:text-google-green">Submit Deliverable</div>
+            <div class="text-[11px] text-google-gray">Google Forms Review</div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer Controls -->
+    <footer class="flex flex-col sm:flex-row items-center justify-between text-xs text-google-gray pt-2 pb-6 px-1 gap-2">
+      <div>Yearly Curriculum Engine &bull; Ready for Google Sites iFrame Embed</div>
+      <button onclick="resetProgress()" class="text-google-red hover:underline flex items-center gap-1">
+        <span class="material-symbols-outlined text-sm">restart_alt</span> Reset Progress Data
+      </button>
+    </footer>
+
+  </div>
+
+  <script>
+    // Domains Data Structure
+    const domainData = {
+      "ux": {
+        title: "UX Content Strategy & Microcopy",
+        quarters: [
+          {
+            id: "q1",
+            name: "Q1: Foundations & Principles",
+            months: "Jan – Mar",
+            desc: "Voice & tone frameworks, heuristics, and microcopy auditing.",
+            modules: [
+              { id: "m1", title: "Weeks 1-2: Voice & Tone Audits", tasks: [
+                { id: "ux_1", text: "Read Google Material Design Content Guidelines", hours: 5 },
+                { id: "ux_2", text: "Audit 3 apps (e.g. Duolingo, Airbnb) for error message copy", hours: 5, milestone: true }
+              ]},
+              { id: "m2", title: "Weeks 3-4: Onboarding & User Flows", tasks: [
+                { id: "ux_3", text: "Map 5 core user signup flows and rewrite microcopy", hours: 10 },
+                { id: "ux_4", text: "Milestone: Publish initial Tone of Voice matrix", hours: 10, milestone: true }
+              ]}
+            ]
+          },
+          {
+            id: "q2",
+            name: "Q2: Applied Tooling & Figma Workflows",
+            months: "Apr – Jun",
+            desc: "Figma text components, component libraries, and accessibility.",
+            modules: [
+              { id: "m3", title: "Weeks 13-16: Design System Integration", tasks: [
+                { id: "ux_5", text: "Learn Figma text styles and component variants", hours: 10 },
+                { id: "ux_6", text: "Build a copy component library for modal alerts & tooltips", hours: 10, milestone: true }
+              ]},
+              { id: "m4", title: "Weeks 17-20: WCAG Accessibility Content Standards", tasks: [
+                { id: "ux_7", text: "Audit screen reader labels and alt text for key components", hours: 10 },
+                { id: "ux_8", text: "Milestone: Deliver accessible copy guidelines doc", hours: 10, milestone: true }
+              ]}
+            ]
+          },
+          {
+            id: "q3",
+            name: "Q3: Testing, Data & User Iteration",
+            months: "Jul – Sep",
+            desc: "A/B copy testing, readability metrics, and feedback loops.",
+            modules: [
+              { id: "m5", title: "Weeks 27-30: Comprehension Testing & Surveys", tasks: [
+                { id: "ux_9", text: "Run highlighter tests on 5 complex onboarding steps", hours: 10 },
+                { id: "ux_10", text: "Conduct 5 user testing sessions on CTA variations", hours: 10, milestone: true }
+              ]},
+              { id: "m6", title: "Weeks 31-34: Edge Case Copywriting", tasks: [
+                { id: "ux_11", text: "Draft strings for empty states, payment failures, & server errors", hours: 10 },
+                { id: "ux_12", text: "Milestone: Compile tested copy dictionary", hours: 10, milestone: true }
+              ]}
+            ]
+          },
+          {
+            id: "q4",
+            name: "Q4: Capstone Case Study & Public Portfolio",
+            months: "Oct – Dec",
+            desc: "Storyboarding, case study synthesis, and public release.",
+            modules: [
+              { id: "m7", title: "Weeks 40-44: Portfolio Synthesis", tasks: [
+                { id: "ux_13", text: "Document before/after metrics and design rationale", hours: 10 },
+                { id: "ux_14", text: "Build case study layout on Webflow or Google Sites", hours: 10, milestone: true }
+              ]},
+              { id: "m8", title: "Weeks 45-52: Final Polish & Launch", tasks: [
+                { id: "ux_15", text: "Peer review with 3 senior content strategists", hours: 10 },
+                { id: "ux_16", text: "Milestone: Publicly launch portfolio and write launch post", hours: 10, milestone: true }
+              ]}
+            ]
+          }
+        ]
+      },
+      "tech-writing": {
+        title: "Technical & Business Writing Mastery",
+        quarters: [
+          {
+            id: "q1",
+            name: "Q1: Foundations of Technical Clarity",
+            months: "Jan – Mar",
+            desc: "Grammar, structured authoring, and documentation architecture.",
+            modules: [
+              { id: "tw1", title: "Weeks 1-4: Audience Analysis & Style Guides", tasks: [
+                { id: "tw_1", text: "Study Microsoft Manual of Style guidelines", hours: 10 },
+                { id: "tw_2", text: "Milestone: Re-write 3 complex API user guides for clarity", hours: 10, milestone: true }
+              ]}
+            ]
+          },
+          {
+            id: "q2",
+            name: "Q2: Grant Proposals & Business Reports",
+            months: "Apr – Jun",
+            desc: "Problem statements, budgeting, logic models, and executive summaries.",
+            modules: [
+              { id: "tw2", title: "Weeks 13-16: Grant Writing Fundamentals", tasks: [
+                { id: "tw_3", text: "Draft a 5-page grant proposal for a local non-profit", hours: 10 },
+                { id: "tw_4", text: "Milestone: Complete logic model & budget narrative", hours: 10, milestone: true }
+              ]}
+            ]
+          },
+          {
+            id: "q3",
+            name: "Q3: Docs-as-Code & Markdown Automation",
+            months: "Jul – Sep",
+            desc: "Git workflows, static site generators, and developer docs.",
+            modules: [
+              { id: "tw3", title: "Weeks 27-30: Developer Portals", tasks: [
+                { id: "tw_5", text: "Build a documentation portal using MkDocs or Docusaurus", hours: 10 },
+                { id: "tw_6", text: "Milestone: Publish live OpenAPI specification walkthrough", hours: 10, milestone: true }
+              ]}
+            ]
+          },
+          {
+            id: "q4",
+            name: "Q4: Portfolio Compilation & Grant Submissions",
+            months: "Oct – Dec",
+            desc: "Public portfolio, client editing cases, and capstone release.",
+            modules: [
+              { id: "tw4", title: "Weeks 40-48: Writing Portfolio", tasks: [
+                { id: "tw_7", text: "Compile technical guides, grants, and whitepapers into portfolio", hours: 10 },
+                { id: "tw_8", text: "Milestone: Launch Technical Writing Portfolio", hours: 10, milestone: true }
+              ]}
+            ]
+          }
+        ]
+      },
+      "design": {
+        title: "Graphic Design & Brand Systems",
+        quarters: [
+          {
+            id: "q1",
+            name: "Q1: Visual Fundamentals & Typography",
+            months: "Jan – Mar",
+            desc: "Color theory, hierarchy, grid systems, and font pairing.",
+            modules: [
+              { id: "gd1", title: "Weeks 1-4: Layout & Grid Systems", tasks: [
+                { id: "gd_1", text: "Design 5 typographic posters using strict 12-column grids", hours: 10 },
+                { id: "gd_2", text: "Milestone: Publish font pairing system guide", hours: 10, milestone: true }
+              ]}
+            ]
+          },
+          {
+            id: "q2",
+            name: "Q2: Brand Identity Systems",
+            months: "Apr – Jun",
+            desc: "Logo design, vector graphics, and brand style guides.",
+            modules: [
+              { id: "gd2", title: "Weeks 13-16: Brand Identity Kit", tasks: [
+                { id: "gd_3", text: "Create full visual identity for a local coffee shop", hours: 10 },
+                { id: "gd_4", text: "Milestone: Deliver 20-page Brand Guidelines Book", hours: 10, milestone: true }
+              ]}
+            ]
+          },
+          {
+            id: "q3",
+            name: "Q3: Packaging & Editorial Design",
+            months: "Jul – Sep",
+            desc: "Print prepress, packaging mockups, and publication layout.",
+            modules: [
+              { id: "gd3", title: "Weeks 27-30: Packaging & Print", tasks: [
+                { id: "gd_5", text: "Design 3D packaging mockups with die-lines", hours: 10 },
+                { id: "gd_6", text: "Milestone: Print physical prototype and document photography", hours: 10, milestone: true }
+              ]}
+            ]
+          },
+          {
+            id: "q4",
+            name: "Q4: Portfolio Presentation & Launch",
+            months: "Oct – Dec",
+            desc: "Behance/Dribbble case studies and client site launch.",
+            modules: [
+              { id: "gd4", title: "Weeks 40-48: Brand Case Studies", tasks: [
+                { id: "gd_7", text: "Build high-resolution mockups and present strategy", hours: 10 },
+                { id: "gd_8", text: "Milestone: Launch Behance/Website Portfolio", hours: 10, milestone: true }
+              ]}
+            ]
+          }
+        ]
+      },
+      "audio": {
+        title: "Audio Editing & Sound Design",
+        quarters: [
+          {
+            id: "q1",
+            name: "Q1: Acoustics & DAW Fundamentals",
+            months: "Jan – Mar",
+            desc: "Digital Audio Workstation basics, EQ, compression, and noise removal.",
+            modules: [
+              { id: "au1", title: "Weeks 1-4: Dialogue Clean-up", tasks: [
+                { id: "au_1", text: "Master noise gating, de-essing, and surgical EQ", hours: 10 },
+                { id: "au_2", text: "Milestone: Clean up 10 minutes of noisy podcast audio", hours: 10, milestone: true }
+              ]}
+            ]
+          },
+          {
+            id: "q2",
+            name: "Q2: Mixing & Podcast Production",
+            months: "Apr – Jun",
+            desc: "Music ducking, stereo imaging, and loudness normalization (LUFS).",
+            modules: [
+              { id: "au2", title: "Weeks 13-16: Multi-track Mixing", tasks: [
+                { id: "au_3", text: "Mix dialogue, sound effects, and background music", hours: 10 },
+                { id: "au_4", text: "Milestone: Master a 15-minute podcast episode to -16 LUFS", hours: 10, milestone: true }
+              ]}
+            ]
+          },
+          {
+            id: "q3",
+            name: "Q3: Sound Design for Visual Media",
+            months: "Jul – Sep",
+            desc: "Foley recording, synthesis, and audio sync for video clips.",
+            modules: [
+              { id: "au3", title: "Weeks 27-30: Foley & Cinematic SFX", tasks: [
+                { id: "au_5", text: "Redo full audio track for a 60-second animated film", hours: 10 },
+                { id: "au_6", text: "Milestone: Deliver re-sounded video trailer", hours: 10, milestone: true }
+              ]}
+            ]
+          },
+          {
+            id: "q4",
+            name: "Q4: Audio Reel & Portfolio Launch",
+            months: "Oct – Dec",
+            desc: "Showreel creation, licensing standards, and client portfolio.",
+            modules: [
+              { id: "au4", title: "Weeks 40-48: Audio Showreel", tasks: [
+                { id: "au_7", text: "Cut 2-minute highlight reel of best mixes and sound design", hours: 10 },
+                { id: "au_8", text: "Milestone: Launch Sound Design Portfolio Website", hours: 10, milestone: true }
+              ]}
+            ]
+          }
+        ]
+      }
+    };
+
+    // Application State
+    let currentDomainKey = "ux";
+    let userState = {
+      completedTasks: {} // e.g. { "ux_1": true, "ux_2": false }
+    };
+
+    // Load from localStorage
+    function loadSavedState() {
+      const saved = localStorage.getItem("gSitesCurriculumState");
+      if (saved) {
+        try {
+          userState = JSON.parse(saved);
+        } catch(e) {
+          console.error("Could not parse saved state", e);
+        }
+      }
+      const savedDomain = localStorage.getItem("gSitesCurriculumDomain");
+      if (savedDomain && domainData[savedDomain]) {
+        currentDomainKey = savedDomain;
+        document.getElementById("domainSelect").value = currentDomainKey;
+      }
+    }
+
+    // Save to localStorage
+    function saveState() {
+      localStorage.setItem("gSitesCurriculumState", JSON.stringify(userState));
+      localStorage.setItem("gSitesCurriculumDomain", currentDomainKey);
+    }
+
+    // Switch Domain
+    function switchDomain(newDomain) {
+      currentDomainKey = newDomain;
+      saveState();
+      renderApp();
+    }
+
+    // Render Function
+    function renderApp() {
+      const domain = domainData[currentDomainKey];
+      
+      // Update Title
+      document.getElementById("courseTitle").innerText = domain.title;
+
+      // Update Summaries for Q1-Q4 Cards
+      domain.quarters.forEach(q => {
+        const descEl = document.getElementById(`${q.id}Desc`);
+        if (descEl) descEl.innerText = q.desc;
+      });
+
+      // Render Syllabus Accordions
+      const container = document.getElementById("syllabusContainer");
+      container.innerHTML = "";
+
+      let totalTasksCount = 0;
+      let completedTasksCount = 0;
+      let totalLoggedHours = 0;
+      let totalMilestones = 0;
+      let completedMilestones = 0;
+
+      domain.quarters.forEach((quarter, qIdx) => {
+        let qTotalTasks = 0;
+        let qCompletedTasks = 0;
+
+        // Build Quarter Accordion Box
+        const quarterEl = document.createElement("div");
+        quarterEl.id = `quarter-${quarter.id}`;
+        quarterEl.className = "bg-white rounded-xl border border-google-border shadow-sm overflow-hidden transition-all";
+
+        let modulesHTML = "";
+
+        quarter.modules.forEach(mod => {
+          let tasksHTML = "";
+
+          mod.tasks.forEach(task => {
+            totalTasksCount++;
+            qTotalTasks++;
+            if (task.milestone) totalMilestones++;
+
+            const isChecked = !!userState.completedTasks[task.id];
+            if (isChecked) {
+              completedTasksCount++;
+              qCompletedTasks++;
+              totalLoggedHours += task.hours;
+              if (task.milestone) completedMilestones++;
+            }
+
+            tasksHTML += `
+              <label class="flex items-start gap-3 p-2.5 rounded-lg hover:bg-google-bg transition-colors cursor-pointer group">
+                <input type="checkbox" 
+                       onchange="toggleTask('${task.id}')" 
+                       ${isChecked ? 'checked' : ''} 
+                       class="mt-1 w-4 h-4 text-google-blue rounded border-google-border focus:ring-google-blue cursor-pointer">
+                <div class="flex-1 text-xs">
+                  <span class="${isChecked ? 'line-through text-google-gray' : 'text-gray-800 font-medium'}">
+                    ${task.text}
+                  </span>
+                  ${task.milestone ? '<span class="ml-2 text-[10px] font-bold text-amber-800 bg-google-yellowLight px-1.5 py-0.5 rounded">Milestone</span>' : ''}
+                </div>
+                <span class="text-[11px] text-google-gray font-mono">${task.hours} hrs</span>
+              </label>
+            `;
+          });
+
+          modulesHTML += `
+            <div class="border-t border-gray-100 first:border-t-0 pt-3 mt-3 first:pt-0 first:mt-0">
+              <h4 class="text-xs font-bold text-google-gray uppercase tracking-wider mb-2">${mod.title}</h4>
+              <div class="space-y-1">${tasksHTML}</div>
+            </div>
+          `;
+        });
+
+        const qPercent = qTotalTasks > 0 ? Math.round((qCompletedTasks / qTotalTasks) * 100) : 0;
+        document.getElementById(`${quarter.id}Percent`).innerText = `${qPercent}%`;
+
+        quarterEl.innerHTML = `
+          <details ${qIdx === 0 ? 'open' : ''} class="group">
+            <summary class="flex items-center justify-between p-4 cursor-pointer select-none bg-white hover:bg-google-bg transition-colors">
+              <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-google-gray group-open:rotate-180 transition-transform">expand_more</span>
+                <div>
+                  <h3 class="text-base font-bold text-gray-900">${quarter.name}</h3>
+                  <p class="text-xs text-google-gray">${quarter.months} &bull; ${quarter.desc}</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="text-xs font-semibold px-2.5 py-1 rounded-full ${qPercent === 100 ? 'bg-google-greenLight text-google-green' : 'bg-google-blueLight text-google-blue'}">
+                  ${qPercent}% Complete
+                </span>
+              </div>
+            </summary>
+            <div class="p-4 pt-2 border-t border-google-border bg-white space-y-4">
+              ${modulesHTML}
+            </div>
+          </details>
+        `;
+
+        container.appendChild(quarterEl);
+      });
+
+      // Update Overall Summary Stats
+      const overallPercent = totalTasksCount > 0 ? Math.round((completedTasksCount / totalTasksCount) * 100) : 0;
+      document.getElementById("completionPercent").innerText = `${overallPercent}%`;
+      document.getElementById("progressBar").style.width = `${overallPercent}%`;
+      document.getElementById("loggedHours").innerText = totalLoggedHours;
+      document.getElementById("completedMilestonesCount").innerText = completedMilestones;
+      document.getElementById("totalMilestonesCount").innerText = totalMilestones;
+    }
+
+    // Toggle Checkbox
+    function toggleTask(taskId) {
+      userState.completedTasks[taskId] = !userState.completedTasks[taskId];
+      saveState();
+      renderApp();
+    }
+
+    // Reset Progress
+    function resetProgress() {
+      if (confirm("Are you sure you want to reset all completed tasks for this curriculum?")) {
+        userState.completedTasks = {};
+        saveState();
+        renderApp();
+      }
+    }
+
+    // Smooth Scroll Helper
+    function scrollToQuarter(qId) {
+      const el = document.getElementById(`quarter-${qId}`);
+      if (el) {
+        const details = el.querySelector("details");
+        if (details) details.open = true;
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    // Initialize on Load
+    window.onload = function() {
+      loadSavedState();
+      renderApp();
+    };
+  </script>
+</body>
+</html>
