@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta property="og:title" content="Lead With Speaking | Systems That Eliminate Chaos">
+<meta property="og:description" content="Build structured workflows, eliminate chaos, and increase income with proven systems.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://images.unsplash.com/photo-1551288049-bebda4e38f71">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Systems That Eliminate Chaos">
+<meta name="twitter:description" content="Structured workflows for clarity, discipline, and income growth.">
+
+<meta name="author" content="Lead With Speaking">
+
+<title>Products | Lead With Speaking</title>
+
+<meta name="description" content="Premium productivity systems, workflow tools, planners, journals, and leadership frameworks designed to eliminate chaos and increase execution.">
+
+<meta name="keywords" content="workflow systems, productivity tools, leadership systems, planners, journals, digital downloads">
+
+
+<style>
+
+/* =========================
+   GLOBAL
+========================= */
+
+body{
+
+margin:0;
+
+font-family:
+Arial,
+Helvetica,
+sans-serif;
+
+background-color:#d9f0ff;
+
+color:#2d2424;
+
+line-height:1.6;
+
+}
+
+
+*{
+
+box-sizing:border-box;
+
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar{
+
+display:flex;
+
+justify-content:space-between;
+
+padding:20px 40px;
+
+background-color:#3b2f2f;
+
+color:white;
+
+align-items:center;
+
+}
+
+
+.nav-links{
+
+display:flex;
+
+flex-wrap:wrap;
+
+}
+
+
+.nav-links a{
+
+margin:0 15px;
+
+color:white;
+
+text-decoration:none;
+
+font-weight:bold;
+
+}
+
+
+.nav-links a:hover{
+
+color:#d9f0ff;
+
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+
+background:#3b2f2f;
+
+color:white;
+
+text-align:center;
+
+padding:45px 20px;
+
+}
+
+
+.hero h1{
+
+margin:0 0 10px 0;
+
+font-size:32px;
+
+}
+
+
+.hero p{
+
+margin:10px auto 20px auto;
+
+max-width:700px;
+
+font-size:15px;
+
+}
+
+
+.hero br{
+
+display:none;
+
+}
+
+
+/* =========================
+   SECTION
+========================= */
+
+.section{
+
+padding:60px 40px;
+
+}
+
+
+.section h2{
+
+font-size:28px;
+
+margin-bottom:20px;
+
+}
+
+
+/* =========================
+   DARK SECTION
+========================= */
+
+.dark-section{
+
+background:#3b2f2f;
+
+color:white;
+
+}
+
+
+/* =========================
+   PRODUCT GRID
+========================= */
+
+.products{
+
+text-align:center;
+
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.card{
+
+background:white;
+
+border-radius:15px;
+
+padding:20px;
+
+margin:15px;
+
+width:280px;
+
+display:inline-block;
+
+vertical-align:top;
+
+text-align:left;
+
+box-shadow:
+0 8px 20px rgba(0,0,0,.08);
+
+}
+
+
+.card img{
+
+width:100%;
+
+height:220px;
+
+object-fit:cover;
+
+border-radius:10px;
+
+}
+
+
+.card h3{
+
+margin-bottom:10px;
+
+}
+
+
+.card p{
+
+font-size:14px;
+
+line-height:1.5;
+
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.btn{
+
+display:inline-block;
+
+padding:10px 20px;
+
+margin-top:10px;
+
+background-color:#3b2f2f;
+
+color:white;
+
+border-radius:50px;
+
+text-decoration:none;
+
+border:none;
+
+cursor:pointer;
+
+font-weight:bold;
+
+}
+
+
+.btn:hover{
+
+background:#594747;
+
+}
+
+
+/* =========================
+   VALUE SECTION
+========================= */
+
+.value-section{
+
+background:#f7fbff;
+
+text-align:center;
+
+}
+
+
+.value-intro{
+
+max-width:750px;
+
+margin:0 auto 40px auto;
+
+color:#555;
+
+}
+
+
+.value-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(220px,1fr));
+
+gap:25px;
+
+max-width:1100px;
+
+margin:auto;
+
+}
+
+
+.value-card{
+
+background:white;
+
+padding:30px;
+
+border-radius:15px;
+
+border-top:5px solid #3b2f2f;
+
+box-shadow:
+0 8px 20px rgba(0,0,0,.07);
+
+text-align:left;
+
+}
+
+
+.value-number{
+
+font-size:14px;
+
+font-weight:bold;
+
+color:#8b6b55;
+
+letter-spacing:1px;
+
+}
+
+
+.value-card h3{
+
+margin:10px 0;
+
+color:#3b2f2f;
+
+}
+
+
+.value-card p{
+
+font-size:14px;
+
+color:#555;
+
+}
+
+
+/* =========================
+   SYSTEM MAP
+========================= */
+
+.system-map{
+
+max-width:1100px;
+
+margin:45px auto 0 auto;
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(180px,1fr));
+
+gap:15px;
+
+}
+
+
+.system-step{
+
+padding:25px 15px;
+
+background:#4a3b3b;
+
+border-radius:12px;
+
+text-align:center;
+
+color:white;
+
+}
+
+
+.system-step strong{
+
+display:block;
+
+font-size:20px;
+
+margin-bottom:8px;
+
+color:#d9f0ff;
+
+}
+
+
+/* =========================
+   BUNDLE
+========================= */
+
+.bundle{
+
+background:
+linear-gradient(
+135deg,
+#3b2f2f,
+#594747
+);
+
+color:white;
+
+text-align:center;
+
+padding:65px 30px;
+
+}
+
+
+.bundle h2{
+
+font-size:32px;
+
+margin-bottom:15px;
+
+}
+
+
+.bundle p{
+
+max-width:750px;
+
+margin:0 auto 25px auto;
+
+}
+
+
+.bundle .btn{
+
+background:#d9f0ff;
+
+color:#3b2f2f;
+
+}
+
+
+.bundle .btn:hover{
+
+background:white;
+
+}
+
+
+/* =========================
+   FAQ
+========================= */
+
+.faq{
+
+max-width:900px;
+
+margin:auto;
+
+}
+
+
+.faq-item{
+
+background:white;
+
+padding:20px;
+
+margin-bottom:15px;
+
+border-radius:12px;
+
+border-left:5px solid #3b2f2f;
+
+}
+
+
+.faq-item strong{
+
+color:#3b2f2f;
+
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+
+background:#3b2f2f;
+
+color:white;
+
+text-align:center;
+
+padding:40px;
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:700px){
+
+.navbar{
+
+flex-direction:column;
+
+gap:15px;
+
+padding:20px;
+
+}
+
+.nav-links{
+
+justify-content:center;
+
+}
+
+.nav-links a{
+
+margin:5px 8px;
+
+font-size:13px;
+
+}
+
+.hero h1{
+
+font-size:25px;
+
+}
+
+.section{
+
+padding:45px 20px;
+
+}
+
+.card{
+
+width:90%;
+
+margin:15px auto;
+
+display:block;
+
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVIGATION
+========================= -->
+
+<header class="navbar">
+
+<div>
+
+<strong>Lead With Speaking</strong>
+
+</div>
+
+
+<nav class="nav-links">
+
+<a href="#">Home</a>
+
+<a href="#">Products</a>
+
+<a href="#">About</a>
+
+<a href="#">Resources</a>
+
+<a href="#">Contact</a>
+
+<a href="#">
+Cart 🛒
+<span id="cart-count">0</span>
+</a>
+
+</nav>
+
+</header>
+
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+<h1>
+Eliminate Chaos. Build Systems That Pay You.
+</h1>
+
+<p>
+
+Most people are not disorganized because they are lazy —
+they lack systems.
+
+These tools are designed to help you think clearly,
+operate efficiently, and turn intentions into consistent action.
+
+</p>
+
+<a href="#products" class="btn">
+
+Explore Systems
+
+</a>
+
+</section>
+
+
+
+<!-- =========================
+     PRODUCTS
+========================= -->
+
+<section class="section products" id="products">
+
+<h2>
+Digital & Physical Systems
+</h2>
+
+
+<div class="card">
+
+<img
+src="https://images.unsplash.com/photo-1551288049-bebda4e38f71"
+alt="Workflow analytics and planning system"
+>
+
+<h3>
+Workflow Toolkit
+</h3>
+
+<p>
+
+A structured framework that helps you break down complex
+work into repeatable systems.
+
+Ideal for creators, freelancers, and leaders who feel overwhelmed.
+
+</p>
+
+<p>
+
+<strong>Includes:</strong>
+Templates, workflow maps, and execution guides.
+
+</p>
+
+<button onclick="addToCart()" class="btn">
+
+Add to Cart
+
+</button>
+
+</div>
+
+
+
+<div class="card">
+
+<img
+src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40"
+alt="Business planning and audit workspace"
+>
+
+<h3>
+Audit System
+</h3>
+
+<p>
+
+Identify where time, money, and energy are being wasted.
+
+This system helps reveal hidden inefficiencies
+before they become expensive problems.
+
+</p>
+
+<p>
+
+<strong>Best for:</strong>
+Business owners and side hustlers.
+
+</p>
+
+<button onclick="addToCart()" class="btn">
+
+Add to Cart
+
+</button>
+
+</div>
+
+
+
+<div class="card">
+
+<img
+src="https://images.unsplash.com/photo-1517842645767-c639042777db"
+alt="Open physical journal with blank pages and pen"
+>
+
+<h3>
+Printed Planner
+</h3>
+
+<p>
+
+A physical planning system designed to reduce mental clutter,
+organize priorities, and turn intentions into daily action.
+
+</p>
+
+<p>
+
+<strong>Use daily for:</strong>
+Focus, discipline, planning, and progress tracking.
+
+</p>
+
+<button onclick="addToCart()" class="btn">
+
+Add to Cart
+
+</button>
+
+</div>
+
+
+
+<div class="card">
+
+<img
+src="https://images.unsplash.com/photo-1492724441997-5dc865305da7"
+alt="Person working with focused attention"
+>
+
+<h3>
+Focus Sprint System
+</h3>
+
+<p>
+
+A timed execution framework that helps you complete
+high-value tasks without constantly switching attention.
+
+</p>
+
+<p>
+
+<strong>Perfect for:</strong>
+People who struggle with procrastination and distraction.
+
+</p>
+
+<button onclick="addToCart()" class="btn">
+
+Add to Cart
+
+</button>
+
+</div>
+
+
+</section>
+
+
+
+<!-- =========================
+     WHY SYSTEMS MATTER
+========================= -->
+
+<section class="section dark-section">
+
+<h2 style="text-align:center;">
+
+Why Systems Matter
+
+</h2>
+
+<p style="
+max-width:700px;
+margin:auto;
+text-align:center;
+">
+
+Without systems, you rely on motivation.
+
+Motivation changes.
+
+Systems create repeatable behavior, reduce decision fatigue,
+and make it easier to identify what is actually producing results.
+
+</p>
+
+</section>
+
+
+
+<!-- =========================
+     HIGH VALUE CONTENT
+========================= -->
+
+<section class="section value-section">
+
+<h2>
+How to Turn a Planner Into a Performance System
+</h2>
+
+<p class="value-intro">
+
+A planner is only as valuable as the decisions it helps you make.
+Use your physical and digital tools as part of a repeatable cycle
+for thinking, prioritizing, executing, and improving.
+
+</p>
+
+
+<div class="value-grid">
+
+
+<div class="value-card">
+
+<div class="value-number">
+01 / CAPTURE
+</div>
+
+<h3>
+Get It Out of Your Head
+</h3>
+
+<p>
+
+Write down responsibilities, ideas, problems, opportunities,
+appointments, and unfinished thoughts.
+
+The goal is to reduce mental clutter and create something
+you can actually organize.
+
+</p>
+
+</div>
+
+
+
+<div class="value-card">
+
+<div class="value-number">
+02 / PRIORITIZE
+</div>
+
+<h3>
+Separate Important From Urgent
+</h3>
+
+<p>
+
+Not everything deserves equal attention.
+
+Identify the activities that create meaningful progress
+and protect time for those activities before lower-value
+tasks consume your schedule.
+
+</p>
+
+</div>
+
+
+
+<div class="value-card">
+
+<div class="value-number">
+03 / EXECUTE
+</div>
+
+<h3>
+Convert Goals Into Actions
+</h3>
+
+<p>
+
+"Work on my business" is not an action.
+
+"Write the product description" is.
+
+Break large goals into specific actions that can be
+started, completed, and measured.
+
+</p>
+
+</div>
+
+
+
+<div class="value-card">
+
+<div class="value-number">
+04 / MEASURE
+</div>
+
+<h3>
+Track What Actually Happened
+</h3>
+
+<p>
+
+Record completed tasks, missed commitments, time spent,
+projects finished, revenue generated, or other meaningful
+indicators.
+
+Memory is not a measurement system.
+
+</p>
+
+</div>
+
+
+
+<div class="value-card">
+
+<div class="value-number">
+05 / REVIEW
+</div>
+
+<h3>
+Study Your Week
+</h3>
+
+<p>
+
+Ask what produced results, what consumed time without
+creating value, where you repeatedly got stuck, and what
+should change next week.
+
+</p>
+
+</div>
+
+
+
+<div class="value-card">
+
+<div class="value-number">
+06 / IMPROVE
+</div>
+
+<h3>
+Change the System
+</h3>
+
+<p>
+
+If the same problem keeps happening, don't simply
+try harder.
+
+Change the workflow, environment, schedule, trigger,
+or process that is producing the problem.
+
+</p>
+
+</div>
+
+
+</div>
+
+
+
+<!-- =========================
+     SYSTEM MAP
+========================= -->
+
+<div class="system-map">
+
+
+<div class="system-step">
+
+<strong>Capture</strong>
+
+Write it down.
+
+</div>
+
+
+<div class="system-step">
+
+<strong>Prioritize</strong>
+
+Choose what matters.
+
+</div>
+
+
+<div class="system-step">
+
+<strong>Plan</strong>
+
+Give it a place and time.
+
+</div>
+
+
+<div class="system-step">
+
+<strong>Execute</strong>
+
+Do the work.
+
+</div>
+
+
+<div class="system-step">
+
+<strong>Measure</strong>
+
+Record the result.
+
+</div>
+
+
+<div class="system-step">
+
+<strong>Improve</strong>
+
+Change the system.
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     PRODUCT APPLICATION
+========================= -->
+
+<section class="section">
+
+<h2 style="text-align:center;">
+
+Which Tool Solves Which Problem?
+
+</h2>
+
+<p style="
+max-width:750px;
+margin:15px auto 35px auto;
+text-align:center;
+color:#555;
+">
+
+Choose the tool based on the problem you are trying to solve,
+not simply because the product looks appealing.
+
+</p>
+
+
+<div class="products">
+
+
+<div class="card">
+
+<h3>
+Too Many Ideas?
+</h3>
+
+<p>
+
+Use the journal or notebook to capture ideas before they
+compete for your attention.
+
+</p>
+
+<strong>
+Best fit: Clarity Journal
+</strong>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>
+Too Much Work?
+</h3>
+
+<p>
+
+Use the planner to separate priorities from distractions
+and convert responsibilities into scheduled actions.
+
+</p>
+
+<strong>
+Best fit: Printed Planner
+</strong>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>
+Business Feels Chaotic?
+</h3>
+
+<p>
+
+Use the audit system to examine where time, money,
+and energy are leaking from your operation.
+
+</p>
+
+<strong>
+Best fit: Audit System
+</strong>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>
+Can't Focus?
+</h3>
+
+<p>
+
+Use the Focus Sprint System to create a defined period
+for concentrated execution.
+
+</p>
+
+<strong>
+Best fit: Focus Sprint System
+</strong>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     BUNDLE
+========================= -->
+
+<section class="bundle">
+
+<h2>
+Complete System Bundle
+</h2>
+
+<p>
+
+Instead of collecting disconnected productivity products,
+build a complete operating system for planning, focus,
+execution, and review.
+
+</p>
+
+<p>
+
+<strong>
+Capture → Prioritize → Plan → Execute → Measure → Improve
+</strong>
+
+</p>
+
+<button onclick="addToCart()" class="btn">
+
+Buy Full Bundle
+
+</button>
+
+</section>
+
+
+
+<!-- =========================
+     FAQ
+========================= -->
+
+<section class="section">
+
+<div class="faq">
+
+<h2>
+FAQs
+</h2>
+
+
+<div class="faq-item">
+
+<strong>
+Are these digital or physical?
+</strong>
+
+<p>
+
+The collection can include both digital systems and physical
+planning tools. Product descriptions identify what each item contains.
+
+</p>
+
+</div>
+
+
+
+<div class="faq-item">
+
+<strong>
+Do I need experience to use them?
+</strong>
+
+<p>
+
+No. The systems are designed to help you move from
+identifying a problem to creating a repeatable process.
+
+</p>
+
+</div>
+
+
+
+<div class="faq-item">
+
+<strong>
+Why use physical planning tools?
+</strong>
+
+<p>
+
+Writing can make information easier to externalize, organize,
+and review. A physical tool also creates a visible place for
+your plans and decisions.
+
+</p>
+
+</div>
+
+
+
+<div class="faq-item">
+
+<strong>
+What makes a system different from a checklist?
+</strong>
+
+<p>
+
+A checklist tells you what to do.
+
+A system explains how activities connect, when they happen,
+how results are measured, and what should change when the
+process does not work.
+
+</p>
+
+</div>
+
+
+
+<div class="faq-item">
+
+<strong>
+Which product should I start with?
+</strong>
+
+<p>
+
+Start with the tool that addresses your biggest current
+constraint. If your problem is scattered thinking, start
+with the journal. If execution is the problem, start with
+the planner or Focus Sprint System. If your business is
+inefficient, start with the Audit System.
+
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+<p>
+© 2026 Lead With Speaking
+</p>
+
+<p>
+Think Clearly • Build Systems • Execute Better
+</p>
+
+</footer>
+
+
+
+<!-- =========================
+     SIMPLE CART JAVASCRIPT
+========================= -->
+
+<script>
+
+let cart = 0;
+
+function addToCart(){
+
+cart++;
+
+document.getElementById("cart-count").innerText = cart;
+
+}
+
+</script>
+
+
+</body>
+
+</html>
