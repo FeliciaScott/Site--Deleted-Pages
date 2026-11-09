@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Skill ROI Calculator & Deep Dive Hub</title>
+    <style>
+        :root {
+            --bg-color: #f7fafc;
+            --card-bg: #ffffff;
+            --text-main: #1a202c;
+            --text-muted: #4a5568;
+            --primary: #2b6cb0;
+            --primary-light: #ebf8ff;
+            --primary-hover: #2c5282;
+            --success: #2f855a;
+            --success-light: #f0fff4;
+            --warning: #b7791f;
+            --warning-light: #fffaf0;
+            --border-color: #e2e8f0;
+            --accent: #4c51bf;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding: 2.5rem 1rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: #111;
+            margin-bottom: 0.75rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Dashboard Area Layout */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        @media (min-width: 850px) {
+            .dashboard-grid {
+                grid-template-columns: 1.1fr 0.9fr;
+            }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 14px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+            border: 1px solid var(--border-color);
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.75rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--border-color);
+            color: #111;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Form Controls */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+        }
+
+        @media (min-width: 600px) {
+            .form-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .full-width {
+                grid-column: span 2;
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-main);
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .prefix {
+            position: absolute;
+            left: 1rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 0.85rem 1rem 0.85rem 2.2rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1.05rem;
+            background-color: #fafafa;
+            transition: all 0.2s ease;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: var(--primary);
+            background-color: var(--card-bg);
+            box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.15);
+        }
+
+        button {
+            width: 100%;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 1rem;
+        }
+
+        button:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Calculation Outputs Display */
+        .results-display {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .roi-hero {
+            text-align: center;
+            background: var(--success-light);
+            border: 2px solid #c6f6d5;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .roi-hero .label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        .roi-hero .value {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--success);
+            line-height: 1.1;
+            margin-top: 0.25rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+        }
+
+        .stat-box {
+            background: #f8fafc;
+            padding: 1.25rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-box .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-bottom: 0.35rem;
+        }
+
+        .stat-box .stat-value {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #111;
+        }
+
+        /* Deep Dive Educational Section */
+        .section-break {
+            margin: 5rem 0 3rem 0;
+            border: none;
+            border-top: 2px solid var(--border-color);
+        }
+
+        .educational-hub h2.hub-title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            font-weight: 800;
+        }
+
+        .edu-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        @media (min-width: 900px) {
+            .edu-grid {
+                grid-template-columns: 1.2fr 0.8fr;
+            }
+        }
+
+        .deep-dive-card {
+            background: var(--card-bg);
+            border-radius: 14px;
+            padding: 2.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .deep-dive-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.25rem;
+            color: #111;
+        }
+
+        /* Framework Steps Layout */
+        .framework-pipeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .step-node {
+            display: flex;
+            gap: 1.25rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .step-node:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .step-number {
+            background: var(--primary-light);
+            color: var(--primary);
+            font-weight: 800;
+            font-size: 1.1rem;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+            color: #111;
+        }
+
+        .step-content p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* Callout Blocks */
+        .callout-box {
+            background-color: var(--warning-light);
+            border-left: 4px solid var(--warning);
+            padding: 1.5rem;
+            border-radius: 0 10px 10px 0;
+            margin-bottom: 2rem;
+        }
+
+        .callout-box h4 {
+            color: #744210;
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+        }
+
+        .callout-box p {
+            font-size: 0.95rem;
+            color: #744210;
+        }
+
+        /* Metric Explanation Blocks */
+        .metric-explainer {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .explainer-item {
+            background: #fafafa;
+            padding: 1.25rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .explainer-item h4 {
+            font-size: 1.05rem;
+            margin-bottom: 0.35rem;
+            color: var(--accent);
+        }
+
+        .explainer-item p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Skill ROI Optimization Studio</h1>
+        <p>A rigorous analytical sandbox to measure, calculate, and systematically maximize the financial leverage of professional upskilling investments.</p>
+    </header>
+
+    <!-- Top Area: Interactive Sandbox -->
+    <div class="dashboard-grid">
+        
+        <!-- Input Form Block -->
+        <div class="card">
+            <h2>Financial Parameters</h2>
+            <form id="roiForm" onsubmit="calculateAdvancedROI(event)">
+                <div class="form-grid">
+                    
+                    <div class="form-group">
+                        <label for="courseCost">Direct Upfront Cost</label>
+                        <div class="input-wrapper">
+                            <span class="prefix">$</span>
+                            <input type="number" id="courseCost" value="2500" min="0" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hiddenCosts">Hidden Overhead Costs</label>
+                        <div class="input-wrapper">
+                            <span class="prefix">$</span>
+                            <input type="number" id="hiddenCosts" value="500" min="0" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="currentSalary">Current Annual Income</label>
+                        <div class="input-wrapper">
+                            <span class="prefix">$</span>
+                            <input type="number" id="currentSalary" value="70000" min="0" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="expectedRaise">Target Annual Income</label>
+                        <div class="input-wrapper">
+                            <span class="prefix">$</span>
+                            <input type="number" id="expectedRaise" value="88000" min="0" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="monthsToTransition">Estimated Study/Transition Window</label>
+                        <div class="input-wrapper">
+                            <span class="prefix" style="left: 3.5rem;">Months:</span>
+                            <input type="number" id="monthsToTransition" value="4" min="1" style="padding-left: 6rem;" required>
+                        </div>
+                    </div>
+
+                </div>
+                <button type="submit">Execute Financial Analysis</button>
+            </form>
+        </div>
+
+        <!-- Dynamic Output Matrix Block -->
+        <div class="card">
+            <h2>Calculated Financial Return</h2>
+            <div class="results-display">
+                <div>
+                    <div class="roi-hero">
+                        <div class="label">True First-Year Net ROI</div>
+                        <div class="value" id="roiResult">500%</div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <div class="stat-label">Total Capital Invested</div>
+                            <div class="stat-value" id="costResult">$3,000</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Gross Income Delta</div>
+                            <div class="stat-value" id="gainResult">$18,000</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Amortized Break-Even</div>
+                            <div class="stat-value" id="paybackResult">2.0 Months</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">36-Month Net Surge</div>
+                            <div class="stat-value" id="threeYearResult">$51,000</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <hr class="section-break">
+
+    <!-- Bottom Area: Deep-Dive Curriculum Hub -->
+    <div class="educational-hub">
+        <h2 class="hub-title">The Curriculum: Managing the Economics of Upskilling</h2>
+        
+        <div class="edu-grid">
+            
+            <!-- Left Panel: Execution Framework -->
+            <div class="deep-dive-card">
+                <h3>The 6-Step Skill Monetization Framework</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
+                    Acquiring a skill only builds potential energy. Converting that potential into measurable capital requires executing a systematic go-to-market plan.
+                </p>
+
+                <div class="framework-pipeline">
+                    <div class="step-node">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Market Clearing Analysis</h4>
+                            <p>Identify high-leverage bottlenecks inside active industries. Do not learn skills based on personal preference alone; locate industries suffering from a shortage of qualified labor where market demand guarantees pricing power.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-node">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Aggressive Core Competency Development</h4>
+                            <p>Establish a rigorous, daily learning sandbox. Focus entirely on high-yield, foundational elements that produce immediate, usable output. Strip away tangential theories to optimize time efficiency.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-node">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Proof-of-Capability Architecture</h4>
+                            <p>Build a clean, public repository of raw, functional case studies. Employers do not value credentials as much as visible proof of execution. Build public evidence that addresses specific operational issues.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-node">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Strategic Network Infiltration</h4>
+                            <p>Reposition your professional profiles to mirror your targeted space. Share processing logs, architectural insights, and clean solutions to catch the attention of industry operators and engineering leaders.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-node">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h4>Leveraged Compensation Capture</h4>
+                            <p>Pivot explicitly to high-yielding arrangements. Negotiate compensation based directly on performance deltas, optimized margins, or recurring project milestones rather than flat hourly rates.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-node">
+                        <div class="step-number">6</div>
+                        <div class="step-content">
+                            <h4>Value Optimization Reinvestment</h4>
+                            <p>Treat your new income stream as a corporate reserve fund. Allocate a steady percentage of your returns directly back into deeper infrastructure, better automation tools, and advanced training blocks to lock in a compounding career trajectory.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Core Financial Variables -->
+            <div class="deep-dive-card" style="display: flex; flex-direction: column; justify-content: flex-start;">
+                <h3>Economic Deep Dive</h3>
+                
+                <div class="callout-box">
+                    <h4>The Opportunity Cost Vector</h4>
+                    <p>Every month spent in training without capturing the target income is an invisible cash drain. True financial efficiency demands a compressed, high-intensity transition window to prevent opportunity costs from eating your future returns.</p>
+                </div>
+
+                <h4 style="font-size: 1.1rem; margin-bottom: 1rem; color: #111;">Advanced Metrics Decoded</h4>
+                
+                <div class="metric-explainer">
+                    <div class="explainer-item">
+                        <h4>True Capital Invested</h4>
+                        <p>The total capital deployed. It combines the raw price of instruction with your hidden overhead costs (including specialized software, computing infrastructure, testing fees, and support tools).</p>
+                    </div>
+
+                    <div class="explainer-item">
+                        <h4>Gross Income Delta</h4>
+                        <p>The difference between your baseline income and your new target income. This represents the new annualized money created directly by the skill asset.</p>
+                    </div>
+
+                    <div class="explainer-item">
+                        <h4>Amortized Break-Even</h4>
+                        <p>The time required for your new earnings increase to completely pay off your initial upfront expenses. After this break-even point, all added earnings are pure profit.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    function calculateAdvancedROI(event) {
+        event.preventDefault();
+
+        // Capture Dom Elements
+        const directCost = parseFloat(document.getElementById('courseCost').value) || 0;
+        const hiddenCost = parseFloat(document.getElementById('hiddenCosts').value) || 0;
+        const baselineIncome = parseFloat(document.getElementById('currentSalary').value) || 0;
+        const targetIncome = parseFloat(document.getElementById('expectedRaise').value) || 0;
+        const transitionPeriod = parseFloat(document.getElementById('monthsToTransition').value) || 1;
+
+        // Perform Calculations
+        const totalCapitalInvested = directCost + hiddenCost;
+        const grossIncomeDelta = targetIncome - baselineIncome;
+        
+        let percentageRoi = 0;
+        let breakEvenMonths = 0;
+        let thirtySixMonthNet = 0;
+
+        if (totalCapitalInvested > 0) {
+            percentageRoi = (grossIncomeDelta / totalCapitalInvested) * 100;
+            breakEvenMonths = (totalCapitalInvested / grossIncomeDelta) * 12;
+            thirtySixMonthNet = (grossIncomeDelta * 3) - totalCapitalInvested;
+        } else if (grossIncomeDelta > 0 && totalCapitalInvested === 0) {
+            percentageRoi = Infinity;
+            breakEvenMonths = 0;
+            thirtySixMonthNet = grossIncomeDelta * 3;
+        }
+
+        // Display Outputs to DOM
+        const heroRoiDisplay = document.getElementById('roiResult');
+        if (grossIncomeDelta <= 0) {
+            heroRoiDisplay.innerText = '0%';
+            heroRoiDisplay.style.color = 'var(--text-muted)';
+            document.getElementById('paybackResult').innerText = 'Never';
+            document.getElementById('threeYearResult').innerText = '$' + (-totalCapitalInvested).toLocaleString();
+        } else {
+            heroRoiDisplay.innerText = percentageRoi === Infinity ? '∞' : Math.round(percentageRoi) + '%';
+            heroRoiDisplay.style.color = 'var(--success)';
+            
+            document.getElementById('paybackResult').innerText = breakEvenMonths < 1 
+                ? 'Under 1 Month' 
+                : breakEvenMonths.toFixed(1) + ' Months';
+                
+            document.getElementById('threeYearResult').innerText = '$' + thirtySixMonthNet.toLocaleString();
+        }
+
+        document.getElementById('costResult').innerText = '$' + totalCapitalInvested.toLocaleString();
+        document.getElementById('gainResult').innerText = '$' + grossIncomeDelta.toLocaleString();
+    }
+</script>
+
+</body>
+</html>
