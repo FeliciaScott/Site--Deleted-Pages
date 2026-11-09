@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PathKeeper | Stop Searching. Start Building.</title>
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+html{
+scroll-behavior:smooth;
+}
+body{
+font-family:"Segoe UI",Arial,sans-serif;
+background:#16120e;
+color:#f3eee8;
+overflow-x:hidden;
+line-height:1.7;
+}
+header{
+width:100%;
+padding:20px 8%;
+background:#110e0b;
+border-bottom:1px solid #2e241c;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
+z-index:1000;
+}
+.logo{
+font-size:1.5rem;
+font-weight:800;
+color:#d4b391;
+text-decoration:none;
+letter-spacing:1px;
+}
+.logo span{
+color:#78ab78;
+}
+section{
+padding:60px 8%;
+}
+h1,h2,h3{
+font-weight:800;
+}
+p{
+color:#cfc5b8;
+}
+/*--------------------------*/
+/* HERO */
+/*--------------------------*/
+.hero{
+padding:60px 8%;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+background:
+radial-gradient(circle at top,#8b5a2b33,transparent 45%),
+radial-gradient(circle at bottom,#78ab7833,transparent 40%),
+#16120e;
+position:relative;
+}
+.badge{
+padding:8px 18px;
+border:1px solid #a67c52;
+border-radius:40px;
+color:#d4b391;
+margin-bottom:20px;
+font-size:.9rem;
+letter-spacing:1px;
+}
+.hero h1{
+font-size:3.8rem;
+max-width:900px;
+line-height:1.1;
+margin-bottom:20px;
+}
+.highlight{
+background:linear-gradient(90deg,#c49a6c,#8fbc8f);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+.hero p{
+max-width:760px;
+font-size:1.2rem;
+margin-bottom:30px;
+}
+.button{
+display:inline-block;
+padding:16px 40px;
+background:linear-gradient(90deg,#a67c52,#78ab78);
+border-radius:60px;
+color:#16120e;
+font-weight:bold;
+text-decoration:none;
+transition:.35s;
+}
+.button:hover{
+transform:translateY(-4px) scale(1.03);
+box-shadow:0 20px 40px rgba(166,124,82,.35);
+}
+/*--------------------------*/
+/* SCROLL */
+/*--------------------------*/
+.scroll{
+margin-top:35px;
+font-size:.85rem;
+letter-spacing:2px;
+color:#a39585;
+}
+/*--------------------------*/
+/* CARDS */
+/*--------------------------*/
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+}
+.card{
+background:#211b15;
+padding:30px;
+border-radius:18px;
+transition:.35s;
+border:1px solid #332a21;
+}
+.card:hover{
+transform:translateY(-6px);
+border-color:#c49a6c;
+}
+.card h3{
+margin:15px 0 10px;
+}
+.number{
+font-size:2.5rem;
+font-weight:900;
+color:#c49a6c;
+}
+/*--------------------------*/
+/* BIG QUOTE */
+/*--------------------------*/
+.statement{
+background:#211b15;
+text-align:center;
+border-radius:25px;
+padding:50px 8%;
+}
+.statement h2{
+font-size:2.4rem;
+max-width:950px;
+margin:auto;
+line-height:1.3;
+}
+.statement span{
+color:#8fbc8f;
+}
+/*--------------------------*/
+/* COMPARISON */
+/*--------------------------*/
+.compare{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:30px;
+}
+.side{
+padding:30px;
+border-radius:20px;
+}
+.old{
+background:#2a1e17;
+border:1px solid #5c3f2d;
+}
+.new{
+background:#1c261c;
+border:1px solid #78ab78;
+}
+.side h3{
+margin-bottom:20px;
+font-size:1.8rem;
+}
+.side ul{
+list-style:none;
+}
+.side li{
+margin:10px 0;
+color:#e6ded6;
+}
+/*--------------------------*/
+/* CTA */
+/*--------------------------*/
+.cta{
+text-align:center;
+}
+.cta h2{
+font-size:2.8rem;
+margin-bottom:20px;
+}
+.cta p{
+max-width:700px;
+margin:auto auto 30px;
+}
+/*--------------------------*/
+footer{
+padding:30px;
+text-align:center;
+border-top:1px solid #2e241c;
+color:#a39585;
+}
+/*--------------------------*/
+@media(max-width:900px){
+section{
+padding:40px 6%;
+}
+.hero h1{
+font-size:2.5rem;
+}
+.compare{
+grid-template-columns:1fr;
+}
+.statement h2{
+font-size:1.8rem;
+}
+.cta h2{
+font-size:2rem;
+}
+}
+</style>
+</head>
+<body>
+<header>
+<a href="https://sites.google.com/view/pathkeeper/home" class="logo" target="_blank" rel="noopener noreferrer">PATH<span>KEEPER</span></a>
+</header>
+<section class="hero">
+<div class="badge">YOUR FUTURE DESERVES A STRATEGY</div>
+<h1>Stop Collecting Information. <span class="highlight">Start Building Momentum.</span></h1>
+<p>Most people spend years searching for answers. PathKeeper helps you organize opportunities, develop valuable skills, and make intentional career decisions that compound over time.</p>
+<a href="https://sites.google.com/view/pathkeeper/home" class="button" target="_blank" rel="noopener noreferrer">Enter PathKeeper</a>
+<div class="scroll">SCROLL TO DISCOVER ↓</div>
+</section>
+<section>
+<h2 style="text-align:center;font-size:2.4rem;margin-bottom:40px;">What If Every Decision Moved You Forward?</h2>
+<div class="cards">
+<div class="card">
+<div class="number">01</div>
+<h3>Discover</h3>
+<p>Explore careers, certifications, learning resources, and opportunities that fit your goals.</p>
+</div>
+<div class="card">
+<div class="number">02</div>
+<h3>Organize</h3>
+<p>Keep everything in one place instead of bookmarking dozens of websites you'll never revisit.</p>
+</div>
+<div class="card">
+<div class="number">03</div>
+<h3>Improve</h3>
+<p>Develop practical skills that increase your value over months and years.</p>
+</div>
+<div class="card">
+<div class="number">04</div>
+<h3>Repeat</h3>
+<p>Continue building momentum so progress becomes part of your routine.</p>
+</div>
+</div>
+</section>
+<section>
+<div class="statement">
+<h2>Success isn't built by finding <span>one perfect opportunity.</span> It's built by making hundreds of better decisions.</h2>
+</div>
+</section>
+<section>
+<h2 style="text-align:center;font-size:2.4rem;margin-bottom:40px;">Choose Your Path</h2>
+<div class="compare">
+<div class="side old">
+<h3>Without PathKeeper</h3>
+<ul>
+<li>✕ Endless Google searches</li>
+<li>✕ Random career advice</li>
+<li>✕ Missed scholarships</li>
+<li>✕ Forgotten bookmarks</li>
+<li>✕ No long-term learning plan</li>
+<li>✕ Constantly starting over</li>
+</ul>
+</div>
+<div class="side new">
+<h3>With PathKeeper</h3>
+<ul>
+<li>✓ Organized opportunities</li>
+<li>✓ Practical learning paths</li>
+<li>✓ Career planning resources</li>
+<li>✓ Skill development tools</li>
+<li>✓ Better financial decisions</li>
+<li>✓ Consistent long-term growth</li>
+</ul>
+</div>
+</div>
+</section>
+<section class="cta">
+<h2>Don't Leave Your Future To Chance.</h2>
+<p>The difference between where you are today and where you'll be five years from now is largely determined by the decisions you make starting today.</p>
+<a href="https://sites.google.com/view/pathkeeper/home" class="button" target="_blank" rel="noopener noreferrer">Start Building Your Future</a>
+</section>
+<footer>© 2026 PathKeeper • Designed to Help You Keep Moving Forward</footer>
+</body>
+</html>
