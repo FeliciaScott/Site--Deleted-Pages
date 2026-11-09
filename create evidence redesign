@@ -1,0 +1,2216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Create Evidence | WorkProof</title>
+
+<style>
+
+/* =========================================================
+   WORKPROOF — INTERACTIVE EVIDENCE SYSTEM
+   ========================================================= */
+
+:root{
+    --brown:#2B1E1A;
+    --blue:#A0C4DF;
+    --cream:#F9F6F0;
+    --slate:#4A3B35;
+
+    --brown-light:#352621;
+    --brown-mid:#40302A;
+    --blue-soft:rgba(160,196,223,.12);
+    --blue-border:rgba(160,196,223,.45);
+
+    --shadow:0 20px 60px rgba(0,0,0,.22);
+    --radius:18px;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Inter,Arial,Helvetica,sans-serif;
+    background:var(--brown);
+    color:var(--cream);
+    line-height:1.65;
+}
+
+button,
+input,
+textarea,
+select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.container{
+    width:min(1180px,calc(100% - 40px));
+    margin:auto;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero{
+    min-height:620px;
+    display:flex;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
+    border-bottom:1px solid var(--slate);
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    width:520px;
+    height:520px;
+    border:1px solid rgba(160,196,223,.18);
+    border-radius:50%;
+    right:-160px;
+    top:-180px;
+}
+
+.hero::after{
+    content:"";
+    position:absolute;
+    width:280px;
+    height:280px;
+    border:1px solid rgba(160,196,223,.12);
+    border-radius:50%;
+    left:-100px;
+    bottom:-120px;
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    max-width:900px;
+    padding:100px 0;
+}
+
+.eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    color:var(--blue);
+    text-transform:uppercase;
+    letter-spacing:2px;
+    font-size:.78rem;
+    font-weight:800;
+    margin-bottom:22px;
+}
+
+.eyebrow::before{
+    content:"";
+    width:28px;
+    height:2px;
+    background:var(--blue);
+}
+
+.hero h1{
+    font-size:clamp(2.7rem,7vw,5.8rem);
+    line-height:.98;
+    letter-spacing:-3px;
+    margin-bottom:28px;
+    max-width:950px;
+}
+
+.hero h1 span{
+    color:var(--blue);
+}
+
+.hero p{
+    max-width:760px;
+    font-size:1.15rem;
+    color:rgba(249,246,240,.78);
+    margin-bottom:35px;
+}
+
+.hero-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.btn{
+    border:1px solid var(--blue-border);
+    background:transparent;
+    color:var(--cream);
+    padding:13px 20px;
+    border-radius:10px;
+    font-weight:700;
+    transition:.25s ease;
+}
+
+.btn:hover{
+    background:var(--blue);
+    color:var(--brown);
+    transform:translateY(-2px);
+}
+
+.btn.primary{
+    background:var(--blue);
+    color:var(--brown);
+}
+
+/* =========================================================
+   LIVE STATUS BAR
+   ========================================================= */
+
+.status-bar{
+    border-bottom:1px solid var(--slate);
+    background:var(--brown-light);
+}
+
+.status-inner{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+}
+
+.status-item{
+    padding:20px;
+    border-right:1px solid var(--slate);
+}
+
+.status-item:last-child{
+    border-right:none;
+}
+
+.status-label{
+    display:block;
+    color:rgba(249,246,240,.5);
+    font-size:.72rem;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.status-value{
+    display:block;
+    color:var(--blue);
+    font-size:1.2rem;
+    font-weight:800;
+}
+
+/* =========================================================
+   SECTION
+   ========================================================= */
+
+section{
+    padding:90px 0;
+    border-bottom:1px solid var(--slate);
+}
+
+.section-heading{
+    max-width:760px;
+    margin-bottom:45px;
+}
+
+.section-heading .number{
+    color:var(--blue);
+    font-size:.8rem;
+    font-weight:800;
+    letter-spacing:2px;
+}
+
+.section-heading h2{
+    font-size:clamp(2rem,4vw,3.5rem);
+    line-height:1.05;
+    margin:8px 0 16px;
+    letter-spacing:-1.5px;
+}
+
+.section-heading p{
+    color:rgba(249,246,240,.68);
+}
+
+/* =========================================================
+   CLAIM VS EVIDENCE
+   ========================================================= */
+
+.claim-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.claim-card{
+    border:1px solid var(--slate);
+    border-radius:var(--radius);
+    padding:30px;
+    background:var(--brown-light);
+    transition:.3s;
+}
+
+.claim-card:hover{
+    border-color:var(--blue-border);
+    transform:translateY(-4px);
+}
+
+.card-label{
+    font-size:.72rem;
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+    color:rgba(249,246,240,.5);
+    margin-bottom:18px;
+}
+
+.claim-card h3{
+    margin-bottom:15px;
+    font-size:1.35rem;
+}
+
+.quote-text{
+    font-size:1.1rem;
+    margin-bottom:24px;
+    color:rgba(249,246,240,.82);
+}
+
+.evaluation{
+    border-top:1px solid var(--slate);
+    padding-top:18px;
+    color:rgba(249,246,240,.55);
+}
+
+.evidence-card{
+    background:var(--blue-soft);
+    border-color:var(--blue-border);
+}
+
+.evidence-card .card-label,
+.evidence-card .evaluation{
+    color:var(--blue);
+}
+
+/* =========================================================
+   INTERACTIVE ANATOMY
+   ========================================================= */
+
+.anatomy{
+    display:grid;
+    grid-template-columns:280px 1fr;
+    gap:25px;
+}
+
+.anatomy-nav{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.anatomy-btn{
+    text-align:left;
+    background:var(--brown-light);
+    border:1px solid var(--slate);
+    color:var(--cream);
+    padding:18px;
+    border-radius:12px;
+    transition:.25s;
+}
+
+.anatomy-btn:hover,
+.anatomy-btn.active{
+    border-color:var(--blue);
+    background:var(--blue-soft);
+}
+
+.anatomy-btn strong{
+    display:block;
+    color:var(--blue);
+    margin-bottom:4px;
+}
+
+.anatomy-display{
+    min-height:350px;
+    background:var(--brown-light);
+    border:1px solid var(--slate);
+    border-radius:var(--radius);
+    padding:38px;
+}
+
+.anatomy-display h3{
+    font-size:2rem;
+    margin-bottom:12px;
+}
+
+.anatomy-display p{
+    color:rgba(249,246,240,.68);
+    margin-bottom:20px;
+}
+
+.example-box{
+    padding:20px;
+    border-left:3px solid var(--blue);
+    background:var(--blue-soft);
+    color:var(--cream);
+}
+
+/* =========================================================
+   EVIDENCE BUILDER
+   ========================================================= */
+
+.builder{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+}
+
+.builder-panel{
+    background:var(--brown-light);
+    border:1px solid var(--slate);
+    border-radius:var(--radius);
+    padding:30px;
+}
+
+.builder-panel h3{
+    margin-bottom:22px;
+}
+
+.field{
+    margin-bottom:20px;
+}
+
+.field label{
+    display:block;
+    font-size:.78rem;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color:var(--blue);
+    font-weight:800;
+    margin-bottom:8px;
+}
+
+.field input,
+.field textarea,
+.field select{
+    width:100%;
+    border:1px solid var(--slate);
+    background:var(--brown);
+    color:var(--cream);
+    border-radius:10px;
+    padding:13px;
+    outline:none;
+}
+
+.field textarea{
+    min-height:105px;
+    resize:vertical;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus{
+    border-color:var(--blue);
+    box-shadow:0 0 0 3px rgba(160,196,223,.08);
+}
+
+.preview{
+    border:1px dashed var(--blue-border);
+    background:var(--blue-soft);
+    border-radius:14px;
+    padding:25px;
+}
+
+.preview-label{
+    color:var(--blue);
+    font-size:.7rem;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    font-weight:800;
+    margin-bottom:15px;
+}
+
+.preview h4{
+    font-size:1.5rem;
+    margin-bottom:15px;
+}
+
+.preview-row{
+    margin-bottom:17px;
+}
+
+.preview-row span{
+    display:block;
+    color:var(--blue);
+    font-size:.7rem;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.preview-row p{
+    color:rgba(249,246,240,.8);
+}
+
+.builder-actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+/* =========================================================
+   SCORE
+   ========================================================= */
+
+.score-panel{
+    margin-top:25px;
+    padding:22px;
+    border:1px solid var(--slate);
+    border-radius:14px;
+}
+
+.score-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:12px;
+}
+
+.score-number{
+    font-size:2rem;
+    font-weight:900;
+    color:var(--blue);
+}
+
+.progress{
+    height:9px;
+    background:var(--brown);
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-fill{
+    width:0%;
+    height:100%;
+    background:var(--blue);
+    transition:.5s ease;
+}
+
+.score-message{
+    margin-top:12px;
+    color:rgba(249,246,240,.62);
+    font-size:.9rem;
+}
+
+/* =========================================================
+   CONVERSION LAB
+   ========================================================= */
+
+.conversion-grid{
+    display:grid;
+    grid-template-columns:1fr 80px 1fr;
+    align-items:stretch;
+    gap:15px;
+}
+
+.conversion-card{
+    padding:30px;
+    border:1px solid var(--slate);
+    border-radius:var(--radius);
+    background:var(--brown-light);
+}
+
+.conversion-card h3{
+    margin-bottom:15px;
+}
+
+.conversion-card p{
+    color:rgba(249,246,240,.72);
+}
+
+.arrow{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:var(--blue);
+    font-size:2rem;
+}
+
+.conversion-controls{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:25px;
+}
+
+.small-btn{
+    border:1px solid var(--slate);
+    background:transparent;
+    color:var(--cream);
+    padding:9px 13px;
+    border-radius:8px;
+}
+
+.small-btn:hover{
+    border-color:var(--blue);
+    color:var(--blue);
+}
+
+/* =========================================================
+   DECISION MATRIX
+   ========================================================= */
+
+.filters{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:25px;
+}
+
+.filter-btn{
+    border:1px solid var(--slate);
+    background:transparent;
+    color:var(--cream);
+    padding:9px 14px;
+    border-radius:8px;
+}
+
+.filter-btn.active,
+.filter-btn:hover{
+    background:var(--blue);
+    color:var(--brown);
+    border-color:var(--blue);
+}
+
+.matrix{
+    overflow:hidden;
+    border:1px solid var(--slate);
+    border-radius:var(--radius);
+}
+
+.matrix-row{
+    display:grid;
+    grid-template-columns:1fr 1.5fr 1fr;
+    border-bottom:1px solid var(--slate);
+}
+
+.matrix-row:last-child{
+    border-bottom:none;
+}
+
+.matrix-row > div{
+    padding:20px;
+    border-right:1px solid var(--slate);
+}
+
+.matrix-row > div:last-child{
+    border-right:none;
+}
+
+.matrix-header{
+    background:var(--brown-light);
+    color:var(--blue);
+    font-size:.75rem;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    font-weight:800;
+}
+
+.matrix-row:not(.matrix-header){
+    transition:.2s;
+}
+
+.matrix-row:not(.matrix-header):hover{
+    background:var(--blue-soft);
+}
+
+/* =========================================================
+   PROGRESSION
+   ========================================================= */
+
+.progression{
+    position:relative;
+}
+
+.progression::before{
+    content:"";
+    position:absolute;
+    left:26px;
+    top:0;
+    bottom:0;
+    width:2px;
+    background:var(--slate);
+}
+
+.level{
+    position:relative;
+    margin-bottom:12px;
+}
+
+.level-button{
+    width:100%;
+    display:grid;
+    grid-template-columns:54px 1fr auto;
+    align-items:center;
+    gap:18px;
+    text-align:left;
+    border:1px solid var(--slate);
+    background:var(--brown-light);
+    color:var(--cream);
+    padding:18px;
+    border-radius:12px;
+    position:relative;
+    z-index:2;
+}
+
+.level-button:hover,
+.level.open .level-button{
+    border-color:var(--blue-border);
+}
+
+.level-number{
+    width:38px;
+    height:38px;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    background:var(--brown);
+    border:1px solid var(--blue-border);
+    color:var(--blue);
+    font-weight:900;
+}
+
+.level-title{
+    font-weight:800;
+}
+
+.level-arrow{
+    color:var(--blue);
+    transition:.3s;
+}
+
+.level.open .level-arrow{
+    transform:rotate(180deg);
+}
+
+.level-content{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .35s ease;
+    padding:0 18px;
+    margin-left:72px;
+    color:rgba(249,246,240,.65);
+}
+
+.level.open .level-content{
+    max-height:180px;
+    padding-top:18px;
+    padding-bottom:18px;
+}
+
+/* =========================================================
+   FINAL CTA
+   ========================================================= */
+
+.final{
+    padding:100px 0;
+}
+
+.final-box{
+    background:var(--blue);
+    color:var(--brown);
+    border-radius:24px;
+    padding:60px;
+    position:relative;
+    overflow:hidden;
+}
+
+.final-box::after{
+    content:"PROOF";
+    position:absolute;
+    right:-30px;
+    bottom:-70px;
+    font-size:9rem;
+    font-weight:900;
+    opacity:.08;
+}
+
+.final-box h2{
+    max-width:700px;
+    font-size:clamp(2.2rem,5vw,4rem);
+    line-height:1;
+    margin-bottom:18px;
+}
+
+.final-box p{
+    max-width:700px;
+    margin-bottom:25px;
+}
+
+.final-box .btn{
+    border-color:var(--brown);
+    color:var(--brown);
+}
+
+.final-box .btn:hover{
+    background:var(--brown);
+    color:var(--cream);
+}
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+
+.toast{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    background:var(--cream);
+    color:var(--brown);
+    padding:14px 18px;
+    border-radius:10px;
+    box-shadow:var(--shadow);
+    transform:translateY(120px);
+    opacity:0;
+    transition:.3s;
+    z-index:999;
+    font-weight:700;
+}
+
+.toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media(max-width:850px){
+
+    .claim-grid,
+    .builder,
+    .anatomy{
+        grid-template-columns:1fr;
+    }
+
+    .conversion-grid{
+        grid-template-columns:1fr;
+    }
+
+    .arrow{
+        transform:rotate(90deg);
+        padding:5px;
+    }
+
+    .status-inner{
+        grid-template-columns:1fr;
+    }
+
+    .status-item{
+        border-right:none;
+        border-bottom:1px solid var(--slate);
+    }
+
+    .matrix{
+        overflow-x:auto;
+    }
+
+    .matrix-row{
+        min-width:720px;
+    }
+
+    .final-box{
+        padding:40px 25px;
+    }
+}
+
+@media(max-width:600px){
+
+    .container{
+        width:min(100% - 25px,1180px);
+    }
+
+    section{
+        padding:65px 0;
+    }
+
+    .hero{
+        min-height:auto;
+    }
+
+    .hero-content{
+        padding:80px 0;
+    }
+
+    .hero h1{
+        letter-spacing:-2px;
+    }
+
+    .level-button{
+        grid-template-columns:45px 1fr auto;
+    }
+
+    .level-content{
+        margin-left:0;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ======================================================
+     HERO
+     ====================================================== -->
+
+<header class="hero">
+
+<div class="container">
+
+<div class="hero-content">
+
+<div class="eyebrow">WorkProof / Create Evidence</div>
+
+<h1>
+Stop saying you have value.
+<span>Show the evidence.</span>
+</h1>
+
+<p>
+Professional experience becomes more useful when it can be inspected,
+understood, tested, or demonstrated. WorkProof helps you convert
+experience into visible evidence of capability.
+</p>
+
+<div class="hero-actions">
+
+<button class="btn primary" onclick="scrollToBuilder()">
+Build an Evidence Block
+</button>
+
+<button class="btn" onclick="scrollToAnatomy()">
+Explore the System
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</header>
+
+
+<!-- ======================================================
+     STATUS
+     ====================================================== -->
+
+<div class="status-bar">
+
+<div class="container">
+
+<div class="status-inner">
+
+<div class="status-item">
+<span class="status-label">Evidence Blocks Created</span>
+<span class="status-value" id="blockCount">0</span>
+</div>
+
+<div class="status-item">
+<span class="status-label">Current Evidence Score</span>
+<span class="status-value" id="topScore">0%</span>
+</div>
+
+<div class="status-item">
+<span class="status-label">System State</span>
+<span class="status-value" id="systemState">Ready</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ======================================================
+     CLAIM VS EVIDENCE
+     ====================================================== -->
+
+<section>
+
+<div class="container">
+
+<div class="section-heading">
+
+<span class="number">01 / THE SHIFT</span>
+
+<h2>Move from assertion to demonstration.</h2>
+
+<p>
+A resume can tell someone what you believe about yourself.
+An Evidence Block gives them something concrete to evaluate.
+</p>
+
+</div>
+
+
+<div class="claim-grid">
+
+<div class="claim-card">
+
+<div class="card-label">Traditional Statement</div>
+
+<h3>Claim</h3>
+
+<p class="quote-text">
+"I am a resilient professional seeking new opportunities
+following a recent career pivot."
+</p>
+
+<div class="evaluation">
+<strong>Question created:</strong><br>
+What is the actual evidence?
+</div>
+
+</div>
+
+
+<div class="claim-card evidence-card">
+
+<div class="card-label">WorkProof Statement</div>
+
+<h3>Demonstration</h3>
+
+<p class="quote-text">
+"I evaluated operational challenges, identified unit-economic
+gaps, and developed a financial model to improve capital allocation."
+</p>
+
+<div class="evaluation">
+<strong>Question created:</strong><br>
+How quickly could this capability be applied?
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ======================================================
+     ANATOMY
+     ====================================================== -->
+
+<section id="anatomySection">
+
+<div class="container">
+
+<div class="section-heading">
+
+<span class="number">02 / ANATOMY</span>
+
+<h2>Explore an Evidence Block.</h2>
+
+<p>
+Click each component. Instead of reading a static list,
+inspect how the pieces work together.
+</p>
+
+</div>
+
+
+<div class="anatomy">
+
+<div class="anatomy-nav">
+
+<button class="anatomy-btn active"
+onclick="showAnatomy(0,this)">
+
+<strong>01 — Diagnostic Focus</strong>
+
+Find the problem.
+
+</button>
+
+<button class="anatomy-btn"
+onclick="showAnatomy(1,this)">
+
+<strong>02 — Core Deliverable</strong>
+
+Show the work.
+
+</button>
+
+<button class="anatomy-btn"
+onclick="showAnatomy(2,this)">
+
+<strong>03 — Outcome</strong>
+
+Explain the result.
+
+</button>
+
+<button class="anatomy-btn"
+onclick="showAnatomy(3,this)">
+
+<strong>04 — Verification</strong>
+
+Make it inspectable.
+
+</button>
+
+</div>
+
+
+<div class="anatomy-display" id="anatomyDisplay">
+
+<h3>Diagnostic Focus</h3>
+
+<p>
+Identify the specific objective, process gap, decision problem,
+or operational challenge you attempted to solve.
+</p>
+
+<div class="example-box">
+
+<strong>Example:</strong><br><br>
+
+"Customer follow-up was inconsistent, creating delays
+between inquiry and response."
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ======================================================
+     BUILDER
+     ====================================================== -->
+
+<section id="builderSection">
+
+<div class="container">
+
+<div class="section-heading">
+
+<span class="number">03 / BUILD</span>
+
+<h2>Create your own Evidence Block.</h2>
+
+<p>
+Fill in the fields below. The system generates a structured
+proof artifact while you work.
+</p>
+
+</div>
+
+
+<div class="builder">
+
+<div class="builder-panel">
+
+<h3>Evidence Inputs</h3>
+
+<div class="field">
+
+<label for="title">Evidence Title</label>
+
+<input
+id="title"
+type="text"
+placeholder="Example: Customer Follow-Up Workflow"
+/>
+
+</div>
+
+
+<div class="field">
+
+<label for="problem">Problem / Objective</label>
+
+<textarea
+id="problem"
+placeholder="What problem were you trying to solve?"
+></textarea>
+
+</div>
+
+
+<div class="field">
+
+<label for="deliverable">What Did You Build?</label>
+
+<textarea
+id="deliverable"
+placeholder="Describe the report, code, workflow, model, template, analysis, etc."
+></textarea>
+
+</div>
+
+
+<div class="field">
+
+<label for="outcome">Outcome / Expected Value</label>
+
+<textarea
+id="outcome"
+placeholder="What improved, changed, became measurable, or could be improved?"
+></textarea>
+
+</div>
+
+
+<div class="field">
+
+<label for="verification">How Can Someone Verify It?</label>
+
+<select id="verification">
+
+<option value="">Choose verification method</option>
+
+<option>Code repository</option>
+<option>Live demonstration</option>
+<option>Document / report</option>
+<option>Before-and-after comparison</option>
+<option>Workflow documentation</option>
+<option>Data / measurement</option>
+<option>Screenshot / artifact</option>
+<option>Other evidence</option>
+
+</select>
+
+</div>
+
+
+<div class="builder-actions">
+
+<button class="btn primary" onclick="generateEvidence()">
+Generate Evidence
+</button>
+
+<button class="btn" onclick="resetBuilder()">
+Reset
+</button>
+
+</div>
+
+</div>
+
+
+<div class="builder-panel">
+
+<h3>Live Evidence Preview</h3>
+
+<div class="preview">
+
+<div class="preview-label">
+WorkProof Evidence Block
+</div>
+
+<h4 id="previewTitle">
+Untitled Evidence Block
+</h4>
+
+<div class="preview-row">
+
+<span>Diagnostic Focus</span>
+
+<p id="previewProblem">
+Your problem or objective will appear here.
+</p>
+
+</div>
+
+
+<div class="preview-row">
+
+<span>Core Deliverable</span>
+
+<p id="previewDeliverable">
+Your work sample will appear here.
+</p>
+
+</div>
+
+
+<div class="preview-row">
+
+<span>Outcome</span>
+
+<p id="previewOutcome">
+Your result or expected value will appear here.
+</p>
+
+</div>
+
+
+<div class="preview-row">
+
+<span>Verification</span>
+
+<p id="previewVerification">
+No verification method selected.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="score-panel">
+
+<div class="score-top">
+
+<strong>Evidence Readiness</strong>
+
+<span class="score-number" id="scoreNumber">
+0%
+</span>
+
+</div>
+
+<div class="progress">
+
+<div class="progress-fill" id="scoreFill"></div>
+
+</div>
+
+<div class="score-message" id="scoreMessage">
+Start filling the evidence fields.
+</div>
+
+</div>
+
+
+<div class="builder-actions">
+
+<button class="btn" onclick="copyEvidence()">
+Copy Evidence Block
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ======================================================
+     CONVERSION LAB
+     ====================================================== -->
+
+<section>
+
+<div class="container">
+
+<div class="section-heading">
+
+<span class="number">04 / CONVERSION LAB</span>
+
+<h2>Turn weak statements into stronger evidence.</h2>
+
+<p>
+Select a professional situation and watch the language shift
+from self-description toward demonstrated capability.
+</p>
+
+</div>
+
+
+<div class="conversion-grid">
+
+<div class="conversion-card">
+
+<div class="card-label">Assertion</div>
+
+<h3 id="conversionBeforeTitle">
+"I am organized."
+</h3>
+
+<p id="conversionBefore">
+I am organized and good at managing competing responsibilities.
+</p>
+
+</div>
+
+
+<div class="arrow">
+→
+</div>
+
+
+<div class="conversion-card evidence-card">
+
+<div class="card-label">Evidence</div>
+
+<h3 id="conversionAfterTitle">
+"Show the system."
+</h3>
+
+<p id="conversionAfter">
+Designed a priority-tracking workflow that separated urgent
+requests from scheduled work and created a repeatable process
+for managing competing responsibilities.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="conversion-controls">
+
+<button class="small-btn" onclick="conversion(0)">
+Organization
+</button>
+
+<button class="small-btn" onclick="conversion(1)">
+Leadership
+</button>
+
+<button class="small-btn" onclick="conversion(2)">
+Problem Solving
+</button>
+
+<button class="small-btn" onclick="conversion(3)">
+Communication
+</button>
+
+<button class="small-btn" onclick="conversion(4)">
+Technical Skill
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ======================================================
+     DECISION MATRIX
+     ====================================================== -->
+
+<section>
+
+<div class="container">
+
+<div class="section-heading">
+
+<span class="number">05 / ASSET MAPPING</span>
+
+<h2>Turn difficult periods into build opportunities.</h2>
+
+<p>
+A transition does not automatically produce evidence.
+The useful question is: what artifact can be created from it?
+</p>
+
+</div>
+
+
+<div class="filters">
+
+<button class="filter-btn active"
+onclick="filterMatrix('all',this)">
+All
+</button>
+
+<button class="filter-btn"
+onclick="filterMatrix('business',this)">
+Business
+</button>
+
+<button class="filter-btn"
+onclick="filterMatrix('career',this)">
+Career
+</button>
+
+<button class="filter-btn"
+onclick="filterMatrix('technical',this)">
+Technical
+</button>
+
+</div>
+
+
+<div class="matrix">
+
+<div class="matrix-row matrix-header">
+
+<div>Situation</div>
+
+<div>Evidence Asset</div>
+
+<div>Category</div>
+
+</div>
+
+
+<div class="matrix-row matrix-item" data-category="business">
+
+<div>Business Closure</div>
+
+<div>
+Create a post-mortem report identifying operational,
+financial, or strategic lessons.
+</div>
+
+<div>Business</div>
+
+</div>
+
+
+<div class="matrix-row matrix-item" data-category="career">
+
+<div>Career Break</div>
+
+<div>
+Build a documented workflow, case study, process manual,
+or analytical project.
+</div>
+
+<div>Career</div>
+
+</div>
+
+
+<div class="matrix-row matrix-item" data-category="technical">
+
+<div>Portfolio Refresh</div>
+
+<div>
+Publish a working technical template, application,
+repository, or interactive tool.
+</div>
+
+<div>Technical</div>
+
+</div>
+
+
+<div class="matrix-row matrix-item" data-category="business">
+
+<div>Operational Problem</div>
+
+<div>
+Model the current process, identify bottlenecks,
+and propose a measurable improvement.
+</div>
+
+<div>Business</div>
+
+</div>
+
+
+<div class="matrix-row matrix-item" data-category="career">
+
+<div>Job Rejection</div>
+
+<div>
+Create a project demonstrating the exact capability
+the target role requires.
+</div>
+
+<div>Career</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ======================================================
+     PROGRESSION
+     ====================================================== -->
+
+<section>
+
+<div class="container">
+
+<div class="section-heading">
+
+<span class="number">06 / PROGRESSION</span>
+
+<h2>Build evidence in layers.</h2>
+
+<p>
+You do not need to begin with an advanced portfolio.
+Progression comes from repeatedly moving work from idea
+to inspectable artifact.
+</p>
+
+</div>
+
+
+<div class="progression">
+
+
+<div class="level">
+
+<button class="level-button" onclick="toggleLevel(this)">
+
+<span class="level-number">01</span>
+
+<span class="level-title">
+Prototype Functional Solutions
+</span>
+
+<span class="level-arrow">▼</span>
+
+</button>
+
+<div class="level-content">
+
+Build a small tool, template, workflow, webpage,
+calculator, framework, or other functional artifact
+that addresses a recognizable problem.
+
+</div>
+
+</div>
+
+
+<div class="level">
+
+<button class="level-button" onclick="toggleLevel(this)">
+
+<span class="level-number">02</span>
+
+<span class="level-title">
+Document the Process
+</span>
+
+<span class="level-arrow">▼</span>
+
+</button>
+
+<div class="level-content">
+
+Explain how the artifact works, why the problem matters,
+what decisions were made, and what limitations remain.
+
+</div>
+
+</div>
+
+
+<div class="level">
+
+<button class="level-button" onclick="toggleLevel(this)">
+
+<span class="level-number">03</span>
+
+<span class="level-title">
+Translate Experience into Insight
+</span>
+
+<span class="level-arrow">▼</span>
+
+</button>
+
+<div class="level-content">
+
+Turn practical experience into a case study, framework,
+analysis, lesson, or reusable model that others can inspect.
+
+</div>
+
+</div>
+
+
+<div class="level">
+
+<button class="level-button" onclick="toggleLevel(this)">
+
+<span class="level-number">04</span>
+
+<span class="level-title">
+Execute Strategic Improvements
+</span>
+
+<span class="level-arrow">▼</span>
+
+</button>
+
+<div class="level-content">
+
+Use evidence to demonstrate that you can diagnose a problem,
+make decisions, implement changes, and evaluate results.
+
+</div>
+
+</div>
+
+
+<div class="level">
+
+<button class="level-button" onclick="toggleLevel(this)">
+
+<span class="level-number">05</span>
+
+<span class="level-title">
+Architect Reusable Systems
+</span>
+
+<span class="level-arrow">▼</span>
+
+</button>
+
+<div class="level-content">
+
+Move beyond isolated projects by creating systems,
+frameworks, reusable tools, and decision structures
+that can operate across multiple situations.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ======================================================
+     FINAL CTA
+     ====================================================== -->
+
+<section class="final">
+
+<div class="container">
+
+<div class="final-box">
+
+<h2>
+Your experience is raw material.
+Build something inspectable from it.
+</h2>
+
+<p>
+A career asset does not have to begin as a perfect portfolio.
+It can begin as one documented problem, one working solution,
+and one piece of evidence that demonstrates what you can do.
+</p>
+
+<button class="btn" onclick="scrollToBuilder()">
+Create Your Evidence Block
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<div class="toast" id="toast">
+Evidence copied.
+</div>
+
+
+<script>
+
+/* =========================================================
+   ANATOMY INTERACTION
+   ========================================================= */
+
+const anatomyData = [
+
+{
+title:"Diagnostic Focus",
+text:"Identify the specific objective, process gap, decision problem, or operational challenge you attempted to solve.",
+example:"Example: Customer follow-up was inconsistent, creating delays between inquiry and response."
+},
+
+{
+title:"Core Deliverable",
+text:"Show the actual work. This could be code, a workflow, report, financial model, audit, strategy brief, template, or other artifact.",
+example:"Example: Built a standardized follow-up workflow with defined stages, response rules, and tracking fields."
+},
+
+{
+title:"Measurable Outcome",
+text:"Explain what changed or what the solution is designed to improve. Use measurements when they exist, but do not invent results.",
+example:"Example: Creates a repeatable process that makes response activity easier to track and evaluate."
+},
+
+{
+title:"Verification",
+text:"Give another person a way to inspect the claim. Evidence becomes stronger when the underlying artifact can actually be reviewed.",
+example:"Example: Provide a live demonstration, repository, report, screenshots, documentation, or before-and-after comparison."
+}
+
+];
+
+
+function showAnatomy(index,button){
+
+document.querySelectorAll(".anatomy-btn")
+.forEach(btn => btn.classList.remove("active"));
+
+button.classList.add("active");
+
+const item = anatomyData[index];
+
+document.getElementById("anatomyDisplay").innerHTML = `
+
+<h3>${item.title}</h3>
+
+<p>${item.text}</p>
+
+<div class="example-box">
+
+<strong>${item.example.split(":")[0]}:</strong>
+
+${item.example.split(":").slice(1).join(":")}
+
+</div>
+
+`;
+
+}
+
+
+/* =========================================================
+   BUILDER
+   ========================================================= */
+
+const fields = [
+"title",
+"problem",
+"deliverable",
+"outcome",
+"verification"
+];
+
+
+fields.forEach(id => {
+
+document.getElementById(id).addEventListener("input",updatePreview);
+
+});
+
+
+function updatePreview(){
+
+const title =
+document.getElementById("title").value.trim();
+
+const problem =
+document.getElementById("problem").value.trim();
+
+const deliverable =
+document.getElementById("deliverable").value.trim();
+
+const outcome =
+document.getElementById("outcome").value.trim();
+
+const verification =
+document.getElementById("verification").value;
+
+
+document.getElementById("previewTitle").textContent =
+title || "Untitled Evidence Block";
+
+document.getElementById("previewProblem").textContent =
+problem || "Your problem or objective will appear here.";
+
+document.getElementById("previewDeliverable").textContent =
+deliverable || "Your work sample will appear here.";
+
+document.getElementById("previewOutcome").textContent =
+outcome || "Your result or expected value will appear here.";
+
+document.getElementById("previewVerification").textContent =
+verification || "No verification method selected.";
+
+calculateScore();
+
+}
+
+
+function calculateScore(){
+
+let score = 0;
+
+const title =
+document.getElementById("title").value.trim();
+
+const problem =
+document.getElementById("problem").value.trim();
+
+const deliverable =
+document.getElementById("deliverable").value.trim();
+
+const outcome =
+document.getElementById("outcome").value.trim();
+
+const verification =
+document.getElementById("verification").value;
+
+
+if(title.length >= 5) score += 15;
+
+if(problem.length >= 30) score += 25;
+
+if(deliverable.length >= 30) score += 25;
+
+if(outcome.length >= 30) score += 20;
+
+if(verification) score += 15;
+
+
+document.getElementById("scoreNumber").textContent =
+score + "%";
+
+document.getElementById("topScore").textContent =
+score + "%";
+
+document.getElementById("scoreFill").style.width =
+score + "%";
+
+
+let message =
+"Start filling the evidence fields.";
+
+if(score >= 90){
+message =
+"Strong evidence structure. Your artifact is close to portfolio-ready.";
+}
+else if(score >= 70){
+message =
+"Good foundation. Strengthen the weaker fields with specific details.";
+}
+else if(score >= 40){
+message =
+"Useful beginning. Add more detail about the problem and actual work.";
+}
+else if(score > 0){
+message =
+"Your Evidence Block has started. Continue adding concrete information.";
+}
+
+
+document.getElementById("scoreMessage").textContent =
+message;
+
+}
+
+
+/* =========================================================
+   GENERATE
+   ========================================================= */
+
+let blockCount = 0;
+
+
+function generateEvidence(){
+
+updatePreview();
+
+const score =
+parseInt(document.getElementById("scoreNumber").textContent);
+
+if(score === 0){
+
+showToast("Add information before generating your Evidence Block.");
+
+return;
+
+}
+
+blockCount++;
+
+document.getElementById("blockCount").textContent =
+blockCount;
+
+document.getElementById("systemState").textContent =
+"Evidence Built";
+
+showToast("Evidence Block generated.");
+
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+function resetBuilder(){
+
+fields.forEach(id => {
+
+const element =
+document.getElementById(id);
+
+if(element.tagName === "SELECT"){
+element.value = "";
+}
+else{
+element.value = "";
+}
+
+});
+
+updatePreview();
+
+document.getElementById("systemState").textContent =
+"Ready";
+
+showToast("Builder reset.");
+
+}
+
+
+/* =========================================================
+   COPY
+   ========================================================= */
+
+function copyEvidence(){
+
+const title =
+document.getElementById("previewTitle").textContent;
+
+const problem =
+document.getElementById("previewProblem").textContent;
+
+const deliverable =
+document.getElementById("previewDeliverable").textContent;
+
+const outcome =
+document.getElementById("previewOutcome").textContent;
+
+const verification =
+document.getElementById("previewVerification").textContent;
+
+
+const text =
+
+`WORKPROOF EVIDENCE BLOCK
+
+${title}
+
+DIAGNOSTIC FOCUS
+${problem}
+
+CORE DELIVERABLE
+${deliverable}
+
+OUTCOME
+${outcome}
+
+VERIFICATION
+${verification}`;
+
+
+navigator.clipboard.writeText(text)
+.then(() => showToast("Evidence Block copied."))
+.catch(() => showToast("Copy unavailable in this browser."));
+
+}
+
+
+/* =========================================================
+   CONVERSION LAB
+   ========================================================= */
+
+const conversions = [
+
+{
+beforeTitle:"I am organized.",
+before:"I am organized and good at managing competing responsibilities.",
+afterTitle:"Show the system.",
+after:"Designed a priority-tracking workflow that separated urgent requests from scheduled work and created a repeatable process for managing competing responsibilities."
+},
+
+{
+beforeTitle:"I am a leader.",
+before:"I am a strong leader who motivates people.",
+afterTitle:"Show the intervention.",
+after:"Coordinated competing priorities, established clearer responsibilities, and created a repeatable communication process for moving work forward."
+},
+
+{
+beforeTitle:"I solve problems.",
+before:"I am a creative problem solver.",
+afterTitle:"Show the diagnosis.",
+after:"Analyzed the recurring bottleneck, separated the contributing factors, tested alternative solutions, and documented a repeatable response process."
+},
+
+{
+beforeTitle:"I communicate well.",
+before:"I have excellent communication skills.",
+afterTitle:"Show the communication artifact.",
+after:"Created structured communication materials that translated complex information into clear actions, expectations, and follow-up points."
+},
+
+{
+beforeTitle:"I have technical skills.",
+before:"I am technically capable.",
+afterTitle:"Show the working artifact.",
+after:"Built and documented a functional technical solution, explaining the design decisions, implementation process, limitations, and intended use."
+}
+
+];
+
+
+function conversion(index){
+
+const item = conversions[index];
+
+document.getElementById("conversionBeforeTitle")
+.textContent = item.beforeTitle;
+
+document.getElementById("conversionBefore")
+.textContent = item.before;
+
+document.getElementById("conversionAfterTitle")
+.textContent = item.afterTitle;
+
+document.getElementById("conversionAfter")
+.textContent = item.after;
+
+}
+
+
+/* =========================================================
+   MATRIX FILTER
+   ========================================================= */
+
+function filterMatrix(category,button){
+
+document.querySelectorAll(".filter-btn")
+.forEach(btn => btn.classList.remove("active"));
+
+button.classList.add("active");
+
+
+document.querySelectorAll(".matrix-item")
+.forEach(row => {
+
+if(category === "all" ||
+row.dataset.category === category){
+
+row.style.display = "grid";
+
+}
+else{
+
+row.style.display = "none";
+
+}
+
+});
+
+}
+
+
+/* =========================================================
+   PROGRESSION ACCORDION
+   ========================================================= */
+
+function toggleLevel(button){
+
+const level =
+button.parentElement;
+
+document.querySelectorAll(".level")
+.forEach(item => {
+
+if(item !== level){
+item.classList.remove("open");
+}
+
+});
+
+level.classList.toggle("open");
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+function scrollToBuilder(){
+
+document.getElementById("builderSection")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+function scrollToAnatomy(){
+
+document.getElementById("anatomySection")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+
+let toastTimer;
+
+function showToast(message){
+
+const toast =
+document.getElementById("toast");
+
+toast.textContent = message;
+
+toast.classList.add("show");
+
+clearTimeout(toastTimer);
+
+toastTimer =
+setTimeout(() => {
+
+toast.classList.remove("show");
+
+},2500);
+
+}
+
+
+/* =========================================================
+   INITIALIZE
+   ========================================================= */
+
+updatePreview();
+
+</script>
+
+</body>
+</html>
