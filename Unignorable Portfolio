@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Unignorable Portfolio Framework</title>
+    <style>
+        :root {
+            --bg-deep: #090d16;
+            --bg-surface: #131a26;
+            --brand-green: #15803d;
+            --brand-lime: #a3e635;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border-muted: #1e293b;
+            --accent-glow: rgba(163, 230, 53, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-primary);
+            padding: 3rem 1.5rem;
+            line-height: 1.6;
+        }
+
+        .wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Hero Header */
+        header {
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border-muted);
+            padding-bottom: 2.5rem;
+        }
+
+        .kicker {
+            color: var(--brand-lime);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        header h1 {
+            font-size: 2.75rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            max-width: 750px;
+        }
+
+        /* Design Add-on: Metrics Summary Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 4rem;
+        }
+
+        .metric-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-muted);
+            border-radius: 8px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+
+        .metric-card .number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--brand-lime);
+            display: block;
+        }
+
+        .metric-card .label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        section {
+            margin-bottom: 5rem;
+        }
+
+        section h2 {
+            font-size: 1.75rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        section h2::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 1.75rem;
+            background-color: var(--brand-lime);
+            border-radius: 2px;
+        }
+
+        /* Step/Sequence Component */
+        .sequence-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .step-card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-muted);
+            border-radius: 8px;
+            padding: 1.75rem;
+            position: relative;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .step-card:hover {
+            border-color: var(--brand-lime);
+            box-shadow: 0 4px 20px var(--accent-glow);
+        }
+
+        .step-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .step-num {
+            font-size: 0.8rem;
+            font-weight: 700;
+            background: var(--brand-green);
+            color: var(--text-primary);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+        }
+
+        .step-time {
+            font-size: 0.85rem;
+            color: var(--brand-lime);
+            font-weight: 600;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Interactive Matrix/Widget Component */
+        .widget-panel {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-muted);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .widget-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .widget-header h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .widget-header p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .widget-controls {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            background: var(--bg-deep);
+            padding: 0.4rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-muted);
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            padding: 0.75rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background-color: var(--brand-green);
+            color: var(--text-primary);
+        }
+
+        .matrix-display {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .matrix-box {
+            background: var(--bg-deep);
+            border: 1px solid var(--border-muted);
+            border-radius: 8px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .matrix-box .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--brand-lime);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .matrix-box h4 {
+            font-size: 1.15rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .matrix-box p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .matrix-box .takeaway {
+            font-size: 0.825rem;
+            background: rgba(21, 128, 61, 0.2);
+            border-left: 2px solid var(--brand-green);
+            padding: 0.5rem 0.75rem;
+            color: var(--text-primary);
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* Cleaned Template Section (Markdown removed) */
+        .template-block {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-muted);
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            overflow: hidden;
+        }
+
+        .template-header {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 0.75rem 1.2rem;
+            border-bottom: 1px solid var(--border-muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-family: monospace;
+        }
+
+        .template-body {
+            padding: 1.25rem;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            line-height: 1.7;
+        }
+
+        .highlight-text {
+            color: var(--brand-lime);
+            font-weight: 600;
+        }
+
+        blockquote {
+            border-left: 3px solid var(--brand-lime);
+            background: rgba(163, 230, 53, 0.03);
+            padding: 1rem 1.25rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.95rem;
+            color: #cbd5e1;
+        }
+
+        /* Design Add-on: Interactive Checklist Extension */
+        .checklist-group {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-muted);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-muted);
+        }
+
+        .check-item:last-child {
+            border-bottom: none;
+        }
+
+        .check-item input[type="checkbox"] {
+            accent-color: var(--brand-green);
+            width: 1.1rem;
+            height: 1.1rem;
+            margin-top: 0.2rem;
+            cursor: pointer;
+        }
+
+        .check-content strong {
+            display: block;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .check-content span {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <header>
+        <span class="kicker">Signal Over Noise</span>
+        <h1>Building the Unignorable Portfolio</h1>
+        <p>Start with impact.</p>
+    </header>
+
+    <!-- Overview Metrics Section (Design Add-on) -->
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <span class="number">45s</span>
+            <span class="label">Average Review Window</span>
+        </div>
+        <div class="metric-card">
+            <span class="number">3</span>
+            <span class="label">Core Execution Pillars</span>
+        </div>
+        <div class="metric-card">
+            <span class="number">100%</span>
+            <span class="label">Verifiable Output</span>
+        </div>
+    </div>
+
+    <!-- Section 1: The Case Study Sequence -->
+    <section>
+        <h2>The Case Study Structural Blueprint</h2>
+        <div class="sequence-stack">
+            <div class="step-card">
+                <div class="step-meta">
+                    <span class="step-num">Phase 01</span>
+                    <span class="step-time">The Raw Initial State</span>
+                </div>
+                <div class="step-title">The Friction & Context Point</div>
+                <div class="step-desc">Establish exactly where you started. Document your lack of baseline resource constraints or structural advantages. Define the explicit bottleneck, problem statement, or knowledge gap you set out to neutralize.</div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-meta">
+                    <span class="step-num">Phase 02</span>
+                    <span class="step-time">Daily Cadence Documentation</span>
+                </div>
+                <div class="step-title">The Behavioral Execution Log</div>
+                <div class="step-desc">Do not merely state the outcome. Surface the daily iteration loops, configuration failures, and corrective structural shifts. This functions as proof of your problem-solving velocity under friction.</div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-meta">
+                    <span class="step-num">Phase 03</span>
+                    <span class="step-time">The Production Output</span>
+                </div>
+                <div class="step-title">Definitive Collateral Delivery</div>
+                <div class="step-desc">Display the live, functional system, verified trade execution, or completed academic asset. Isolate the exact micro-contributions you owned, showing absolute mastery over the final product baseline.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Interactive Sweat Equity Explorer (Refactored & Cleaned) -->
+    <section>
+        <h2>Sweat Equity Framework Explorer</h2>
+        <div class="widget-panel">
+            <div class="widget-header">
+                <h3>The Pillars of Execution</h3>
+                <p>Select an industry to analyze how to systematically demonstrate structural setups, daily iteration habits, and verifiable production outcomes.</p>
+            </div>
+            
+            <div class="widget-controls">
+                <button class="tab-btn active" onclick="switchIndustry('tech', this)">Tech & Software</button>
+                <button class="tab-btn" onclick="switchIndustry('trades', this)">Skilled Trades</button>
+                <button class="tab-btn" onclick="switchIndustry('academia', this)">Sciences & Academia</button>
+            </div>
+
+            <div class="matrix-display" id="matrix-content">
+                <!-- Dynamic Content Injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Case Study Template (Removed ** AI Syntax and Added Content) -->
+    <section>
+        <h2>Case Study Documentation Blueprint</h2>
+        <p>Utilize this standardized hierarchy inside project documentation to present structural work and eliminate non-essential fluff.</p>
+        
+        <div class="template-block">
+            <div class="template-header">
+                <span>case-study-template.md</span>
+                <span>DOCUMENTATION FORMAT</span>
+            </div>
+            <div class="template-body">Project Reference: System Implementation Profile
+
+1. Target Context & Structural Constraints
+   <span class="highlight-text">Primary Objective:</span> Define the explicit technical or operational capability to engineer.
+   <span class="highlight-text">Baseline Constraints:</span> Operating under budget limitations, zero legacy assets, or unguided frameworks.
+   <span class="highlight-text">Core Bottleneck:</span> Identify the primary technical or mechanical barrier requiring resolution.
+
+2. Daily Iteration Log & Troubleshooting Velocity
+   <span class="highlight-text">Timeline Phase 01:</span> Neutralized environment setup errors and configuration gaps.
+   <span class="highlight-text">Timeline Phase 02:</span> Restructured internal execution logic to resolve operational friction points.
+   <span class="highlight-text">Verifiable Footprint:</span> Access complete change-log records and granular inspection notes via public logs.
+
+3. Final Deliverables & Operational Metrics
+   <span class="highlight-text">Deployment Link:</span> Live platform URL or public inspection repository.
+   <span class="highlight-text">Performance Benchmark:</span> Realized a 40% efficiency improvement and built 3 custom operational workflows.</div>
+        </div>
+
+        <blockquote>
+            <strong>Evaluation Realism:</strong> Evaluators spend under 45 seconds scanning your materials. Leading with concise execution metrics rather than subjective descriptions demonstrates technical maturity instantly.
+        </blockquote>
+    </section>
+
+    <!-- Section 4: Execution Checklist (New Add-on Section) -->
+    <section>
+        <h2>Portfolio Readiness Audit</h2>
+        <div class="checklist-group">
+            <div class="check-item">
+                <input type="checkbox" id="check1" checked>
+                <div class="check-content">
+                    <label for="check1"><strong>Context & Friction Explicitly Defined</strong></label>
+                    <span>Clear statements showing initial constraints without decorative descriptions.</span>
+                </div>
+            </div>
+            <div class="check-item">
+                <input type="checkbox" id="check2">
+                <div class="check-content">
+                    <label for="check2"><strong>Verifiable Execution Footprint Linked</strong></label>
+                    <span>Direct access to commit logs, fabrication photos, or raw data ledgers.</span>
+                </div>
+            </div>
+            <div class="check-item">
+                <input type="checkbox" id="check3">
+                <div class="check-content">
+                    <label for="check3"><strong>Live Deliverable Reachable Within 1-Click</strong></label>
+                    <span>Zero friction access to deployed systems or final collateral outputs.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    const data = {
+        tech: [
+            { 
+                label: "Pillar 01: Environmental Structure", 
+                title: "Clean Infrastructure & Rigor", 
+                desc: "Demonstrate strict discipline over development environments. Publish containerized runtime setups, clean environment configs, structured dependency trees, and public dotfiles.",
+                takeaway: "Key Focus: Zero 'works on my machine' ambiguity."
+            },
+            { 
+                label: "Pillar 02: Behavioral Cadence", 
+                title: "Verifiable Iteration Loops", 
+                desc: "Provide steady, non-batched Git commit graphs. Include inline refactoring logs, architectural shift notes, and clear tracking of breaking-change resolutions.",
+                takeaway: "Key Focus: Proof of consistent problem-solving velocity."
+            },
+            { 
+                label: "Pillar 03: Core Performance Output", 
+                title: "Decoupled Production Assets", 
+                desc: "Deliver fully accessible live production links paired with decoupled code repositories, clear setup Readme files, and documented architectural trade-offs.",
+                takeaway: "Key Focus: Measurable runtime efficiency and clean output."
+            }
+        ],
+        trades: [
+            { 
+                label: "Pillar 01: Environmental Structure", 
+                title: "Workspace & Precision Standards", 
+                desc: "Maintain detailed logs on tool calibration, material safety management, physical layout geometry, and blueprint interpretation benchmarks.",
+                takeaway: "Key Focus: Demonstrating strict operational safety."
+            },
+            { 
+                label: "Pillar 02: Behavioral Cadence", 
+                title: "Fabrication & Revision Logs", 
+                desc: "Track consecutive hours spent troubleshooting physical assemblies, fixing tolerance drifts, and adapting layouts to structural site realities.",
+                takeaway: "Key Focus: Endurance through complex physical constraints."
+            },
+            { 
+                label: "Pillar 03: Core Performance Output", 
+                title: "Verifiable Structural Collateral", 
+                desc: "Present high-resolution visual evidence (e.g., conduit bending paths, precision jointing) positioned side-by-side with original technical schematics.",
+                takeaway: "Key Focus: Uncompromising build quality and spec alignment."
+            }
+        ],
+        academia: [
+            { 
+                label: "Pillar 01: Environmental Structure", 
+                title: "Methodological Frameworks", 
+                desc: "Outline precise experimental controls, hypothesis boundaries, data collection pipelines, and systematic reference mapping rules.",
+                takeaway: "Key Focus: Elimination of bias and measurement errors."
+            },
+            { 
+                label: "Pillar 02: Behavioral Cadence", 
+                title: "Raw Datasets & Literature Logs", 
+                desc: "Document exhaustive qualitative literature reviews, preliminary dataset transformations, negative result logs, and parameter shifts.",
+                takeaway: "Key Focus: Transparency across every research phase."
+            },
+            { 
+                label: "Pillar 03: Core Performance Output", 
+                title: "Peer-Ready Monograph / Model", 
+                desc: "Publish thoroughly cited technical briefs, accessible statistical models, and raw calculation validation scripts ready for audit.",
+                takeaway: "Key Focus: Replicable scientific and mathematical insight."
+            }
+        ]
+    };
+
+    function switchIndustry(industry, element) {
+        // Handle Active Button State
+        const buttons = document.querySelectorAll('.tab-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        element.classList.add('active');
+
+        // Render Dynamic Grid Content
+        const container = document.getElementById('matrix-content');
+        container.innerHTML = '';
+
+        data[industry].forEach(item => {
+            const box = document.createElement('div');
+            box.className = 'matrix-box';
+            box.innerHTML = `
+                <div>
+                    <span class="label">${item.label}</span>
+                    <h4>${item.title}</h4>
+                    <p>${item.desc}</p>
+                </div>
+                <div class="takeaway">${item.takeaway}</div>
+            `;
+            container.appendChild(box);
+        });
+    }
+
+    // Initialize Default State (Tech)
+    document.addEventListener('DOMContentLoaded', () => {
+        switchIndustry('tech', document.querySelector('.tab-btn'));
+    });
+</script>
+
+</body>
+</html>
