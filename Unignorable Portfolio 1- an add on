@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Unignorable Portfolio Framework</title>
+    <style>
+        :root {
+            --bg-deep: #090d10;
+            --bg-panel: #12181d;
+            --primary-green: #15803d;
+            --volt-lime: #ccff00;
+            --volt-hover: #b5e600;
+            --text-bright: #f1f5f9;
+            --text-dim: #64748b;
+            --border-glow: #1e293b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-bright);
+            padding: 3rem 1rem;
+            line-height: 1.6;
+        }
+
+        .wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 3.5rem;
+            border-left: 4px solid var(--volt-lime);
+            padding-left: 1.5rem;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+
+        header h1 span {
+            color: var(--volt-lime);
+        }
+
+        header p {
+            color: var(--text-dim);
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+            max-width: 700px;
+        }
+
+        /* Interactive Tabs */
+        .tab-navigation {
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 2px solid var(--border-glow);
+            margin-bottom: 2.5rem;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-bright);
+        }
+
+        .tab-btn.active {
+            color: var(--volt-lime);
+            border-bottom-color: var(--volt-lime);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out forwards;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Framework Typography & Layout Components */
+        .grid-two {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background-color: var(--bg-panel);
+            border: 1px solid var(--border-glow);
+            padding: 2rem;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .card-accent {
+            border-top: 3px solid var(--primary-green);
+        }
+
+        .card h3 {
+            color: var(--volt-lime);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pill {
+            background: rgba(204, 255, 0, 0.1);
+            color: var(--volt-lime);
+            padding: 0.2rem 0.6rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            border-radius: 4px;
+            letter-spacing: 0.05em;
+        }
+
+        ol, ul {
+            padding-left: 1.25rem;
+            color: #cbd5e1;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+        }
+
+        strong {
+            color: var(--text-bright);
+        }
+
+        /* Sweat Equity Framework Component */
+        .sweat-equity-matrix {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            background: linear-gradient(145deg, #111827, #030712);
+            border: 1px solid var(--border-glow);
+            padding: 2.5rem;
+            border-radius: 16px;
+            margin-top: 1rem;
+        }
+
+        .matrix-row {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 1.5rem;
+            padding-top: 0.5rem;
+        }
+
+        .matrix-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .matrix-label {
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--primary-green);
+            letter-spacing: 0.05em;
+        }
+
+        /* Code/Template block layout */
+        .template-block {
+            background: #000;
+            border: 1px dashed var(--primary-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            color: #a7f3d0;
+            font-size: 0.95rem;
+            white-space: pre-line;
+            margin: 1.5rem 0;
+            line-height: 1.5;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            .matrix-row {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            header h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <header>
+        <h1>The Unignorable <span>Portfolio Engine</span></h1>
+    </header>
+
+    <!-- Navigation Hub -->
+    <nav class="tab-navigation">
+        <button class="tab-btn active" onclick="switchTab(event, 'grit')">1. Documenting Daily Grit</button>
+        <button class="tab-btn" onclick="switchTab(event, 'framework')">2. Sweat Equity Framework</button>
+        <button class="tab-btn" onclick="switchTab(event, 'templates')">3. Case Study Templates</button>
+    </nav>
+
+    <!-- Tab 1: Daily Grit -->
+    <div id="grit" class="tab-content active">
+        <div class="grid-two">
+            <div class="card card-accent">
+                <h3><span>01</span> GitHub-Style Transparency</h3>
+                <p style="color: var(--text-dim); margin-bottom: 1rem;">Don't wait for final delivery to showcase your project. Document the dirty work.</p>
+                <ul>
+                    <li><strong>The Public Commits:</strong> Log your daily baseline. Whether it's a line of code, a weld bead, or data cleanup, update a public repository or micro-site daily.</li>
+                    <li><strong>The Failed Path Logs:</strong> Note down the bugs, bad hypotheses, and broken models. Showing <em>how</em> you troubleshoot highlights high situational awareness.</li>
+                </ul>
+            </div>
+            <div class="card card-accent">
+                <h3><span>02</span> Time-Lapse Technical Evidence</h3>
+                <p style="color: var(--text-dim); margin-bottom: 1rem;">Humanize your workflow to force viewers past a simple glance.</p>
+                <ul>
+                    <li><strong>Screen-Capture Sprints:</strong> Record hyper-lapse clips of your technical deep-work blocks. Drop them seamlessly into project intros.</li>
+                    <li><strong>Vulnerability Metrics:</strong> "Spent 6 hours optimizing a query that ended up yielding only a 2% increase. Here's exactly why my architecture choice limited it."</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab 2: Sweat Equity -->
+    <div id="framework" class="tab-content">
+        <div class="sweat-equity-matrix">
+            <h2 style="color: var(--text-bright); font-size: 1.6rem; margin-bottom: 0.5rem;">The Structural Proof System</h2>
+            <p style="color: var(--text-dim); margin-bottom: 1.5rem;">Turn invisible intellectual labor into undeniable tangible data by proving your environment, habits, and production metrics.</p>
+            
+            <div class="matrix-row">
+                <div class="matrix-label">1. Environment</div>
+                <div>
+                    <span class="pill">Structure</span>
+                    <p style="margin-top: 0.5rem; color: #e2e8f0;"><strong>What is your sandbox constraint?</strong> Clearly specify your strict operating parameters. E.g., "Built completely within AWS free tier limits," or "Using exclusively scrap Grade-2 carbon steel under a $50 overall budget constraint."</p>
+                </div>
+            </div>
+
+            <div class="matrix-row">
+                <div class="matrix-label">2. Behavior</div>
+                <div>
+                    <span class="pill">Execution</span>
+                    <p style="margin-top: 0.5rem; color: #e2e8f0;"><strong>What was the systemic friction?</strong> Highlight the routine habits required to execute. Show raw logs tracking your strict velocity. E.g., "3 hours of active diagnostic testing every morning at 5:00 AM across 45 consecutive calendar days."</p>
+                </div>
+            </div>
+
+            <div class="matrix-row">
+                <div class="matrix-label">3. Output</div>
+                <div>
+                    <span class="pill">Collateral</span>
+                    <p style="margin-top: 0.5rem; color: #e2e8f0;"><strong>What is the standalone output?</strong> Deliver an easily verifiable, unignorable artifact. E.g., a fully operational deployment link, an open-source tool, or an industry-certified engineering drawing pack ready to print.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab 3: Case Study Templates -->
+    <div id="templates" class="tab-content">
+        <div class="card">
+            <h3>Raw Study Notes ➔ Professional Case Study Framework</h3>
+            <p style="color: var(--text-dim);">Copy, paste, and fill this markdown boilerplate out for your individual projects to quickly structure them for review.</p>
+            
+            <div class="template-block">
+# Project Title: [System Name or Problem Statement]
+## Executive Summary
+* **The High-Stakes Challenge:** [Describe the problem in 2 clear sentences]
+* **The Final Concrete Output:** [What structural asset did you deliver?]
+* **The Core ROI Metric:** [E.g., Reduced build time by 40%, achieved 98% accuracy]
+
+## 1. The Friction & Environmental Constraints
+* [Detail what rules or budget ceilings you operated under]
+* [List your tooling stack or materials used]
+
+## 2. Daily Grit Logs (The Iteration Cycle)
+* **Hypothesis Alpha:** [What did you try first?]
+* **The Critical Failure Point:** [Why and how did it fail under stress testing?]
+* **The Pivot:** [How did raw behavioral data redirect your project?]
+
+## 3. Standard Verification & Output Proof
+* [Embed code repository link, CAD schema, or video blueprint]
+* [Link to validation testing metrics or production runs]
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function switchTab(event, tabId) {
+        // Hide all tabs
+        const contents = document.querySelectorAll('.tab-content');
+        contents.forEach(content => content.classList.remove('active'));
+
+        // Deactivate all buttons
+        const buttons = document.querySelectorAll('.tab-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+
+        // Activate selected tab and button
+        document.getElementById(tabId).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }
+</script>
+
+</body>
+</html>
