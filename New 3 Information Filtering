@@ -1,0 +1,1811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Information Intelligence Lab | PathKeeper</title>
+
+<style>
+:root {
+  --forest:#0F2C23;
+  --deep:#091D17;
+  --green:#194936;
+  --sage:#7A9A8B;
+  --cream:#F7F9F2;
+  --paper:#FFFFFF;
+  --brown:#4A3B35;
+  --tan:#D8B08C;
+  --muted:#64746B;
+  --border:#DCE5DC;
+  --red:#A43F35;
+  --gold:#936A20;
+  --soft:#EAF1E9;
+  --radius:17px;
+}
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  margin:0;
+  background:var(--cream);
+  color:var(--forest);
+  font-family:Arial,Helvetica,sans-serif;
+  line-height:1.7;
+}
+button,input,select,textarea { font:inherit; }
+button { cursor:pointer; }
+a { color:inherit; }
+button:focus-visible,a:focus-visible,
+input:focus-visible,select:focus-visible,
+textarea:focus-visible {
+  outline:3px solid var(--tan);
+  outline-offset:3px;
+}
+header {
+  background:var(--forest);
+  color:white;
+  border-bottom:3px solid var(--tan);
+  padding:17px 5%;
+}
+.nav {
+  max-width:1240px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+}
+.brand { font-weight:900; letter-spacing:1.4px; }
+.brand span { color:var(--tan); }
+.nav small { color:#D8E5DC; text-align:right; }
+.hero {
+  background:linear-gradient(130deg,var(--green),var(--deep));
+  color:white;
+  padding:65px 6%;
+}
+.hero-inner { max-width:1240px; margin:auto; }
+.eyebrow {
+  color:var(--tan);
+  font-size:.76rem;
+  font-weight:800;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+h1 {
+  font-size:clamp(2.3rem,5vw,4.6rem);
+  line-height:1.08;
+  letter-spacing:-1.8px;
+  max-width:920px;
+  margin:18px 0;
+}
+.hero p { color:#E0E9E2; max-width:790px; font-size:1.08rem; }
+.hero-actions,.actions {
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:24px;
+}
+.btn {
+  display:inline-block;
+  border:1px solid transparent;
+  border-radius:9px;
+  padding:11px 16px;
+  font-size:.88rem;
+  font-weight:750;
+  text-decoration:none;
+}
+.primary { background:var(--tan); color:var(--forest); }
+.outline { color:white; border-color:#89A797; background:transparent; }
+.dark { background:var(--forest); color:white; }
+.light { background:white; color:var(--forest); border-color:var(--border); }
+main { max-width:1240px; margin:auto; padding:38px 22px 80px; }
+.section { margin-bottom:55px; scroll-margin-top:20px; }
+.heading { margin-bottom:22px; }
+.heading h2 {
+  font-size:clamp(1.65rem,3.2vw,2.35rem);
+  line-height:1.2;
+  letter-spacing:-.6px;
+  margin:0 0 10px;
+}
+.heading p { color:var(--muted); max-width:820px; margin:0; }
+.grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:16px;
+}
+.card,.panel {
+  background:var(--paper);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:23px;
+  min-width:0;
+}
+.card h3,.panel h3 { margin:8px 0; line-height:1.35; }
+.card p,.card li { color:var(--muted); font-size:.93rem; }
+.card ul { padding-left:20px; }
+.number { color:var(--sage); font-size:1.5rem; font-weight:900; }
+.tag {
+  display:inline-block;
+  background:var(--soft);
+  color:var(--green);
+  padding:4px 9px;
+  border-radius:20px;
+  font-size:.74rem;
+  font-weight:800;
+}
+.muted { color:var(--muted); }
+.small { font-size:.82rem; }
+.callout {
+  background:#F0EDE3;
+  border-left:4px solid var(--tan);
+  padding:18px 21px;
+  border-radius:0 12px 12px 0;
+  margin:20px 0;
+}
+.callout p { margin-bottom:0; }
+.dark-panel {
+  background:var(--forest);
+  color:white;
+  border-radius:var(--radius);
+  padding:25px;
+}
+.dark-panel p { color:#D6E2D9; }
+.dark-panel h3 { margin-top:0; }
+.pill {
+  display:inline-block;
+  border:1px solid #DCE5DC;
+  border-radius:30px;
+  padding:5px 10px;
+  font-size:.78rem;
+  background:white;
+}
+.field { margin:0 0 18px; }
+label { display:block; font-weight:750; font-size:.9rem; margin-bottom:7px; }
+label .hint { display:block; font-weight:400; color:var(--muted); font-size:.8rem; }
+input[type=text],input[type=url],input[type=number],
+input[type=date],select,textarea {
+  width:100%;
+  padding:12px;
+  border:1px solid #CBD8CD;
+  border-radius:9px;
+  background:#FCFDFB;
+  color:var(--forest);
+}
+textarea { min-height:100px; resize:vertical; }
+input[type=range] { width:100%; accent-color:var(--green); }
+.two-col {
+  display:grid;
+  grid-template-columns:minmax(0,1.4fr) minmax(260px,.8fr);
+  gap:20px;
+  align-items:start;
+}
+.sticky { position:sticky; top:15px; }
+.score-panel {
+  background:var(--forest);
+  color:white;
+  border-radius:var(--radius);
+  padding:25px;
+}
+.score-panel p { color:#D6E2D9; }
+.score-number { font-size:3.7rem; font-weight:900; line-height:1.15; }
+.meter { height:9px; background:#385548; border-radius:9px; overflow:hidden; margin:15px 0; }
+.meter-fill { height:100%; width:0; background:var(--tan); transition:width .2s; }
+.rating {
+  border:1px solid var(--border);
+  padding:14px;
+  border-radius:11px;
+  margin-bottom:12px;
+}
+.rating-head {
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:start;
+}
+.rating-head label { margin:0; }
+.rating-value { white-space:nowrap; font-weight:800; color:var(--green); }
+.rating small { display:block; color:var(--muted); font-weight:400; }
+.status {
+  display:inline-block;
+  padding:5px 10px;
+  background:#E5EEE4;
+  color:var(--forest);
+  border-radius:20px;
+  font-size:.8rem;
+  font-weight:800;
+}
+.lesson {
+  background:white;
+  border:1px solid var(--border);
+  border-radius:13px;
+  margin-bottom:12px;
+  overflow:hidden;
+}
+.lesson summary {
+  cursor:pointer;
+  padding:18px 20px;
+  font-weight:800;
+  list-style-position:inside;
+}
+.lesson summary:hover { background:#F0F4EF; }
+.lesson-body { padding:0 22px 22px; }
+.lesson-body h4 { margin-bottom:4px; }
+.lesson-body p,.lesson-body li { color:var(--muted); }
+.lesson-body ul { padding-left:22px; }
+.equation {
+  padding:14px;
+  border-radius:9px;
+  background:#EEF3EC;
+  font-weight:800;
+  overflow-wrap:anywhere;
+}
+.check-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:11px;
+}
+.check-item {
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  background:white;
+  border:1px solid var(--border);
+  border-radius:11px;
+  padding:14px;
+}
+.check-item input { margin-top:6px; accent-color:var(--green); }
+.check-item strong { font-size:.89rem; }
+.check-item small { display:block; color:var(--muted); margin-top:3px; }
+.table-wrap {
+  overflow-x:auto;
+  background:white;
+  border:1px solid var(--border);
+  border-radius:12px;
+}
+table { width:100%; border-collapse:collapse; min-width:650px; }
+th,td {
+  padding:13px 15px;
+  text-align:left;
+  vertical-align:top;
+  border-bottom:1px solid var(--border);
+  font-size:.87rem;
+}
+th { background:#EAF0E8; }
+td { color:var(--muted); }
+tr:last-child td { border-bottom:0; }
+.feedback {
+  margin-top:15px;
+  background:#EDF3EB;
+  border-radius:10px;
+  padding:15px;
+}
+.feedback:empty { display:none; }
+.option {
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  padding:11px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  margin:9px 0;
+  cursor:pointer;
+}
+.option input { margin-top:6px; accent-color:var(--green); }
+.log-card {
+  background:white;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:17px;
+  margin-bottom:12px;
+  overflow-wrap:anywhere;
+}
+.log-card h4 { margin:0 0 5px; }
+.empty {
+  padding:23px;
+  text-align:center;
+  color:var(--muted);
+  border:1px dashed #B9C9BB;
+  border-radius:12px;
+}
+footer {
+  background:var(--forest);
+  color:white;
+  text-align:center;
+  padding:34px 6%;
+}
+footer strong { color:var(--tan); }
+footer p { color:#D6E2D9; max-width:680px; margin:8px auto; }
+@media(max-width:850px) {
+  .grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .two-col { grid-template-columns:1fr; }
+  .sticky { position:static; }
+}
+@media(max-width:550px) {
+  .grid,.check-grid { grid-template-columns:1fr; }
+  main { padding-left:14px; padding-right:14px; }
+  .hero { padding:45px 6%; }
+  .nav { align-items:flex-start; }
+  .nav small { max-width:145px; }
+}
+@media print {
+  header,.hero-actions,.no-print,footer { display:none!important; }
+  body,main { background:white; padding:0; }
+  .sticky { position:static; }
+  .score-panel { color:black; background:white; border:1px solid #aaa; }
+  .score-panel p { color:#333; }
+  .section,.card,.panel,.lesson { break-inside:avoid; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">PATH<span>KEEPER</span></div>
+    <small>Information Intelligence · Research · Judgment</small>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Advanced Learning and Investigation System</div>
+    <h1>Learn to distinguish information from evidence.</h1>
+    <p>
+      An advanced laboratory for investigating claims, comparing sources,
+      detecting flawed reasoning, measuring uncertainty, and deciding
+      what evidence is sufficient for action.
+    </p>
+    <div class="hero-actions">
+      <a class="btn primary" href="#curriculum">Start advanced lessons</a>
+      <a class="btn outline" href="#investigation">Run an investigation</a>
+      <a class="btn outline" href="#evaluator">Evaluate a claim</a>
+    </div>
+  </div>
+</section>
+
+<main>
+
+<section class="section">
+  <div class="heading">
+    <h2>01. The architecture of information quality</h2>
+    <p>
+      Information quality is multidimensional. A source may be authentic
+      but outdated, accurate but irrelevant, useful but incomplete, or
+      persuasive without being well-supported.
+    </p>
+  </div>
+
+  <div class="grid">
+    <article class="card">
+      <div class="number">01</div>
+      <h3>Accuracy</h3>
+      <p>Does the information correspond to the underlying facts? Can the specific claim be independently checked?</p>
+    </article>
+    <article class="card">
+      <div class="number">02</div>
+      <h3>Provenance</h3>
+      <p>Where did the information originate? Can you trace its transformations, citations, and ownership?</p>
+    </article>
+    <article class="card">
+      <div class="number">03</div>
+      <h3>Relevance</h3>
+      <p>Does it answer the question you actually need to resolve, or merely discuss a neighboring topic?</p>
+    </article>
+    <article class="card">
+      <div class="number">04</div>
+      <h3>Timeliness</h3>
+      <p>Is the information current for this decision? Different facts have different rates of change.</p>
+    </article>
+    <article class="card">
+      <div class="number">05</div>
+      <h3>Completeness</h3>
+      <p>Are important limitations, conditions, exceptions, denominators, and contradictory findings missing?</p>
+    </article>
+    <article class="card">
+      <div class="number">06</div>
+      <h3>Independence</h3>
+      <p>Do multiple sources provide independent evidence, or are they repeating the same original assertion?</p>
+    </article>
+  </div>
+
+  <div class="callout">
+    <strong>Core distinction:</strong>
+    A polished presentation is not evidence. A reputable publisher is
+    not infallible. A citation is not automatically relevant support.
+    Every important claim must be evaluated in context.
+  </div>
+</section>
+
+<section class="section" id="curriculum">
+  <div class="heading">
+    <h2>02. Advanced intelligence curriculum</h2>
+    <p>
+      These lessons develop a deeper understanding of how knowledge is
+      established, how evidence fails, and how to reason under uncertainty.
+      Open each lesson and work through its practical application.
+    </p>
+  </div>
+
+  <details class="lesson" open>
+    <summary>Lesson 1 — Bayesian reasoning: updating beliefs with evidence</summary>
+    <div class="lesson-body">
+      <h4>The central idea</h4>
+      <p>
+        A rational investigator does not treat every new fact as equally
+        important. Evidence should change confidence according to how
+        much more likely that evidence would be if a claim were true
+        than if it were false.
+      </p>
+      <div class="equation">
+        Posterior odds = Prior odds × Likelihood ratio
+      </div>
+      <p>
+        The prior represents the starting probability. The likelihood
+        ratio compares how well the evidence fits competing explanations.
+        The posterior represents the updated probability after considering
+        the evidence.
+      </p>
+      <h4>Example</h4>
+      <p>
+        Suppose a fictional program claims that applicants who complete
+        a course are more likely to get a job. A testimonial alone is
+        compatible with many explanations: the course helped, the person
+        already had strong qualifications, or the job was obtained through
+        unrelated experience.
+      </p>
+      <p>
+        Better evidence might compare similar applicants, document the
+        employment outcome, explain the sample, and disclose how people
+        entered each group.
+      </p>
+      <h4>Intellectual discipline</h4>
+      <ul>
+        <li>Write down your initial belief before reviewing persuasive evidence.</li>
+        <li>Ask what you would expect to observe if the claim were false.</li>
+        <li>Distinguish evidence that is merely compatible with a claim from evidence that discriminates between competing explanations.</li>
+        <li>Update confidence proportionally rather than switching from certainty to certainty.</li>
+      </ul>
+      <div class="callout">
+        <strong>Expert insight:</strong>
+        Evidence is especially informative when it is much more expected
+        under one explanation than under its alternatives.
+      </div>
+    </div>
+  </details>
+
+  <details class="lesson">
+    <summary>Lesson 2 — Causal inference: correlation is not causation</summary>
+    <div class="lesson-body">
+      <h4>The central idea</h4>
+      <p>
+        Two variables can move together without one causing the other.
+        Their relationship may arise from a third variable, selection
+        effects, reverse causation, or coincidence.
+      </p>
+      <div class="equation">
+        Observed association ≠ established causal effect
+      </div>
+      <h4>Example</h4>
+      <p>
+        A company finds that employees who attend optional training
+        receive more promotions. This does not prove training caused
+        the promotions. Employees who seek training might also have
+        more experience, stronger managers, or greater motivation.
+      </p>
+      <h4>Investigative procedure</h4>
+      <ol>
+        <li>Define the proposed cause and the outcome precisely.</li>
+        <li>Establish that the proposed cause occurred before the outcome.</li>
+        <li>Identify plausible confounding variables.</li>
+        <li>Investigate how participants were selected.</li>
+        <li>Examine experimental, quasi-experimental, or longitudinal evidence where appropriate.</li>
+        <li>Check whether the conclusion exceeds what the study design can support.</li>
+      </ol>
+      <p>
+        Randomized experiments can help identify causal effects under
+        suitable conditions, but poor implementation, attrition,
+        noncompliance, and limited generalizability can still undermine
+        conclusions.
+      </p>
+    </div>
+  </details>
+
+  <details class="lesson">
+    <summary>Lesson 3 — Provenance and source independence</summary>
+    <div class="lesson-body">
+      <h4>The central idea</h4>
+      <p>
+        A claim repeated by ten websites may still have only one
+        underlying source. Counting repetitions as separate confirmation
+        creates false confidence.
+      </p>
+      <h4>Construct a source lineage</h4>
+      <ol>
+        <li>Identify where the claim first appeared, if possible.</li>
+        <li>Follow citations and links backward.</li>
+        <li>Check whether sources conducted their own investigation.</li>
+        <li>Determine whether apparent corroboration is simply syndication or paraphrasing.</li>
+        <li>Look for evidence gathered through a different method or institution.</li>
+      </ol>
+      <h4>Independence is not binary</h4>
+      <p>
+        Sources may share datasets, ownership, experts, funding, or
+        reporting pipelines. Shared dependencies can make their errors
+        correlated. Independent replication is generally more informative
+        than numerous derivative summaries.
+      </p>
+      <div class="callout">
+        Ask: "How many independent paths lead to this conclusion?"
+        Do not ask only: "How many pages repeat it?"
+      </div>
+    </div>
+  </details>
+
+  <details class="lesson">
+    <summary>Lesson 4 — Statistical literacy and denominator discipline</summary>
+    <div class="lesson-body">
+      <h4>The central idea</h4>
+      <p>
+        Numbers can be mathematically correct yet misleading because of
+        their denominator, comparison group, sampling method, uncertainty,
+        or visual presentation.
+      </p>
+      <h4>Common failures</h4>
+      <ul>
+        <li><strong>Relative versus absolute change:</strong> A 50% increase from 2 cases to 3 cases is one additional case.</li>
+        <li><strong>Base-rate neglect:</strong> A seemingly impressive indicator may still produce many false positives when the condition being detected is rare.</li>
+        <li><strong>Selection bias:</strong> A sample of enthusiastic customers may not represent all customers.</li>
+        <li><strong>Survivorship bias:</strong> Studying successful businesses while ignoring those that failed distorts conclusions about what works.</li>
+        <li><strong>Small samples:</strong> A few observations may produce unstable estimates.</li>
+        <li><strong>Missing uncertainty:</strong> A point estimate does not reveal how precisely the quantity is known.</li>
+      </ul>
+      <h4>Questions for every important statistic</h4>
+      <ol>
+        <li>What is the numerator?</li>
+        <li>What is the denominator?</li>
+        <li>Who or what was included and excluded?</li>
+        <li>What is the comparison group?</li>
+        <li>How was the measurement collected?</li>
+        <li>What range of values is compatible with the data?</li>
+      </ol>
+    </div>
+  </details>
+
+  <details class="lesson">
+    <summary>Lesson 5 — Epistemology: what does it mean to know?</summary>
+    <div class="lesson-body">
+      <h4>Separate four epistemic states</h4>
+      <ul>
+        <li><strong>Observed:</strong> Directly recorded or experienced, with measurement limitations acknowledged.</li>
+        <li><strong>Inferred:</strong> A conclusion drawn from observations and assumptions.</li>
+        <li><strong>Reported:</strong> A statement communicated by another source that has not necessarily been independently checked.</li>
+        <li><strong>Unknown:</strong> A question for which the available evidence does not justify a conclusion.</li>
+      </ul>
+      <p>
+        A fifth useful category is <strong>disputed</strong>: multiple
+        interpretations or bodies of evidence remain in conflict.
+      </p>
+      <h4>The ladder of epistemic strength</h4>
+      <p>
+        Begin with the raw observation. Establish that the measurement
+        was valid. Check the provenance. Examine the interpretation.
+        Test alternative explanations. Then determine the strength of
+        the conclusion.
+      </p>
+      <p>
+        A confident statement is a statement about someone's confidence,
+        not necessarily about the quality of their knowledge.
+      </p>
+      <div class="callout">
+        Intellectual maturity includes being able to say what would
+        change your mind and what you cannot currently establish.
+      </div>
+    </div>
+  </details>
+
+  <details class="lesson">
+    <summary>Lesson 6 — Cognitive bias and motivated reasoning</summary>
+    <div class="lesson-body">
+      <h4>Why intelligent people can reach poor conclusions</h4>
+      <p>
+        Intelligence can improve reasoning, but it can also be used to
+        defend an existing belief. More elaborate arguments do not
+        automatically mean less bias.
+      </p>
+      <ul>
+        <li><strong>Confirmation bias:</strong> Preferentially seeking evidence that supports an existing belief.</li>
+        <li><strong>Anchoring:</strong> Giving excessive weight to an initial number, claim, or impression.</li>
+        <li><strong>Availability bias:</strong> Overestimating what is memorable or easy to recall.</li>
+        <li><strong>Authority bias:</strong> Treating status as a substitute for evidence.</li>
+        <li><strong>Motivated reasoning:</strong> Applying different standards depending on the conclusion one wants.</li>
+        <li><strong>Overconfidence:</strong> Being more certain than one's evidence and track record justify.</li>
+      </ul>
+      <h4>Countermeasures</h4>
+      <ol>
+        <li>Write down the strongest alternative explanation.</li>
+        <li>Search deliberately for disconfirming evidence.</li>
+        <li>Apply the same standard to claims you like and dislike.</li>
+        <li>Specify in advance what evidence would change your mind.</li>
+        <li>Ask a knowledgeable person to critique the method, not merely the conclusion.</li>
+      </ol>
+    </div>
+  </details>
+
+  <details class="lesson">
+    <summary>Lesson 7 — Information decay and temporal validity</summary>
+    <div class="lesson-body">
+      <h4>The central idea</h4>
+      <p>
+        Information can become less useful over time even when it was
+        originally accurate. Different categories of information have
+        different rates of change.
+      </p>
+      <p>
+        Software instructions can become obsolete after a product update.
+        Scholarship deadlines change each cycle. Historical facts may
+        remain stable, while market prices can change by the hour.
+      </p>
+      <h4>Build a freshness protocol</h4>
+      <ol>
+        <li>Identify which elements of the claim can change.</li>
+        <li>Find the last verified date, not just the page's display date.</li>
+        <li>Determine who controls the underlying information.</li>
+        <li>Check the current authoritative record.</li>
+        <li>Record the date on which you verified it.</li>
+        <li>Set a recheck interval appropriate to the rate of change and the stakes.</li>
+      </ol>
+      <p>
+        A publication date alone does not establish currency. An old
+        document can describe a current rule correctly, and a newly
+        published article can repeat obsolete information.
+      </p>
+    </div>
+  </details>
+
+  <details class="lesson">
+    <summary>Lesson 8 — Research methods and external validity</summary>
+    <div class="lesson-body">
+      <h4>Different methods answer different questions</h4>
+      <ul>
+        <li><strong>Descriptive research:</strong> What was observed?</li>
+        <li><strong>Correlational research:</strong> Which variables were associated?</li>
+        <li><strong>Experimental research:</strong> What effect occurred under the studied intervention and conditions?</li>
+        <li><strong>Qualitative research:</strong> How do people experience, interpret, or explain a phenomenon?</li>
+        <li><strong>Systematic reviews:</strong> What does the eligible body of research collectively indicate, given its methods and limitations?</li>
+      </ul>
+      <p>
+        No method is universally superior. The appropriate design depends
+        on the question, feasibility, ethical constraints, measurement
+        quality, and desired inference.
+      </p>
+      <h4>External validity</h4>
+      <p>
+        A result observed in one population, setting, time period, or
+        implementation may not transfer to another. Examine the conditions
+        under which the evidence was produced before applying it elsewhere.
+      </p>
+      <h4>Publication bias</h4>
+      <p>
+        Positive or striking results may be more likely to be published
+        or publicized. The visible literature can therefore differ from
+        the full set of studies that were conducted.
+      </p>
+    </div>
+  </details>
+
+  <details class="lesson">
+    <summary>Lesson 9 — Signal detection and efficient filtering</summary>
+    <div class="lesson-body">
+      <h4>The central idea</h4>
+      <p>
+        Filtering systems face two competing errors: accepting bad
+        information and rejecting good information.
+      </p>
+      <ul>
+        <li><strong>False positive:</strong> Treating an unsupported or false claim as reliable.</li>
+        <li><strong>False negative:</strong> Rejecting useful or accurate information.</li>
+        <li><strong>True positive:</strong> Correctly identifying information that meets the relevant standard.</li>
+        <li><strong>True negative:</strong> Correctly identifying information that fails the relevant standard.</li>
+      </ul>
+      <p>
+        The right threshold depends on the cost of each error. A low-stakes
+        brainstorming exercise may tolerate more uncertainty than a legal,
+        medical, safety, or major financial decision.
+      </p>
+      <h4>Practical filter</h4>
+      <ol>
+        <li>Remove material unrelated to the question.</li>
+        <li>Screen for source traceability and minimum evidence.</li>
+        <li>Prioritize claims that could materially change the decision.</li>
+        <li>Investigate high-risk uncertainties first.</li>
+        <li>Stop when additional research is unlikely to change the action, unless a mandatory verification standard remains unmet.</li>
+      </ol>
+    </div>
+  </details>
+
+  <details class="lesson">
+    <summary>Lesson 10 — Decision theory and the value of information</summary>
+    <div class="lesson-body">
+      <h4>The central idea</h4>
+      <p>
+        Research has a cost. So does acting on poor information. The goal
+        is not infinite certainty; it is obtaining enough decision-relevant
+        evidence at a reasonable cost while meeting essential safety and
+        verification requirements.
+      </p>
+      <div class="equation">
+        Value of research = Expected improvement in decisions − Research cost
+      </div>
+      <p>
+        This is a conceptual decision rule, not a precise formula unless
+        the possible outcomes, probabilities, and costs can be estimated.
+      </p>
+      <h4>Example</h4>
+      <p>
+        Before applying for an opportunity, checking its official eligibility
+        requirements may take five minutes and prevent hours of wasted work.
+        Before making a large financial commitment, deeper independent
+        verification may be justified because the downside is greater.
+      </p>
+      <h4>Stopping rule</h4>
+      <ul>
+        <li>Define the decision and minimum evidence required.</li>
+        <li>Identify the uncertainties most likely to change the decision.</li>
+        <li>Estimate the cost of resolving each uncertainty.</li>
+        <li>Research the highest-value uncertainties first.</li>
+        <li>Stop when the decision is adequately supported and further research is unlikely to change it.</li>
+      </ul>
+      <p>
+        Do not use a favorable cost-benefit calculation to bypass legal,
+        ethical, professional, or safety requirements.
+      </p>
+    </div>
+  </details>
+</section>
+
+<section class="section" id="decompose">
+  <div class="heading">
+    <h2>03. Claim decomposition laboratory</h2>
+    <p>
+      Complex statements often combine observations, assumptions, causal
+      claims, predictions, and recommendations. Separate them before
+      deciding whether the argument is sound.
+    </p>
+  </div>
+
+  <div class="panel">
+    <div class="field">
+      <label for="claimText">Enter a statement or argument</label>
+      <textarea id="claimText" placeholder="Example: People who complete this certificate get better jobs, so everyone should buy it."></textarea>
+    </div>
+
+    <div class="grid">
+      <div class="field">
+        <label for="factText">Observable or verifiable claims</label>
+        <textarea id="factText" placeholder="What could be checked against records or observations?"></textarea>
+      </div>
+      <div class="field">
+        <label for="assumptionText">Hidden assumptions</label>
+        <textarea id="assumptionText" placeholder="What must be true for the argument to work?"></textarea>
+      </div>
+      <div class="field">
+        <label for="inferenceText">Interpretation or inference</label>
+        <textarea id="inferenceText" placeholder="What conclusion is being drawn from the evidence?"></textarea>
+      </div>
+      <div class="field">
+        <label for="alternativeText">Alternative explanations</label>
+        <textarea id="alternativeText" placeholder="What else could explain the observations?"></textarea>
+      </div>
+      <div class="field">
+        <label for="missingText">Missing evidence</label>
+        <textarea id="missingText" placeholder="What evidence would be needed to establish the conclusion?"></textarea>
+      </div>
+      <div class="field">
+        <label for="falsifyText">What would weaken or falsify the claim?</label>
+        <textarea id="falsifyText" placeholder="Describe a meaningful counterexample or test."></textarea>
+      </div>
+    </div>
+
+    <button class="btn dark" type="button" id="buildDossier">Build claim dossier</button>
+    <button class="btn light" type="button" id="clearDossier">Clear dossier</button>
+    <div class="feedback" id="dossierOutput" aria-live="polite"></div>
+    <button class="btn light" type="button" id="downloadDossier">Download dossier as text</button>
+  </div>
+</section>
+
+<section class="section" id="comparison">
+  <div class="heading">
+    <h2>04. Conflicting source analysis</h2>
+    <p>
+      When sources disagree, compare what each actually measured or
+      established. Do not resolve a disagreement by automatically
+      choosing the most confident, popular, or prestigious source.
+    </p>
+  </div>
+
+  <div class="panel">
+    <div class="field">
+      <label for="question">Question being investigated</label>
+      <input id="question" type="text" placeholder="What specific question do these sources address?">
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th>Source A</th>
+            <th>Source B</th>
+            <th>Source C</th>
+          </tr>
+        </thead>
+        <tbody id="sourceRows"></tbody>
+      </table>
+    </div>
+    <div class="actions">
+      <button class="btn dark" type="button" id="analyzeSources">Analyze comparison</button>
+      <button class="btn light" type="button" id="clearSources">Clear comparison</button>
+    </div>
+    <div class="feedback" id="sourceOutput" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="section" id="investigation">
+  <div class="heading">
+    <h2>05. Investigation challenge</h2>
+    <p>
+      Practice diagnosing weak evidence. Choose the strongest answer
+      before revealing the explanation.
+    </p>
+  </div>
+
+  <div class="panel">
+    <span class="tag">Scenario 01 · Causal reasoning</span>
+    <h3>A training provider advertises a 90% employment success rate.</h3>
+    <p>
+      Its website says that 90% of surveyed graduates found work.
+      It does not disclose the survey response rate, the time period,
+      the number of respondents, whether jobs were related to the training,
+      or how employment was verified.
+    </p>
+
+    <div id="scenarioOptions">
+      <label class="option">
+        <input type="radio" name="scenario" value="a">
+        <span>A. The claim is reliable because 90% is a very high percentage.</span>
+      </label>
+      <label class="option">
+        <input type="radio" name="scenario" value="b">
+        <span>B. The claim is false because the provider sells training.</span>
+      </label>
+      <label class="option">
+        <input type="radio" name="scenario" value="c">
+        <span>C. The claim is insufficiently specified; request the denominator, survey methods, timeframe, outcome definition, and independent verification.</span>
+      </label>
+      <label class="option">
+        <input type="radio" name="scenario" value="d">
+        <span>D. The claim is proven if the provider publishes testimonials from graduates.</span>
+      </label>
+    </div>
+
+    <button class="btn dark" type="button" id="checkScenario">Check my reasoning</button>
+    <div class="feedback" id="scenarioFeedback" aria-live="polite"></div>
+  </div>
+
+  <div class="panel" style="margin-top:16px">
+    <span class="tag">Scenario 02 · Source independence</span>
+    <h3>Five websites repeat the same statistic.</h3>
+    <p>
+      All five link to the same original press release. None links to
+      the underlying study or independently checks the result.
+      What is the best conclusion?
+    </p>
+    <div id="scenario2Options">
+      <label class="option">
+        <input type="radio" name="scenario2" value="a">
+        <span>A. Five sources confirm the statistic independently.</span>
+      </label>
+      <label class="option">
+        <input type="radio" name="scenario2" value="b">
+        <span>B. The repetition establishes popularity, not five independent confirmations.</span>
+      </label>
+      <label class="option">
+        <input type="radio" name="scenario2" value="c">
+        <span>C. The statistic must be false.</span>
+      </label>
+      <label class="option">
+        <input type="radio" name="scenario2" value="d">
+        <span>D. Press releases can never contain reliable information.</span>
+      </label>
+    </div>
+    <button class="btn dark" type="button" id="checkScenario2">Check my reasoning</button>
+    <div class="feedback" id="scenario2Feedback" aria-live="polite"></div>
+  </div>
+
+  <div class="panel" style="margin-top:16px">
+    <span class="tag">Scenario 03 · Statistical reasoning</span>
+    <h3>A program reports that its success rate doubled.</h3>
+    <p>
+      The rate increased from 2% to 4%. No sample size, comparison group,
+      or uncertainty estimate is provided. What should you investigate?
+    </p>
+    <div id="scenario3Options">
+      <label class="option">
+        <input type="radio" name="scenario3" value="a">
+        <span>A. Only whether the word "doubled" is mathematically correct.</span>
+      </label>
+      <label class="option">
+        <input type="radio" name="scenario3" value="b">
+        <span>B. The sample sizes, absolute change, measurement method, comparison group, and uncertainty.</span>
+      </label>
+      <label class="option">
+        <input type="radio" name="scenario3" value="c">
+        <span>C. Whether the report uses attractive charts.</span>
+      </label>
+      <label class="option">
+        <input type="radio" name="scenario3" value="d">
+        <span>D. Nothing; doubling always proves a substantial practical improvement.</span>
+      </label>
+    </div>
+    <button class="btn dark" type="button" id="checkScenario3">Check my reasoning</button>
+    <div class="feedback" id="scenario3Feedback" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="section" id="calibration">
+  <div class="heading">
+    <h2>06. Confidence calibration lab</h2>
+    <p>
+      Calibration means that your stated confidence corresponds reasonably
+      well to how often your judgments prove correct across many cases.
+      It is not the same as being persuasive or feeling certain.
+    </p>
+  </div>
+
+  <div class="panel">
+    <h3>Record a prediction</h3>
+    <div class="field">
+      <label for="prediction">A specific claim that can later be checked</label>
+      <input id="prediction" type="text" placeholder="Example: The published application deadline is November 15.">
+    </div>
+    <div class="field">
+      <label for="confidence">How confident are you?</label>
+      <select id="confidence">
+        <option value="50">50% — uncertain</option>
+        <option value="60">60% — slightly more likely than not</option>
+        <option value="70">70% — fairly likely</option>
+        <option value="80">80% — very likely</option>
+        <option value="90">90% — highly confident</option>
+        <option value="95">95% — extremely confident</option>
+        <option value="99">99% — almost certain</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="evidenceBasis">Why do you hold this confidence?</label>
+      <textarea id="evidenceBasis" placeholder="List the evidence, source, and main uncertainty."></textarea>
+    </div>
+    <button class="btn dark" type="button" id="savePrediction">Record prediction</button>
+
+    <div id="predictionLog" style="margin-top:18px">
+      <div class="empty">No predictions recorded yet.</div>
+    </div>
+
+    <div class="callout">
+      <strong>Calibration practice:</strong>
+      Later, record whether each prediction was correct. Across many
+      predictions, compare your stated confidence with your actual
+      accuracy. A single outcome does not determine whether a probability
+      judgment was well-calibrated.
+    </div>
+  </div>
+</section>
+
+<section class="section" id="evaluator">
+  <div class="heading">
+    <h2>07. Weighted information evaluator</h2>
+    <p>
+      Score the available evidence, not your personal preference for the
+      conclusion. Unknown criteria should remain zero until investigated.
+    </p>
+  </div>
+
+  <div class="two-col">
+    <form class="panel" id="evaluationForm">
+      <div class="field">
+        <label for="claim">Claim being evaluated</label>
+        <textarea id="claim" required placeholder="Write one specific claim."></textarea>
+      </div>
+      <div class="field">
+        <label for="source">Source or publisher</label>
+        <input id="source" type="text" required placeholder="Author, organization, or publication">
+      </div>
+      <div class="field">
+        <label for="url">Source URL (optional)</label>
+        <input id="url" type="url" placeholder="https://example.com">
+      </div>
+      <div class="field">
+        <label for="purpose">Intended use</label>
+        <select id="purpose">
+          <option>Learning or academic research</option>
+          <option>Career or education decision</option>
+          <option>Business or financial decision</option>
+          <option>General knowledge</option>
+          <option>Health, legal, or safety-related decision</option>
+        </select>
+      </div>
+
+      <div id="ratings"></div>
+
+      <div class="field">
+        <label for="redflags">Known concerns</label>
+        <textarea id="redflags" placeholder="List missing evidence, contradictory findings, incentives, or uncertainty."></textarea>
+      </div>
+      <div class="field">
+        <label for="nextstep">Next verification action</label>
+        <select id="nextstep">
+          <option>Find the original source</option>
+          <option>Check an official or authoritative record</option>
+          <option>Compare independent sources</option>
+          <option>Inspect the research methods and data</option>
+          <option>Check dates and current requirements</option>
+          <option>Consult a qualified professional</option>
+        </select>
+      </div>
+      <button type="submit" class="btn dark">Evaluate and save review</button>
+      <button type="button" class="btn light" id="resetEvaluator">Clear evaluator</button>
+    </form>
+
+    <aside class="score-panel sticky" aria-live="polite">
+      <div class="eyebrow">Preliminary result</div>
+      <div><span class="score-number" id="score">0</span><span>/100</span></div>
+      <div class="meter"><div class="meter-fill" id="meterFill"></div></div>
+      <span class="status" id="status">Not assessed</span>
+      <h3>Interpretation</h3>
+      <p id="interpretation">Rate the criteria to generate a preliminary screening result.</p>
+      <h3>Weak or unknown criteria</h3>
+      <ul id="issues"><li>Evaluate the evidence and source.</li></ul>
+      <h3>Next step</h3>
+      <p id="recommendation">Find the original source.</p>
+      <button class="btn light" type="button" id="printReview">Print page</button>
+      <p class="small">
+        Self-assessed scores are not fact-checks or validated probability
+        estimates. A high score does not prove a claim true. High-stakes
+        decisions require appropriate independent verification.
+      </p>
+    </aside>
+  </div>
+</section>
+
+<section class="section">
+  <div class="heading">
+    <h2>08. Verification protocol</h2>
+    <p>
+      Complete the checks that apply to the claim. Checklist completion
+      measures your process, not the truth of the information.
+    </p>
+  </div>
+
+  <div id="checklist" class="check-grid">
+    <label class="check-item"><input type="checkbox"><span><strong>Exact claim defined</strong><small>The statement is specific enough to test.</small></span></label>
+    <label class="check-item"><input type="checkbox"><span><strong>Original source located</strong><small>The information has been traced to its origin where possible.</small></span></label>
+    <label class="check-item"><input type="checkbox"><span><strong>Date and context checked</strong><small>The information is applicable to this time and setting.</small></span></label>
+    <label class="check-item"><input type="checkbox"><span><strong>Evidence inspected</strong><small>The evidence directly supports the claim.</small></span></label>
+    <label class="check-item"><input type="checkbox"><span><strong>Independent confirmation sought</strong><small>Sources do not merely repeat one another.</small></span></label>
+    <label class="check-item"><input type="checkbox"><span><strong>Alternative explanations considered</strong><small>Competing explanations have been examined.</small></span></label>
+    <label class="check-item"><input type="checkbox"><span><strong>Limitations documented</strong><small>Important gaps and uncertainties are recorded.</small></span></label>
+    <label class="check-item"><input type="checkbox"><span><strong>Decision threshold met</strong><small>Evidence is appropriate to the consequences of an error.</small></span></label>
+  </div>
+
+  <div class="callout">
+    <strong id="checkProgress">0 of 8 checks completed</strong>
+    <p id="checkAdvice">Complete the checks that apply before relying on the claim.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="heading">
+    <h2>09. Information failure reference</h2>
+    <p>Use this reference to match a detected weakness with an appropriate investigative response.</p>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Failure mode</th><th>Diagnostic question</th><th>Corrective action</th></tr></thead>
+      <tbody>
+        <tr><td>Unsupported assertion</td><td>What evidence directly supports the claim?</td><td>Trace citations and locate primary records.</td></tr>
+        <tr><td>False precision</td><td>Does the measurement justify this level of detail?</td><td>Inspect methods, sample size, and uncertainty.</td></tr>
+        <tr><td>Cherry-picking</td><td>Were relevant contrary results omitted?</td><td>Search for the full body of relevant evidence.</td></tr>
+        <tr><td>Selection bias</td><td>Who is absent from the sample?</td><td>Inspect recruitment, inclusion, and exclusion criteria.</td></tr>
+        <tr><td>Confounding</td><td>Could a third variable explain the relationship?</td><td>Examine the causal model and study design.</td></tr>
+        <tr><td>Outdated claim</td><td>Could the underlying fact have changed?</td><td>Verify the current authoritative record.</td></tr>
+        <tr><td>Dependent sources</td><td>Do sources share one underlying source?</td><td>Trace provenance and seek independent corroboration.</td></tr>
+        <tr><td>Misleading framing</td><td>Does the wording exceed what the data show?</td><td>Rewrite the claim in neutral, measurable terms.</td></tr>
+        <tr><td>Unfalsifiable claim</td><td>What possible observation would count against it?</td><td>Clarify testable predictions or limit the conclusion.</td></tr>
+        <tr><td>High-stakes uncertainty</td><td>What is the cost of being wrong?</td><td>Require stronger verification and appropriate expertise.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="section">
+  <div class="heading">
+    <h2>10. Review history and evidence record</h2>
+    <p>
+      Keep your findings organized and export them for further work.
+      Records are held in page memory and are not automatically retained
+      after a reload.
+    </p>
+  </div>
+  <div class="actions no-print">
+    <button class="btn dark" id="exportLog" type="button">Export reviews as CSV</button>
+    <button class="btn light" id="clearLog" type="button">Clear review history</button>
+  </div>
+  <div id="reviewLog" style="margin-top:18px">
+    <div class="empty">No evaluations saved yet.</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="dark-panel">
+    <div class="eyebrow">Final decision protocol</div>
+    <h2>Do not confuse finishing research with achieving certainty.</h2>
+    <p>
+      A defensible decision states what the evidence supports, what it
+      does not support, which uncertainties remain, and why the evidence
+      is sufficient—or insufficient—for the specific action.
+    </p>
+    <ol>
+      <li>Define the decision and the claim that matters.</li>
+      <li>Identify the strongest available evidence and its limitations.</li>
+      <li>Test important alternative explanations.</li>
+      <li>Determine the cost of false acceptance and false rejection.</li>
+      <li>Meet any mandatory verification or professional requirements.</li>
+      <li>Record the conclusion, confidence, and next review trigger.</li>
+    </ol>
+    <p>
+      The goal is not to believe nothing. It is to make your confidence
+      proportional to the evidence and your actions proportional to the
+      consequences.
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <strong>PATHKEEPER · INFORMATION INTELLIGENCE LAB</strong>
+  <p>Improve the quality of what you learn, the strength of what you conclude, and the reasoning behind what you do.</p>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  const $ = id => document.getElementById(id);
+
+  // -----------------------------
+  // Claim decomposition dossier
+  // -----------------------------
+  const dossierFields = [
+    ["Original claim", "claimText"],
+    ["Observable or verifiable claims", "factText"],
+    ["Hidden assumptions", "assumptionText"],
+    ["Interpretation or inference", "inferenceText"],
+    ["Alternative explanations", "alternativeText"],
+    ["Missing evidence", "missingText"],
+    ["Potential falsification", "falsifyText"]
+  ];
+
+  let latestDossier = "";
+
+  $("buildDossier").addEventListener("click", function () {
+    const lines = [
+      "PATHKEEPER — CLAIM DOSSIER",
+      "Created: " + new Date().toLocaleString(),
+      ""
+    ];
+
+    dossierFields.forEach(function (entry) {
+      lines.push(entry[0].toUpperCase());
+      lines.push($(entry[1]).value.trim() || "[Not supplied]");
+      lines.push("");
+    });
+
+    latestDossier = lines.join("\n");
+    const out = $("dossierOutput");
+    out.replaceChildren();
+
+    const heading = document.createElement("strong");
+    heading.textContent = "Dossier generated";
+    out.appendChild(heading);
+
+    const pre = document.createElement("pre");
+    pre.style.whiteSpace = "pre-wrap";
+    pre.style.overflowWrap = "anywhere";
+    pre.textContent = latestDossier;
+    out.appendChild(pre);
+  });
+
+  $("clearDossier").addEventListener("click", function () {
+    dossierFields.forEach(entry => $(entry[1]).value = "");
+    latestDossier = "";
+    $("dossierOutput").replaceChildren();
+  });
+
+  $("downloadDossier").addEventListener("click", function () {
+    if (!latestDossier) {
+      $("buildDossier").click();
+    }
+    downloadText("pathkeeper-claim-dossier.txt", latestDossier);
+  });
+
+  function downloadText(filename, content) {
+    const blob = new Blob([content], {type:"text/plain;charset=utf-8"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  // -----------------------------
+  // Source comparison matrix
+  // -----------------------------
+  const comparisonDimensions = [
+    ["Publisher / author", "Who is responsible for the source?"],
+    ["Original evidence", "What primary evidence does it provide?"],
+    ["Method / sample", "How was the information obtained?"],
+    ["Publication / data date", "When was the underlying information collected?"],
+    ["Incentives / conflicts", "What interests might affect the presentation?"],
+    ["Limitations / counterevidence", "What weaknesses or contrary findings exist?"],
+    ["Independence", "Does this source rely on another source in the matrix?"],
+    ["Actual conclusion", "What does the source support, narrowly stated?"]
+  ];
+
+  const sourceRows = $("sourceRows");
+
+  comparisonDimensions.forEach(function (dimension, i) {
+    const tr = document.createElement("tr");
+    const th = document.createElement("th");
+    th.textContent = dimension[0];
+    th.title = dimension[1];
+    tr.appendChild(th);
+
+    ["A", "B", "C"].forEach(function (letter) {
+      const td = document.createElement("td");
+      const input = document.createElement("textarea");
+      input.id = "src" + letter + "_" + i;
+      input.rows = 2;
+      input.setAttribute("aria-label", "Source " + letter + ": " + dimension[0]);
+      input.placeholder = dimension[1];
+      td.appendChild(input);
+      tr.appendChild(td);
+    });
+
+    sourceRows.appendChild(tr);
+  });
+
+  $("analyzeSources").addEventListener("click", function () {
+    const out = $("sourceOutput");
+    out.replaceChildren();
+
+    const notes = [];
+    const question = $("question").value.trim();
+    if (question) notes.push("Question: " + question);
+
+    ["A", "B", "C"].forEach(function (letter) {
+      const filled = comparisonDimensions.filter((_, i) =>
+        $("src" + letter + "_" + i).value.trim() !== ""
+      ).length;
+
+      notes.push(
+        "Source " + letter + ": " + filled + " of " +
+        comparisonDimensions.length + " dimensions documented."
+      );
+    });
+
+    const independence = ["A", "B", "C"].map(letter =>
+      $("src" + letter + "_6").value.trim()
+    );
+
+    const summary = document.createElement("p");
+    summary.textContent = notes.join(" ");
+    out.appendChild(summary);
+
+    const advice = document.createElement("p");
+    const allIndependent = independence.every(v =>
+      /independent|different original|separate data/i.test(v)
+    );
+
+    advice.textContent = allIndependent
+      ? "The notes describe the sources as independent. Verify those relationships rather than relying on labels alone."
+      : "Independence has not been clearly established for every source. Trace citations and shared data before counting sources as separate confirmation.";
+
+    out.appendChild(advice);
+
+    const warning = document.createElement("p");
+    warning.textContent =
+      "This matrix organizes your own notes; it does not automatically verify the sources or determine which one is correct. Resolve differences in methods, definitions, populations, dates, and actual claims.";
+    out.appendChild(warning);
+  });
+
+  $("clearSources").addEventListener("click", function () {
+    $("question").value = "";
+    comparisonDimensions.forEach((_, i) =>
+      ["A", "B", "C"].forEach(letter => $("src" + letter + "_" + i).value = "")
+    );
+    $("sourceOutput").replaceChildren();
+  });
+
+  // -----------------------------
+  // Scenario-based learning
+  // -----------------------------
+  function bindScenario(name, correct, feedbackId, explanation) {
+    $(name === "scenario" ? "checkScenario" :
+      name === "scenario2" ? "checkScenario2" : "checkScenario3"
+    ).addEventListener("click", function () {
+      const selected = document.querySelector('input[name="' + name + '"]:checked');
+      const output = $(feedbackId);
+      output.replaceChildren();
+
+      const p = document.createElement("p");
+      if (!selected) {
+        p.textContent = "Choose an answer before checking your reasoning.";
+      } else {
+        p.textContent = (selected.value === correct ? "Correct reasoning. " : "Not quite. ") + explanation;
+      }
+      output.appendChild(p);
+    });
+  }
+
+  bindScenario(
+    "scenario", "c", "scenarioFeedback",
+    "The percentage is not interpretable enough without its denominator, response rate, timeframe, outcome definition, and verification method. Commercial incentives justify scrutiny, not automatic rejection."
+  );
+
+  bindScenario(
+    "scenario2", "b", "scenario2Feedback",
+    "Five repetitions of one press release remain dependent on that original source. Locate the underlying evidence and seek independent corroboration."
+  );
+
+  bindScenario(
+    "scenario3", "b", "scenario3Feedback",
+    "A change from 2% to 4% is a two-percentage-point absolute increase and a 100% relative increase. Its practical meaning depends on sample sizes, uncertainty, study design, and the outcome."
+  );
+
+  // -----------------------------
+  // Confidence calibration records
+  // -----------------------------
+  const predictions = [];
+
+  $("savePrediction").addEventListener("click", function () {
+    const claim = $("prediction").value.trim();
+    if (!claim) {
+      $("prediction").focus();
+      return;
+    }
+
+    predictions.push({
+      claim: claim,
+      confidence: Number($("confidence").value),
+      basis: $("evidenceBasis").value.trim(),
+      result: "Not yet resolved",
+      created: new Date().toLocaleDateString()
+    });
+
+    $("prediction").value = "";
+    $("evidenceBasis").value = "";
+    renderPredictions();
+  });
+
+  function renderPredictions() {
+    const container = $("predictionLog");
+    container.replaceChildren();
+
+    if (!predictions.length) {
+      const empty = document.createElement("div");
+      empty.className = "empty";
+      empty.textContent = "No predictions recorded yet.";
+      container.appendChild(empty);
+      return;
+    }
+
+    predictions.forEach(function (prediction, index) {
+      const card = document.createElement("article");
+      card.className = "log-card";
+
+      const title = document.createElement("h4");
+      title.textContent = prediction.claim;
+      card.appendChild(title);
+
+      const confidence = document.createElement("p");
+      confidence.textContent = "Confidence: " + prediction.confidence +
+        "% · Recorded: " + prediction.created;
+      card.appendChild(confidence);
+
+      if (prediction.basis) {
+        const basis = document.createElement("p");
+        basis.textContent = "Reasoning: " + prediction.basis;
+        card.appendChild(basis);
+      }
+
+      const status = document.createElement("p");
+      status.textContent = "Outcome: " + prediction.result;
+      card.appendChild(status);
+
+      const controls = document.createElement("div");
+      controls.className = "actions";
+
+      ["Correct", "Incorrect", "Unresolved"].forEach(function (value) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "btn light";
+        button.textContent = value;
+        button.addEventListener("click", function () {
+          prediction.result = value;
+          renderPredictions();
+        });
+        controls.appendChild(button);
+      });
+
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.className = "btn light";
+      remove.textContent = "Delete";
+      remove.addEventListener("click", function () {
+        predictions.splice(index, 1);
+        renderPredictions();
+      });
+      controls.appendChild(remove);
+      card.appendChild(controls);
+      container.appendChild(card);
+    });
+  }
+
+  // -----------------------------
+  // Weighted evaluation engine
+  // -----------------------------
+  const criteria = [
+    {
+      name:"Source transparency and expertise",
+      weight:15,
+      description:"Is the author identifiable and appropriately qualified?"
+    },
+    {
+      name:"Evidence quality",
+      weight:30,
+      description:"Is relevant, traceable evidence available?"
+    },
+    {
+      name:"Independent corroboration",
+      weight:20,
+      description:"Do independent sources support the claim?"
+    },
+    {
+      name:"Recency and contextual accuracy",
+      weight:15,
+      description:"Is the information current and applicable?"
+    },
+    {
+      name:"Fairness and incentive transparency",
+      weight:10,
+      description:"Are limitations, conflicts, and contrary evidence addressed?"
+    },
+    {
+      name:"Relevance to the question",
+      weight:10,
+      description:"Does the evidence answer the exact question?"
+    }
+  ];
+
+  const ratingsContainer = $("ratings");
+
+  criteria.forEach(function (criterion, index) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "rating";
+
+    const head = document.createElement("div");
+    head.className = "rating-head";
+
+    const label = document.createElement("label");
+    label.htmlFor = "rating" + index;
+    label.textContent = criterion.name;
+
+    const hint = document.createElement("small");
+    hint.textContent = criterion.description;
+    label.appendChild(hint);
+
+    const value = document.createElement("span");
+    value.className = "rating-value";
+    value.id = "ratingValue" + index;
+    value.textContent = "0/4";
+
+    head.appendChild(label);
+    head.appendChild(value);
+
+    const range = document.createElement("input");
+    range.type = "range";
+    range.id = "rating" + index;
+    range.min = "0";
+    range.max = "4";
+    range.step = "1";
+    range.value = "0";
+    range.setAttribute("aria-label", criterion.name + " rating");
+
+    range.addEventListener("input", updateScore);
+    wrapper.appendChild(head);
+    wrapper.appendChild(range);
+    ratingsContainer.appendChild(wrapper);
+  });
+
+  function getRatings() {
+    return criteria.map((_, index) => Number($("rating" + index).value));
+  }
+
+  function calculateScore(values) {
+    return Math.round(values.reduce((total, value, index) =>
+      total + value / 4 * criteria[index].weight, 0
+    ));
+  }
+
+  function assessmentFor(score, values) {
+    if (values.every(value => value === 0)) {
+      return {
+        status:"Not assessed",
+        interpretation:"No positive ratings have been supplied. Zero can mean unknown, not necessarily false.",
+        next:"Find the original source and inspect its supporting evidence."
+      };
+    }
+    if (score >= 80) {
+      return {
+        status:"Promising — verify",
+        interpretation:"Your ratings indicate comparatively strong quality signals. They do not establish that the claim is true.",
+        next:"Independently verify the most consequential part of the claim."
+      };
+    }
+    if (score >= 60) {
+      return {
+        status:"Partially supported",
+        interpretation:"Some quality signals are favorable, but further investigation may be necessary.",
+        next:"Investigate the weakest criteria and resolve important uncertainties."
+      };
+    }
+    if (score >= 35) {
+      return {
+        status:"Insufficient confidence",
+        interpretation:"The current ratings indicate meaningful weaknesses or gaps.",
+        next:"Find stronger evidence and compare independent sources."
+      };
+    }
+    return {
+      status:"High uncertainty",
+      interpretation:"The current ratings do not provide a strong basis for relying on this information. That does not prove the claim false.",
+      next:"Pause reliance until the source and evidence can be checked."
+    };
+  }
+
+  function updateScore() {
+    const values = getRatings();
+    const score = calculateScore(values);
+    const assessment = assessmentFor(score, values);
+
+    values.forEach((value, index) => {
+      $("ratingValue" + index).textContent = value + "/4";
+    });
+
+    $("score").textContent = score;
+    $("meterFill").style.width = score + "%";
+    $("status").textContent = assessment.status;
+    $("interpretation").textContent = assessment.interpretation;
+    $("recommendation").textContent = $("nextstep").value || assessment.next;
+
+    const issues = $("issues");
+    issues.replaceChildren();
+
+    const weak = values.map((value, index) => ({value, index}))
+      .filter(item => item.value <= 1);
+
+    if (!weak.length) {
+      const li = document.createElement("li");
+      li.textContent = "No criterion received a rating of 0 or 1. Independent verification is still necessary.";
+      issues.appendChild(li);
+    } else {
+      weak.forEach(function (item) {
+        const li = document.createElement("li");
+        li.textContent = criteria[item.index].name +
+          (item.value === 0 ? ": unknown or unverified." : ": weak evidence.");
+        issues.appendChild(li);
+      });
+    }
+  }
+
+  $("nextstep").addEventListener("change", updateScore);
+
+  const reviews = [];
+  const form = $("evaluationForm");
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+
+    const values = getRatings();
+    const score = calculateScore(values);
+    const assessment = assessmentFor(score, values);
+
+    reviews.unshift({
+      claim:$("claim").value.trim(),
+      source:$("source").value.trim(),
+      url:$("url").value.trim(),
+      purpose:$("purpose").value,
+      score:score,
+      status:assessment.status,
+      ratings:values,
+      concerns:$("redflags").value.trim(),
+      next:$("nextstep").value,
+      created:new Date().toLocaleString()
+    });
+
+    renderReviews();
+    $("status").textContent = assessment.status + " — saved";
+  });
+
+  function renderReviews() {
+    const container = $("reviewLog");
+    container.replaceChildren();
+
+    if (!reviews.length) {
+      const empty = document.createElement("div");
+      empty.className = "empty";
+      empty.textContent = "No evaluations saved yet.";
+      container.appendChild(empty);
+      return;
+    }
+
+    reviews.forEach(function (review, index) {
+      const card = document.createElement("article");
+      card.className = "log-card";
+
+      const title = document.createElement("h4");
+      title.textContent = review.claim;
+      card.appendChild(title);
+
+      const meta = document.createElement("p");
+      meta.className = "muted small";
+      meta.textContent = review.source + " · " + review.created;
+      card.appendChild(meta);
+
+      const result = document.createElement("p");
+      result.textContent = review.score + "/100 — " + review.status;
+      card.appendChild(result);
+
+      const next = document.createElement("p");
+      next.textContent = "Next action: " + review.next;
+      card.appendChild(next);
+
+      if (review.concerns) {
+        const concerns = document.createElement("p");
+        concerns.textContent = "Concerns: " + review.concerns;
+        card.appendChild(concerns);
+      }
+
+      if (review.url) {
+        const link = document.createElement("a");
+        link.href = review.url;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = "Open source";
+        card.appendChild(link);
+      }
+
+      const actions = document.createElement("div");
+      actions.className = "actions";
+
+      const reassess = document.createElement("button");
+      reassess.type = "button";
+      reassess.className = "btn light";
+      reassess.textContent = "Reassess";
+      reassess.addEventListener("click", function () {
+        $("claim").value = review.claim;
+        $("source").value = review.source;
+        $("url").value = review.url;
+        $("purpose").value = review.purpose;
+        $("redflags").value = review.concerns;
+        $("nextstep").value = review.next;
+
+        review.ratings.forEach((value, i) => $("rating" + i).value = value);
+        updateScore();
+        $("evaluator").scrollIntoView({behavior:"smooth"});
+      });
+
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.className = "btn light";
+      remove.textContent = "Delete";
+      remove.addEventListener("click", function () {
+        reviews.splice(index, 1);
+        renderReviews();
+      });
+
+      actions.appendChild(reassess);
+      actions.appendChild(remove);
+      card.appendChild(actions);
+      container.appendChild(card);
+    });
+  }
+
+  $("resetEvaluator").addEventListener("click", function () {
+    form.reset();
+    criteria.forEach((_, index) => $("rating" + index).value = 0);
+    updateScore();
+  });
+
+  $("printReview").addEventListener("click", function () {
+    window.print();
+  });
+
+  $("clearLog").addEventListener("click", function () {
+    if (!reviews.length) return;
+    if (window.confirm("Clear all evaluation records from this session?")) {
+      reviews.length = 0;
+      renderReviews();
+    }
+  });
+
+  $("exportLog").addEventListener("click", function () {
+    if (!reviews.length) {
+      window.alert("Save an evaluation before exporting.");
+      return;
+    }
+
+    const columns = [
+      "Claim","Source","URL","Purpose","Score","Assessment",
+      "Ratings","Concerns","Next Action","Reviewed At"
+    ];
+
+    function csvCell(value) {
+      let text = String(value == null ? "" : value);
+      if (/^[\s]*[=+\-@]/.test(text)) text = "'" + text;
+      return '"' + text.replace(/"/g, '""') + '"';
+    }
+
+    const rows = reviews.map(review => [
+      review.claim,review.source,review.url,review.purpose,
+      review.score,review.status,review.ratings.join("; "),
+      review.concerns,review.next,review.created
+    ].map(csvCell).join(","));
+
+    downloadText(
+      "pathkeeper-information-reviews.csv",
+      "\uFEFF" + columns.map(csvCell).join(",") + "\r\n" + rows.join("\r\n")
+    );
+  });
+
+  // -----------------------------
+  // Verification checklist
+  // -----------------------------
+  const checkboxes = Array.from(
+    document.querySelectorAll("#checklist input[type=checkbox]")
+  );
+
+  function updateChecklist() {
+    const count = checkboxes.filter(box => box.checked).length;
+    $("checkProgress").textContent =
+      count + " of " + checkboxes.length + " checks completed";
+
+    $("checkAdvice").textContent =
+      count === checkboxes.length
+        ? "All checks marked complete. Confirm the underlying evidence and ensure the process is appropriate for the stakes."
+        : "Complete the remaining applicable checks before relying on the claim.";
+  }
+
+  checkboxes.forEach(box => box.addEventListener("change", updateChecklist));
+
+  updateScore();
+  updateChecklist();
+})();
+</script>
+
+</body>
+</html>
+NEW 3 Information Filtering
