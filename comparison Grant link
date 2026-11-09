@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grants You Didn't Know Existed</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --primary:#5bbf8a;
+    --secondary:#16354a;
+    --light:#f5fff9;
+    --accent:#e7fff0;
+    --white:#ffffff;
+    --text:#333;
+    --shadow:0 12px 30px rgba(0,0,0,.08);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:var(--light);
+    color:var(--text);
+    line-height:1.7;
+}
+
+header{
+    background:linear-gradient(135deg,#5bbf8a,#8ae0b3);
+    color:white;
+    text-align:center;
+    padding:90px 8%;
+}
+
+header h1{
+    font-size:3rem;
+    margin-bottom:20px;
+}
+
+header p{
+    max-width:900px;
+    margin:auto;
+    font-size:1.1rem;
+}
+
+.hero-buttons{
+    margin-top:35px;
+}
+
+.hero-buttons a{
+    display:inline-block;
+    background:white;
+    color:var(--secondary);
+    text-decoration:none;
+    padding:14px 28px;
+    border-radius:40px;
+    margin:8px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.hero-buttons a:hover{
+    transform:translateY(-4px);
+}
+
+.intro{
+    padding:70px 8%;
+    text-align:center;
+}
+
+.intro h2{
+    color:var(--secondary);
+    margin-bottom:20px;
+    font-size:2rem;
+}
+
+.intro p{
+    max-width:900px;
+    margin:auto;
+}
+
+.resources{
+    padding:70px 8%;
+}
+
+.resources h2{
+    text-align:center;
+    color:var(--secondary);
+    margin-bottom:40px;
+}
+
+.resource-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:25px;
+}
+
+.resource-card{
+    background:white;
+    padding:30px;
+    border-radius:18px;
+    text-align:center;
+    box-shadow:var(--shadow);
+}
+
+.resource-card h3{
+    color:var(--primary);
+    margin-bottom:10px;
+}
+
+.resource-card a{
+    text-decoration:none;
+    color:var(--secondary);
+    font-weight:600;
+}
+
+.categories{
+    padding:80px 8%;
+}
+
+.categories h2{
+    text-align:center;
+    color:var(--secondary);
+    margin-bottom:50px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:30px;
+}
+
+.card{
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+}
+
+.card-header{
+    background:var(--primary);
+    color:white;
+    padding:20px;
+}
+
+.card-body{
+    padding:25px;
+}
+
+.card-body p{
+    margin-bottom:15px;
+}
+
+.card-body ul{
+    padding-left:20px;
+}
+
+.card-body li{
+    margin-bottom:10px;
+}
+
+.highlight-section{
+    padding:80px 8%;
+    background:var(--accent);
+}
+
+.highlight-section h2{
+    text-align:center;
+    margin-bottom:40px;
+    color:var(--secondary);
+}
+
+.highlight-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.highlight-box{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:var(--shadow);
+}
+
+.highlight-box h3{
+    color:var(--primary);
+    margin-bottom:12px;
+}
+
+.cta{
+    background:var(--secondary);
+    color:white;
+    text-align:center;
+    padding:90px 8%;
+}
+
+.cta h2{
+    margin-bottom:20px;
+    font-size:2.3rem;
+}
+
+.footer{
+    background:#102634;
+    color:white;
+    text-align:center;
+    padding:30px;
+}
+
+</style>
+</head>
+<body>
+
+<header>
+
+<h1>Grants You Didn't Know Existed</h1>
+
+<p>
+Most people think grants are only available to nonprofits, researchers,
+or large organizations. In reality, grants exist for entrepreneurs,
+artists, tradespeople, farmers, community projects, housing assistance,
+career training, veterans, women, minorities, inventors, and many others.
+This guide is designed to help you discover funding opportunities you may
+have never considered.
+</p>
+
+<div class="hero-buttons">
+<a href="#grants">Explore Grant Types</a>
+<a href="#resources">Grant Databases</a>
+</div>
+
+</header>
+
+<section class="intro">
+
+<h2>Funding Opportunities Beyond Traditional Loans</h2>
+
+<p>
+Unlike loans, grants generally do not need to be repaid. They can help
+people start businesses, learn new skills, launch projects, improve their
+communities, develop products, create art, purchase equipment, and build
+financial independence. Many grant opportunities are overlooked simply
+because people never realize they exist.
+</p>
+
+</section>
+
+<section class="resources" id="resources">
+
+<h2>Grant Search Platforms & Resources</h2>
+
+<div class="resource-grid">
+
+<div class="resource-card">
+<h3>Grants.gov</h3>
+<p>Federal grant opportunities across hundreds of categories.</p>
+<a href="https://www.grants.gov" target="_blank">Visit Website</a>
+</div>
+
+<div class="resource-card">
+<h3>SBA Resources</h3>
+<p>Small business funding programs and support resources.</p>
+<a href="https://www.sba.gov" target="_blank">Visit Website</a>
+</div>
+
+<div class="resource-card">
+<h3>Candid Foundation Directory</h3>
+<p>Search foundations and private grantmakers.</p>
+<a href="https://candid.org" target="_blank">Visit Website</a>
+</div>
+
+<div class="resource-card">
+<h3>USDA Rural Development</h3>
+<p>Funding opportunities for rural communities and businesses.</p>
+<a href="https://www.rd.usda.gov" target="_blank">Visit Website</a>
+</div>
+
+</div>
+
+</section>
+
+<section class="categories" id="grants">
+
+<h2>Explore Grant Categories</h2>
+
+<div class="grid">
+
+<div class="card">
+<div class="card-header">
+<h3>Small Business Grants</h3>
+</div>
+<div class="card-body">
+<p>Funding for business growth and startup development.</p>
+<ul>
+<li>Startup Businesses</li>
+<li>Home-Based Businesses</li>
+<li>Minority-Owned Businesses</li>
+<li>Women-Owned Businesses</li>
+<li>Veteran-Owned Businesses</li>
+<li>Rural Businesses</li>
+<li>Online Businesses</li>
+</ul>
+</div>
+</div>
+
+<div class="card">
+<div class="card-header">
+<h3>Career Training Grants</h3>
+</div>
+<div class="card-body">
+<p>Support for workforce development and certifications.</p>
+<ul>
+<li>Trade School Training</li>
+<li>IT Certifications</li>
+<li>Healthcare Certifications</li>
+<li>Commercial Driver Training</li>
+<li>Manufacturing Programs</li>
+<li>Construction Skills Training</li>
+<li>Workforce Re-Entry Programs</li>
+</ul>
+</div>
+</div>
+
+<div class="card">
+<div class="card-header">
+<h3>Entrepreneur Grants</h3>
+</div>
+<div class="card-body">
+<ul>
+<li>Startup Founders</li>
+<li>Youth Entrepreneurs</li>
+<li>Innovation Projects</li>
+<li>Community Businesses</li>
+<li>Technology Ventures</li>
+<li>Social Enterprises</li>
+<li>Economic Development Projects</li>
+</ul>
+</div>
+</div>
+
+<div class="card">
+<div class="card-header">
+<h3>Housing & Homeownership</h3>
+</div>
+<div class="card-body">
+<ul>
+<li>First-Time Home Buyers</li>
+<li>Down Payment Assistance</li>
+<li>Home Repairs</li>
+<li>Rural Housing Programs</li>
+<li>Accessibility Modifications</li>
+<li>Energy Efficiency Improvements</li>
+</ul>
+</div>
+</div>
+
+<div class="card">
+<div class="card-header">
+<h3>Creative & Arts Grants</h3>
+</div>
+<div class="card-body">
+<ul>
+<li>Writers</li>
+<li>Filmmakers</li>
+<li>Musicians</li>
+<li>Artists</li>
+<li>Photographers</li>
+<li>Designers</li>
+<li>Content Creators</li>
+</ul>
+</div>
+</div>
+
+<div class="card">
+<div class="card-header">
+<h3>Technology Grants</h3>
+</div>
+<div class="card-body">
+<ul>
+<li>Software Development</li>
+<li>Artificial Intelligence</li>
+<li>Cybersecurity</li>
+<li>Research Projects</li>
+<li>STEM Programs</li>
+<li>Technology Innovation</li>
+</ul>
+</div>
+</div>
+
+<div class="card">
+<div class="card-header">
+<h3>Agriculture Grants</h3>
+</div>
+<div class="card-body">
+<ul>
+<li>Farm Startups</li>
+<li>Urban Farming</li>
+<li>Community Gardens</li>
+<li>Sustainable Agriculture</li>
+<li>Food Production</li>
+<li>Agricultural Equipment</li>
+</ul>
+</div>
+</div>
+
+<div class="card">
+<div class="card-header">
+<h3>Community Development</h3>
+</div>
+<div class="card-body">
+<ul>
+<li>Neighborhood Projects</li>
+<li>Youth Programs</li>
+<li>Community Centers</li>
+<li>Volunteer Organizations</li>
+<li>Public Improvement Projects</li>
+<li>Local Economic Development</li>
+</ul>
+</div>
+</div>
+
+<div class="card">
+<div class="card-header">
+<h3>Veteran Grants</h3>
+</div>
+<div class="card-body">
+<ul>
+<li>Business Development</li>
+<li>Housing Assistance</li>
+<li>Career Transition Programs</li>
+<li>Training Programs</li>
+<li>Community Services</li>
+<li>Family Support Programs</li>
+</ul>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<section class="highlight-section">
+
+<h2>Hidden Grant Opportunities Many People Miss</h2>
+
+<div class="highlight-grid">
+
+<div class="highlight-box">
+<h3>Equipment Grants</h3>
+<p>Funding for tools, machinery, computers, and equipment needed to start or grow a business.</p>
+</div>
+
+<div class="highlight-box">
+<h3>Micro Grants</h3>
+<p>Small grants often ranging from $100 to several thousand dollars for projects and startups.</p>
+</div>
+
+<div class="highlight-box">
+<h3>Rural Grants</h3>
+<p>Funding specifically available to residents and businesses in rural communities.</p>
+</div>
+
+<div class="highlight-box">
+<h3>Innovation Grants</h3>
+<p>Support for new ideas, inventions, technology, and problem-solving projects.</p>
+</div>
+
+<div class="highlight-box">
+<h3>Green Energy Grants</h3>
+<p>Programs supporting sustainability, energy efficiency, and environmental initiatives.</p>
+</div>
+
+<div class="highlight-box">
+<h3>Local Foundation Grants</h3>
+<p>Many cities and counties have foundations that provide funding opportunities with less competition.</p>
+</div>
+
+</div>
+
+</section>
+
+<section class="cta">
+
+<h2>Stop Assuming Grants Are For Someone Else</h2>
+
+<p>
+Many grants receive surprisingly few qualified applications because people
+believe they are only for large organizations or highly connected individuals.
+Whether you're building a business, learning a trade, improving your community,
+launching a project, or developing a new skill, there may be grant opportunities
+available to help support your goals.
+</p>
+
+</section>
+
+<footer class="footer">
+
+<p>
+Funding Opportunities Directory • Discover grants for business, careers,
+housing, creativity, innovation, community development, and personal growth.
+</p>
+
+</footer>
+
+</body>
+</html>
