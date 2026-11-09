@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Information Quality Filtering System</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:#0F2D22;
+color:#F3EBDD;
+line-height:1.8;
+}
+
+
+.hero{
+background:linear-gradient(180deg,#194936,#0F2D22);
+padding:80px 20px;
+text-align:center;
+}
+
+
+.hero h1{
+font-size:3rem;
+color:#D8B08C;
+margin-bottom:20px;
+}
+
+
+.hero p{
+max-width:850px;
+margin:auto;
+font-size:1.1rem;
+}
+
+
+
+.container{
+max-width:1150px;
+margin:auto;
+padding:60px 20px;
+}
+
+
+section{
+margin-bottom:65px;
+}
+
+
+h2{
+color:#D8B08C;
+border-left:5px solid #4B2E1E;
+padding-left:15px;
+font-size:2rem;
+margin-bottom:25px;
+}
+
+
+
+/* CARDS */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
+}
+
+
+.card{
+background:#173A2B;
+border:1px solid rgba(216,176,140,.25);
+padding:25px;
+border-radius:15px;
+transition:.3s;
+}
+
+
+.card:hover{
+transform:translateY(-6px);
+border-color:#D8B08C;
+}
+
+
+.card h3{
+color:#D8B08C;
+margin-bottom:12px;
+}
+
+
+
+/* QUOTE */
+
+.quote{
+background:#4B2E1E;
+padding:30px;
+border-radius:15px;
+text-align:center;
+font-size:1.2rem;
+font-style:italic;
+}
+
+
+
+/* TABLE */
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+
+th{
+background:#4B2E1E;
+padding:15px;
+}
+
+
+td{
+padding:15px;
+border:1px solid rgba(255,255,255,.15);
+}
+
+
+tr:nth-child(even){
+background:#173A2B;
+}
+
+
+
+/* LIST */
+
+.box{
+background:#173A2B;
+padding:30px;
+border-radius:15px;
+}
+
+
+.box li{
+margin:12px;
+}
+
+
+
+/* FOOTER */
+
+footer{
+background:#081D15;
+padding:60px 20px;
+text-align:center;
+}
+
+
+footer h2{
+border:none;
+}
+
+
+
+@media(max-width:700px){
+
+.hero h1{
+font-size:2.2rem;
+}
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+
+<header class="hero">
+
+<h1>Information Quality Filtering System</h1>
+
+<p>
+
+Only allow inputs that directly improve decision accuracy or output
+quality. In an age of unlimited information, success depends less on
+accessing more data and more on developing better filters.
+
+</p>
+
+</header>
+
+
+
+
+
+
+<div class="container">
+
+
+
+<section>
+
+<div class="quote">
+
+"The quality of your decisions is limited by the quality of the
+information entering your mind."
+
+</div>
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+<h2>What Is Information Quality Filtering?</h2>
+
+
+<p>
+
+Information Quality Filtering is the process of intentionally selecting,
+organizing, and evaluating information before allowing it to influence
+your decisions.
+
+</p>
+
+
+<p style="margin-top:20px;">
+
+Not all information has equal value. Some information creates clarity,
+improves skills, and strengthens decisions. Other information creates
+distraction, confusion, or unnecessary emotional reactions.
+
+</p>
+
+
+</section>
+
+
+
+
+
+
+
+
+<section>
+
+<h2>The Modern Information Challenge</h2>
+
+
+<div class="grid">
+
+
+<div class="card">
+
+<h3>Too Much Access</h3>
+
+<p>
+
+The modern world provides unlimited information, but unlimited access
+does not automatically create better understanding.
+
+</p>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>Low-Quality Inputs</h3>
+
+<p>
+
+Opinions, trends, and incomplete information can influence decisions
+without improving accuracy.
+
+</p>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>Attention Competition</h3>
+
+<p>
+
+Every source competes for your focus. Without filters, your priorities
+can be shaped by external systems.
+
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>Epistemic Noise</h3>
+
+<p>
+
+High-frequency, low-signal feedback loops corrupt long-term strategic modeling and tactical execution clarity.
+
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>Cognitive Overload</h3>
+
+<p>
+
+Unfiltered intake exhausts working memory reserves, accelerating burnout and diminishing high-order synthesis capabilities.
+
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>Algorithmic Manipulation</h3>
+
+<p>
+
+Platform distribution algorithms optimize for engagement metrics rather than truth, distorting objective reality assessment.
+
+</p>
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+<section>
+
+<h2>The Information Filter Framework</h2>
+
+
+<table>
+
+
+<tr>
+
+<th>Filter Question</th>
+
+<th>Purpose</th>
+
+</tr>
+
+
+<tr>
+
+<td>Does this improve my understanding?</td>
+
+<td>Separate useful knowledge from unnecessary information.</td>
+
+</tr>
+
+
+<tr>
+
+<td>Is the source reliable?</td>
+
+<td>Evaluate credibility before accepting conclusions.</td>
+
+</tr>
+
+
+<tr>
+
+<td>Can I apply this information?</td>
+
+<td>Prioritize knowledge that creates action.</td>
+
+</tr>
+
+
+<tr>
+
+<td>Does this support my goals?</td>
+
+<td>Remove information that creates distraction.</td>
+
+</tr>
+
+
+<tr>
+
+<td>Will this improve future decisions?</td>
+
+<td>Focus on long-term value.</td>
+
+</tr>
+
+
+</table>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<section>
+
+<h2>Categories of High-Value Information</h2>
+
+
+<div class="grid">
+
+
+
+<div class="card">
+
+<h3>Decision Information</h3>
+
+<p>
+
+Data that improves choices, reduces uncertainty, and helps evaluate
+possible outcomes.
+
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>Skill Information</h3>
+
+<p>
+
+Knowledge that helps you develop abilities, solve problems, and increase
+your capabilities.
+
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>Strategic Information</h3>
+
+<p>
+
+Insights about markets, industries, trends, and opportunities that
+influence future planning.
+
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>Self-Knowledge</h3>
+
+<p>
+
+Information that improves awareness of your habits, strengths,
+weaknesses, and decision patterns.
+
+</p>
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+<section>
+
+<h2>Build Better Information Habits</h2>
+
+
+<div class="grid">
+
+
+<div class="card">
+
+<h3>Create Input Categories</h3>
+
+<p>
+
+Organize information into areas such as learning, business, health,
+skills, and personal development.
+
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>Reduce Noise</h3>
+
+<p>
+
+Unsubscribe from sources that consistently create distraction without
+adding value.
+
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>Review Knowledge</h3>
+
+<p>
+
+Regularly revisit important information instead of constantly collecting
+new information.
+
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>Establish Hard Boundaries</h3>
+
+<p>
+
+Enforce strict scheduling gates to separate deep analytical consumption phases from chaotic real-time data streams.
+
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>Validate Epistemic Depth</h3>
+
+<p>
+
+Prioritize primary documents, foundational principles, and peer-reviewed case studies over superficial commentary.
+
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>Audit Intake Pipelines</h3>
+
+<p>
+
+Conduct periodic systematic reviews of all information sources to ruthlessly prune declining-yield feeds.
+
+</p>
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<section>
+
+<h2>Information Quality Audit</h2>
+
+
+<div class="box">
+
+
+<ul>
+
+<li>What sources consistently improve my thinking?</li>
+
+<li>What information creates unnecessary stress?</li>
+
+<li>Am I learning or just consuming?</li>
+
+<li>Does this information lead to better action?</li>
+
+<li>Am I collecting knowledge without applying it?</li>
+
+<li>What inputs should I remove?</li>
+
+</ul>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<section>
+
+<h2>Create An Intelligence Advantage</h2>
+
+
+<div class="quote">
+
+"The goal is not to know everything. The goal is to know what matters."
+
+</div>
+
+
+<p style="margin-top:25px;">
+
+A strong information filtering system creates a competitive advantage.
+People who can identify valuable information, ignore distractions, and
+convert knowledge into action are able to make better decisions with
+greater confidence.
+
+</p>
+
+
+</section>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+<footer>
+
+<h2>Protect Your Mental Information Environment</h2>
+
+
+<p>
+
+Your mind is shaped by what you repeatedly consume. Build an information
+system that strengthens your judgment, improves your skills, and supports
+your long-term goals.
+
+</p>
+
+
+</footer>
+
+
+
+
+</body>
+
+</html>
