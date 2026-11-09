@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Information Quality Filtering | Career & Education Signal</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS RESET & VARIABLES */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --slate-navy: #0F172A;
+            --slate-darker: #080D1A;
+            --slate-card: #1E293B;
+            --slate-border: #334155;
+            --amber-gold: #F59E0B;
+            --amber-hover: #D97706;
+            --amber-light: #FEF3C7;
+            --teal-accent: #0D9488;
+            --teal-light: #CCFBF1;
+            --bg-sage: #F8FAFC;
+            --bg-sage-card: #FFFFFF;
+            --bg-muted: #F1F5F9;
+            --text-dark: #0F172A;
+            --text-muted: #64748B;
+            --text-light: #F8FAFC;
+            --text-dim: #94A3B8;
+            --danger-red: #EF4444;
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-serif: 'Source Serif 4', Georgia, serif;
+            --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+            --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.12);
+            --shadow-lg: 0 10px 25px rgba(15, 23, 42, 0.18);
+            --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-sage);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* TYPOGRAPHY */
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .serif {
+            font-family: var(--font-serif);
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* CONTAINER & LAYOUT */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background-color: rgba(15, 23, 42, 0.92);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--slate-border);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 4.5rem;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.25rem;
+        }
+
+        .brand-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--amber-gold), var(--teal-accent));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--slate-navy);
+            font-weight: 900;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--amber-gold);
+        }
+
+        .cta-btn {
+            background-color: var(--amber-gold);
+            color: var(--slate-navy);
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cta-btn:hover {
+            background-color: var(--amber-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background-color: var(--slate-navy);
+            color: var(--text-light);
+            padding: 6rem 0 7rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, rgba(13, 148, 136, 0.05) 50%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            color: var(--amber-gold);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero h1 span {
+            color: var(--amber-gold);
+            position: relative;
+        }
+
+        .hero-tagline {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+            max-width: 90%;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.08);
+            color: var(--text-light);
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            text-decoration: none;
+            border: 1px solid var(--slate-border);
+            transition: var(--transition);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: white;
+        }
+
+        /* HERO DISPLAY CARD */
+        .hero-widget-card {
+            background-color: var(--slate-darker);
+            border: 1px solid var(--slate-border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+
+        .signal-meter-preview {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .meter-label-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
+
+        .meter-bar-bg {
+            height: 12px;
+            background-color: var(--slate-card);
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .meter-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--danger-red) 0%, var(--amber-gold) 50%, var(--teal-accent) 100%);
+            width: 78%;
+            border-radius: 6px;
+            transition: width 1s ease-out;
+        }
+
+        .snr-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--slate-border);
+        }
+
+        .stat-box {
+            background-color: var(--slate-card);
+            padding: 1rem;
+            border-radius: var(--radius-sm);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--amber-gold);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* INTERACTIVE TOOL SECTION */
+        .section-title-wrap {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3.5rem auto;
+        }
+
+        .section-title-wrap h2 {
+            font-size: 2.25rem;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .section-title-wrap p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .tool-card {
+            background: var(--bg-sage-card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid #E2E8F0;
+            padding: 2.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .tool-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            color: var(--slate-navy);
+        }
+
+        .custom-select, .custom-range {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid #CBD5E1;
+            font-family: inherit;
+            font-size: 0.95rem;
+            background-color: var(--bg-sage);
+            color: var(--text-dark);
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .custom-select:focus {
+            border-color: var(--teal-accent);
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+        }
+
+        .slider-wrap {
+            margin-top: 0.5rem;
+        }
+
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .slider-val {
+            color: var(--teal-accent);
+        }
+
+        input[type="range"] {
+            width: 100%;
+            accent-color: var(--teal-accent);
+            cursor: pointer;
+        }
+
+        /* TOOL OUTPUT SIDE */
+        .tool-output {
+            background-color: var(--slate-navy);
+            color: var(--text-light);
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .score-display {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .score-circle {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 6px solid var(--amber-gold);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem auto;
+            background-color: rgba(255, 255, 255, 0.03);
+            transition: var(--transition);
+        }
+
+        .score-value {
+            font-size: 2.75rem;
+            font-weight: 800;
+            color: var(--amber-gold);
+            line-height: 1;
+        }
+
+        .score-max {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+
+        .verdict-badge {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .verdict-high {
+            background-color: rgba(13, 148, 136, 0.2);
+            color: #2DD4BF;
+            border: 1px solid #0D9488;
+        }
+
+        .verdict-medium {
+            background-color: rgba(245, 158, 11, 0.2);
+            color: var(--amber-gold);
+            border: 1px solid var(--amber-gold);
+        }
+
+        .verdict-low {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: #FCA5A5;
+            border: 1px solid var(--danger-red);
+        }
+
+        .score-recommendation {
+            font-size: 0.95rem;
+            color: var(--text-dim);
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        /* CORE FRAMEWORKS SECTION */
+        .frameworks-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .framework-card {
+            background-color: var(--bg-sage-card);
+            border: 1px solid #E2E8F0;
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .framework-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--teal-accent);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .icon-noise {
+            background-color: #FEE2E2;
+            color: var(--danger-red);
+        }
+
+        .icon-signal {
+            background-color: var(--teal-light);
+            color: var(--teal-accent);
+        }
+
+        .icon-matrix {
+            background-color: var(--amber-light);
+            color: var(--amber-hover);
+        }
+
+        .framework-card h3 {
+            font-size: 1.3rem;
+            color: var(--slate-navy);
+            margin-bottom: 0.75rem;
+        }
+
+        .framework-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .accordion-btn {
+            background: none;
+            border: none;
+            color: var(--teal-accent);
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0;
+            margin-top: auto;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            border-top: 1px dashed #E2E8F0;
+            margin-top: 1rem;
+            padding-top: 0;
+        }
+
+        .accordion-content.open {
+            padding-top: 1rem;
+        }
+
+        .accordion-content ul {
+            padding-left: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        /* SCENARIO TESTER SECTION */
+        .scenarios-section {
+            background-color: var(--slate-navy);
+            color: var(--text-light);
+        }
+
+        .scenario-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background-color: var(--slate-card);
+            color: var(--text-dim);
+            border: 1px solid var(--slate-border);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background-color: var(--amber-gold);
+            color: var(--slate-navy);
+            border-color: var(--amber-gold);
+        }
+
+        .scenario-display {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .comparison-box {
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            border: 1px solid var(--slate-border);
+        }
+
+        .box-noise {
+            background-color: rgba(239, 68, 68, 0.05);
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        .box-signal {
+            background-color: rgba(13, 148, 136, 0.08);
+            border-color: rgba(13, 148, 136, 0.4);
+        }
+
+        .box-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        .text-danger { color: #FCA5A5; }
+        .text-signal { color: #2DD4BF; }
+
+        .scenario-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .scenario-list li {
+            position: relative;
+            padding-left: 1.75rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--text-dim);
+        }
+
+        .box-noise li::before {
+            content: "✕";
+            position: absolute;
+            left: 0;
+            color: var(--danger-red);
+            font-weight: 800;
+        }
+
+        .box-signal li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--teal-accent);
+            font-weight: 800;
+        }
+
+        /* ACTION PLAN & GOAL TRACKER */
+        .tracker-card {
+            background-color: var(--bg-sage-card);
+            border-radius: var(--radius-lg);
+            border: 1px solid #E2E8F0;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .tracker-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #E2E8F0;
+        }
+
+        .progress-indicator {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--teal-accent);
+            background-color: var(--teal-light);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+        }
+
+        .checklist {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: var(--bg-sage);
+            border-radius: var(--radius-sm);
+            border: 1px solid #E2E8F0;
+            transition: var(--transition);
+        }
+
+        .check-item:hover {
+            border-color: #CBD5E1;
+        }
+
+        .check-item input[type="checkbox"] {
+            margin-top: 0.25rem;
+            width: 18px;
+            height: 18px;
+            accent-color: var(--teal-accent);
+            cursor: pointer;
+        }
+
+        .check-label {
+            font-weight: 600;
+            color: var(--slate-navy);
+            font-size: 1rem;
+        }
+
+        .check-subtext {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .add-goal-form {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .add-goal-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid #CBD5E1;
+            font-family: inherit;
+            outline: none;
+        }
+
+        .add-goal-input:focus {
+            border-color: var(--teal-accent);
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--slate-darker);
+            color: var(--text-dim);
+            padding: 3rem 0;
+            border-top: 1px solid var(--slate-border);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 992px) {
+            .hero-grid, .tool-card, .scenario-display {
+                grid-template-columns: 1fr;
+            }
+
+            .frameworks-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .nav-links {
+                display: none;
+            }
+
+            .add-goal-form {
+                flex-direction: column;
+            }
+
+            section {
+                padding: 3rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="brand">
+                <div class="brand-icon">IQ</div>
+                <span>SignalFilter</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#tool">Signal Calculator</a></li>
+                <li><a href="#frameworks">Frameworks</a></li>
+                <li><a href="#scenarios">Scenario Tester</a></li>
+                <li><a href="#checklist">Goal Tracker</a></li>
+            </ul>
+            <a href="#tool" class="cta-btn">Analyze Source</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div>
+                    <div class="hero-badge">
+                        <span>⚡</span> Information Quality Engine
+                    </div>
+                    <h1>Cut through noise. <br>Focus on <span>High-Yield</span> Goals.</h1>
+                    <p class="hero-tagline">
+                        Education and career decisions are ruined by hype, outdated advice, and vanity trends. Apply rigorous information quality filtering to make clear, sustainable moves.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#tool" class="cta-btn">Filter Your First Source</a>
+                        <a href="#frameworks" class="btn-secondary">Explore Frameworks</a>
+                    </div>
+                </div>
+
+                <div class="hero-widget-card">
+                    <div class="signal-meter-preview">
+                        <div class="meter-label-row">
+                            <span>Information Stream Efficiency</span>
+                            <span style="color: var(--teal-accent); font-weight:700;">HIGH SIGNAL (78%)</span>
+                        </div>
+                        <div class="meter-bar-bg">
+                            <div class="meter-bar-fill" id="heroMeterFill"></div>
+                        </div>
+                        <p style="font-size: 0.85rem; color: var(--text-dim); margin-top: 0.5rem;">
+                            Current Filter Status: Active. 3 Distractions Blocked today.
+                        </p>
+                        <div class="snr-stats">
+                            <div class="stat-box">
+                                <div class="stat-number">10x</div>
+                                <div class="stat-label">Decision Speed</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-number">-65%</div>
+                                <div class="stat-label">Career Fatigue</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE TOOL: SIGNAL FILTER -->
+    <section id="tool">
+        <div class="container">
+            <div class="section-title-wrap">
+                <h2>The Career & Education Signal Filter</h2>
+                <p>Select an information source and adjust its properties to evaluate its actual decision-making value.</p>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-inputs">
+                    <div class="input-group">
+                        <label for="sourceSelect">Information Source Type</label>
+                        <select id="sourceSelect" class="custom-select" onchange="updateCalculations()">
+                            <option value="custom">-- Custom / Manual Rating --</option>
+                            <option value="social" selected>Social Media Hype / Viral Influencers</option>
+                            <option value="jobboard">Generic Job Board Requirements</option>
+                            <option value="mentor">Direct Industry Mentorship</option>
+                            <option value="data">Raw Skill Demand & Bureau Data</option>
+                            <option value="peer">Peer Pressure & Social Expectations</option>
+                            <option value="curiosity">Personal First-Principles Curiosity</option>
+                        </select>
+                    </div>
+
+                    <!-- SLIDER 1: CREDIBILITY -->
+                    <div class="slider-wrap">
+                        <div class="slider-header">
+                            <span>Source Credibility (Verifiability)</span>
+                            <span class="slider-val" id="credVal">3/10</span>
+                        </div>
+                        <input type="range" id="credibility" min="1" max="10" value="3" oninput="updateCalculations()">
+                        <p style="font-size:0.75rem; color: var(--text-muted); margin-top:0.2rem;">Is this backable by raw data, or based on individual self-interest?</p>
+                    </div>
+
+                    <!-- SLIDER 2: RELEVANCE -->
+                    <div class="slider-wrap">
+                        <div class="slider-header">
+                            <span>Direct Relevance (Timeliness & Scope)</span>
+                            <span class="slider-val" id="relVal">4/10</span>
+                        </div>
+                        <input type="range" id="relevance" min="1" max="10" value="4" oninput="updateCalculations()">
+                        <p style="font-size:0.75rem; color: var(--text-muted); margin-top:0.2rem;">Does this apply directly to your immediate skill level and market?</p>
+                    </div>
+
+                    <!-- SLIDER 3: SUSTAINABILITY -->
+                    <div class="slider-wrap">
+                        <div class="slider-header">
+                            <span>Durability / Sustainability</span>
+                            <span class="slider-val" id="sustVal">2/10</span>
+                        </div>
+                        <input type="range" id="sustainability" min="1" max="10" value="2" oninput="updateCalculations()">
+                        <p style="font-size:0.75rem; color: var(--text-muted); margin-top:0.2rem;">Will this advice or skill still be valuable in 5 to 10 years?</p>
+                    </div>
+                </div>
+
+                <!-- OUTPUT DISPLAY -->
+                <div class="tool-output">
+                    <div>
+                        <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-dim);">Quality Score Output</span>
+                        <div class="score-display">
+                            <div class="score-circle" id="scoreCircle">
+                                <span class="score-value" id="finalScore">30</span>
+                                <span class="score-max">/ 100</span>
+                            </div>
+                            <span id="verdictBadge" class="verdict-badge verdict-low">Low-Yield Hype</span>
+                        </div>
+                    </div>
+                    
+                    <p class="score-recommendation" id="recommendationText">
+                        Caution: High risk of wasted effort. This source exhibits high emotional resonance but low long-term durability. Filter this out of your immediate roadmap.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CORE FRAMEWORKS -->
+    <section id="frameworks" style="background-color: var(--bg-muted);">
+        <div class="container">
+            <div class="section-title-wrap">
+                <h2>Three Pillars of Quality Filtering</h2>
+                <p>Systematic frameworks to keep your education and career roadmap clear of fatigue and directionless pivot cycles.</p>
+            </div>
+
+            <div class="frameworks-grid">
+                <!-- CARD 1 -->
+                <div class="framework-card">
+                    <div class="card-icon icon-noise">🚫</div>
+                    <h3>1. Noise Detection</h3>
+                    <p>Learn to instinctively flag vanity metrics, clickbait trends, outdated institutional advice, and emotional FOMO.</p>
+                    <button class="accordion-btn" onclick="toggleAccordion(this)">
+                        <span>View Indicators</span> ▼
+                    </button>
+                    <div class="accordion-content">
+                        <ul>
+                            <li><strong>Vague Roadmaps:</strong> "Learn Python in 2 Weeks" promises.</li>
+                            <li><strong>Survivor Bias:</strong> Outlier success stories marketed as guaranteed processes.</li>
+                            <li><strong>Market Lag:</strong> College curricula designed 6 years behind current industry tooling.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- CARD 2 -->
+                <div class="framework-card">
+                    <div class="card-icon icon-signal">🎯</div>
+                    <h3>2. Signal Prioritization</h3>
+                    <p>Focus strictly on immutable fundamentals, verifiable skill proof, and high-leverage relationships.</p>
+                    <button class="accordion-btn" onclick="toggleAccordion(this)">
+                        <span>View High Signals</span> ▼
+                    </button>
+                    <div class="accordion-content">
+                        <ul>
+                            <li><strong>First-Principles:</strong> Math, logic, clear communication, system design.</li>
+                            <li><strong>Public Proof of Work:</strong> Shipped products, published analysis, peer-reviewed contributions.</li>
+                            <li><strong>Direct Feedback:</strong> Code reviews or performance assessments from active practitioners.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- CARD 3 -->
+                <div class="framework-card">
+                    <div class="card-icon icon-matrix">⚖️</div>
+                    <h3>3. The Decision Matrix</h3>
+                    <p>Evaluate trade-offs across three non-negotiable vectors: Speed, Durability, and Cost of Acquisition.</p>
+                    <button class="accordion-btn" onclick="toggleAccordion(this)">
+                        <span>View Trade-off Rules</span> ▼
+                    </button>
+                    <div class="accordion-content">
+                        <ul>
+                            <li><strong>High Speed + Low Durability:</strong> Good for quick contextual awareness, bad for primary career anchors.</li>
+                            <li><strong>High Durability + Low Speed:</strong> Foundational degrees or core principles—invest steadily over time.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCENARIO TESTER -->
+    <section id="scenarios" class="scenarios-section">
+        <div class="container">
+            <div class="section-title-wrap">
+                <h2 style="color: white;">Scenario Filter Tester</h2>
+                <p style="color: var(--text-dim);">See how information filtering radically changes career and learning plans.</p>
+            </div>
+
+            <div class="scenario-tabs">
+                <button class="tab-btn active" onclick="switchScenario('dev', this)">Web Development Pivot</button>
+                <button class="tab-btn" onclick="switchScenario('major', this)">Choosing College Major</button>
+                <button class="tab-btn" onclick="switchScenario('tech', this)">Evaluating Tech Trends</button>
+            </div>
+
+            <div class="scenario-display">
+                <!-- RAW STREAM -->
+                <div class="comparison-box box-noise">
+                    <div class="box-header text-danger">
+                        <span>⚠️ Unfiltered Information Stream (Noise)</span>
+                    </div>
+                    <ul class="scenario-list" id="noiseList">
+                        <!-- Populated via JS -->
+                    </ul>
+                </div>
+
+                <!-- FILTERED STREAM -->
+                <div class="comparison-box box-signal">
+                    <div class="box-header text-signal">
+                        <span>✨ Filtered High-Yield Action Plan (Signal)</span>
+                    </div>
+                    <ul class="scenario-list" id="signalList">
+                        <!-- Populated via JS -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GOAL TRACKER / ACTION PLAN -->
+    <section id="checklist">
+        <div class="container">
+            <div class="section-title-wrap">
+                <h2>High-Signal Goal Tracker</h2>
+                <p>Construct your personalized checklist built strictly on quality-filtered information.</p>
+            </div>
+
+            <div class="tracker-card">
+                <div class="tracker-header">
+                    <div>
+                        <h3 style="color: var(--slate-navy);">Active Quality Milestones</h3>
+                        <p style="font-size:0.85rem; color:var(--text-muted); margin:0;">Check off completed high-yield actions.</p>
+                    </div>
+                    <div class="progress-indicator" id="progressPct">
+                        0% Completed
+                    </div>
+                </div>
+
+                <div class="checklist" id="checklistContainer">
+                    <div class="check-item">
+                        <input type="checkbox" onchange="updateProgress()" id="chk1">
+                        <div>
+                            <label for="chk1" class="check-label">Audit your daily information diet</label>
+                            <div class="check-subtext">Unfollow clickbait career influencers and unsubscribed from low-signal newsletter panic.</div>
+                        </div>
+                    </div>
+                    <div class="check-item">
+                        <input type="checkbox" onchange="updateProgress()" id="chk2">
+                        <div>
+                            <label for="chk2" class="check-label">Identify 2 immutable core fundamentals in your target field</label>
+                            <div class="check-subtext">Example: Data structures for software engineers; Accounting mechanics for finance.</div>
+                        </div>
+                    </div>
+                    <div class="check-item">
+                        <input type="checkbox" onchange="updateProgress()" id="chk3">
+                        <div>
+                            <label for="chk3" class="check-label">Schedule 1 direct feedback session with an active practitioner</label>
+                            <div class="check-subtext">Replace 10 hours of browsing with 30 minutes of real-world critique.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="add-goal-form" onsubmit="addCustomGoal(event)">
+                    <input type="text" id="goalInput" class="add-goal-input" placeholder="Add a custom high-signal goal..." required>
+                    <button type="submit" class="cta-btn">+ Add Goal</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>© 2026 Information Quality Filtering Initiative. Designed for deep focus, long-term durability, and clarity.</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Preset source data for calculator
+        const presets = {
+            social: { cred: 2, rel: 3, sust: 2 },
+            jobboard: { cred: 5, rel: 6, sust: 4 },
+            mentor: { cred: 9, rel: 9, sust: 8 },
+            data: { cred: 9, rel: 7, sust: 9 },
+            peer: { cred: 3, rel: 4, sust: 3 },
+            curiosity: { cred: 8, rel: 8, sust: 9 }
+        };
+
+        // Scenario data
+        const scenarioData = {
+            dev: {
+                noise: [
+                    "Panicking over every new framework released on Twitter/X.",
+                    "Tutorial purgatory: Building 15 identical simple To-Do apps from tutorials.",
+                    "Trying to learn 5 programming languages simultaneously.",
+                    "Believing AI will eliminate all entry-level coders next month."
+                ],
+                signal: [
+                    "Mastering fundamental JavaScript, execution context, and async mechanics.",
+                    "Building 1 unique end-to-end application solving a real personal problem.",
+                    "Reading open-source codebases to understand real-world architectural design.",
+                    "Practicing core computer science data structures and problem-solving principles."
+                ]
+            },
+            major: {
+                noise: [
+                    "Choosing a major solely based on generic 'Top 10 Highest Paying Degrees' lists.",
+                    "Following parental pressure into a field you lack natural affinity for.",
+                    "Assuming college coursework alone guarantees industry job readiness.",
+                    "Ignoring tuition debt ratios relative to starting market salaries."
+                ],
+                signal: [
+                    "Analyzing job description requirements for actual senior roles you admire.",
+                    "Interviewing 3 working professionals who graduated from the program 5 years ago.",
+                    "Prioritizing majors with strong foundational transferable skills (Math, CS, Finance).",
+                    "Calculating strict ROI on tuition costs versus entry-level median earnings."
+                ]
+            },
+            tech: {
+                noise: [
+                    "Re-architecting your entire codebase because a new framework is trending.",
+                    "Chasing short-term tech hypes with zero proven enterprise adoption.",
+                    "Consuming 2 hours of tech news daily without writing code.",
+                    "Abandoning stable stack expertise for unproven fringe tools."
+                ],
+                signal: [
+                    "Evaluating tech based on maintainability, community size, and documentation quality.",
+                    "Adopting new tooling only when it solves a specific bottleneck in production.",
+                    "Focusing on system design principles that transcend specific frameworks.",
+                    "Running small controlled hackathon spikes before committing to stack migrations."
+                ]
+            }
+        };
+
+        // 1. CALCULATOR LOGIC
+        function updateCalculations() {
+            const sourceSelect = document.getElementById('sourceSelect').value;
+            const credSlider = document.getElementById('credibility');
+            const relSlider = document.getElementById('relevance');
+            const sustSlider = document.getElementById('sustainability');
+
+            // Handle preset selection
+            if (sourceSelect !== 'custom' && presets[sourceSelect]) {
+                credSlider.value = presets[sourceSelect].cred;
+                relSlider.value = presets[sourceSelect].rel;
+                sustSlider.value = presets[sourceSelect].sust;
+            }
+
+            const cred = parseInt(credSlider.value);
+            const rel = parseInt(relSlider.value);
+            const sust = parseInt(sustSlider.value);
+
+            // Update UI slider values
+            document.getElementById('credVal').innerText = `${cred}/10`;
+            document.getElementById('relVal').innerText = `${rel}/10`;
+            document.getElementById('sustVal').innerText = `${sust}/10`;
+
+            // Calculate Weighted Score (Out of 100)
+            // Weighting: Credibility 40%, Sustainability 35%, Relevance 25%
+            const score = Math.round((cred * 4) + (sust * 3.5) + (rel * 2.5));
+
+            // Render Output
+            const scoreEl = document.getElementById('finalScore');
+            const scoreCircle = document.getElementById('scoreCircle');
+            const badgeEl = document.getElementById('verdictBadge');
+            const recEl = document.getElementById('recommendationText');
+
+            scoreEl.innerText = score;
+
+            if (score >= 75) {
+                badgeEl.innerText = "High Signal";
+                badgeEl.className = "verdict-badge verdict-high";
+                scoreCircle.style.borderColor = "#0D9488";
+                scoreEl.style.color = "#2DD4BF";
+                recEl.innerText = "Excellent quality. This source is rooted in long-term principles or verified data. Highly actionable for your goals.";
+            } else if (score >= 45) {
+                badgeEl.innerText = "Moderate Signal / Contextual";
+                badgeEl.className = "verdict-badge verdict-medium";
+                scoreCircle.style.borderColor = "#F59E0B";
+                scoreEl.style.color = "#F59E0B";
+                recEl.innerText = "Useful for surface-level context, but cross-reference before making major time investments or career pivots.";
+            } else {
+                badgeEl.innerText = "Low-Yield Hype / Noise";
+                badgeEl.className = "verdict-badge verdict-low";
+                scoreCircle.style.borderColor = "#EF4444";
+                scoreEl.style.color = "#FCA5A5";
+                recEl.innerText = "High distraction potential. This source exhibits high emotional resonance but low long-term durability. Minimize exposure.";
+            }
+        }
+
+        // 2. ACCORDION TOGGLE
+        function toggleAccordion(btn) {
+            const content = btn.nextElementSibling;
+            const isOpen = content.classList.contains('open');
+
+            // Close all
+            document.querySelectorAll('.accordion-content').forEach(el => {
+                el.classList.remove('open');
+                el.style.maxHeight = null;
+            });
+
+            // Toggle clicked
+            if (!isOpen) {
+                content.classList.add('open');
+                content.style.maxHeight = content.scrollHeight + "px";
+                btn.querySelector('span').innerText = "Hide Details";
+            } else {
+                btn.querySelector('span').innerText = "View Details";
+            }
+        }
+
+        // 3. SCENARIO SWITCHER
+        function switchScenario(key, btn) {
+            // Update active tab styling
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const data = scenarioData[key];
+            const noiseList = document.getElementById('noiseList');
+            const signalList = document.getElementById('signalList');
+
+            // Render lists
+            noiseList.innerHTML = data.noise.map(item => `<li>${item}</li>`).join('');
+            signalList.innerHTML = data.signal.map(item => `<li>${item}</li>`).join('');
+        }
+
+        // 4. CHECKLIST LOGIC
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('#checklistContainer input[type="checkbox"]');
+            const checked = document.querySelectorAll('#checklistContainer input[type="checkbox"]:checked');
+            const pct = Math.round((checked.length / checkboxes.length) * 100) || 0;
+            
+            document.getElementById('progressPct').innerText = `${pct}% Completed`;
+        }
+
+        function addCustomGoal(e) {
+            e.preventDefault();
+            const input = document.getElementById('goalInput');
+            const text = input.value.trim();
+
+            if (text) {
+                const container = document.getElementById('checklistContainer');
+                const id = 'custom_' + Date.now();
+                
+                const newItem = document.createElement('div');
+                newItem.className = 'check-item';
+                newItem.innerHTML = `
+                    <input type="checkbox" onchange="updateProgress()" id="${id}">
+                    <div>
+                        <label for="${id}" class="check-label">${escapeHtml(text)}</label>
+                        <div class="check-subtext">Custom High-Signal Action Goal</div>
+                    </div>
+                `;
+                
+                container.appendChild(newItem);
+                input.value = '';
+                updateProgress();
+            }
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+
+        // INITIALIZATION
+        window.addEventListener('DOMContentLoaded', () => {
+            updateCalculations();
+            switchScenario('dev', document.querySelector('.tab-btn.active'));
+            updateProgress();
+        });
+    </script>
+</body>
+</html>
