@@ -1,0 +1,3119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Course-to-Career Planner | Austin Coding Sample</title>
+
+<style>
+
+:root{
+  --bg:#07110f;
+  --panel:#0d1c19;
+  --panel2:#122521;
+  --panel3:#172e28;
+  --cream:#f5efe1;
+  --muted:#b9c8c1;
+  --green:#72c49b;
+  --green2:#3c9b70;
+  --gold:#e6c77a;
+  --blue:#74b9ff;
+  --red:#e48b8b;
+  --border:#28453d;
+  --shadow:0 18px 45px rgba(0,0,0,.28);
+  --radius:18px;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:
+    radial-gradient(circle at 10% 0%,rgba(114,196,155,.12),transparent 30%),
+    radial-gradient(circle at 90% 20%,rgba(230,199,122,.08),transparent 25%),
+    var(--bg);
+  color:var(--cream);
+  font-family:Arial,Helvetica,sans-serif;
+  line-height:1.6;
+}
+
+button,
+input,
+select{
+  font:inherit;
+}
+
+a{
+  color:inherit;
+}
+
+.container{
+  width:min(1200px,94%);
+  margin:auto;
+}
+
+.hero{
+  padding:70px 0 45px;
+}
+
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.4fr .8fr;
+  gap:25px;
+  align-items:stretch;
+}
+
+.hero-main,
+.hero-side{
+  background:linear-gradient(145deg,var(--panel2),var(--panel));
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:34px;
+  box-shadow:var(--shadow);
+}
+
+.eyebrow{
+  color:var(--green);
+  font-size:.78rem;
+  font-weight:800;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  margin-bottom:14px;
+}
+
+h1{
+  font-size:clamp(2.2rem,5vw,4.4rem);
+  line-height:1.02;
+  margin-bottom:20px;
+  max-width:800px;
+}
+
+.hero-main p{
+  color:var(--muted);
+  font-size:1.08rem;
+  max-width:760px;
+}
+
+.hero-side h3{
+  margin-bottom:15px;
+}
+
+.hero-side ul{
+  list-style:none;
+}
+
+.hero-side li{
+  padding:10px 0;
+  border-bottom:1px solid var(--border);
+  color:var(--muted);
+}
+
+.hero-side li:last-child{
+  border-bottom:0;
+}
+
+.check{
+  color:var(--green);
+  font-weight:900;
+  margin-right:7px;
+}
+
+.section{
+  padding:30px 0;
+}
+
+.section-heading{
+  margin-bottom:25px;
+}
+
+.section-heading h2{
+  font-size:2rem;
+  margin-bottom:8px;
+}
+
+.section-heading p{
+  color:var(--muted);
+  max-width:800px;
+}
+
+.notice{
+  background:rgba(230,199,122,.08);
+  border:1px solid rgba(230,199,122,.3);
+  border-left:5px solid var(--gold);
+  padding:18px;
+  border-radius:12px;
+  color:#eadfca;
+  margin-bottom:25px;
+}
+
+.control-bar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:25px;
+}
+
+.filter-btn{
+  background:var(--panel2);
+  color:var(--muted);
+  border:1px solid var(--border);
+  padding:10px 15px;
+  border-radius:999px;
+  cursor:pointer;
+}
+
+.filter-btn.active,
+.filter-btn:hover{
+  background:var(--green);
+  color:#07110f;
+  border-color:var(--green);
+}
+
+.course-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+}
+
+.course-card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:24px;
+  transition:.2s ease;
+}
+
+.course-card:hover{
+  transform:translateY(-3px);
+  border-color:var(--green2);
+}
+
+.course-card.selected{
+  border:2px solid var(--green);
+  box-shadow:0 0 0 4px rgba(114,196,155,.08);
+}
+
+.course-top{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:15px;
+}
+
+.course-title{
+  font-size:1.35rem;
+  font-weight:800;
+}
+
+.tag{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:999px;
+  font-size:.72rem;
+  font-weight:800;
+  margin:3px;
+}
+
+.free{
+  background:rgba(114,196,155,.13);
+  color:var(--green);
+}
+
+.paid{
+  background:rgba(230,199,122,.12);
+  color:var(--gold);
+}
+
+.austin{
+  background:rgba(116,185,255,.12);
+  color:var(--blue);
+}
+
+.course-card p{
+  color:var(--muted);
+  margin-bottom:15px;
+}
+
+.metrics{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin:18px 0;
+}
+
+.metric{
+  background:var(--panel3);
+  padding:12px;
+  border-radius:10px;
+}
+
+.metric small{
+  display:block;
+  color:#91a59d;
+  font-size:.7rem;
+  text-transform:uppercase;
+}
+
+.metric strong{
+  display:block;
+  margin-top:3px;
+}
+
+.course-card h4{
+  color:var(--green);
+  margin:18px 0 7px;
+}
+
+.course-card ul{
+  padding-left:20px;
+  color:var(--muted);
+}
+
+.course-card li{
+  margin-bottom:5px;
+}
+
+.button-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:20px;
+}
+
+.btn{
+  display:inline-block;
+  border:0;
+  border-radius:9px;
+  padding:11px 15px;
+  cursor:pointer;
+  text-decoration:none;
+  font-weight:800;
+}
+
+.btn-primary{
+  background:var(--green);
+  color:#07110f;
+}
+
+.btn-secondary{
+  background:transparent;
+  border:1px solid var(--border);
+  color:var(--cream);
+}
+
+.btn-secondary:hover{
+  border-color:var(--green);
+}
+
+.dashboard{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+
+.panel{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:25px;
+}
+
+.panel h3{
+  margin-bottom:8px;
+}
+
+.panel-sub{
+  color:var(--muted);
+  font-size:.92rem;
+  margin-bottom:20px;
+}
+
+.score{
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+
+.score-circle{
+  width:105px;
+  height:105px;
+  border-radius:50%;
+  border:8px solid var(--green2);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.6rem;
+  font-weight:900;
+  flex-shrink:0;
+}
+
+.progress-wrap{
+  flex:1;
+}
+
+.progress{
+  height:12px;
+  background:#20342f;
+  border-radius:999px;
+  overflow:hidden;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:var(--green);
+  transition:.3s;
+}
+
+.checklist{
+  list-style:none;
+}
+
+.checklist li{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  padding:11px 0;
+  border-bottom:1px solid var(--border);
+}
+
+.checklist li:last-child{
+  border-bottom:0;
+}
+
+.checklist input{
+  margin-top:5px;
+  accent-color:var(--green);
+}
+
+.schedule{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:8px;
+  margin-top:20px;
+}
+
+.day{
+  background:var(--panel3);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:12px;
+  min-height:150px;
+}
+
+.day strong{
+  display:block;
+  color:var(--green);
+  margin-bottom:8px;
+}
+
+.day p{
+  font-size:.82rem;
+  color:var(--muted);
+  margin-bottom:7px;
+}
+
+.hours-form{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:20px;
+}
+
+.field label{
+  display:block;
+  font-size:.78rem;
+  color:var(--muted);
+  margin-bottom:5px;
+}
+
+.field input,
+.field select{
+  width:100%;
+  background:#081512;
+  color:var(--cream);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:10px;
+}
+
+.total-box{
+  background:var(--panel3);
+  border:1px solid var(--border);
+  padding:18px;
+  border-radius:12px;
+  margin-top:15px;
+}
+
+.total-box strong{
+  color:var(--green);
+  font-size:1.4rem;
+}
+
+.pathway{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.step{
+  position:relative;
+  background:var(--panel3);
+  border:1px solid var(--border);
+  padding:20px;
+  border-radius:14px;
+}
+
+.step-number{
+  width:35px;
+  height:35px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--green);
+  color:#07110f;
+  border-radius:50%;
+  font-weight:900;
+  margin-bottom:12px;
+}
+
+.step h3{
+  margin-bottom:7px;
+}
+
+.step p{
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+.project-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.project{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:20px;
+}
+
+.project .level{
+  color:var(--gold);
+  font-size:.75rem;
+  font-weight:800;
+  text-transform:uppercase;
+}
+
+.project h3{
+  margin:8px 0;
+}
+
+.project p{
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+.project ul{
+  margin:12px 0 0 18px;
+  color:var(--muted);
+  font-size:.87rem;
+}
+
+.job-table-wrap{
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:850px;
+}
+
+th,
+td{
+  padding:14px;
+  border-bottom:1px solid var(--border);
+  text-align:left;
+  vertical-align:top;
+}
+
+th{
+  color:var(--green);
+  background:var(--panel3);
+}
+
+td{
+  color:var(--muted);
+}
+
+details{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:12px;
+  margin-bottom:10px;
+}
+
+summary{
+  cursor:pointer;
+  padding:16px;
+  font-weight:800;
+}
+
+.details-content{
+  padding:0 18px 18px;
+  color:var(--muted);
+}
+
+.tracker{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.tracker-item{
+  background:var(--panel3);
+  border:1px solid var(--border);
+  padding:15px;
+  border-radius:12px;
+}
+
+.tracker-item label{
+  display:flex;
+  gap:9px;
+  align-items:center;
+  color:var(--muted);
+}
+
+.tracker-item input{
+  accent-color:var(--green);
+}
+
+.application-table input,
+.application-table select{
+  width:100%;
+  min-width:120px;
+  background:#07110f;
+  color:var(--cream);
+  border:1px solid var(--border);
+  padding:8px;
+  border-radius:7px;
+}
+
+.footer{
+  padding:50px 0 80px;
+  color:#91a59d;
+  font-size:.85rem;
+}
+
+.hidden{
+  display:none!important;
+}
+
+@media(max-width:900px){
+
+  .hero-grid,
+  .dashboard,
+  .course-grid{
+    grid-template-columns:1fr;
+  }
+
+  .pathway{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .project-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .schedule{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:600px){
+
+  .hero{
+    padding-top:35px;
+  }
+
+  .hero-main,
+  .hero-side,
+  .panel,
+  .course-card{
+    padding:20px;
+  }
+
+  .metrics,
+  .hours-form,
+  .project-grid,
+  .tracker{
+    grid-template-columns:1fr;
+  }
+
+  .pathway{
+    grid-template-columns:1fr;
+  }
+
+  .schedule{
+    grid-template-columns:1fr;
+  }
+
+  h1{
+    font-size:2.3rem;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="hero">
+
+  <div class="hero-grid">
+
+    <div class="hero-main">
+
+      <div class="eyebrow">
+        Pathkeeper • Course-to-Career Template
+      </div>
+
+      <h1>
+        Don't just choose a course.
+        Build a path from learning to employment.
+      </h1>
+
+      <p>
+        This sample shows how a person can evaluate an inexpensive or free
+        coding program, understand exactly what it covers, turn the learning
+        into portfolio evidence, create a realistic study schedule, and
+        compare the resulting skills against actual Austin-area job requirements.
+      </p>
+
+      <div class="button-row">
+
+        <button
+          class="btn btn-primary"
+          onclick="scrollToSection('course-selection')">
+          Compare Courses
+        </button>
+
+        <button
+          class="btn btn-secondary"
+          onclick="scrollToSection('planner')">
+          Build My Schedule
+        </button>
+
+      </div>
+
+    </div>
+
+    <div class="hero-side">
+
+      <h3>The decision system</h3>
+
+      <ul>
+
+        <li>
+          <span class="check">01</span>
+          Define the employment target
+        </li>
+
+        <li>
+          <span class="check">02</span>
+          Compare course coverage
+        </li>
+
+        <li>
+          <span class="check">03</span>
+          Calculate time and cost
+        </li>
+
+        <li>
+          <span class="check">04</span>
+          Build projects while learning
+        </li>
+
+        <li>
+          <span class="check">05</span>
+          Create portfolio evidence
+        </li>
+
+        <li>
+          <span class="check">06</span>
+          Start applying before you feel "finished"
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     HOW TO USE
+========================================================= -->
+
+<section class="section">
+
+  <div class="notice">
+
+    <strong>Important:</strong>
+    A course is not the same thing as a job qualification.
+    This planner deliberately separates course completion from
+    job readiness. The goal is to identify what the course teaches,
+    what must be learned elsewhere, what evidence must be built,
+    and what employers are actually requesting.
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     COURSE SELECTION
+========================================================= -->
+
+<section class="section" id="course-selection">
+
+  <div class="section-heading">
+
+    <h2>1. Compare learning options</h2>
+
+    <p>
+      The sample below focuses on web development and adjacent technology
+      because Austin has demand for web, front-end, WordPress, software and
+      IT-related roles. It intentionally includes completely free resources,
+      structured free resources, and paid options.
+    </p>
+
+  </div>
+
+  <div class="control-bar">
+
+    <button
+      class="filter-btn active"
+      onclick="filterCourses('all',this)">
+      All
+    </button>
+
+    <button
+      class="filter-btn"
+      onclick="filterCourses('free',this)">
+      Free
+    </button>
+
+    <button
+      class="filter-btn"
+      onclick="filterCourses('low',this)">
+      Low Cost
+    </button>
+
+    <button
+      class="filter-btn"
+      onclick="filterCourses('austin',this)">
+      Austin
+    </button>
+
+    <button
+      class="filter-btn"
+      onclick="filterCourses('javascript',this)">
+      JavaScript
+    </button>
+
+  </div>
+
+
+  <div class="course-grid">
+
+
+    <!-- MDN -->
+
+    <article class="course-card"
+      data-type="free javascript"
+      data-course="MDN Web Development">
+
+      <div class="course-top">
+
+        <div class="course-title">
+          MDN Learn Web Development
+        </div>
+
+        <div>
+          <span class="tag free">FREE</span>
+        </div>
+
+      </div>
+
+      <p>
+        Mozilla's structured web-development curriculum.
+        Particularly useful for understanding the fundamentals rather than
+        simply copying projects.
+      </p>
+
+      <div class="metrics">
+
+        <div class="metric">
+          <small>Cost</small>
+          <strong>$0</strong>
+        </div>
+
+        <div class="metric">
+          <small>Schedule</small>
+          <strong>Self-paced</strong>
+        </div>
+
+        <div class="metric">
+          <small>Level</small>
+          <strong>Beginner</strong>
+        </div>
+
+      </div>
+
+      <h4>Coverage</h4>
+
+      <ul>
+        <li>Environment setup</li>
+        <li>Web standards</li>
+        <li>Semantic HTML</li>
+        <li>CSS fundamentals</li>
+        <li>CSS layout and responsive design</li>
+        <li>JavaScript fundamentals</li>
+        <li>Accessibility</li>
+        <li>Version control concepts</li>
+        <li>Testing and performance concepts</li>
+        <li>Publishing websites</li>
+      </ul>
+
+      <h4>Portfolio opportunities</h4>
+
+      <ul>
+        <li>Responsive business website</li>
+        <li>Accessible information site</li>
+        <li>Interactive JavaScript tool</li>
+        <li>Data-driven resource page</li>
+      </ul>
+
+      <h4>What it does NOT automatically provide</h4>
+
+      <ul>
+        <li>Job placement</li>
+        <li>Local employer network</li>
+        <li>Large capstone portfolio</li>
+        <li>Professional work experience</li>
+      </ul>
+
+      <div class="button-row">
+
+        <a
+          class="btn btn-primary"
+          href="https://developer.mozilla.org/en-US/docs/Learn_web_development"
+          target="_blank">
+          Open MDN
+        </a>
+
+        <button
+          class="btn btn-secondary"
+          onclick="selectCourse('MDN Web Development')">
+          Select
+        </button>
+
+      </div>
+
+    </article>
+
+
+    <!-- Odin -->
+
+    <article class="course-card"
+      data-type="free javascript"
+      data-course="The Odin Project">
+
+      <div class="course-top">
+
+        <div class="course-title">
+          The Odin Project
+        </div>
+
+        <div>
+          <span class="tag free">FREE</span>
+        </div>
+
+      </div>
+
+      <p>
+        Project-heavy curriculum designed around building websites and
+        applications instead of only consuming lessons.
+      </p>
+
+      <div class="metrics">
+
+        <div class="metric">
+          <small>Cost</small>
+          <strong>$0</strong>
+        </div>
+
+        <div class="metric">
+          <small>Schedule</small>
+          <strong>Self-paced</strong>
+        </div>
+
+        <div class="metric">
+          <small>Path</small>
+          <strong>Full Stack JS</strong>
+        </div>
+
+      </div>
+
+      <h4>Coverage</h4>
+
+      <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+        <li>DOM manipulation</li>
+        <li>APIs</li>
+        <li>Git and GitHub</li>
+        <li>Node.js</li>
+        <li>Back-end concepts</li>
+        <li>Testing</li>
+        <li>Multiple portfolio projects</li>
+      </ul>
+
+      <h4>Portfolio opportunities</h4>
+
+      <ul>
+        <li>Landing page recreation</li>
+        <li>JavaScript application</li>
+        <li>API-powered application</li>
+        <li>Full-stack application</li>
+        <li>Responsive multi-page site</li>
+      </ul>
+
+      <h4>Best use</h4>
+
+      <p>
+        Strong choice when the learner wants a substantial portfolio and
+        eventually wants to move beyond basic static websites.
+      </p>
+
+      <div class="button-row">
+
+        <a
+          class="btn btn-primary"
+          href="https://www.theodinproject.com/paths"
+          target="_blank">
+          Open Odin
+        </a>
+
+        <button
+          class="btn btn-secondary"
+          onclick="selectCourse('The Odin Project')">
+          Select
+        </button>
+
+      </div>
+
+    </article>
+
+
+    <!-- freeCodeCamp -->
+
+    <article class="course-card"
+      data-type="free javascript"
+      data-course="freeCodeCamp">
+
+      <div class="course-top">
+
+        <div class="course-title">
+          freeCodeCamp
+        </div>
+
+        <div>
+          <span class="tag free">FREE</span>
+        </div>
+
+      </div>
+
+      <p>
+        Large interactive curriculum with coding exercises, certifications,
+        projects and multiple development paths.
+      </p>
+
+      <div class="metrics">
+
+        <div class="metric">
+          <small>Cost</small>
+          <strong>$0</strong>
+        </div>
+
+        <div class="metric">
+          <small>Schedule</small>
+          <strong>Flexible</strong>
+        </div>
+
+        <div class="metric">
+          <small>Format</small>
+          <strong>Interactive</strong>
+        </div>
+
+      </div>
+
+      <h4>Coverage to investigate</h4>
+
+      <ul>
+        <li>Responsive web design</li>
+        <li>JavaScript</li>
+        <li>Front-end libraries</li>
+        <li>Data structures</li>
+        <li>Back-end development</li>
+        <li>APIs</li>
+        <li>Databases</li>
+        <li>Multiple project-based certifications</li>
+      </ul>
+
+      <h4>Portfolio opportunities</h4>
+
+      <ul>
+        <li>Portfolio website</li>
+        <li>Interactive tools</li>
+        <li>JavaScript applications</li>
+        <li>API applications</li>
+        <li>Front-end projects</li>
+      </ul>
+
+      <h4>Important strategy</h4>
+
+      <p>
+        Do not treat certificate completion as the final product.
+        Convert the lessons into original projects with your own
+        requirements, interface decisions and documentation.
+      </p>
+
+      <div class="button-row">
+
+        <a
+          class="btn btn-primary"
+          href="https://www.freecodecamp.org/learn/"
+          target="_blank">
+          Open freeCodeCamp
+        </a>
+
+        <button
+          class="btn btn-secondary"
+          onclick="selectCourse('freeCodeCamp')">
+          Select
+        </button>
+
+      </div>
+
+    </article>
+
+
+    <!-- Google -->
+
+    <article class="course-card"
+      data-type="low"
+      data-course="Google IT Automation with Python">
+
+      <div class="course-top">
+
+        <div class="course-title">
+          Google IT Automation with Python
+        </div>
+
+        <div>
+          <span class="tag paid">PAID / FINANCIAL AID OPTIONS</span>
+        </div>
+
+      </div>
+
+      <p>
+        A different route from front-end development: Python, Git,
+        automation and IT-oriented programming.
+      </p>
+
+      <div class="metrics">
+
+        <div class="metric">
+          <small>Typical U.S. Price</small>
+          <strong>$49/mo</strong>
+        </div>
+
+        <div class="metric">
+          <small>Estimated</small>
+          <strong>~6 months</strong>
+        </div>
+
+        <div class="metric">
+          <small>Study</small>
+          <strong>~10 hrs/wk</strong>
+        </div>
+
+      </div>
+
+      <h4>Coverage</h4>
+
+      <ul>
+        <li>Python</li>
+        <li>Git and GitHub</li>
+        <li>Automation</li>
+        <li>Operating systems</li>
+        <li>Regular expressions</li>
+        <li>Configuration management</li>
+        <li>Cloud concepts</li>
+        <li>IT automation</li>
+      </ul>
+
+      <h4>Portfolio opportunities</h4>
+
+      <ul>
+        <li>File automation tool</li>
+        <li>Data-cleaning script</li>
+        <li>System monitoring utility</li>
+        <li>API automation project</li>
+        <li>Deployment/configuration project</li>
+      </ul>
+
+      <h4>Best use</h4>
+
+      <p>
+        Better fit for someone interested in Python, IT automation and
+        technical operations than someone whose immediate target is
+        front-end web development.
+      </p>
+
+      <div class="button-row">
+
+        <a
+          class="btn btn-primary"
+          href="https://www.coursera.org/professional-certificates/google-it-automation"
+          target="_blank">
+          View Certificate
+        </a>
+
+        <button
+          class="btn btn-secondary"
+          onclick="selectCourse('Google IT Automation with Python')">
+          Select
+        </button>
+
+      </div>
+
+    </article>
+
+
+    <!-- ACC -->
+
+    <article class="course-card"
+      data-type="austin low javascript"
+      data-course="Austin Community College Web Development">
+
+      <div class="course-top">
+
+        <div class="course-title">
+          Austin Community College Web Development
+        </div>
+
+        <div>
+          <span class="tag austin">AUSTIN</span>
+          <span class="tag paid">PAID</span>
+        </div>
+
+      </div>
+
+      <p>
+        Local structured option with web-development coursework that
+        progresses through HTML/CSS, JavaScript, interaction design,
+        UX and a capstone portfolio.
+      </p>
+
+      <div class="metrics">
+
+        <div class="metric">
+          <small>Location</small>
+          <strong>Austin</strong>
+        </div>
+
+        <div class="metric">
+          <small>Format</small>
+          <strong>Structured</strong>
+        </div>
+
+        <div class="metric">
+          <small>Portfolio</small>
+          <strong>Capstone</strong>
+        </div>
+
+      </div>
+
+      <h4>Coverage</h4>
+
+      <ul>
+        <li>HTML and CSS</li>
+        <li>JavaScript</li>
+        <li>Advanced web authoring</li>
+        <li>Interaction design</li>
+        <li>UX design</li>
+        <li>AI-powered web development elective</li>
+        <li>Capstone portfolio</li>
+      </ul>
+
+      <h4>Why it matters</h4>
+
+      <p>
+        A local structured program can be useful when accountability,
+        instructor guidance and a formal sequence matter more than
+        minimizing cost.
+      </p>
+
+      <h4>Before enrolling</h4>
+
+      <p>
+        Check the current semester schedule, prerequisites and tuition.
+        Do not assume every course is free simply because Austin has
+        other free workforce programs.
+      </p>
+
+      <div class="button-row">
+
+        <a
+          class="btn btn-primary"
+          href="https://continue.austincc.edu/webmaster"
+          target="_blank">
+          View ACC Program
+        </a>
+
+        <button
+          class="btn btn-secondary"
+          onclick="selectCourse('Austin Community College Web Development')">
+          Select
+        </button>
+
+      </div>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     SELECTED COURSE
+========================================================= -->
+
+<section class="section">
+
+  <div class="dashboard">
+
+    <div class="panel">
+
+      <h3>Selected learning path</h3>
+
+      <p class="panel-sub">
+        Your selection becomes the starting point for the planning system.
+      </p>
+
+      <div
+        id="selected-course"
+        style="font-size:1.7rem;font-weight:900;color:var(--green);">
+        No course selected
+      </div>
+
+      <div
+        id="course-recommendation"
+        style="margin-top:12px;color:var(--muted);">
+        Select a course above to populate your plan.
+      </div>
+
+    </div>
+
+    <div class="panel">
+
+      <h3>Course-selection rule</h3>
+
+      <p class="panel-sub">
+        Choose based on the job you want, not simply the course that
+        sounds impressive.
+      </p>
+
+      <ul style="padding-left:20px;color:var(--muted);">
+
+        <li>Can you afford the full program?</li>
+        <li>Can you maintain the weekly workload?</li>
+        <li>Does it teach the skills employers request?</li>
+        <li>Will you create original work?</li>
+        <li>Does it leave obvious skill gaps?</li>
+        <li>Can you show evidence of what you learned?</li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     COURSE COVERAGE MATRIX
+========================================================= -->
+
+<section class="section">
+
+  <div class="section-heading">
+
+    <h2>2. Course coverage matrix</h2>
+
+    <p>
+      This prevents a common problem: completing a course without knowing
+      which employer requirements remain uncovered.
+    </p>
+
+  </div>
+
+  <div class="job-table-wrap">
+
+    <table>
+
+      <thead>
+
+        <tr>
+          <th>Skill</th>
+          <th>MDN</th>
+          <th>Odin</th>
+          <th>freeCodeCamp</th>
+          <th>Google Python</th>
+          <th>ACC Web Dev</th>
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td>HTML</td>
+          <td>Strong</td>
+          <td>Strong</td>
+          <td>Strong</td>
+          <td>Low</td>
+          <td>Strong</td>
+        </tr>
+
+        <tr>
+          <td>CSS</td>
+          <td>Strong</td>
+          <td>Strong</td>
+          <td>Strong</td>
+          <td>Low</td>
+          <td>Strong</td>
+        </tr>
+
+        <tr>
+          <td>JavaScript</td>
+          <td>Core</td>
+          <td>Strong</td>
+          <td>Strong</td>
+          <td>None</td>
+          <td>Strong</td>
+        </tr>
+
+        <tr>
+          <td>Git / GitHub</td>
+          <td>Basic</td>
+          <td>Strong</td>
+          <td>Some</td>
+          <td>Strong</td>
+          <td>Program dependent</td>
+        </tr>
+
+        <tr>
+          <td>APIs</td>
+          <td>Some</td>
+          <td>Strong</td>
+          <td>Strong</td>
+          <td>Some</td>
+          <td>Some</td>
+        </tr>
+
+        <tr>
+          <td>Node.js / backend</td>
+          <td>Intro</td>
+          <td>Strong</td>
+          <td>Some</td>
+          <td>Different route</td>
+          <td>Limited</td>
+        </tr>
+
+        <tr>
+          <td>Accessibility</td>
+          <td>Strong</td>
+          <td>Some</td>
+          <td>Some</td>
+          <td>Not central</td>
+          <td>Some</td>
+        </tr>
+
+        <tr>
+          <td>UX / interaction</td>
+          <td>Some</td>
+          <td>Some</td>
+          <td>Some</td>
+          <td>Not central</td>
+          <td>Strong</td>
+        </tr>
+
+        <tr>
+          <td>Portfolio projects</td>
+          <td>Self-created</td>
+          <td>Many</td>
+          <td>Many</td>
+          <td>Self-created</td>
+          <td>Capstone</td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     PATHWAY
+========================================================= -->
+
+<section class="section">
+
+  <div class="section-heading">
+
+    <h2>3. The learning-to-employment pipeline</h2>
+
+    <p>
+      The course itself is only one part of the pathway.
+    </p>
+
+  </div>
+
+  <div class="pathway">
+
+    <div class="step">
+      <div class="step-number">1</div>
+      <h3>Learn</h3>
+      <p>
+        Complete lessons and understand the underlying concept.
+      </p>
+    </div>
+
+    <div class="step">
+      <div class="step-number">2</div>
+      <h3>Practice</h3>
+      <p>
+        Rebuild the concept without copying the course example.
+      </p>
+    </div>
+
+    <div class="step">
+      <div class="step-number">3</div>
+      <h3>Build</h3>
+      <p>
+        Turn several related skills into an original project.
+      </p>
+    </div>
+
+    <div class="step">
+      <div class="step-number">4</div>
+      <h3>Prove</h3>
+      <p>
+        Publish the project, document the decisions and use it in applications.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     PORTFOLIO
+========================================================= -->
+
+<section class="section">
+
+  <div class="section-heading">
+
+    <h2>4. Portfolio construction plan</h2>
+
+    <p>
+      Every major learning phase should produce something that can eventually
+      become evidence of ability.
+    </p>
+
+  </div>
+
+  <div class="project-grid">
+
+    <article class="project">
+
+      <div class="level">Project 01 • Foundation</div>
+
+      <h3>Professional Business Website</h3>
+
+      <p>
+        Build a responsive website for a fictional Austin business.
+      </p>
+
+      <ul>
+        <li>Semantic HTML</li>
+        <li>Responsive CSS</li>
+        <li>Navigation</li>
+        <li>Contact section</li>
+        <li>Mobile layout</li>
+        <li>Accessibility review</li>
+      </ul>
+
+    </article>
+
+
+    <article class="project">
+
+      <div class="level">Project 02 • JavaScript</div>
+
+      <h3>Interactive Business Tool</h3>
+
+      <p>
+        Build something that solves a real operational problem.
+      </p>
+
+      <ul>
+        <li>Form inputs</li>
+        <li>Validation</li>
+        <li>Calculations</li>
+        <li>Conditional logic</li>
+        <li>Dynamic interface</li>
+        <li>Local storage</li>
+      </ul>
+
+    </article>
+
+
+    <article class="project">
+
+      <div class="level">Project 03 • Data/API</div>
+
+      <h3>Information Dashboard</h3>
+
+      <p>
+        Build a dashboard that transforms information into useful decisions.
+      </p>
+
+      <ul>
+        <li>Data structure</li>
+        <li>Filtering</li>
+        <li>Sorting</li>
+        <li>Search</li>
+        <li>API or JSON data</li>
+        <li>User-friendly presentation</li>
+      </ul>
+
+    </article>
+
+
+    <article class="project">
+
+      <div class="level">Project 04 • Real-world</div>
+
+      <h3>Client-style Website</h3>
+
+      <p>
+        Treat the project as if an actual business hired you.
+      </p>
+
+      <ul>
+        <li>Requirements document</li>
+        <li>Wireframe</li>
+        <li>Design decisions</li>
+        <li>Implementation</li>
+        <li>Testing</li>
+        <li>Revision log</li>
+      </ul>
+
+    </article>
+
+
+    <article class="project">
+
+      <div class="level">Project 05 • Systems</div>
+
+      <h3>Small Business Operations App</h3>
+
+      <p>
+        Create a practical system instead of another generic calculator.
+      </p>
+
+      <ul>
+        <li>Inventory</li>
+        <li>Tasks</li>
+        <li>Customers</li>
+        <li>Status tracking</li>
+        <li>Reports</li>
+        <li>Data persistence</li>
+      </ul>
+
+    </article>
+
+
+    <article class="project">
+
+      <div class="level">Project 06 • Portfolio</div>
+
+      <h3>Portfolio Operating System</h3>
+
+      <p>
+        Build the site that explains your work to an employer.
+      </p>
+
+      <ul>
+        <li>About / positioning</li>
+        <li>Project case studies</li>
+        <li>Technology used</li>
+        <li>Problem solved</li>
+        <li>Before / after</li>
+        <li>Live project links</li>
+      </ul>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     WEEKLY PLANNER
+========================================================= -->
+
+<section class="section" id="planner">
+
+  <div class="section-heading">
+
+    <h2>5. Build a realistic weekly schedule</h2>
+
+    <p>
+      Course hours should never consume the entire learning schedule.
+      A person needs time to study, practice, build, review and apply.
+    </p>
+
+  </div>
+
+  <div class="panel">
+
+    <h3>Weekly allocation</h3>
+
+    <p class="panel-sub">
+      Enter the number of hours you realistically have available.
+      The planner divides them between learning and employment preparation.
+    </p>
+
+    <div class="hours-form">
+
+      <div class="field">
+
+        <label for="available-hours">
+          Available hours per week
+        </label>
+
+        <input
+          id="available-hours"
+          type="number"
+          value="10"
+          min="2"
+          max="60"
+          oninput="calculateSchedule()">
+
+      </div>
+
+      <div class="field">
+
+        <label for="job-stage">
+          Current stage
+        </label>
+
+        <select
+          id="job-stage"
+          onchange="calculateSchedule()">
+
+          <option value="beginner">
+            Beginner
+          </option>
+
+          <option value="building">
+            Building portfolio
+          </option>
+
+          <option value="applying">
+            Applying for jobs
+          </option>
+
+        </select>
+
+      </div>
+
+      <div class="field">
+
+        <label for="target-weeks">
+          Target timeframe
+        </label>
+
+        <select
+          id="target-weeks"
+          onchange="calculateSchedule()">
+
+          <option value="12">12 weeks</option>
+          <option value="16">16 weeks</option>
+          <option value="24">24 weeks</option>
+          <option value="36">36 weeks</option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <div class="total-box">
+
+      <div>
+        <strong id="weekly-total">10 hours</strong>
+        available each week
+      </div>
+
+      <div
+        id="schedule-explanation"
+        style="color:var(--muted);margin-top:8px;">
+      </div>
+
+    </div>
+
+
+    <div class="schedule" id="schedule-grid">
+
+      <div class="day">
+        <strong>Monday</strong>
+        <p>1 hr learning</p>
+        <p>30 min practice</p>
+      </div>
+
+      <div class="day">
+        <strong>Tuesday</strong>
+        <p>1 hr learning</p>
+        <p>30 min practice</p>
+      </div>
+
+      <div class="day">
+        <strong>Wednesday</strong>
+        <p>1 hr project building</p>
+      </div>
+
+      <div class="day">
+        <strong>Thursday</strong>
+        <p>1 hr learning</p>
+        <p>30 min review</p>
+      </div>
+
+      <div class="day">
+        <strong>Friday</strong>
+        <p>30 min coding practice</p>
+        <p>30 min job research</p>
+      </div>
+
+      <div class="day">
+        <strong>Saturday</strong>
+        <p>2 hr portfolio project</p>
+      </div>
+
+      <div class="day">
+        <strong>Sunday</strong>
+        <p>Review progress</p>
+        <p>Plan next week</p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     TIMELINE
+========================================================= -->
+
+<section class="section">
+
+  <div class="section-heading">
+
+    <h2>6. Example 24-week roadmap</h2>
+
+    <p>
+      The exact pace should change according to available hours.
+      The important idea is that portfolio construction starts early.
+    </p>
+
+  </div>
+
+
+  <details open>
+
+    <summary>
+      Weeks 1–4 — Foundations
+    </summary>
+
+    <div class="details-content">
+
+      <ul>
+        <li>HTML structure</li>
+        <li>CSS fundamentals</li>
+        <li>Responsive design</li>
+        <li>Basic Git/GitHub</li>
+        <li>Build Project 01</li>
+        <li>Publish first website</li>
+      </ul>
+
+    </div>
+
+  </details>
+
+
+  <details>
+
+    <summary>
+      Weeks 5–8 — JavaScript fundamentals
+    </summary>
+
+    <div class="details-content">
+
+      <ul>
+        <li>Variables</li>
+        <li>Data types</li>
+        <li>Operators</li>
+        <li>Conditions</li>
+        <li>Functions</li>
+        <li>Arrays</li>
+        <li>Objects</li>
+        <li>DOM</li>
+        <li>Build Project 02</li>
+      </ul>
+
+    </div>
+
+  </details>
+
+
+  <details>
+
+    <summary>
+      Weeks 9–12 — Real interaction
+    </summary>
+
+    <div class="details-content">
+
+      <ul>
+        <li>Forms</li>
+        <li>Validation</li>
+        <li>Events</li>
+        <li>Local storage</li>
+        <li>Error handling</li>
+        <li>Accessibility</li>
+        <li>Build Project 03</li>
+      </ul>
+
+    </div>
+
+  </details>
+
+
+  <details>
+
+    <summary>
+      Weeks 13–16 — Portfolio-quality development
+    </summary>
+
+    <div class="details-content">
+
+      <ul>
+        <li>Build Project 04</li>
+        <li>Write project documentation</li>
+        <li>Improve responsive behavior</li>
+        <li>Test on multiple screen sizes</li>
+        <li>Clean GitHub repositories</li>
+        <li>Create case studies</li>
+      </ul>
+
+    </div>
+
+  </details>
+
+
+  <details>
+
+    <summary>
+      Weeks 17–20 — Job alignment
+    </summary>
+
+    <div class="details-content">
+
+      <ul>
+        <li>Compare job descriptions</li>
+        <li>Identify repeated technologies</li>
+        <li>Close the largest skill gaps</li>
+        <li>Improve resume</li>
+        <li>Prepare technical explanations</li>
+        <li>Begin regular applications</li>
+      </ul>
+
+    </div>
+
+  </details>
+
+
+  <details>
+
+    <summary>
+      Weeks 21–24 — Application engine
+    </summary>
+
+    <div class="details-content">
+
+      <ul>
+        <li>Apply consistently</li>
+        <li>Customize resume evidence</li>
+        <li>Practice interviews</li>
+        <li>Continue portfolio improvements</li>
+        <li>Track applications</li>
+        <li>Use rejection/interview feedback to identify gaps</li>
+      </ul>
+
+    </div>
+
+  </details>
+
+</section>
+
+
+<!-- =========================================================
+     AUSTIN JOB MARKET
+========================================================= -->
+
+<section class="section">
+
+  <div class="section-heading">
+
+    <h2>7. What Austin employers are actually asking for</h2>
+
+    <p>
+      The purpose of this section is not to promise a job.
+      It is to work backward from employer requirements.
+    </p>
+
+  </div>
+
+  <div class="job-table-wrap">
+
+    <table>
+
+      <thead>
+
+        <tr>
+          <th>Example job signal</th>
+          <th>Skills mentioned</th>
+          <th>Portfolio evidence to build</th>
+          <th>Learning response</th>
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr>
+
+          <td>
+            Entry-level Web Developer
+          </td>
+
+          <td>
+            HTML, CSS, JavaScript, responsive websites,
+            SEO, analytics, Git, WordPress
+          </td>
+
+          <td>
+            Business website + SEO/resource dashboard +
+            WordPress-style project
+          </td>
+
+          <td>
+            MDN + freeCodeCamp + practical projects
+          </td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>
+            Junior WordPress Developer
+          </td>
+
+          <td>
+            WordPress, Elementor, website maintenance,
+            optimization
+          </td>
+
+          <td>
+            Three business sites + maintenance documentation +
+            performance improvements
+          </td>
+
+          <td>
+            HTML/CSS + WordPress/Elementor practice
+          </td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>
+            Junior Full-Stack Engineer
+          </td>
+
+          <td>
+            JavaScript, APIs, backend, databases,
+            deployment
+          </td>
+
+          <td>
+            Full-stack application with documented architecture
+          </td>
+
+          <td>
+            Odin Full Stack JavaScript path
+          </td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>
+            IT Automation / Technical Operations
+          </td>
+
+          <td>
+            Python, Git, automation, systems,
+            configuration
+          </td>
+
+          <td>
+            Automation scripts + documented workflow improvements
+          </td>
+
+          <td>
+            Google IT Automation with Python
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+  <div class="button-row" style="margin-top:20px;">
+
+    <a
+      class="btn btn-primary"
+      href="https://www.linkedin.com/jobs/junior-web-developer-jobs-austin-tx"
+      target="_blank">
+      Austin Junior Web Jobs
+    </a>
+
+    <a
+      class="btn btn-secondary"
+      href="https://www.indeed.com/q-junior-web-developer-l-austin-tx-jobs.html"
+      target="_blank">
+      Indeed Austin Jobs
+    </a>
+
+    <a
+      class="btn btn-secondary"
+      href="https://www.builtinaustin.com/jobs/search/web-developer"
+      target="_blank">
+      Built In Austin
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     WORKFORCE OPTIONS
+========================================================= -->
+
+<section class="section">
+
+  <div class="section-heading">
+
+    <h2>8. Don't overlook Austin workforce programs</h2>
+
+    <p>
+      Before paying for training, check whether you qualify for free or
+      subsidized workforce development. Austin's Workforce Development
+      program currently funds organizations providing free or low-cost
+      occupational training in high-demand fields including information
+      technology.
+    </p>
+
+  </div>
+
+  <div class="panel">
+
+    <h3>Funding check</h3>
+
+    <ul style="padding-left:20px;color:var(--muted);">
+
+      <li>
+        Search Austin-funded workforce providers.
+      </li>
+
+      <li>
+        Check eligibility before paying for a bootcamp.
+      </li>
+
+      <li>
+        Compare the same skill outcome across free and paid programs.
+      </li>
+
+      <li>
+        Check whether the provider offers employer connections,
+        internships or placement assistance.
+      </li>
+
+      <li>
+        Confirm the current program dates before planning around it.
+      </li>
+
+    </ul>
+
+    <div class="button-row">
+
+      <a
+        class="btn btn-primary"
+        href="https://www.austintexas.gov/economic-development/programs/workforce-development-program"
+        target="_blank">
+        Austin Workforce Development
+      </a>
+
+      <a
+        class="btn btn-secondary"
+        href="https://adulted.austincc.edu/career-pathways/career-pathways-certificate-programs/"
+        target="_blank">
+        ACC Career Pathways
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     PORTFOLIO CHECKLIST
+========================================================= -->
+
+<section class="section">
+
+  <div class="section-heading">
+
+    <h2>9. Portfolio readiness checklist</h2>
+
+    <p>
+      Course completion should not be the only progress indicator.
+      Check off the evidence you can actually show an employer.
+    </p>
+
+  </div>
+
+  <div class="panel">
+
+    <div class="tracker">
+
+      <div class="tracker-item">
+        <label>
+          <input type="checkbox" class="portfolio-check">
+          Public GitHub profile
+        </label>
+      </div>
+
+      <div class="tracker-item">
+        <label>
+          <input type="checkbox" class="portfolio-check">
+          Published portfolio website
+        </label>
+      </div>
+
+      <div class="tracker-item">
+        <label>
+          <input type="checkbox" class="portfolio-check">
+          Responsive HTML/CSS project
+        </label>
+      </div>
+
+      <div class="tracker-item">
+        <label>
+          <input type="checkbox" class="portfolio-check">
+          JavaScript application
+        </label>
+      </div>
+
+      <div class="tracker-item">
+        <label>
+          <input type="checkbox" class="portfolio-check">
+          API/data project
+        </label>
+      </div>
+
+      <div class="tracker-item">
+        <label>
+          <input type="checkbox" class="portfolio-check">
+          Client-style project
+        </label>
+      </div>
+
+      <div class="tracker-item">
+        <label>
+          <input type="checkbox" class="portfolio-check">
+          Project README files
+        </label>
+      </div>
+
+      <div class="tracker-item">
+        <label>
+          <input type="checkbox" class="portfolio-check">
+          Screenshots and live links
+        </label>
+      </div>
+
+      <div class="tracker-item">
+        <label>
+          <input type="checkbox" class="portfolio-check">
+          Resume connected to projects
+        </label>
+      </div>
+
+      <div class="tracker-item">
+        <label>
+          <input type="checkbox" class="portfolio-check">
+          Interview explanation for each project
+        </label>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     JOB READINESS
+========================================================= -->
+
+<section class="section">
+
+  <div class="dashboard">
+
+    <div class="panel">
+
+      <h3>Portfolio evidence score</h3>
+
+      <div class="score">
+
+        <div
+          class="score-circle"
+          id="portfolio-score">
+          0%
+        </div>
+
+        <div class="progress-wrap">
+
+          <p class="panel-sub">
+            This measures evidence, not course completion.
+          </p>
+
+          <div class="progress">
+            <div
+              class="progress-bar"
+              id="portfolio-bar">
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="panel">
+
+      <h3>Readiness interpretation</h3>
+
+      <p
+        id="readiness-message"
+        style="color:var(--muted);">
+        Begin by building evidence.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     APPLICATION TRACKER
+========================================================= -->
+
+<section class="section">
+
+  <div class="section-heading">
+
+    <h2>10. Application tracker</h2>
+
+    <p>
+      Once enough evidence exists, the system should track actual market
+      activity rather than simply counting completed lessons.
+    </p>
+
+  </div>
+
+  <div class="panel">
+
+    <div class="job-table-wrap">
+
+      <table class="application-table">
+
+        <thead>
+
+          <tr>
+            <th>Company</th>
+            <th>Role</th>
+            <th>Required skill</th>
+            <th>Status</th>
+            <th>Evidence used</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>
+              <input type="text" placeholder="Company">
+            </td>
+
+            <td>
+              <input type="text" placeholder="Web Developer">
+            </td>
+
+            <td>
+              <input type="text" placeholder="HTML / CSS / JS">
+            </td>
+
+            <td>
+              <select>
+                <option>Researching</option>
+                <option>Applied</option>
+                <option>Interview</option>
+                <option>Rejected</option>
+                <option>Offer</option>
+              </select>
+            </td>
+
+            <td>
+              <input type="text" placeholder="Project / GitHub">
+            </td>
+          </tr>
+
+
+          <tr>
+            <td>
+              <input type="text" placeholder="Company">
+            </td>
+
+            <td>
+              <input type="text" placeholder="Role">
+            </td>
+
+            <td>
+              <input type="text" placeholder="Skill">
+            </td>
+
+            <td>
+              <select>
+                <option>Researching</option>
+                <option>Applied</option>
+                <option>Interview</option>
+                <option>Rejected</option>
+                <option>Offer</option>
+              </select>
+            </td>
+
+            <td>
+              <input type="text" placeholder="Evidence">
+            </td>
+          </tr>
+
+
+          <tr>
+            <td>
+              <input type="text" placeholder="Company">
+            </td>
+
+            <td>
+              <input type="text" placeholder="Role">
+            </td>
+
+            <td>
+              <input type="text" placeholder="Skill">
+            </td>
+
+            <td>
+              <select>
+                <option>Researching</option>
+                <option>Applied</option>
+                <option>Interview</option>
+                <option>Rejected</option>
+                <option>Offer</option>
+              </select>
+            </td>
+
+            <td>
+              <input type="text" placeholder="Evidence">
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     COURSE DECISION QUESTIONS
+========================================================= -->
+
+<section class="section">
+
+  <div class="section-heading">
+
+    <h2>11. Questions to answer before committing</h2>
+
+  </div>
+
+
+  <details open>
+
+    <summary>
+      Can I actually finish this course?
+    </summary>
+
+    <div class="details-content">
+
+      Compare the required weekly hours against your real schedule.
+      A theoretically excellent program that cannot fit your life is
+      not necessarily the best choice.
+
+    </div>
+
+  </details>
+
+
+  <details>
+
+    <summary>
+      Does this course teach the skills my target jobs require?
+    </summary>
+
+    <div class="details-content">
+
+      Copy 10–20 relevant job descriptions into a spreadsheet.
+      Count recurring technologies and responsibilities.
+      Use that frequency to identify your highest-value learning gaps.
+
+    </div>
+
+  </details>
+
+
+  <details>
+
+    <summary>
+      What will I have to learn outside the course?
+    </summary>
+
+    <div class="details-content">
+
+      Look for missing areas such as Git, deployment, accessibility,
+      testing, APIs, databases, WordPress, React, SQL or cloud tools.
+      Missing skills should become part of the plan rather than surprises
+      after graduation.
+
+    </div>
+
+  </details>
+
+
+  <details>
+
+    <summary>
+      What can I build from each section?
+    </summary>
+
+    <div class="details-content">
+
+      Every major topic should trigger a small application exercise.
+      Every several related topics should produce a portfolio project.
+      This prevents passive course consumption.
+
+    </div>
+
+  </details>
+
+
+  <details>
+
+    <summary>
+      When should I start applying?
+    </summary>
+
+    <div class="details-content">
+
+      Do not automatically wait until the entire curriculum is complete.
+      Once you have several credible projects and can satisfy a meaningful
+      portion of a job description, begin applying while continuing to learn.
+      Early applications also reveal what employers are actually asking for.
+
+    </div>
+
+  </details>
+
+</section>
+
+
+<!-- =========================================================
+     FINAL DECISION
+========================================================= -->
+
+<section class="section">
+
+  <div class="panel">
+
+    <h2 style="margin-bottom:12px;">
+      Final decision rule
+    </h2>
+
+    <p style="color:var(--muted);max-width:850px;">
+
+      Choose the learning path that creates the strongest combination of
+      <strong style="color:var(--cream);">
+      affordability + realistic schedule + employer relevance +
+      portfolio evidence + skill progression
+      </strong>.
+      The cheapest course is not automatically the best course.
+      The most prestigious course is not automatically the best course.
+      The strongest choice is the one that can realistically move a person
+      from their current skill level toward demonstrable capability and
+      employment.
+
+    </p>
+
+  </div>
+
+</section>
+
+
+<footer class="footer">
+
+  <p>
+    Sample template for a course-to-career decision system.
+    Course availability, prices, eligibility, schedules and job postings
+    change over time. Verify current information with the provider and
+    employer before making financial or career decisions.
+  </p>
+
+</footer>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   COURSE SELECTION
+========================================================= */
+
+const courseRecommendations = {
+
+  "MDN Web Development":
+    "Best starting point for a beginner who wants strong web fundamentals without paying. Pair it with original projects and GitHub.",
+
+  "The Odin Project":
+    "Best fit for a learner who wants a deeper project-heavy JavaScript/full-stack route and is willing to spend substantial independent study time.",
+
+  "freeCodeCamp":
+    "Best fit for a learner who likes interactive exercises and wants a broad, free curriculum with many project opportunities.",
+
+  "Google IT Automation with Python":
+    "Best fit when the target is Python, automation or IT operations rather than primarily front-end web development.",
+
+  "Austin Community College Web Development":
+    "Best fit when local structure, instructor support and a formal Austin-area curriculum are more important than minimizing tuition."
+};
+
+
+function selectCourse(courseName){
+
+  const cards = document.querySelectorAll(".course-card");
+
+  cards.forEach(card => {
+
+    card.classList.remove("selected");
+
+    if(card.dataset.course === courseName){
+      card.classList.add("selected");
+    }
+
+  });
+
+  document.getElementById("selected-course").textContent = courseName;
+
+  document.getElementById("course-recommendation").textContent =
+    courseRecommendations[courseName] ||
+    "Build a plan around the selected course.";
+
+  localStorage.setItem(
+    "selectedCourse",
+    courseName
+  );
+
+}
+
+
+/* =========================================================
+   COURSE FILTER
+========================================================= */
+
+function filterCourses(type,button){
+
+  const cards =
+    document.querySelectorAll(".course-card");
+
+  const buttons =
+    document.querySelectorAll(".filter-btn");
+
+  buttons.forEach(btn =>
+    btn.classList.remove("active")
+  );
+
+  button.classList.add("active");
+
+  cards.forEach(card => {
+
+    if(type === "all"){
+      card.classList.remove("hidden");
+      return;
+    }
+
+    const categories =
+      card.dataset.type.split(" ");
+
+    if(categories.includes(type)){
+      card.classList.remove("hidden");
+    }else{
+      card.classList.add("hidden");
+    }
+
+  });
+
+}
+
+
+/* =========================================================
+   SCROLL
+========================================================= */
+
+function scrollToSection(id){
+
+  const element =
+    document.getElementById(id);
+
+  if(element){
+
+    element.scrollIntoView({
+      behavior:"smooth"
+    });
+
+  }
+
+}
+
+
+/* =========================================================
+   WEEKLY SCHEDULE CALCULATOR
+========================================================= */
+
+function calculateSchedule(){
+
+  const hours =
+    Number(
+      document.getElementById(
+        "available-hours"
+      ).value
+    ) || 0;
+
+  const stage =
+    document.getElementById(
+      "job-stage"
+    ).value;
+
+  const weeks =
+    Number(
+      document.getElementById(
+        "target-weeks"
+      ).value
+    );
+
+  document.getElementById(
+    "weekly-total"
+  ).textContent =
+    hours + " hours";
+
+  let learning;
+  let practice;
+  let building;
+  let jobSearch;
+
+  if(stage === "beginner"){
+
+    learning = hours * .45;
+    practice = hours * .25;
+    building = hours * .25;
+    jobSearch = hours * .05;
+
+  }
+
+  else if(stage === "building"){
+
+    learning = hours * .30;
+    practice = hours * .20;
+    building = hours * .40;
+    jobSearch = hours * .10;
+
+  }
+
+  else{
+
+    learning = hours * .20;
+    practice = hours * .15;
+    building = hours * .30;
+    jobSearch = hours * .35;
+
+  }
+
+  const totalLearning =
+    Math.round(learning * weeks);
+
+  const totalBuilding =
+    Math.round(building * weeks);
+
+  const totalApplications =
+    Math.max(
+      1,
+      Math.round(
+        (jobSearch / 0.5) * weeks
+      )
+    );
+
+  document.getElementById(
+    "schedule-explanation"
+  ).innerHTML =
+
+    "Suggested weekly allocation: " +
+
+    "<strong>" +
+    learning.toFixed(1) +
+    "h learning</strong>, " +
+
+    "<strong>" +
+    practice.toFixed(1) +
+    "h practice</strong>, " +
+
+    "<strong>" +
+    building.toFixed(1) +
+    "h building</strong>, " +
+
+    "<strong>" +
+    jobSearch.toFixed(1) +
+    "h employment preparation</strong>. " +
+
+    "Over " +
+    weeks +
+    " weeks this creates approximately " +
+    totalLearning +
+    " hours of learning and " +
+    totalBuilding +
+    " hours of project building.";
+
+  const dayNames =
+    [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ];
+
+  const activities = [
+
+    "Learn new material",
+    "Practice without copying",
+    "Build portfolio project",
+    "Review + fix mistakes",
+    "Job research + skill gap analysis",
+    "Deep project work",
+    "Weekly review + planning"
+
+  ];
+
+  const grid =
+    document.getElementById(
+      "schedule-grid"
+    );
+
+  grid.innerHTML = "";
+
+  dayNames.forEach((day,index) => {
+
+    const div =
+      document.createElement("div");
+
+    div.className = "day";
+
+    div.innerHTML =
+      "<strong>" +
+      day +
+      "</strong>" +
+
+      "<p>" +
+      activities[index] +
+      "</p>" +
+
+      "<p>" +
+      Math.max(
+        .5,
+        (hours / 7).toFixed(1)
+      ) +
+      " planned hours</p>";
+
+    grid.appendChild(div);
+
+  });
+
+}
+
+
+/* =========================================================
+   PORTFOLIO CHECKLIST
+========================================================= */
+
+const portfolioChecks =
+  document.querySelectorAll(
+    ".portfolio-check"
+  );
+
+function updatePortfolioScore(){
+
+  let completed = 0;
+
+  portfolioChecks.forEach(
+    (checkbox,index) => {
+
+      if(checkbox.checked){
+        completed++;
+      }
+
+      localStorage.setItem(
+        "portfolio-" + index,
+        checkbox.checked
+      );
+
+    }
+  );
+
+  const total =
+    portfolioChecks.length;
+
+  const percentage =
+    Math.round(
+      (completed / total) * 100
+    );
+
+  document.getElementById(
+    "portfolio-score"
+  ).textContent =
+    percentage + "%";
+
+  document.getElementById(
+    "portfolio-bar"
+  ).style.width =
+    percentage + "%";
+
+
+  let message;
+
+  if(percentage < 20){
+
+    message =
+      "You are still creating the foundation. Focus on producing your first public project.";
+
+  }
+
+  else if(percentage < 50){
+
+    message =
+      "You have early evidence. Keep building original work rather than only completing lessons.";
+
+  }
+
+  else if(percentage < 80){
+
+    message =
+      "Your portfolio is becoming credible. Compare your projects directly against job descriptions.";
+
+  }
+
+  else{
+
+    message =
+      "Strong evidence base. Shift increasing time toward applications, interviews and closing remaining skill gaps.";
+
+  }
+
+  document.getElementById(
+    "readiness-message"
+  ).textContent =
+    message;
+
+}
+
+
+portfolioChecks.forEach(
+  checkbox => {
+
+    checkbox.addEventListener(
+      "change",
+      updatePortfolioScore
+    );
+
+  }
+);
+
+
+/* =========================================================
+   RESTORE SAVED DATA
+========================================================= */
+
+function restoreData(){
+
+  const savedCourse =
+    localStorage.getItem(
+      "selectedCourse"
+    );
+
+  if(savedCourse){
+
+    selectCourse(savedCourse);
+
+  }
+
+
+  portfolioChecks.forEach(
+    (checkbox,index) => {
+
+      const saved =
+        localStorage.getItem(
+          "portfolio-" + index
+        );
+
+      if(saved === "true"){
+
+        checkbox.checked = true;
+
+      }
+
+    }
+  );
+
+  updatePortfolioScore();
+
+  calculateSchedule();
+
+}
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+restoreData();
+
+</script>
+
+</body>
+</html>
