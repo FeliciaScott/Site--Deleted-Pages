@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pre-Commitment Decision Mapping</title>
+
+<style>
+
+/* -----------------------
+   GLOBAL STYLES
+------------------------*/
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:#0F2D22;
+color:#F3EBDD;
+line-height:1.6;
+}
+
+/* -----------------------
+   HERO
+------------------------*/
+
+.hero{
+background:linear-gradient(180deg,#194936,#0F2D22);
+padding:50px 20px;
+text-align:center;
+}
+
+.hero h1{
+font-size:2.6rem;
+color:#D8B08C;
+margin-bottom:12px;
+}
+
+.hero p{
+max-width:850px;
+margin:auto;
+font-size:1.1rem;
+}
+
+/* -----------------------
+   LAYOUT
+------------------------*/
+
+.container{
+max-width:1150px;
+margin:auto;
+padding:30px 20px;
+}
+
+section{
+margin-bottom:40px;
+}
+
+h2{
+font-size:1.8rem;
+color:#D8B08C;
+border-left:5px solid #4B2E1E;
+padding-left:12px;
+margin-bottom:18px;
+}
+
+/* -----------------------
+   CARDS
+------------------------*/
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:20px;
+}
+
+.card{
+background:#173A2B;
+padding:20px;
+border-radius:12px;
+border:1px solid rgba(216,176,140,.25);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-4px);
+border-color:#D8B08C;
+}
+
+.card h3{
+color:#D8B08C;
+margin-bottom:10px;
+font-size:1.2rem;
+}
+
+/* -----------------------
+   EXPERT TRIAD CONTAINER
+------------------------*/
+
+.triad-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+}
+
+.triad-card{
+background:#173A2B;
+padding:22px;
+border-radius:12px;
+border:1px solid rgba(216,176,140,.4);
+}
+
+.triad-card h3{
+color:#D8B08C;
+margin-bottom:12px;
+font-size:1.25rem;
+}
+
+.triad-card ul{
+padding-left:18px;
+}
+
+.triad-card li{
+margin-bottom:8px;
+font-size:0.95rem;
+}
+
+@media(max-width:900px){
+.triad-grid{
+grid-template-columns:1fr;
+}
+}
+
+/* -----------------------
+   QUOTES
+------------------------*/
+
+.quote{
+background:#4B2E1E;
+padding:25px;
+border-radius:12px;
+text-align:center;
+font-size:1.1rem;
+font-style:italic;
+}
+
+/* -----------------------
+   TABLE
+------------------------*/
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th{
+background:#4B2E1E;
+padding:12px;
+text-align:left;
+}
+
+td{
+padding:12px;
+border:1px solid rgba(255,255,255,.15);
+}
+
+tr:nth-child(even){
+background:#173A2B;
+}
+
+/* -----------------------
+   CHECKLIST
+------------------------*/
+
+.checklist{
+background:#173A2B;
+padding:25px;
+border-radius:12px;
+}
+
+.checklist ul{
+padding-left:20px;
+}
+
+.checklist li{
+margin:8px 0;
+}
+
+/* -----------------------
+   FOOTER
+------------------------*/
+
+footer{
+background:#081D15;
+padding:40px 20px;
+text-align:center;
+}
+
+footer h2{
+border:none;
+}
+
+@media(max-width:700px){
+.hero h1{
+font-size:2rem;
+}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="hero">
+
+<h1>Pre-Commitment Decision Mapping</h1>
+
+<p>
+Lock future decisions in advance to eliminate emotional interference.
+Create deterministic architectural systems that execute actions before cognitive fatigue,
+affective bias, cortisol surges, or temporal discounting undermine strategic agency.
+</p>
+
+</header>
+
+<div class="container">
+
+<section>
+
+<div class="quote">
+"The supreme art of cognitive self-regulation is to constrain your future degrees of freedom while your rationality is uncompromised."
+</div>
+
+</section>
+
+<section>
+
+<h2>What is Pre-Commitment Decision Mapping?</h2>
+
+<p>
+Pre-Commitment Decision Mapping is a rigorous planning paradigm where high-stakes decision architecture is compiled early. By systematically removing runtime agency during high-stress, you prevent fallback loops.
+</p>
+
+<p style="margin-top:15px;">
+Rather than utilizing scarce willpower reserves during systemic pressure, this architecture deploys structural tripwires, asymmetric constraints, and automated rule engines that enforce optimal path dependency without real-time emotional friction.
+</p>
+
+</section>
+
+<section>
+
+<h2>Advanced Architectural Mechanics</h2>
+
+<div class="triad-grid">
+
+<div class="triad-card">
+<h3>1. Temporal Discounting Inversion</h3>
+<ul>
+<li>Forces hyperbolic discounting models to yield to hyper-rational pre-ordained valuation metrics.</li>
+<li>Alters utility functions so near-term psychological comfort cannot override long-term compound gains.</li>
+<li>Establishes hard boundaries against immediate gratification loops.</li>
+</ul>
+</div>
+
+<div class="triad-card">
+<h3>2. Heuristic Interruption Matrices</h3>
+<ul>
+<li>Intercepts fast, subconscious System 1 pattern-matching routines before affective bias corrupts data inputs.</li>
+<li>Mandates algorithmic gates.</li>
+<li>Substitutes instinctive threat-response reactivity with calculated scenario studies.</li>
+</ul>
+</div>
+
+<div class="triad-card">
+<h3>3. Environmental Choice Architecture</h3>
+<ul>
+<li>Engineering default states (defaults bias) so that optimal long-term paths require zero active cognitive load.</li>
+<li>Removes accessibility vectors for maladaptive behavioral pathways entirely from the local environment.</li>
+<li>Automates regulatory feedback loops to ensure compliance without conscious oversight.</li>
+</ul>
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2>Why Pre-Commitment Works</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Removes Emotion</h3>
+<p>
+Planning ahead mathematically diminishes the neurological influence of fear, excitement, status anxiety, and impulsive cognitive distortions.
+</p>
+</div>
+
+<div class="card">
+<h3>Creates Consistency</h3>
+<p>
+When decisions are compiled ahead of execution, applied vectors become deterministic, highly predictable, and intrinsically aligned with macro-objectives.
+</p>
+</div>
+
+<div class="card">
+<h3>Reduces Decision Fatigue</h3>
+<p>
+Minimizing daily micro-choices preserves precious executive function containers for complex systemic problem-solving and strategic optimization.
+</p>
+</div>
+
+<div class="card">
+<h3>Eliminates Paralysis</h3>
+<p>
+Pre-scripted rules strip away over-analysis by defining exact trigger-to-action pathways ahead of runtime chaos.
+</p>
+</div>
+
+<div class="card">
+<h3>Anchors Focus</h3>
+<p>
+Rigid boundaries protect core strategic directives from the constant pull of emergent, low-yield distractions.
+</p>
+</div>
+
+<div class="card">
+<h3>Scales Execution</h3>
+<p>
+Codified logic structures allow complex routines to run seamlessly without constant direct oversight.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2>The Decision Mapping Framework</h2>
+
+<table>
+
+<tr>
+<th>Situation</th>
+<th>Pre-Commitment</th>
+<th>Expected Result</th>
+</tr>
+
+<tr>
+<td>Unexpected Liquidity Shock</td>
+<td>Enforce automated capital reallocation cascades before touching emergency reserves.</td>
+<td>Mitigated panic-driven asset liquidation.</td>
+</tr>
+
+<tr>
+<td>Attention Hijacking Vectors</td>
+<td>Implement strict network isolation schedules during deep analytical phases.</td>
+<td>Maximized cognitive output throughput.</td>
+</tr>
+
+<tr>
+<td>High-Stakes Negotiations</td>
+<td>Pre-define walk-away matrices, BATNA (best alternative to a negotiated agreement) boundaries, and mandatory cooling-off pauses.</td>
+<td>Zero concession to emotional coercion.</td>
+</tr>
+
+<tr>
+<td>Strategic Pivots</td>
+<td>Evaluate emergent opportunities exclusively against weighted, pre-established falsifiable criteria.</td>
+<td>Immunity to shiny-object syndrome.</td>
+</tr>
+
+<tr>
+<td>Physical Adaptation Blocks</td>
+<td>Lock training metrics and caloric thresholds via automated third-party logging and scheduling protocols.</td>
+<td>Uncompromised physiological optimization.</td>
+</tr>
+
+</table>
+
+</section>
+
+<section>
+
+<h2>High-Leverage Execution Domains</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Capital Allocation</h3>
+<p>
+Codify strict algorithmic rules for asset deployment, risk thresholds, and portfolio rebalancing before market volatility triggers behavioral errors.
+</p>
+</div>
+
+<div class="card">
+<h3>Strategic Roadmap Integrity</h3>
+<p>
+Establish immutable milestone dependencies to ensure tactical execution remains tethered to long-term structural milestones.
+</p>
+</div>
+
+<div class="card">
+<h3>Epistemic Acquisition</h3>
+<p>
+Pre-schedule deliberate study periods, curriculum pathways, and high-fidelity information intake pipelines irrespective of baseline motivation swings.
+</p>
+</div>
+
+<div class="card">
+<h3>Physiological Governance</h3>
+<p>
+Design standardized rest, recovery, and nutritional protocols to ensure cognitive hardware operates at peak thermal efficiency.
+</p>
+</div>
+
+<div class="card">
+<h3>Operational Redundancy</h3>
+<p>
+Build backup channels and alternative procedures to ensure continuity when primary systems encounter friction.
+</p>
+</div>
+
+<div class="card">
+<h3>Network Architecture</h3>
+<p>
+Curate communication parameters and informational inputs to prevent cognitive contamination from low-signal noise sources.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2>Diagnostic Audit Matrix</h2>
+
+<div class="checklist">
+
+<ul>
+<li>What precise macro-objective justifies the existence of this decision boundary?</li>
+<li>Which specific cognitive biases or neuro-chemical states pose the highest vector of vulnerability?</li>
+<li>What quantifiable friction mechanisms can be introduced to block impulsive runtime deviations?</li>
+<li>What is the exact falsification threshold that will invalidate this pre-commitment map?</li>
+<li>How does this system scale under conditions of maximum stress and absolute resource scarcity?</li>
+<li>What does systemic failure look like over a multi-year horizon, and how is it structurally prevented?</li>
+</ul>
+
+</div>
+
+</section>
+
+<section>
+
+<h2>Architectural Deployment Modalities</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Circadian Protocol Initialization</h3>
+<p>
+Pre-program structural workflow templates, priority sequences, and environmental parameters prior to sleep offset to eliminate morning executive drag.
+</p>
+</div>
+
+<div class="card">
+<h3>Fiduciary Safeguard Rules</h3>
+<p>
+Embed multi-step verification delays on large capital flows to introduce mandatory cognitive cooling windows.
+</p>
+</div>
+
+<div class="card">
+<h3>Uninterrupted Cognitive Sprints</h3>
+<p>
+Lock calendars into isolated execution brackets, cutting off asynchronous interruption vectors before they can compromise high-order focus states.
+</p>
+</div>
+
+<div class="card">
+<h3>Automated Fail-Safe Triggers</h3>
+<p>
+Program explicit programmatic abort criteria that instantly suspend active plots when key threshold anomalies are breached.
+</p>
+</div>
+
+<div class="card">
+<h3>Behavioral Redundancy Arrays</h3>
+<p>
+Establish secondary validation channels requiring dual verification protocols before implementing high-consequence systemic shifts.
+</p>
+</div>
+
+<div class="card">
+<h3>Environmental Lockdown Protocols</h3>
+<p>
+Automate digital and physical environment restrictions at predefined hours to enforce strict boundaries between deep work and rest.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2>Build Systems, Not Reactions</h2>
+
+<div class="quote">
+Elite performers do not rely on real-time improvisational heroism. They engineer airtight frameworks that force future actions to comply with rigorous, ex-ante architectural designs.
+</div>
+
+
+</section>
+
+</div>
+
+<footer>
+
+<h2>Design Your Future Decisions Today</h2>
+
+<p>
+Every complex challenge yields to structural design. Construct decision architectures that honor your highest long-term intent, neutralize internal friction, and drive compounding outputs.
+</p>
+
+</footer>
+
+</body>
+</html>
