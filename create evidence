@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Evidence | WorkProof</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Color Variables */
+        :root {
+            --bg-cream: #FDFBF7;
+            --text-dark: #2D3A3A;
+            --green-forest: #2E5A4A;
+            --green-sage: #8DA999;
+            --accent-light: #E8E5D8;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+            margin: 0;
+            padding: 2rem;
+        }
+
+        .wp-main {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .lesson-header h1 {
+            color: var(--green-forest);
+            font-size: 2.5rem;
+        }
+
+        .subtitle {
+            color: #555;
+            font-size: 1.1rem;
+        }
+
+        /* Concept Cards */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .concept-card {
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--accent-light);
+            background: var(--white);
+        }
+
+        .evidence-card {
+            border-top: 4px solid var(--green-forest);
+        }
+
+        .verdict.success {
+            color: var(--green-forest);
+            font-weight: 600;
+        }
+
+        /* Table Styling */
+        .table-wrapper { margin-top: 2rem; overflow-x: auto; }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+        }
+
+        .comparison-table th {
+            background: var(--green-forest);
+            color: var(--bg-cream);
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--accent-light);
+        }
+
+        .cert-tag {
+            background: var(--accent-light);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        /* Ladder Styling */
+        .ladder-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-num {
+            font-weight: 700;
+            color: var(--green-sage);
+            font-size: 1.5rem;
+        }
+
+        /* Callout Styling */
+        .creation-callout {
+            background: var(--green-forest);
+            color: var(--bg-cream);
+            padding: 2.5rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        /* Evidence Block Lesson Styles */
+        .evidence-block-guide {
+            background: var(--white);
+            border: 1px solid var(--accent-light);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+        }
+
+        .evidence-block-guide h2 {
+            color: var(--green-forest);
+            margin-bottom: 1rem;
+        }
+
+        .eb-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .eb-item {
+            background: var(--bg-cream);
+            padding: 1.25rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--green-sage);
+        }
+
+        .eb-item h4 {
+            color: var(--green-forest);
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <main class="wp-main">
+        <header class="lesson-header">
+            <h1>Shift from <em>Asserting Value</em> to <em>Demonstrating Capability</em></h1>
+            <p class="subtitle">During professional transitions, lasting momentum comes from concrete proof of skill and execution leverage. Here is how to strategically position your experience.</p>
+        </header>
+
+        <section class="concept-grid">
+            <div class="concept-card claim-card">
+                <h3>Traditional Resume Statement</h3>
+                <p class="statement">"I am a resilient professional seeking new opportunities following a recent career pivot."</p>
+                <div class="verdict"><strong>Primary Evaluation:</strong> "What is the scope of experience?"</div>
+            </div>
+            <div class="concept-card evidence-card">
+                <h3>The WorkProof Approach</h3>
+                <p class="statement">"I evaluated key operational challenges from my prior venture, identified unit-economic gaps, and developed a financial model that optimizes capital allocation under market volatility."</p>
+                <div class="verdict success"><strong>Primary Evaluation:</strong> "How quickly can these results be applied?"</div>
+            </div>
+        </section>
+
+        <!-- Teaching the Evidence Block Section -->
+        <section class="evidence-block-guide">
+            <h2>Anatomy of an Evidence Block</h2>
+            <p>An Evidence Block is a self-contained, verifiable portfolio component that demonstrates technical and operational capability. It translates abstract experience into clear, documented achievements.</p>
+            
+            <div class="eb-grid">
+                <div class="eb-item">
+                    <h4>1. Diagnostic Focus</h4>
+                    <p>Identifies the specific business objective, process gap, or operational challenge being addressed.</p>
+                </div>
+                <div class="eb-item">
+                    <h4>2. Core Deliverable</h4>
+                    <p>Provides tangible work samples—such as code repositories, workflow models, audit frameworks, or strategy briefs.</p>
+                </div>
+                <div class="eb-item">
+                    <h4>3. Measurable Outcome</h4>
+                    <p>Demonstrates how the solution drives efficiency, reduces risk, or creates scalable long-term value.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="lesson-section">
+            <h2>Converting Experience into Strategic Assets</h2>
+            <p class="section-intro">Professional challenges provide valuable data. Transform practical lessons into high-value intellectual assets that showcase your technical expertise:</p>
+            
+            <div class="table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Career Transition Point</th>
+                            <th>Value-Add Portfolio Asset</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="cert-tag">Business Closure or Restructure</span></td>
+                            <td>Authored a comprehensive 15-page analytical report detailing risk assessment and strategic mitigation models for future operations.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="cert-tag">Career Break / Layoff</span></td>
+                            <td>Designed and documented an automated operational workflow and standard operating procedure (SOP) manual that increases team efficiency.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="cert-tag">Portfolio Refresh</span></td>
+                            <td>Published an open-source technical template addressing common infrastructural bottlenecks, driving active engagement from technical peers.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="lesson-section">
+            <h2>The Professional Progression Framework</h2>
+            <p class="section-intro">Build career momentum by developing public-facing portfolio artifacts that highlight your analytical and managerial capabilities.</p>
+            
+            <div class="ladder-container">
+                <div class="ladder-step">
+                    <span class="step-num">05</span>
+                    <div class="step-content">
+                        <h4>Architecting Resilient Frameworks</h4>
+                        <p>Designing robust operational systems and predictive models to safeguard against organizational risk.</p>
+                    </div>
+                </div>
+                <div class="ladder-step">
+                    <span class="step-num">04</span>
+                    <div class="step-content">
+                        <h4>Strategic Turnaround Execution</h4>
+                        <p>Optimizing underperforming workflows, reallocating resources efficiently, and driving operational performance.</p>
+                    </div>
+                </div>
+                <div class="ladder-step">
+                    <span class="step-num">03</span>
+                    <div class="step-content">
+                        <h4>Translating Experience into Insights</h4>
+                        <p>Publishing analytical case studies and frameworks that serve as educational guides for industry peers.</p>
+                    </div>
+                </div>
+                <div class="ladder-step">
+                    <span class="step-num">02</span>
+                    <div class="step-content">
+                        <h4>Knowledge Sharing & Documentation</h4>
+                        <p>Making key operational insights and documented processes accessible in professional repositories for peer review.</p>
+                    </div>
+                </div>
+                <div class="ladder-step">
+                    <span class="step-num">01</span>
+                    <div class="step-content">
+                        <h4>Prototyping Functional Solutions</h4>
+                        <p>Developing standalone tools, templates, or codebases that directly address recurring industry challenges.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="creation-callout">
+            <div class="callout-text">
+                <h2>Ready to turn your experience into a career asset?</h2>
+                <p>Shift focus from past challenges to future capabilities. Convert your practical knowledge into a verifiable, professional Evidence Block.</p>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>
