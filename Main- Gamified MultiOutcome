@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PathKeeper | Multi-Outcome Experimentation Framework</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      background: #06130e;
+      color: #e8f3ed;
+      line-height: 1.5;
+      padding: 16px;
+    }
+
+    .container { 
+      width: 100%; 
+      max-width: 900px; 
+      margin: 0 auto; 
+    }
+    
+    /* Header */
+    header {
+      background: #0f2d22;
+      border: 1px solid #1f4738;
+      border-radius: 10px;
+      padding: 22px 24px;
+      margin-bottom: 16px;
+    }
+
+    .badge-tag {
+      color: #72ecb7;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    h1 { 
+      font-size: 1.6rem; 
+      color: #ffffff; 
+      font-weight: 800; 
+      margin-top: 4px;
+      margin-bottom: 6px;
+    }
+
+    header p {
+      font-size: 0.9rem;
+      color: #b0c9bc;
+    }
+
+    /* Core Sections */
+    .card {
+      background: #0d261e;
+      border: 1px solid #1f4738;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .card h2 { 
+      font-size: 1.15rem; 
+      color: #dcb386; 
+      margin-bottom: 10px; 
+      border-bottom: 1px solid #1f4738;
+      padding-bottom: 6px;
+    }
+
+    .card h3 {
+      font-size: 0.95rem;
+      color: #72ecb7;
+      margin: 14px 0 6px 0;
+    }
+
+    p, li {
+      font-size: 0.85rem;
+      color: #c5dcd0;
+    }
+
+    ul, ol {
+      margin-left: 18px;
+      margin-bottom: 10px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    /* Highlight Callouts */
+    .callout {
+      background: #071712;
+      border-left: 3px solid #dcb386;
+      padding: 10px 14px;
+      border-radius: 0 6px 6px 0;
+      margin: 12px 0;
+    }
+
+    .callout p {
+      font-size: 0.82rem;
+      color: #e8f3ed;
+    }
+
+    /* Framework Table */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 0.8rem;
+    }
+
+    .data-table th, .data-table td {
+      border: 1px solid #183b2e;
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    .data-table th {
+      background: #071712;
+      color: #72ecb7;
+      font-weight: 700;
+    }
+
+    .data-table td {
+      background: #0a1f18;
+    }
+
+    /* Grid layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .sub-card {
+      background: #071712;
+      border: 1px solid #183b2e;
+      padding: 12px;
+      border-radius: 6px;
+    }
+
+    .sub-card h4 {
+      font-size: 0.88rem;
+      color: #dcb386;
+      margin-bottom: 6px;
+    }
+
+    @media (max-width: 650px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- HEADER -->
+    <header>
+      <span class="badge-tag">PathKeeper Architecture</span>
+      <h1>Multi-Outcome Experimentation Framework</h1>
+      <p>How to design, track, and run low-risk operational experiments in your daily workflow without relying on digital web tools.</p>
+    </header>
+
+    <!-- SECTION 1: THE FOUNDATION -->
+    <div class="card">
+      <h2>01. Why Off-Site Experimentation Matters</h2>
+      <p>True strategic resilience isn't built inside web applications—it is built in your physical routine, personal decision journals, and operational workflows. Digital interactive tools can simulate ideas, but real-world execution happens offline.</p>
+      
+      <div class="callout">
+        <p><strong>Core Principle:</strong> An experiment is any small, controlled test designed to gather real feedback before committing full energy, time, or capital to a single path.</p>
+      </div>
+
+      <h3>Key Advantages of Offline Testing:</h3>
+      <ul>
+        <li><strong>Frictionless Setup:</strong> No login credentials, app crashes, or digital fatigue.</li>
+        <li><strong>High Intentionality:</strong> Writing by hand or tracking on physical scorecards increases focus and retention.</li>
+        <li><strong>Immediate Reality Check:</strong> Offline actions force interaction with actual daily variables rather than hypothetical digital models.</li>
+      </ul>
+    </div>
+
+    <!-- SECTION 2: 4 OFFLINE EXPERIMENT METHODS -->
+    <div class="card">
+      <h2>02. Methods for Offline Experimentation</h2>
+      <p>You can execute multi-outcome strategies immediately using four primary low-tech structures:</p>
+
+      <div class="grid-2">
+        <div class="sub-card">
+          <h4>1. Notebook & Decision Log</h4>
+          <p>Dedicate a section of a notebook to record pre-decision baselines. Document your primary expectation, two backup routes, and a trigger condition for switching tracks.</p>
+        </div>
+
+        <div class="sub-card">
+          <h4>2. Physical Wall Board</h4>
+          <p>Use index cards or post-it notes on a board to map your core project into three lanes: <em>Upside Focus</em>, <em>Baseline Maintenance</em>, and <em>Risk Guardrails</em>.</p>
+        </div>
+
+        <div class="sub-card">
+          <h4>3. Offline Spreadsheets</h4>
+          <p>Maintain a simple local CSV or Excel ledger to track weekly metrics, effort allocation percentages, and early warning indicators for your active pursuits.</p>
+        </div>
+
+        <div class="sub-card">
+          <h4>4. Time-Boxed Pilot Runs</h4>
+          <p>Test a new process or offering for a strict 7-day or 14-day window in the physical world before committing to a permanent schedule or expense.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 3: STEP-BY-STEP EXECUTION -->
+    <div class="card">
+      <h2>03. Step-by-Step Blueprint for an Offline Experiment</h2>
+      <ol>
+        <li>
+          <strong>Define the Target Initiative:</strong> Select a single priority (e.g., launching a new project, refining a workflow, or shifting scheduling models).
+        </li>
+        <li>
+          <strong>Map the 4 Possible Outcomes:</strong>
+          <ul>
+            <li><em>Best Case:</em> Demand or efficiency exceeds expectations.</li>
+            <li><em>Expected Case:</em> Stable, steady progression along the main plan.</li>
+            <li><em>Downside Strain:</em> Time or resource costs exceed the estimate.</li>
+            <li><em>External Shift:</em> Unforeseen changes alter the landscape.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Set Trigger Points:</strong> Write down specific numbers or dates that tell you when to shift from Outcome A to Outcome B.
+        </li>
+        <li>
+          <strong>Run a 10-Day Field Test:</strong> Execute the plan locally. Log daily observations in a physical notebook at the end of each shift or workday.
+        </li>
+        <li>
+          <strong>Review & Adjust:</strong> Compare actual results against your initial 4 outcome notes. Refine your system based on real evidence.
+        </li>
+      </ol>
+    </div>
+
+    <!-- NEW SECTION 4: DIAGNOSTIC & STRESS TESTING -->
+    <div class="card">
+      <h2>04. Pre-Mortem Stress Testing Protocol</h2>
+      <p>Before launching any offline test, run your plan through a pre-mortem audit to spot hidden weaknesses before they cost real-world time or resources.</p>
+      
+      <div class="grid-3">
+        <div class="sub-card">
+          <h4>1. Assume Absolute Failure</h4>
+          <p>Fast-forward 30 days. Assume the experiment failed completely. List the top 3 physical or logistical breakdowns that caused it.</p>
+        </div>
+
+        <div class="sub-card">
+          <h4>2. Identify Friction Points</h4>
+          <p>Where does execution rely on perfect energy, perfect timing, or unverified help? Remove single points of failure early.</p>
+        </div>
+
+        <div class="sub-card">
+          <h4>3. Build Immediate Safeguards</h4>
+          <p>Adjust your starting rules to eliminate those vulnerabilities before day one of the field test.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEW SECTION 5: RESOURCE ALLOCATION -->
+    <div class="card">
+      <h2>05. Offline Resource & Energy Guardrails</h2>
+      <p>Multi-outcome execution requires protecting your primary baseline while running tests on the side. Use this 70/20/10 split to protect daily stability:</p>
+
+      <ul>
+        <li><strong>70% Baseline Energy:</strong> Committed to essential, income-generating, or non-negotiable daily operations.</li>
+        <li><strong>20% Managed Testing:</strong> Dedicated strictly to running active offline experiments and monitoring triggers.</li>
+        <li><strong>10% Contingency Buffer:</strong> Left completely uncommitted to absorb unexpected delays, personal fatigue, or physical disruptions.</li>
+      </ul>
+    </div>
+
+    <!-- SECTION 6: FRAMEWORK MATRIX -->
+    <div class="card">
+      <h2>06. Off-Site Experimentation Template</h2>
+      <p>Recreate this layout in your journal, on a whiteboard, or in a local document to structure your planning:</p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Outcome Tier</th>
+            <th>Operational Focus</th>
+            <th>Trigger Condition</th>
+            <th>Offline Action Step</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Tier 1: Growth</strong></td>
+            <td>Full expansion & aggressive execution</td>
+            <td>80%+ target milestone achieved early</td>
+            <td>Reinvest excess capacity into scale</td>
+          </tr>
+          <tr>
+            <td><strong>Tier 2: Baseline</strong></td>
+            <td>Standard daily routine & steady output</td>
+            <td>Metrics remain within expected range</td>
+            <td>Maintain current resource split</td>
+          </tr>
+          <tr>
+            <td><strong>Tier 3: Defensive</strong></td>
+            <td>Protect core stability & conserve energy</td>
+            <td>Time or resource strain exceeds +20%</td>
+            <td>Cut secondary tasks; preserve core output</td>
+          </tr>
+          <tr>
+            <td><strong>Tier 4: Pivot</strong></td>
+            <td>Activate backup route or contingency</td>
+            <td>External blocker halts primary path</td>
+            <td>Switch immediately to pre-planned Route B</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- NEW SECTION 7: AUDIT & RETROSPECTIVE -->
+    <div class="card">
+      <h2>07. Weekly Offline Audit & Retrospective</h2>
+      <p>At the end of every week, answer these four reflection questions in your physical log to keep your strategic capability sharp:</p>
+
+      <ol>
+        <li>Which of the 4 outcome scenarios did reality most closely resemble this week?</li>
+        <li>Did any unexpected variables appear that were missing from your initial setup?</li>
+        <li>Were your trigger points clear enough to prompt action without hesitation?</li>
+        <li>What single adjustment will make next week’s execution more resilient?</li>
+      </ol>
+    </div>
+
+    <!-- SECTION 8: SUMMARY -->
+    <div class="card">
+      <h2>08. Summary</h2>
+      <p>By keeping experimentation offline, you build practical problem-solving habits that work anywhere—regardless of technology access, software changes, or digital distractions. Strategy is measured by real-world stability, clarity, and execution.</p>
+    </div>
+
+  </div>
+
+</body>
+</html>
