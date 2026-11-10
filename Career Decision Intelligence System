@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Career Decision Intelligence System</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Arial,sans-serif;
+background:#173226;
+color:#F7F2E7;
+line-height:1.6;
+}
+
+/* HERO */
+
+.hero{
+text-align:center;
+padding:80px 20px;
+background:linear-gradient(180deg,#214534,#173226);
+}
+
+.hero h1{
+font-size:3rem;
+margin-bottom:20px;
+}
+
+.hero p{
+max-width:900px;
+margin:auto;
+font-size:1.1rem;
+}
+
+/* CONTAINER */
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:40px 20px;
+}
+
+/* DASHBOARD */
+
+.dashboard{
+display:grid;
+grid-template-columns:2fr 1fr;
+gap:30px;
+margin-top:30px;
+}
+
+@media(max-width:900px){
+.dashboard{
+grid-template-columns:1fr;
+}
+}
+
+/* CARD */
+
+.card{
+background:#214534;
+padding:25px;
+border-radius:20px;
+border:1px solid rgba(255,255,255,.08);
+}
+
+.card h2{
+color:#D5B07C;
+margin-bottom:20px;
+}
+
+/* FORM */
+
+label{
+display:block;
+margin-bottom:8px;
+font-weight:bold;
+}
+
+select,
+input{
+width:100%;
+padding:12px;
+margin-bottom:20px;
+border:none;
+border-radius:10px;
+background:#F7F2E7;
+}
+
+button{
+width:100%;
+padding:15px;
+background:#D5B07C;
+color:#173226;
+font-weight:bold;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
+/* RESULTS */
+
+.score{
+font-size:4rem;
+color:#D5B07C;
+text-align:center;
+font-weight:bold;
+}
+
+.result-box{
+background:#2A5943;
+padding:15px;
+margin-top:15px;
+border-radius:12px;
+}
+
+/* GRID */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+margin-top:40px;
+}
+
+.insight-card{
+background:#214534;
+padding:20px;
+border-radius:18px;
+}
+
+.insight-card h3{
+color:#D5B07C;
+margin-bottom:10px;
+}
+
+/* MATRIX */
+
+.matrix{
+margin-top:50px;
+overflow-x:auto;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th{
+background:#D5B07C;
+color:#173226;
+padding:15px;
+}
+
+td{
+padding:15px;
+background:#214534;
+border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+/* FOOTER */
+
+footer{
+margin-top:60px;
+padding:40px;
+text-align:center;
+opacity:.8;
+}
+
+</style>
+</head>
+<body>
+
+<section class="hero">
+
+<h1>🎯 Career Decision Intelligence System</h1>
+
+<p>
+Stop choosing careers based only on salary.
+Compare opportunities based on earning potential, lifestyle,
+future demand, automation resistance, growth opportunities,
+and personal interest.
+</p>
+
+</section>
+
+<div class="container">
+
+<div class="dashboard">
+
+<!-- LEFT -->
+
+<div class="card">
+
+<h2>Career Evaluation Engine</h2>
+
+<label>Career Interest</label>
+<select>
+<option>Web Development</option>
+<option>Digital Marketing</option>
+<option>Cybersecurity</option>
+<option>Electrician</option>
+<option>HVAC Technician</option>
+<option>Nursing</option>
+<option>Project Management</option>
+<option>Entrepreneurship</option>
+</select>
+
+<label>Personal Interest Level (1-10)</label>
+<input type="number" placeholder="8">
+
+<label>Expected Salary</label>
+<input type="number" placeholder="$60,000">
+
+<label>Automation Risk (1-10)</label>
+<input type="number" placeholder="3">
+
+<label>Work-Life Balance (1-10)</label>
+<input type="number" placeholder="7">
+
+<label>Education Cost</label>
+<input type="number" placeholder="$5,000">
+
+<label>Job Growth Outlook (1-10)</label>
+<input type="number" placeholder="9">
+
+<button>Calculate Career Score</button>
+
+</div>
+
+<!-- RIGHT -->
+
+<div class="card">
+
+<h2>Career Intelligence Score</h2>
+
+<div class="score">87</div>
+
+<div class="result-box">
+<strong>Recommendation:</strong><br>
+Strong long-term opportunity with favorable growth and manageable risk.
+</div>
+
+<div class="result-box">
+<strong>Strength:</strong><br>
+High demand and strong earning potential.
+</div>
+
+<div class="result-box">
+<strong>Risk:</strong><br>
+Requires continuous learning to remain competitive.
+</div>
+
+</div>
+
+</div>
+
+<!-- INSIGHTS -->
+
+<h2 style="margin-top:60px;color:#D5B07C;">
+Career Decision Framework
+</h2>
+
+<div class="grid">
+
+<div class="insight-card">
+<h3>💰 Income Potential</h3>
+<p>
+What can this career realistically earn after 5–10 years?
+</p>
+</div>
+
+<div class="insight-card">
+<h3>🧠 Skill Portability</h3>
+<p>
+Can the skills transfer across industries?
+</p>
+</div>
+
+<div class="insight-card">
+<h3>📈 Growth Outlook</h3>
+<p>
+Will demand increase or decrease over time?
+</p>
+</div>
+
+<div class="insight-card">
+<h3>🤖 Automation Resistance</h3>
+<p>
+How difficult would it be for AI or automation to replace?
+</p>
+</div>
+
+<div class="insight-card">
+<h3>🌍 Geographic Flexibility</h3>
+<p>
+Can the career be performed remotely or globally?
+</p>
+</div>
+
+<div class="insight-card">
+<h3>⚖ Lifestyle Impact</h3>
+<p>
+Consider stress, schedules, and family life.
+</p>
+</div>
+
+</div>
+
+<!-- MATRIX -->
+
+<div class="matrix">
+
+<h2 style="margin-bottom:20px;color:#D5B07C;">
+Career Comparison Matrix
+</h2>
+
+<table>
+
+<tr>
+<th>Career</th>
+<th>Income</th>
+<th>Growth</th>
+<th>Automation Risk</th>
+<th>Education Cost</th>
+</tr>
+
+<tr>
+<td>Cybersecurity</td>
+<td>High</td>
+<td>High</td>
+<td>Low</td>
+<td>Medium</td>
+</tr>
+
+<tr>
+<td>Electrician</td>
+<td>High</td>
+<td>High</td>
+<td>Very Low</td>
+<td>Low</td>
+</tr>
+
+<tr>
+<td>Digital Marketing</td>
+<td>Medium</td>
+<td>Medium</td>
+<td>Medium</td>
+<td>Low</td>
+</tr>
+
+<tr>
+<td>Nursing</td>
+<td>High</td>
+<td>High</td>
+<td>Very Low</td>
+<td>High</td>
+</tr>
+
+</table>
+
+</div>
+
+<!-- ADVANCED SECTION -->
+
+<div class="card" style="margin-top:50px;">
+
+<h2>🔍 Questions Most People Never Ask</h2>
+
+<ul style="padding-left:20px;">
+<li>Will this career still exist in 15 years?</li>
+<li>Can I build a side business using these skills?</li>
+<li>Does this path improve my future options?</li>
+<li>Can this career become remote?</li>
+<li>Will this work damage my physical health?</li>
+<li>How difficult is advancement?</li>
+<li>Could these skills help me start a company?</li>
+<li>Does this career fit the life I want?</li>
+</ul>
+
+</div>
+
+</div>
+
+<footer>
+
+🌿 Pathkeeper Career Intelligence System • Make decisions using evidence, not guesswork.
+
+</footer>
+
+</body>
+</html>
