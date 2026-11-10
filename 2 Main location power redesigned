@@ -1,0 +1,3065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Location Power Differential Mapping | Strategy Command Center</title>
+
+<style>
+:root{
+    --bg:#1C2419;
+    --accent:#D8B4E2;
+    --text:#F4F1DE;
+    --border:#3A4735;
+
+    --surface:#232D20;
+    --surface2:#293526;
+    --muted:#B8B8A6;
+    --success:#A8D5BA;
+    --warning:#E8C98B;
+    --danger:#D99090;
+
+    --shadow:0 18px 50px rgba(0,0,0,.25);
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.7;
+}
+
+button,
+input,
+select,
+textarea{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible{
+    outline:3px solid var(--accent);
+    outline-offset:3px;
+}
+
+/* =========================
+   TOP PROGRESS
+========================= */
+
+#scrollProgress{
+    position:fixed;
+    top:0;
+    left:0;
+    height:4px;
+    width:0%;
+    background:var(--accent);
+    z-index:9999;
+}
+
+/* =========================
+   NAV
+========================= */
+
+.nav{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(28,36,25,.94);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border);
+}
+
+.nav-inner{
+    max-width:1250px;
+    margin:auto;
+    min-height:64px;
+    padding:10px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.brand{
+    color:var(--text);
+    font-weight:900;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    font-size:.8rem;
+}
+
+.nav-actions{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.nav-btn,
+.btn{
+    border:1px solid var(--border);
+    background:var(--surface);
+    color:var(--text);
+    padding:9px 14px;
+    border-radius:9px;
+    transition:.2s ease;
+}
+
+.nav-btn:hover,
+.btn:hover{
+    border-color:var(--accent);
+    color:var(--accent);
+    transform:translateY(-1px);
+}
+
+.btn.primary{
+    background:var(--accent);
+    color:#241B27;
+    border-color:var(--accent);
+    font-weight:800;
+}
+
+.btn.primary:hover{
+    background:#E7C9EF;
+    color:#241B27;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    min-height:650px;
+    display:grid;
+    place-items:center;
+    padding:80px 20px 70px;
+    position:relative;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at 20% 20%,rgba(216,180,226,.13),transparent 30%),
+        radial-gradient(circle at 80% 70%,rgba(168,213,186,.08),transparent 28%),
+        linear-gradient(135deg,#1C2419,#202A1D 55%,#171D16);
+}
+
+.hero-grid{
+    width:100%;
+    max-width:1250px;
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    gap:60px;
+    align-items:center;
+}
+
+.eyebrow{
+    color:var(--accent);
+    text-transform:uppercase;
+    letter-spacing:.18em;
+    font-size:.75rem;
+    font-weight:900;
+    margin-bottom:18px;
+}
+
+.hero h1{
+    font-size:clamp(2.7rem,6vw,5.8rem);
+    line-height:.98;
+    max-width:850px;
+    letter-spacing:-.055em;
+}
+
+.hero h1 span{
+    color:var(--accent);
+}
+
+.hero-copy{
+    max-width:760px;
+    color:#D7D5C6;
+    font-size:1.08rem;
+    margin-top:25px;
+}
+
+.hero-actions{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:30px;
+}
+
+/* =========================
+   PLAYER CARD
+========================= */
+
+.player-card{
+    background:rgba(35,45,32,.9);
+    border:1px solid var(--border);
+    border-radius:24px;
+    padding:26px;
+    box-shadow:var(--shadow);
+}
+
+.player-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:22px;
+}
+
+.rank{
+    color:var(--accent);
+    font-weight:900;
+    letter-spacing:.1em;
+    font-size:.8rem;
+}
+
+.xp-number{
+    font-size:2rem;
+    font-weight:900;
+}
+
+.xp-label{
+    color:var(--muted);
+    font-size:.75rem;
+    text-transform:uppercase;
+}
+
+.xp-track{
+    height:10px;
+    background:#11170F;
+    border-radius:20px;
+    overflow:hidden;
+    margin:10px 0 20px;
+}
+
+.xp-fill{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,var(--accent),#A8D5BA);
+    transition:.5s ease;
+}
+
+.stat-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+}
+
+.stat{
+    padding:15px;
+    background:var(--surface2);
+    border:1px solid var(--border);
+    border-radius:12px;
+}
+
+.stat small{
+    display:block;
+    color:var(--muted);
+    text-transform:uppercase;
+    font-size:.65rem;
+    letter-spacing:.1em;
+}
+
+.stat strong{
+    display:block;
+    margin-top:3px;
+    color:var(--accent);
+    font-size:1.15rem;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.container{
+    width:min(1250px,calc(100% - 40px));
+    margin:auto;
+}
+
+section{
+    padding:85px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    gap:25px;
+    margin-bottom:35px;
+}
+
+.section-number{
+    color:var(--accent);
+    font-size:.7rem;
+    font-weight:900;
+    letter-spacing:.18em;
+}
+
+h2{
+    font-size:clamp(2rem,4vw,3.3rem);
+    line-height:1.05;
+    letter-spacing:-.035em;
+    margin-top:8px;
+}
+
+.section-intro{
+    max-width:760px;
+    color:var(--muted);
+}
+
+/* =========================
+   INSIGHT CARDS
+========================= */
+
+.insight-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.insight-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    padding:28px;
+    border-radius:18px;
+    position:relative;
+    overflow:hidden;
+    transition:.25s ease;
+}
+
+.insight-card:hover{
+    transform:translateY(-5px);
+    border-color:var(--accent);
+}
+
+.insight-card .number{
+    color:var(--accent);
+    font-size:.7rem;
+    font-weight:900;
+    letter-spacing:.15em;
+}
+
+.insight-card h3{
+    margin:13px 0 10px;
+    font-size:1.25rem;
+}
+
+.insight-card p{
+    color:var(--muted);
+}
+
+.reveal{
+    max-height:0;
+    overflow:hidden;
+    opacity:0;
+    transition:.35s ease;
+}
+
+.insight-card.open .reveal{
+    max-height:300px;
+    opacity:1;
+    margin-top:18px;
+}
+
+.reveal-btn{
+    margin-top:18px;
+    background:none;
+    color:var(--accent);
+    border:0;
+    font-weight:800;
+    padding:0;
+}
+
+/* =========================
+   LOCATION LAB
+========================= */
+
+.lab{
+    background:
+        linear-gradient(135deg,rgba(216,180,226,.08),transparent 40%),
+        var(--surface);
+    border:1px solid var(--border);
+    border-radius:24px;
+    padding:30px;
+    box-shadow:var(--shadow);
+}
+
+.lab-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+}
+
+.form-group{
+    margin-bottom:20px;
+}
+
+.form-group label{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:8px;
+    font-size:.82rem;
+    font-weight:800;
+}
+
+.value-display{
+    color:var(--accent);
+}
+
+input[type="text"],
+input[type="number"],
+select,
+textarea{
+    width:100%;
+    background:#161D14;
+    color:var(--text);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:13px 14px;
+}
+
+input[type="range"]{
+    width:100%;
+    accent-color:var(--accent);
+}
+
+.range-row{
+    display:grid;
+    grid-template-columns:1fr 65px;
+    gap:12px;
+    align-items:center;
+}
+
+.score-panel{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    min-height:100%;
+    background:#151C13;
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:30px;
+    text-align:center;
+}
+
+.score-ring{
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    background:
+        radial-gradient(circle,#151C13 58%,transparent 59%),
+        conic-gradient(var(--accent) 0deg,#485444 0deg);
+    transition:.4s ease;
+}
+
+.score-ring strong{
+    font-size:3rem;
+}
+
+.score-status{
+    margin-top:15px;
+    color:var(--accent);
+    font-weight:900;
+}
+
+.score-explanation{
+    max-width:420px;
+    color:var(--muted);
+    margin-top:8px;
+}
+
+/* =========================
+   MATRIX
+========================= */
+
+.matrix{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.matrix-item{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:22px;
+}
+
+.matrix-item h3{
+    color:var(--accent);
+    margin-bottom:8px;
+}
+
+.matrix-item p{
+    color:var(--muted);
+}
+
+/* =========================
+   SCENARIO SIMULATOR
+========================= */
+
+.simulator{
+    display:grid;
+    grid-template-columns:280px 1fr;
+    border:1px solid var(--border);
+    border-radius:20px;
+    overflow:hidden;
+    background:var(--surface);
+}
+
+.scenario-menu{
+    background:#172016;
+    border-right:1px solid var(--border);
+}
+
+.scenario-btn{
+    width:100%;
+    padding:18px;
+    background:transparent;
+    color:var(--text);
+    border:0;
+    border-bottom:1px solid var(--border);
+    text-align:left;
+}
+
+.scenario-btn:hover,
+.scenario-btn.active{
+    background:var(--surface2);
+    color:var(--accent);
+}
+
+.scenario-content{
+    padding:35px;
+}
+
+.scenario-panel{
+    display:none;
+}
+
+.scenario-panel.active{
+    display:block;
+}
+
+.scenario-metric{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-top:25px;
+}
+
+.metric{
+    background:#172016;
+    padding:17px;
+    border-radius:12px;
+    border:1px solid var(--border);
+}
+
+.metric span{
+    display:block;
+    color:var(--muted);
+    font-size:.7rem;
+    text-transform:uppercase;
+}
+
+.metric strong{
+    color:var(--accent);
+    font-size:1.25rem;
+}
+
+/* =========================
+   AUDIT
+========================= */
+
+.audit{
+    display:grid;
+    grid-template-columns:1fr 340px;
+    gap:25px;
+}
+
+.audit-list{
+    display:grid;
+    gap:10px;
+}
+
+.audit-item{
+    display:flex;
+    gap:14px;
+    align-items:flex-start;
+    background:var(--surface);
+    border:1px solid var(--border);
+    padding:17px;
+    border-radius:12px;
+    cursor:pointer;
+}
+
+.audit-item input{
+    margin-top:6px;
+    accent-color:var(--accent);
+}
+
+.audit-item.completed{
+    border-color:var(--success);
+    opacity:.75;
+}
+
+.audit-item.completed span{
+    text-decoration:line-through;
+}
+
+.audit-score{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:25px;
+    height:max-content;
+    position:sticky;
+    top:90px;
+}
+
+.audit-score-number{
+    font-size:3rem;
+    font-weight:900;
+    color:var(--accent);
+}
+
+/* =========================
+   STRATEGY BUILDER
+========================= */
+
+.builder{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:22px;
+    padding:30px;
+}
+
+.builder-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.builder-output{
+    background:#121912;
+    border:1px dashed var(--border);
+    border-radius:15px;
+    padding:22px;
+    min-height:280px;
+}
+
+.output-label{
+    color:var(--accent);
+    font-size:.7rem;
+    text-transform:uppercase;
+    letter-spacing:.12em;
+    font-weight:900;
+    margin-bottom:15px;
+}
+
+.output-line{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    border-bottom:1px solid var(--border);
+    padding:12px 0;
+}
+
+.output-line span{
+    color:var(--muted);
+}
+
+/* =========================
+   PROGRESSION
+========================= */
+
+.progression{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:10px;
+}
+
+.level{
+    border:1px solid var(--border);
+    background:var(--surface);
+    border-radius:15px;
+    padding:20px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.level:hover,
+.level.active{
+    border-color:var(--accent);
+    background:#293225;
+}
+
+.level-number{
+    color:var(--accent);
+    font-weight:900;
+}
+
+.level h3{
+    margin:8px 0;
+    font-size:1rem;
+}
+
+.level p{
+    color:var(--muted);
+    font-size:.85rem;
+}
+
+.level-detail{
+    margin-top:18px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:22px;
+    min-height:100px;
+}
+
+/* =========================
+   XP ACTIONS
+========================= */
+
+.mission-board{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.mission{
+    border:1px solid var(--border);
+    background:var(--surface);
+    border-radius:15px;
+    padding:22px;
+}
+
+.mission.done{
+    border-color:var(--success);
+}
+
+.mission h3{
+    margin-bottom:8px;
+}
+
+.mission p{
+    color:var(--muted);
+    font-size:.9rem;
+}
+
+.xp-tag{
+    display:inline-block;
+    margin-top:15px;
+    color:var(--accent);
+    font-weight:900;
+}
+
+/* =========================
+   QUOTE
+========================= */
+
+.quote{
+    border:1px solid var(--border);
+    background:
+        linear-gradient(135deg,rgba(216,180,226,.1),transparent),
+        var(--surface);
+    border-radius:22px;
+    padding:40px;
+    font-size:1.35rem;
+    line-height:1.5;
+    text-align:center;
+    font-weight:700;
+}
+
+.quote span{
+    color:var(--accent);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    padding:80px 20px;
+    text-align:center;
+    background:#151C13;
+}
+
+footer h2{
+    color:var(--accent);
+    max-width:700px;
+    margin:auto;
+}
+
+footer p{
+    color:var(--muted);
+    max-width:700px;
+    margin:18px auto 0;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+#toast{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    background:var(--accent);
+    color:#251D26;
+    padding:13px 17px;
+    border-radius:10px;
+    font-weight:800;
+    transform:translateY(100px);
+    opacity:0;
+    transition:.3s;
+    z-index:9999;
+}
+
+#toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:900px){
+
+    .hero-grid,
+    .lab-grid,
+    .audit,
+    .builder-grid{
+        grid-template-columns:1fr;
+    }
+
+    .insight-grid,
+    .mission-board{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .progression{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .simulator{
+        grid-template-columns:1fr;
+    }
+
+    .scenario-menu{
+        border-right:0;
+        border-bottom:1px solid var(--border);
+    }
+}
+
+@media(max-width:650px){
+
+    .nav-inner{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .hero{
+        padding-top:55px;
+    }
+
+    .hero h1{
+        font-size:2.7rem;
+    }
+
+    .insight-grid,
+    .matrix,
+    .mission-board,
+    .scenario-metric,
+    .progression{
+        grid-template-columns:1fr;
+    }
+
+    .section-head{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .lab,
+    .builder{
+        padding:20px;
+    }
+
+    .quote{
+        padding:25px;
+        font-size:1.1rem;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div id="scrollProgress"></div>
+
+<!-- =========================
+     NAVIGATION
+========================= -->
+
+<nav class="nav">
+    <div class="nav-inner">
+
+        <div class="brand">
+            Location Strategy Lab
+        </div>
+
+        <div class="nav-actions">
+            <button class="nav-btn" onclick="scrollToSection('locationLab')">
+                Location Lab
+            </button>
+
+            <button class="nav-btn" onclick="scrollToSection('audit')">
+                Audit
+            </button>
+
+            <button class="nav-btn" onclick="scrollToSection('missions')">
+                Missions
+            </button>
+
+            <button class="nav-btn" onclick="resetProgress()">
+                Reset
+            </button>
+        </div>
+
+    </div>
+</nav>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<header class="hero">
+
+    <div class="hero-grid">
+
+        <div>
+
+            <div class="eyebrow">
+                Strategic Mobility Intelligence
+            </div>
+
+            <h1>
+                Location Is a
+                <span>Variable.</span>
+                Treat It Like One.
+            </h1>
+
+            <p class="hero-copy">
+                Location Power Differential Mapping transforms geography from
+                a passive backdrop into a decision variable. Instead of asking
+                only where you want to live or work, evaluate where your
+                particular combination of capabilities, demand, competition,
+                infrastructure, purchasing power, and networks produces the
+                strongest strategic position.
+            </p>
+
+            <div class="hero-actions">
+
+                <button class="btn primary"
+                        onclick="scrollToSection('locationLab')">
+                    Run Location Analysis
+                </button>
+
+                <button class="btn"
+                        onclick="scrollToSection('missions')">
+                    Start Strategic Missions
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <aside class="player-card">
+
+            <div class="player-top">
+
+                <div>
+                    <div class="rank" id="rankName">
+                        STRATEGIST I
+                    </div>
+
+                    <div class="xp-label">
+                        Strategic XP
+                    </div>
+                </div>
+
+                <div class="xp-number" id="xpNumber">
+                    0
+                </div>
+
+            </div>
+
+            <div class="xp-track">
+                <div class="xp-fill" id="xpFill"></div>
+            </div>
+
+            <div class="stat-grid">
+
+                <div class="stat">
+                    <small>Location Score</small>
+                    <strong id="heroScore">0</strong>
+                </div>
+
+                <div class="stat">
+                    <small>Audit</small>
+                    <strong id="heroAudit">0%</strong>
+                </div>
+
+                <div class="stat">
+                    <small>Missions</small>
+                    <strong id="heroMissions">0/6</strong>
+                </div>
+
+                <div class="stat">
+                    <small>Level</small>
+                    <strong id="heroLevel">01</strong>
+                </div>
+
+            </div>
+
+        </aside>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+
+<!-- =========================
+     CORE CONCEPT
+========================= -->
+
+<section>
+
+    <div class="section-head">
+
+        <div>
+            <div class="section-number">01 / THE MODEL</div>
+            <h2>Move From Geography to Strategy</h2>
+        </div>
+
+        <p class="section-intro">
+            The central question is not whether one location is universally
+            better than another. It is whether a particular environment
+            improves the economics of your specific situation.
+        </p>
+
+    </div>
+
+
+    <div class="quote">
+        A location becomes strategically powerful when it improves the
+        relationship between <span>what you can produce</span>,
+        <span>who needs it</span>, and
+        <span>what it costs to remain positioned there.</span>
+    </div>
+
+</section>
+
+
+<!-- =========================
+     ADVANCED INSIGHTS
+========================= -->
+
+<section>
+
+    <div class="section-head">
+
+        <div>
+            <div class="section-number">02 / ADVANCED INTELLIGENCE</div>
+            <h2>The Hidden Variables</h2>
+        </div>
+
+        <p class="section-intro">
+            Geographic advantage rarely comes from a single number.
+            It emerges from interactions between variables that are usually
+            evaluated separately.
+        </p>
+
+    </div>
+
+
+    <div class="insight-grid">
+
+        <article class="insight-card">
+
+            <div class="number">01 — DEMAND</div>
+
+            <h3>Demand-Skill Misalignment</h3>
+
+            <p>
+                A capability can appear ordinary in a large talent pool yet
+                become unusually valuable when deployed against a shortage
+                that employers or customers cannot easily resolve.
+            </p>
+
+            <div class="reveal">
+                The useful metric is not simply “how many jobs exist.”
+                Examine whether the problems being purchased are growing
+                faster than the number of people capable of solving them.
+            </div>
+
+            <button class="reveal-btn"
+                    onclick="toggleInsight(this)">
+                Explore mechanism →
+            </button>
+
+        </article>
+
+
+        <article class="insight-card">
+
+            <div class="number">02 — FRICTION</div>
+
+            <h3>Competition Is Only One Cost</h3>
+
+            <p>
+                Saturation affects more than visibility. It can increase
+                customer acquisition effort, salary pressure, networking
+                requirements, and the amount of proof required before trust
+                is established.
+            </p>
+
+            <div class="reveal">
+                A smaller market can therefore outperform a larger one if
+                access costs, competitor density, and customer acquisition
+                friction are substantially lower.
+            </div>
+
+            <button class="reveal-btn"
+                    onclick="toggleInsight(this)">
+                Explore mechanism →
+            </button>
+
+        </article>
+
+
+        <article class="insight-card">
+
+            <div class="number">03 — NETWORK</div>
+
+            <h3>Proximity Changes Opportunity Flow</h3>
+
+            <p>
+                Certain ecosystems compress the distance between talent,
+                capital, customers, institutions, mentors, vendors, and
+                decision-makers.
+            </p>
+
+            <div class="reveal">
+                Network density matters because opportunity often travels
+                through repeated interactions. A strong position can reduce
+                the number of steps required to reach the people who can
+                accelerate your next move.
+            </div>
+
+            <button class="reveal-btn"
+                    onclick="toggleInsight(this)">
+                Explore mechanism →
+            </button>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     LOCATION LAB
+========================= -->
+
+<section id="locationLab">
+
+    <div class="section-head">
+
+        <div>
+            <div class="section-number">03 / LOCATION LAB</div>
+            <h2>Build a Location Differential Score</h2>
+        </div>
+
+        <p class="section-intro">
+            Score a hypothetical location against your own circumstances.
+            The tool does not declare a universal “best city.” It reveals
+            where your assumptions create leverage or friction.
+        </p>
+
+    </div>
+
+
+    <div class="lab">
+
+        <div class="lab-grid">
+
+            <div>
+
+                <div class="form-group">
+
+                    <label>
+                        Location / Scenario
+                    </label>
+
+                    <input
+                        id="locationName"
+                        type="text"
+                        placeholder="Example: Remote-first strategy"
+                        oninput="updateLocationScore()">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Demand Strength
+                        <span class="value-display"
+                              id="demandValue">5</span>
+                    </label>
+
+                    <div class="range-row">
+
+                        <input
+                            id="demand"
+                            type="range"
+                            min="1"
+                            max="10"
+                            value="5"
+                            oninput="updateLocationScore()">
+
+                        <div> / 10</div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Competition Advantage
+                        <span class="value-display"
+                              id="competitionValue">5</span>
+                    </label>
+
+                    <div class="range-row">
+
+                        <input
+                            id="competition"
+                            type="range"
+                            min="1"
+                            max="10"
+                            value="5"
+                            oninput="updateLocationScore()">
+
+                        <div> / 10</div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Cost Efficiency
+                        <span class="value-display"
+                              id="costValue">5</span>
+                    </label>
+
+                    <div class="range-row">
+
+                        <input
+                            id="cost"
+                            type="range"
+                            min="1"
+                            max="10"
+                            value="5"
+                            oninput="updateLocationScore()">
+
+                        <div> / 10</div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Network Access
+                        <span class="value-display"
+                              id="networkValue">5</span>
+                    </label>
+
+                    <div class="range-row">
+
+                        <input
+                            id="network"
+                            type="range"
+                            min="1"
+                            max="10"
+                            value="5"
+                            oninput="updateLocationScore()">
+
+                        <div> / 10</div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Infrastructure
+                        <span class="value-display"
+                              id="infrastructureValue">5</span>
+                    </label>
+
+                    <div class="range-row">
+
+                        <input
+                            id="infrastructure"
+                            type="range"
+                            min="1"
+                            max="10"
+                            value="5"
+                            oninput="updateLocationScore()">
+
+                        <div> / 10</div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Expansion Potential
+                        <span class="value-display"
+                              id="expansionValue">5</span>
+                    </label>
+
+                    <div class="range-row">
+
+                        <input
+                            id="expansion"
+                            type="range"
+                            min="1"
+                            max="10"
+                            value="5"
+                            oninput="updateLocationScore()">
+
+                        <div> / 10</div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="score-panel">
+
+                <div class="score-ring" id="scoreRing">
+                    <strong id="locationScore">50</strong>
+                </div>
+
+                <div class="score-status" id="scoreStatus">
+                    Neutral Position
+                </div>
+
+                <p class="score-explanation" id="scoreExplanation">
+                    Your current assumptions produce a balanced strategic
+                    position. Increase the variables that create leverage
+                    rather than optimizing one category in isolation.
+                </p>
+
+                <button class="btn primary"
+                        style="margin-top:20px"
+                        onclick="saveLocationAnalysis()">
+                    Save Analysis
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     DIFFERENTIAL MATRIX
+========================= -->
+
+<section>
+
+    <div class="section-head">
+
+        <div>
+            <div class="section-number">04 / DIFFERENTIAL MATRIX</div>
+            <h2>What You Are Actually Comparing</h2>
+        </div>
+
+        <p class="section-intro">
+            Location analysis becomes more useful when every attractive
+            feature is connected to an economic or operational consequence.
+        </p>
+
+    </div>
+
+
+    <div class="matrix">
+
+        <div class="matrix-item">
+            <h3>Opportunity Density</h3>
+            <p>
+                Measure the concentration of relevant employers, customers,
+                contracts, institutions, projects, and emerging problems.
+                High population alone does not guarantee high opportunity
+                density for your particular capability.
+            </p>
+        </div>
+
+        <div class="matrix-item">
+            <h3>Competition Entropy</h3>
+            <p>
+                Examine how many credible alternatives buyers already have.
+                A strong market can still be strategically difficult if
+                every attractive opportunity is surrounded by sophisticated
+                competitors.
+            </p>
+        </div>
+
+        <div class="matrix-item">
+            <h3>Capital Retention</h3>
+            <p>
+                Income has limited strategic value if operating expenses
+                consume most of it. Compare what remains after housing,
+                transportation, taxes, tools, insurance, and other recurring
+                requirements.
+            </p>
+        </div>
+
+        <div class="matrix-item">
+            <h3>Opportunity Velocity</h3>
+            <p>
+                Consider how quickly one successful interaction can produce
+                the next opportunity. Dense ecosystems can create compounding
+                effects when introductions, reputation, and proof circulate
+                rapidly.
+            </p>
+        </div>
+
+        <div class="matrix-item">
+            <h3>Learning Density</h3>
+            <p>
+                The strongest environment may not immediately maximize income.
+                It may dramatically accelerate your exposure to advanced
+                systems, technologies, customers, and decision-making models.
+            </p>
+        </div>
+
+        <div class="matrix-item">
+            <h3>Exit Optionality</h3>
+            <p>
+                Evaluate whether the position gives you multiple future moves.
+                A good location strategy should expand your choices rather
+                than trap you inside one employer, industry, customer group,
+                or geography.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     SCENARIO SIMULATOR
+========================= -->
+
+<section>
+
+    <div class="section-head">
+
+        <div>
+            <div class="section-number">05 / SCENARIO ENGINE</div>
+            <h2>Choose the Type of Advantage</h2>
+        </div>
+
+        <p class="section-intro">
+            Different strategies optimize different constraints. Select a
+            scenario to see what the strategy is designed to accomplish.
+        </p>
+
+    </div>
+
+
+    <div class="simulator">
+
+        <div class="scenario-menu">
+
+            <button class="scenario-btn active"
+                    onclick="showScenario('remote',this)">
+                Remote Income Arbitrage
+            </button>
+
+            <button class="scenario-btn"
+                    onclick="showScenario('micro',this)">
+                Micro-Market Entry
+            </button>
+
+            <button class="scenario-btn"
+                    onclick="showScenario('cluster',this)">
+                Industry Cluster
+            </button>
+
+            <button class="scenario-btn"
+                    onclick="showScenario('frontier',this)">
+                Emerging Market
+            </button>
+
+        </div>
+
+
+        <div class="scenario-content">
+
+            <div class="scenario-panel active" id="remote">
+
+                <h3>Remote Income Arbitrage</h3>
+
+                <p>
+                    Separate the market where your work is purchased from the
+                    location where your operating costs are incurred. This
+                    can increase flexibility when the work itself does not
+                    require physical proximity.
+                </p>
+
+                <div class="scenario-metric">
+
+                    <div class="metric">
+                        <span>Primary Goal</span>
+                        <strong>Reach</strong>
+                    </div>
+
+                    <div class="metric">
+                        <span>Key Constraint</span>
+                        <strong>Connectivity</strong>
+                    </div>
+
+                    <div class="metric">
+                        <span>Watch</span>
+                        <strong>Time Zones</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="scenario-panel" id="micro">
+
+                <h3>Micro-Market Entry</h3>
+
+                <p>
+                    Search for smaller customer groups with an unusually
+                    expensive problem and fewer specialized providers.
+                    The advantage comes from solving a narrow problem better
+                    than broad competitors.
+                </p>
+
+                <div class="scenario-metric">
+
+                    <div class="metric">
+                        <span>Primary Goal</span>
+                        <strong>Scarcity</strong>
+                    </div>
+
+                    <div class="metric">
+                        <span>Key Constraint</span>
+                        <strong>Market Size</strong>
+                    </div>
+
+                    <div class="metric">
+                        <span>Watch</span>
+                        <strong>Demand Depth</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="scenario-panel" id="cluster">
+
+                <h3>Industry Cluster Strategy</h3>
+
+                <p>
+                    Deliberately move closer to organizations, specialists,
+                    investors, customers, or institutions that accelerate
+                    your professional learning and opportunity flow.
+                </p>
+
+                <div class="scenario-metric">
+
+                    <div class="metric">
+                        <span>Primary Goal</span>
+                        <strong>Network</strong>
+                    </div>
+
+                    <div class="metric">
+                        <span>Key Constraint</span>
+                        <strong>Cost</strong>
+                    </div>
+
+                    <div class="metric">
+                        <span>Watch</span>
+                        <strong>Saturation</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="scenario-panel" id="frontier">
+
+                <h3>Emerging Market Strategy</h3>
+
+                <p>
+                    Enter environments where infrastructure, industries, or
+                    customer behavior are changing quickly. The opportunity
+                    comes from participating before the ecosystem becomes
+                    fully mature.
+                </p>
+
+                <div class="scenario-metric">
+
+                    <div class="metric">
+                        <span>Primary Goal</span>
+                        <strong>Position</strong>
+                    </div>
+
+                    <div class="metric">
+                        <span>Key Constraint</span>
+                        <strong>Uncertainty</strong>
+                    </div>
+
+                    <div class="metric">
+                        <span>Watch</span>
+                        <strong>Execution Risk</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     AUDIT
+========================= -->
+
+<section id="audit">
+
+    <div class="section-head">
+
+        <div>
+            <div class="section-number">06 / STRATEGIC AUDIT</div>
+            <h2>Challenge Your Assumptions</h2>
+        </div>
+
+        <p class="section-intro">
+            A location decision becomes dangerous when preferences are
+            disguised as analysis. Use the audit to expose the variables
+            that have not yet been tested.
+        </p>
+
+    </div>
+
+
+    <div class="audit">
+
+        <div class="audit-list">
+
+            <label class="audit-item">
+                <input type="checkbox" onchange="updateAudit()">
+                <span>
+                    I can identify a specific demand problem that my skills
+                    are positioned to solve.
+                </span>
+            </label>
+
+            <label class="audit-item">
+                <input type="checkbox" onchange="updateAudit()">
+                <span>
+                    I have compared my target environment against at least
+                    one alternative rather than evaluating it alone.
+                </span>
+            </label>
+
+            <label class="audit-item">
+                <input type="checkbox" onchange="updateAudit()">
+                <span>
+                    I know which costs could materially reduce the benefit
+                    of higher income or opportunity.
+                </span>
+            </label>
+
+            <label class="audit-item">
+                <input type="checkbox" onchange="updateAudit()">
+                <span>
+                    I have identified the network relationships that matter
+                    for my next stage.
+                </span>
+            </label>
+
+            <label class="audit-item">
+                <input type="checkbox" onchange="updateAudit()">
+                <span>
+                    I understand which parts of my work can be performed
+                    remotely and which require physical proximity.
+                </span>
+            </label>
+
+            <label class="audit-item">
+                <input type="checkbox" onchange="updateAudit()">
+                <span>
+                    I have considered how the environment affects my learning
+                    rate, not just my immediate income.
+                </span>
+            </label>
+
+            <label class="audit-item">
+                <input type="checkbox" onchange="updateAudit()">
+                <span>
+                    I can identify at least one future opportunity that this
+                    position could unlock.
+                </span>
+            </label>
+
+        </div>
+
+
+        <aside class="audit-score">
+
+            <div class="section-number">
+                READINESS
+            </div>
+
+            <div class="audit-score-number"
+                 id="auditScore">
+                0%
+            </div>
+
+            <p id="auditMessage">
+                Begin the audit to identify how much of your location strategy
+                has been converted from intuition into explicit reasoning.
+            </p>
+
+            <button class="btn primary"
+                    style="margin-top:18px"
+                    onclick="completeAudit()">
+                Complete Audit
+            </button>
+
+        </aside>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     STRATEGY BUILDER
+========================= -->
+
+<section>
+
+    <div class="section-head">
+
+        <div>
+            <div class="section-number">07 / STRATEGY BUILDER</div>
+            <h2>Convert Analysis Into a Decision</h2>
+        </div>
+
+        <p class="section-intro">
+            A location framework is only useful if it produces a concrete
+            operating hypothesis. Build one below.
+        </p>
+
+    </div>
+
+
+    <div class="builder">
+
+        <div class="builder-grid">
+
+            <div>
+
+                <div class="form-group">
+                    <label>Primary Capability</label>
+
+                    <input
+                        id="capability"
+                        type="text"
+                        placeholder="Example: Web development"
+                        oninput="updateBuilder()">
+                </div>
+
+
+                <div class="form-group">
+                    <label>Target Problem</label>
+
+                    <textarea
+                        id="problem"
+                        rows="4"
+                        placeholder="What valuable problem do you want to solve?"
+                        oninput="updateBuilder()"></textarea>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Preferred Environment</label>
+
+                    <select id="environment"
+                            onchange="updateBuilder()">
+
+                        <option value="Remote-first market">
+                            Remote-first market
+                        </option>
+
+                        <option value="Large industry cluster">
+                            Large industry cluster
+                        </option>
+
+                        <option value="Underserved regional market">
+                            Underserved regional market
+                        </option>
+
+                        <option value="Emerging ecosystem">
+                            Emerging ecosystem
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+                    <label>Primary Strategic Objective</label>
+
+                    <select id="objective"
+                            onchange="updateBuilder()">
+
+                        <option value="Increase income">
+                            Increase income
+                        </option>
+
+                        <option value="Reduce operating costs">
+                            Reduce operating costs
+                        </option>
+
+                        <option value="Accelerate learning">
+                            Accelerate learning
+                        </option>
+
+                        <option value="Increase network access">
+                            Increase network access
+                        </option>
+
+                        <option value="Create future options">
+                            Create future options
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button class="btn primary"
+                        onclick="copyStrategy()">
+                    Copy Strategy Brief
+                </button>
+
+            </div>
+
+
+            <div class="builder-output">
+
+                <div class="output-label">
+                    Generated Strategy Brief
+                </div>
+
+                <div class="output-line">
+                    <span>Capability</span>
+                    <strong id="outCapability">
+                        Not defined
+                    </strong>
+                </div>
+
+                <div class="output-line">
+                    <span>Problem</span>
+                    <strong id="outProblem">
+                        Not defined
+                    </strong>
+                </div>
+
+                <div class="output-line">
+                    <span>Environment</span>
+                    <strong id="outEnvironment">
+                        Remote-first market
+                    </strong>
+                </div>
+
+                <div class="output-line">
+                    <span>Objective</span>
+                    <strong id="outObjective">
+                        Increase income
+                    </strong>
+                </div>
+
+                <p id="strategyConclusion"
+                   style="margin-top:20px;color:var(--muted);">
+                    Define your capability and target problem to generate a
+                    strategic hypothesis.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     PROGRESSION
+========================= -->
+
+<section>
+
+    <div class="section-head">
+
+        <div>
+            <div class="section-number">08 / PROGRESSION SYSTEM</div>
+            <h2>From Observer to Strategic Operator</h2>
+        </div>
+
+        <p class="section-intro">
+            Advancement comes from improving the quality of your decisions,
+            not simply collecting more information.
+        </p>
+
+    </div>
+
+
+    <div class="progression">
+
+        <div class="level active"
+             onclick="selectLevel(1,this)">
+            <div class="level-number">01</div>
+            <h3>Observer</h3>
+            <p>Recognizes geographic constraints.</p>
+        </div>
+
+        <div class="level"
+             onclick="selectLevel(2,this)">
+            <div class="level-number">02</div>
+            <h3>Analyst</h3>
+            <p>Measures environmental variables.</p>
+        </div>
+
+        <div class="level"
+             onclick="selectLevel(3,this)">
+            <div class="level-number">03</div>
+            <h3>Positioner</h3>
+            <p>Matches capability to opportunity.</p>
+        </div>
+
+        <div class="level"
+             onclick="selectLevel(4,this)">
+            <div class="level-number">04</div>
+            <h3>Strategist</h3>
+            <p>Designs multi-variable positioning.</p>
+        </div>
+
+        <div class="level"
+             onclick="selectLevel(5,this)">
+            <div class="level-number">05</div>
+            <h3>Architect</h3>
+            <p>Builds systems with multiple exits.</p>
+        </div>
+
+    </div>
+
+
+    <div class="level-detail" id="levelDetail">
+        Level 01: You have started treating your environment as a variable
+        instead of an unchangeable condition. The next step is to measure it.
+    </div>
+
+</section>
+
+
+<!-- =========================
+     MISSIONS
+========================= -->
+
+<section id="missions">
+
+    <div class="section-head">
+
+        <div>
+            <div class="section-number">09 / FIELD MISSIONS</div>
+            <h2>Earn Strategic XP</h2>
+        </div>
+
+        <p class="section-intro">
+            Turn the framework into behavior. Each completed mission rewards
+            XP and moves your strategy from theory toward evidence.
+        </p>
+
+    </div>
+
+
+    <div class="mission-board">
+
+        <article class="mission"
+                 data-mission="0">
+
+            <h3>Map Your Capability</h3>
+
+            <p>
+                Write down the three capabilities you can realistically
+                exchange for economic value today.
+            </p>
+
+            <span class="xp-tag">+50 XP</span>
+
+            <button class="btn"
+                    style="display:block;margin-top:15px"
+                    onclick="completeMission(0,this)">
+                Complete Mission
+            </button>
+
+        </article>
+
+
+        <article class="mission"
+                 data-mission="1">
+
+            <h3>Identify a Scarcity</h3>
+
+            <p>
+                Find a problem where demand appears stronger than the
+                available specialized supply.
+            </p>
+
+            <span class="xp-tag">+75 XP</span>
+
+            <button class="btn"
+                    style="display:block;margin-top:15px"
+                    onclick="completeMission(1,this)">
+                Complete Mission
+            </button>
+
+        </article>
+
+
+        <article class="mission"
+                 data-mission="2">
+
+            <h3>Compare Two Environments</h3>
+
+            <p>
+                Compare your current environment with an alternative using
+                at least three variables.
+            </p>
+
+            <span class="xp-tag">+100 XP</span>
+
+            <button class="btn"
+                    style="display:block;margin-top:15px"
+                    onclick="completeMission(2,this)">
+                Complete Mission
+            </button>
+
+        </article>
+
+
+        <article class="mission"
+                 data-mission="3">
+
+            <h3>Find a Network Node</h3>
+
+            <p>
+                Identify an organization, professional community, institution,
+                or ecosystem that could accelerate your next opportunity.
+            </p>
+
+            <span class="xp-tag">+75 XP</span>
+
+            <button class="btn"
+                    style="display:block;margin-top:15px"
+                    onclick="completeMission(3,this)">
+                Complete Mission
+            </button>
+
+        </article>
+
+
+        <article class="mission"
+                 data-mission="4">
+
+            <h3>Calculate Retention</h3>
+
+            <p>
+                Estimate how much of your potential income remains after the
+                major recurring costs associated with your environment.
+            </p>
+
+            <span class="xp-tag">+100 XP</span>
+
+            <button class="btn"
+                    style="display:block;margin-top:15px"
+                    onclick="completeMission(4,this)">
+                Complete Mission
+            </button>
+
+        </article>
+
+
+        <article class="mission"
+                 data-mission="5">
+
+            <h3>Design an Exit Option</h3>
+
+            <p>
+                Identify one future path that your current positioning could
+                unlock if the first strategy stops working.
+            </p>
+
+            <span class="xp-tag">+125 XP</span>
+
+            <button class="btn"
+                    style="display:block;margin-top:15px"
+                    onclick="completeMission(5,this)">
+                Complete Mission
+            </button>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FINAL PRINCIPLE
+========================= -->
+
+<section>
+
+    <div class="quote">
+
+        Do not ask only,
+        <span>“Where can I succeed?”</span>
+
+        Ask,
+        <span>“Where does my particular combination of capabilities
+        encounter the strongest conditions for compounding?”</span>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<footer>
+
+    <h2>
+        Engineer the Environment Around the Future You Are Building.
+    </h2>
+
+    <p>
+        Location strategy is ultimately an exercise in optionality.
+        The strongest position is not necessarily the cheapest, largest,
+        or most prestigious. It is the environment that improves your
+        ability to create value while increasing the number of viable
+        decisions available to you later.
+    </p>
+
+    <button class="btn primary"
+            style="margin-top:25px"
+            onclick="scrollToSection('locationLab')">
+        Recalculate Position
+    </button>
+
+</footer>
+
+
+<div id="toast"></div>
+
+
+<script>
+
+/* =========================
+   GLOBAL STATE
+========================= */
+
+let xp = Number(localStorage.getItem("locationXP")) || 0;
+
+let missions =
+    JSON.parse(localStorage.getItem("locationMissions") || "[]");
+
+let auditState =
+    JSON.parse(localStorage.getItem("locationAudit") || "[]");
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function scrollToSection(id){
+
+    const element = document.getElementById(id);
+
+    if(element){
+        element.scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+        });
+    }
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+function showToast(message){
+
+    const toast = document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    setTimeout(function(){
+        toast.classList.remove("show");
+    },2200);
+}
+
+
+/* =========================
+   INSIGHT REVEALS
+========================= */
+
+function toggleInsight(button){
+
+    const card = button.closest(".insight-card");
+
+    card.classList.toggle("open");
+
+    if(card.classList.contains("open")){
+        button.textContent = "Collapse insight ↑";
+    }else{
+        button.textContent = "Explore mechanism →";
+    }
+}
+
+
+/* =========================
+   LOCATION SCORE
+========================= */
+
+function updateLocationScore(){
+
+    const fields = [
+        "demand",
+        "competition",
+        "cost",
+        "network",
+        "infrastructure",
+        "expansion"
+    ];
+
+    let total = 0;
+
+    fields.forEach(function(id){
+
+        const value =
+            Number(document.getElementById(id).value);
+
+        total += value;
+
+        document.getElementById(id + "Value").textContent = value;
+
+    });
+
+    const score =
+        Math.round((total / 60) * 100);
+
+    document.getElementById("locationScore").textContent = score;
+    document.getElementById("heroScore").textContent = score;
+
+    const ring =
+        document.getElementById("scoreRing");
+
+    ring.style.background =
+        "radial-gradient(circle,#151C13 58%,transparent 59%)," +
+        "conic-gradient(var(--accent) " +
+        (score * 3.6) +
+        "deg,#485444 0deg)";
+
+    let status;
+    let explanation;
+
+    if(score >= 80){
+
+        status = "High-Leverage Position";
+
+        explanation =
+            "The environment scores strongly across multiple variables. " +
+            "The next question is whether the assumptions behind the score " +
+            "can be verified in the real world.";
+
+    }else if(score >= 65){
+
+        status = "Promising Position";
+
+        explanation =
+            "Several variables create leverage, but at least one major " +
+            "constraint should be investigated before committing resources.";
+
+    }else if(score >= 45){
+
+        status = "Neutral Position";
+
+        explanation =
+            "The environment is neither clearly advantageous nor clearly " +
+            "disadvantageous. Your strategy needs stronger differentiation.";
+
+    }else{
+
+        status = "High-Friction Position";
+
+        explanation =
+            "The current assumptions indicate substantial structural friction. " +
+            "Look for a different environment or redesign the operating model.";
+
+    }
+
+    document.getElementById("scoreStatus").textContent = status;
+    document.getElementById("scoreExplanation").textContent = explanation;
+
+    localStorage.setItem(
+        "locationScore",
+        score
+    );
+}
+
+
+/* =========================
+   SAVE LOCATION ANALYSIS
+========================= */
+
+function saveLocationAnalysis(){
+
+    const name =
+        document.getElementById("locationName").value.trim() ||
+        "Unnamed Scenario";
+
+    const score =
+        document.getElementById("locationScore").textContent;
+
+    const analysis = {
+
+        name:name,
+        score:score,
+        demand:document.getElementById("demand").value,
+        competition:document.getElementById("competition").value,
+        cost:document.getElementById("cost").value,
+        network:document.getElementById("network").value,
+        infrastructure:document.getElementById("infrastructure").value,
+        expansion:document.getElementById("expansion").value,
+        date:new Date().toLocaleString()
+
+    };
+
+    localStorage.setItem(
+        "locationAnalysis",
+        JSON.stringify(analysis)
+    );
+
+    addXP(75);
+
+    showToast(
+        "Location analysis saved +75 XP"
+    );
+}
+
+
+/* =========================
+   SCENARIO ENGINE
+========================= */
+
+function showScenario(id,button){
+
+    document
+        .querySelectorAll(".scenario-panel")
+        .forEach(function(panel){
+            panel.classList.remove("active");
+        });
+
+    document
+        .querySelectorAll(".scenario-btn")
+        .forEach(function(btn){
+            btn.classList.remove("active");
+        });
+
+    document
+        .getElementById(id)
+        .classList.add("active");
+
+    button.classList.add("active");
+}
+
+
+/* =========================
+   AUDIT
+========================= */
+
+function updateAudit(){
+
+    const items =
+        document.querySelectorAll(".audit-item");
+
+    let completed = 0;
+
+    auditState = [];
+
+    items.forEach(function(item,index){
+
+        const checkbox =
+            item.querySelector("input");
+
+        if(checkbox.checked){
+
+            completed++;
+
+            item.classList.add("completed");
+
+            auditState.push(index);
+
+        }else{
+
+            item.classList.remove("completed");
+
+        }
+
+    });
+
+    const percentage =
+        Math.round(
+            (completed / items.length) * 100
+        );
+
+    document.getElementById("auditScore")
+        .textContent = percentage + "%";
+
+    document.getElementById("heroAudit")
+        .textContent = percentage + "%";
+
+    if(percentage === 100){
+
+        document.getElementById("auditMessage")
+            .textContent =
+            "Your strategic assumptions have been fully audited. Move from analysis into verification.";
+
+    }else if(percentage >= 60){
+
+        document.getElementById("auditMessage")
+            .textContent =
+            "Your framework is becoming decision-ready. Resolve the remaining unknowns before making major commitments.";
+
+    }else{
+
+        document.getElementById("auditMessage")
+            .textContent =
+            "Several important variables remain untested. Continue the audit before treating the location as a strategic advantage.";
+
+    }
+
+    localStorage.setItem(
+        "locationAudit",
+        JSON.stringify(auditState)
+    );
+}
+
+
+function completeAudit(){
+
+    const items =
+        document.querySelectorAll(".audit-item");
+
+    const checked =
+        document.querySelectorAll(
+            ".audit-item input:checked"
+        ).length;
+
+    if(checked === items.length){
+
+        addXP(150);
+
+        showToast(
+            "Audit completed +150 XP"
+        );
+
+    }else{
+
+        showToast(
+            "Complete every audit variable first."
+        );
+
+    }
+}
+
+
+/* =========================
+   STRATEGY BUILDER
+========================= */
+
+function updateBuilder(){
+
+    const capability =
+        document.getElementById("capability").value.trim();
+
+    const problem =
+        document.getElementById("problem").value.trim();
+
+    const environment =
+        document.getElementById("environment").value;
+
+    const objective =
+        document.getElementById("objective").value;
+
+    document.getElementById("outCapability")
+        .textContent =
+        capability || "Not defined";
+
+    document.getElementById("outProblem")
+        .textContent =
+        problem || "Not defined";
+
+    document.getElementById("outEnvironment")
+        .textContent =
+        environment;
+
+    document.getElementById("outObjective")
+        .textContent =
+        objective;
+
+    let conclusion =
+        "Define your capability and target problem to generate a strategic hypothesis.";
+
+    if(capability && problem){
+
+        conclusion =
+            "Strategic hypothesis: position " +
+            capability +
+            " inside a " +
+            environment.toLowerCase() +
+            " to address " +
+            problem +
+            ", with the primary objective of " +
+            objective.toLowerCase() +
+            ".";
+
+    }
+
+    document.getElementById(
+        "strategyConclusion"
+    ).textContent = conclusion;
+
+    localStorage.setItem(
+        "strategyBuilder",
+        JSON.stringify({
+            capability,
+            problem,
+            environment,
+            objective
+        })
+    );
+}
+
+
+function copyStrategy(){
+
+    const capability =
+        document.getElementById("capability").value.trim();
+
+    const problem =
+        document.getElementById("problem").value.trim();
+
+    const environment =
+        document.getElementById("environment").value;
+
+    const objective =
+        document.getElementById("objective").value;
+
+    if(!capability || !problem){
+
+        showToast(
+            "Add a capability and problem first."
+        );
+
+        return;
+    }
+
+    const text =
+`LOCATION STRATEGY BRIEF
+
+Capability:
+${capability}
+
+Target Problem:
+${problem}
+
+Preferred Environment:
+${environment}
+
+Primary Objective:
+${objective}
+
+Strategic Hypothesis:
+Position ${capability} inside a ${environment.toLowerCase()} to address ${problem}, with the primary objective of ${objective.toLowerCase()}.`;
+
+    navigator.clipboard.writeText(text)
+        .then(function(){
+
+            addXP(50);
+
+            showToast(
+                "Strategy brief copied +50 XP"
+            );
+
+        })
+        .catch(function(){
+
+            showToast(
+                "Copy unavailable in this browser."
+            );
+
+        });
+}
+
+
+/* =========================
+   PROGRESSION
+========================= */
+
+const levelDetails = {
+
+    1:
+    "Observer: You have started treating your environment as a variable instead of an unchangeable condition. Your next task is to identify measurable differences.",
+
+    2:
+    "Analyst: You compare demand, competition, cost, infrastructure, and network access instead of relying on reputation or instinct.",
+
+    3:
+    "Positioner: You deliberately match your capabilities with environments where they solve expensive or underserved problems.",
+
+    4:
+    "Strategist: You combine multiple variables and construct positioning that can survive changes in employers, customers, industries, or geography.",
+
+    5:
+    "Architect: You build an environment strategy around optionality, compounding networks, capital retention, learning velocity, and multiple future exits."
+
+};
+
+
+function selectLevel(level,element){
+
+    document
+        .querySelectorAll(".level")
+        .forEach(function(item){
+            item.classList.remove("active");
+        });
+
+    element.classList.add("active");
+
+    document.getElementById(
+        "levelDetail"
+    ).textContent =
+        levelDetails[level];
+
+    showToast(
+        "Strategic level " + level + " selected"
+    );
+}
+
+
+/* =========================
+   MISSIONS
+========================= */
+
+const missionXP = [
+    50,
+    75,
+    100,
+    75,
+    100,
+    125
+];
+
+
+function completeMission(index,button){
+
+    if(missions.includes(index)){
+
+        showToast(
+            "Mission already completed."
+        );
+
+        return;
+    }
+
+    missions.push(index);
+
+    localStorage.setItem(
+        "locationMissions",
+        JSON.stringify(missions)
+    );
+
+    const mission =
+        button.closest(".mission");
+
+    mission.classList.add("done");
+
+    button.textContent =
+        "Mission Complete";
+
+    button.disabled = true;
+
+    addXP(
+        missionXP[index]
+    );
+
+    updateMissionStats();
+
+    showToast(
+        "Mission completed +" +
+        missionXP[index] +
+        " XP"
+    );
+}
+
+
+function updateMissionStats(){
+
+    document.getElementById(
+        "heroMissions"
+    ).textContent =
+        missions.length + "/6";
+}
+
+
+/* =========================
+   XP SYSTEM
+========================= */
+
+function addXP(amount){
+
+    xp += amount;
+
+    localStorage.setItem(
+        "locationXP",
+        xp
+    );
+
+    updateXP();
+}
+
+
+function updateXP(){
+
+    const xpPerLevel = 300;
+
+    const level =
+        Math.min(
+            10,
+            Math.floor(xp / xpPerLevel) + 1
+        );
+
+    const currentLevelXP =
+        xp % xpPerLevel;
+
+    const percentage =
+        Math.min(
+            100,
+            (currentLevelXP / xpPerLevel) * 100
+        );
+
+    document.getElementById(
+        "xpNumber"
+    ).textContent = xp;
+
+    document.getElementById(
+        "xpFill"
+    ).style.width =
+        percentage + "%";
+
+    document.getElementById(
+        "heroLevel"
+    ).textContent =
+        String(level).padStart(2,"0");
+
+    const rankNames = [
+        "STRATEGIST I",
+        "STRATEGIST II",
+        "POSITION ANALYST",
+        "MARKET POSITIONER",
+        "SYSTEM STRATEGIST",
+        "MOBILITY ARCHITECT",
+        "LEVERAGE ARCHITECT",
+        "STRATEGIC OPERATOR",
+        "SYSTEM DESIGNER",
+        "ENVIRONMENT ARCHITECT"
+    ];
+
+    document.getElementById(
+        "rankName"
+    ).textContent =
+        rankNames[level - 1] ||
+        "ENVIRONMENT ARCHITECT";
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+function resetProgress(){
+
+    const confirmReset =
+        confirm(
+            "Reset all saved Location Strategy progress?"
+        );
+
+    if(!confirmReset){
+        return;
+    }
+
+    localStorage.removeItem("locationXP");
+    localStorage.removeItem("locationMissions");
+    localStorage.removeItem("locationAudit");
+    localStorage.removeItem("locationScore");
+    localStorage.removeItem("locationAnalysis");
+    localStorage.removeItem("strategyBuilder");
+
+    location.reload();
+}
+
+
+/* =========================
+   SCROLL PROGRESS
+========================= */
+
+window.addEventListener(
+    "scroll",
+    function(){
+
+        const scrollTop =
+            window.scrollY;
+
+        const height =
+            document.documentElement.scrollHeight -
+            window.innerHeight;
+
+        const progress =
+            height > 0
+                ? (scrollTop / height) * 100
+                : 0;
+
+        document.getElementById(
+            "scrollProgress"
+        ).style.width =
+            progress + "%";
+
+    }
+);
+
+
+/* =========================
+   RESTORE SAVED STATE
+========================= */
+
+function restoreState(){
+
+    updateXP();
+
+    updateMissionStats();
+
+    missions.forEach(function(index){
+
+        const mission =
+            document.querySelector(
+                '[data-mission="' + index + '"]'
+            );
+
+        if(mission){
+
+            mission.classList.add("done");
+
+            const button =
+                mission.querySelector("button");
+
+            button.textContent =
+                "Mission Complete";
+
+            button.disabled = true;
+
+        }
+
+    });
+
+
+    const savedAudit =
+        JSON.parse(
+            localStorage.getItem("locationAudit") || "[]"
+        );
+
+    savedAudit.forEach(function(index){
+
+        const item =
+            document.querySelectorAll(
+                ".audit-item"
+            )[index];
+
+        if(item){
+
+            item.querySelector(
+                "input"
+            ).checked = true;
+
+        }
+
+    });
+
+    updateAudit();
+
+
+    const savedBuilder =
+        JSON.parse(
+            localStorage.getItem("strategyBuilder") || "null"
+        );
+
+    if(savedBuilder){
+
+        document.getElementById(
+            "capability"
+        ).value =
+            savedBuilder.capability || "";
+
+        document.getElementById(
+            "problem"
+        ).value =
+            savedBuilder.problem || "";
+
+        document.getElementById(
+            "environment"
+        ).value =
+            savedBuilder.environment ||
+            "Remote-first market";
+
+        document.getElementById(
+            "objective"
+        ).value =
+            savedBuilder.objective ||
+            "Increase income";
+
+        updateBuilder();
+
+    }
+
+    const savedScore =
+        localStorage.getItem(
+            "locationScore"
+        );
+
+    if(savedScore){
+
+        document.getElementById(
+            "heroScore"
+        ).textContent =
+            savedScore;
+
+    }
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        updateLocationScore();
+
+        updateBuilder();
+
+        restoreState();
+
+    }
+);
+
+</script>
+
+</body>
+</html>
