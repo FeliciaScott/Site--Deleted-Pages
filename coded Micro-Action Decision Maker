@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Next Micro-Action Decision Engine</title>
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: #111827;
+      --accent: #10b981;
+      --accent-hover: #059669;
+      --text: #f9fafb;
+      --text-muted: #9ca3af;
+      --border: #1f2937;
+      --code-bg: #030712;
+    }
+
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 1.5rem;
+    }
+
+
+    .matrix-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      width: 100%;
+      max-width: 650px;
+      padding: 2rem;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
+    }
+
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+
+    p.subtitle {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      margin-bottom: 1.5rem;
+    }
+
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+
+    label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+
+    select {
+      width: 100%;
+      padding: 0.75rem;
+      background-color: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 0.95rem;
+      outline: none;
+      cursor: pointer;
+    }
+
+
+    select:focus {
+      border-color: var(--accent);
+    }
+
+
+    button.btn-execute {
+      width: 100%;
+      padding: 0.875rem;
+      background-color: var(--accent);
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      margin-top: 0.5rem;
+    }
+
+
+    button.btn-execute:hover {
+      background-color: var(--accent-hover);
+    }
+
+
+    /* Output Area */
+    .output-section {
+      display: none;
+      text-align: center;
+    }
+
+
+    .output-section.active {
+      display: block;
+    }
+
+
+    .action-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      background-color: rgba(16, 185, 129, 0.1);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+
+    .action-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      line-height: 1.4;
+      margin-bottom: 1.5rem;
+    }
+
+
+    .timer-display {
+      font-size: 3.5rem;
+      font-weight: 800;
+      font-family: monospace;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.05em;
+    }
+
+
+    .timer-controls {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+
+    .btn-secondary {
+      flex: 1;
+      padding: 0.75rem;
+      background-color: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+
+    .btn-secondary:hover {
+      background-color: var(--border);
+    }
+
+
+    /* Advanced Lesson Accordion Panel */
+    .lesson-panel {
+      margin-top: 1.5rem;
+      border-top: 1px dashed var(--border);
+      padding-top: 1rem;
+      text-align: left;
+    }
+
+
+    .lesson-toggle {
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+
+    .lesson-content {
+      display: none;
+      margin-top: 0.75rem;
+      background-color: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1rem;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: var(--text-muted);
+    }
+
+
+    .lesson-content h3 {
+      color: var(--text);
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+
+
+    .lesson-content code {
+      color: var(--accent);
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+
+
+  <div class="matrix-card">
+    <!-- INPUT FORM -->
+    <div id="selectorForm">
+      <h1>Micro-Action Decision Matrix</h1>
+      <p class="subtitle">Bypass decision fatigue. Select capacity and execute immediately.</p>
+      
+      <div class="form-group">
+        <label for="energy">Current Energy Level</label>
+        <select id="energy">
+          <option value="low">Low Energy (Recovery / Depleted Context)</option>
+          <option value="medium">Medium Energy (Steady Operational Execution)</option>
+          <option value="high">High Energy (Peak Performance / Deep Focus)</option>
+        </select>
+      </div>
+
+
+      <div class="form-group">
+        <label for="time">Available Time Window</label>
+        <select id="time">
+          <option value="5">5 Minutes (Frictionless Micro-Win)</option>
+          <option value="15">15 Minutes (Focused Task Block)</option>
+          <option value="30">30 Minutes (Deep Execution Sprint)</option>
+        </select>
+      </div>
+
+
+      <div class="form-group">
+        <label for="context">Execution Context</label>
+        <select id="context">
+          <option value="solo">Solo Execution (Code / Web Asset Management)</option>
+          <option value="physical">Environment (System Setup / Declutter)</option>
+          <option value="outreach">Outreach & Strategic Pipelines</option>
+        </select>
+      </div>
+
+
+      <button class="btn-execute" onclick="generateAction()">Initialize Micro-Task</button>
+    </div>
+
+
+    <!-- OUTPUT & TIMER -->
+    <div id="outputSection" class="output-section">
+      <span class="action-badge" id="actionBadge">Micro-Action Active</span>
+      <div class="action-title" id="actionText">Executing high-yield micro-step...</div>
+      
+      <div class="timer-display" id="timerDisplay">05:00</div>
+
+
+      <div class="timer-controls">
+        <button class="btn-secondary" id="toggleBtn" onclick="toggleTimer()">Pause</button>
+        <button class="btn-secondary" onclick="resetMatrix()">Complete / Reset</button>
+      </div>
+    </div>
+
+
+    <!-- ADVANCED LESSON MODULE FOR HIGH PERFORMERS -->
+    <div class="lesson-panel">
+      <button class="lesson-toggle" onclick="toggleLesson()">
+        <span>▶ Advanced Architecture Lesson: System Capacity & Decision Elimination</span>
+      </button>
+      <div class="lesson-content" id="lessonContent">
+        <h3>Architectural Insight: Overcoming High-Performer Bottlenecks</h3>
+        <p>Driven individuals rarely fail due to laziness; they fail due to <strong>system complexity overload</strong>. High performers tend to over-architect solutions, creating massive planning friction before writing a single line of execution.</p>
+        <br>
+        <p><strong>1. Finite State Selection vs. Infinite Choice:</strong> This matrix operates as a deterministic finite-state machine ($O(1)$ lookup time). It maps <code>(Energy, Time, Context)</code> directly to a single action key, stripping away choice overhead.</p>
+        <br>
+        <p><strong>2. Bounded Execution Constraints:</strong> By strictly capping execution time via an automated visual loop, your system forces high focus and eliminates premature over-engineering.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    // System Lookup Database
+    const actionDatabase = {
+      low: {
+        solo: {
+          5: "Refactor a single variable name or format 10 lines of unorganized CSS.",
+          15: "Delete or archive unused digital assets from your primary workspace.",
+          30: "Read and annotate documentation for one web API or utility library."
+        },
+        physical: {
+          5: "Clear off all non-essential items from your physical desk area.",
+          15: "Wipe down screen, keyboard, and organize essential hard tools.",
+          30: "Organize primary work area to remove all physical drag."
+        },
+        outreach: {
+          5: "Send a 1-sentence confirmation or quick status update to a contact.",
+          15: "Draft a standardized text template for upcoming application emails.",
+          30: "Audit your application tracker and remove obsolete contacts."
+        }
+      },
+      medium: {
+        solo: {
+          5: "Write down the exact 3 micro-steps needed to start your next goal.",
+          15: "Fix one isolated UI bug or layout misalignment in your web project.",
+          30: "Draft a complete HTML boilerplate component for your next layout feature."
+        },
+        physical: {
+          5: "Organize digital cables, adapters, and peripheral gear.",
+          15: "Perform a quick hardware/software update check on primary systems.",
+          30: "Audit local project directories and archive completed build folders."
+        },
+        outreach: {
+          5: "Bookmark 3 target job listings or funding opportunities.",
+          15: "Send one direct follow-up message regarding an outstanding application.",
+          30: "Tailor your standard portfolio narrative for a specific opportunity."
+        }
+      },
+      high: {
+        solo: {
+          5: "Draft the core architecture diagram or data schema for your next module.",
+          15: "Implement dynamic event handlers or state management for your component.",
+          30: "Build out an entire responsive frontend component from scratch."
+        },
+        physical: {
+          5: "Configure a distraction-free environment layout for deep work.",
+          15: "Streamline your primary physical workstation for maximum workflow velocity.",
+          30: "Execute a full environment reset and prep workspace for tomorrow."
+        },
+        outreach: {
+          5: "Send a targeted professional connection request.",
+          15: "Refine your master portfolio bio for high-tier application submissions.",
+          30: "Complete and submit a high-priority grant or work proposal."
+        }
+      }
+    };
+
+
+    let timerInterval = null;
+    let secondsLeft = 0;
+    let isRunning = false;
+
+
+    function generateAction() {
+      const energy = document.getElementById('energy').value;
+      const time = document.getElementById('time').value;
+      const context = document.getElementById('context').value;
+
+
+      const action = actionDatabase[energy]?.[context]?.[time] || "Execute one single high-priority action.";
+
+
+      document.getElementById('actionText').innerText = action;
+      document.getElementById('actionBadge').innerText = `${energy} energy • ${time} min • ${context}`;
+      
+      secondsLeft = parseInt(time, 10) * 60;
+      updateTimerDisplay();
+
+
+      document.getElementById('selectorForm').style.display = 'none';
+      document.getElementById('outputSection').classList.add('active');
+
+
+      startTimer();
+    }
+
+
+    function updateTimerDisplay() {
+      const mins = Math.floor(secondsLeft / 60);
+      const secs = secondsLeft % 60;
+      document.getElementById('timerDisplay').innerText = 
+        `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }
+
+
+    function startTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+      isRunning = true;
+      document.getElementById('toggleBtn').innerText = 'Pause';
+      
+      timerInterval = setInterval(() => {
+        if (secondsLeft > 0) {
+          secondsLeft--;
+          updateTimerDisplay();
+        } else {
+          clearInterval(timerInterval);
+          isRunning = false;
+          document.getElementById('timerDisplay').innerText = "DONE";
+          document.getElementById('toggleBtn').innerText = 'Finished';
+        }
+      }, 1000);
+    }
+
+
+    function toggleTimer() {
+      if (isRunning) {
+        clearInterval(timerInterval);
+        isRunning = false;
+        document.getElementById('toggleBtn').innerText = 'Resume';
+      } else if (secondsLeft > 0) {
+        startTimer();
+      }
+    }
+
+
+    function resetMatrix() {
+      if (timerInterval) clearInterval(timerInterval);
+      isRunning = false;
+      secondsLeft = 0;
+      
+      document.getElementById('outputSection').classList.remove('active');
+      document.getElementById('selectorForm').style.display = 'block';
+    }
+
+
+    function toggleLesson() {
+      const content = document.getElementById('lessonContent');
+      const toggleBtn = document.querySelector('.lesson-toggle span');
+      if (content.style.display === 'block') {
+        content.style.display = 'none';
+        toggleBtn.innerText = '▶ Advanced Architecture Lesson: System Capacity & Decision Elimination';
+      } else {
+        content.style.display = 'block';
+        toggleBtn.innerText = '▼ Advanced Architecture Lesson: System Capacity & Decision Elimination';
+      }
+    }
+  </script>
+</body>
+</html>
