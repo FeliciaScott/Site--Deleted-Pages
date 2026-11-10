@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pathkeeper | Resource Vault</title>
+
+<style>
+:root{
+    --forest:#173b32;
+    --deep:#0d2923;
+    --green:#2f6655;
+    --sage:#9ab9a7;
+    --cream:#f5f0e5;
+    --paper:#fffdf7;
+    --gold:#c5a15b;
+    --text:#24332e;
+    --muted:#66756f;
+    --line:#dce3dc;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    font-family:Inter,Segoe UI,Arial,sans-serif;
+    color:var(--text);
+    background:
+        radial-gradient(circle at 10% 10%,rgba(197,161,91,.13),transparent 25%),
+        radial-gradient(circle at 90% 30%,rgba(47,102,85,.12),transparent 28%),
+        var(--cream);
+    overflow-x:hidden;
+}
+
+/* BACKGROUND GRID */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:.25;
+    background-image:
+        linear-gradient(rgba(23,59,50,.045) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(23,59,50,.045) 1px,transparent 1px);
+    background-size:35px 35px;
+    mask-image:linear-gradient(to bottom,black,transparent 85%);
+}
+
+/* MAIN */
+
+.container{
+    width:min(1100px,92%);
+    margin:0 auto;
+    padding:80px 0 55px;
+}
+
+/* HEADER */
+
+.container > h1{
+    position:relative;
+    display:inline-block;
+    color:var(--forest);
+    font-size:clamp(2.6rem,7vw,5.5rem);
+    line-height:.95;
+    letter-spacing:-4px;
+    margin-bottom:20px;
+}
+
+.container > h1::after{
+    content:"";
+    position:absolute;
+    width:55px;
+    height:5px;
+    background:var(--gold);
+    border-radius:20px;
+    bottom:-12px;
+    left:4px;
+}
+
+.container > p{
+    max-width:650px;
+    color:var(--muted);
+    font-size:1.08rem;
+    line-height:1.7;
+    margin-bottom:55px;
+}
+
+/* VAULT LABEL */
+
+.container::before{
+    content:"PATHKEEPER / RESOURCE VAULT";
+    display:block;
+    width:max-content;
+    padding:8px 14px;
+    margin-bottom:18px;
+    border:1px solid rgba(47,102,85,.25);
+    border-radius:30px;
+    color:var(--green);
+    font-size:.72rem;
+    font-weight:800;
+    letter-spacing:2px;
+    background:rgba(255,255,255,.45);
+}
+
+/* CARD GRID */
+
+.card-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+    margin-bottom:35px;
+}
+
+/* CARDS */
+
+.card{
+    position:relative;
+    min-height:330px;
+    padding:30px;
+    display:flex;
+    flex-direction:column;
+    background:rgba(255,253,247,.9);
+    border:1px solid rgba(47,102,85,.16);
+    border-radius:22px;
+    box-shadow:
+        0 15px 35px rgba(23,59,50,.08),
+        inset 0 1px rgba(255,255,255,.8);
+    overflow:hidden;
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease,
+        border-color .3s ease;
+}
+
+.card::before{
+    content:"";
+    position:absolute;
+    width:120px;
+    height:120px;
+    right:-50px;
+    top:-50px;
+    border-radius:50%;
+    background:rgba(197,161,91,.12);
+}
+
+.card::after{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:4px;
+    height:0;
+    background:var(--gold);
+    transition:height .35s ease;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    border-color:rgba(197,161,91,.5);
+    box-shadow:
+        0 22px 45px rgba(23,59,50,.14),
+        0 0 0 1px rgba(197,161,91,.08);
+}
+
+.card:hover::after{
+    height:100%;
+}
+
+/* ICON */
+
+.card-icon{
+    width:52px;
+    height:52px;
+    margin-bottom:25px;
+    border-radius:15px;
+    background:
+        linear-gradient(135deg,var(--forest),var(--green));
+    position:relative;
+    box-shadow:0 8px 18px rgba(23,59,50,.18);
+}
+
+.card-icon::before{
+    content:"";
+    position:absolute;
+    inset:13px;
+    border:2px solid var(--gold);
+    border-radius:7px;
+}
+
+.card-icon::after{
+    content:"";
+    position:absolute;
+    width:8px;
+    height:8px;
+    border:2px solid var(--gold);
+    border-radius:50%;
+    left:20px;
+    top:20px;
+}
+
+/* CARD TEXT */
+
+.card h3{
+    color:var(--forest);
+    font-size:1.2rem;
+    line-height:1.35;
+    margin-bottom:13px;
+}
+
+.card p{
+    color:var(--muted);
+    font-size:.94rem;
+    line-height:1.7;
+    margin-bottom:25px;
+}
+
+/* BUTTON */
+
+.btn{
+    margin-top:auto;
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+    padding:13px 18px;
+    border-radius:12px;
+    background:var(--forest);
+    color:#fff;
+    text-decoration:none;
+    font-size:.86rem;
+    font-weight:800;
+    letter-spacing:.3px;
+    transition:all .25s ease;
+}
+
+.btn:hover{
+    background:var(--gold);
+    color:var(--deep);
+    transform:translateY(-2px);
+}
+
+/* QUICK REFERENCE */
+
+.highlight-box{
+    position:relative;
+    padding:32px 35px;
+    margin-top:15px;
+    background:
+        linear-gradient(135deg,rgba(23,59,50,.97),rgba(30,72,61,.96));
+    color:white;
+    border-radius:24px;
+    overflow:hidden;
+    box-shadow:0 20px 45px rgba(23,59,50,.17);
+}
+
+.highlight-box::before{
+    content:"";
+    position:absolute;
+    width:240px;
+    height:240px;
+    right:-90px;
+    top:-110px;
+    border:1px solid rgba(197,161,91,.35);
+    border-radius:50%;
+}
+
+.highlight-box::after{
+    content:"";
+    position:absolute;
+    width:160px;
+    height:160px;
+    right:-40px;
+    top:-70px;
+    border:1px solid rgba(197,161,91,.2);
+    border-radius:50%;
+}
+
+.highlight-box h3{
+    position:relative;
+    z-index:2;
+    color:#fff;
+    font-size:1.15rem;
+    margin-bottom:22px;
+}
+
+.highlight-box ul{
+    position:relative;
+    z-index:2;
+    margin-left:1.2rem;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px 35px;
+}
+
+.highlight-box li{
+    color:#e7eee9;
+    line-height:1.5;
+    font-size:.92rem;
+}
+
+/* FOOTER */
+
+footer{
+    padding:28px 20px 35px;
+    text-align:center;
+    color:#718078;
+    font-size:.8rem;
+    letter-spacing:.5px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:850px){
+
+    .card-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .highlight-box ul{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:600px){
+
+    .container{
+        padding-top:55px;
+    }
+
+    .container > h1{
+        letter-spacing:-2px;
+    }
+
+    .card-grid{
+        grid-template-columns:1fr;
+    }
+
+    .card{
+        min-height:300px;
+    }
+
+    .highlight-box{
+        padding:27px 24px;
+    }
+}
+
+/* REDUCED MOTION */
+
+@media(prefers-reduced-motion:reduce){
+
+    html{
+        scroll-behavior:auto;
+    }
+
+    *{
+        transition:none!important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<main class="container">
+
+    <h1>Resource Vault</h1>
+
+    <p>
+        Free templates, guides, and tools to help you stay on the right path.
+    </p>
+
+    <div class="card-grid">
+
+        <div class="card">
+            <div class="card-icon"></div>
+            <h3>Scholarship Tracker (Notion Template)</h3>
+            <p>
+                Track deadlines, essays, recommendation letters, and submission status.
+            </p>
+            <a href="#" class="btn">Download Template</a>
+        </div>
+
+        <div class="card">
+            <div class="card-icon"></div>
+            <h3>Free Textbook Directory</h3>
+            <p>
+                300+ free academic textbooks from OpenStax, MIT, and more.
+            </p>
+            <a href="#" class="btn">Browse Library</a>
+        </div>
+
+        <div class="card">
+            <div class="card-icon"></div>
+            <h3>Grant Writing Starter Pack</h3>
+            <p>
+                Templates for research proposals, budgets, and timelines.
+            </p>
+            <a href="#" class="btn">Download Pack</a>
+        </div>
+
+    </div>
+
+    <div class="highlight-box">
+
+        <h3>📌 Quick Reference: Scholarship Application Checklist</h3>
+
+        <ul>
+            <li>☐ Research 5 scholarships that fit your profile</li>
+            <li>☐ Create a calendar with all deadlines</li>
+            <li>☐ Draft personal statement 6 weeks before deadline</li>
+            <li>☐ Request recommendation letters 4 weeks before</li>
+            <li>☐ Revise essays 3 times</li>
+            <li>☐ Submit 2 days before deadline</li>
+        </ul>
+
+    </div>
+
+</main>
+
+<footer>
+    · Pathkeeper — where scholars choose depth over noise.
+</footer>
+
+</body>
+</html>
