@@ -1,0 +1,641 @@
+<!-- DECISION LAB INTEGRATED APP MODULE -->
+<div id="dl-app-root">
+  <style>
+    #dl-app-root * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    #dl-app-root {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0F2D22;
+      color: #F3EBDD;
+      line-height: 1.8;
+      width: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid #244638;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    #dl-app-root button,
+    #dl-app-root select,
+    #dl-app-root input,
+    #dl-app-root textarea {
+      font: inherit;
+    }
+
+    #dl-app-root button {
+      cursor: pointer;
+    }
+
+    #dl-app-root .hero {
+      background: linear-gradient(180deg, #194936, #0F2D22);
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    #dl-app-root .hero h1 {
+      font-size: 3rem;
+      color: #D8B08C;
+      margin-bottom: 20px;
+    }
+
+    #dl-app-root .hero p {
+      max-width: 850px;
+      margin: auto;
+      font-size: 1.1rem;
+      color: #bfcfc5;
+    }
+
+    #dl-app-root .container {
+      max-width: 1150px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    #dl-app-root section {
+      margin-bottom: 65px;
+    }
+
+    #dl-app-root h2 {
+      color: #D8B08C;
+      border-left: 5px solid #4B2E1E;
+      padding-left: 15px;
+      font-size: 2rem;
+      margin-bottom: 25px;
+    }
+
+    #dl-app-root .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 25px;
+    }
+
+    #dl-app-root .card {
+      background: #173A2B;
+      border: 1px solid rgba(216, 176, 140, .25);
+      padding: 25px;
+      border-radius: 15px;
+      transition: .3s;
+    }
+
+    #dl-app-root .card:hover {
+      transform: translateY(-6px);
+      border-color: #D8B08C;
+    }
+
+    #dl-app-root .card h3 {
+      color: #D8B08C;
+      margin-bottom: 12px;
+    }
+
+    #dl-app-root p {
+      color: #bfcfc5;
+    }
+
+    #dl-app-root .quote {
+      background: #4B2E1E;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      font-size: 1.2rem;
+      font-style: italic;
+      color: #F3EBDD;
+    }
+
+    #dl-app-root table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    #dl-app-root th {
+      background: #4B2E1E;
+      padding: 15px;
+      color: #D8B08C;
+      text-align: left;
+    }
+
+    #dl-app-root td {
+      padding: 15px;
+      border: 1px solid rgba(255, 255, 255, .15);
+      font-size: 0.95rem;
+    }
+
+    #dl-app-root tr:nth-child(even) {
+      background: #173A2B;
+    }
+
+    #dl-app-root .box {
+      background: #173A2B;
+      padding: 30px;
+      border-radius: 15px;
+    }
+
+    #dl-app-root .box ul {
+      list-style-position: inside;
+    }
+
+    #dl-app-root .box li {
+      margin: 12px 0;
+      color: #bfcfc5;
+    }
+
+    /* INTERACTIVE SIMULATION ENGINE STYLES */
+    #dl-app-root .dl-hud {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+      background: #0c261b;
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid #254939;
+      margin-bottom: 35px;
+    }
+
+    #dl-app-root .dl-hud-card {
+      background: #102e21;
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid #254637;
+      text-align: center;
+    }
+
+    #dl-app-root .dl-hud-card small {
+      display: block;
+      color: #7e9c8c;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    #dl-app-root .dl-hud-card strong {
+      font-size: 1.6rem;
+      color: #d8b08c;
+    }
+
+    #dl-app-root .dl-panel {
+      background: #173A2B;
+      border: 1px solid rgba(216, 176, 140, .25);
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+
+    #dl-app-root .dl-input-group {
+      margin-bottom: 22px;
+    }
+
+    #dl-app-root label {
+      display: block;
+      font-size: 0.85rem;
+      color: #9fb4a8;
+      margin-bottom: 8px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    #dl-app-root input[type="text"],
+    #dl-app-root select,
+    #dl-app-root textarea {
+      width: 100%;
+      padding: 12px 15px;
+      background: #0F2D22;
+      border: 1px solid #2f4b3e;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 0.95rem;
+    }
+
+    #dl-app-root input:focus,
+    #dl-app-root select:focus,
+    #dl-app-root textarea:focus {
+      outline: none;
+      border-color: #D8B08C;
+    }
+
+    #dl-app-root .dl-futures-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    #dl-app-root .dl-future-card {
+      background: #0F2D22;
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid #2e5040;
+    }
+
+    #dl-app-root .dl-future-card h4 {
+      font-size: 0.85rem;
+      color: #D8B08C;
+      margin-bottom: 8px;
+    }
+
+    #dl-app-root .dl-future-card textarea {
+      height: 90px;
+      resize: none;
+      font-size: 0.85rem;
+    }
+
+    #dl-app-root .dl-btn {
+      background: #D8B08C;
+      color: #102e21;
+      border: none;
+      padding: 16px 28px;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+      display: block;
+      width: 100%;
+    }
+
+    #dl-app-root .dl-btn:hover {
+      background: #e6c7a9;
+      transform: translateY(-2px);
+    }
+
+    #dl-app-root .dl-risk-selector {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    #dl-app-root .dl-chip {
+      background: #0F2D22;
+      border: 1px solid #345646;
+      color: #9fb4a8;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: 0.2s;
+      user-select: none;
+    }
+
+    #dl-app-root .dl-chip.active {
+      background: #75d5a8;
+      color: #0F2D22;
+      border-color: #75d5a8;
+      font-weight: bold;
+    }
+
+    #dl-app-root .dl-output {
+      display: none;
+      background: #0b2117;
+      border: 1px solid #75d5a8;
+      border-radius: 12px;
+      padding: 25px;
+      margin-top: 25px;
+    }
+
+    #dl-app-root .dl-output.visible {
+      display: block;
+    }
+
+    #dl-app-root .dl-output h3 {
+      color: #D8B08C;
+      margin-bottom: 12px;
+    }
+
+    #dl-app-root .dl-output-content {
+      font-size: 0.95rem;
+      color: #bfcfc5;
+      line-height: 1.6;
+    }
+
+    #dl-app-root .toast {
+      position: fixed;
+      right: 25px;
+      bottom: 25px;
+      background: #D8B08C;
+      color: #102e21;
+      padding: 14px 22px;
+      border-radius: 10px;
+      font-weight: bold;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: .3s;
+      z-index: 9999;
+    }
+
+    #dl-app-root .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    #dl-app-root footer {
+      background: #081D15;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    #dl-app-root footer h2 {
+      border: none;
+      padding-left: 0;
+    }
+
+    @media(max-width: 700px) {
+      #dl-app-root .hero h1 { font-size: 2.2rem; }
+      #dl-app-root table { display: block; overflow-x: auto; }
+      #dl-app-root .dl-futures-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+
+  <!-- HERO -->
+  <header class="hero">
+    <h1>Multi-Outcome Simulation Thinking</h1>
+    <p>Evaluate decisions through multiple competing future scenarios to reduce bias. Develop the ability to analyze several possible outcomes and prepare strategically.</p>
+  </header>
+
+  <div class="container">
+    <!-- QUOTE -->
+    <section>
+      <div class="quote">
+        "The strongest decisions are not based on certainty. They are based on preparation for multiple possibilities."
+      </div>
+    </section>
+
+    <!-- WHAT IS IT -->
+    <section>
+      <h2>What is Multi-Outcome Simulation Thinking?</h2>
+      <p>Multi-Outcome Simulation Thinking is the practice of mentally testing decisions against multiple possible futures before committing resources.</p>
+      <p style="margin-top:20px;">
+        Instead of asking only: <strong>"What happens if this works?"</strong><br>
+        Strategic thinkers also ask: <strong>"What happens if this fails, changes, or creates unexpected consequences?"</strong>
+      </p>
+      <p style="margin-top:20px;">This process helps reduce emotional decision-making and creates more resilient strategies.</p>
+    </section>
+
+    <!-- LIVE SIMULATOR ENGINE (INTERACTIVE LESSON) -->
+    <section>
+      <h2>Interactive Decision Simulator</h2>
+      <div class="dl-hud">
+        <div class="dl-hud-card"><small>Decision XP</small><strong id="dl-xp-val">0</strong></div>
+        <div class="dl-hud-card"><small>Preparedness Score</small><strong id="dl-score-val">0%</strong></div>
+        <div class="dl-hud-card"><small>Identified Risks</small><strong id="dl-risk-val">0</strong></div>
+        <div class="dl-hud-card"><small>Resilience Rating</small><strong id="dl-rating-val">Vulnerable</strong></div>
+      </div>
+
+      <div class="dl-panel">
+        <div class="dl-input-group">
+          <label for="dl-core-decision">What Core Decision Are You Stress-Testing?</label>
+          <input type="text" id="dl-core-decision" placeholder="e.g., Switching to a new online platform architecture">
+        </div>
+
+        <label>Define The Four Futures</label>
+        <div class="dl-futures-grid">
+          <div class="dl-future-card">
+            <h4>🚀 Best Case</h4>
+            <textarea id="dl-f-best" placeholder="Maximum positive impact..."></textarea>
+          </div>
+          <div class="dl-future-card">
+            <h4>🎯 Expected Case</h4>
+            <textarea id="dl-f-expected" placeholder="Standard baseline result..."></textarea>
+          </div>
+          <div class="dl-future-card">
+            <h4>⚠️ Worst Case</h4>
+            <textarea id="dl-f-worst" placeholder="Major execution bottleneck..."></textarea>
+          </div>
+          <div class="dl-future-card">
+            <h4>❓ Unexpected</h4>
+            <textarea id="dl-f-unexpected" placeholder="Unforeseen external shift..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="dl-panel">
+        <label>Tag Applicable Vulnerabilities</label>
+        <div class="dl-risk-selector">
+          <div class="dl-chip">Financial Risk</div>
+          <div class="dl-chip">Time Risk</div>
+          <div class="dl-chip">Market Risk</div>
+          <div class="dl-chip">Skill Risk</div>
+          <div class="dl-chip">Change Risk</div>
+        </div>
+      </div>
+
+      <button class="dl-btn" id="dl-run-btn">Run Simulation & Generate Strategy Brief</button>
+
+      <div class="dl-output" id="dl-output-box">
+        <h3>Simulation Strategy Brief</h3>
+        <div class="dl-output-content" id="dl-output-text"></div>
+      </div>
+    </section>
+
+    <!-- DANGERS -->
+    <section>
+      <h2>The Danger of Single-Outcome Thinking</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Overconfidence</h3>
+          <p>Assuming one expected result will happen can cause people to ignore risks, competition, or changing conditions.</p>
+        </div>
+        <div class="card">
+          <h3>Limited Preparation</h3>
+          <p>When unexpected events occur, people without backup scenarios must react instead of strategically responding.</p>
+        </div>
+        <div class="card">
+          <h3>Emotional Bias</h3>
+          <p>People often choose options based on what they hope will happen instead of evaluating what could realistically happen.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FRAMEWORK TABLE -->
+    <section>
+      <h2>The Future Scenario Framework</h2>
+      <table>
+        <tr>
+          <th>Scenario</th>
+          <th>Question</th>
+          <th>Strategic Response</th>
+        </tr>
+        <tr>
+          <td>Best Case</td>
+          <td>What happens if everything works better than expected?</td>
+          <td>How can success be expanded?</td>
+        </tr>
+        <tr>
+          <td>Expected Case</td>
+          <td>What is the most realistic outcome?</td>
+          <td>What resources are needed?</td>
+        </tr>
+        <tr>
+          <td>Worst Case</td>
+          <td>What happens if major problems appear?</td>
+          <td>How can damage be reduced?</td>
+        </tr>
+        <tr>
+          <td>Unexpected Case</td>
+          <td>What outcome has not been considered?</td>
+          <td>What flexibility should be created?</td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- APPLICATIONS -->
+    <section>
+      <h2>Areas Where Simulation Thinking Helps</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Career Decisions</h3>
+          <p>Analyze potential jobs, skills, industries, and opportunities by examining short-term and long-term outcomes.</p>
+        </div>
+        <div class="card">
+          <h3>Business Strategy</h3>
+          <p>Evaluate customers, competition, expenses, growth opportunities, and possible challenges before making investments.</p>
+        </div>
+        <div class="card">
+          <h3>Financial Planning</h3>
+          <p>Consider different income, expense, and risk scenarios before making major financial decisions.</p>
+        </div>
+        <div class="card">
+          <h3>Personal Growth</h3>
+          <p>Understand how daily decisions influence future identity, abilities, and available opportunities.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section>
+      <h2>Decision Simulation Process</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Step 1: Define The Decision</h3>
+          <p>Clearly identify what choice is being made and what outcome you are trying to create.</p>
+        </div>
+        <div class="card">
+          <h3>Step 2: Create Multiple Futures</h3>
+          <p>Imagine different paths instead of assuming one guaranteed result.</p>
+        </div>
+        <div class="card">
+          <h3>Step 3: Identify Risks</h3>
+          <p>Determine what factors could change the outcome and how they can be managed.</p>
+        </div>
+        <div class="card">
+          <h3>Step 4: Build Flexibility</h3>
+          <p>Choose strategies that preserve options and allow adjustments.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUESTIONS -->
+    <section>
+      <h2>Strategic Thinking Questions</h2>
+      <div class="box">
+        <ul>
+          <li>What are the possible outcomes of this decision?</li>
+          <li>What assumptions am I making?</li>
+          <li>What information would change my decision?</li>
+          <li>What happens if conditions change?</li>
+          <li>What opportunities could appear unexpectedly?</li>
+          <li>How can I create a strategy that works in multiple scenarios?</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CREATING INTELLIGENCE -->
+    <section>
+      <h2>Create Decision Intelligence</h2>
+      <div class="quote">
+        "The goal is not predicting the future perfectly. The goal is becoming prepared for multiple futures."
+      </div>
+      <p style="margin-top:25px;">
+        Multi-Outcome Simulation Thinking transforms decision-making from guessing into strategic preparation. By evaluating multiple possible futures, people can reduce bias, recognize hidden risks, and create systems that remain effective even when circumstances change.
+      </p>
+    </section>
+  </div>
+
+  <footer>
+    <h2>Think Beyond The Immediate Moment</h2>
+    <p>Better decisions come from seeing more than one path. Expand your perspective, simulate possibilities, and build strategies designed for uncertain environments.</p>
+  </footer>
+
+  <div class="toast" id="dl-toast">+25 XP</div>
+
+  <script>
+    (function() {
+      let xp = parseInt(localStorage.getItem("decisionXP")) || 0;
+      let selectedRisks = 0;
+
+      function showToast(msg) {
+        const toast = document.getElementById('dl-toast');
+        toast.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(function() { toast.classList.remove('show'); }, 2200);
+      }
+
+      function updateStats() {
+        const hasDecision = document.getElementById('dl-core-decision').value.trim() !== '';
+        const best = document.getElementById('dl-f-best').value.trim() !== '';
+        const expected = document.getElementById('dl-f-expected').value.trim() !== '';
+        const worst = document.getElementById('dl-f-worst').value.trim() !== '';
+        const unexpected = document.getElementById('dl-f-unexpected').value.trim() !== '';
+
+        let filledFutures = [best, expected, worst, unexpected].filter(Boolean).length;
+        let score = (filledFutures * 15) + (selectedRisks * 8) + (hasDecision ? 20 : 0);
+        score = Math.min(100, score);
+
+        document.getElementById('dl-xp-val').innerText = xp;
+        document.getElementById('dl-score-val').innerText = score + '%';
+        document.getElementById('dl-risk-val').innerText = selectedRisks;
+
+        let rating = "Vulnerable";
+        if (score >= 80) rating = "Resilient";
+        else if (score >= 50) rating = "Moderate";
+        document.getElementById('dl-rating-val').innerText = rating;
+      }
+
+      document.querySelectorAll('#dl-app-root .dl-chip').forEach(function(chip) {
+        chip.addEventListener('click', function() {
+          this.classList.toggle('active');
+          selectedRisks = document.querySelectorAll('#dl-app-root .dl-chip.active').length;
+          xp += 10;
+          localStorage.setItem("decisionXP", xp);
+          showToast("+10 Decision XP");
+          updateStats();
+        });
+      });
+
+      document.getElementById('dl-run-btn').addEventListener('click', function() {
+        const decision = document.getElementById('dl-core-decision').value.trim();
+        const outputBox = document.getElementById('dl-output-box');
+        const outputText = document.getElementById('dl-output-text');
+
+        if (!decision) {
+          outputBox.classList.add('visible');
+          outputText.innerHTML = "<span style='color:#d8b08c;'>Please enter a core decision to simulate.</span>";
+          return;
+        }
+
+        xp += 50;
+        localStorage.setItem("decisionXP", xp);
+        showToast("+50 Decision XP!");
+
+        outputBox.classList.add('visible');
+        outputText.innerHTML = `
+          <strong>Decision Analyzed:</strong> ${decision}<br><br>
+          <strong>Resilience Profile:</strong> ${document.getElementById('dl-rating-val').innerText} (${document.getElementById('dl-score-val').innerText})<br>
+          <strong>Vulnerabilities Tagged:</strong> ${selectedRisks} risk factors identified.<br><br>
+          <em>Strategic Directive:</em> Examine your <strong>Worst Case</strong> and <strong>Unexpected</strong> conditions. Construct one operational buffer that preserves your project even if both occur simultaneously.
+        `;
+        updateStats();
+      });
+
+      document.querySelectorAll('#dl-app-root input, #dl-app-root textarea').forEach(function(input) {
+        input.addEventListener('input', updateStats);
+      });
+
+      updateStats();
+    })();
+  </script>
+</div>
