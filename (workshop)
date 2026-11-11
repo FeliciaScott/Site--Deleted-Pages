@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Resource Matrix</title>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --primary-green: #10b981;
+            --primary-hover: #059669;
+            --accent-teal: #06b6d4;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            padding: 2rem 1rem;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        header h1 span {
+            color: var(--primary-green);
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Filter Controls */
+        .filter-container {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .filter-group label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .filter-group select {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+            border-radius: 6px;
+            outline: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .filter-group select:focus {
+            border-color: var(--primary-green);
+        }
+
+        /* Matrix Table Styling */
+        .table-wrapper {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            min-width: 800px;
+        }
+
+        th, td {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: rgba(16, 185, 129, 0.05);
+            color: var(--primary-green);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .resource-name {
+            font-weight: 600;
+            color: var(--text-main);
+            display: block;
+            font-size: 1.1rem;
+        }
+
+        .resource-platform {
+            font-size: 0.85rem;
+            color: var(--accent-teal);
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .badge-industry {
+            background-color: rgba(6, 182, 212, 0.1);
+            color: var(--accent-teal);
+            border: 1px solid rgba(6, 182, 212, 0.2);
+        }
+
+        .badge-time {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+        }
+
+        .badge-output {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--primary-green);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        /* Action Button */
+        .btn-action {
+            display: inline-block;
+            background-color: var(--primary-green);
+            color: var(--bg-dark);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background-color 0.2s, transform 0.1s;
+            text-align: center;
+        }
+
+        .btn-action:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-action:active {
+            transform: scale(0.98);
+        }
+
+        /* Empty State */
+        .no-results {
+            display: none;
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Elite Learning <span>Resource Matrix</span></h1>
+    </header>
+
+    <div class="filter-container">
+        <div class="filter-group">
+            <label for="filter-industry">Industry</label>
+            <select id="filter-industry" onchange="filterMatrix()">
+                <option value="all">All Industries</option>
+                <option value="tech">Tech & Software</option>
+                <option value="academia">Hard Sciences & Academia</option>
+                <option value="trades">Skilled Trades</option>
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <label for="filter-time">Time Commitment</label>
+            <select id="filter-time" onchange="filterMatrix()">
+                <option value="all">All Commitments</option>
+                <option value="short">Self-Paced / Short</option>
+                <option value="long">Multi-Month Intensive</option>
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <label for="filter-output">Target Output</label>
+            <select id="filter-output" onchange="filterMatrix()">
+                <option value="all">All Outputs</option>
+                <option value="portfolio">Portfolio Projects</option>
+                <option value="certification">Verified Credentials</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="table-wrapper">
+        <table id="matrix-table">
+            <thead>
+                <tr>
+                    <th>Resource & Platform</th>
+                    <th>Industry</th>
+                    <th>Time Commitment</th>
+                    <th>Proven Output</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-industry="tech" data-time="long" data-output="portfolio">
+                    <td>
+                        <span class="resource-name">Computer Science Curriculum</span>
+                        <span class="resource-platform">OSSU (Open Source Society University)</span>
+                    </td>
+                    <td><span class="badge badge-industry">Tech & Software</span></td>
+                    <td><span class="badge badge-time">Multi-Month Intensive</span></td>
+                    <td><span class="badge badge-output">Portfolio Projects</span></td>
+                    <td><a href="https://github.com/ossu/computer-science" target="_blank" class="btn-action">Access</a></td>
+                </tr>
+                <tr data-industry="academia" data-time="long" data-output="certification">
+                    <td>
+                        <span class="resource-name">MIT OpenCourseWare</span>
+                        <span class="resource-platform">Massachusetts Institute of Technology</span>
+                    </td>
+                    <td><span class="badge badge-industry">Hard Sciences & Academia</span></td>
+                    <td><span class="badge badge-time">Multi-Month Intensive</span></td>
+                    <td><span class="badge badge-output">Verified Credentials</span></td>
+                    <td><a href="https://ocw.mit.edu" target="_blank" class="btn-action">Access</a></td>
+                </tr>
+                <tr data-industry="tech" data-time="short" data-output="portfolio">
+                    <td>
+                        <span class="resource-name">Responsive Web Design</span>
+                        <span class="resource-platform">freeCodeCamp</span>
+                    </td>
+                    <td><span class="badge badge-industry">Tech & Software</span></td>
+                    <td><span class="badge badge-time">Self-Paced / Short</span></td>
+                    <td><span class="badge badge-output">Portfolio Projects</span></td>
+                    <td><a href="https://www.freecodecamp.org" target="_blank" class="btn-action">Access</a></td>
+                </tr>
+                <tr data-industry="trades" data-time="long" data-output="certification">
+                    <td>
+                        <span class="resource-name">Pre-Apprenticeship Training (MC3)</span>
+                        <span class="resource-platform">NABTU (North America's Building Trades Unions)</span>
+                    </td>
+                    <td><span class="badge badge-industry">Skilled Trades</span></td>
+                    <td><span class="badge badge-time">Multi-Month Intensive</span></td>
+                    <td><span class="badge badge-output">Verified Credentials</span></td>
+                    <td><a href="https://nabtu.org/apprenticeship-and-training/mc3/" target="_blank" class="btn-action">Access</a></td>
+                </tr>
+                <tr data-industry="tech" data-time="short" data-output="portfolio">
+                    <td>
+                        <span class="resource-name">Full Stack Open</span>
+                        <span class="resource-platform">University of Helsinki</span>
+                    </td>
+                    <td><span class="badge badge-industry">Tech & Software</span></td>
+                    <td><span class="badge badge-time">Self-Paced / Short</span></td>
+                    <td><span class="badge badge-output">Portfolio Projects</span></td>
+                    <td><a href="https://fullstackopen.com/en/" target="_blank" class="btn-action">Access</a></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div id="no-results-msg" class="no-results">
+            No elite resources match this exact configuration. Try broadening your criteria.
+        </div>
+    </div>
+</div>
+
+<script>
+    function filterMatrix() {
+        const industryFilter = document.getElementById('filter-industry').value;
+        const timeFilter = document.getElementById('filter-time').value;
+        const outputFilter = document.getElementById('filter-output').value;
+        
+        const table = document.getElementById('matrix-table');
+        const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+        let visibleRows = 0;
+
+        for (let i = 0; i < rows.length; i++) {
+            const row = rows[i];
+            const matchesIndustry = industryFilter === 'all' || row.getAttribute('data-industry') === industryFilter;
+            const matchesTime = timeFilter === 'all' || row.getAttribute('data-time') === timeFilter;
+            const matchesOutput = outputFilter === 'all' || row.getAttribute('data-output') === outputFilter;
+
+            if (matchesIndustry && matchesTime && matchesOutput) {
+                row.style.display = '';
+                visibleRows++;
+            } else {
+                row.style.display = 'none';
+            }
+        }
+
+        // Handle empty results display
+        const noResultsMsg = document.getElementById('no-results-msg');
+        if (visibleRows === 0) {
+            table.style.display = 'none';
+            noResultsMsg.style.display = 'block';
+        } else {
+            table.style.display = 'table';
+            noResultsMsg.style.display = 'none';
+        }
+    }
+</script>
+
+</body>
+</html>
