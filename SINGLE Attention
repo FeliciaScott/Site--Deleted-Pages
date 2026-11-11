@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Attention Fragmentation Control | Master System</title>
+<style>
+/* =========================================================
+   COLOR SYSTEM & CSS VARIABLES
+   Palette: Rich Brown, Soft Cream, Deep Blue
+========================================================= */
+:root {
+  /* Brown Shades */
+  --brown-dark: #2C1A0E;
+  --brown-deep: #3D2617;
+  --brown-mid: #5C3A21;
+  --brown-accent: #A65B32;
+  --brown-warm: #8C4827;
+
+  /* Cream Shades */
+  --cream-bg: #FDFBF7;
+  --cream-surface: #F4ECE1;
+  --cream-card: #FAF5ED;
+  --cream-border: #E6D7C3;
+  --cream-muted: #8C8073;
+
+  /* Blue Shades */
+  --blue-dark: #1B365D;
+  --blue-slate: #2A4A7F;
+  --blue-bright: #3B6BB0;
+  --blue-accent: #4A7BB0;
+  --blue-light: #EBF2FA;
+
+  /* Functional Mappings */
+  --bg-main: var(--cream-bg);
+  --bg-surface: var(--cream-surface);
+  --bg-card: var(--cream-card);
+  --text-main: var(--brown-dark);
+  --text-muted: #594D42;
+  --border-color: var(--cream-border);
+  --accent-primary: var(--blue-dark);
+  --accent-secondary: var(--brown-accent);
+
+  --shadow-sm: 0 2px 8px rgba(44, 26, 14, 0.05);
+  --shadow-md: 0 8px 24px rgba(44, 26, 14, 0.08);
+  --shadow-lg: 0 16px 40px rgba(27, 54, 93, 0.12);
+}
+
+/* =========================================================
+   BASE & TYPOGRAPHY
+========================================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1.1; }
+h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); color: var(--blue-dark); }
+h3 { font-size: 1.25rem; color: var(--brown-deep); }
+
+p { font-size: 1.025rem; color: var(--text-muted); }
+
+/* =========================================================
+   LAYOUT & CONTAINER
+========================================================= */
+.container {
+  width: min(1180px, calc(100% - 40px));
+  margin: auto;
+}
+
+.section {
+  padding: 70px 0;
+  border-bottom: 1px solid var(--cream-border);
+}
+
+.section-title {
+  margin-bottom: 35px;
+}
+
+.section-title h2 {
+  display: inline-block;
+  border-left: 5px solid var(--brown-accent);
+  padding-left: 15px;
+}
+
+.section-title p {
+  margin-top: 10px;
+  max-width: 750px;
+}
+
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+
+/* =========================================================
+   HEADER & XP TRACKER
+========================================================= */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(253, 251, 247, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--cream-border);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 75px;
+}
+
+.logo {
+  font-weight: 900;
+  font-size: 1.1rem;
+  color: var(--blue-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+}
+
+.logo span { color: var(--brown-accent); }
+
+.nav-links {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 0.825rem;
+  font-weight: 700;
+  transition: all 0.2s;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.nav-links a:hover {
+  color: var(--blue-dark);
+  background: var(--cream-surface);
+}
+
+.nav-links a.nav-external {
+  color: var(--blue-bright);
+  background: var(--blue-light);
+  border: 1px solid rgba(59, 107, 176, 0.2);
+}
+
+.nav-links a.nav-external:hover {
+  background: var(--blue-bright);
+  color: #FFFFFF;
+}
+
+.xp-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--blue-dark);
+  color: #FFFFFF;
+  padding: 8px 18px;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  box-shadow: var(--shadow-sm);
+}
+
+.xp-badge span { color: #FEC89A; }
+
+/* =========================================================
+   HERO SECTION & BUTTON GRID
+========================================================= */
+.hero {
+  background: linear-gradient(135deg, var(--blue-dark) 0%, #10233F 100%);
+  color: #FFFFFF;
+  padding: 80px 0;
+  position: relative;
+}
+
+.hero p { color: #D6E2F0; }
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.hero-content h1 span { color: #FEC89A; }
+
+.hero-content p {
+  margin: 20px 0 25px;
+  font-size: 1.15rem;
+  line-height: 1.8;
+}
+
+.external-actions-block {
+  margin-top: 25px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+}
+
+.external-actions-block label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #FEC89A;
+  margin-bottom: 15px;
+}
+
+.hero-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-weight: 800;
+  font-size: 0.875rem;
+  cursor: pointer;
+  border: none;
+  transition: all 0.25s ease;
+  text-decoration: none;
+  text-align: center;
+}
+
+.btn-primary {
+  background: var(--brown-accent);
+  color: #FFFFFF;
+}
+
+.btn-primary:hover {
+  background: var(--brown-warm);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(166, 91, 50, 0.35);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   CARDS & TABLES
+========================================================= */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--cream-border);
+  border-radius: 12px;
+  padding: 28px;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--blue-bright);
+  box-shadow: var(--shadow-md);
+}
+
+.card h3 {
+  margin-bottom: 12px;
+}
+
+.quote-box {
+  background: var(--cream-surface);
+  border-left: 5px solid var(--brown-accent);
+  padding: 30px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--brown-dark);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #FFFFFF;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--cream-border);
+}
+
+.data-table th {
+  background: var(--blue-dark);
+  color: #FFFFFF;
+  padding: 16px 20px;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+.data-table td {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--cream-border);
+  font-size: 0.925rem;
+}
+
+.data-table tr:nth-child(even) { background: var(--cream-surface); }
+
+/* =========================================================
+   INTERACTIVE TOOLS: TIMER & LEAK SCANNER
+========================================================= */
+.timer-container {
+  background: var(--blue-dark);
+  color: #FFFFFF;
+  border-radius: 16px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+}
+
+.timer-display {
+  font-size: clamp(3.5rem, 8vw, 5.5rem);
+  font-weight: 900;
+  color: #FEC89A;
+  font-family: monospace;
+  margin: 15px 0 25px;
+}
+
+.timer-controls {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.leak-card {
+  cursor: pointer;
+  user-select: none;
+}
+
+.leak-card.selected {
+  border-color: var(--brown-accent);
+  background: var(--cream-surface);
+  box-shadow: 0 0 0 2px var(--brown-accent);
+}
+
+.leak-score-badge {
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: var(--blue-dark);
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+footer {
+  background: var(--brown-dark);
+  color: var(--cream-surface);
+  padding: 60px 0;
+  text-align: center;
+}
+
+footer h2 { color: #FEC89A; margin-bottom: 15px; }
+footer p { color: #D6C4AD; max-width: 650px; margin: auto; }
+
+/* =========================================================
+   RESPONSIVE MEDIA QUERIES
+========================================================= */
+@media (max-width: 992px) {
+  .hero-grid, .grid-2, .grid-3, .grid-4 {
+    grid-template-columns: 1fr;
+  }
+  .nav-links { display: none; }
+  .hero-buttons {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#" class="logo">Attention<span>Control</span></a>
+      <nav class="nav-links">
+        <a href="#foundations">Foundations</a>
+        <a href="#vulnerabilities">Matrix</a>
+        <a href="#timer">Focus Timer</a>
+        <a href="#audit">Audit</a>
+        <a href="https://sites.google.com/view/pathkeeper/high-velocity-focus-dashboard" target="_blank" rel="noopener noreferrer" class="nav-external">Dashboard ↗</a>
+        <a href="https://sites.google.com/view/pathkeeper/focus-challenge" target="_blank" rel="noopener noreferrer" class="nav-external">Challenge ↗</a>
+        <a href="https://sites.google.com/view/pathkeeper/deep-work" target="_blank" rel="noopener noreferrer" class="nav-external">Deep Work ↗</a>
+        <a href="https://sites.google.com/view/pathkeeper/deepwork-resource-tool" target="_blank" rel="noopener noreferrer" class="nav-external">Resource Tool ↗</a>
+      </nav>
+      <div class="xp-badge">
+        XP: <span id="xpDisplay">0</span> | Level <span id="levelDisplay">1</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <h1>Attention <span>Fragmentation</span> Control</h1>
+        <p>
+          Your cognitive architecture is your primary bottleneck for complex problem-solving.
+          Protecting deep focus requires deterministic algorithmic and systemic boundaries.
+        </p>
+
+        <!-- EXTERNAL ACTION BUTTON GRID -->
+        <div class="external-actions-block">
+          <label>External System Modules & Resources</label>
+          <div class="hero-buttons">
+            <a href="https://sites.google.com/view/pathkeeper/high-velocity-focus-dashboard" class="btn btn-primary" target="_blank" rel="noopener noreferrer">High-Velocity Focus Dashboard ↗</a>
+            <a href="https://sites.google.com/view/pathkeeper/focus-challenge" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Focus Challenge ↗</a>
+            <a href="https://sites.google.com/view/pathkeeper/deep-work" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Deep Work System ↗</a>
+            <a href="https://sites.google.com/view/pathkeeper/deepwork-resource-tool" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Deep Work Resource Tool ↗</a>
+          </div>
+        </div>
+
+      </div>
+      <div class="quote-box" style="background: rgba(255,255,255,0.08); border-color: #FEC89A; color: #FFFFFF;">
+        "Where your attention goes, your energy follows. Where your energy goes, your results are created."
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDATIONS -->
+  <section class="section" id="foundations">
+    <div class="container">
+      <div class="section-title">
+        <h2>Cognitive Foundations</h2>
+        <p>Understanding how context switching imposes a heavy metabolic tax on your brain.</p>
+      </div>
+      <div class="grid-4">
+        <div class="card">
+          <h3>Executive Depletion</h3>
+          <p>Task alternation exhausts metabolic glucose in the prefrontal cortex, precipitating decision fatigue.</p>
+        </div>
+        <div class="card">
+          <h3>Encoding Deficits</h3>
+          <p>Superficial processing impedes memory consolidation into durable long-term schemas.</p>
+        </div>
+        <div class="card">
+          <h3>Attention Residue</h3>
+          <p>Unresolved prior tasks linger in cognitive buffers, creating an invisible ceiling on analytical work.</p>
+        </div>
+        <div class="card">
+          <h3>Heuristic Degradation</h3>
+          <p>Chronic fragmentation forces reliance on intuitive biases over rigorous logical deduction.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SYSTEMIC VULNERABILITY MATRIX -->
+  <section class="section" id="vulnerabilities">
+    <div class="container">
+      <div class="section-title">
+        <h2>Systemic Vulnerability Matrix</h2>
+        <p>Identify common cognitive leaks and deploy structural mitigations.</p>
+      </div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Systemic Pathology</th>
+            <th>Primary Mechanism</th>
+            <th>Structural Mitigation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>High-Frequency Alerting</strong></td>
+            <td>Dopaminergic hijacking via variable reward schedules.</td>
+            <td>Hard network isolation and privilege revocation.</td>
+          </tr>
+          <tr>
+            <td><strong>Contextual Pollution</strong></td>
+            <td>Concurrent maintenance of conflicting goal states.</td>
+            <td>Single-thread execution buffers and task queues.</td>
+          </tr>
+          <tr>
+            <td><strong>Informational Obesity</strong></td>
+            <td>Unbounded input accumulation exceeding digestion capacity.</td>
+            <td>Strict consumption quotas and ruthless source culling.</td>
+          </tr>
+          <tr>
+            <td><strong>Reactive Drift</strong></td>
+            <td>External agenda usurpation via unbuffered communication.</td>
+            <td>Pre-allocated strategic deep-work blocks.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- FOCUS TIMER -->
+  <section class="section" id="timer">
+    <div class="container">
+      <div class="section-title">
+        <h2>Deep Work Execution Engine</h2>
+        <p>Isolate your cognitive environment and track focus intervals.</p>
+      </div>
+      <div class="timer-container">
+        <h3>Deep Focus Session</h3>
+        <div class="timer-display" id="timeDisplay">25:00</div>
+        <div class="timer-controls">
+          <button class="btn btn-primary" id="startBtn" onclick="toggleTimer()">Start Session</button>
+          <button class="btn btn-secondary" onclick="resetTimer()">Reset</button>
+          <button class="btn btn-secondary" onclick="setTimerDuration(25)">25 Min Block</button>
+          <button class="btn btn-secondary" onclick="setTimerDuration(50)">50 Min Block</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DAILY DIAGNOSTIC AUDIT -->
+  <section class="section" id="audit">
+    <div class="container">
+      <div class="section-title">
+        <h2>Daily Metacognitive Audit</h2>
+        <p>Audit your cognitive throughput and claim XP for enforcing boundaries.</p>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Friction Point Diagnostics</h3>
+          <p style="margin-bottom: 15px;">Select today's active attention leaks:</p>
+          <div class="leak-card card" onclick="toggleLeak(this, 15)">
+            <strong>📱 Unscheduled Notification Checking</strong>
+            <p>Interrupted deep focus for minor updates (+15 Friction Index)</p>
+          </div>
+          <div class="leak-card card" style="margin-top: 10px;" onclick="toggleLeak(this, 25)">
+            <strong>🌐 Open-Ended Web Browsing</strong>
+            <p>Drifted into passive content consumption (+25 Friction Index)</p>
+          </div>
+        </div>
+        <div class="card" style="text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+          <h3>Friction Index Score</h3>
+          <div class="leak-score-badge" id="frictionScore">0</div>
+          <p>Keep your score below 20 for optimal cognitive clarity.</p>
+          <button class="btn btn-primary" style="margin-top: 20px;" onclick="claimAuditXP()">Log Audit (+50 XP)</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <h2>Protect Your Most Valuable Resource</h2>
+      <p>
+        Your attention determines what ideas enter your mind, what skills you develop, and what future you create.
+        Manage it intentionally.
+      </p>
+    </div>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    // State management
+    let xp = 0;
+    let level = 1;
+    let timer;
+    let timerRunning = false;
+    let timeLeft = 25 * 60;
+    let frictionScore = 0;
+
+    // Timer Logic
+    function updateTimerDisplay() {
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      document.getElementById('timeDisplay').textContent = 
+        `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    function toggleTimer() {
+      const startBtn = document.getElementById('startBtn');
+      if (timerRunning) {
+        clearInterval(timer);
+        timerRunning = false;
+        startBtn.textContent = 'Resume Session';
+      } else {
+        timerRunning = true;
+        startBtn.textContent = 'Pause Session';
+        timer = setInterval(() => {
+          if (timeLeft > 0) {
+            timeLeft--;
+            updateTimerDisplay();
+          } else {
+            clearInterval(timer);
+            timerRunning = false;
+            addXP(100);
+            alert('Focus Session Complete! +100 XP');
+            resetTimer();
+          }
+        }, 1000);
+      }
+    }
+
+    function resetTimer() {
+      clearInterval(timer);
+      timerRunning = false;
+      timeLeft = 25 * 60;
+      document.getElementById('startBtn').textContent = 'Start Session';
+      updateTimerDisplay();
+    }
+
+    function setTimerDuration(mins) {
+      clearInterval(timer);
+      timerRunning = false;
+      timeLeft = mins * 60;
+      document.getElementById('startBtn').textContent = 'Start Session';
+      updateTimerDisplay();
+    }
+
+    // Leak Diagnostics Logic
+    function toggleLeak(el, score) {
+      el.classList.toggle('selected');
+      if (el.classList.contains('selected')) {
+        frictionScore += score;
+      } else {
+        frictionScore -= score;
+      }
+      document.getElementById('frictionScore').textContent = frictionScore;
+    }
+
+    // Gamification Logic
+    function addXP(amount) {
+      xp += amount;
+      level = Math.floor(xp / 200) + 1;
+      document.getElementById('xpDisplay').textContent = xp;
+      document.getElementById('levelDisplay').textContent = level;
+    }
+
+    function claimAuditXP() {
+      addXP(50);
+      alert('Audit Logged successfully! +50 XP awarded.');
+    }
+  </script>
+</body>
+</html>
