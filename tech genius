@@ -1,0 +1,2881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PathKeeper | Focus & Learning Intelligence System</title>
+
+<style>
+:root {
+  --cream: #F7F2E8;
+  --cream-light: #FFFCF6;
+  --cream-dark: #E8DDD0;
+  --brown-deep: #3E2723;
+  --brown: #5D4037;
+  --brown-soft: #8D6E63;
+  --blue-deep: #0D1B2A;
+  --blue: #1B3A4B;
+  --blue-mid: #2C5F7C;
+  --blue-soft: #4A7C9B;
+  --blue-light: #DCEAF1;
+  --gold: #C69B62;
+  --green: #54745B;
+  --red: #A74638;
+  --ink: #263238;
+  --muted: #68777B;
+  --line: #D9D1C5;
+  --white: #FFFFFF;
+  --shadow: 0 12px 35px rgba(13,27,42,.07);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.65;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+a {
+  color: var(--blue-mid);
+}
+
+.page {
+  width: min(1500px, 96%);
+  margin: auto;
+  padding: 22px 0 50px;
+}
+
+/* HEADER */
+
+.hero {
+  background:
+    radial-gradient(circle at 85% 15%, rgba(74,124,155,.3), transparent 32%),
+    linear-gradient(125deg, var(--blue-deep), var(--blue));
+  color: var(--cream-light);
+  border-radius: 22px;
+  padding: clamp(28px, 5vw, 65px);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.eyebrow {
+  color: var(--gold);
+  text-transform: uppercase;
+  font-size: .76rem;
+  font-weight: 800;
+  letter-spacing: .17em;
+  margin-bottom: 16px;
+}
+
+.hero h1 {
+  max-width: 1000px;
+  font-size: clamp(2.3rem, 6vw, 5rem);
+  line-height: 1.06;
+  margin-bottom: 22px;
+}
+
+.hero h1 span {
+  color: #B8D5E5;
+}
+
+.hero p {
+  color: #E0E8EC;
+  max-width: 850px;
+  font-size: 1.08rem;
+}
+
+.hero-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 26px;
+}
+
+.pill {
+  border: 1px solid rgba(255,255,255,.3);
+  border-radius: 30px;
+  padding: 6px 12px;
+  color: var(--cream-light);
+  font-size: .78rem;
+}
+
+/* NAVIGATION */
+
+.top-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  padding: 18px 0 25px;
+}
+
+.top-nav a {
+  text-decoration: none;
+  background: var(--cream-light);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 9px 13px;
+  font-size: .83rem;
+  font-weight: 700;
+  color: var(--blue-deep);
+}
+
+.top-nav a:hover {
+  background: var(--blue-light);
+}
+
+/* GENERAL LAYOUT */
+
+.section-heading {
+  margin: 38px 0 17px;
+}
+
+.section-heading .eyebrow {
+  margin-bottom: 5px;
+}
+
+.section-heading h2 {
+  color: var(--brown-deep);
+  font-size: clamp(1.45rem, 3vw, 2rem);
+}
+
+.section-heading p {
+  color: var(--muted);
+  max-width: 850px;
+  margin-top: 5px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.card {
+  background: var(--cream-light);
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  padding: 23px;
+  min-width: 0;
+  box-shadow: var(--shadow);
+}
+
+.span-4 { grid-column: span 4; }
+.span-5 { grid-column: span 5; }
+.span-6 { grid-column: span 6; }
+.span-7 { grid-column: span 7; }
+.span-8 { grid-column: span 8; }
+.span-12 { grid-column: span 12; }
+
+.card h3 {
+  color: var(--blue-deep);
+  font-size: 1.12rem;
+  margin-bottom: 9px;
+}
+
+.card h4 {
+  color: var(--brown);
+  margin-bottom: 7px;
+}
+
+.card p {
+  color: var(--muted);
+  font-size: .93rem;
+}
+
+.number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 37px;
+  height: 37px;
+  background: var(--blue-light);
+  color: var(--blue-deep);
+  border-radius: 10px;
+  font-weight: 900;
+  margin-bottom: 12px;
+}
+
+.tag {
+  display: inline-block;
+  color: var(--brown);
+  background: var(--cream-dark);
+  border-radius: 30px;
+  padding: 4px 9px;
+  font-size: .72rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+/* FORMS */
+
+label {
+  display: block;
+  color: var(--brown);
+  font-size: .8rem;
+  font-weight: 800;
+  margin: 15px 0 6px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid #CFC6B9;
+  border-radius: 9px;
+  padding: 11px 13px;
+  background: var(--white);
+  color: var(--ink);
+  min-width: 0;
+}
+
+textarea {
+  min-height: 95px;
+  resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--blue-soft);
+  outline: 2px solid rgba(74,124,155,.16);
+}
+
+.hint {
+  font-size: .8rem;
+  color: var(--muted);
+  margin-top: 7px;
+}
+
+/* BUTTONS */
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  border-radius: 9px;
+  padding: 11px 16px;
+  font-weight: 800;
+  margin-top: 13px;
+  transition: filter .2s, transform .2s;
+}
+
+.btn:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background: var(--blue);
+  color: white;
+}
+
+.btn-secondary {
+  background: var(--cream-dark);
+  color: var(--brown-deep);
+  border: 1px solid var(--line);
+}
+
+.btn-accent {
+  background: var(--gold);
+  color: var(--blue-deep);
+}
+
+.btn-danger {
+  background: #F6E7E3;
+  color: var(--red);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--blue);
+  border: 1px solid var(--blue-soft);
+}
+
+.full {
+  width: 100%;
+}
+
+/* RESULTS */
+
+.result-box {
+  background: #EDF3F4;
+  border-left: 4px solid var(--blue-mid);
+  border-radius: 0 10px 10px 0;
+  padding: 16px;
+  margin-top: 15px;
+}
+
+.result-box p {
+  color: var(--ink);
+  margin-top: 5px;
+}
+
+.result-box ul {
+  margin: 9px 0 0 20px;
+  color: var(--ink);
+}
+
+.result-success {
+  background: #EEF3EA;
+  border-left-color: var(--green);
+}
+
+.result-warning {
+  background: #F8F0E3;
+  border-left-color: var(--gold);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* FLOW */
+
+.flow-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0,1fr));
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.flow-step {
+  background: var(--blue-light);
+  border-radius: 11px;
+  padding: 15px;
+  text-align: center;
+}
+
+.flow-step strong {
+  display: block;
+  color: var(--blue-deep);
+}
+
+.flow-step span {
+  display: block;
+  color: var(--muted);
+  font-size: .78rem;
+  margin-top: 4px;
+}
+
+/* LEARNING STRATEGY */
+
+.action-list {
+  list-style: none;
+  margin-top: 12px;
+}
+
+.action-list li {
+  border-bottom: 1px solid var(--line);
+  padding: 9px 0;
+  font-size: .9rem;
+  color: var(--ink);
+}
+
+.action-list li:last-child {
+  border-bottom: 0;
+}
+
+.action-list li::before {
+  content: "✓";
+  color: var(--green);
+  font-weight: 900;
+  margin-right: 9px;
+}
+
+/* FOCUS TIMER */
+
+.timer-card {
+  background:
+    linear-gradient(145deg, var(--blue-deep), var(--blue));
+  color: white;
+  border: 1px solid var(--blue-mid);
+}
+
+.timer-card h3 {
+  color: var(--cream-light);
+}
+
+.timer-card p {
+  color: #D8E3E8;
+}
+
+.timer-label {
+  color: var(--gold);
+  text-align: center;
+  font-size: .75rem;
+  font-weight: 900;
+  letter-spacing: .14em;
+  margin-top: 10px;
+}
+
+.clock {
+  color: #C5DFEB;
+  font-family: monospace;
+  font-size: clamp(3rem, 7vw, 5rem);
+  font-weight: 900;
+  text-align: center;
+  letter-spacing: -.08em;
+  margin: 15px 0;
+  line-height: 1.15;
+}
+
+.progress-track {
+  width: 100%;
+  height: 9px;
+  background: rgba(255,255,255,.14);
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 16px 0;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--gold);
+  transition: width .3s;
+}
+
+.current-action {
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.17);
+  border-radius: 11px;
+  padding: 15px;
+  margin-top: 15px;
+}
+
+.current-action strong {
+  display: block;
+  color: var(--gold);
+  font-size: .72rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.current-action span {
+  color: white;
+  font-weight: 700;
+}
+
+.timer-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 9px;
+  margin-top: 15px;
+}
+
+.timer-controls button {
+  margin-top: 0;
+}
+
+/* METRICS */
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.metric {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 15px;
+  min-width: 0;
+}
+
+.metric strong {
+  display: block;
+  color: var(--blue);
+  font-size: 1.8rem;
+  overflow-wrap: anywhere;
+}
+
+.metric span {
+  color: var(--muted);
+  font-size: .73rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+/* REVIEW */
+
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 14px;
+  margin-top: 17px;
+}
+
+.review-item {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 17px;
+}
+
+.review-item h4 {
+  color: var(--brown);
+}
+
+.review-item p {
+  font-size: .82rem;
+  margin-bottom: 10px;
+}
+
+.review-item.full-review {
+  grid-column: span 2;
+}
+
+.analysis-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 10px;
+  margin-top: 17px;
+}
+
+.analysis-box {
+  background: var(--blue-light);
+  border-radius: 11px;
+  padding: 15px;
+}
+
+.analysis-box span {
+  display: block;
+  color: var(--muted);
+  font-size: .7rem;
+  text-transform: uppercase;
+}
+
+.analysis-box strong {
+  color: var(--blue-deep);
+  font-size: 1.5rem;
+}
+
+/* HISTORY */
+
+.table-wrap {
+  overflow-x: auto;
+  margin-top: 15px;
+}
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 650px;
+  font-size: .83rem;
+}
+
+.history-table th {
+  text-align: left;
+  color: var(--brown);
+  background: var(--cream);
+  padding: 11px;
+  border-bottom: 2px solid var(--line);
+  text-transform: uppercase;
+  font-size: .7rem;
+}
+
+.history-table td {
+  padding: 11px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.empty-history {
+  background: var(--cream);
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  padding: 22px;
+  text-align: center;
+  color: var(--muted);
+  margin-top: 12px;
+}
+
+/* LEARNING CHART */
+
+.chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  height: 170px;
+  border-bottom: 1px solid var(--line);
+  padding: 12px 4px 0;
+  margin-top: 20px;
+}
+
+.chart-column {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  gap: 5px;
+}
+
+.chart-value {
+  font-size: .72rem;
+  color: var(--blue-deep);
+  font-weight: 800;
+}
+
+.chart-bar {
+  width: min(42px, 85%);
+  min-height: 3px;
+  background: var(--blue-soft);
+  border-radius: 6px 6px 0 0;
+}
+
+.chart-label {
+  font-size: .68rem;
+  color: var(--muted);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+/* LESSONS */
+
+.lesson-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 13px;
+}
+
+.lesson {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px;
+}
+
+.lesson .tag {
+  color: var(--blue);
+  background: var(--blue-light);
+}
+
+.lesson h4 {
+  color: var(--brown-deep);
+  margin-bottom: 7px;
+}
+
+.lesson p {
+  font-size: .88rem;
+}
+
+/* FOOTER */
+
+footer {
+  margin-top: 35px;
+  border-top: 1px solid var(--line);
+  padding: 25px 10px;
+  color: var(--muted);
+  text-align: center;
+  font-size: .85rem;
+}
+
+@media(max-width:1000px) {
+  .span-4,
+  .span-5,
+  .span-6,
+  .span-7,
+  .span-8 {
+    grid-column: span 12;
+  }
+
+  .flow-grid {
+    grid-template-columns: repeat(3, minmax(0,1fr));
+  }
+
+  .lesson-grid {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
+}
+
+@media(max-width:650px) {
+  .page {
+    width: 94%;
+    padding-top: 12px;
+  }
+
+  .card {
+    padding: 17px;
+  }
+
+  .review-grid,
+  .lesson-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .review-item.full-review {
+    grid-column: span 1;
+  }
+
+  .metric-grid {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
+
+  .analysis-grid {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
+
+  .flow-grid {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
+
+  .timer-controls {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media(max-width:380px) {
+  .metric-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .flow-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+<header class="hero">
+  <div class="eyebrow">PathKeeper · Focus & Learning Intelligence</div>
+
+  <h1>
+    Learn with intention.<br>
+    <span>Execute with precision.</span>
+  </h1>
+
+  <p>
+    A connected learning and performance environment. Identify the skill
+    you need to improve, choose an evidence-based practice approach,
+    protect your attention, measure what you produce, and adapt your
+    next action using the results.
+  </p>
+
+  <div class="hero-pills">
+    <span class="pill">01 · Define</span>
+    <span class="pill">02 · Diagnose</span>
+    <span class="pill">03 · Prepare</span>
+    <span class="pill">04 · Focus</span>
+    <span class="pill">05 · Measure</span>
+    <span class="pill">06 · Adapt</span>
+  </div>
+</header>
+
+<nav class="top-nav" aria-label="Main sections">
+  <a href="#learning">Learning Plan</a>
+  <a href="#practice">Practice Strategy</a>
+  <a href="#mission">Mission Setup</a>
+  <a href="#focus">Focus Timer</a>
+  <a href="#review">Cycle Review</a>
+  <a href="#assessment">Assessment</a>
+  <a href="#history">Performance History</a>
+</nav>
+
+<!-- 01 LEARNING PLAN -->
+
+<div class="section-heading" id="learning">
+  <div class="eyebrow">Stage 01 · Define the skill</div>
+  <h2>Learning Intelligence Center</h2>
+  <p>
+    Establish the outcome, identify the skill gap, and measure your
+    starting point before choosing how to study or practice.
+  </p>
+</div>
+
+<div class="grid">
+
+  <section class="card span-7">
+    <div class="number">01</div>
+    <h3>Goal · Define the desired outcome</h3>
+    <p>
+      Optimize for durable skill mastery and independent performance,
+      not time spent studying or course completion alone.
+    </p>
+
+    <label for="learningGoal">Learning goal</label>
+    <input id="learningGoal"
+      placeholder="Example: Build practical JavaScript skills">
+
+    <label for="skill">Skill to improve</label>
+    <input id="skill"
+      placeholder="Example: Array manipulation, research, writing">
+
+    <label for="target">Target performance (%)</label>
+    <input id="target" type="number" min="1" max="100" value="85">
+
+    <label for="learningDeadline">Target date (optional)</label>
+    <input id="learningDeadline" type="date">
+
+    <button class="btn btn-primary full" onclick="createPlan()">
+      Analyze learning needs
+    </button>
+
+    <div id="planResult" class="result-box hidden" aria-live="polite"></div>
+  </section>
+
+  <section class="card span-5">
+    <div class="number">02</div>
+    <h3>Sensors · Collect evidence</h3>
+    <p>
+      Learning needs multiple signals. A single score cannot explain
+      every strength, weakness, or obstacle.
+    </p>
+
+    <ul class="action-list">
+      <li>Accuracy on unfamiliar problems</li>
+      <li>Confidence before attempting a task</li>
+      <li>Time required to complete a task</li>
+      <li>Hints, errors, and repeated mistakes</li>
+      <li>Retention after a delay</li>
+      <li>Ability to explain and apply the skill</li>
+    </ul>
+
+    <p class="hint">
+      Confidence is useful context, not proof of mastery.
+    </p>
+  </section>
+
+  <section class="card span-6">
+    <div class="number">03</div>
+    <h3>Baseline · Measure current performance</h3>
+    <p>Enter your initial evidence before the intervention.</p>
+
+    <label for="baseline">Baseline accuracy (%)</label>
+    <input id="baseline" type="number" min="0" max="100" value="50">
+
+    <label for="confidence">Confidence (1–5)</label>
+    <select id="confidence">
+      <option value="1">1 — Not confident</option>
+      <option value="2">2 — Slightly confident</option>
+      <option value="3" selected>3 — Moderately confident</option>
+      <option value="4">4 — Confident</option>
+      <option value="5">5 — Very confident</option>
+    </select>
+
+    <label for="minutes">Available practice time (minutes)</label>
+    <input id="minutes" type="number" min="5" max="240" value="25">
+
+    <label for="errorType">Most common difficulty</label>
+    <select id="errorType">
+      <option value="concept">I don't understand the concept</option>
+      <option value="process">I understand but cannot execute it</option>
+      <option value="accuracy">I make repeated errors</option>
+      <option value="retention">I forget what I learned</option>
+      <option value="transfer">I struggle with unfamiliar problems</option>
+      <option value="unknown">I'm not sure yet</option>
+    </select>
+  </section>
+
+  <section class="card span-6">
+    <div class="number">04</div>
+    <h3>Controller · Choose the next action</h3>
+    <p>
+      The controller combines baseline performance, confidence,
+      reported difficulty, and available time to suggest a practice method.
+      Treat the recommendation as a hypothesis to test.
+    </p>
+
+    <div id="controllerResult" class="result-box">
+      <h4>Waiting for baseline data</h4>
+      <p>Complete the baseline fields and analyze your learning needs.</p>
+    </div>
+
+    <label for="strategy">Practice strategy</label>
+    <select id="strategy">
+      <option value="auto">Let PathKeeper recommend</option>
+      <option value="teach">Review a worked example</option>
+      <option value="guided">Guided practice with hints</option>
+      <option value="independent">Independent practice</option>
+      <option value="spaced">Spaced retrieval practice</option>
+      <option value="transfer">Unfamiliar application challenge</option>
+    </select>
+
+    <button class="btn btn-secondary full" onclick="chooseStrategy()">
+      Update recommendation
+    </button>
+  </section>
+
+</div>
+
+<!-- 02 PRACTICE -->
+
+<div class="section-heading" id="practice">
+  <div class="eyebrow">Stage 02 · Turn the diagnosis into action</div>
+  <h2>Practice Design Center</h2>
+  <p>
+    Convert the recommendation into a defined activity. The focus timer
+    will use this activity as the work target when a learning plan exists.
+  </p>
+</div>
+
+<div class="grid">
+
+  <section class="card span-7">
+    <div class="number">05</div>
+    <h3>Actions · Run a practice intervention</h3>
+    <p>
+      Use the suggested activity as a starting point. Adjust it when
+      the task, resources, or available time require a different approach.
+    </p>
+
+    <div id="actionPlan" class="result-box">
+      <h4>Practice plan</h4>
+      <p>Analyze your baseline to generate a targeted practice plan.</p>
+    </div>
+
+    <label for="activity">What will you practice?</label>
+    <input id="activity"
+      placeholder="Example: Solve ten array exercises without copying answers">
+
+    <label for="practiceNotes">What happened during practice?</label>
+    <textarea id="practiceNotes"
+      placeholder="Record mistakes, hints needed, confusing steps, or breakthroughs."></textarea>
+
+    <button class="btn btn-primary full" onclick="markPracticeComplete()">
+      Mark practice complete
+    </button>
+
+    <div id="practiceStatus" class="hint" aria-live="polite"></div>
+  </section>
+
+  <section class="card span-5">
+    <div class="number">06</div>
+    <h3>Strategy library · Understand the methods</h3>
+
+    <ul class="action-list">
+      <li><strong>Worked example:</strong> Study a complete example and explain each step.</li>
+      <li><strong>Guided practice:</strong> Attempt a task with limited hints, then reduce assistance.</li>
+      <li><strong>Independent practice:</strong> Solve a new problem without assistance.</li>
+      <li><strong>Spaced retrieval:</strong> Recall information after a delay instead of repeatedly rereading.</li>
+      <li><strong>Transfer challenge:</strong> Apply the skill to an unfamiliar problem.</li>
+    </ul>
+
+    <div class="result-box result-warning">
+      <h4>Important distinction</h4>
+      <p>
+        Finishing a lesson is evidence of activity. Independently
+        applying the skill is stronger evidence of capability.
+      </p>
+    </div>
+  </section>
+
+</div>
+
+<!-- 03 MISSION -->
+
+<div class="section-heading" id="mission">
+  <div class="eyebrow">Stage 03 · Prepare the environment</div>
+  <h2>Mission Architecture</h2>
+  <p>
+    Define the exact deliverable for the next work session. A clear
+    endpoint reduces decision-making during the focus cycle.
+  </p>
+</div>
+
+<div class="grid">
+
+  <section class="card span-7">
+    <div class="number">07</div>
+    <h3>Mission setup</h3>
+
+    <label for="missionGoal">What are you trying to accomplish?</label>
+    <textarea id="missionGoal"
+      placeholder="Example: Build a working JavaScript function that filters an array of objects."></textarea>
+
+    <label for="definition">What does done look like?</label>
+    <input id="definition"
+      placeholder="Example: Function works, passes tests, and I can explain the logic.">
+
+    <label for="energy">Current cognitive capacity</label>
+    <select id="energy">
+      <option value="low">Low — protect cognition</option>
+      <option value="medium" selected>Medium — normal execution</option>
+      <option value="high">High — deep reasoning available</option>
+    </select>
+
+    <label for="noise">Current distraction level</label>
+    <select id="noise">
+      <option value="low">Low — environment controlled</option>
+      <option value="medium" selected>Medium — some interruptions</option>
+      <option value="high">High — significant digital noise</option>
+    </select>
+
+    <label for="focusDuration">Focus cycle duration</label>
+    <select id="focusDuration">
+      <option value="15">15 minutes — short execution</option>
+      <option value="25" selected>25 minutes — standard focus</option>
+      <option value="45">45 minutes — extended focus</option>
+      <option value="60">60 minutes — long focus</option>
+    </select>
+
+    <div class="metric-grid">
+      <div class="metric">
+        <strong id="capacityStatus">MEDIUM</strong>
+        <span>Cognitive capacity</span>
+      </div>
+      <div class="metric">
+        <strong id="noiseStatus">MEDIUM</strong>
+        <span>Environmental noise</span>
+      </div>
+      <div class="metric">
+        <strong id="modeStatus">BUILD</strong>
+        <span>Recommended mode</span>
+      </div>
+    </div>
+
+    <button class="btn btn-primary full" onclick="initializeSystem()">
+      Prepare focus mission
+    </button>
+
+    <div id="missionResult" class="result-box hidden" aria-live="polite"></div>
+  </section>
+
+  <section class="card span-5">
+    <div class="number">08</div>
+    <h3>Execution sequence</h3>
+
+    <div class="flow-grid" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+      <div class="flow-step">
+        <strong>01 · Decompose</strong>
+        <span>Choose one deliverable</span>
+      </div>
+      <div class="flow-step">
+        <strong>02 · Prepare</strong>
+        <span>Remove friction</span>
+      </div>
+      <div class="flow-step">
+        <strong>03 · Execute</strong>
+        <span>Protect attention</span>
+      </div>
+      <div class="flow-step">
+        <strong>04 · Capture</strong>
+        <span>Record evidence</span>
+      </div>
+    </div>
+
+    <ul class="action-list">
+      <li>Open the required file or learning material.</li>
+      <li>Close unrelated tabs and applications.</li>
+      <li>Silence nonessential notifications.</li>
+      <li>Keep the next action visible.</li>
+      <li>Decide what evidence will prove progress.</li>
+    </ul>
+  </section>
+
+</div>
+
+<!-- 04 FOCUS TIMER -->
+
+<div class="section-heading" id="focus">
+  <div class="eyebrow">Stage 04 · Protect attention</div>
+  <h2>Deep Work Command Center</h2>
+  <p>
+    Execute the prepared mission in a bounded focus cycle. A pause is
+    recorded as an interruption, not treated as a personal failure.
+  </p>
+</div>
+
+<div class="grid">
+
+  <section class="card timer-card span-5">
+    <h3>Focus timer</h3>
+
+    <div class="timer-label" id="cycleLabel">SYSTEM READY</div>
+    <div class="clock" id="clock" role="timer" aria-live="off">25:00</div>
+
+    <div class="progress-track">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="current-action">
+      <strong>Current cognitive target</strong>
+      <span id="currentAction">Prepare a mission and initialize the system.</span>
+    </div>
+
+    <div class="timer-controls">
+      <button class="btn btn-accent" onclick="startTimer()">Start / Resume</button>
+      <button class="btn btn-secondary" onclick="pauseTimer()" id="pauseButton">Pause</button>
+      <button class="btn btn-secondary" onclick="completeCycle()">Complete cycle</button>
+      <button class="btn btn-danger" onclick="resetTimer()">Reset timer</button>
+    </div>
+
+    <p class="hint" style="color:#D8E3E8">
+      The timer continues only while this page remains open. Keep this
+      page active if you want the timer to remain visible.
+    </p>
+  </section>
+
+  <section class="card span-7">
+    <h3>Cognitive performance telemetry</h3>
+    <p>
+      Track completed focus cycles, time spent in focused work, and
+      interruptions. These measures describe activity, not mastery.
+    </p>
+
+    <div class="metric-grid">
+      <div class="metric">
+        <strong id="cycles">0</strong>
+        <span>Cycles completed</span>
+      </div>
+      <div class="metric">
+        <strong id="focusMinutes">0</strong>
+        <span>Focus minutes</span>
+      </div>
+      <div class="metric">
+        <strong id="interruptions">0</strong>
+        <span>Interruptions</span>
+      </div>
+      <div class="metric">
+        <strong id="focusScore">100</strong>
+        <span>Focus score</span>
+      </div>
+      <div class="metric">
+        <strong id="outputUnits">0</strong>
+        <span>Recorded outputs</span>
+      </div>
+      <div class="metric">
+        <strong id="efficiency">0%</strong>
+        <span>Completion rate</span>
+      </div>
+    </div>
+
+    <div class="result-box">
+      <h4>Environment engineering</h4>
+      <p>
+        Don't spend your attention managing unnecessary inputs. Prepare
+        the documents, tools, examples, and resources before the cycle.
+        Repeated interruptions are evidence that the environment or
+        workflow may need redesign.
+      </p>
+    </div>
+  </section>
+
+</div>
+
+<!-- 05 POST CYCLE REVIEW -->
+
+<div class="section-heading" id="review">
+  <div class="eyebrow">Stage 05 · Extract intelligence</div>
+  <h2>Post-Cycle Intelligence Engine</h2>
+  <p>
+    Convert the work session into evidence. The system uses your review
+    to identify friction, assess output, and recommend the next adjustment.
+  </p>
+</div>
+
+<div class="grid">
+
+  <section class="card span-12">
+    <div class="number">09</div>
+    <h3>Review the completed cycle</h3>
+    <p>
+      You can complete this review after a timer ends or after a manually
+      completed cycle. Record what actually happened rather than what
+      you intended to accomplish.
+    </p>
+
+    <div class="review-grid">
+      <div class="review-item">
+        <h4>What did you actually produce?</h4>
+        <p>Describe a tangible result, decision, or completed artifact.</p>
+        <textarea id="outputReview"
+          placeholder="Example: Completed a JavaScript function and tested it against five inputs."></textarea>
+      </div>
+
+      <div class="review-item">
+        <h4>Where did friction appear?</h4>
+        <p>Identify anything that slowed execution or created confusion.</p>
+        <textarea id="frictionReview"
+          placeholder="Example: I spent too much time looking for the correct documentation."></textarea>
+      </div>
+
+      <div class="review-item">
+        <h4>What did you learn?</h4>
+        <p>Capture a discovery, mistake, pattern, or useful principle.</p>
+        <textarea id="insightReview"
+          placeholder="Example: I understand how the filter method returns a new array."></textarea>
+      </div>
+
+      <div class="review-item">
+        <h4>What should happen next?</h4>
+        <p>Define the smallest action that makes the next cycle executable.</p>
+        <textarea id="nextReview"
+          placeholder="Example: Test the function with objects containing missing values."></textarea>
+      </div>
+
+      <div class="review-item full-review">
+        <h4>How did the environment affect performance?</h4>
+        <p>Identify environmental causes to change before the next session.</p>
+        <textarea id="environmentReview"
+          placeholder="Example: I need one reference document open and unrelated tabs closed."></textarea>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" onclick="analyzeCycle()">
+      Analyze this cycle
+    </button>
+
+    <button class="btn btn-accent" onclick="saveCycle()">
+      Save intelligence record
+    </button>
+
+    <div class="analysis-grid">
+      <div class="analysis-box">
+        <span>Output quality</span>
+        <strong id="outputQuality">—</strong>
+      </div>
+      <div class="analysis-box">
+        <span>Friction index</span>
+        <strong id="frictionIndex">—</strong>
+      </div>
+      <div class="analysis-box">
+        <span>Learning value</span>
+        <strong id="learningValue">—</strong>
+      </div>
+      <div class="analysis-box">
+        <span>Next readiness</span>
+        <strong id="nextReadiness">—</strong>
+      </div>
+    </div>
+
+    <div class="result-box" id="systemDiagnosis" aria-live="polite">
+      <h4>System diagnosis</h4>
+      <p>Complete a post-cycle review to identify an improvement opportunity.</p>
+    </div>
+
+    <div class="result-box result-success" id="systemRecommendation">
+      <h4>Recommended system change</h4>
+      <p>Your recommendation will appear after the review.</p>
+    </div>
+  </section>
+
+</div>
+
+<!-- 06 LEARNING ASSESSMENT -->
+
+<div class="section-heading" id="assessment">
+  <div class="eyebrow">Stage 06 · Verify learning</div>
+  <h2>Learning Feedback & Assessment</h2>
+  <p>
+    Test performance after practice. Compare new questions of similar
+    difficulty whenever possible. Repeated practice questions are weaker
+    evidence of independent transfer.
+  </p>
+</div>
+
+<div class="grid">
+
+  <section class="card span-6">
+    <div class="number">10</div>
+    <h3>Feedback · Verify improvement</h3>
+
+    <label for="afterScore">Post-practice accuracy (%)</label>
+    <input id="afterScore" type="number" min="0" max="100" value="60">
+
+    <label for="afterConfidence">Confidence after practice (1–5)</label>
+    <select id="afterConfidence">
+      <option value="1">1 — Not confident</option>
+      <option value="2">2 — Slightly confident</option>
+      <option value="3" selected>3 — Moderately confident</option>
+      <option value="4">4 — Confident</option>
+      <option value="5">5 — Very confident</option>
+    </select>
+
+    <label for="testType">Assessment quality</label>
+    <select id="testType">
+      <option value="comparable">New questions, similar difficulty</option>
+      <option value="easy">Easier than the baseline test</option>
+      <option value="hard">Harder than the baseline test</option>
+      <option value="repeated">Repeated questions from practice</option>
+    </select>
+
+    <label for="retention">Delayed retention (%)</label>
+    <input id="retention" type="number" min="0" max="100"
+      placeholder="Optional — enter after a later test">
+
+    <button class="btn btn-primary full" onclick="recordResult()">
+      Record and evaluate results
+    </button>
+
+    <div id="feedbackResult" class="result-box hidden" aria-live="polite"></div>
+  </section>
+
+  <section class="card span-6">
+    <div class="number">11</div>
+    <h3>Adaptation · Change the strategy when needed</h3>
+    <p>
+      Repeated difficulty should trigger a review of the method,
+      assessment quality, task difficulty, and possible external barriers.
+      The system should not automatically prescribe more of the same.
+    </p>
+
+    <div class="flow-grid" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+      <div class="flow-step">
+        <strong>Observe</strong>
+        <span>Review results</span>
+      </div>
+      <div class="flow-step">
+        <strong>Diagnose</strong>
+        <span>Find obstacles</span>
+      </div>
+      <div class="flow-step">
+        <strong>Adjust</strong>
+        <span>Change one variable</span>
+      </div>
+      <div class="flow-step">
+        <strong>Retest</strong>
+        <span>Check evidence</span>
+      </div>
+    </div>
+
+    <div id="adaptationResult" class="result-box">
+      <h4>Adaptation status</h4>
+      <p>Results will appear after the first assessment is recorded.</p>
+    </div>
+
+    <label for="barrier">Possible barrier affecting results</label>
+    <select id="barrier">
+      <option value="none">No known barrier</option>
+      <option value="fatigue">Fatigue or insufficient rest</option>
+      <option value="time">Insufficient time</option>
+      <option value="resources">Missing learning resources</option>
+      <option value="instructions">Unclear instructions</option>
+      <option value="environment">Distracting environment</option>
+    </select>
+
+    <button class="btn btn-secondary full" onclick="reviewBarrier()">
+      Review possible barrier
+    </button>
+
+    <div id="barrierResult" class="result-box hidden" aria-live="polite"></div>
+  </section>
+
+</div>
+
+<!-- 07 HISTORY -->
+
+<div class="section-heading" id="history">
+  <div class="eyebrow">Stage 07 · Review the evidence</div>
+  <h2>Performance & Learning History</h2>
+  <p>
+    Keep the two types of evidence distinct: focus-cycle reviews show
+    how work was executed; learning assessments show how skill performance
+    changed.
+  </p>
+</div>
+
+<div class="grid">
+
+  <section class="card span-7">
+    <h3>Learning performance history</h3>
+
+    <div class="metric-grid">
+      <div class="metric">
+        <strong id="latestMetric">—</strong>
+        <span>Latest score</span>
+      </div>
+      <div class="metric">
+        <strong id="changeMetric">—</strong>
+        <span>Change from baseline</span>
+      </div>
+      <div class="metric">
+        <strong id="countMetric">0</strong>
+        <span>Assessments</span>
+      </div>
+    </div>
+
+    <div id="chart" class="chart" aria-label="Learning performance chart">
+      <p class="hint">Your scores will appear here.</p>
+    </div>
+
+    <div id="learningHistory" aria-live="polite">
+      <div class="empty-history">No learning assessments recorded yet.</div>
+    </div>
+  </section>
+
+  <section class="card span-5">
+    <h3>Safeguards · Prevent bad decisions</h3>
+    <ul class="action-list">
+      <li>Never infer mastery from a single score.</li>
+      <li>Compare tests with similar difficulty.</li>
+      <li>Check delayed retention before declaring lasting mastery.</li>
+      <li>Distinguish memorization from independent application.</li>
+      <li>Consider time pressure, interruptions, and task ambiguity.</li>
+      <li>Allow the learner to override a recommendation.</li>
+      <li>Do not treat low performance as personal failure.</li>
+    </ul>
+  </section>
+
+  <section class="card span-12">
+    <h3>Focus-cycle intelligence history</h3>
+    <div id="historyContainer">
+      <div class="empty-history">
+        No cycle intelligence records yet. Complete and save your first review.
+      </div>
+    </div>
+  </section>
+
+  <section class="card span-12">
+    <h3>Learning record and user control</h3>
+    <p>
+      Export your records before leaving the page. This version keeps
+      information in the current page session and does not send it to
+      an external server.
+    </p>
+
+    <button class="btn btn-primary" onclick="exportData()">
+      Export all records (CSV)
+    </button>
+
+    <button class="btn btn-secondary" onclick="exportCycleData()">
+      Export focus reviews
+    </button>
+
+    <button class="btn btn-outline" onclick="exportLearningData()">
+      Export learning assessments
+    </button>
+
+    <button class="btn btn-danger" onclick="resetAllData()">
+      Reset session records
+    </button>
+
+    <p class="hint">
+      Exported records are downloaded to your device. Reloading the page
+      clears the session data in this version. Do not enter sensitive
+      personal information.
+    </p>
+  </section>
+
+</div>
+
+<!-- 08 LEARNING PRINCIPLES -->
+
+<div class="section-heading">
+  <div class="eyebrow">Reference · Improve the system</div>
+  <h2>Performance & Learning Principles</h2>
+  <p>
+    Use these principles to understand why the combined system separates
+    planning, execution, measurement, and adaptation.
+  </p>
+</div>
+
+<div class="lesson-grid">
+
+  <article class="lesson">
+    <span class="tag">01 · Cognitive load</span>
+    <h4>Don't spend your attention on navigation</h4>
+    <p>
+      Searching for files, choosing between too many tabs, and
+      reconstructing a task consume resources without producing
+      the intended output.
+    </p>
+  </article>
+
+  <article class="lesson">
+    <span class="tag">02 · Concentration</span>
+    <h4>Focus is a bounded cycle</h4>
+    <p>
+      Use a defined period of concentrated execution followed by
+      recovery and assessment. The system should not demand endless
+      attention.
+    </p>
+  </article>
+
+  <article class="lesson">
+    <span class="tag">03 · Output</span>
+    <h4>Measure production, not effort</h4>
+    <p>
+      Track completed artifacts, decisions, solved problems, tested
+      code, and other observable outputs instead of relying on time
+      spent at a desk.
+    </p>
+  </article>
+
+  <article class="lesson">
+    <span class="tag">04 · Energy matching</span>
+    <h4>Match task difficulty to capacity</h4>
+    <p>
+      Use higher-capacity periods for difficult reasoning and
+      lower-capacity periods for smaller, clearly defined actions.
+    </p>
+  </article>
+
+  <article class="lesson">
+    <span class="tag">05 · Recovery</span>
+    <h4>Stopping is part of the system</h4>
+    <p>
+      Recovery helps prevent depletion. Record the state of the work
+      so restarting requires less reconstruction.
+    </p>
+  </article>
+
+  <article class="lesson">
+    <span class="tag">06 · Adaptation</span>
+    <h4>Change the system after repeated friction</h4>
+    <p>
+      If the same obstacle appears repeatedly, investigate the process
+      or environment instead of simply demanding more discipline.
+    </p>
+  </article>
+
+</div>
+
+<footer>
+  PATHKEEPER · Learn deliberately. Protect attention. Measure honestly.
+  Adapt intelligently.
+</footer>
+
+</div>
+
+<script>
+"use strict";
+
+/* =========================================
+   SYSTEM STATE
+========================================= */
+
+let currentPlan = null;
+let practiceCompleted = false;
+let latestRecommendation = null;
+
+let learningHistory = [];
+let cycleHistory = [];
+
+let failureStreak = 0;
+let adaptationLevel = 0;
+
+let timer = null;
+let seconds = 1500;
+let totalSeconds = 1500;
+let cycleRunning = false;
+let cycleStarted = false;
+
+let cycleCount = 0;
+let focusMinutes = 0;
+let interruptions = 0;
+let outputUnits = 0;
+let cyclesAttempted = 0;
+
+let lastCycleAnalysis = null;
+let lastLearningRecord = null;
+
+/* =========================================
+   STRATEGY LIBRARY
+========================================= */
+
+const strategies = {
+  teach: {
+    title: "Worked example",
+    steps: [
+      "Study one complete example of the skill.",
+      "Explain why each step works.",
+      "Complete a similar example without looking."
+    ],
+    reason: "Build a clearer mental model before increasing difficulty."
+  },
+
+  guided: {
+    title: "Guided practice",
+    steps: [
+      "Attempt a problem with a small hint.",
+      "Explain the step where you became stuck.",
+      "Retry the problem with fewer hints."
+    ],
+    reason: "Reduce execution difficulty while developing independence."
+  },
+
+  independent: {
+    title: "Independent practice",
+    steps: [
+      "Solve a new problem without assistance.",
+      "Check the result against clear criteria.",
+      "Explain and correct any mistakes."
+    ],
+    reason: "Test whether the skill can be performed independently."
+  },
+
+  spaced: {
+    title: "Spaced retrieval",
+    steps: [
+      "Recall the concept without opening your notes.",
+      "Check the answer and correct any gaps.",
+      "Schedule another recall attempt after a delay."
+    ],
+    reason: "Strengthen recall and test whether learning persists."
+  },
+
+  transfer: {
+    title: "Transfer challenge",
+    steps: [
+      "Solve an unfamiliar problem using the skill.",
+      "Explain why the chosen approach fits the problem.",
+      "Compare the result with the assessment criteria."
+    ],
+    reason: "Test application beyond familiar examples."
+  }
+};
+
+/* =========================================
+   HELPERS AND VALIDATION
+========================================= */
+
+function getField(id) {
+  return document.getElementById(id);
+}
+
+function numberFrom(id, fallback = 0) {
+  const field = getField(id);
+  if (!field) return fallback;
+
+  const value = Number(field.value);
+  return Number.isFinite(value) ? value : fallback;
+}
+
+function safeText(value) {
+  return String(value).replace(/[&<>"']/g, character => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[character]);
+}
+
+function validPercent(id, label, minimum = 0) {
+  const field = getField(id);
+  const value = Number(field.value);
+
+  if (
+    field.value.trim() === "" ||
+    !Number.isFinite(value) ||
+    value < minimum ||
+    value > 100
+  ) {
+    alert(label + " must be a number from " + minimum + " to 100.");
+    field.focus();
+    return null;
+  }
+
+  return value;
+}
+
+function showResult(id, title, message, type = "") {
+  const element = getField(id);
+  element.classList.remove("hidden", "result-success", "result-warning");
+
+  if (type) {
+    element.classList.add(type);
+  }
+
+  element.innerHTML =
+    "<h4>" + safeText(title) + "</h4>" +
+    "<p>" + safeText(message) + "</p>";
+}
+
+function log(message) {
+  console.log("[PathKeeper] " + message);
+}
+
+/* =========================================
+   LEARNING CONTROLLER
+========================================= */
+
+function recommendStrategy(baseline, confidence, difficulty) {
+  if (difficulty === "retention") return "spaced";
+  if (difficulty === "transfer") return "transfer";
+
+  if (baseline < 45 || difficulty === "concept") {
+    return "teach";
+  }
+
+  if (
+    baseline < 70 ||
+    difficulty === "process" ||
+    difficulty === "unknown"
+  ) {
+    return "guided";
+  }
+
+  if (
+    confidence >= 4 &&
+    baseline >= 85 &&
+    difficulty !== "accuracy"
+  ) {
+    return "transfer";
+  }
+
+  if (difficulty === "accuracy") {
+    return "guided";
+  }
+
+  return "independent";
+}
+
+function explainRecommendation(plan) {
+  if (plan.difficulty === "retention") {
+    return "The priority is strengthening recall over time.";
+  }
+
+  if (plan.difficulty === "transfer") {
+    return "The priority is applying knowledge to unfamiliar tasks.";
+  }
+
+  if (plan.baseline < 45 || plan.difficulty === "concept") {
+    return "The available evidence suggests starting with conceptual understanding.";
+  }
+
+  if (plan.baseline < 70 || plan.difficulty === "process") {
+    return "Guided practice can reveal where execution breaks down.";
+  }
+
+  if (plan.difficulty === "accuracy") {
+    return "Guided practice can help expose and correct recurring mistakes.";
+  }
+
+  return "The next activity is selected to challenge the current skill level.";
+}
+
+function createPlan() {
+  const goal = getField("learningGoal").value.trim();
+  const skill = getField("skill").value.trim();
+
+  const target = validPercent("target", "Target performance", 1);
+  const baseline = validPercent("baseline", "Baseline accuracy");
+
+  if (target === null || baseline === null) return;
+
+  if (!goal || !skill) {
+    alert("Enter both a learning goal and a skill to improve.");
+    return;
+  }
+
+  const minutes = numberFrom("minutes", 25);
+
+  if (minutes < 5 || minutes > 240) {
+    alert("Practice time must be between 5 and 240 minutes.");
+    getField("minutes").focus();
+    return;
+  }
+
+  currentPlan = {
+    goal,
+    skill,
+    target,
+    baseline,
+    confidence: numberFrom("confidence", 3),
+    minutes,
+    difficulty: getField("errorType").value,
+    deadline: getField("learningDeadline").value
+  };
+
+  latestRecommendation = recommendStrategy(
+    baseline,
+    currentPlan.confidence,
+    currentPlan.difficulty
+  );
+
+  getField("strategy").value = "auto";
+
+  practiceCompleted = false;
+  getField("practiceStatus").textContent = "";
+
+  getField("planResult").classList.remove("hidden");
+
+  getField("planResult").innerHTML = `
+    <h4>Learning objective established</h4>
+    <p><strong>Goal:</strong> ${safeText(goal)}</p>
+    <p><strong>Skill:</strong> ${safeText(skill)}</p>
+    <p><strong>Baseline:</strong> ${baseline}%</p>
+    <p><strong>Target:</strong> ${target}%</p>
+    <p><strong>Initial gap:</strong> ${Math.max(0, target - baseline)} percentage points</p>
+    <p><strong>Available practice time:</strong> ${minutes} minutes</p>
+  `;
+
+  renderRecommendation();
+  renderActionPlan();
+
+  getField("activity").value =
+    "Practice " + skill + " using the recommended strategy.";
+
+  log("Learning plan created for " + skill);
+}
+
+function renderRecommendation() {
+  if (!currentPlan || !latestRecommendation) return;
+
+  const strategy = strategies[latestRecommendation];
+
+  getField("controllerResult").innerHTML = `
+    <h4>Recommended: ${safeText(strategy.title)}</h4>
+    <p>${safeText(strategy.reason)}</p>
+    <p><strong>Reason for selection:</strong>
+      ${safeText(explainRecommendation(currentPlan))}
+    </p>
+  `;
+}
+
+function renderActionPlan() {
+  if (!currentPlan || !latestRecommendation) return;
+
+  const strategy = strategies[latestRecommendation];
+  const minutes = Math.max(5, currentPlan.minutes);
+
+  const preparation = Math.max(2, Math.round(minutes * .2));
+  const practice = Math.max(3, Math.round(minutes * .6));
+  const review = Math.max(2, minutes - preparation - practice);
+
+  getField("actionPlan").innerHTML = `
+    <h4>${safeText(strategy.title)}</h4>
+    <p>${safeText(strategy.reason)}</p>
+    <ul class="action-list">
+      ${strategy.steps.map(step =>
+        "<li>" + safeText(step) + "</li>"
+      ).join("")}
+    </ul>
+    <p><strong>Suggested time:</strong>
+      ${preparation} minutes preparation,
+      ${practice} minutes practice,
+      ${review} minutes review.
+    </p>
+    <p><strong>Evidence to collect:</strong>
+      accuracy on a new task, errors encountered, and hints needed.
+    </p>
+  `;
+}
+
+function chooseStrategy() {
+  if (!currentPlan) {
+    alert("Analyze your baseline before selecting a strategy.");
+    return;
+  }
+
+  const selected = getField("strategy").value;
+
+  if (selected !== "auto") {
+    latestRecommendation = selected;
+  } else {
+    latestRecommendation = recommendStrategy(
+      currentPlan.baseline,
+      currentPlan.confidence,
+      currentPlan.difficulty
+    );
+  }
+
+  practiceCompleted = false;
+  getField("practiceStatus").textContent =
+    "Recommendation updated. Complete the selected practice before recording results.";
+
+  renderRecommendation();
+  renderActionPlan();
+}
+
+/* =========================================
+   PRACTICE TRACKING
+========================================= */
+
+function markPracticeComplete() {
+  if (!currentPlan) {
+    alert("Create a learning plan first.");
+    return;
+  }
+
+  const activity = getField("activity").value.trim();
+
+  if (!activity) {
+    alert("Describe the activity you completed first.");
+    getField("activity").focus();
+    return;
+  }
+
+  practiceCompleted = true;
+
+  getField("practiceStatus").textContent =
+    "Practice recorded. Complete a post-practice assessment using new questions when possible.";
+
+  log("Practice marked complete.");
+}
+
+/* =========================================
+   MISSION AND ENVIRONMENT SETUP
+========================================= */
+
+function initializeSystem() {
+  const goal = getField("missionGoal").value.trim();
+  const definition = getField("definition").value.trim();
+
+  const energy = getField("energy").value;
+  const noise = getField("noise").value;
+  const duration = numberFrom("focusDuration", 25);
+
+  if (!goal) {
+    alert("Enter a mission before preparing the focus system.");
+    getField("missionGoal").focus();
+    return;
+  }
+
+  if (!definition) {
+    alert("Describe what a completed mission should look like.");
+    getField("definition").focus();
+    return;
+  }
+
+  if (cycleRunning) {
+    alert("Pause or complete the active focus cycle before changing the mission.");
+    return;
+  }
+
+  getField("capacityStatus").textContent = energy.toUpperCase();
+  getField("noiseStatus").textContent = noise.toUpperCase();
+
+  let mode = "BUILD";
+  let action = "Define the next observable deliverable and work only on it.";
+
+  if (noise === "high") {
+    mode = "ENVIRONMENT RESET";
+    action = "Remove competing inputs before beginning: silence notifications, close unrelated tabs, and isolate the work surface.";
+  } else if (energy === "low") {
+    mode = "SIMPLIFY";
+    action = "Reduce the mission to the smallest useful deliverable. Create one concrete piece of progress without demanding peak cognition.";
+  } else if (energy === "high") {
+    mode = "DEEP BUILD";
+    action = "Work on the highest-leverage reasoning task inside the mission. Build, solve, analyze, or create the part that changes the outcome most.";
+  }
+
+  getField("modeStatus").textContent = mode;
+
+  if (currentPlan && !getField("activity").value.trim()) {
+    getField("activity").value =
+      "Practice " + currentPlan.skill + " using " +
+      (latestRecommendation ? strategies[latestRecommendation].title : "independent practice");
+  }
+
+  const practiceTarget = getField("activity").value.trim();
+
+  if (practiceTarget) {
+    action += " Practice target: " + practiceTarget;
+  }
+
+  getField("currentAction").textContent = action;
+
+  seconds = duration * 60;
+  totalSeconds = seconds;
+  cycleStarted = false;
+
+  updateClock();
+
+  getField("cycleLabel").textContent = "READY TO EXECUTE";
+  getField("pauseButton").textContent = "Pause";
+
+  getField("missionResult").classList.remove("hidden");
+
+  getField("missionResult").innerHTML = `
+    <h4>Mission prepared</h4>
+    <p><strong>Mission:</strong> ${safeText(goal)}</p>
+    <p><strong>Definition of done:</strong> ${safeText(definition)}</p>
+    <p><strong>Mode:</strong> ${safeText(mode)}</p>
+    <p><strong>Focus duration:</strong> ${duration} minutes</p>
+    <p><strong>Next action:</strong> ${safeText(action)}</p>
+  `;
+
+  log("Mission initialized.");
+}
+
+/* =========================================
+   TIMER ENGINE
+========================================= */
+
+function updateClock() {
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+
+  getField("clock").textContent =
+    String(minutes).padStart(2, "0") + ":" +
+    String(remainingSeconds).padStart(2, "0");
+
+  const elapsed = totalSeconds - seconds;
+  const percent = totalSeconds > 0
+    ? (elapsed / totalSeconds) * 100
+    : 0;
+
+  getField("progressBar").style.width =
+    Math.max(0, Math.min(100, percent)) + "%";
+}
+
+function startTimer() {
+  if (cycleRunning) return;
+
+  if (seconds <= 0) {
+    alert("Reset or initialize a new focus cycle before starting.");
+    return;
+  }
+
+  if (!cycleStarted) {
+    cycleStarted = true;
+    cyclesAttempted++;
+    updateMetrics();
+  }
+
+  cycleRunning = true;
+  getField("cycleLabel").textContent = "DEEP WORK ACTIVE";
+  getField("pauseButton").textContent = "Pause";
+
+  timer = setInterval(() => {
+    if (seconds > 0) {
+      seconds--;
+      updateClock();
+    } else {
+      finishCycle(true);
+    }
+  }, 1000);
+
+  log("Focus timer started.");
+}
+
+function pauseTimer() {
+  if (!cycleRunning) {
+    if (cycleStarted && seconds > 0) {
+      startTimer();
+    }
+    return;
+  }
+
+  clearInterval(timer);
+  timer = null;
+  cycleRunning = false;
+
+  interruptions++;
+
+  getField("pauseButton").textContent = "Resume";
+  getField("cycleLabel").textContent = "PAUSED";
+
+  updateMetrics();
+  log("Focus cycle paused. Interruption recorded.");
+}
+
+function completeCycle() {
+  if (!cycleStarted) {
+    alert("Start a focus cycle before completing it.");
+    return;
+  }
+
+  if (!confirm("Complete this focus cycle and open the review?")) {
+    return;
+  }
+
+  finishCycle(false);
+}
+
+function finishCycle(automatic) {
+  if (!cycleStarted) return;
+
+  clearInterval(timer);
+  timer = null;
+  cycleRunning = false;
+
+  const elapsedSeconds = Math.max(0, totalSeconds - seconds);
+  const elapsedMinutes = Math.max(1, Math.round(elapsedSeconds / 60));
+
+  cycleCount++;
+  focusMinutes += elapsedMinutes;
+
+  getField("cycleLabel").textContent =
+    automatic ? "CYCLE COMPLETE" : "CYCLE ENDED";
+
+  getField("pauseButton").textContent = "Pause";
+
+  updateMetrics();
+
+  getField("outputReview").focus();
+
+  log("Focus cycle completed.");
+
+  getField("systemDiagnosis").scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+
+  if (automatic) {
+    alert("Focus cycle complete. Take a moment to review what you produced.");
+  }
+}
+
+function resetTimer() {
+  clearInterval(timer);
+  timer = null;
+  cycleRunning = false;
+  cycleStarted = false;
+
+  const duration = numberFrom("focusDuration", 25);
+
+  seconds = duration * 60;
+  totalSeconds = seconds;
+
+  getField("cycleLabel").textContent = "SYSTEM READY";
+  getField("pauseButton").textContent = "Pause";
+  getField("currentAction").textContent =
+    "Prepare a mission and initialize the system.";
+
+  updateClock();
+  log("Timer reset. Performance records preserved.");
+}
+
+/* =========================================
+   PERFORMANCE METRICS
+========================================= */
+
+function updateMetrics() {
+  getField("cycles").textContent = cycleCount;
+  getField("focusMinutes").textContent = focusMinutes;
+  getField("interruptions").textContent = interruptions;
+  getField("outputUnits").textContent = outputUnits;
+
+  const focusScore = Math.max(
+    0,
+    Math.round(100 - (interruptions * 8))
+  );
+
+  getField("focusScore").textContent = focusScore;
+
+  const completionRate = cyclesAttempted > 0
+    ? Math.round((cycleCount / cyclesAttempted) * 100)
+    : 0;
+
+  getField("efficiency").textContent = completionRate + "%";
+}
+
+/* =========================================
+   CYCLE ANALYSIS ENGINE
+========================================= */
+
+function analyzeCycle() {
+  const output = getField("outputReview").value.trim();
+  const friction = getField("frictionReview").value.trim();
+  const insight = getField("insightReview").value.trim();
+  const next = getField("nextReview").value.trim();
+  const environment = getField("environmentReview").value.trim();
+
+  if (!output) {
+    alert("Describe what you actually produced before analyzing the cycle.");
+    getField("outputReview").focus();
+    return null;
+  }
+
+  const outputScore = output.length >= 80
+    ? 90
+    : output.length >= 35
+      ? 70
+      : 45;
+
+  const learningScore = insight.length >= 80
+    ? 95
+    : insight.length >= 35
+      ? 75
+      : insight.length > 0
+        ? 55
+        : 30;
+
+  const readinessScore = next.length >= 80
+    ? 95
+    : next.length >= 35
+      ? 80
+      : next.length > 0
+        ? 60
+        : 25;
+
+  const frictionIndex = friction.length === 0
+    ? 0
+    : friction.length >= 80
+      ? 70
+      : friction.length >= 35
+        ? 45
+        : 25;
+
+  const adjustedReadiness = environment.length >= 35
+    ? Math.min(100, readinessScore + 5)
+    : readinessScore;
+
+  let diagnosis = "";
+  let recommendation = "";
+
+  if (frictionIndex >= 60) {
+    diagnosis =
+      "Your primary bottleneck appears to be environmental or process friction.";
+
+    recommendation =
+      "Identify the specific friction named in your review and eliminate it before the next cycle. Change the environment, workflow, file structure, notification settings, or preparation process.";
+  } else if (outputScore < 60) {
+    diagnosis =
+      "The cycle produced limited observable output. The objective may have been too large, unclear, or insufficiently decomposed.";
+
+    recommendation =
+      "Reduce the next cycle to one visible artifact or decision. Define exactly what should exist when the timer ends.";
+  } else if (learningScore < 60) {
+    diagnosis =
+      "Execution occurred, but the system captured little learning.";
+
+    recommendation =
+      "Record one specific discovery, mistake, pattern, or decision from the cycle. Use it to change the next attempt.";
+  } else if (adjustedReadiness < 60) {
+    diagnosis =
+      "The current work may be progressing, but the next cycle is not sufficiently prepared.";
+
+    recommendation =
+      "Define the next action in physical terms: what file to open, what problem to solve, what section to write, or what decision to make.";
+  } else {
+    diagnosis =
+      "The cycle generated usable output and enough information to improve the next cycle.";
+
+    recommendation =
+      "Preserve the conditions that worked, remove one remaining source of friction, and begin the next cycle with the recorded next action.";
+  }
+
+  const intelligence = Math.round(
+    (
+      outputScore +
+      (100 - frictionIndex) +
+      learningScore +
+      adjustedReadiness
+    ) / 4
+  );
+
+  lastCycleAnalysis = {
+    outputScore,
+    frictionIndex,
+    learningScore,
+    readinessScore: adjustedReadiness,
+    intelligence,
+    diagnosis,
+    recommendation,
+    output,
+    friction,
+    insight,
+    next,
+    environment
+  };
+
+  getField("outputQuality").textContent = outputScore;
+  getField("frictionIndex").textContent = frictionIndex;
+  getField("learningValue").textContent = learningScore;
+  getField("nextReadiness").textContent = adjustedReadiness;
+
+  showResult(
+    "systemDiagnosis",
+    "System diagnosis · Intelligence " + intelligence,
+    diagnosis,
+    "result-warning"
+  );
+
+  showResult(
+    "systemRecommendation",
+    "Recommended system change",
+    recommendation,
+    "result-success"
+  );
+
+  return lastCycleAnalysis;
+}
+
+/* =========================================
+   SAVE CYCLE INTELLIGENCE
+========================================= */
+
+function saveCycle() {
+  const analysis = analyzeCycle();
+
+  if (!analysis) return;
+
+  const record = {
+    date: new Date().toLocaleString(),
+    cycle: cycleCount,
+    output: analysis.output,
+    friction: analysis.friction || "None recorded",
+    insight: analysis.insight || "None recorded",
+    next: analysis.next || "No next action recorded",
+    intelligence: analysis.intelligence
+  };
+
+  cycleHistory.unshift(record);
+  outputUnits++;
+
+  renderCycleHistory();
+  updateMetrics();
+
+  alert("Cycle intelligence record saved.");
+  log("Cycle intelligence record saved.");
+}
+
+function renderCycleHistory() {
+  const container = getField("historyContainer");
+
+  if (cycleHistory.length === 0) {
+    container.innerHTML =
+      '<div class="empty-history">No cycle intelligence records yet.</div>';
+    return;
+  }
+
+  const rows = cycleHistory.map(record => `
+    <tr>
+      <td><strong>Cycle ${record.cycle}</strong><br>${safeText(record.date)}</td>
+      <td>${safeText(record.output)}</td>
+      <td>${safeText(record.friction)}</td>
+      <td>${safeText(record.insight)}</td>
+      <td>${safeText(record.next)}</td>
+      <td><strong>${record.intelligence}</strong></td>
+    </tr>
+  `).join("");
+
+  container.innerHTML = `
+    <div class="table-wrap">
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th>Cycle</th>
+            <th>Output</th>
+            <th>Friction</th>
+            <th>Learning</th>
+            <th>Next action</th>
+            <th>Intelligence</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>
+  `;
+}
+
+/* =========================================
+   LEARNING ASSESSMENT
+========================================= */
+
+function recordResult() {
+  if (!currentPlan) {
+    alert("Create a learning plan before recording results.");
+    return;
+  }
+
+  if (!practiceCompleted) {
+    const proceed = confirm(
+      "You have not marked the practice as complete. Record the assessment anyway?"
+    );
+
+    if (!proceed) return;
+  }
+
+  const score = validPercent("afterScore", "Post-practice accuracy");
+
+  if (score === null) return;
+
+  const retentionField = getField("retention");
+  let retention = null;
+
+  if (retentionField.value.trim() !== "") {
+    retention = validPercent("retention", "Delayed retention");
+
+    if (retention === null) return;
+  }
+
+  const testType = getField("testType").value;
+  const afterConfidence = numberFrom("afterConfidence", 3);
+
+  const previousComparable = [...learningHistory]
+    .reverse()
+    .find(record => record.testType === "comparable");
+
+  const previousScore = previousComparable
+    ? previousComparable.score
+    : currentPlan.baseline;
+
+  const delta = score - previousScore;
+
+  const record = {
+    date: new Date().toLocaleString(),
+    goal: currentPlan.goal,
+    skill: currentPlan.skill,
+    baseline: currentPlan.baseline,
+    score,
+    delta,
+    retention,
+    confidence: afterConfidence,
+    testType,
+    strategy: latestRecommendation,
+    target: currentPlan.target
+  };
+
+  learningHistory.push(record);
+  lastLearningRecord = record;
+
+  if (testType === "comparable") {
+    if (delta <= 0) {
+      failureStreak++;
+    } else {
+      failureStreak = 0;
+    }
+  }
+
+  const result = getField("feedbackResult");
+  result.classList.remove("hidden");
+
+  let feedbackTitle = "Assessment recorded";
+  let feedbackMessage = "";
+
+  if (testType !== "comparable") {
+    feedbackMessage =
+      "This assessment is not directly comparable with the baseline. Keep the result as context, but do not use it alone to claim improvement or trigger a strategy change.";
+  } else if (score >= currentPlan.target) {
+    feedbackMessage =
+      "The target was reached on this assessment. Verify delayed retention and apply the skill to an unfamiliar task before declaring mastery.";
+  } else if (delta > 0) {
+    feedbackMessage =
+      "Performance improved by " + delta + " percentage points compared with the previous comparable result. Continue and verify the improvement with another test.";
+  } else {
+    feedbackMessage =
+      "No improvement was demonstrated on this comparable assessment. Review the errors, difficulty, and possible barriers before repeating the same activity.";
+  }
+
+  result.innerHTML = `
+    <h4>${safeText(feedbackTitle)}</h4>
+    <p><strong>Score:</strong> ${score}%</p>
+    <p><strong>Change from previous comparable result:</strong>
+      ${delta > 0 ? "+" : ""}${delta} percentage points
+    </p>
+    <p>${safeText(feedbackMessage)}</p>
+    ${retention !== null
+      ? "<p><strong>Delayed retention:</strong> " + retention + "%</p>"
+      : ""}
+  `;
+
+  updateAdaptation(record);
+  updateLearningDashboard();
+
+  practiceCompleted = false;
+
+  getField("practiceStatus").textContent =
+    "Assessment recorded. Review the adaptation recommendation before your next practice cycle.";
+
+  log("Learning assessment recorded.");
+}
+
+/* =========================================
+   ADAPTATION ENGINE
+========================================= */
+
+function updateAdaptation(record) {
+  const result = getField("adaptationResult");
+  const reliable = record.testType === "comparable";
+
+  if (!reliable) {
+    showResult(
+      "adaptationResult",
+      "Adaptation paused: verify the measurement",
+      "Use a new test with similar difficulty. Do not change the learning strategy based only on a non-comparable assessment.",
+      "result-warning"
+    );
+    return;
+  }
+
+  if (failureStreak === 1) {
+    showResult(
+      "adaptationResult",
+      "Review the source of difficulty",
+      "One unsuccessful result is not enough to prove the strategy failed. Inspect mistakes and check for fatigue, unclear instructions, or a harder-than-expected test.",
+      "result-warning"
+    );
+    return;
+  }
+
+  if (failureStreak >= 2) {
+    adaptationLevel++;
+
+    let nextStrategy = "guided";
+
+    if (latestRecommendation === "teach") {
+      nextStrategy = "guided";
+    } else if (latestRecommendation === "guided") {
+      nextStrategy = "teach";
+    } else if (
+      latestRecommendation === "independent" ||
+      latestRecommendation === "transfer"
+    ) {
+      nextStrategy = "guided";
+    } else if (latestRecommendation === "spaced") {
+      nextStrategy = "teach";
+    }
+
+    latestRecommendation = nextStrategy;
+    getField("strategy").value = nextStrategy;
+
+    renderRecommendation();
+    renderActionPlan();
+
+    showResult(
+      "adaptationResult",
+      "Strategy changed after repeated difficulty",
+      "The last two comparable assessments did not improve. PathKeeper recommends " +
+        strategies[nextStrategy].title +
+        ". Inspect recurring errors, check prerequisites, and change one major variable at a time.",
+      "result-warning"
+    );
+
+    return;
+  }
+
+  if (record.score >= currentPlan.target) {
+    showResult(
+      "adaptationResult",
+      "Progress toward mastery",
+      "The target was reached. Verify retention after a delay and apply the skill to an unfamiliar task before advancing.",
+      "result-success"
+    );
+  } else if (record.delta > 0) {
+    showResult(
+      "adaptationResult",
+      "Continue and verify",
+      "Performance improved. Keep the current strategy for another comparable test. If improvement persists, increase difficulty gradually.",
+      "result-success"
+    );
+  } else {
+    showResult(
+      "adaptationResult",
+      "Investigate before repeating",
+      "There is no demonstrated improvement yet. Review errors and barriers before deciding what to change.",
+      "result-warning"
+    );
+  }
+}
+
+/* =========================================
+   SAFEGUARDS
+========================================= */
+
+function reviewBarrier() {
+  const barrier = getField("barrier").value;
+
+  const guidance = {
+    none:
+      "No barrier has been reported. Continue monitoring test quality, workload, and recurring errors without assuming the current method is necessarily correct.",
+
+    fatigue:
+      "Consider a shorter session or a break, then retest when rested. Avoid interpreting a fatigue-affected score as a definitive skill level.",
+
+    time:
+      "Break the activity into smaller blocks and agree on a realistic time budget. Distinguish a speed problem from an understanding problem.",
+
+    resources:
+      "Locate a worked example, reference material, or appropriate practice resource before repeating the assessment.",
+
+    instructions:
+      "Clarify the instructions and success criteria. Ambiguous tasks can measure interpretation rather than the intended skill.",
+
+    environment:
+      "Reduce interruptions if possible, then repeat a comparable assessment. Record the changed conditions."
+  };
+
+  showResult(
+    "barrierResult",
+    "Barrier review",
+    guidance[barrier],
+    "result-warning"
+  );
+}
+
+/* =========================================
+   LEARNING DASHBOARD AND CHART
+========================================= */
+
+function updateLearningDashboard() {
+  const latest = learningHistory[learningHistory.length - 1];
+
+  getField("latestMetric").textContent =
+    latest ? latest.score + "%" : "—";
+
+  getField("changeMetric").textContent =
+    latest
+      ? (latest.score - latest.baseline > 0 ? "+" : "") +
+        (latest.score - latest.baseline) + " pp"
+      : "—";
+
+  getField("countMetric").textContent = learningHistory.length;
+
+  renderChart();
+  renderLearningHistory();
+}
+
+function renderChart() {
+  const chart = getField("chart");
+
+  if (learningHistory.length === 0) {
+    chart.innerHTML =
+      '<p class="hint">Your scores will appear here.</p>';
+    return;
+  }
+
+  const records = learningHistory.slice(-10);
+
+  const values = records.map((record, index) => ({
+    label: "Test " + (index + 1),
+    score: record.score
+  }));
+
+  chart.innerHTML = values.map(item => `
+    <div class="chart-column">
+      <span class="chart-value">${item.score}%</span>
+      <div class="chart-bar" style="height:${Math.max(3, item.score)}%"></div>
+      <span class="chart-label">${item.label}</span>
+    </div>
+  `).join("");
+}
+
+function renderLearningHistory() {
+  const container = getField("learningHistory");
+
+  if (learningHistory.length === 0) {
+    container.innerHTML =
+      '<div class="empty-history">No learning assessments recorded yet.</div>';
+    return;
+  }
+
+  container.innerHTML = learningHistory.slice().reverse().map(record => `
+    <div class="empty-history" style="text-align:left">
+      <strong>${safeText(record.skill)}</strong>
+      <p>${safeText(record.date)}</p>
+      <p>Score: ${record.score}% · Baseline: ${record.baseline}%</p>
+      <p>Strategy: ${safeText(
+        strategies[record.strategy]
+          ? strategies[record.strategy].title
+          : "Not recorded"
+      )}</p>
+      <p>Assessment: ${safeText(record.testType)}</p>
+      ${record.retention !== null
+        ? "<p>Delayed retention: " + record.retention + "%</p>"
+        : ""}
+    </div>
+  `).join("");
+}
+
+/* =========================================
+   DATA EXPORT
+========================================= */
+
+function downloadCSV(filename, rows) {
+  if (!rows.length) {
+    alert("There are no records to export yet.");
+    return;
+  }
+
+  const headers = Object.keys(rows[0]);
+
+  const escapeCSV = value =>
+    '"' + String(value ?? "").replace(/"/g, '""') + '"';
+
+  const csv = [
+    headers.map(escapeCSV).join(","),
+    ...rows.map(row =>
+      headers.map(header => escapeCSV(row[header])).join(",")
+    )
+  ].join("\n");
+
+  const blob = new Blob([csv], {
+    type: "text/csv;charset=utf-8;"
+  });
+
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+
+  link.href = url;
+  link.download = filename;
+
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  URL.revokeObjectURL(url);
+}
+
+function exportLearningData() {
+  downloadCSV("pathkeeper-learning-history.csv", learningHistory);
+}
+
+function exportCycleData() {
+  downloadCSV("pathkeeper-focus-cycle-history.csv", cycleHistory);
+}
+
+function exportData() {
+  const combined = [
+    ...cycleHistory.map(record => ({
+      recordType: "Focus cycle",
+      ...record
+    })),
+    ...learningHistory.map(record => ({
+      recordType: "Learning assessment",
+      ...record
+    }))
+  ];
+
+  downloadCSV("pathkeeper-combined-performance-records.csv", combined);
+}
+
+/* =========================================
+   RESET SESSION DATA
+========================================= */
+
+function resetAllData() {
+  const confirmed = confirm(
+    "This will clear all focus and learning records in the current page session. Export anything you want to keep first. Continue?"
+  );
+
+  if (!confirmed) return;
+
+  clearInterval(timer);
+  timer = null;
+
+  currentPlan = null;
+  practiceCompleted = false;
+  latestRecommendation = null;
+
+  learningHistory = [];
+  cycleHistory = [];
+
+  failureStreak = 0;
+  adaptationLevel = 0;
+
+  cycleRunning = false;
+  cycleStarted = false;
+
+  seconds = 1500;
+  totalSeconds = 1500;
+
+  cycleCount = 0;
+  focusMinutes = 0;
+  interruptions = 0;
+  outputUnits = 0;
+  cyclesAttempted = 0;
+
+  lastCycleAnalysis = null;
+  lastLearningRecord = null;
+
+  [
+    "learningGoal", "skill", "missionGoal", "definition",
+    "activity", "practiceNotes", "outputReview", "frictionReview",
+    "insightReview", "nextReview", "environmentReview",
+    "retention"
+  ].forEach(id => {
+    getField(id).value = "";
+  });
+
+  getField("target").value = 85;
+  getField("baseline").value = 50;
+  getField("minutes").value = 25;
+  getField("afterScore").value = 60;
+
+  getField("strategy").value = "auto";
+  getField("errorType").value = "concept";
+  getField("barrier").value = "none";
+  getField("focusDuration").value = "25";
+
+  getField("planResult").classList.add("hidden");
+  getField("missionResult").classList.add("hidden");
+  getField("feedbackResult").classList.add("hidden");
+  getField("barrierResult").classList.add("hidden");
+
+  getField("controllerResult").innerHTML =
+    "<h4>Waiting for baseline data</h4><p>Complete the baseline fields and analyze your learning needs.</p>";
+
+  getField("actionPlan").innerHTML =
+    "<h4>Practice plan</h4><p>Analyze your baseline to generate a targeted practice plan.</p>";
+
+  getField("adaptationResult").innerHTML =
+    "<h4>Adaptation status</h4><p>Results will appear after the first assessment is recorded.</p>";
+
+  getField("systemDiagnosis").innerHTML =
+    "<h4>System diagnosis</h4><p>Complete a post-cycle review to identify an improvement opportunity.</p>";
+
+  getField("systemRecommendation").innerHTML =
+    "<h4>Recommended system change</h4><p>Your recommendation will appear after the review.</p>";
+
+  getField("outputQuality").textContent = "—";
+  getField("frictionIndex").textContent = "—";
+  getField("learningValue").textContent = "—";
+  getField("nextReadiness").textContent = "—";
+
+  getField("practiceStatus").textContent = "";
+
+  getField("cycleLabel").textContent = "SYSTEM READY";
+  getField("pauseButton").textContent = "Pause";
+  getField("currentAction").textContent =
+    "Prepare a mission and initialize the system.";
+
+  updateClock();
+  updateMetrics();
+  updateLearningDashboard();
+  renderCycleHistory();
+
+  alert("The current session records have been reset.");
+}
+
+/* =========================================
+   LIVE SETTINGS AND INITIAL STATE
+========================================= */
+
+getField("energy").addEventListener("change", function() {
+  getField("capacityStatus").textContent = this.value.toUpperCase();
+});
+
+getField("noise").addEventListener("change", function() {
+  getField("noiseStatus").textContent = this.value.toUpperCase();
+});
+
+getField("focusDuration").addEventListener("change", function() {
+  if (!cycleStarted) {
+    seconds = numberFrom("focusDuration", 25) * 60;
+    totalSeconds = seconds;
+    updateClock();
+  }
+});
+
+updateClock();
+updateMetrics();
+updateLearningDashboard();
+renderCycleHistory();
+
+</script>
+</body>
+</html>
