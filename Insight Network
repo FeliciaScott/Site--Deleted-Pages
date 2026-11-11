@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Intelligence Network</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#0F2D22;
+    color:#F3EBDD;
+    line-height:1.7;
+}
+
+
+/* HERO */
+
+.hero{
+    padding:80px 20px;
+    text-align:center;
+    background:
+    linear-gradient(
+    180deg,
+    #194936,
+    #0F2D22
+    );
+    border-bottom:1px solid rgba(243,235,221,.2);
+}
+
+.hero h1{
+    font-size:3rem;
+    color:#D8B08C;
+    margin-bottom:20px;
+}
+
+.hero p{
+    max-width:850px;
+    margin:auto;
+    font-size:1.1rem;
+}
+
+
+.button{
+    display:inline-block;
+    margin-top:30px;
+    padding:14px 30px;
+    background:#4B2E1E;
+    color:#F3EBDD;
+    text-decoration:none;
+    border-radius:30px;
+    font-weight:bold;
+}
+
+
+/* MAIN */
+
+.container{
+    max-width:1150px;
+    margin:auto;
+    padding:50px 20px;
+}
+
+
+h2{
+    color:#D8B08C;
+    margin-bottom:25px;
+    font-size:2rem;
+    border-left:5px solid #4B2E1E;
+    padding-left:15px;
+}
+
+
+section{
+    margin-bottom:60px;
+}
+
+
+/* CARDS */
+
+.grid{
+
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(260px,1fr));
+
+    gap:25px;
+}
+
+
+.card{
+
+    background:#173A2B;
+    padding:25px;
+    border-radius:15px;
+    border:1px solid rgba(216,176,140,.25);
+
+    transition:.3s;
+
+}
+
+
+.card:hover{
+
+    transform:translateY(-8px);
+    border-color:#D8B08C;
+
+}
+
+
+.card h3{
+
+    color:#D8B08C;
+    margin-bottom:10px;
+
+}
+
+
+.card p{
+
+    opacity:.9;
+
+}
+
+
+
+/* INFORMATION PYRAMID */
+
+
+.level{
+
+    background:#183D2D;
+    padding:30px;
+    margin:20px 0;
+    border-left:5px solid #4B2E1E;
+    border-radius:10px;
+
+}
+
+
+.level h3{
+
+    color:#D8B08C;
+
+}
+
+
+
+/* CHECKLIST */
+
+
+.checklist{
+
+    background:#173A2B;
+    padding:30px;
+    border-radius:15px;
+
+}
+
+
+.checklist div{
+
+    padding:12px;
+    border-bottom:1px solid rgba(243,235,221,.1);
+
+}
+
+
+.checklist span{
+
+    color:#35F2D0;
+    font-weight:bold;
+
+}
+
+
+
+/* FRAMEWORK */
+
+
+.framework{
+
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(250px,1fr));
+
+gap:25px;
+
+}
+
+
+.framework-box{
+
+background:#143326;
+padding:25px;
+border-radius:12px;
+
+}
+
+
+.framework-box h3{
+
+color:#D8B08C;
+
+}
+
+
+
+/* FOOTER */
+
+
+footer{
+
+background:#082017;
+padding:60px 20px;
+text-align:center;
+
+}
+
+
+footer h2{
+
+border:none;
+
+}
+
+
+@media(max-width:700px){
+
+.hero h1{
+
+font-size:2.2rem;
+
+}
+
+
+h2{
+
+font-size:1.5rem;
+
+}
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header class="hero">
+
+<h1>The Intelligence Network</h1>
+
+<p>
+Your future decisions are shaped by the information you repeatedly consume.
+Build a personal intelligence system that improves your thinking,
+increases your awareness, and helps you recognize opportunities faster.
+</p>
+
+<a class="button" href="#system">
+Build Your Knowledge System
+</a>
+
+</header>
+
+
+
+<div class="container">
+
+
+<section>
+
+<h2>What Is an Intelligence Network?</h2>
+
+<p>
+
+An Intelligence Network is a personal ecosystem of knowledge.
+It includes books, experiences, mentors, research, conversations,
+skills, observations, and ideas that continuously improve your ability
+to understand the world.
+
+</p>
+
+<p>
+
+High performers do not simply consume more information.
+They create systems that filter, organize, and apply information.
+
+</p>
+
+</section>
+
+
+
+
+<section id="system">
+
+
+<h2>The Intelligence Growth System</h2>
+
+
+<div class="grid">
+
+
+<div class="card">
+
+<h3>1. Capture</h3>
+
+<p>
+Collect valuable ideas from books, conversations, articles,
+experiences, and observations.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>2. Organize</h3>
+
+<p>
+Connect information into categories, patterns,
+and useful frameworks.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>3. Apply</h3>
+
+<p>
+Turn knowledge into action through projects,
+experiments, and decisions.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>4. Review</h3>
+
+<p>
+Study results and improve your thinking process.
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+
+<section>
+
+<h2>The Information Pyramid</h2>
+
+
+<div class="level">
+
+<h3>Foundation: Daily Learning</h3>
+
+<p>
+Read, listen, study, and observe every day.
+Small consistent learning creates long-term advantages.
+</p>
+
+</div>
+
+
+<div class="level">
+
+<h3>Middle: Deep Understanding</h3>
+
+<p>
+Study topics beyond headlines.
+Learn history, causes, systems, and opposing viewpoints.
+</p>
+
+</div>
+
+
+<div class="level">
+
+<h3>Top: Original Thinking</h3>
+
+<p>
+Combine ideas from different fields to create new solutions,
+strategies, and opportunities.
+</p>
+
+</div>
+
+
+</section>
+
+
+
+
+
+<section>
+
+
+<h2>Information Diet Rules</h2>
+
+
+<div class="framework">
+
+
+<div class="framework-box">
+
+<h3>Consume Less Noise</h3>
+
+<p>
+Avoid endless information that creates awareness without action.
+</p>
+
+</div>
+
+
+
+<div class="framework-box">
+
+<h3>Increase Depth</h3>
+
+<p>
+One deeply understood concept is more valuable than hundreds
+of shallow opinions.
+</p>
+
+</div>
+
+
+
+<div class="framework-box">
+
+<h3>Study Systems</h3>
+
+<p>
+Learn how money, organizations, technology, psychology,
+and society operate.
+</p>
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+<section>
+
+
+<h2>Daily Intelligence Checklist....  Upgrade List</h2>
+
+
+<div class="checklist">
+
+
+<div>
+<span>✓</span>
+Read or study something valuable
+</div>
+
+
+<div>
+<span>✓</span>
+Write down important ideas
+</div>
+
+
+<div>
+<span>✓</span>
+Question an assumption
+</div>
+
+
+<div>
+<span>✓</span>
+Practice a useful skill
+</div>
+
+
+<div>
+<span>✓</span>
+Review what you learned
+</div>
+
+
+<div>
+<span>✓</span>
+Apply one idea in real life
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+<section>
+
+
+<h2>Knowledge Compounds Over Time</h2>
+
+
+<p>
+
+A single idea may appear insignificant.
+However, ideas connected together create frameworks.
+Frameworks improve decisions.
+Better decisions create better outcomes.
+
+</p>
+
+
+<p>
+
+The advantage does not come from knowing everything.
+The advantage comes from building a mind that learns,
+adapts, and improves continuously.
+
+</p>
+
+
+</section>
+
+
+
+</div>
+
+
+
+<footer>
+
+<h2>Create Your Intelligence Advantage</h2>
+
+<p>
+
+The quality of your future depends on the quality of information
+you allow into your mind today.
+
+</p>
+
+
+</footer>
+
+
+
+</body>
+</html>
