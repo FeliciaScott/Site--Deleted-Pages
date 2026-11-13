@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PathKeeper | Site Strategy and Page Planner</title>
+<style>
+:root {
+  --forest:#173d2d; --green:#2f6547; --sage:#e2ecdf;
+  --cream:#f8f5ed; --paper:#fff; --brown:#79543a;
+  --tan:#ead8bd; --ink:#24342b; --muted:#65746a;
+  --line:#d7dfd5; --red:#8a4237; --gold:#c89c59;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);
+font:15px/1.55 Arial,Helvetica,sans-serif}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+header{background:linear-gradient(125deg,var(--forest),#38674a);
+color:white;padding:38px 20px}
+.wrap{max-width:1250px;margin:auto;padding:0 17px}
+.eyebrow{color:#e7c69c;font-size:11px;font-weight:bold;
+letter-spacing:2px;text-transform:uppercase}
+h1{font-size:clamp(30px,5vw,46px);line-height:1.1;margin:10px 0}
+header p{max-width:800px;color:#e7eee8}
+main{padding:22px 0 55px}
+.panel{background:white;border:1px solid var(--line);
+border-radius:15px;padding:22px;margin:17px 0}
+h2{color:var(--forest);font-size:22px;margin:0 0 9px}
+h3{color:var(--green);font-size:16px}
+p{margin:8px 0}
+.muted,.small{color:var(--muted);font-size:13px}
+.note{background:#f3ecdf;border-left:4px solid var(--brown);
+border-radius:7px;padding:12px 14px;margin:13px 0;font-size:13px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.stat{background:white;border:1px solid var(--line);
+border-radius:11px;padding:14px}
+.stat strong{display:block;color:var(--forest);font-size:25px}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.btn{border:0;border-radius:8px;padding:11px 14px;
+font-weight:bold;background:var(--forest);color:white}
+.btn.light{background:var(--sage);color:var(--forest)}
+.btn.brown{background:var(--brown);color:white}
+.btn.red{background:#f4e3df;color:var(--red)}
+.btn.gold{background:var(--tan);color:#3b2a1e}
+.btn:hover{opacity:.87}
+.progress-track{height:9px;background:#e9eee7;border-radius:20px;
+overflow:hidden;margin:12px 0}
+.progress-fill{height:100%;width:0;background:var(--green)}
+.field-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.field{min-width:0}
+.field.full{grid-column:1/-1}
+label{display:block;font-weight:bold;font-size:13px;margin-bottom:6px}
+input,select,textarea{width:100%;padding:10px;border:1px solid #cbd5ca;
+border-radius:8px;background:#fff;color:var(--ink)}
+textarea{min-height:85px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:2px solid #92b59a}
+.question{padding:13px 0;border-bottom:1px solid #edf0eb}
+.question:last-child{border-bottom:0}
+.question label{font-size:14px}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;min-width:1050px;font-size:12px}
+th,td{text-align:left;vertical-align:top;padding:9px;
+border-bottom:1px solid #e7ece5}
+th{position:sticky;top:0;background:#edf3eb;color:var(--forest);z-index:1}
+td input,td select,td textarea{min-width:110px;padding:7px;font-size:12px}
+td textarea{min-width:180px;min-height:65px}
+.tag{display:inline-block;background:var(--sage);color:var(--forest);
+padding:3px 7px;border-radius:5px;font-size:11px}
+.section-intro{margin-bottom:15px}
+.result{display:none}
+.result.show{display:block}
+.result-head{background:var(--forest);color:white;border-radius:11px;
+padding:20px;margin-bottom:15px}
+.result-head h2{color:white}
+.result-head p{color:#e4ece5}
+.result-card{border:1px solid var(--line);border-radius:11px;
+padding:15px;margin:12px 0;overflow-wrap:anywhere}
+.result-card.high{border-left:5px solid var(--green)}
+.result-card.medium{border-left:5px solid var(--gold)}
+.result-card.backup{border-left:5px solid var(--brown)}
+.result-card li{margin:7px 0}
+footer{background:var(--forest);color:#e4ece5;padding:23px;text-align:center}
+@media(max-width:700px){
+ .stats{grid-template-columns:repeat(2,1fr)}
+ .field-grid{grid-template-columns:1fr}
+ .field.full{grid-column:auto}
+ .panel{padding:15px}
+ .btn{width:100%}
+}
+@media print{
+ header{background:white;color:black;padding:10px}
+ header p,.eyebrow{color:#333}
+ body{background:white}
+ .panel{break-inside:avoid}
+ .toolbar,.no-print,button{display:none!important}
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="wrap">
+ <div class="eyebrow">PathKeeper · Website Operations</div>
+ <h1>Site Strategy & Page Planning System</h1>
+ <p>
+ Turn your existing page inventory into an organized editing plan.
+ Review existing pages, add missing pages, improve connections, and
+ generate a strategy with a backup plan based on your answers.
+ </p>
+</div>
+</header>
+
+<main class="wrap">
+
+<section class="panel">
+ <h2>How this version works</h2>
+ <p>
+ This tool combines your questionnaire, page inventory, editing decisions,
+ page-content suggestions, and link recommendations.
+ </p>
+ <div class="note">
+ <strong>Preservation rule:</strong> The planner does not delete pages from
+ Google Sites. Keep, Merge, Move, Review, Create, and Remove are planning
+ decisions only. Verify content and links before making changes to the live site.
+ </div>
+ <div class="stats">
+  <div class="stat"><strong id="pageCount">0</strong><span class="small">Inventory entries</span></div>
+  <div class="stat"><strong id="addedCount">0</strong><span class="small">Added by you</span></div>
+  <div class="stat"><strong id="mergeCount">0</strong><span class="small">Merge candidates</span></div>
+  <div class="stat"><strong id="createCount">0</strong><span class="small">Create candidates</span></div>
+ </div>
+ <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+ <p class="small" id="progressText">Review the inventory and questionnaire to build your plan.</p>
+</section>
+
+<section class="panel" id="inventory">
+ <h2>01. PathKeeper page inventory</h2>
+ <p class="muted section-intro">
+ These entries combine the page list you provided with the earlier page-content
+ and link map. The suggestions are planning guidance. Confirm titles, parents,
+ and current live-page status against your Google Sites Pages panel.
+ </p>
+
+ <div class="field-grid no-print">
+  <div class="field">
+   <label for="searchPages">Search pages</label>
+   <input id="searchPages" placeholder="Search by title, parent, content, or suggestion">
+  </div>
+  <div class="field">
+   <label for="filterAction">Filter by editing decision</label>
+   <select id="filterAction">
+    <option value="">All decisions</option>
+    <option>Keep</option><option>Review</option><option>Merge</option>
+    <option>Move</option><option>Create</option><option>Remove</option>
+   </select>
+  </div>
+ </div>
+
+ <div class="toolbar no-print">
+  <button type="button" class="btn light" id="showAll">Show all pages</button>
+  <button type="button" class="btn light" id="addPageBtn">Add a page</button>
+  <button type="button" class="btn" id="downloadInventory">Download inventory CSV</button>
+  <button type="button" class="btn light" id="resetInventory">Restore starter inventory</button>
+ </div>
+
+ <div class="table-wrap">
+ <table>
+ <thead>
+ <tr>
+  <th>Page title</th>
+  <th>Parent / proposed location</th>
+  <th>Decision</th>
+  <th>Status</th>
+  <th>Purpose / suggested content</th>
+  <th>Buttons / related pages</th>
+  <th>Published URL</th>
+  <th>Notes / next action</th>
+ </tr>
+ </thead>
+ <tbody id="pageRows"></tbody>
+ </table>
+ </div>
+ <p class="small" id="inventoryStatus" aria-live="polite">
+ Changes are used in the generated report. Download a backup to preserve them.
+ </p>
+</section>
+
+<section class="panel">
+ <h2>02. Strategy questionnaire</h2>
+ <p class="muted">
+ Answer what you know. You can leave questions blank. Your answers are combined
+ with the page inventory to create the strategy and backup plan.
+ </p>
+
+ <form id="strategyForm">
+
+ <h3>A. Mission and visitors</h3>
+ <div class="field-grid">
+  <div class="question">
+   <label for="audience">1. Who should PathKeeper help first?</label>
+   <select id="audience">
+    <option value="">Choose or leave blank</option>
+    <option>Students</option><option>Career changers</option>
+    <option>Job seekers</option><option>Aspiring business owners</option>
+    <option>People developing skills</option><option>Several audiences</option>
+   </select>
+  </div>
+  <div class="question">
+   <label for="mission">2. What is the main result visitors should achieve?</label>
+   <textarea id="mission" placeholder="What should a visitor be able to do after using the site?"></textarea>
+  </div>
+  <div class="question">
+   <label for="problem">3. What problem does PathKeeper solve?</label>
+   <textarea id="problem" placeholder="Describe the problem in practical terms."></textarea>
+  </div>
+  <div class="question">
+   <label for="homepage">4. What is the homepage plan?</label>
+   <select id="homepage">
+    <option value="">Choose or leave blank</option>
+    <option>Build a focused landing page to replace the current homepage</option>
+    <option>Improve the existing homepage</option>
+    <option>Create a new homepage and preserve useful old content</option>
+   </select>
+  </div>
+ </div>
+
+ <h3>B. Page structure and editing</h3>
+ <div class="field-grid">
+  <div class="question">
+   <label for="mainBlocker">5. What is the biggest current obstacle?</label>
+   <select id="mainBlocker">
+    <option value="">Choose or leave blank</option>
+    <option>Too many pages or drafts</option><option>Unclear parent pages</option>
+    <option>Duplicate content</option><option>Missing content</option>
+    <option>Missing links</option><option>Design and layout</option>
+    <option>Technical problems</option><option>Not enough time</option>
+    <option>Unclear priorities</option><option>Finding visitors</option>
+   </select>
+  </div>
+  <div class="question">
+   <label for="navPlan">6. What should the main navigation contain?</label>
+   <textarea id="navPlan" placeholder="Suggested: Home, Intelligence Center, Opportunity Atlas, Mobility & Location, Career Planning, Resource Vault, About & How to Use."></textarea>
+  </div>
+  <div class="question">
+   <label for="pagePolicy">7. How should duplicate pages be handled?</label>
+   <select id="pagePolicy">
+    <option value="">Choose or leave blank</option>
+    <option>Compare content and merge only after preserving unique information</option>
+    <option>Keep separate until I review each page</option>
+    <option>Review duplicate drafts in groups by topic</option>
+   </select>
+  </div>
+  <div class="question">
+   <label for="newPages">8. What additional pages should be created?</label>
+   <textarea id="newPages" placeholder="Add page titles and explain what each should do. These suggestions will be included in the report."></textarea>
+  </div>
+  <div class="question">
+   <label for="contentNeeds">9. What information is missing from existing pages?</label>
+   <textarea id="contentNeeds" placeholder="Examples: explanations, steps, eligibility, official links, cost comparisons, templates, examples."></textarea>
+  </div>
+  <div class="question">
+   <label for="pageOrder">10. Which pages must be completed first?</label>
+   <textarea id="pageOrder" placeholder="List the pages that matter most to launch."></textarea>
+  </div>
+ </div>
+
+ <h3>C. Buttons, links, and visitor journey</h3>
+ <div class="field-grid">
+  <div class="question">
+   <label for="primaryAction">11. What is the main visitor action?</label>
+   <select id="primaryAction">
+    <option value="">Choose or leave blank</option>
+    <option>Explore opportunities</option><option>Use the Free Library</option>
+    <option>Build a career plan</option><option>Research a location</option>
+    <option>Use a learning tool</option><option>Create evidence of work</option>
+    <option>Purchase a service or product</option>
+   </select>
+  </div>
+  <div class="question">
+   <label for="buttonNeeds">12. Which buttons need destinations or clearer labels?</label>
+   <textarea id="buttonNeeds" placeholder="List the button label, current page, and intended destination if known."></textarea>
+  </div>
+  <div class="question">
+   <label for="visitorFlow">13. What should the visitor journey be?</label>
+   <textarea id="visitorFlow" placeholder="Example: Home → Opportunity Atlas → Intelligence Center → Career Planning → Execution & Progress → WorkProof."></textarea>
+  </div>
+  <div class="question">
+   <label for="linksState">14. How complete are internal links?</label>
+   <select id="linksState">
+    <option value="">Choose or leave blank</option>
+    <option>Mostly complete and tested</option><option>Some missing</option>
+    <option>Many missing</option><option>Not tested on the published site</option>
+   </select>
+  </div>
+ </div>
+
+ <h3>D. Design, resources, and proof of work</h3>
+ <div class="field-grid">
+  <div class="question">
+   <label for="design">15. What visual direction should the site use?</label>
+   <select id="design">
+    <option value="">Choose or leave blank</option>
+    <option>Forest green, cream, and brown</option>
+    <option>Dark green with warm neutral accents</option>
+    <option>Light and minimal</option>
+    <option>Compare multiple color combinations</option>
+   </select>
+  </div>
+  <div class="question">
+   <label for="images">16. What should happen to pictures?</label>
+   <select id="images">
+    <option value="">Choose or leave blank</option>
+    <option>Remove decorative pictures unless useful</option>
+    <option>Keep instructional visuals and evidence images</option>
+    <option>Use images to show proof of work</option>
+    <option>Review each image individually</option>
+   </select>
+  </div>
+  <div class="question">
+   <label for="proof">17. What proof-of-work features are needed?</label>
+   <textarea id="proof" placeholder="Examples: image evidence, project records, certificates, completed tasks, portfolio links."></textarea>
+  </div>
+  <div class="question">
+   <label for="resourceTypes">18. What should the Resource Vault include?</label>
+   <textarea id="resourceTypes" placeholder="Examples: templates, guides, checklists, official links, learning resources, grant resources."></textarea>
+  </div>
+  <div class="question">
+   <label for="mobile">19. What is the mobile readiness status?</label>
+   <select id="mobile">
+    <option value="">Choose or leave blank</option>
+    <option>Tested and usable</option><option>Needs improvement</option>
+    <option>Not tested yet</option>
+   </select>
+  </div>
+  <div class="question">
+   <label for="automation">20. Which interactive features matter most?</label>
+   <textarea id="automation" placeholder="Examples: guided questionnaires, calculators, search filters, checklists, downloads, progress tracking."></textarea>
+  </div>
+ </div>
+
+ <h3>E. Opportunities, business, and discovery</h3>
+ <div class="field-grid">
+  <div class="question">
+   <label for="opportunities">21. Which opportunity categories are priorities?</label>
+   <textarea id="opportunities" placeholder="Scholarships, funding, certificates, study abroad, competitions, internships, startups, and other categories."></textarea>
+  </div>
+  <div class="question">
+   <label for="offerings">22. What products or services should be considered?</label>
+   <textarea id="offerings" placeholder="Describe possible paid services, digital products, templates, or custom work."></textarea>
+  </div>
+  <div class="question">
+   <label for="monetization">23. How should paid offerings be approached?</label>
+   <select id="monetization">
+    <option value="">Choose or leave blank</option>
+    <option>Keep the site free for now</option>
+    <option>Free tools with optional paid resources</option>
+    <option>Test one service before building more</option>
+    <option>Research demand and competitor pricing first</option>
+   </select>
+  </div>
+  <div class="question">
+   <label for="traffic">24. How should people discover PathKeeper?</label>
+   <select id="traffic">
+    <option value="">Choose or leave blank</option>
+    <option>Search engines and useful content</option>
+    <option>Direct sharing and referrals</option>
+    <option>Social media</option>
+    <option>Partnerships</option>
+    <option>Several channels</option>
+   </select>
+  </div>
+ </div>
+
+ <h3>F. Time, risks, and backup plan</h3>
+ <div class="field-grid">
+  <div class="question">
+   <label for="time">25. How much time is available each week?</label>
+   <select id="time">
+    <option value="">Choose or leave blank</option>
+    <option>Under 2 hours</option><option>2–4 hours</option>
+    <option>5–7 hours</option><option>8–12 hours</option>
+    <option>More than 12 hours</option><option>Varies</option>
+   </select>
+  </div>
+  <div class="question">
+   <label for="budget">26. What is the available budget?</label>
+   <select id="budget">
+    <option value="">Choose or leave blank</option>
+    <option>$0 — free tools only</option><option>Under $50</option>
+    <option>$50–$200</option><option>$200–$500</option>
+    <option>Depends on evidence of demand</option>
+   </select>
+  </div>
+  <div class="question">
+   <label for="risk">27. What could cause the project to stall?</label>
+   <textarea id="risk" placeholder="Examples: scope expansion, unfinished pages, untested links, time, budget, or missing information."></textarea>
+  </div>
+  <div class="question">
+   <label for="fallback">28. If the original plan fails, what is the preferred fallback?</label>
+   <select id="fallback">
+    <option value="">Choose or leave blank</option>
+    <option>Launch a smaller useful version</option>
+    <option>Focus on one audience</option>
+    <option>Focus on one page or tool</option>
+    <option>Improve existing pages gradually</option>
+    <option>Test one paid service separately</option>
+    <option>Ask users for feedback and revise</option>
+   </select>
+  </div>
+  <div class="question">
+   <label for="success">29. How will success be measured?</label>
+   <select id="success">
+    <option value="">Choose or leave blank</option>
+    <option>Visitors complete a useful task</option>
+    <option>Downloads or tool use</option>
+    <option>Returning visitors</option>
+    <option>Service requests or sales</option>
+    <option>Completed plans and proof of work</option>
+    <option>Search traffic</option>
+   </select>
+  </div>
+  <div class="question">
+   <label for="deadline">30. When should the first milestone be reached?</label>
+   <select id="deadline">
+    <option value="">Choose or leave blank</option>
+    <option>7 days</option><option>30 days</option>
+    <option>60 days</option><option>90 days</option>
+   </select>
+  </div>
+  <div class="question">
+   <label for="extraNotes">31. Any other details the strategy must consider?</label>
+   <textarea id="extraNotes" placeholder="Include constraints, additional pages, important suggestions, or corrections."></textarea>
+  </div>
+ </div>
+
+ <div class="toolbar">
+  <button class="btn" type="button" id="generate">Generate Strategy + Backup Plan</button>
+  <button class="btn light" type="button" id="downloadReport">Download Strategy Report</button>
+  <button class="btn light" type="button" id="downloadJSON">Download Project Backup (JSON)</button>
+  <button class="btn brown" type="button" id="downloadChecklist">Download Action Checklist</button>
+ </div>
+ <p id="status" class="small" aria-live="polite">Complete what you can, then generate your report.</p>
+ </form>
+</section>
+
+<section class="panel result" id="results" aria-live="polite">
+ <div id="reportContent"></div>
+ <div class="toolbar no-print">
+  <button class="btn" type="button" id="downloadAgain">Download this report</button>
+  <button class="btn light" type="button" onclick="window.print()">Print / Save as PDF</button>
+ </div>
+</section>
+
+</main>
+<footer>PathKeeper · Strategy, page structure, useful connections, and practical execution.</footer>
+
+<script>
+"use strict";
+
+/* Starter page records preserve the titles and decisions supplied by the user.
+   Suggestions are planning guidance, not verified facts about the live site. */
+
+const starterPages = [
+{name:"Home",parent:"—",action:"Keep",status:"Not started",purpose:"Main landing page: mission, visitor pathways, and clear next actions.",content:"Mission; who PathKeeper helps; how to use the site; featured pathways; concise descriptions of the main sections.",buttons:"Our Core Mission → About & How to Use; Free Library → Resource Vault; Explore Opportunities → Opportunity Atlas; Build a Career Plan → Career Planning",url:"",notes:"Consider a focused landing page to replace the current homepage if that remains your plan."},
+{name:"Asymmetric",parent:"Home",action:"Keep",status:"Not started",purpose:"Explain asymmetric value and leverage: actions where potential value outweighs required resources.",content:"Concept; practical examples; decision framework; risk and trade-offs; action worksheet.",buttons:"Explore the Framework; Compare Options → Intelligence Center; Build a Plan → Career Planning",url:"",notes:"Keep the main version. Compare all supporting drafts before merging."},
+{name:"Add to Asymmetric",parent:"Asymmetric",action:"Merge",status:"Not started",purpose:"Supporting content intended to be incorporated into the main Asymmetric page.",content:"Review unique examples and frameworks; transfer useful content to Asymmetric; confirm no unique links are lost.",buttons:"Link to Asymmetric main page",url:"",notes:"User-supplied parent was Delete; merge candidate. Verify before removing."},
+{name:"link- Pre-Commitment",parent:"Main- Pre-Commitment",action:"Merge",status:"Not started",purpose:"Supporting or linked Pre-Commitment draft.",content:"Compare content with the main Pre-Commitment page; preserve useful examples and internal links.",buttons:"Link to Main- Pre-Commitment",url:"",notes:"User-supplied parent was Delete; merge candidate."},
+{name:"Main- Pre-Commitment",parent:"Home",action:"Keep",status:"Not started",purpose:"Teach pre-commitment: decide rules in advance to reduce impulsive decisions under pressure.",content:"Definition; when it helps; practical decision map; safeguards; exceptions; review and adjustment process.",buttons:"Build a Pre-Commitment Plan; Explore Default Action; Review Progress",url:"",notes:"Main page candidate. Avoid absolute claims that planning removes all emotion or guarantees optimal outcomes."},
+{name:"Create Evidence- Redesign",parent:"WorkProof",action:"Move",status:"Not started",purpose:"Redesigned evidence-of-work page or tool.",content:"Evidence standards; task; actions taken; result; artifact; skills shown; next improvement.",buttons:"Create Evidence → WorkProof; Open Evidence Block",url:"",notes:"User supplied parent Button. Proposed destination is WorkProof; confirm which button should lead here."},
+{name:"Attention redesign",parent:"Attention",action:"Keep",status:"Not started",purpose:"Explain attention control and reduce fragmentation during meaningful work.",content:"Common distractions; task switching; environmental changes; focus sessions; recovery; practical experiments.",buttons:"Start a Focus Session; Explore Focus Champions; Review Progress",url:"",notes:"Check whether this is the primary Attention page or a redesign draft."},
+{name:"Add to Create Evidence",parent:"Create Evidence",action:"Merge",status:"Not started",purpose:"Supporting evidence content to incorporate into the main evidence workflow.",content:"Review examples, evidence criteria, image/file proof requirements, and unique links.",buttons:"Create Evidence; Open Evidence Block",url:"",notes:"User-supplied parent was Delete; merge candidate."},
+{name:"Main Skill Rarity",parent:"Skill Rarity Redesign",action:"Merge",status:"Not started",purpose:"Older or supporting Skill Rarity page.",content:"Compare unique explanations, examples, and links with the redesign before merging.",buttons:"Link to Skill Rarity Redesign",url:"",notes:"User-supplied parent was Delete; merge candidate."},
+{name:"Skill Rarity Redesign",parent:"Opportunity Atlas",action:"Review",status:"Not started",purpose:"Explain how complementary, in-demand skills can differentiate a career profile.",content:"Skill combinations; evidence of demand; practice plan; proof-of-work; risks of relying on one trend.",buttons:"Map Skill Gaps → Career Planning; Build Proof → WorkProof",url:"",notes:"Confirm whether this belongs under Career Intelligence Lab rather than Opportunity Atlas."},
+{name:"Link Quality Information",parent:"Information Quality",action:"Merge",status:"Not started",purpose:"Supporting content about evaluating link and source quality.",content:"Official source checks; date checked; relevance; warning signs; broken-link review; source notes.",buttons:"Evaluate a Resource → Resource Intelligence Center",url:"",notes:"User-supplied parent was Delete; merge candidate."},
+{name:"Education App",parent:"Opportunity Atlas",action:"Review",status:"Not started",purpose:"Education opportunity or education-search tool.",content:"Learning options; eligibility; time; costs; financial aid; outcomes; provider verification.",buttons:"Compare Learning Options; Find Certificates; Explore Study Abroad",url:"",notes:"Clarify whether this is a standalone app, page, or education category."},
+{name:"Technology",parent:"Opportunity Atlas",action:"Review",status:"Not started",purpose:"Technology skills, tools, and learning pathways.",content:"Skill areas; free and low-cost learning; prerequisites; project ideas; technology programs; privacy and safety.",buttons:"Explore Tech Skills; Find Training; Build a Project",url:"",notes:"Potential connection to Career Intelligence Lab and WorkProof."},
+{name:"Information Quality",parent:"Intelligence Center",action:"Keep",status:"Not started",purpose:"Teach visitors to assess source credibility, freshness, evidence, and relevance.",content:"Source quality criteria; official links; recency; evidence strength; bias and uncertainty; comparison examples.",buttons:"Evaluate a Resource → Resource Intelligence Center; Compare Sources → Intelligence Center",url:"",notes:"Original parent was Unsure; proposed location is Intelligence Center."},
+{name:"Main- Location Power",parent:"Location Power Differential Mapping",action:"Review",status:"Not started",purpose:"Main version of the location power differential analysis page.",content:"Opportunity access; local industries; education; costs; transport; funding; services; constraints and evidence.",buttons:"Search Opportunities by Category and Location; Compare Locations",url:"",notes:"Compare with Location Power Differential Mapping and the redesign before deciding."},
+{name:"Startup",parent:"Opportunity Atlas",action:"Create",status:"Not started",purpose:"Help visitors investigate startup programs and test business ideas.",content:"Idea validation; accelerator options; funding; requirements; basic business planning; milestones and risks.",buttons:"Explore Accelerators; Find Funding; Validate an Idea",url:"",notes:"User-supplied parent was Home; proposed placement is Opportunity Atlas."},
+{name:"Search Location",parent:"Location Power Differential Mapping",action:"Merge",status:"Not started",purpose:"Location search content to incorporate into the dedicated location/category search page.",content:"Location input; category; eligibility; local or remote scope; official results; date checked.",buttons:"Search Opportunities by Category and Location",url:"",notes:"User-supplied parent was Location; merge candidate."},
+{name:"Track Your Progress",parent:"Execution & Progress",action:"Keep",status:"Not started",purpose:"Help visitors track actions, milestones, evidence, and review dates.",content:"Goals; completed actions; blockers; evidence; next step; weekly review.",buttons:"View My Next Actions; Record Evidence; Return to Career Planning",url:"",notes:"Original parent was Unsure; proposed placement is Execution & Progress."},
+{name:"Action Planner",parent:"Career Planning",action:"Review",status:"Not started",purpose:"Convert goals into actionable tasks, deadlines, and review points.",content:"Goal; next action; schedule; resources; blockers; completion criteria; fallback actions.",buttons:"Create My Plan; Track Progress; Find Opportunities",url:"",notes:"Original parent was Career GroundWork; confirm current parent and naming."},
+{name:"Editing Map",parent:"Website operations / private workspace",action:"Remove",status:"Not started",purpose:"Internal editing reference rather than a primary visitor destination.",content:"Keep useful planning information outside the public visitor navigation if it is only for site administration.",buttons:"Internal use only if retained",url:"",notes:"User supplied parent GitHub and action Remove. Confirm whether the live page is still needed before removal."},
+{name:"3 Page Edits",parent:"Website operations / private workspace",action:"Remove",status:"Not started",purpose:"Editing work record or draft.",content:"Preserve any unique instructions before removing from the public navigation.",buttons:"Internal use only if retained",url:"",notes:"User-supplied action Remove. Confirm before changing the live site."},
+{name:"2 Main Location Power redesign",parent:"Location Power Differential Mapping",action:"Merge",status:"Not started",purpose:"Alternative location power redesign draft.",content:"Compare sections, useful facts, visual design, and links with the main page.",buttons:"Link to Location Power Differential Mapping",url:"",notes:"User-supplied parent Home; merge candidate."},
+{name:"Default Action",parent:"Default Action Architecture",action:"Keep",status:"Not started",purpose:"Explain how defaults and pre-decided actions can make useful behavior easier.",content:"Default choices; triggers; practical examples; limitations; safeguards; review process.",buttons:"Explore Default Action Architecture; Build an Action Plan",url:"",notes:"Original parent Home; proposed grouping under Default Action Architecture."},
+{name:"Main- Gamified MultiOutcome",parent:"Other Offerings Gamified",action:"Keep",status:"Not started",purpose:"Main gamified multi-outcome system.",content:"Goals; missions; progress rules; different outcome pathways; evidence; feedback and review.",buttons:"Start a Mission; Track Progress; Submit Proof",url:"",notes:"Original parent Home; proposed placement under Other Offerings Gamified."},
+{name:"MultiOutcome",parent:"Main- Gamified MultiOutcome",action:"Merge",status:"Not started",purpose:"Supporting MultiOutcome draft.",content:"Compare unique missions, scoring rules, and examples with the main gamified page.",buttons:"Link to Main- Gamified MultiOutcome",url:"",notes:"User-supplied parent Delete; merge candidate."},
+{name:"Intelligence Network",parent:"Intelligence Center",action:"Keep",status:"Not started",purpose:"Connect research, resources, and decisions across PathKeeper.",content:"Research pathways; source relationships; comparison tools; related topic links; review criteria.",buttons:"Open Intelligence Center; Evaluate a Resource; Compare Options",url:"",notes:"Original parent Unsure; proposed placement under Intelligence Center."},
+{name:"Add to Intelligence Network",parent:"Intelligence Network",action:"Merge",status:"Not started",purpose:"Supporting Intelligence Network content.",content:"Compare unique sections, resource links, and network relationships with the main page.",buttons:"Link to Intelligence Network",url:"",notes:"User-supplied parent Unsure; merge candidate."},
+{name:"link Attention Fragmentation",parent:"Attention redesign",action:"Merge",status:"Not started",purpose:"Supporting attention-fragmentation content.",content:"Useful examples, explanations, and practical focus techniques.",buttons:"Link to Attention redesign",url:"",notes:"Original parent note included Delete; merge candidate."},
+{name:"attention 2",parent:"Attention redesign",action:"Merge",status:"Not started",purpose:"Additional Attention draft.",content:"Compare unique content and links with the main Attention page.",buttons:"Link to Attention redesign",url:"",notes:"User-supplied parent Delete; merge candidate."},
+{name:"link cognitive environment",parent:"Main- Cognitive Environment",action:"Merge",status:"Not started",purpose:"Supporting Cognitive Environment content.",content:"Preserve unique environmental-design guidance and relevant links.",buttons:"Link to Main- Cognitive Environment",url:"",notes:"User-supplied parent Delete; merge candidate."},
+{name:"Main- Cognitive Environment",parent:"Home",action:"Keep",status:"Not started",purpose:"Explain how physical and digital environments influence attention and action.",content:"Environment design; reduce friction; distraction controls; default settings; examples; review loop.",buttons:"Explore Attention; Explore Pre-Commitment; Explore Default Action",url:"",notes:"Main page candidate for cognitive systems."},
+{name:"2 cognitive environment",parent:"Main- Cognitive Environment",action:"Merge",status:"Not started",purpose:"Older cognitive environment draft.",content:"Compare unique examples and sections with the main cognitive environment page.",buttons:"Link to Main- Cognitive Environment",url:"",notes:"User-supplied parent Delete; merge candidate."},
+{name:"add to cognitive environment",parent:"Main- Cognitive Environment",action:"Merge",status:"Not started",purpose:"Supporting cognitive environment material.",content:"Transfer useful unique material to the main page after review.",buttons:"Link to Main- Cognitive Environment",url:"",notes:"User-supplied parent Delete; merge candidate."},
+{name:"Insight Network",parent:"Intelligence Network",action:"Merge",status:"Not started",purpose:"Related intelligence or insight draft.",content:"Compare its unique purpose with Intelligence Network and Resource Intelligence Center.",buttons:"Link to the retained research page",url:"",notes:"User-supplied parent Unsure; merge candidate pending content review."},
+{name:"resume 2",parent:"resume redesign",action:"Merge",status:"Not started",purpose:"Older resume draft.",content:"Compare examples, template content, and unique guidance with the main resume page.",buttons:"Link to resume redesign",url:"",notes:"User-supplied parent Delete; merge candidate."},
+{name:"resume",parent:"resume redesign",action:"Merge",status:"Not started",purpose:"Original resume page.",content:"Preserve useful resume advice, examples, and external links before merging.",buttons:"Link to resume redesign",url:"",notes:"User-supplied parent Delete; merge candidate."},
+{name:"resume redesign",parent:"Career Planning",action:"Keep",status:"Not started",purpose:"Main resume resource for presenting skills and experience.",content:"Resume structure; achievement statements; role-specific tailoring; evidence; review checklist.",buttons:"Edit My Resume; Build Evidence; Explore Career Planning",url:"",notes:"Original parent Unsure; proposed placement under Career Planning."},
+{name:"Able Console",parent:"Career Intelligence Lab",action:"Move",status:"Not started",purpose:"Console or interface for a learning, career, or evidence workflow.",content:"Define its function, inputs, outputs, user instructions, and relationship to other tools.",buttons:"Open the relevant learning or career tool",url:"",notes:"Original parent Unsure; confirm exact purpose before moving."},
+{name:"portfolio- (maybe duplicate)",parent:"Portfolio Operator / PortfolioOS",action:"Keep",status:"Not started",purpose:"Portfolio draft that may contain distinct work samples.",content:"Inventory work samples; identify unique evidence; compare against resume and WorkProof; select strongest artifacts.",buttons:"Build a Portfolio; View WorkProof",url:"",notes:"User explicitly flagged possible duplication; compare before merging."},
+{name:"2 course template",parent:"Resource Vault / Templates",action:"Merge",status:"Not started",purpose:"Course template draft.",content:"Compare structure, worksheets, and instructions with the retained course template.",buttons:"Open Course Template",url:"",notes:"Original parent Finance; proposed placement under Resource Vault / Templates."},
+{name:"2 grant template",parent:"Resource Vault / Templates",action:"Review",status:"Not started",purpose:"Grant template draft.",content:"Review intended audience, instructions, fields, and whether it duplicates the main grant template.",buttons:"Open Grant Template",url:"",notes:"Original parent Finance; proposed placement under Resource Vault / Templates."},
+{name:"3 course template",parent:"Resource Vault / Templates",action:"Merge",status:"Not started",purpose:"Additional course template draft.",content:"Compare unique fields and instructions with the retained course template.",buttons:"Open Course Template",url:"",notes:"Original parent Finance; merge candidate."},
+{name:"Logos",parent:"Branding / private workspace",action:"Review",status:"Not started",purpose:"Brand assets or logo collection.",content:"Identify current approved logo, favicon, image versions, usage rules, and where each asset belongs.",buttons:"Use approved branding assets",url:"",notes:"Original parent Delete; review before removing assets."},
+{name:"2 course template redesign (main)",parent:"Resource Vault / Templates",action:"Review",status:"Not started",purpose:"Main redesigned course template candidate.",content:"Compare usability, instructions, fields, and content quality with other course templates.",buttons:"Open Course Template",url:"",notes:"Original parent Finance; determine whether this should be the retained version."},
+{name:"course template redesign",parent:"Resource Vault / Templates",action:"Merge",status:"Not started",purpose:"Course template redesign draft.",content:"Compare unique sections with the main redesign before merging.",buttons:"Link to retained course template",url:"",notes:"Original parent Finance; merge candidate."},
+{name:"grant template",parent:"Resource Vault / Templates",action:"Merge",status:"Not started",purpose:"Grant template draft.",content:"Compare fields, instructions, and examples with the main grant template.",buttons:"Link to retained grant template",url:"",notes:"Original parent Finance; merge candidate."},
+{name:"grant template redesign (main)",parent:"Resource Vault / Templates",action:"Keep",status:"Not started",purpose:"Main grant template candidate.",content:"Grant purpose; eligibility; need statement; project plan; budget; outcomes; evidence; review checklist.",buttons:"Use Grant Template; Review Funding Opportunities",url:"",notes:"Original parent Finance; proposed retained template."},
+{name:"EDIT resume",parent:"resume redesign",action:"Review",status:"Not started",purpose:"Resume editing workflow or worksheet.",content:"Resume review criteria; role match; evidence-based achievements; formatting and final check.",buttons:"Edit My Resume; Build Evidence",url:"",notes:"Original parent Unsure; clarify whether this is a tool or a duplicate page."},
+{name:"Intelligence Center",parent:"Home",action:"Review",status:"Not started",purpose:"Central research and decision hub.",content:"Facts; comparisons; decision frameworks; source quality; location analysis; research limitations.",buttons:"Compare Options; Analyze a Location; Open Resource Vault",url:"",notes:"Core destination. Link to Opportunity Atlas and Career Planning."},
+{name:"Location Power Differential Mapping",parent:"Intelligence Center",action:"Review",status:"Not started",purpose:"Compare locations for opportunity access and practical constraints.",content:"Local industries; training; cost; transportation; funding; public resources; source dates; trade-offs.",buttons:"Search Opportunities by Category and Location; Compare Locations",url:"",notes:"Core research page."},
+{name:"Search Opportunities by Category and Location",parent:"Location Power Differential Mapping",action:"Review",status:"Not started",purpose:"Find opportunities by category and location.",content:"Category; location; eligibility; local or remote scope; official result links; date checked.",buttons:"Search Opportunities; Reset Filters; Compare Results",url:"",notes:"Add clear empty-state guidance and next-step links."},
+{name:"Resource Vault",parent:"Home",action:"Review",status:"Not started",purpose:"Central library of reusable resources.",content:"Guides; checklists; templates; official resources; descriptions; formats; source and last-reviewed date.",buttons:"Browse Free Library; Open Templates; Evaluate a Resource",url:"",notes:"Primary destination for the Free Library button."},
+{name:"Resource Intelligence Center",parent:"Resource Vault",action:"Review",status:"Not started",purpose:"Help visitors judge resource quality and usefulness.",content:"Source credibility; freshness; audience; cost; evidence; limitations; comparison criteria.",buttons:"Evaluate a Resource; Compare Sources; Open Resource Vault",url:"",notes:"Connect to Information Quality."},
+{name:"Create Evidence",parent:"WorkProof",action:"Move",status:"Not started",purpose:"Create evidence of completed work.",content:"Task; context; action taken; result; image or artifact; skills shown; reflection; next improvement.",buttons:"Create Evidence; Open Evidence Block; Build a Portfolio",url:"",notes:"Original parent Button; proposed destination WorkProof."},
+{name:"add content somewhere",parent:"Career Planning",action:"Merge",status:"Not started",purpose:"Unassigned content that needs a clear home.",content:"Identify the topic and audience; compare with Career Planning and Career Mindset; place content on the best-fitting page.",buttons:"Link to the selected topic page",url:"",notes:"Original parent Career Mindset; do not merge until the content is identified."},
+{name:"Coded Opportunity",parent:"Opportunity Atlas",action:"Merge",status:"Not started",purpose:"Opportunity-related draft or code page.",content:"Identify useful opportunity information or working code; preserve reusable content and links.",buttons:"Link to the appropriate opportunity page",url:"",notes:"Original parent Delete; review its unique value before merging."},
+{name:"Remote Work Programs",parent:"Opportunity Atlas",action:"Keep",status:"Not started",purpose:"Find remote work programs and related opportunities.",content:"Role/program type; eligibility; paid status; location restrictions; requirements; official application links; date checked.",buttons:"Browse Remote Work Programs; Prepare an Application",url:"",notes:"Original parent Unsure; proposed placement under Opportunity Atlas."},
+{name:"add to remote work",parent:"Remote Work Programs",action:"Merge",status:"Not started",purpose:"Supporting remote-work content.",content:"Compare unique program details, eligibility information, and links with the main page.",buttons:"Link to Remote Work Programs",url:"",notes:"User-supplied parent Delete; merge candidate."},
+{name:"add to When Work is Hard",parent:"Career Planning / Focus Champions",action:"Merge",status:"Not started",purpose:"Support material for working through difficulty or stalled progress.",content:"Define the challenge; reduce task size; identify blockers; plan recovery; choose a next action.",buttons:"Choose a Next Action; Start a Focus Session",url:"",notes:"Original parent Delete; confirm best destination after reviewing content."},
+{name:"New 3 Default Action",parent:"Default Action Architecture",action:"Review",status:"Not started",purpose:"Alternative Default Action draft.",content:"Compare frameworks, examples, instructions, and links with the main architecture page.",buttons:"Link to Default Action Architecture",url:"",notes:"User-supplied parent Home; review for overlap."},
+{name:"New Main Default Action",parent:"Default Action Architecture",action:"Review",status:"Not started",purpose:"Potential main Default Action page.",content:"Default behavior; triggers; choice architecture; examples; safeguards; review criteria.",buttons:"Build a Default Action Plan; Explore Pre-Commitment",url:"",notes:"Compare with New Default Action Architecture before selecting a main version."},
+{name:"New Default Action Architecture",parent:"Home",action:"Review",status:"Not started",purpose:"Explain how to design default actions that reduce friction and support goals.",content:"Goal; current default; desired default; trigger; action; feedback; safeguards; adjustment.",buttons:"Build a Default Action Plan; Explore Pre-Commitment",url:"",notes:"Potential main page; compare against other Default Action drafts."},
+{name:"New Information Filtering",parent:"Information Quality",action:"Review",status:"Not started",purpose:"Explain a repeatable process for filtering information.",content:"Define question; assess source; check recency; compare claims; note uncertainty; choose action; review later.",buttons:"Evaluate a Resource; Compare Sources",url:"",notes:"Proposed placement under Information Quality."},
+{name:"High-Velocity Focus DashBoard",parent:"Attention redesign",action:"Move",status:"Not started",purpose:"Focus dashboard or interface.",content:"Current mission; timer/session; distraction control; task outcome; progress log; review.",buttons:"Start a Focus Session; Review Progress",url:"",notes:"Original parent Attention; confirm whether it is a standalone tool or a section."},
+{name:"Decoded Pathways",parent:"Opportunity Atlas / Career Planning",action:"Keep",status:"Not started",purpose:"Explain pathways from interests or skills to concrete opportunities.",content:"Starting point; options; prerequisites; costs; risks; decision steps; next actions.",buttons:"Explore Opportunities; Build a Career Plan",url:"",notes:"Original parent Unsure; select one primary home and link to related sections."},
+{name:"add to Decoded pathways",parent:"Decoded Pathways",action:"Merge",status:"Not started",purpose:"Supporting pathway content.",content:"Compare unique steps, examples, and links with Decoded Pathways.",buttons:"Link to Decoded Pathways",url:"",notes:"User-supplied parent Delete; merge candidate."},
+{name:"GitHub 2 Decoded replace",parent:"Decoded Pathways",action:"Merge",status:"Not started",purpose:"Replacement or imported Decoded Pathways draft.",content:"Compare content, embedded code, links, and design with the retained version.",buttons:"Link to Decoded Pathways",url:"",notes:"User-supplied parent Delete; preserve unique content before merging."},
+{name:"Resource Matrix",parent:"Resource Vault",action:"Move",status:"Not started",purpose:"Structured comparison matrix for resources.",content:"Resource name; purpose; audience; cost; requirements; credibility; source; last checked; next action.",buttons:"Compare Resources; Evaluate a Resource",url:"",notes:"Original parent Resource; proposed placement Resource Vault or Resource Intelligence Center."},
+{name:"Able Console lesson",parent:"Resource Vault / Learning",action:"Merge",status:"Not started",purpose:"Lesson content related to Able Console.",content:"Identify learning objective, instructions, examples, and whether the lesson belongs with a retained tool.",buttons:"Open the relevant lesson or tool",url:"",notes:"User-supplied parent Delete; merge candidate."},
+{name:"Certificates",parent:"Education",action:"Keep",status:"Not started",purpose:"Help visitors choose useful certificates based on goals and evidence.",content:"Issuing organization; cost; time; prerequisites; assessment; recognition; free alternatives; proof project.",buttons:"Compare Certificates; Check Requirements; Add to Learning Plan",url:"",notes:"Opportunity Atlas education subtopic."},
+{name:"Study Abroad",parent:"Education",action:"Keep",status:"Not started",purpose:"Research international education and practical requirements.",content:"Program; eligibility; tuition and living costs; funding; official visa information; deadlines; language and support.",buttons:"Compare Programs; Find Study Funding; Build a Checklist",url:"",notes:"Use official sources for current requirements."},
+{name:"Competitions",parent:"Education",action:"Keep",status:"Not started",purpose:"Find competitions that develop or demonstrate skills.",content:"Eligibility; topic; format; deadline; fees; judging; awards; intellectual-property terms; official rules.",buttons:"Browse Competitions; Review Rules; Prepare a Submission",url:"",notes:"Opportunity Atlas education subtopic."},
+{name:"Opportunity Atlas",parent:"Home",action:"Keep",status:"Not started",purpose:"Central directory for structured opportunities.",content:"Scholarships; funding; internships; fellowships; education; certificates; study abroad; competitions; eligibility; deadlines; official links.",buttons:"Browse Scholarships; Find Funding; Explore Education; Find Internships",url:"",notes:"Use concise category pages with clear next steps."},
+{name:"Scholarship",parent:"Opportunity Atlas",action:"Review",status:"Not started",purpose:"Locate scholarships and organize applications.",content:"Eligibility; award; study level; geographic limits; required materials; deadline; official application; tracker.",buttons:"Search Scholarships; Prepare Documents; Track Applications",url:"",notes:"Check dates and eligibility against official sources."},
+{name:"Funding",parent:"Opportunity Atlas",action:"Review",status:"Not started",purpose:"Help visitors find financial support relevant to a goal.",content:"Funding type; eligible applicants; permitted use; award size if verified; deadline; matching requirements; official source; scam warnings.",buttons:"Find Grants; Compare Funding; Check Eligibility",url:"",notes:"Connect to grant templates and Startup."},
+{name:"Fellowship",parent:"Opportunity Atlas",action:"Review",status:"Not started",purpose:"Find fellowships for study, research, service, or career development.",content:"Focus; applicant profile; duration; stipend or costs; expected output; application stages; official source.",buttons:"Browse Fellowships; Check Fit; Prepare Materials",url:"",notes:"Opportunity Atlas category."},
+{name:"Mentorship",parent:"Opportunity Atlas",action:"Review",status:"Not started",purpose:"Help visitors find and use mentoring relationships productively.",content:"Mentor sources; outreach examples; goals; boundaries; meeting agenda; follow-up; program links.",buttons:"Find Mentorship; Draft an Introduction; Set Learning Goals",url:"",notes:"Connect to Career Planning and Internship."},
+{name:"Internship",parent:"Opportunity Atlas",action:"Review",status:"Not started",purpose:"Find practical work experience and prepare applications.",content:"Role; skills; pay status; eligibility; location; dates; materials; official posting; evidence to collect.",buttons:"Browse Internships; Prepare a Resume; Track Applications",url:"",notes:"Connect to WorkProof."},
+{name:"Volunteering",parent:"Opportunity Atlas",action:"Review",status:"Not started",purpose:"Find service opportunities that build experience and contribute to a cause.",content:"Role; time; location; screening; skills gained; organization credibility; sign-up link; evidence of experience.",buttons:"Find Volunteer Roles; Compare Commitments; Record Experience",url:"",notes:"Opportunity Atlas category."},
+{name:"Education",parent:"Opportunity Atlas",action:"Review",status:"Not started",purpose:"Compare learning options against career goals and constraints.",content:"Credentials; learning formats; prerequisites; time and cost; aid; outcomes; recognition; official provider links.",buttons:"Compare Learning Options; Find Certificates; Explore Study Abroad",url:"",notes:"Parent for Certificates, Study Abroad, Competitions, and Education App if appropriate."},
+{name:"Mobility",parent:"Opportunity Atlas",action:"Review",status:"Not started",purpose:"Assess how location, access, and moving affect opportunity.",content:"Transportation; housing; cost of living; local industries; education; services; geographic eligibility; relocation trade-offs.",buttons:"Compare Locations; Research Local Resources; Review Costs",url:"",notes:"Connect to Location Power Differential Mapping."},
+{name:"Residency",parent:"Opportunity Atlas",action:"Review",status:"Not started",purpose:"Find residency programs, placements, or structured learning experiences.",content:"Program type; eligibility; duration; location; cost or support; materials; deadline; official program link.",buttons:"Check Eligibility; Compare Programs; Prepare an Application",url:"",notes:"Opportunity Atlas category."},
+{name:"Accelerator",parent:"Startup",action:"Review",status:"Not started",purpose:"Compare structured programs that help projects or businesses grow.",content:"Target stage; duration; mentorship; equity or fees; deliverables; deadline; geographic restrictions.",buttons:"Compare Accelerators; Check Requirements; Build Application",url:"",notes:"Connect to Startup and Funding."},
+{name:"Problem Solving Center",parent:"Home",action:"Review",status:"Not started",purpose:"Help visitors define problems, test causes, and select practical solutions.",content:"Problem statement; evidence vs assumptions; root cause; options; constraints; small tests; success measures.",buttons:"Define the Problem; Compare Solutions; Run a Small Test",url:"",notes:"Potential future expansion."},
+{name:"Career Intelligence Lab",parent:"Home",action:"Review",status:"Not started",purpose:"Build career understanding through role research, skill analysis, and evidence.",content:"Target roles; tasks and skills; demand; entry requirements; learning gaps; portfolio proof; alternatives; source quality.",buttons:"Analyze a Career; Map Skill Gaps; Build Proof",url:"",notes:"Connect to Certificates, WorkProof, and PortfolioOS."},
+{name:"Focus Champions",parent:"Home",action:"Review",status:"Not started",purpose:"Support consistent work through focused sessions and visible progress.",content:"Goal; work sessions; distraction plan; session result; recovery; weekly review; progress measures.",buttons:"Start a Focus Session; Choose a Mission; Review Progress",url:"",notes:"Connect to Attention and Execution & Progress."},
+{name:"WorkProof",parent:"Home",action:"Review",status:"Not started",purpose:"Turn completed work into credible evidence of skills.",content:"Evidence standard; project; problem; actions; result; artifacts; skills demonstrated; reflection.",buttons:"Create Evidence; Open Evidence Block; Build a Portfolio",url:"",notes:"Core destination for Create Evidence."},
+{name:"Evidence Block",parent:"WorkProof",action:"Review",status:"Not started",purpose:"Capture one concise record of completed work.",content:"Task; date; context; actions; result; artifact; skills demonstrated; limitations; next step.",buttons:"Save Evidence; Add Another Record; View WorkProof",url:"",notes:"A structured evidence template may be more useful than a separate page."},
+{name:"Elevate Learning Network v3",parent:"Home",action:"Review",status:"Not started",purpose:"Connect learning goals, practice, feedback, and opportunities.",content:"Learning objective; baseline; practice resources; feedback loop; weekly milestones; support; proof of improvement.",buttons:"Choose a Learning Goal; Find Resources; Track Improvement",url:"",notes:"Review relationship to gamified learning pages."},
+{name:"Portfolio Operator / PortfolioOS",parent:"Career Intelligence Lab",action:"Review",status:"Not started",purpose:"Turn career development into missions, progress, proof, and review.",content:"Goal; mission list; progress rules; milestones; evidence requirements; weekly audit; next mission.",buttons:"Start a Mission; Submit Proof; Run a Weekly Audit",url:"",notes:"Connect to WorkProof and Evidence Block."},
+{name:"Career Planning",parent:"Home",action:"Keep",status:"Not started",purpose:"Convert a career direction into a feasible learning and work plan.",content:"Target outcome; current situation; skill gaps; schedule; resources; milestones; constraints; fallback plan.",buttons:"Create My Plan; Find Opportunities; Build Skills; Track Progress",url:"",notes:"Core navigation destination."},
+{name:"Execution & Progress",parent:"Career Planning",action:"Keep",status:"Not started",purpose:"Help visitors carry out plans and detect stalled progress.",content:"Action checklist; deadlines; applications; task status; blockers; evidence; next action; weekly review.",buttons:"View My Next Actions; Track Applications; Record Evidence",url:"",notes:"Connect Career Planning to WorkProof."},
+{name:"About & How to Use",parent:"Home",action:"Create",status:"Not started",purpose:"Explain the mission and guide visitors through the site.",content:"Who PathKeeper serves; mission; visitor walkthrough; main sections; evaluating resources; research-to-action process; limitations.",buttons:"Our Core Mission; Start Here; Browse Free Library",url:"",notes:"Recommended destination for Our Core Mission."},
+{name:"Mobility & Location",parent:"Home",action:"Create",status:"Not started",purpose:"A clear main destination for location comparisons and location-dependent opportunities.",content:"Location power differential; location research; opportunity search; practical costs and access; decision checklist.",buttons:"Compare Locations; Search Opportunities by Category and Location",url:"",notes:"Proposed navigation label to group the location-related pages."},
+{name:"Other Offerings Gamified",parent:"Home",action:"Review",status:"Not started",purpose:"Organize gamified learning and execution offerings.",content:"Explain each tool; who it serves; how it connects to missions, proof, feedback, and career planning.",buttons:"Explore Learning Tools; Start a Mission; View PortfolioOS",url:"",notes:"Use as the parent for related gamified pages where appropriate."},
+{name:"Default Action Architecture",parent:"Intelligence Center",action:"Review",status:"Not started",purpose:"Show how to design default actions that make useful behavior easier.",content:"Goal; current default; desired default; trigger; action; feedback; safeguards; review.",buttons:"Build a Default Action Plan; Explore Pre-Commitment",url:"",notes:"Potential main page for the Default Action drafts."},
+{name:"Attention",parent:"Home",action:"Review",status:"Not started",purpose:"Centralize attention, focus, and fragmentation-control content.",content:"Attention fragmentation; environmental design; focus sessions; distraction reduction; progress review.",buttons:"Explore Attention Control; Start a Focus Session",url:"",notes:"Potential parent for Attention redesign and High-Velocity Focus Dashboard."}
+];
+
+let pages = [];
+let addedIds = 0;
+let latestReport = "";
+let latestChecklist = "";
+
+function cloneStarter(){return starterPages.map(p=>({...p,addedByUser:false}))}
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function val(id){return document.getElementById(id)?.value?.trim()||""}
+
+function renderInventory(){
+ const q=val("searchPages").toLowerCase();
+ const action=val("filterAction");
+ const rows=document.getElementById("pageRows");
+ const filtered=pages.map((p,i)=>({...p,_i:i})).filter(p=>{
+  const hay=[p.name,p.parent,p.purpose,p.content,p.buttons,p.notes,p.action,p.status].join(" ").toLowerCase();
+  return (!q||hay.includes(q))&&(!action||p.action===action);
+ });
+
+ rows.innerHTML=filtered.map(p=>`
+ <tr data-index="${p._i}">
+  <td>
+   <input data-field="name" aria-label="Page title" value="${esc(p.name)}">
+   ${p.addedByUser?'<span class="tag">Added</span>':""}
+  </td>
+  <td><input data-field="parent" aria-label="Parent page" value="${esc(p.parent)}"></td>
+  <td><select data-field="action" aria-label="Editing decision">
+   ${["Keep","Review","Merge","Move","Create","Remove"].map(x=>`<option ${p.action===x?"selected":""}>${x}</option>`).join("")}
+  </select></td>
+  <td><select data-field="status" aria-label="Completion status">
+   ${["Not started","Researching","Drafting","Ready to build","Built in Google Sites","Published and tested","Blocked"].map(x=>`<option ${p.status===x?"selected":""}>${x}</option>`).join("")}
+  </select></td>
+  <td>
+   <textarea data-field="purpose" aria-label="Purpose">${esc(p.purpose)}</textarea>
+   <textarea data-field="content" aria-label="Suggested content" placeholder="Suggested content">${esc(p.content)}</textarea>
+  </td>
+  <td>
+   <textarea data-field="buttons" aria-label="Buttons and links">${esc(p.buttons)}</textarea>
+  </td>
+  <td><input data-field="url" aria-label="Published URL" placeholder="Paste real URL" value="${esc(p.url)}"></td>
+  <td><textarea data-field="notes" aria-label="Notes and next action">${esc(p.notes)}</textarea></td>
+ </tr>`).join("");
+
+ const merges=pages.filter(p=>p.action==="Merge").length;
+ const creates=pages.filter(p=>p.action==="Create").length;
+ const added=pages.filter(p=>p.addedByUser).length;
+ const complete=pages.filter(p=>p.status==="Published and tested").length;
+ document.getElementById("pageCount").textContent=pages.length;
+ document.getElementById("addedCount").textContent=added;
+ document.getElementById("mergeCount").textContent=merges;
+ document.getElementById("createCount").textContent=creates;
+ const pct=pages.length?Math.round(complete/pages.length*100):0;
+ document.getElementById("progressFill").style.width=pct+"%";
+ document.getElementById("progressText").textContent=
+ `${complete} of ${pages.length} entries marked Published and tested (${pct}%).`;
+}
+
+function syncInventoryField(e){
+ const el=e.target;
+ if(!el.matches("[data-field]"))return;
+ const row=el.closest("tr");
+ if(!row)return;
+ const i=Number(row.dataset.index);
+ const key=el.dataset.field;
+ if(!pages[i])return;
+ pages[i][key]=el.value;
+ document.getElementById("inventoryStatus").textContent=
+ "Inventory changed. Generate a new report to include the latest edits.";
+ if(key==="name"||key==="parent"||key==="action"||key==="status")renderInventory();
+}
+
+document.getElementById("pageRows").addEventListener("change",syncInventoryField);
+document.getElementById("pageRows").addEventListener("input",syncInventoryField);
+document.getElementById("searchPages").addEventListener("input",renderInventory);
+document.getElementById("filterAction").addEventListener("change",renderInventory);
+
+document.getElementById("showAll").addEventListener("click",()=>{
+ document.getElementById("searchPages").value="";
+ document.getElementById("filterAction").value="";
+ renderInventory();
+});
+
+document.getElementById("addPageBtn").addEventListener("click",()=>{
+ const name=prompt("Enter the new page title:");
+ if(!name||!name.trim())return;
+ const parent=prompt("Enter the proposed parent page (or leave blank):")||"To be decided";
+ const purpose=prompt("What should this page help visitors do?")||"Define the page purpose.";
+ pages.push({
+  name:name.trim(),parent,action:"Create",status:"Not started",
+  purpose,content:"Define the useful information, steps, examples, resources, and evidence the page should include.",
+  buttons:"Define primary action and destination",url:"",
+  notes:"Newly added page. Check for overlap with existing pages before building.",
+  addedByUser:true
+ });
+ addedIds++;
+ renderInventory();
+ document.getElementById("inventoryStatus").textContent=
+ "Page added. Edit its suggested content and links in the inventory.";
+});
+
+document.getElementById("resetInventory").addEventListener("click",()=>{
+ if(!confirm("Restore the starter inventory? Your current inventory edits will be lost."))return;
+ pages=cloneStarter();
+ renderInventory();
+ document.getElementById("inventoryStatus").textContent="Starter inventory restored.";
+});
+
+function getAnswers(){
+ const ids=[
+ "audience","mission","problem","homepage","mainBlocker","navPlan","pagePolicy",
+ "newPages","contentNeeds","pageOrder","primaryAction","buttonNeeds","visitorFlow",
+ "linksState","design","images","proof","resourceTypes","mobile","automation",
+ "opportunities","offerings","monetization","traffic","time","budget","risk",
+ "fallback","success","deadline","extraNotes"
+ ];
+ const out={};
+ ids.forEach(id=>out[id]=val(id));
+ return out;
+}
+
+function makeStrategy(a){
+ const tasks=[];
+ const backups=[];
+ const risks=[];
+ const recommendations=[];
+
+ function task(priority,title,detail){
+  tasks.push({priority,title,detail});
+ }
+
+ task("HIGH","Set the mission and visitor outcome",
+  `Define who PathKeeper serves and what visitors should accomplish. Audience: ${a.audience||"to be confirmed"}. Desired result: ${a.mission||"define a concrete result"}.`);
+
+ if(a.homepage.includes("focused landing page")||!a.homepage){
+  task("HIGH","Finish the focused landing page",
+   "State the mission, explain how to use the site, and route visitors to the main sections. Keep the homepage focused instead of duplicating every topic page.");
+ }else{
+  task("HIGH","Improve the selected homepage approach",
+   `Follow the chosen approach: ${a.homepage}. Preserve useful content and test the visitor journey before publishing.`);
+ }
+
+ task("HIGH","Review the page inventory",
+  "Use the current inventory decisions. Confirm the page name, purpose, parent, and unique content before moving or merging any page.");
+
+ if(pages.some(p=>p.action==="Merge")){
+  task("HIGH","Review merge candidates without losing useful content",
+   "Compare every Merge candidate with its proposed destination. Preserve unique sections, useful links, code, images, and examples before changing the live site.");
+ }
+
+ if(pages.some(p=>p.action==="Create")){
+  task("MEDIUM","Evaluate proposed new pages",
+   "Check whether each Create candidate needs a separate page or belongs as a section on an existing page. Create pages only when they have a distinct visitor purpose.");
+ }
+
+ task("HIGH","Complete the core navigation",
+  "Use Home as the entry point. Connect Our Core Mission to About & How to Use, Free Library to Resource Vault, Explore Opportunities to Opportunity Atlas, and Build a Career Plan to Career Planning.");
+
+ task("HIGH","Connect the visitor journey",
+  `Use this intended flow as a starting point: ${a.visitorFlow||"Home → Opportunity Atlas → Intelligence Center / Mobility & Location → Career Planning → Execution & Progress → WorkProof"}. Test each destination on the published site.`);
+
+ if(a.linksState!=="Mostly complete and tested"){
+  task("HIGH","Test all important buttons and links",
+   "Verify the button label, destination, and published URL. Remove or fix placeholders and check mobile behavior.");
+ }
+
+ task("HIGH","Add useful content to each priority page",
+  `Include the purpose, useful information, resources, decision or action, and next step. Missing information identified: ${a.contentNeeds||"review each page brief and fill gaps"}.`);
+
+ if(a.images==="Remove decorative pictures unless useful"){
+  task("MEDIUM","Remove unnecessary decorative pictures",
+   "Keep only visuals that explain a concept, support navigation, or provide useful proof of work.");
+ }
+
+ task("MEDIUM","Review evidence-of-work connections",
+  `Connect Create Evidence, WorkProof, Evidence Block, resume redesign, and Portfolio Operator / PortfolioOS where relevant. Evidence requirements: ${a.proof||"define what counts as credible proof"}.`);
+
+ task("MEDIUM","Improve the resource system",
+  `Organize the Resource Vault around: ${a.resourceTypes||"guides, templates, checklists, and trusted resources"}. Link resource evaluation guidance to Information Quality and Resource Intelligence Center.`);
+
+ if(a.mobile==="Not tested yet"||a.mobile==="Needs improvement"){
+  task("HIGH","Test mobile layouts and buttons",
+   "Review text readability, navigation, button spacing, tables, embeds, and downloads on a phone-sized screen.");
+ }
+
+ task("MEDIUM","Check page quality and current information",
+  "Use logical H1/H2/H3 headings, descriptive page titles, useful image alt text, working internal links, official sources for opportunity details, and a last-checked date for changing information.");
+
+ task("MEDIUM","Limit work to available resources",
+  `Available time: ${a.time||"not specified"}. Budget: ${a.budget||"not specified"}. Complete the most important visitor path before optional redesigns.`);
+
+ if(a.offerings||a.monetization){
+  task("MEDIUM","Validate one sustainable offering",
+   `Potential offerings: ${a.offerings||"not specified"}. Approach: ${a.monetization||"research demand before deciding"}. Define the deliverable, intended audience, boundaries, and evidence of demand before expanding.`);
+ }
+
+ task("MEDIUM","Set a measurable milestone",
+  `Preferred measure: ${a.success||"a visitor completes a useful task"}. Target: ${a.deadline||"set a review date"}. Record what was completed and what still blocks progress.`);
+
+ if(a.newPages){
+  recommendations.push("Additional pages requested: "+a.newPages);
+ }
+ if(a.pageOrder){
+  recommendations.push("Pages to prioritize first: "+a.pageOrder);
+ }
+ if(a.buttonNeeds){
+  recommendations.push("Button/link issues to resolve: "+a.buttonNeeds);
+ }
+ if(a.automation){
+  recommendations.push("Interactive features requested: "+a.automation);
+ }
+ if(a.opportunities){
+  recommendations.push("Opportunity categories to prioritize: "+a.opportunities);
+ }
+ if(a.extraNotes){
+  recommendations.push("Additional requirements: "+a.extraNotes);
+ }
+ if(a.navPlan){
+  recommendations.push("Preferred navigation: "+a.navPlan);
+ }
+
+ const mergePages=pages.filter(p=>p.action==="Merge");
+ const createPages=pages.filter(p=>p.action==="Create");
+ const movePages=pages.filter(p=>p.action==="Move");
+ const reviewPages=pages.filter(p=>p.action==="Review");
+ const removePages=pages.filter(p=>p.action==="Remove");
+
+ if(mergePages.length){
+  recommendations.push("Merge candidates ("+mergePages.length+"): "+
+   mergePages.map(p=>p.name+" → "+p.parent).join("; "));
+ }
+ if(createPages.length){
+  recommendations.push("Create candidates ("+createPages.length+"): "+
+   createPages.map(p=>p.name+" → "+p.parent).join("; "));
+ }
+ if(movePages.length){
+  recommendations.push("Move candidates ("+movePages.length+"): "+
+   movePages.map(p=>p.name+" → "+p.parent).join("; "));
+ }
+ if(reviewPages.length){
+  recommendations.push("Review candidates ("+reviewPages.length+"): "+
+   reviewPages.map(p=>p.name).join("; "));
+ }
+ if(removePages.length){
+  recommendations.push("Removal candidates ("+removePages.length+"): "+
+   removePages.map(p=>p.name).join("; ")+
+   ". Confirm that useful content, code, images, and links have been preserved before any live removal.");
+ }
+
+ if(a.risk)risks.push("Risk identified: "+a.risk);
+ if(a.mainBlocker==="Too many pages or drafts"||a.mainBlocker==="Unclear priorities"){
+  risks.push("Scope risk: do not add another page until the current priority page has a clear purpose, complete core content, and working links.");
+ }
+ if(a.mainBlocker==="Finding visitors"){
+  risks.push("Discovery risk: publishing alone does not guarantee visitors. Test one relevant discovery channel and measure actual use.");
+ }
+ if(a.mainBlocker==="Technical problems"){
+  risks.push("Technical risk: prototype and test a feature in the published environment before depending on it across multiple pages.");
+ }
+ if(a.pagePolicy){
+  recommendations.push("Duplicate handling rule: "+a.pagePolicy+".");
+ }
+
+ const fallback=a.fallback;
+ if(fallback==="Focus on one audience"){
+  backups.push("Reduce the site to one main audience and tailor the landing page, examples, navigation, and first action to that group.");
+ }else if(fallback==="Focus on one page or tool"){
+  backups.push("Focus on one useful page or tool. Make it work end-to-end before adding more sections.");
+ }else if(fallback==="Improve existing pages gradually"){
+  backups.push("Pause broad restructuring. Improve the highest-value existing pages one at a time, testing each change before moving on.");
+ }else if(fallback==="Test one paid service separately"){
+  backups.push("Test one defined service with a small audience. Validate the problem and willingness to pay before investing in a large product system.");
+ }else if(fallback==="Ask users for feedback and revise"){
+  backups.push("Ask a few intended visitors to complete the main action. Record where they hesitate and revise the most confusing step.");
+ }else{
+  backups.push("Launch a minimum useful version: a focused Home page, one core tool or resource, and tested links to the next step.");
+ }
+
+ backups.push("If a duplicate is difficult to resolve, preserve both versions temporarily, compare unique content and links, and defer the merge until the destination is clear.");
+ backups.push("If time or budget becomes constrained, pause optional branding and secondary tools. Protect the main visitor path, accurate content, and working links.");
+ backups.push("If traffic is low, check public access and indexing settings, improve the page's usefulness, and share one relevant resource directly with the intended audience.");
+ backups.push("If an embed, script, or download fails, provide a simpler alternative and document the limitation instead of allowing the entire visitor journey to fail.");
+
+ if(!risks.length)risks.push("Review scope, time, budget, page overlap, link quality, and visitor usefulness weekly.");
+
+ return {tasks,backups,risks,recommendations};
+}
+
+function buildReport(a,s){
+ const out=[];
+ const add=(x="")=>out.push(x);
+ add("PATHKEEPER — STRATEGY, PAGE INVENTORY & BACKUP PLAN");
+ add("Generated: "+new Date().toLocaleString());
+ add("=".repeat(66));
+ add("");
+ add("1. STRATEGIC DIRECTION");
+ add("Audience: "+(a.audience||"To be confirmed"));
+ add("Mission/result: "+(a.mission||"Define a measurable visitor outcome"));
+ add("Problem: "+(a.problem||"Clarify the main problem PathKeeper solves"));
+ add("Homepage approach: "+(a.homepage||"Create or confirm a focused landing page"));
+ add("Primary action: "+(a.primaryAction||"Choose the main visitor action"));
+ add("Success measure: "+(a.success||"A visitor completes a useful task"));
+ add("Target milestone: "+(a.deadline||"Set a review date"));
+ add("");
+ add("2. PRIORITY ACTION PLAN");
+ s.tasks.forEach((t,i)=>{
+  add(`${i+1}. [${t.priority}] ${t.title}`);
+  add("   "+t.detail);
+  add("");
+ });
+ add("3. CURRENT PAGE INVENTORY AND DECISIONS");
+ add("-".repeat(40));
+ pages.forEach((p,i)=>{
+  add(`${i+1}. ${p.name}`);
+  add("   Parent: "+(p.parent||"Unassigned"));
+  add("   Decision: "+p.action+" | Status: "+p.status);
+  add("   Purpose: "+(p.purpose||"Not defined"));
+  add("   Suggested content: "+(p.content||"Not defined"));
+  add("   Buttons / related pages: "+(p.buttons||"Not defined"));
+  add("   Published URL: "+(p.url||"Not supplied"));
+  add("   Notes / next action: "+(p.notes||"None"));
+  add("");
+ });
+ add("4. ADDITIONAL PAGE AND CONTENT REQUESTS");
+ add("Navigation: "+(a.navPlan||"Use the proposed core navigation and confirm it"));
+ add("New pages requested: "+(a.newPages||"None specified in questionnaire"));
+ add("Missing content: "+(a.contentNeeds||"Review page briefs for gaps"));
+ add("Pages to prioritize: "+(a.pageOrder||"Start with Home and the core visitor path"));
+ add("Buttons needing attention: "+(a.buttonNeeds||"Test all core buttons"));
+ add("Desired visitor flow: "+(a.visitorFlow||"Home → Opportunity Atlas → Intelligence Center / Mobility → Career Planning → Execution & Progress → WorkProof"));
+ add("");
+ add("5. RECOMMENDED SITE-WIDE CONTENT STANDARD");
+ add("- Every page states its purpose and who it helps.");
+ add("- Each page provides useful information, relevant resources, and a next step.");
+ add("- Use official sources for eligibility, deadlines, fees, and applications.");
+ add("- Add last-checked dates where information changes frequently.");
+ add("- Use descriptive buttons and connect them to correct destinations.");
+ add("- Check mobile layout and test the published version.");
+ add("- Preserve unique content before merging or removing drafts.");
+ add("");
+ add("6. BACKUP PLAN");
+ s.backups.forEach((x,i)=>add((i+1)+". "+x));
+ add("");
+ add("7. RISK CONTROLS");
+ s.risks.forEach((x,i)=>add((i+1)+". "+x));
+ add("");
+ add("8. ADDITIONAL RECOMMENDATIONS");
+ s.recommendations.forEach((x,i)=>add((i+1)+". "+x));
+ if(!s.recommendations.length)add("Use the prioritized actions and page notes above.");
+ add("");
+ add("9. RESOURCE AND CONSTRAINT NOTES");
+ add("Main blocker: "+(a.mainBlocker||"Not specified"));
+ add("Available time: "+(a.time||"Not specified"));
+ add("Budget: "+(a.budget||"Not specified"));
+ add("Design: "+(a.design||"Not specified"));
+ add("Image approach: "+(a.images||"Review image usefulness"));
+ add("Proof of work: "+(a.proof||"Define evidence requirements"));
+ add("Resources: "+(a.resourceTypes||"Organize useful reusable resources"));
+ add("Interactive features: "+(a.automation||"Prioritize only features that help the visitor"));
+ add("Traffic approach: "+(a.traffic||"Choose and test a discovery channel"));
+ add("Paid offerings: "+(a.offerings||"Not specified"));
+ add("Monetization approach: "+(a.monetization||"Validate demand before committing"));
+ add("Additional notes: "+(a.extraNotes||"None"));
+ add("");
+ add("10. IMPORTANT LIMITATIONS");
+ add("This is a planning tool, not a live Google Sites connection.");
+ add("It does not automatically change, publish, delete, or move live pages.");
+ add("Page purposes and suggested content are recommendations to review.");
+ add("Verify actual page URLs, unique content, and links before implementation.");
+ return out.join("\n");
+}
+
+function renderReport(a,s){
+ const tasks=s.tasks.map((t,i)=>`
+ <div class="result-card ${t.priority==="HIGH"?"high":"medium"}">
+  <span class="tag">${esc(t.priority)} PRIORITY</span>
+  <h3>${i+1}. ${esc(t.title)}</h3><p>${esc(t.detail)}</p>
+ </div>`).join("");
+ const backups=s.backups.map(x=>`<li>${esc(x)}</li>`).join("");
+ const risks=s.risks.map(x=>`<li>${esc(x)}</li>`).join("");
+ const rec=s.recommendations.map(x=>`<li>${esc(x)}</li>`).join("");
+ const merges=pages.filter(p=>p.action==="Merge");
+ const creates=pages.filter(p=>p.action==="Create");
+ const moves=pages.filter(p=>p.action==="Move");
+ const reviews=pages.filter(p=>p.action==="Review");
+ const removes=pages.filter(p=>p.action==="Remove");
+ document.getElementById("reportContent").innerHTML=`
+ <div class="result-head">
+  <div class="eyebrow">Generated from your answers and edited inventory</div>
+  <h2>PathKeeper Strategy & Backup Plan</h2>
+  <p><strong>Audience:</strong> ${esc(a.audience||"To be confirmed")}</p>
+  <p><strong>Primary action:</strong> ${esc(a.primaryAction||"Choose a main visitor action")}</p>
+  <p><strong>Inventory:</strong> ${pages.length} entries · ${merges.length} Merge · ${moves.length} Move · ${creates.length} Create · ${reviews.length} Review · ${removes.length} Remove candidates</p>
+ </div>
+ <h2>Priority actions</h2>${tasks}
+ <div class="result-card">
+  <h3>Page decision summary</h3>
+  <p><strong>Merge candidates:</strong> ${esc(merges.map(p=>p.name).join(", ")||"None")}</p>
+  <p><strong>Move candidates:</strong> ${esc(moves.map(p=>p.name).join(", ")||"None")}</p>
+  <p><strong>Create candidates:</strong> ${esc(creates.map(p=>p.name).join(", ")||"None")}</p>
+  <p><strong>Review candidates:</strong> ${esc(reviews.map(p=>p.name).join(", ")||"None")}</p>
+  <p><strong>Remove candidates:</strong> ${esc(removes.map(p=>p.name).join(", ")||"None")}</p>
+  <p class="small">These are the current worksheet decisions, not instructions to delete or alter live Google Sites pages.</p>
+ </div>
+ <div class="result-card backup">
+  <h3>Backup plan</h3><ol>${backups}</ol>
+ </div>
+ <div class="result-card"><h3>Risk controls</h3><ul>${risks}</ul></div>
+ <div class="result-card"><h3>Suggestions based on your answers</h3>
+  ${rec?`<ul>${rec}</ul>`:"<p>Use the page-specific recommendations and priority actions above.</p>"}
+ </div>
+ <div class="result-card">
+  <h3>Next milestone</h3>
+  <p>Complete one core visitor path, test the links on the published site, and record the result.</p>
+  <p><strong>Target:</strong> ${esc(a.deadline||"Set a review date")}</p>
+  <p><strong>Measure:</strong> ${esc(a.success||"A visitor completes a useful task")}</p>
+ </div>
+ <div class="note"><strong>Before implementation:</strong> Preserve unique content, confirm page destinations, and verify actual URLs. This tool does not change Google Sites automatically.</div>`;
+ document.getElementById("results").classList.add("show");
+}
+
+function generate(){
+ const a=getAnswers();
+ const s=makeStrategy(a);
+ latestReport=buildReport(a,s);
+ latestChecklist=[
+ "PATHKEEPER — ACTION CHECKLIST",
+ "",
+ ...s.tasks.map((t,i)=>`[ ] ${i+1}. ${t.title}\n    ${t.detail}`),
+ "",
+ "BACKUP PLAN",
+ ...s.backups.map((x,i)=>`[ ] B${i+1}. ${x}`),
+ "",
+ "PAGE DECISIONS TO VERIFY",
+ ...pages.map(p=>`[ ] ${p.name} | ${p.action} | Parent: ${p.parent} | Status: ${p.status}`),
+ "",
+ "WEEKLY REVIEW",
+ "[ ] What did I complete?",
+ "[ ] What is still blocking progress?",
+ "[ ] Are important links working?",
+ "[ ] What did visitors find useful?",
+ "[ ] What is the next highest-priority action?"
+ ].join("\n");
+ renderReport(a,s);
+ document.getElementById("status").textContent=
+ "Strategy generated from the current questionnaire answers and edited page inventory.";
+ document.getElementById("results").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function downloadFile(name,content,type){
+ try{
+  const blob=new Blob([content],{type});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1500);
+  document.getElementById("status").textContent="Download requested: "+name;
+ }catch(e){
+  document.getElementById("status").textContent=
+  "Download could not start. Open this page directly in a browser and try again.";
+ }
+}
+
+function csvCell(v){return '"'+String(v??"").replace(/"/g,'""')+'"'}
+function downloadCSV(){
+ const fields=["name","parent","action","status","purpose","content","buttons","url","notes"];
+ const rows=[fields,...pages.map(p=>fields.map(k=>p[k]||""))];
+ downloadFile("PathKeeper-Page-Inventory.csv",
+  rows.map(r=>r.map(csvCell).join(",")).join("\r\n"),
+  "text/csv;charset=utf-8");
+}
+
+function downloadJSON(){
+ const backup={
+  project:"PathKeeper",
+  exportedAt:new Date().toISOString(),
+  questionnaire:getAnswers(),
+  pages:pages
+ };
+ downloadFile("PathKeeper-Project-Backup.json",
+  JSON.stringify(backup,null,2),"application/json;charset=utf-8");
+}
+
+document.getElementById("generate").addEventListener("click",generate);
+document.getElementById("downloadReport").addEventListener("click",()=>{
+ if(!latestReport)generate();
+ downloadFile("PathKeeper-Strategy-and-Backup-Plan.txt",latestReport,"text/plain;charset=utf-8");
+});
+document.getElementById("downloadAgain").addEventListener("click",()=>{
+ if(!latestReport)generate();
+ downloadFile("PathKeeper-Strategy-and-Backup-Plan.txt",latestReport,"text/plain;charset=utf-8");
+});
+document.getElementById("downloadChecklist").addEventListener("click",()=>{
+ if(!latestChecklist)generate();
+ downloadFile("PathKeeper-Action-Checklist.txt",latestChecklist,"text/plain;charset=utf-8");
+});
+document.getElementById("downloadJSON").addEventListener("click",downloadJSON);
+document.getElementById("downloadInventory").addEventListener("click",downloadCSV);
+
+pages=cloneStarter();
+renderInventory();
+</script>
+</body>
+</html>
