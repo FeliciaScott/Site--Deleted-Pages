@@ -1,0 +1,2696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PathKeeper | Career Command Center</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:"Segoe UI",Arial,sans-serif;
+background:#081018;
+color:#edf4f8;
+line-height:1.6;
+overflow-x:hidden;
+}
+
+button,
+a{
+font-family:inherit;
+}
+
+button{
+cursor:pointer;
+}
+
+a{
+text-decoration:none;
+color:inherit;
+}
+
+:root{
+--blue:#4385ff;
+--green:#35e0a4;
+--cyan:#55d8ff;
+--gold:#ffc857;
+--red:#ff6875;
+--bg:#081018;
+--panel:#101b27;
+--panel2:#142231;
+--border:#223548;
+--muted:#8ea2b5;
+}
+
+/* =========================
+GLOBAL
+========================= */
+
+.container{
+width:88%;
+max-width:1350px;
+margin:auto;
+}
+
+section{
+padding:90px 0;
+}
+
+.section-heading{
+max-width:750px;
+margin-bottom:50px;
+}
+
+.section-heading.center{
+margin-left:auto;
+margin-right:auto;
+text-align:center;
+}
+
+.section-heading h2{
+font-size:2.7rem;
+line-height:1.15;
+margin-bottom:15px;
+}
+
+.section-heading p{
+color:var(--muted);
+font-size:1.05rem;
+}
+
+.eyebrow{
+display:inline-block;
+font-size:.72rem;
+font-weight:800;
+letter-spacing:2px;
+text-transform:uppercase;
+color:var(--green);
+margin-bottom:12px;
+}
+
+.btn{
+border:0;
+border-radius:12px;
+padding:13px 22px;
+font-weight:800;
+transition:.25s;
+}
+
+.btn-primary{
+background:linear-gradient(90deg,var(--blue),var(--green));
+color:#fff;
+}
+
+.btn-primary:hover{
+transform:translateY(-3px);
+box-shadow:0 12px 30px #4385ff33;
+}
+
+.btn-dark{
+background:#0b141d;
+color:#dce8ef;
+border:1px solid var(--border);
+}
+
+.btn-dark:hover{
+border-color:var(--blue);
+}
+
+.card{
+background:var(--panel);
+border:1px solid var(--border);
+border-radius:18px;
+}
+
+/* =========================
+TOP NAV
+========================= */
+
+.topbar{
+position:sticky;
+top:0;
+z-index:1000;
+height:70px;
+background:#081018eF;
+backdrop-filter:blur(16px);
+border-bottom:1px solid var(--border);
+}
+
+.topbar-inner{
+height:100%;
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+
+.logo{
+font-size:1.2rem;
+font-weight:900;
+letter-spacing:1px;
+}
+
+.logo span{
+color:var(--green);
+}
+
+.nav{
+display:flex;
+gap:25px;
+font-size:.88rem;
+color:#9eb0c0;
+}
+
+.nav a:hover{
+color:#fff;
+}
+
+.profile{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.avatar{
+width:36px;
+height:36px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(135deg,var(--blue),var(--green));
+font-weight:900;
+}
+
+.level{
+font-size:.75rem;
+font-weight:800;
+color:var(--green);
+}
+
+/* =========================
+HERO
+========================= */
+
+.hero{
+padding:70px 0 45px;
+background:
+radial-gradient(circle at 15% 20%,#4385ff18,transparent 35%),
+radial-gradient(circle at 85% 30%,#35e0a418,transparent 35%),
+var(--bg);
+}
+
+.hero-grid{
+display:grid;
+grid-template-columns:1.25fr .75fr;
+gap:45px;
+align-items:center;
+}
+
+.hero h1{
+font-size:4.3rem;
+line-height:1.03;
+letter-spacing:-2px;
+margin-bottom:25px;
+}
+
+.gradient-text{
+background:linear-gradient(90deg,#fff,var(--green));
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.hero-copy{
+font-size:1.12rem;
+color:var(--muted);
+max-width:700px;
+margin-bottom:30px;
+}
+
+.hero-actions{
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+}
+
+/* =========================
+COMMAND PANEL
+========================= */
+
+.command-panel{
+padding:25px;
+}
+
+.command-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+}
+
+.command-header h3{
+font-size:1rem;
+}
+
+.status{
+font-size:.7rem;
+padding:6px 10px;
+border-radius:20px;
+background:#0c2921;
+color:var(--green);
+}
+
+.score-ring{
+width:180px;
+height:180px;
+border-radius:50%;
+margin:10px auto 20px;
+background:
+conic-gradient(var(--green) 0deg,#1c2a36 0deg);
+display:flex;
+align-items:center;
+justify-content:center;
+position:relative;
+}
+
+.score-ring:after{
+content:"";
+position:absolute;
+width:140px;
+height:140px;
+border-radius:50%;
+background:var(--panel);
+}
+
+.score-value{
+position:relative;
+z-index:2;
+text-align:center;
+}
+
+.score-value strong{
+display:block;
+font-size:2.5rem;
+}
+
+.score-value span{
+font-size:.7rem;
+color:var(--muted);
+}
+
+.score-label{
+text-align:center;
+font-weight:800;
+}
+
+/* =========================
+STAT STRIP
+========================= */
+
+.stats{
+padding:20px 0 70px;
+}
+
+.stat-grid{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:15px;
+}
+
+.stat{
+padding:20px;
+background:var(--panel);
+border:1px solid var(--border);
+border-radius:14px;
+}
+
+.stat small{
+display:block;
+color:var(--muted);
+font-size:.7rem;
+text-transform:uppercase;
+letter-spacing:1px;
+}
+
+.stat strong{
+display:block;
+font-size:1.7rem;
+margin:4px 0;
+}
+
+.stat span{
+font-size:.75rem;
+color:var(--green);
+}
+
+/* =========================
+TODAY
+========================= */
+
+.today{
+background:#0c151e;
+}
+
+.today-grid{
+display:grid;
+grid-template-columns:1.5fr .8fr;
+gap:25px;
+}
+
+.daily{
+padding:30px;
+}
+
+.daily-top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:25px;
+}
+
+.daily-top span{
+color:var(--gold);
+font-size:.8rem;
+font-weight:800;
+}
+
+.daily h3{
+font-size:1.8rem;
+margin-bottom:10px;
+}
+
+.daily p{
+color:var(--muted);
+margin-bottom:25px;
+}
+
+.task{
+display:flex;
+align-items:center;
+gap:15px;
+padding:16px;
+background:#0b141d;
+border:1px solid var(--border);
+border-radius:12px;
+margin-bottom:10px;
+transition:.2s;
+}
+
+.task:hover{
+border-color:var(--blue);
+}
+
+.task input{
+width:19px;
+height:19px;
+accent-color:var(--green);
+}
+
+.task.done{
+opacity:.55;
+text-decoration:line-through;
+}
+
+.reward{
+margin-left:auto;
+font-size:.75rem;
+color:var(--green);
+font-weight:800;
+}
+
+.focus-card{
+padding:30px;
+}
+
+.focus-card h3{
+margin-bottom:10px;
+}
+
+.focus-meter{
+height:12px;
+background:#081018;
+border-radius:20px;
+overflow:hidden;
+margin:20px 0;
+}
+
+.focus-fill{
+width:35%;
+height:100%;
+background:linear-gradient(90deg,var(--blue),var(--green));
+}
+
+.focus-number{
+font-size:3rem;
+font-weight:900;
+}
+
+/* =========================
+MISSION BOARD
+========================= */
+
+.missions{
+background:var(--bg);
+}
+
+.mission-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+}
+
+.mission{
+padding:27px;
+position:relative;
+overflow:hidden;
+transition:.3s;
+}
+
+.mission:hover{
+transform:translateY(-6px);
+border-color:var(--blue);
+}
+
+.mission-icon{
+font-size:2rem;
+margin-bottom:18px;
+}
+
+.mission h3{
+margin-bottom:8px;
+}
+
+.mission p{
+font-size:.9rem;
+color:var(--muted);
+margin-bottom:20px;
+}
+
+.mission-meta{
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-top:1px solid var(--border);
+padding-top:15px;
+font-size:.75rem;
+}
+
+.mission-xp{
+color:var(--green);
+font-weight:800;
+}
+
+.difficulty{
+color:var(--gold);
+}
+
+/* =========================
+CAREER MAP
+========================= */
+
+.map-section{
+background:#0c151e;
+}
+
+.map{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:10px;
+position:relative;
+}
+
+.map:before{
+content:"";
+position:absolute;
+height:3px;
+left:8%;
+right:8%;
+top:43px;
+background:#263747;
+}
+
+.node{
+position:relative;
+z-index:2;
+text-align:center;
+}
+
+.node-circle{
+width:86px;
+height:86px;
+border-radius:50%;
+margin:auto;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#101b27;
+border:3px solid #263747;
+font-size:1.5rem;
+transition:.3s;
+}
+
+.node.unlocked .node-circle{
+border-color:var(--green);
+background:#0e2922;
+box-shadow:0 0 25px #35e0a422;
+}
+
+.node.active .node-circle{
+border-color:var(--blue);
+box-shadow:0 0 30px #4385ff33;
+}
+
+.node h3{
+font-size:.9rem;
+margin-top:15px;
+}
+
+.node p{
+font-size:.72rem;
+color:var(--muted);
+}
+
+/* =========================
+SKILL TREE
+========================= */
+
+.skill-tree{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+}
+
+.skill{
+padding:25px;
+}
+
+.skill-head{
+display:flex;
+justify-content:space-between;
+margin-bottom:15px;
+}
+
+.skill-level{
+color:var(--green);
+font-weight:800;
+font-size:.8rem;
+}
+
+.progress{
+height:8px;
+background:#081018;
+border-radius:20px;
+overflow:hidden;
+}
+
+.progress span{
+display:block;
+height:100%;
+background:linear-gradient(90deg,var(--blue),var(--green));
+}
+
+.skill small{
+display:block;
+margin-top:12px;
+color:var(--muted);
+}
+
+/* =========================
+OPPORTUNITY SCANNER
+========================= */
+
+.scanner{
+background:#0c151e;
+}
+
+.scanner-grid{
+display:grid;
+grid-template-columns:.7fr 1.3fr;
+gap:25px;
+}
+
+.filter-box{
+padding:25px;
+}
+
+.filter{
+margin-bottom:20px;
+}
+
+.filter label{
+display:block;
+font-size:.75rem;
+color:var(--muted);
+margin-bottom:7px;
+}
+
+.filter select{
+width:100%;
+padding:12px;
+border-radius:9px;
+background:#0b141d;
+color:#fff;
+border:1px solid var(--border);
+}
+
+.opportunities{
+display:grid;
+gap:12px;
+}
+
+.opportunity{
+padding:22px;
+display:grid;
+grid-template-columns:auto 1fr auto;
+gap:18px;
+align-items:center;
+}
+
+.op-icon{
+width:48px;
+height:48px;
+border-radius:12px;
+background:#172636;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:1.3rem;
+}
+
+.opportunity h3{
+font-size:1rem;
+}
+
+.opportunity p{
+font-size:.78rem;
+color:var(--muted);
+}
+
+.match{
+font-weight:900;
+color:var(--green);
+}
+
+/* =========================
+DECISION SIMULATOR
+========================= */
+
+.simulator{
+background:var(--bg);
+}
+
+.simulator-box{
+max-width:950px;
+margin:auto;
+padding:40px;
+}
+
+.scenario{
+font-size:1.5rem;
+font-weight:800;
+margin-bottom:25px;
+}
+
+.sim-options{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+}
+
+.sim-option{
+padding:25px;
+background:#0b141d;
+border:1px solid var(--border);
+border-radius:14px;
+transition:.25s;
+}
+
+.sim-option:hover{
+border-color:var(--blue);
+transform:translateY(-4px);
+}
+
+.sim-result{
+display:none;
+margin-top:25px;
+padding:20px;
+background:#0e2922;
+border:1px solid var(--green);
+border-radius:12px;
+color:#c8f7e7;
+}
+
+.sim-result.show{
+display:block;
+}
+
+/* =========================
+ACHIEVEMENTS
+========================= */
+
+.achievements{
+background:#0c151e;
+}
+
+.badges{
+display:grid;
+grid-template-columns:repeat(6,1fr);
+gap:15px;
+}
+
+.badge-card{
+padding:22px 10px;
+text-align:center;
+opacity:.3;
+filter:grayscale(1);
+transition:.3s;
+}
+
+.badge-card.unlocked{
+opacity:1;
+filter:none;
+border-color:var(--gold);
+}
+
+.badge-icon{
+font-size:2.2rem;
+margin-bottom:10px;
+}
+
+.badge-card h3{
+font-size:.8rem;
+}
+
+.badge-card p{
+font-size:.68rem;
+color:var(--muted);
+}
+
+/* =========================
+RESOURCE VAULT
+========================= */
+
+.vault-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px;
+}
+
+.vault{
+padding:25px;
+}
+
+.vault h3{
+font-size:1rem;
+margin:15px 0 7px;
+}
+
+.vault p{
+font-size:.78rem;
+}
+
+.vault-tag{
+display:inline-block;
+padding:4px 8px;
+background:#172636;
+color:#9eb5c8;
+font-size:.65rem;
+border-radius:20px;
+}
+
+/* =========================
+MOMENTUM LOOP
+========================= */
+
+.loop{
+background:
+radial-gradient(circle at center,#4385ff0d,transparent 45%),
+#0b141d;
+}
+
+.loop-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+}
+
+.loop-card{
+text-align:center;
+padding:30px 20px;
+}
+
+.loop-number{
+width:50px;
+height:50px;
+margin:auto auto 15px;
+border-radius:50%;
+background:#172636;
+color:var(--green);
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:900;
+}
+
+/* =========================
+FINAL CTA
+========================= */
+
+.cta{
+text-align:center;
+padding:120px 8%;
+background:
+radial-gradient(circle,#4385ff18,transparent 45%),
+#081018;
+}
+
+.cta h2{
+font-size:3.5rem;
+line-height:1.1;
+margin-bottom:20px;
+}
+
+.cta p{
+max-width:700px;
+margin:0 auto 35px;
+color:var(--muted);
+}
+
+/* =========================
+FOOTER
+========================= */
+
+footer{
+padding:45px;
+text-align:center;
+color:#667b8e;
+border-top:1px solid var(--border);
+font-size:.85rem;
+}
+
+/* =========================
+NOTIFICATION
+========================= */
+
+.toast{
+position:fixed;
+bottom:25px;
+right:25px;
+background:#35e0a4;
+color:#06100c;
+padding:15px 22px;
+border-radius:12px;
+font-weight:900;
+transform:translateY(100px);
+opacity:0;
+transition:.4s;
+z-index:9999;
+box-shadow:0 15px 40px #0008;
+}
+
+.toast.show{
+transform:translateY(0);
+opacity:1;
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+
+@media(max-width:1100px){
+
+.hero-grid,
+.today-grid,
+.scanner-grid{
+grid-template-columns:1fr;
+}
+
+.stat-grid{
+grid-template-columns:repeat(3,1fr);
+}
+
+.skill-tree{
+grid-template-columns:repeat(2,1fr);
+}
+
+.vault-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+.badges{
+grid-template-columns:repeat(3,1fr);
+}
+
+}
+
+@media(max-width:800px){
+
+.hero h1{
+font-size:3rem;
+}
+
+.mission-grid{
+grid-template-columns:1fr 1fr;
+}
+
+.map{
+grid-template-columns:1fr;
+gap:25px;
+}
+
+.map:before{
+display:none;
+}
+
+.sim-options{
+grid-template-columns:1fr;
+}
+
+.loop-grid{
+grid-template-columns:1fr 1fr;
+}
+
+.nav{
+display:none;
+}
+
+}
+
+@media(max-width:600px){
+
+.container{
+width:92%;
+}
+
+section{
+padding:70px 0;
+}
+
+.hero h1{
+font-size:2.45rem;
+}
+
+.hero-copy{
+font-size:1rem;
+}
+
+.stat-grid,
+.mission-grid,
+.skill-tree,
+.vault-grid,
+.badges{
+grid-template-columns:1fr;
+}
+
+.loop-grid{
+grid-template-columns:1fr;
+}
+
+.hero-actions{
+flex-direction:column;
+}
+
+.command-panel{
+margin-top:20px;
+}
+
+.opportunity{
+grid-template-columns:auto 1fr;
+}
+
+.match{
+grid-column:2;
+}
+
+.simulator-box{
+padding:25px;
+}
+
+.cta h2{
+font-size:2.5rem;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+TOP BAR
+========================= -->
+
+<header class="topbar">
+
+<div class="container topbar-inner">
+
+<div class="logo">
+PATH<span>KEEPER</span>
+</div>
+
+<nav class="nav">
+
+<a href="#dashboard">Dashboard</a>
+<a href="#missions">Missions</a>
+<a href="#skills">Skills</a>
+<a href="#opportunities">Opportunities</a>
+<a href="#achievements">Achievements</a>
+
+</nav>
+
+<div class="profile">
+
+<div>
+<div class="level" id="levelText">LEVEL 1</div>
+<small id="xpText">0 XP</small>
+</div>
+
+<div class="avatar">
+P
+</div>
+
+</div>
+
+</div>
+
+</header>
+
+
+<!-- =========================
+HERO / DASHBOARD
+========================= -->
+
+<section class="hero" id="dashboard">
+
+<div class="container">
+
+<div class="hero-grid">
+
+<div>
+
+<span class="eyebrow">
+Header</span>
+
+<h1>
+Stop Searching.
+<span class="gradient-text">
+Start Building.
+</span>
+</h1>
+
+<p class="hero-copy">
+
+PathKeeper turns career development into a visible progression system.
+Discover opportunities, strengthen skills, build evidence, make better
+decisions, and watch your professional momentum grow.
+
+</p>
+
+<div class="hero-actions">
+
+<a href="#missions" class="btn btn-primary">
+Begin Today's Mission
+</a>
+
+<a href="#skills" class="btn btn-dark">
+View Skill Tree
+</a>
+
+</div>
+
+</div>
+
+
+<div class="command-panel card">
+
+<div class="command-header">
+
+<h3>Career Health</h3>
+
+<span class="status">
+● SYSTEM ACTIVE
+</span>
+
+</div>
+
+<div class="score-ring" id="scoreRing">
+
+<div class="score-value">
+
+<strong id="careerScore">
+42
+</strong>
+
+<span>CAREER SCORE</span>
+
+</div>
+
+</div>
+
+<div class="score-label">
+Building Momentum
+</div>
+
+<p style="text-align:center;font-size:.8rem;margin-top:8px;">
+Complete actions to strengthen your profile.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+STATS
+========================= -->
+
+<section class="stats">
+
+<div class="container">
+
+<div class="stat-grid">
+
+<div class="stat">
+<small>Current Level</small>
+<strong id="levelStat">1</strong>
+<span>Keep progressing</span>
+</div>
+
+<div class="stat">
+<small>Total XP</small>
+<strong id="xpStat">0</strong>
+<span>Earn more</span>
+</div>
+
+<div class="stat">
+<small>Streak</small>
+<strong id="streakStat">1 🔥</strong>
+<span>Consistency matters</span>
+</div>
+
+<div class="stat">
+<small>Missions</small>
+<strong id="missionStat">0</strong>
+<span>Completed</span>
+</div>
+
+<div class="stat">
+<small>Badges</small>
+<strong id="badgeStat">0</strong>
+<span>Unlocked</span>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+TODAY
+========================= -->
+
+<section class="today">
+
+<div class="container">
+
+<div class="section-heading">
+
+<span class="eyebrow">
+TODAY'S OPERATING PLAN
+</span>
+
+<h2>
+Make Today Count.
+</h2>
+
+<p>
+You don't need to solve your entire career today.
+Complete a few high-value actions.
+</p>
+
+</div>
+
+<div class="today-grid">
+
+<div class="daily card">
+
+<div class="daily-top">
+
+<h3>Daily Action Stack</h3>
+
+<span>+100 XP AVAILABLE</span>
+
+</div>
+
+<label class="task">
+
+<input type="checkbox" onchange="completeTask(this,20)">
+
+<span>
+Identify one skill that would increase your earning power.
+</span>
+
+<span class="reward">
++20
+</span>
+
+</label>
+
+<label class="task">
+
+<input type="checkbox" onchange="completeTask(this,25)">
+
+<span>
+Find one realistic opportunity worth applying for.
+</span>
+
+<span class="reward">
++25
+</span>
+
+</label>
+
+<label class="task">
+
+<input type="checkbox" onchange="completeTask(this,30)">
+
+<span>
+Create or improve one piece of career evidence.
+</span>
+
+<span class="reward">
++30
+</span>
+
+</label>
+
+<label class="task">
+
+<input type="checkbox" onchange="completeTask(this,25)">
+
+<span>
+Spend 20 minutes practicing a valuable skill.
+</span>
+
+<span class="reward">
++25
+</span>
+
+</label>
+
+</div>
+
+
+<div class="focus-card card">
+
+<span class="eyebrow">
+FOCUS CAPACITY
+</span>
+
+<h3>
+Today's Focus
+</h3>
+
+<div class="focus-number">
+35%
+</div>
+
+<div class="focus-meter">
+<div class="focus-fill"></div>
+</div>
+
+<p>
+Protect your best attention for work that produces
+skills, evidence, income, or opportunities.
+</p>
+
+<br>
+
+<button class="btn btn-primary" onclick="focusBoost()">
+Start Focus Session
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+MISSIONS
+========================= -->
+
+<section class="missions" id="missions">
+
+<div class="container">
+
+<div class="section-heading center">
+
+<span class="eyebrow">
+MISSION BOARD
+</span>
+
+<h2>
+Choose Your Next Move
+</h2>
+
+<p>
+Different missions strengthen different parts of your career system.
+Choose based on your current bottleneck.
+</p>
+
+</div>
+
+<div class="mission-grid">
+
+
+<div class="mission card">
+
+<div class="mission-icon">🔍</div>
+
+<h3>Opportunity Hunt</h3>
+
+<p>
+Locate three opportunities aligned with your current skills and goals.
+</p>
+
+<button class="btn btn-dark" onclick="missionComplete(this,40)">
+Complete Mission
+</button>
+
+<div class="mission-meta">
+<span class="mission-xp">+40 XP</span>
+<span class="difficulty">EASY</span>
+</div>
+
+</div>
+
+
+<div class="mission card">
+
+<div class="mission-icon">🧠</div>
+
+<h3>Skill Upgrade</h3>
+
+<p>
+Spend focused time improving one skill that has real market value.
+</p>
+
+<button class="btn btn-dark" onclick="missionComplete(this,60)">
+Complete Mission
+</button>
+
+<div class="mission-meta">
+<span class="mission-xp">+60 XP</span>
+<span class="difficulty">MEDIUM</span>
+</div>
+
+</div>
+
+
+<div class="mission card">
+
+<div class="mission-icon">📁</div>
+
+<h3>Evidence Drop</h3>
+
+<p>
+Create something tangible that proves you can perform a useful task.
+</p>
+
+<button class="btn btn-dark" onclick="missionComplete(this,80)">
+Complete Mission
+</button>
+
+<div class="mission-meta">
+<span class="mission-xp">+80 XP</span>
+<span class="difficulty">HARD</span>
+</div>
+
+</div>
+
+
+<div class="mission card">
+
+<div class="mission-icon">💼</div>
+
+<h3>Career Positioning</h3>
+
+<p>
+Improve one section of your resume, portfolio, profile, or professional pitch.
+</p>
+
+<button class="btn btn-dark" onclick="missionComplete(this,50)">
+Complete Mission
+</button>
+
+<div class="mission-meta">
+<span class="mission-xp">+50 XP</span>
+<span class="difficulty">MEDIUM</span>
+</div>
+
+</div>
+
+
+<div class="mission card">
+
+<div class="mission-icon">💰</div>
+
+<h3>Financial Defense</h3>
+
+<p>
+Identify one expense, risk, or financial decision that deserves attention.
+</p>
+
+<button class="btn btn-dark" onclick="missionComplete(this,45)">
+Complete Mission
+</button>
+
+<div class="mission-meta">
+<span class="mission-xp">+45 XP</span>
+<span class="difficulty">EASY</span>
+</div>
+
+</div>
+
+
+<div class="mission card">
+
+<div class="mission-icon">🚀</div>
+
+<h3>Real-World Deployment</h3>
+
+<p>
+Take something you've learned and use it on an actual problem.
+</p>
+
+<button class="btn btn-dark" onclick="missionComplete(this,100)">
+Complete Mission
+</button>
+
+<div class="mission-meta">
+<span class="mission-xp">+100 XP</span>
+<span class="difficulty">ELITE</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+CAREER MAP
+========================= -->
+
+<section class="map-section">
+
+<div class="container">
+
+<div class="section-heading center">
+
+<span class="eyebrow">
+CAREER MAP
+</span>
+
+<h2>
+Where Are You Going?
+</h2>
+
+<p>
+Career growth is easier to manage when you can see the sequence.
+</p>
+
+</div>
+
+<div class="map">
+
+<div class="node unlocked">
+
+<div class="node-circle">
+🔎
+</div>
+
+<h3>Discover</h3>
+
+<p>
+Understand possibilities.
+</p>
+
+</div>
+
+<div class="node active">
+
+<div class="node-circle">
+🧭
+</div>
+
+<h3>Choose</h3>
+
+<p>
+Prioritize direction.
+</p>
+
+</div>
+
+<div class="node">
+
+<div class="node-circle">
+🛠️
+</div>
+
+<h3>Build</h3>
+
+<p>
+Develop capability.
+</p>
+
+</div>
+
+<div class="node">
+
+<div class="node-circle">
+📈
+</div>
+
+<h3>Deploy</h3>
+
+<p>
+Enter the market.
+</p>
+
+</div>
+
+<div class="node">
+
+<div class="node-circle">
+🏆
+</div>
+
+<h3>Compound</h3>
+
+<p>
+Turn progress into leverage.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+SKILL TREE
+========================= -->
+
+<section id="skills">
+
+<div class="container">
+
+<div class="section-heading">
+
+<span class="eyebrow">
+SKILL TREE
+</span>
+
+<h2>
+Build Your Capability Stack
+</h2>
+
+<p>
+A strong career isn't one skill. It's a combination of capabilities
+that reinforce one another.
+</p>
+
+</div>
+
+<div class="skill-tree">
+
+<div class="skill card">
+
+<div class="skill-head">
+<strong>Technical</strong>
+<span class="skill-level">LEVEL 2</span>
+</div>
+
+<div class="progress">
+<span style="width:42%"></span>
+</div>
+
+<small>
+HTML • CSS • JavaScript • Tools
+</small>
+
+</div>
+
+
+<div class="skill card">
+
+<div class="skill-head">
+<strong>Communication</strong>
+<span class="skill-level">LEVEL 4</span>
+</div>
+
+<div class="progress">
+<span style="width:76%"></span>
+</div>
+
+<small>
+Writing • Presentation • Clarity
+</small>
+
+</div>
+
+
+<div class="skill card">
+
+<div class="skill-head">
+<strong>Business</strong>
+<span class="skill-level">LEVEL 3</span>
+</div>
+
+<div class="progress">
+<span style="width:58%"></span>
+</div>
+
+<small>
+Strategy • Marketing • Operations
+</small>
+
+</div>
+
+
+<div class="skill card">
+
+<div class="skill-head">
+<strong>Problem Solving</strong>
+<span class="skill-level">LEVEL 3</span>
+</div>
+
+<div class="progress">
+<span style="width:63%"></span>
+</div>
+
+<small>
+Analysis • Systems • Decisions
+</small>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+OPPORTUNITY SCANNER
+========================= -->
+
+<section class="scanner" id="opportunities">
+
+<div class="container">
+
+<div class="section-heading">
+
+<span class="eyebrow">
+OPPORTUNITY SCANNER
+</span>
+
+<h2>
+Find Your Highest-Match Opportunities
+</h2>
+
+<p>
+Stop treating every opportunity equally.
+Prioritize the ones with the strongest fit.
+</p>
+
+</div>
+
+<div class="scanner-grid">
+
+<div class="filter-box card">
+
+<h3 style="margin-bottom:25px;">
+Opportunity Filters
+</h3>
+
+<div class="filter">
+
+<label>Career Area</label>
+
+<select>
+<option>Technology</option>
+<option>Business</option>
+<option>Marketing</option>
+<option>Operations</option>
+<option>Customer Success</option>
+</select>
+
+</div>
+
+<div class="filter">
+
+<label>Experience</label>
+
+<select>
+<option>Entry Level</option>
+<option>Junior</option>
+<option>Intermediate</option>
+</select>
+
+</div>
+
+<div class="filter">
+
+<label>Priority</label>
+
+<select>
+<option>Best Skill Match</option>
+<option>Highest Pay</option>
+<option>Fastest Entry</option>
+<option>Remote Friendly</option>
+</select>
+
+</div>
+
+<button class="btn btn-primary" onclick="scanOpportunities()">
+Run Opportunity Scan
+</button>
+
+</div>
+
+
+<div class="opportunities">
+
+<div class="opportunity card">
+
+<div class="op-icon">💻</div>
+
+<div>
+
+<h3>Junior Web Support</h3>
+
+<p>
+Technical support • Web • Customer communication
+</p>
+
+</div>
+
+<div class="match">
+92% MATCH
+</div>
+
+</div>
+
+
+<div class="opportunity card">
+
+<div class="op-icon">📊</div>
+
+<div>
+
+<h3>Operations Assistant</h3>
+
+<p>
+Organization • Data • Process improvement
+</p>
+
+</div>
+
+<div class="match">
+87% MATCH
+</div>
+
+</div>
+
+
+<div class="opportunity card">
+
+<div class="op-icon">📣</div>
+
+<div>
+
+<h3>Digital Marketing Assistant</h3>
+
+<p>
+Content • Analytics • Communication
+</p>
+
+</div>
+
+<div class="match">
+81% MATCH
+</div>
+
+</div>
+
+
+<div class="opportunity card">
+
+<div class="op-icon">🤝</div>
+
+<div>
+
+<h3>Customer Success Associate</h3>
+
+<p>
+Communication • Problem solving • CRM
+</p>
+
+</div>
+
+<div class="match">
+78% MATCH
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+DECISION SIMULATOR
+========================= -->
+
+<section class="simulator">
+
+<div class="container">
+
+<div class="section-heading center">
+
+<span class="eyebrow">
+DECISION SIMULATOR
+</span>
+
+<h2>
+Practice Better Career Decisions
+</h2>
+
+<p>
+The goal isn't to predict the future perfectly.
+It's to improve the quality of your decisions.
+</p>
+
+</div>
+
+<div class="simulator-box card">
+
+<div class="scenario">
+
+You have 10 hours this week.
+Where should most of your time go?
+</div>
+
+<div class="sim-options">
+
+<button class="sim-option" onclick="decision('search')">
+
+<strong>Spend all 10 hours searching</strong>
+
+<p>
+Find more jobs, courses, videos, and information.
+</p>
+
+</button>
+
+<button class="sim-option" onclick="decision('skill')">
+
+<strong>Spend 7 hours learning + 3 applying</strong>
+
+<p>
+Build a capability while staying connected to opportunities.
+</p>
+
+</button>
+
+<button class="sim-option" onclick="decision('evidence')">
+
+<strong>Build a project + apply it</strong>
+
+<p>
+Create evidence and use it to demonstrate capability.
+</p>
+
+</button>
+
+</div>
+
+<div class="sim-result" id="simResult"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+ACHIEVEMENTS
+========================= -->
+
+<section class="achievements" id="achievements">
+
+<div class="container">
+
+<div class="section-heading center">
+
+<span class="eyebrow">
+ACHIEVEMENT SYSTEM
+</span>
+
+<h2>
+Things Worth Unlocking
+</h2>
+
+<p>
+The badges reward behaviors that actually contribute to professional progress.
+</p>
+
+</div>
+
+<div class="badges">
+
+<div class="badge-card card unlocked">
+
+<div class="badge-icon">
+🌱
+</div>
+
+<h3>First Move</h3>
+
+<p>Take your first action.</p>
+
+</div>
+
+<div class="badge-card card" id="badge1">
+
+<div class="badge-icon">
+🔥
+</div>
+
+<h3>Consistent</h3>
+
+<p>Complete 3 actions.</p>
+
+</div>
+
+<div class="badge-card card" id="badge2">
+
+<div class="badge-icon">
+🧠
+</div>
+
+<h3>Strategist</h3>
+
+<p>Reach 150 XP.</p>
+
+</div>
+
+<div class="badge-card card" id="badge3">
+
+<div class="badge-icon">
+🛠️
+</div>
+
+<h3>Builder</h3>
+
+<p>Reach 300 XP.</p>
+
+</div>
+
+<div class="badge-card card" id="badge4">
+
+<div class="badge-icon">
+>📁
+</div>
+
+<h3>Evidence Maker</h3>
+
+<p>Complete a build mission.</p>
+
+</div>
+
+<div class="badge-card card" id="badge5">
+
+<div class="badge-icon">
+>🏆
+</div>
+
+<h3>PathKeeper</h3>
+
+<p>Reach Level 5.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+RESOURCE VAULT
+========================= -->
+
+<section>
+
+<div class="container">
+
+<div class="section-heading">
+
+<span class="eyebrow">
+RESOURCE VAULT
+</span>
+
+<h2>
+Your Career Toolkit
+</h2>
+
+<p>
+Useful resources should lead somewhere. Each category supports a specific
+part of the career-building system.
+</p>
+
+</div>
+
+<div class="vault-grid">
+
+<div class="vault card">
+
+<span class="vault-tag">
+DISCOVERY
+</span>
+
+<h3>Career Explorer</h3>
+
+<p>
+Compare possible career directions before investing months of effort.
+</p>
+
+</div>
+
+<div class="vault card">
+
+<span class="vault-tag">
+SKILLS
+</span>
+
+<h3>Learning Roadmaps</h3>
+
+<p>
+Turn vague goals into sequences of concrete learning actions.
+</p>
+
+</div>
+
+<div class="vault card">
+
+<span class="vault-tag">
+EVIDENCE
+</span>
+
+<h3>Portfolio Builder</h3>
+
+<p>
+Turn completed work into proof that employers and clients can evaluate.
+</p>
+
+</div>
+
+<div class="vault card">
+
+<span class="vault-tag">
+MONEY
+</span>
+
+<h3>Financial Planner</h3>
+
+<p>
+Protect your resources while you build toward your next opportunity.
+</p>
+
+</div>
+
+<div class="vault card">
+
+<span class="vault-tag">
+OPPORTUNITY
+</span>
+
+<h3>Opportunity Tracker</h3>
+
+<p>
+Track applications, programs, scholarships, projects, and leads.
+</p>
+
+</div>
+
+<div class="vault card">
+
+<span class="vault-tag">
+DECISIONS
+</span>
+
+<h3>Decision Journal</h3>
+
+<p>
+Record major decisions and evaluate whether your reasoning improved.
+</p>
+
+</div>
+
+<div class="vault card">
+
+<span class="vault-tag">
+SYSTEMS
+</span>
+
+<h3>Personal Operating System</h3>
+
+<p>
+Design routines for learning, execution, finances, and career management.
+</p>
+
+</div>
+
+<div class="vault card">
+
+<span class="vault-tag">
+RECOVERY
+</span>
+
+<h3>Career Reset Tools</h3>
+
+<p>
+Use structured exercises when your original career plan stops working.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+MOMENTUM LOOP
+========================= -->
+
+<section class="loop">
+
+<div class="container">
+
+<div class="section-heading center">
+
+<span class="eyebrow">
+THE PATHKEEPER LOOP
+</span>
+
+<h2>
+Build. Measure. Improve. Repeat.
+</h2>
+
+<p>
+The long-term advantage comes from creating a system that continuously improves.
+</p>
+
+</div>
+
+<div class="loop-grid">
+
+<div class="loop-card card">
+
+<div class="loop-number">
+01
+</div>
+
+<h3>Learn</h3>
+
+<p>
+Acquire knowledge that solves useful problems.
+</p>
+
+</div>
+
+<div class="loop-card card">
+
+<div class="loop-number">
+02
+</div>
+
+<h3>Build</h3>
+
+<p>
+Convert knowledge into practical capability.
+</p>
+
+</div>
+
+<div class="loop-card card">
+
+<div class="loop-number">
+03
+</div>
+
+<h3>Measure</h3>
+
+<p>
+Evaluate what actually improved.
+</p>
+
+</div>
+
+<div class="loop-card card">
+
+<div class="loop-number">
+04
+</div>
+
+<h3>Compound</h3>
+
+<p>
+Use the results to make the next cycle stronger.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+CTA
+========================= -->
+
+<section class="cta">
+
+<div class="container">
+
+<span class="eyebrow">
+YOUR NEXT MOVE
+</span>
+
+<h2>
+Your Career Doesn't Need More Noise.
+</h2>
+
+<p>
+It needs a system for deciding what matters,
+doing the work, measuring progress, and continuing forward.
+</p>
+
+<a href="home.html" class="btn btn-primary">
+Enter PathKeeper
+</a>
+
+</div>
+
+</section>
+
+
+<footer>
+
+© 2026 PathKeeper • Build Skills. Create Evidence. Find Opportunities. Keep Moving.
+
+</footer>
+
+
+<div class="toast" id="toast">
++20 XP
+</div>
+
+
+<script>
+
+/* ==========================================
+PATHKEEPER GAME ENGINE
+========================================== */
+
+let xp =
+parseInt(localStorage.getItem("pkXP")) || 0;
+
+let actions =
+parseInt(localStorage.getItem("pkActions")) || 0;
+
+let streak =
+parseInt(localStorage.getItem("pkStreak")) || 1;
+
+
+/* ==========================================
+LEVEL
+========================================== */
+
+function level(){
+
+return Math.floor(xp / 100) + 1;
+
+}
+
+
+/* ==========================================
+CAREER SCORE
+========================================== */
+
+function careerScore(){
+
+let score =
+42 + Math.floor(xp / 12);
+
+if(score > 100){
+score = 100;
+}
+
+return score;
+
+}
+
+
+/* ==========================================
+UPDATE UI
+========================================== */
+
+function updateUI(){
+
+const currentLevel = level();
+
+document.getElementById("levelText")
+.textContent =
+"LEVEL " + currentLevel;
+
+document.getElementById("xpText")
+.textContent =
+xp + " XP";
+
+document.getElementById("levelStat")
+.textContent =
+currentLevel;
+
+document.getElementById("xpStat")
+.textContent =
+xp;
+
+document.getElementById("streakStat")
+.textContent =
+streak + " 🔥";
+
+document.getElementById("missionStat")
+.textContent =
+actions;
+
+const score =
+careerScore();
+
+document.getElementById("careerScore")
+.textContent =
+score;
+
+document.getElementById("scoreRing")
+.style.background =
+`conic-gradient(
+var(--green) ${score * 3.6}deg,
+#1c2a36 ${score * 3.6}deg
+)`;
+
+updateBadges();
+
+}
+
+
+/* ==========================================
+ADD XP
+========================================== */
+
+function addXP(amount){
+
+const oldLevel =
+level();
+
+xp += amount;
+
+actions++;
+
+localStorage.setItem("pkXP",xp);
+localStorage.setItem("pkActions",actions);
+
+updateUI();
+
+showToast("+" + amount + " XP earned");
+
+if(level() > oldLevel){
+
+setTimeout(function(){
+
+showToast(
+"LEVEL UP! You reached Level " +
+level()
+);
+
+},1000);
+
+}
+
+}
+
+
+/* ==========================================
+TASK
+========================================== */
+
+function completeTask(input,amount){
+
+const task =
+input.closest(".task");
+
+if(input.checked){
+
+task.classList.add("done");
+
+addXP(amount);
+
+}
+
+}
+
+
+/* ==========================================
+MISSION
+========================================== */
+
+function missionComplete(button,amount){
+
+if(button.dataset.completed){
+return;
+}
+
+button.dataset.completed = "true";
+
+button.textContent = "✓ Completed";
+
+button.style.background =
+"#0e2922";
+
+button.style.color =
+"var(--green)";
+
+addXP(amount);
+
+}
+
+
+/* ==========================================
+FOCUS
+========================================== */
+
+function focusBoost(){
+
+showToast("Focus session started");
+
+addXP(10);
+
+}
+
+
+/* ==========================================
+OPPORTUNITY SCANNER
+========================================== */
+
+function scanOpportunities(){
+
+showToast("Opportunity scan complete");
+
+addXP(15);
+
+}
+
+
+/* ==========================================
+DECISION SIMULATOR
+========================================== */
+
+function decision(choice){
+
+const result =
+document.getElementById("simResult");
+
+result.classList.add("show");
+
+if(choice === "search"){
+
+result.innerHTML =
+"<strong>Result:</strong> More information may feel productive, but without action it can create a larger collection of possibilities without increasing capability.";
+
+}
+
+if(choice === "skill"){
+
+result.innerHTML =
+"<strong>Result:</strong> Strong choice. You're balancing capability development with market exposure.";
+
+addXP(15);
+
+}
+
+if(choice === "evidence"){
+
+result.innerHTML =
+"<strong>Result:</strong> Excellent. Creating evidence can simultaneously strengthen your skills, portfolio, confidence, and market position.";
+
+addXP(25);
+
+}
+
+}
+
+
+/* ==========================================
+BADGES
+========================================== */
+
+function updateBadges(){
+
+if(actions >= 3){
+
+document
+.getElementById("badge1")
+.classList.add("unlocked");
+
+}
+
+if(xp >= 150){
+
+document
+.getElementById("badge2")
+.classList.add("unlocked");
+
+}
+
+if(xp >= 300){
+
+document
+.getElementById("badge3")
+.classList.add("unlocked");
+
+}
+
+if(actions >= 5){
+
+document
+.getElementById("badge4")
+.classList.add("unlocked");
+
+}
+
+if(level() >= 5){
+
+document
+.getElementById("badge5")
+.classList.add("unlocked");
+
+}
+
+let badges =
+document.querySelectorAll(
+".badge-card.unlocked"
+).length;
+
+document.getElementById("badgeStat")
+.textContent =
+badges;
+
+}
+
+
+/* ==========================================
+TOAST
+========================================== */
+
+function showToast(message){
+
+const toast =
+document.getElementById("toast");
+
+toast.textContent =
+message;
+
+toast.classList.add("show");
+
+setTimeout(function(){
+
+toast.classList.remove("show");
+
+},2200);
+
+}
+
+
+/* ==========================================
+START
+========================================== */
+
+updateUI();
+
+</script>
+
+</body>
+</html>
