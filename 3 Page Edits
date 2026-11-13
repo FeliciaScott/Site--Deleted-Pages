@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PathKeeper | Editing & Proof Center</title>
+
+<style>
+:root {
+  --green: #0F2C23;
+  --green2: #245541;
+  --cream: #F7F9F2;
+  --brown: #79563D;
+  --blue: #A0C4DF;
+  --ink: #24352D;
+  --muted: #66756C;
+  --line: #D8E2D8;
+  --white: #FFFFFF;
+  --red: #A33232;
+  --orange: #93601C;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font: 15px/1.6 Arial, sans-serif;
+}
+header {
+  background: linear-gradient(130deg,var(--green),var(--green2));
+  color: white;
+  padding: 35px 20px;
+}
+.wrap { max-width: 1100px; margin: auto; padding: 0 17px; }
+.eyebrow {
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+h1 { font-size: clamp(29px,5vw,43px); line-height: 1.15; margin: 10px 0; }
+h2 { font-size: 22px; margin: 0 0 8px; }
+h3 { font-size: 16px; margin: 0 0 8px; }
+header p { max-width: 740px; color: #E7F0E8; }
+main { padding: 20px 0 50px; }
+.panel {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 21px;
+  margin: 15px 0;
+  box-shadow: 0 4px 16px #0F2C2308;
+}
+.muted, .help { color: var(--muted); font-size: 13px; }
+.stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+.stat {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  padding: 14px;
+}
+.number { font-size: 27px; font-weight: bold; color: var(--green); }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+.wide { grid-column: 1 / -1; }
+.field label { display: block; font-weight: bold; font-size: 12px; margin-bottom: 5px; }
+input, select, textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #C9D5CC;
+  border-radius: 7px;
+  font: inherit;
+  background: white;
+  color: var(--ink);
+}
+textarea { min-height: 100px; resize: vertical; }
+input[type="checkbox"], input[type="radio"] { width: auto; }
+button {
+  border: 0;
+  border-radius: 7px;
+  background: var(--green);
+  color: white;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 12px;
+}
+button:hover { filter: brightness(1.13); }
+button.secondary { background: #E8EFE8; color: var(--green); }
+button.brown { background: var(--brown); }
+button.danger { background: var(--red); }
+.toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 13px; }
+.note {
+  background: #F4F0E7;
+  border-left: 4px solid var(--brown);
+  padding: 12px;
+  margin: 12px 0;
+  border-radius: 5px;
+  font-size: 13px;
+}
+.checklist { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.check {
+  display: flex;
+  gap: 9px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 13px;
+}
+.check input { margin-top: 5px; }
+.progress {
+  height: 9px;
+  background: #E6ECE6;
+  border-radius: 9px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+.progress span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--green2);
+}
+.results { display: grid; gap: 9px; margin-top: 14px; }
+.result {
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 13px;
+}
+.result.error { border-left: 4px solid var(--red); }
+.result.warning { border-left: 4px solid var(--orange); }
+.result.good { border-left: 4px solid var(--green2); }
+.evidence-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.upload {
+  border: 2px dashed #B9CBBE;
+  border-radius: 10px;
+  padding: 15px;
+  background: #FBFCF8;
+}
+.preview {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(150px,1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+.image-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px;
+  overflow: hidden;
+}
+.image-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+  background: #F0F1EC;
+}
+.image-card p { font-size: 12px; overflow-wrap: anywhere; }
+.image-card button { margin-top: 5px; }
+.badge {
+  display: inline-block;
+  background: #E9F1E9;
+  color: var(--green);
+  padding: 3px 7px;
+  border-radius: 5px;
+  font-size: 11px;
+}
+footer { padding: 10px 0 30px; color: var(--muted); font-size: 12px; }
+[hidden] { display: none !important; }
+
+@media(max-width:700px) {
+  .stats { grid-template-columns: 1fr 1fr; }
+  .grid, .checklist, .evidence-grid { grid-template-columns: 1fr; }
+  .wide { grid-column: auto; }
+  .panel { padding: 15px; }
+}
+@media print {
+  header { background: white; color: black; padding: 10px 0; }
+  header p, .eyebrow { color: #333; }
+  .no-print, button, input[type="file"] { display: none !important; }
+  .panel { box-shadow: none; break-inside: avoid; }
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="wrap">
+    <div class="eyebrow">PathKeeper · Website Operations</div>
+    <h1>Editing & Proof Center</h1>
+    <p>
+      Prepare page updates, inspect your editing work, compare screenshots,
+      identify errors, and export actionable advice before publishing.
+    </p>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section class="stats">
+  <div class="stat">
+    <div class="number" id="pageTotal">0</div>
+    <div class="muted">Pages available</div>
+  </div>
+  <div class="stat">
+    <div class="number" id="issueTotal">0</div>
+    <div class="muted">Issues found</div>
+  </div>
+  <div class="stat">
+    <div class="number" id="evidenceTotal">0</div>
+    <div class="muted">Evidence images</div>
+  </div>
+  <div class="stat">
+    <div class="number" id="doneTotal">0%</div>
+    <div class="muted">Project checks complete</div>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>1. Select the page you are editing</h2>
+  <p class="muted">
+    Work on one page at a time. This tool records your plan; it does not
+    directly change your published Google Sites website.
+  </p>
+
+  <div class="grid">
+    <div class="field">
+      <label for="page">Page</label>
+      <select id="page">
+        <option>Home</option>
+        <option>About & How to Use</option>
+        <option>Intelligence Center</option>
+        <option>Opportunity Atlas</option>
+        <option>Career Planning</option>
+        <option>Execution & Progress</option>
+        <option>Resource Vault</option>
+        <option>Resource Intelligence Center</option>
+        <option>Location Power Differential Mapping</option>
+        <option>Search Opportunities by Category and Location</option>
+        <option>Residency</option>
+        <option>Startup</option>
+        <option>Accelerator</option>
+        <option>Funding</option>
+        <option>Scholarship</option>
+        <option>Fellowship</option>
+        <option>Mentorship</option>
+        <option>Internship</option>
+        <option>Volunteering</option>
+        <option>Education</option>
+        <option>Certificates</option>
+        <option>Study Abroad</option>
+        <option>Competitions</option>
+        <option>Technology</option>
+        <option>Mobility</option>
+        <option>Problem Solving Center</option>
+        <option>Career Intelligence Lab</option>
+        <option>Focus Champions</option>
+        <option>WorkProof</option>
+        <option>Evidence Block</option>
+        <option>Elevate Learning Network v3</option>
+        <option>Portfolio Operator / PortfolioOS</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="status">Editing status</label>
+      <select id="status">
+        <option>Not started</option>
+        <option>Researching</option>
+        <option>Drafting</option>
+        <option>Ready to build</option>
+        <option>Built in Google Sites</option>
+        <option>Published and tested</option>
+        <option>Blocked</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="priority">Priority</label>
+      <select id="priority">
+        <option>High</option>
+        <option selected>Medium</option>
+        <option>Low</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="publishedUrl">Published page URL</label>
+      <input id="publishedUrl" type="url"
+        placeholder="https://sites.google.com/view/...">
+    </div>
+
+    <div class="field wide">
+      <label for="intro">Page introduction</label>
+      <textarea id="intro"
+        placeholder="Explain who this page helps, what visitors can do, and what to do next."></textarea>
+    </div>
+
+    <div class="field wide">
+      <label for="sections">Sections and content to add</label>
+      <textarea id="sections"
+        placeholder="Section 1: Purpose&#10;Section 2: Useful information&#10;Section 3: Resources and examples&#10;Section 4: Next steps"></textarea>
+    </div>
+
+    <div class="field">
+      <label for="buttonLabel">Main button label</label>
+      <input id="buttonLabel" placeholder="e.g. Compare Certificates">
+    </div>
+
+    <div class="field">
+      <label for="destination">Main button destination</label>
+      <input id="destination" placeholder="Page title or complete URL">
+    </div>
+
+    <div class="field wide">
+      <label for="links">Other links to add or check</label>
+      <textarea id="links"
+        placeholder="One per line: button label → destination page or URL"></textarea>
+    </div>
+
+    <div class="field wide">
+      <label for="sources">Sources or facts to verify</label>
+      <textarea id="sources"
+        placeholder="Official sources, eligibility, deadlines, fees, and information that needs checking."></textarea>
+    </div>
+
+    <div class="field">
+      <label for="reviewDate">Last reviewed</label>
+      <input id="reviewDate" type="date">
+    </div>
+
+    <div class="field">
+      <label for="nextAction">Next action or blocker</label>
+      <input id="nextAction"
+        placeholder="e.g. Fix the button destination">
+    </div>
+  </div>
+
+  <div class="toolbar no-print">
+    <button id="savePage">Save page notes</button>
+    <button class="secondary" id="loadPage">Reload saved notes</button>
+    <button class="secondary" id="copyDraft">Copy editing brief</button>
+  </div>
+  <p class="help" id="saveMessage" aria-live="polite">
+    Select a page and begin editing.
+  </p>
+</section>
+
+<section class="panel" id="proof">
+  <h2>2. Import proof of work</h2>
+  <p class="muted">
+    Upload a screenshot of the original page and a screenshot of the
+    updated page. Add notes explaining the intended change. Images are
+    displayed locally in this session and included in the downloadable
+    evidence report as image references and filenames.
+  </p>
+
+  <div class="evidence-grid">
+    <div class="upload">
+      <h3>Original screenshot</h3>
+      <label for="beforeImages">Upload original image(s)</label>
+      <input id="beforeImages" type="file"
+        accept="image/*" multiple>
+      <p class="help">Capture the page before editing.</p>
+    </div>
+
+    <div class="upload">
+      <h3>Updated screenshot</h3>
+      <label for="afterImages">Upload updated image(s)</label>
+      <input id="afterImages" type="file"
+        accept="image/*" multiple>
+      <p class="help">Capture the page after editing.</p>
+    </div>
+  </div>
+
+  <div class="field" style="margin-top:15px">
+    <label for="changeDescription">What was supposed to change?</label>
+    <textarea id="changeDescription"
+      placeholder="Example: Replace the old scholarship button with Browse Scholarships and connect it to the Scholarship page."></textarea>
+  </div>
+
+  <div class="field" style="margin-top:12px">
+    <label for="observedChange">What does the updated screenshot actually show?</label>
+    <textarea id="observedChange"
+      placeholder="Describe the visible result. Note anything that is still wrong or missing."></textarea>
+  </div>
+
+  <div class="field" style="margin-top:12px">
+    <label for="proofLimitations">Outstanding concerns</label>
+    <textarea id="proofLimitations"
+      placeholder="Example: Button appearance is visible, but its destination has not been tested."></textarea>
+  </div>
+
+  <div class="checklist" style="margin-top:12px">
+    <label class="check">
+      <input type="checkbox" id="liveVerified">
+      I opened the published page and verified the change there.
+    </label>
+    <label class="check">
+      <input type="checkbox" id="linksVerified">
+      I clicked the relevant published buttons and tested their destinations.
+    </label>
+  </div>
+
+  <div class="toolbar no-print">
+    <button id="recordEvidence">Record this proof</button>
+    <button class="secondary" id="clearEvidence">Clear current image previews</button>
+  </div>
+
+  <div id="imagePreview" class="preview"></div>
+  <div id="evidenceLog" class="results"></div>
+
+  <div class="note">
+    <b>Evidence standard:</b> screenshots document visible appearance.
+    Published-page checks and button tests are recorded separately.
+    This tool cannot independently certify that an image is authentic
+    or that an update happened on Google's servers.
+  </div>
+</section>
+
+<section class="panel">
+  <h2>3. Detect editing errors</h2>
+  <p class="muted">
+    Run the audit after drafting or after making changes. Fix errors before
+    publishing, and resolve warnings where they apply.
+  </p>
+
+  <div class="toolbar no-print">
+    <button id="runAudit">Run error audit</button>
+    <button class="secondary" id="downloadAdvice">Download advice report</button>
+    <button class="secondary" id="downloadEvidence">Download proof log</button>
+  </div>
+
+  <div id="auditSummary" class="note">
+    No audit has been run yet.
+  </div>
+  <div id="auditResults" class="results"></div>
+</section>
+
+<section class="panel">
+  <h2>4. Project quality checklist</h2>
+  <p class="muted">
+    These checks help you move from a draft to a verified published page.
+  </p>
+
+  <div class="progress"><span id="progressBar"></span></div>
+  <p id="progressLabel" class="help">0% complete</p>
+
+  <div class="checklist" id="checks">
+    <label class="check"><input type="checkbox"> Page purpose is clear.</label>
+    <label class="check"><input type="checkbox"> Content is accurate and complete.</label>
+    <label class="check"><input type="checkbox"> Headings and sections are organized.</label>
+    <label class="check"><input type="checkbox"> Buttons have meaningful labels.</label>
+    <label class="check"><input type="checkbox"> Internal destinations exist.</label>
+    <label class="check"><input type="checkbox"> External links have been checked.</label>
+    <label class="check"><input type="checkbox"> Original screenshot captured if needed.</label>
+    <label class="check"><input type="checkbox"> Updated screenshot captured if needed.</label>
+    <label class="check"><input type="checkbox"> Published page opened and reviewed.</label>
+    <label class="check"><input type="checkbox"> Buttons tested on the published page.</label>
+    <label class="check"><input type="checkbox"> Mobile layout checked.</label>
+    <label class="check"><input type="checkbox"> Editing notes and evidence exported.</label>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>5. Export, import, and recover your work</h2>
+  <p class="muted">
+    Export a backup before major edits. The JSON backup contains page notes,
+    checklist progress, and evidence-log metadata. It does not contain the
+    original image files.
+  </p>
+
+  <div class="toolbar no-print">
+    <button id="exportBackup">Export project backup (.json)</button>
+    <button class="secondary" id="importBackupBtn">Import project backup</button>
+    <input id="importBackup" type="file" accept=".json,application/json" hidden>
+    <button class="secondary" id="exportBrief">Export current page brief (.txt)</button>
+    <button class="secondary" id="printReport">Print / save report as PDF</button>
+  </div>
+
+  <div class="note">
+    The page notes and checklist are saved in this browser when storage is
+    available. Uploaded screenshots are held in memory and may disappear
+    when the page is refreshed. Keep your original image files and export
+    your records regularly.
+  </div>
+</section>
+
+</main>
+
+<footer class="wrap">
+  PathKeeper Editing & Proof Center · Local editing assistant ·
+  Always review the published website before considering an update complete.
+</footer>
+
+<script>
+"use strict";
+
+/* ==========================================
+   PATHKEEPER EDITING & PROOF CENTER
+========================================== */
+
+const $ = id => document.getElementById(id);
+
+const STORAGE_KEY = "pathkeeper_editing_proof_center_v1";
+
+const fields = [
+  "status", "priority", "publishedUrl", "intro", "sections",
+  "buttonLabel", "destination", "links", "sources",
+  "reviewDate", "nextAction", "changeDescription",
+  "observedChange", "proofLimitations", "liveVerified",
+  "linksVerified"
+];
+
+let savedPages = {};
+let evidenceRecords = [];
+let currentImages = [];
+let lastAudit = [];
+
+const pageSelect = $("page");
+
+$("pageTotal").textContent = pageSelect.options.length;
+
+function esc(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
+function downloadFile(filename, content, type) {
+  const blob = new Blob([content], {type});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1500);
+}
+
+function currentPage() {
+  return pageSelect.value;
+}
+
+function readForm() {
+  const data = {};
+  fields.forEach(id => {
+    const el = $(id);
+    data[id] = el.type === "checkbox" ? el.checked : el.value;
+  });
+  return data;
+}
+
+function writeForm(data = {}) {
+  fields.forEach(id => {
+    const el = $(id);
+    if (el.type === "checkbox") {
+      el.checked = Boolean(data[id]);
+    } else {
+      el.value = data[id] ?? "";
+    }
+  });
+}
+
+function persist() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      version: 1,
+      savedPages,
+      evidenceRecords,
+      checks: [...$("checks").querySelectorAll("input")]
+        .map(input => input.checked)
+    }));
+  } catch (error) {
+    $("saveMessage").textContent =
+      "Browser storage is unavailable or full. Export a backup.";
+  }
+}
+
+function loadStorage() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+
+    const data = JSON.parse(raw);
+
+    if (data && typeof data === "object") {
+      savedPages = data.savedPages || {};
+      evidenceRecords = Array.isArray(data.evidenceRecords)
+        ? data.evidenceRecords : [];
+
+      const checks = $("checks").querySelectorAll("input");
+      checks.forEach((input, index) => {
+        input.checked = Boolean(data.checks?.[index]);
+      });
+    }
+  } catch (error) {
+    $("saveMessage").textContent =
+      "Saved data could not be read. Import a valid backup if available.";
+  }
+}
+
+function savePage() {
+  savedPages[currentPage()] = readForm();
+  persist();
+  updateStats();
+
+  $("saveMessage").textContent =
+    "Page notes saved in this browser. Export a backup for safekeeping.";
+}
+
+function loadPage() {
+  writeForm(savedPages[currentPage()] || {});
+  $("saveMessage").textContent =
+    "Loaded saved notes for " + currentPage() + ".";
+}
+
+pageSelect.addEventListener("change", () => {
+  savePage();
+  loadPage();
+  $("auditResults").innerHTML = "";
+  $("auditSummary").textContent =
+    "Page changed. Run a new audit for this page.";
+  lastAudit = [];
+});
+
+/* ==========================================
+   IMAGE IMPORT AND PROOF OF WORK
+========================================== */
+
+function releaseCurrentImages() {
+  currentImages.forEach(image => URL.revokeObjectURL(image.url));
+  currentImages = [];
+}
+
+function renderImages() {
+  $("imagePreview").innerHTML = currentImages.map(image => `
+    <div class="image-card">
+      <img src="${esc(image.url)}" alt="${esc(image.name)}">
+      <p><b>${esc(image.kind)}</b></p>
+      <p>${esc(image.name)}</p>
+      <p>${Math.round(image.size / 1024)} KB</p>
+    </div>
+  `).join("");
+
+  $("evidenceTotal").textContent = currentImages.length;
+}
+
+async function handleImageImport(event, kind) {
+  const files = [...event.target.files];
+  const valid = files.filter(file => file.type.startsWith("image/"));
+
+  if (valid.length !== files.length) {
+    alert("Some files were skipped because they are not images.");
+  }
+
+  for (const file of valid) {
+    if (file.size > 15 * 1024 * 1024) {
+      alert(file.name + " exceeds the 15 MB per-image limit.");
+      continue;
+    }
+
+    currentImages.push({
+      name: file.name,
+      kind,
+      size: file.size,
+      type: file.type,
+      url: URL.createObjectURL(file)
+    });
+  }
+
+  renderImages();
+  event.target.value = "";
+}
+
+$("beforeImages").addEventListener("change", event =>
+  handleImageImport(event, "Original")
+);
+
+$("afterImages").addEventListener("change", event =>
+  handleImageImport(event, "Updated")
+);
+
+function recordEvidence() {
+  const data = readForm();
+  const beforeCount = currentImages.filter(i => i.kind === "Original").length;
+  const afterCount = currentImages.filter(i => i.kind === "Updated").length;
+
+  if (!data.changeDescription.trim()) {
+    alert("Describe the change you intended to make first.");
+    return;
+  }
+
+  if (!beforeCount || !afterCount) {
+    if (!confirm(
+      "You have not uploaded both original and updated screenshots. " +
+      "Record this entry anyway?"
+    )) return;
+  }
+
+  const record = {
+    page: currentPage(),
+    recordedAt: new Date().toISOString(),
+    intendedChange: data.changeDescription,
+    observedChange: data.observedChange,
+    concerns: data.proofLimitations,
+    originalImages: currentImages
+      .filter(i => i.kind === "Original")
+      .map(i => ({name: i.name, size: i.size, type: i.type})),
+    updatedImages: currentImages
+      .filter(i => i.kind === "Updated")
+      .map(i => ({name: i.name, size: i.size, type: i.type})),
+    publishedPageVerified: data.liveVerified,
+    buttonsVerified: data.linksVerified
+  };
+
+  evidenceRecords.push(record);
+  persist();
+  renderEvidenceLog();
+  updateStats();
+
+  $("saveMessage").textContent = "Proof-of-work record added.";
+
+  releaseCurrentImages();
+  renderImages();
+
+  $("changeDescription").value = "";
+  $("observedChange").value = "";
+  $("proofLimitations").value = "";
+  $("liveVerified").checked = false;
+  $("linksVerified").checked = false;
+}
+
+function renderEvidenceLog() {
+  $("evidenceLog").innerHTML = evidenceRecords.slice().reverse()
+    .map((record, reverseIndex) => {
+      const actualIndex = evidenceRecords.length - 1 - reverseIndex;
+      const totalImages =
+        record.originalImages.length + record.updatedImages.length;
+
+      return `
+        <div class="result">
+          <b>${esc(record.page)}</b>
+          <p>${esc(record.intendedChange)}</p>
+          <p>Image references: ${totalImages}</p>
+          <p>Published page checked:
+            ${record.publishedPageVerified ? "Yes" : "No"}
+          </p>
+          <p>Buttons tested:
+            ${record.buttonsVerified ? "Yes" : "No"}
+          </p>
+          <button class="secondary no-print"
+            data-remove-record="${actualIndex}">Remove record</button>
+        </div>
+      `;
+    }).join("");
+}
+
+$("evidenceLog").addEventListener("click", event => {
+  const button = event.target.closest("[data-remove-record]");
+  if (!button) return;
+
+  const index = Number(button.dataset.removeRecord);
+  if (!Number.isInteger(index) || index < 0) return;
+
+  if (!confirm("Remove this evidence record?")) return;
+
+  evidenceRecords.splice(index, 1);
+  persist();
+  renderEvidenceLog();
+  updateStats();
+});
+
+$("recordEvidence").addEventListener("click", recordEvidence);
+
+$("clearEvidence").addEventListener("click", () => {
+  releaseCurrentImages();
+  renderImages();
+  $("beforeImages").value = "";
+  $("afterImages").value = "";
+});
+
+/* ==========================================
+   ERROR AUDIT AND ACTIONABLE ADVICE
+========================================== */
+
+function validWebUrl(value) {
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" || url.protocol === "http:";
+  } catch {
+    return false;
+  }
+}
+
+function auditPage() {
+  savePage();
+
+  const data = readForm();
+  const issues = [];
+
+  function add(level, title, advice) {
+    issues.push({level, title, advice});
+  }
+
+  if (!data.intro.trim()) {
+    add("error", "Missing introduction",
+      "Write 2–4 sentences explaining the page purpose, who it helps, and the next action.");
+  }
+
+  if (!data.sections.trim()) {
+    add("error", "No section outline",
+      "Add a clear structure with useful information, resources, and a next step.");
+  }
+
+  if (!data.buttonLabel.trim()) {
+    add("error", "Missing main button label",
+      "Give the primary button a specific action, such as Browse Scholarships.");
+  }
+
+  if (!data.destination.trim()) {
+    add("error", "Missing button destination",
+      "Enter the destination page title or URL and verify it in Google Sites.");
+  } else if (
+    data.destination.includes("://") &&
+    !validWebUrl(data.destination)
+  ) {
+    add("error", "Invalid button URL",
+      "Correct the URL. Use a valid http:// or https:// address.");
+  } else if (
+    !data.destination.includes("://") &&
+    ![...pageSelect.options].some(
+      option => option.value.toLowerCase() === data.destination.trim().toLowerCase()
+    )
+  ) {
+    add("warning", "Destination not in the page list",
+      "Confirm the page exists in Google Sites. If it is a real external destination, enter its full URL.");
+  }
+
+  if (data.publishedUrl && !validWebUrl(data.publishedUrl)) {
+    add("error", "Published page URL is malformed",
+      "Use the complete published page URL, beginning with https://.");
+  }
+
+  if (!data.publishedUrl) {
+    add("warning", "Published URL not recorded",
+      "Add the published URL when the page is live so you can verify the real page.");
+  }
+
+  if (!data.sources.trim()) {
+    add("warning", "No sources or verification notes",
+      "Record official sources for changing facts, costs, requirements, and deadlines, where relevant.");
+  }
+
+  if (!data.reviewDate) {
+    add("warning", "No review date",
+      "Record the date you last checked the page content and its important links.");
+  }
+
+  if (!data.nextAction.trim()) {
+    add("warning", "No next action recorded",
+      "Write the next concrete editing task so work can resume without guessing.");
+  }
+
+  if (data.links.trim()) {
+    data.links.split(/\n/).forEach((line, index) => {
+      const trimmed = line.trim();
+      if (!trimmed) return;
+
+      const match = trimmed.match(/https?:\/\/\S+/);
+      if (match && !validWebUrl(match[0])) {
+        add("error", "Potentially invalid link in line " + (index + 1),
+          "Correct the URL or replace it with a verified Google Sites destination.");
+      } else if (!match && !trimmed.includes("→")) {
+        add("warning", "Unclear link entry in line " + (index + 1),
+          "Use the format Button label → destination page or URL.");
+      }
+    });
+  }
+
+  if (data.status === "Published and tested" && !data.liveVerified) {
+    add("warning", "Published status lacks recorded verification",
+      "Open the live page and check the update before recording published verification.");
+  }
+
+  if (data.linksVerified && !data.liveVerified) {
+    add("warning", "Button verification needs published-page context",
+      "Verify the published page first, then test the relevant buttons.");
+  }
+
+  if (!evidenceRecords.some(record => record.page === currentPage())) {
+    add("warning", "No proof-of-work record for this page",
+      "If this edit needs evidence, record the intended change and upload original and updated screenshots.");
+  }
+
+  const errors = issues.filter(i => i.level === "error").length;
+  const warnings = issues.filter(i => i.level === "warning").length;
+
+  if (!issues.length) {
+    add("good", "No issues detected by these checks",
+      "This is not a full website test. Open the published page and test its actual buttons, layout, and links.");
+  }
+
+  lastAudit = issues;
+  $("issueTotal").textContent = errors + warnings;
+  $("auditSummary").textContent =
+    errors + " error(s), " + warnings +
+    " warning(s). Review each item and resolve relevant issues before publishing.";
+
+  $("auditResults").innerHTML = issues.map(issue => `
+    <div class="result ${esc(issue.level)}">
+      <b>${esc(issue.title)}</b>
+      <p>${esc(issue.advice)}</p>
+    </div>
+  `).join("");
+
+  updateStats();
+}
+
+$("runAudit").addEventListener("click", auditPage);
+
+/* ==========================================
+   EXPORT REPORTS
+========================================== */
+
+function buildAdviceReport() {
+  const data = readForm();
+
+  const lines = [
+    "PATHKEEPER — EDITING ADVICE REPORT",
+    "===================================",
+    "Page: " + currentPage(),
+    "Generated: " + new Date().toLocaleString(),
+    "Status: " + data.status,
+    "Priority: " + data.priority,
+    "",
+    "PAGE DETAILS",
+    "Published URL: " + (data.publishedUrl || "Not recorded"),
+    "Introduction: " + (data.intro || "Missing"),
+    "Sections: " + (data.sections || "Missing"),
+    "Button: " + (data.buttonLabel || "Missing"),
+    "Destination: " + (data.destination || "Missing"),
+    "Sources: " + (data.sources || "Not recorded"),
+    "Last reviewed: " + (data.reviewDate || "Not recorded"),
+    "Next action: " + (data.nextAction || "Not recorded"),
+    "",
+    "AUDIT FINDINGS",
+    "--------------"
+  ];
+
+  if (!lastAudit.length) {
+    lines.push("Run the error audit to generate findings.");
+  } else {
+    lastAudit.forEach((item, index) => {
+      lines.push(
+        (index + 1) + ". [" + item.level.toUpperCase() + "] " + item.title,
+        "   Recommended action: " + item.advice,
+        ""
+      );
+    });
+  }
+
+  lines.push(
+    "",
+    "PROOF OF WORK",
+    "-------------"
+  );
+
+  const records = evidenceRecords.filter(r => r.page === currentPage());
+
+  if (!records.length) {
+    lines.push("No proof-of-work records saved for this page.");
+  } else {
+    records.forEach((r, index) => {
+      lines.push(
+        "Record " + (index + 1),
+        "Date: " + r.recordedAt,
+        "Intended change: " + r.intendedChange,
+        "Observed change: " + (r.observedChange || "Not recorded"),
+        "Concerns: " + (r.concerns || "None recorded"),
+        "Original images: " + r.originalImages.map(i => i.name).join(", "),
+        "Updated images: " + r.updatedImages.map(i => i.name).join(", "),
+        "Published page verified: " + r.publishedPageVerified,
+        "Buttons tested: " + r.buttonsVerified,
+        ""
+      );
+    });
+  }
+
+  lines.push(
+    "",
+    "LIMITATION",
+    "This report records user-entered notes and automated checks. It does not independently verify the live website or prove image authenticity."
+  );
+
+  return lines.join("\n");
+}
+
+$("downloadAdvice").addEventListener("click", () => {
+  if (!lastAudit.length) auditPage();
+
+  downloadFile(
+    "pathkeeper-editing-advice.txt",
+    buildAdviceReport(),
+    "text/plain;charset=utf-8"
+  );
+});
+
+$("downloadEvidence").addEventListener("click", () => {
+  const report = {
+    generatedAt: new Date().toISOString(),
+    evidenceRecords,
+    note: "Image files are not embedded in this log. Preserve the original images separately."
+  };
+
+  downloadFile(
+    "pathkeeper-proof-of-work.json",
+    JSON.stringify(report, null, 2),
+    "application/json"
+  );
+});
+
+$("exportBrief").addEventListener("click", () => {
+  savePage();
+  downloadFile(
+    "pathkeeper-page-brief.txt",
+    buildAdviceReport(),
+    "text/plain;charset=utf-8"
+  );
+});
+
+$("copyDraft").addEventListener("click", async () => {
+  const data = readForm();
+
+  const brief = [
+    "PAGE: " + currentPage(),
+    "PURPOSE / INTRODUCTION:\n" + data.intro,
+    "SECTIONS:\n" + data.sections,
+    "MAIN BUTTON: " + data.buttonLabel,
+    "DESTINATION: " + data.destination,
+    "OTHER LINKS:\n" + data.links,
+    "SOURCES:\n" + data.sources,
+    "NEXT ACTION: " + data.nextAction
+  ].join("\n\n");
+
+  try {
+    await navigator.clipboard.writeText(brief);
+    $("saveMessage").textContent = "Editing brief copied.";
+  } catch {
+    downloadFile("pathkeeper-editing-brief.txt", brief, "text/plain");
+  }
+});
+
+/* ==========================================
+   PROJECT BACKUP AND IMPORT
+========================================== */
+
+function exportBackup() {
+  savePage();
+
+  const backup = {
+    app: "PathKeeper Editing & Proof Center",
+    version: 1,
+    exportedAt: new Date().toISOString(),
+    savedPages,
+    evidenceRecords,
+    checks: [...$("checks").querySelectorAll("input")]
+      .map(input => input.checked)
+  };
+
+  downloadFile(
+    "pathkeeper-editing-backup.json",
+    JSON.stringify(backup, null, 2),
+    "application/json"
+  );
+}
+
+$("exportBackup").addEventListener("click", exportBackup);
+
+$("importBackupBtn").addEventListener("click", () => {
+  $("importBackup").click();
+});
+
+$("importBackup").addEventListener("change", async event => {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  try {
+    const data = JSON.parse(await file.text());
+
+    if (
+      !data ||
+      data.app !== "PathKeeper Editing & Proof Center" ||
+      data.version !== 1 ||
+      !data.savedPages ||
+      typeof data.savedPages !== "object" ||
+      Array.isArray(data.savedPages) ||
+      !Array.isArray(data.evidenceRecords)
+    ) {
+      throw new Error("Invalid backup format");
+    }
+
+    if (!confirm("Import this backup and replace current saved notes?")) {
+      return;
+    }
+
+    savedPages = data.savedPages;
+    evidenceRecords = data.evidenceRecords;
+
+    const checks = $("checks").querySelectorAll("input");
+    checks.forEach((input, index) => {
+      input.checked = Boolean(data.checks?.[index]);
+    });
+
+    persist();
+    loadPage();
+    renderEvidenceLog();
+    updateStats();
+
+    $("saveMessage").textContent = "Backup imported successfully.";
+  } catch (error) {
+    alert("Could not import this file. Select a valid PathKeeper JSON backup.");
+  } finally {
+    event.target.value = "";
+  }
+});
+
+/* ==========================================
+   PROGRESS AND STARTUP
+========================================== */
+
+function updateStats() {
+  const checks = [...$("checks").querySelectorAll("input")];
+  const complete = checks.filter(input => input.checked).length;
+  const percent = Math.round(complete / checks.length * 100);
+
+  $("progressBar").style.width = percent + "%";
+  $("progressLabel").textContent =
+    complete + " of " + checks.length + " checks complete (" + percent + "%).";
+
+  $("doneTotal").textContent = percent + "%";
+  $("evidenceTotal").textContent = evidenceRecords.length;
+}
+
+$("checks").addEventListener("change", () => {
+  persist();
+  updateStats();
+});
+
+$("savePage").addEventListener("click", savePage);
+$("loadPage").addEventListener("click", loadPage);
+
+$("printReport").addEventListener("click", () => window.print());
+
+loadStorage();
+loadPage();
+renderEvidenceLog();
+updateStats();
+</script>
+</body>
+</html>
