@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Remote Skills & Opportunity Roadmap</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --green:#5bbf8a;
+    --dark:#14532d;
+    --light:#f5fff9;
+    --card:#ffffff;
+    --text:#444;
+    --shadow:0 12px 30px rgba(0,0,0,.08);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:var(--light);
+    color:var(--text);
+    line-height:1.8;
+}
+
+/* HERO */
+
+header{
+    background:linear-gradient(135deg,#5bbf8a,#7fe3b0);
+    color:white;
+    text-align:center;
+    padding:100px 8%;
+}
+
+header h1{
+    font-size:3.5rem;
+    margin-bottom:20px;
+}
+
+header p{
+    max-width:900px;
+    margin:auto;
+    font-size:1.1rem;
+}
+
+/* LESSONS */
+
+.lesson{
+    padding:80px 8%;
+}
+
+.lesson:nth-child(even){
+    background:white;
+}
+
+.lesson h2{
+    text-align:center;
+    color:var(--dark);
+    font-size:2.3rem;
+    margin-bottom:25px;
+}
+
+.lesson h2::after{
+    content:"";
+    width:100px;
+    height:5px;
+    background:var(--green);
+    display:block;
+    margin:15px auto;
+    border-radius:50px;
+}
+
+.lesson p{
+    max-width:900px;
+    margin:0 auto 20px;
+}
+
+/* INTRO CARD */
+
+.intro-card{
+    max-width:1000px;
+    margin:auto;
+    background:white;
+    padding:35px;
+    border-radius:20px;
+    box-shadow:var(--shadow);
+}
+
+/* FRAMEWORK */
+
+.framework{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
+    margin-top:40px;
+}
+
+.framework div{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:var(--shadow);
+    border-top:6px solid var(--green);
+    transition:.3s;
+}
+
+.framework div:hover{
+    transform:translateY(-8px);
+}
+
+.framework h3{
+    color:var(--dark);
+    margin-bottom:15px;
+}
+
+.framework ul{
+    padding-left:20px;
+}
+
+.framework li{
+    margin-bottom:10px;
+}
+
+/* EXAMPLES */
+
+.examples{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+    margin-top:40px;
+}
+
+.examples div{
+    background:white;
+    border-radius:18px;
+    padding:25px;
+    text-align:center;
+    box-shadow:var(--shadow);
+    transition:.3s;
+}
+
+.examples div:hover{
+    transform:translateY(-8px);
+}
+
+.examples h3{
+    color:var(--dark);
+    margin-bottom:10px;
+}
+
+/* PATHWAYS */
+
+.pathway{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    margin-bottom:25px;
+    border-left:8px solid var(--green);
+    box-shadow:var(--shadow);
+}
+
+.pathway h3{
+    color:var(--dark);
+    margin-bottom:10px;
+}
+
+/* TABLE */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:40px;
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+}
+
+th{
+    background:var(--green);
+    color:white;
+    padding:18px;
+    text-align:left;
+}
+
+td{
+    padding:18px;
+    border-bottom:1px solid #eee;
+}
+
+tr:nth-child(even){
+    background:#f7fff9;
+}
+
+/* AI LIST */
+
+.lesson ul{
+    max-width:900px;
+    margin:30px auto;
+    padding-left:25px;
+}
+
+.lesson ul li{
+    margin-bottom:12px;
+}
+
+/* HIGHLIGHT */
+
+.highlight{
+    max-width:1000px;
+    margin:40px auto 0;
+    background:linear-gradient(135deg,#5bbf8a,#7fe3b0);
+    color:white;
+    padding:35px;
+    border-radius:20px;
+    text-align:center;
+}
+
+.highlight h3{
+    margin-bottom:15px;
+}
+
+/* FOOTER */
+
+footer{
+    background:#103a22;
+    color:white;
+    text-align:center;
+    padding:40px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+header h1{
+    font-size:2.5rem;
+}
+
+.lesson h2{
+    font-size:1.8rem;
+}
+
+.framework,
+.examples{
+    grid-template-columns:1fr;
+}
+
+table{
+    display:block;
+    overflow-x:auto;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h1>Remote Skills & Opportunity Roadmap</h1>
+
+<p>
+The internet has created thousands of ways to earn income, build a career,
+and create opportunities. The people who succeed are often those who
+continuously learn and develop valuable skills.
+</p>
+
+</header>
+
+<section class="lesson">
+
+<h2>Why Upskilling Matters</h2>
+
+<div class="intro-card">
+
+<p>
+Technology changes rapidly. Many jobs disappear, evolve, or become automated.
+People who continuously learn often have access to more opportunities,
+greater flexibility, and higher income potential.
+</p>
+
+<p>
+Upskilling means improving existing skills or learning new ones that increase
+your value in the marketplace.
+</p>
+
+</div>
+
+</section>
+
+<section class="lesson">
+
+<h2>The Three Skill Categories</h2>
+
+<div class="framework">
+
+<div>
+
+<h3>Foundational Skills</h3>
+
+<ul>
+<li>Communication</li>
+<li>Writing</li>
+<li>Organization</li>
+<li>Problem Solving</li>
+<li>Critical Thinking</li>
+</ul>
+
+</div>
+
+<div>
+
+<h3>Technical Skills</h3>
+
+<ul>
+<li>Data Analysis</li>
+<li>Cybersecurity</li>
+<li>Coding</li>
+<li>Cloud Computing</li>
+<li>AI Tools</li>
+</ul>
+
+</div>
+
+<div>
+
+<h3>Business Skills</h3>
+
+<ul>
+<li>Marketing</li>
+<li>Sales</li>
+<li>Project Management</li>
+<li>Leadership</li>
+<li>Customer Success</li>
+</ul>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="lesson">
+
+<h2>The Power Of Skill Stacking</h2>
+
+<p>
+High earners often combine multiple skills. The value is rarely found in a
+single skill. It comes from how skills work together.
+</p>
+
+<div class="examples">
+
+<div>
+<h3>Marketing + AI</h3>
+<p>Create content faster and improve productivity.</p>
+</div>
+
+<div>
+<h3>Writing + SEO</h3>
+<p>Generate search traffic and attract audiences.</p>
+</div>
+
+<div>
+<h3>Project Management + Communication</h3>
+<p>Lead teams and improve collaboration.</p>
+</div>
+
+<div>
+<h3>Data Analysis + Business Knowledge</h3>
+<p>Make stronger business decisions.</p>
+</div>
+
+</div>
+
+</section>
+
+<section class="lesson">
+
+<h2>Remote Career Pathways</h2>
+
+<div class="pathway">
+<h3>Customer Service Path</h3>
+<p>Customer Service → Team Lead → Operations Coordinator → Operations Manager</p>
+</div>
+
+<div class="pathway">
+<h3>Marketing Path</h3>
+<p>Content Creator → Marketing Assistant → Marketing Specialist → Marketing Manager</p>
+</div>
+
+<div class="pathway">
+<h3>Technology Path</h3>
+<p>IT Support → System Administrator → Cloud Engineer → Solutions Architect</p>
+</div>
+
+</section>
+
+<section class="lesson">
+
+<h2>High-Value Skills With Free Learning Resources</h2>
+
+<table>
+
+<tr>
+<th>Skill</th>
+<th>Resource</th>
+<th>Cost</th>
+</tr>
+
+<tr>
+<td>Digital Marketing</td>
+<td>Google Skillshop</td>
+<td>Free</td>
+</tr>
+
+<tr>
+<td>CRM Systems</td>
+<td>HubSpot Academy</td>
+<td>Free</td>
+</tr>
+
+<tr>
+<td>Coding</td>
+<td>FreeCodeCamp</td>
+<td>Free</td>
+</tr>
+
+<tr>
+<td>Cybersecurity</td>
+<td>Cisco Skills For All</td>
+<td>Free</td>
+</tr>
+
+<tr>
+<td>Cloud Computing</td>
+<td>AWS Skill Builder</td>
+<td>Free</td>
+</tr>
+
+</table>
+
+</section>
+
+<section class="lesson">
+
+<h2>AI & The Future Of Work</h2>
+
+<p>
+Artificial intelligence is changing how work is performed. Many routine tasks
+are becoming automated. The most resilient workers learn how to use AI instead
+of competing against it.
+</p>
+
+<ul>
+
+<li>Use AI to research topics quickly</li>
+
+<li>Use AI to brainstorm ideas</li>
+
+<li>Use AI to summarize information</li>
+
+<li>Use AI to improve writing</li>
+
+<li>Use AI to automate repetitive tasks</li>
+
+<li>Use AI to organize projects</li>
+
+<li>Use AI to create first drafts</li>
+
+<li>Use AI to learn new concepts faster</li>
+
+</ul>
+
+<div class="highlight">
+
+<h3>Key Lesson</h3>
+
+<p>
+The future belongs to people who combine human skills such as communication,
+creativity, leadership, and critical thinking with technology skills such as
+AI, data analysis, and digital tools.
+</p>
+
+</div>
+
+</section>
+
+<footer>
+
+<h3>Keep Learning. Keep Building.</h3>
+
+<p>
+Every skill you develop expands the number of opportunities available to you.
+The goal isn't just finding a job. The goal is becoming valuable enough to
+create options.
+</p>
+
+</footer>
+
+</body>
+</html>
