@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ABLE System Architecture v7.0</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root {
+    --space-dark: #05070f;
+    --panel-surface: #0a0f1b;
+    --border-matrix: rgba(255,255,255,0.05);
+    --input-bg: #03050a;
+
+    --matrix-green: #10b981;
+    --quantum-cyan: #06b6d4;
+    --alert-amber: #f59e0b;
+    --critical-red: #ef4444;
+
+    --text-high: #f8fafc;
+    --text-low: #64748b;
+
+    --font-ui: 'Plus Jakarta Sans', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--space-dark);
+    color: var(--text-high);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    line-height: 1.3;
+    min-height: 100vh;
+    padding: 1.5rem;
+}
+
+.app-shell {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.workspace-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-matrix);
+    padding-bottom: 0.75rem;
+}
+
+.brand-block {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.matrix-node {
+    width: 8px;
+    height: 8px;
+    background-color: var(--matrix-green);
+    border-radius: 2px;
+}
+
+.brand-block h2 {
+    font-size: 0.9rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.text-gradient {
+    background: linear-gradient(
+        135deg,
+        var(--matrix-green),
+        var(--quantum-cyan)
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.system-status {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-low);
+}
+
+/* =========================================================
+   MAIN GRID
+========================================================= */
+
+.dashboard-grid-matrix {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+}
+
+.span-4-cols {
+    grid-column: span 4;
+}
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.panel-card {
+    background-color: var(--panel-surface);
+    border: 1px solid var(--border-matrix);
+    border-radius: 8px;
+    padding: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+.status-optimal {
+    border-left: 2px solid var(--matrix-green);
+}
+
+.status-warning {
+    border-left: 2px solid var(--alert-amber);
+}
+
+.status-critical {
+    border-left: 2px solid var(--critical-red);
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.plane-tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-low);
+    background: rgba(255,255,255,0.03);
+    padding: 0.1rem 0.3rem;
+    border-radius: 3px;
+}
+
+.zone-flag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 0.05rem 0.3rem;
+    border-radius: 3px;
+}
+
+.zone-flag.optimal {
+    background: rgba(16,185,129,0.1);
+    color: var(--matrix-green);
+}
+
+.zone-flag.warning {
+    background: rgba(245,158,11,0.1);
+    color: var(--alert-amber);
+}
+
+.zone-flag.critical {
+    background: rgba(239,68,68,0.1);
+    color: var(--critical-red);
+}
+
+.panel-title {
+    font-size: 0.8rem;
+    color: var(--text-low);
+    font-weight: 600;
+    margin-top: 0.4rem;
+}
+
+.panel-data {
+    margin: 0.2rem 0;
+    display: flex;
+    align-items: baseline;
+    gap: 0.15rem;
+}
+
+.big-num {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.data-unit {
+    font-size: 0.75rem;
+    color: var(--text-low);
+    font-family: var(--font-mono);
+}
+
+.threshold-tracker {
+    font-size: 0.65rem;
+    font-family: var(--font-mono);
+    color: var(--text-low);
+    margin-top: 0.4rem;
+    padding-top: 0.4rem;
+    border-top: 1px dotted var(--border-matrix);
+}
+
+/* =========================================================
+   EDUCATIONAL MICRO-PANELS
+========================================================= */
+
+.learning-question {
+    color: var(--text-high);
+    font-size: 0.72rem;
+    line-height: 1.45;
+    margin-top: 0.5rem;
+}
+
+.learning-answer {
+    color: var(--text-low);
+    font-size: 0.7rem;
+    line-height: 1.45;
+    margin-top: 0.35rem;
+}
+
+.learning-answer strong {
+    color: var(--text-high);
+}
+
+.metric-example {
+    margin-top: 0.55rem;
+    padding: 0.35rem 0.45rem;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.025);
+    color: var(--quantum-cyan);
+    font-family: var(--font-mono);
+    font-size: 0.63rem;
+    line-height: 1.5;
+}
+
+/* =========================================================
+   PLAYBOOK
+========================================================= */
+
+.edu-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 0.5rem;
+    border-top: 1px solid var(--border-matrix);
+    padding-top: 0.75rem;
+}
+
+.edu-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.edu-column h4 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-high);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.edu-column p {
+    font-size: 0.75rem;
+    color: var(--text-low);
+    line-height: 1.4;
+}
+
+.edu-accent-text {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--quantum-cyan);
+    background: rgba(6,182,212,0.05);
+    padding: 0.2rem;
+    border-radius: 4px;
+}
+
+.card-block-title {
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+}
+
+.card-block-sub {
+    font-size: 0.72rem;
+    color: var(--text-low);
+    line-height: 1.45;
+}
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-row-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.input-wrapper label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-low);
+}
+
+.matrix-input,
+.matrix-select {
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-matrix);
+    border-radius: 4px;
+    padding: 0.4rem 0.5rem;
+    color: var(--text-high);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    outline: none;
+}
+
+.matrix-input:focus,
+.matrix-select:focus {
+    border-color: var(--quantum-cyan);
+}
+
+.btn-submit {
+    background: linear-gradient(
+        135deg,
+        var(--matrix-green),
+        var(--quantum-cyan)
+    );
+
+    color: var(--space-dark);
+    border: none;
+    border-radius: 4px;
+    padding: 0.4rem 1rem;
+    font-family: var(--font-ui);
+    font-weight: 700;
+    font-size: 0.8rem;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.matrix-table-container {
+    width: 100%;
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-matrix);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.matrix-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.8rem;
+}
+
+.matrix-table th {
+    background-color: rgba(255,255,255,0.01);
+    padding: 0.5rem;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    color: var(--text-low);
+    border-bottom: 1px solid var(--border-matrix);
+}
+
+.matrix-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--border-matrix);
+    font-family: var(--font-mono);
+}
+
+.matrix-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* =========================================================
+   ANALYSIS
+========================================================= */
+
+.analysis-footer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+}
+
+.analysis-block {
+    background: rgba(255,255,255,0.01);
+    border: 1px dashed var(--border-matrix);
+    padding: 0.75rem;
+    border-radius: 6px;
+}
+
+.analysis-block h5 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--text-high);
+    margin-bottom: 0.35rem;
+    font-family: var(--font-mono);
+}
+
+.analysis-block p {
+    font-size: 0.75rem;
+    color: var(--text-low);
+    line-height: 1.4;
+}
+
+/* =========================================================
+   TECHNICAL MATRIX
+========================================================= */
+
+.deep-technical-matrix {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    border-top: 1px solid var(--border-matrix);
+    padding-top: 1rem;
+}
+
+.audit-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding-right: 1rem;
+    border-right: 1px solid var(--border-matrix);
+}
+
+.audit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--text-low);
+}
+
+.audit-item strong {
+    color: var(--text-high);
+    font-family: var(--font-mono);
+    min-width: 45px;
+}
+
+.remediation-flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.remediation-step {
+    background: #070d18;
+    border-radius: 6px;
+    padding: 0.6rem;
+    border: 1px solid rgba(245,158,11,0.08);
+}
+
+.remediation-step h6 {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--alert-amber);
+    margin-bottom: 0.15rem;
+    font-family: var(--font-mono);
+}
+
+.remediation-step p {
+    font-size: 0.75rem;
+    color: var(--text-low);
+}
+
+/* =========================================================
+   CALCULATIONS
+========================================================= */
+
+.calc-matrix-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 0.75rem;
+}
+
+.calc-sheet {
+    background: #03060c;
+    border: 1px solid var(--border-matrix);
+    border-radius: 6px;
+    padding: 0.75rem;
+}
+
+.calc-sheet h4 {
+    font-size: 0.8rem;
+    color: var(--quantum-cyan);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+    border-bottom: 1px dotted var(--border-matrix);
+    padding-bottom: 0.25rem;
+}
+
+.calc-sheet p {
+    font-size: 0.75rem;
+    color: var(--text-low);
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.math-image-box {
+    background: #060912;
+    border: 1px solid rgba(255,255,255,0.02);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.6rem;
+    border-radius: 4px;
+    margin: 0.5rem 0;
+}
+
+.math-svg {
+    max-height: 38px;
+    width: auto;
+    fill: #f8fafc;
+}
+
+.formula-box {
+    width: 100%;
+    background: #060912;
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 12px;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--quantum-cyan);
+    text-align: center;
+    line-height: 1.6;
+    font-size: 0.8rem;
+    white-space: normal;
+    word-break: break-word;
+}
+
+.audit-check-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.35rem;
+    margin-top: 0.5rem;
+}
+
+.check-node {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border-matrix);
+    border-radius: 4px;
+    padding: 0.4rem;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-low);
+}
+
+.check-node strong {
+    display: block;
+    color: var(--text-high);
+    font-size: 0.75rem;
+    margin-bottom: 0.1rem;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .dashboard-grid-matrix,
+    .edu-grid,
+    .analysis-footer-grid,
+    .calc-matrix-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .deep-technical-matrix {
+        grid-template-columns: 1fr;
+    }
+
+    .audit-list {
+        border-right: none;
+        border-bottom: 1px solid var(--border-matrix);
+        padding-bottom: 1rem;
+        padding-right: 0;
+    }
+
+    .span-4-cols {
+        grid-column: span 2;
+    }
+
+    .form-row-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+
+    body {
+        padding: 0.75rem;
+    }
+
+    .workspace-header {
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .system-status {
+        font-size: 0.6rem;
+        text-align: right;
+    }
+
+    .dashboard-grid-matrix,
+    .edu-grid,
+    .analysis-footer-grid,
+    .calc-matrix-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .span-4-cols {
+        grid-column: span 1;
+    }
+
+    .form-row-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .audit-check-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="app-shell">
+
+<header class="workspace-header">
+
+<div class="brand-block">
+
+<div class="matrix-node"></div>
+
+<h2>
+ABLE <span class="text-gradient">CONSOLE</span>
+</h2>
+
+</div>
+
+<div class="system-status">
+SYS_ACTIVE // LEARNING_CORE_LOADED
+</div>
+
+</header>
+
+
+<div class="dashboard-grid-matrix">
+
+
+<!-- =====================================================
+     ATTENTION
+====================================================== -->
+
+<div class="panel-card status-optimal">
+
+<div>
+
+<div class="panel-header">
+
+<span class="plane-tag">[A] FIELD</span>
+
+<span class="zone-flag optimal">
+CORE
+</span>
+
+</div>
+
+<h2 class="panel-title">
+Attention Field
+</h2>
+
+<div class="panel-data">
+
+<span
+class="big-num"
+style="color:var(--matrix-green);">
+84.2
+</span>
+
+<span class="data-unit">
+example score
+</span>
+
+</div>
+
+<p class="learning-question">
+<strong>What is this?</strong>
+</p>
+
+<p class="learning-answer">
+Attention is the ability to keep mental resources directed toward a chosen task while resisting competing inputs.
+</p>
+
+<div class="metric-example">
+Example: 84.2 = strong focus period, not a medical measurement.
+</div>
+
+</div>
+
+<div class="threshold-tracker">
+LEARN: Focus ≠ time spent // Focus = useful attention retained
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     BEHAVIOR
+====================================================== -->
+
+<div class="panel-card status-warning">
+
+<div>
+
+<div class="panel-header">
+
+<span class="plane-tag">[B] LOOP</span>
+
+<span class="zone-flag warning">
+WATCH
+</span>
+
+</div>
+
+<h2 class="panel-title">
+Behavioral Flow
+</h2>
+
+<div class="panel-data">
+
+<span
+class="big-num"
+style="color:var(--alert-amber);">
+10.1
+</span>
+
+<span class="data-unit">
+example yield
+</span>
+
+</div>
+
+<p class="learning-question">
+<strong>What is this?</strong>
+</p>
+
+<p class="learning-answer">
+Behavioral flow measures the gap between what you intend to do and what you repeatedly execute.
+</p>
+
+<div class="metric-example">
+Planned 10 actions → completed 7 → execution rate = 70%
+</div>
+
+</div>
+
+<div class="threshold-tracker">
+LEARN: Repeated behavior creates systems, not isolated intentions
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     LEVERAGE
+====================================================== -->
+
+<div class="panel-card status-critical">
+
+<div>
+
+<div class="panel-header">
+
+<span class="plane-tag">[L] FULCRUM</span>
+
+<span class="zone-flag critical">
+REVIEW
+</span>
+
+</div>
+
+<h2 class="panel-title">
+Leverage Factor
+</h2>
+
+<div class="panel-data">
+
+<span
+class="big-num"
+style="color:var(--critical-red);">
+1.85
+</span>
+
+<span class="data-unit">
+example x
+</span>
+
+</div>
+
+<p class="learning-question">
+<strong>What is this?</strong>
+</p>
+
+<p class="learning-answer">
+Leverage asks how much meaningful output an activity produces relative to the time, energy, or resources required.
+</p>
+
+<div class="metric-example">
+Impact 9 ÷ Effort 3 = 3.0x leverage
+</div>
+
+</div>
+
+<div class="threshold-tracker">
+LEARN: More activity does not automatically mean more progress
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     ENVIRONMENT
+====================================================== -->
+
+<div class="panel-card status-optimal">
+
+<div>
+
+<div class="panel-header">
+
+<span class="plane-tag">[E] STRUCT</span>
+
+<span class="zone-flag optimal">
+CORE
+</span>
+
+</div>
+
+<h2 class="panel-title">
+Choice Architecture
+</h2>
+
+<div class="panel-data">
+
+<span
+class="big-num"
+style="color:var(--matrix-green);">
+91.3
+</span>
+
+<span class="data-unit">
+example %
+</span>
+
+</div>
+
+<p class="learning-question">
+<strong>What is this?</strong>
+</p>
+
+<p class="learning-answer">
+Choice architecture is the design of your surroundings that makes some actions easier, harder, more visible, or more automatic.
+</p>
+
+<div class="metric-example">
+5 useful defaults × 20% = 100% environment score
+</div>
+
+</div>
+
+<div class="threshold-tracker">
+LEARN: Change the environment before blaming motivation
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     EDUCATIONAL PLAYBOOK
+====================================================== -->
+
+<div
+class="panel-card span-4-cols"
+style="
+background-color:#0d1527;
+border-color:rgba(6,182,212,0.15);
+">
+
+<div>
+
+<h3
+class="card-block-title"
+style="color:var(--quantum-cyan);">
+ABLE Engineering Playbook
+</h3>
+
+<p
+class="card-block-sub"
+style="color:#94a3b8;">
+The four dimensions work together. The purpose is not to create impressive-looking numbers. The purpose is to understand why performance succeeds, degrades, and recovers.
+</p>
+
+</div>
+
+
+<div class="edu-grid">
+
+
+<div class="edu-column">
+
+<h4>
+⚡ [A] ATTENTION
+</h4>
+
+<p>
+<strong>Core idea:</strong>
+Your attention is a limited resource. Every interruption creates a switching cost because your brain must reconstruct what it was doing.
+</p>
+
+<p>
+<strong>Study:</strong>
+Track how often you leave the target task, why you leave it, and how long it takes to return.
+</p>
+
+<p class="edu-accent-text">
+QUESTION → How many minutes of your work session were actually devoted to the intended task?
+</p>
+
+</div>
+
+
+<div class="edu-column">
+
+<h4>
+📈 [B] BEHAVIOR
+</h4>
+
+<p>
+<strong>Core idea:</strong>
+Intentions describe what you want. Behavior reveals what your current system actually produces.
+</p>
+
+<p>
+<strong>Study:</strong>
+Compare planned actions with completed actions across several days instead of judging yourself from one day.
+</p>
+
+<p class="edu-accent-text">
+QUESTION → What repeatedly happens when motivation disappears?
+</p>
+
+</div>
+
+
+<div class="edu-column">
+
+<h4>
+⚓ [L] LEVERAGE
+</h4>
+
+<p>
+<strong>Core idea:</strong>
+Some actions produce outputs that continue working after the action is finished. These are often more valuable than tasks that must be repeated manually.
+</p>
+
+<p>
+<strong>Study:</strong>
+Look for automation, reusable assets, skills, systems, relationships, documentation, and processes that multiply future output.
+</p>
+
+<p class="edu-accent-text">
+QUESTION → Which action creates value beyond the hour in which you perform it?
+</p>
+
+</div>
+
+
+<div class="edu-column">
+
+<h4>
+⚙ [E] ENVIRONMENT
+</h4>
+
+<p>
+<strong>Core idea:</strong>
+People do not make decisions in a vacuum. Physical layout, software defaults, notifications, availability, and friction influence behavior.
+</p>
+
+<p>
+<strong>Study:</strong>
+Make desired actions easier to start and undesirable distractions harder to access.
+</p>
+
+<p class="edu-accent-text">
+QUESTION → What behavior does your environment make easiest?
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     METRIC ENTRY
+====================================================== -->
+
+<div class="panel-card span-4-cols">
+
+<div>
+
+<h3 class="card-block-title">
+Metric Snapshot Entry
+</h3>
+
+<p class="card-block-sub">
+Practice converting observations into measurable variables. The goal is learning how to operationalize vague concepts.
+</p>
+
+</div>
+
+<form onsubmit="event.preventDefault();">
+
+<div class="form-row-grid">
+
+<div class="input-wrapper">
+
+<label>
+Vector Plane
+</label>
+
+<select class="matrix-select">
+
+<option>[A] Attention</option>
+
+<option>[B] Behavior</option>
+
+<option>[L] Leverage</option>
+
+<option>[E] Environment</option>
+
+</select>
+
+</div>
+
+
+<div class="input-wrapper">
+
+<label>
+Recorded Value
+</label>
+
+<input
+type="number"
+step="0.01"
+class="matrix-input"
+placeholder="Enter value...">
+
+</div>
+
+
+<div class="input-wrapper">
+
+<label>
+Assessment
+</label>
+
+<select class="matrix-select">
+
+<option>Optimal</option>
+
+<option>Warning</option>
+
+<option>Critical</option>
+
+</select>
+
+</div>
+
+
+<button
+type="submit"
+class="btn-submit">
+Log Observation
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+
+<!-- =====================================================
+     HISTORICAL COMPARISON
+====================================================== -->
+
+<div class="panel-card span-4-cols">
+
+<div>
+
+<h3 class="card-block-title">
+Historical Vectors Array
+</h3>
+
+<p class="card-block-sub">
+Use repeated observations to identify patterns rather than drawing conclusions from a single measurement.
+</p>
+
+</div>
+
+
+<div class="matrix-table-container">
+
+<table class="matrix-table">
+
+<thead>
+
+<tr>
+
+<th>
+Cycle
+</th>
+
+<th>
+Observation
+</th>
+
+<th>
+Status
+</th>
+
+<th>
+Recommended Question
+</th>
+
+</tr>
+
+</thead>
+
+
+<tbody>
+
+<tr>
+
+<td>
+Cycle_04
+</td>
+
+<td>
+[L] Leverage @ 1.85x
+</td>
+
+<td>
+<span class="zone-flag critical">
+Review
+</span>
+</td>
+
+<td>
+Which low-value activities could be removed, automated, delegated, or redesigned?
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+Cycle_03
+</td>
+
+<td>
+[B] Behavior @ 70%
+</td>
+
+<td>
+<span class="zone-flag warning">
+Watch
+</span>
+</td>
+
+<td>
+Where does execution break down between intention and action?
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+Cycle_02
+</td>
+
+<td>
+[E] Environment @ 91.3%
+</td>
+
+<td>
+<span class="zone-flag optimal">
+Strong
+</span>
+</td>
+
+<td>
+Which environmental design decisions should be preserved?
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     CROSS-PLANE EDUCATION
+====================================================== -->
+
+<div
+class="panel-card span-4-cols"
+style="
+background:rgba(255,255,255,0.01);
+border-color:rgba(255,255,255,0.03);
+margin-top:0.25rem;
+">
+
+<div>
+
+<h4
+class="card-block-title"
+style="
+font-size:0.8rem;
+text-transform:uppercase;
+letter-spacing:0.5px;
+color:var(--text-low);
+margin-bottom:0.5rem;
+">
+How the Four Systems Interact
+</h4>
+
+</div>
+
+
+<div class="analysis-footer-grid">
+
+
+<div class="analysis-block">
+
+<h5>
+[E] → [A]
+ENVIRONMENT → ATTENTION
+</h5>
+
+<p>
+A cluttered workspace, constant notifications, multiple open applications, and visible distractions increase the number of competing inputs. Before trying to "increase discipline," reduce unnecessary inputs.
+</p>
+
+</div>
+
+
+<div class="analysis-block">
+
+<h5>
+[A] → [B]
+ATTENTION → BEHAVIOR
+</h5>
+
+<p>
+Consistent execution becomes harder when attention repeatedly breaks. Instead of asking only whether a person is motivated, investigate whether the task is receiving uninterrupted attention.
+</p>
+
+</div>
+
+
+<div class="analysis-block">
+
+<h5>
+[B] → [L]
+BEHAVIOR → LEVERAGE
+</h5>
+
+<p>
+Repeated actions create information about which processes work. Once a reliable process is identified, ask whether it can be automated, documented, delegated, or converted into a reusable asset.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="deep-technical-matrix">
+
+
+<div class="audit-list">
+
+<div
+style="
+font-weight:bold;
+font-size:0.75rem;
+text-transform:uppercase;
+color:var(--text-high);
+margin-bottom:0.25rem;
+">
+Real-World Systems Audit
+</div>
+
+
+<div class="audit-item">
+
+<strong>AUD_01</strong>
+
+Identify the biggest source of attention loss.
+
+</div>
+
+
+<div class="audit-item">
+
+<strong>AUD_02</strong>
+
+Compare planned behavior with actual behavior.
+
+</div>
+
+
+<div class="audit-item">
+
+<strong>AUD_03</strong>
+
+Find one repetitive activity that could be simplified or automated.
+
+</div>
+
+
+<div class="audit-item">
+
+<strong>AUD_04</strong>
+
+Redesign the environment so the desired action requires fewer steps.
+
+</div>
+
+</div>
+
+
+<div class="remediation-flow">
+
+<div
+style="
+font-weight:bold;
+font-size:0.75rem;
+text-transform:uppercase;
+color:var(--text-high);
+">
+Root-Cause Learning Sequence
+</div>
+
+
+<div class="remediation-step">
+
+<h6>
+01 // OBSERVE
+</h6>
+
+<p>
+Do not immediately assume you know why performance changed. Record what actually happened.
+</p>
+
+</div>
+
+
+<div class="remediation-step">
+
+<h6>
+02 // DEFINE
+</h6>
+
+<p>
+Turn vague statements such as "I cannot focus" into observable variables such as interruptions, task changes, elapsed time, or unfinished actions.
+</p>
+
+</div>
+
+
+<div
+class="remediation-step"
+style="border-color:rgba(6,182,212,0.15);">
+
+<h6 style="color:var(--quantum-cyan);">
+03 // EXPERIMENT
+</h6>
+
+<p>
+Change one variable at a time. For example, remove phone notifications for one work block and compare the result.
+</p>
+
+</div>
+
+
+<div class="remediation-step">
+
+<h6>
+04 // LEARN
+</h6>
+
+<p>
+Keep what works, reject what does not, and document the conditions under which the improvement occurred.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     CALCULATIONS
+====================================================== -->
+
+<div
+class="panel-card span-4-cols"
+style="
+background:#060a12;
+border:1px solid rgba(6,182,212,0.2);
+margin-top:0.25rem;
+">
+
+<div>
+
+<h3
+class="card-block-title"
+style="color:var(--quantum-cyan);">
+System Metric Calculations Playbook
+</h3>
+
+<p
+class="card-block-sub"
+style="color:#64748b;">
+These formulas are learning models. They are useful for structured self-observation, not clinical or scientific diagnostic measurements.
+</p>
+
+</div>
+
+
+<div class="calc-matrix-grid">
+
+
+<div class="calc-sheet">
+
+<h4>
+⚡ [A] Attention Field
+</h4>
+
+<p>
+Estimate how much of a work period remained devoted to the intended task.
+</p>
+
+<div class="math-image-box">
+
+<div class="formula-box">
+
+AFS =
+(Deep Focus Minutes ÷ Available Work Minutes)
+× 100
+
+</div>
+
+</div>
+
+<p
+style="
+font-size:0.7rem;
+background:rgba(255,255,255,0.01);
+padding:0.3rem;
+border-radius:3px;
+">
+
+<strong>Example:</strong>
+
+75 minutes of focused work during a 90-minute block:
+
+<br>
+
+<span
+style="
+color:var(--matrix-green);
+font-family:var(--font-mono);
+">
+
+(75 ÷ 90) × 100 = 83.3%
+
+</span>
+
+</p>
+
+</div>
+
+
+<div class="calc-sheet">
+
+<h4>
+📈 [B] Behavioral Flow
+</h4>
+
+<p>
+Measure execution reliability by comparing completed actions with planned actions.
+</p>
+
+<div class="math-image-box">
+
+<div class="formula-box">
+
+Behavior Yield =
+Completed ÷ Planned × 100
+
+</div>
+
+</div>
+
+<p
+style="
+font-size:0.7rem;
+background:rgba(255,255,255,0.01);
+padding:0.3rem;
+border-radius:3px;
+">
+
+<strong>Example:</strong>
+
+3 completed actions from 5 planned actions:
+
+<br>
+
+<span
+style="
+color:var(--alert-amber);
+font-family:var(--font-mono);
+">
+
+(3 ÷ 5) × 100 = 60%
+
+</span>
+
+</p>
+
+</div>
+
+
+<div class="calc-sheet">
+
+<h4>
+⚓ [L] Leverage Index
+</h4>
+
+<p>
+Estimate whether an activity produces relatively large impact for its required effort.
+</p>
+
+<div class="math-image-box">
+
+<div class="formula-box">
+
+L =
+Impact Score ÷ Effort Score
+
+</div>
+
+</div>
+
+<p
+style="
+font-size:0.7rem;
+background:rgba(255,255,255,0.01);
+padding:0.3rem;
+border-radius:3px;
+">
+
+<strong>Example:</strong>
+
+An automation has an impact score of 9 and effort score of 3:
+
+<br>
+
+<span
+style="
+color:var(--matrix-green);
+font-family:var(--font-mono);
+">
+
+9 ÷ 3 = 3.0x
+
+</span>
+
+</p>
+
+</div>
+
+
+<div class="calc-sheet">
+
+<h4>
+⚙ [E] Environment
+</h4>
+
+<p>
+Audit whether the environment makes productive behavior easier to initiate.
+</p>
+
+
+<div class="audit-check-row">
+
+<div class="check-node">
+
+<strong>+20%</strong>
+
+Tool Ready
+
+</div>
+
+<div class="check-node">
+
+<strong>+20%</strong>
+
+Phone Hidden
+
+</div>
+
+<div class="check-node">
+
+<strong>+20%</strong>
+
+Task Staged
+
+</div>
+
+<div class="check-node">
+
+<strong>+20%</strong>
+
+Distractions Blocked
+
+</div>
+
+<div class="check-node">
+
+<strong>+20%</strong>
+
+Resources Ready
+
+</div>
+
+</div>
+
+
+<p
+style="
+font-size:0.7rem;
+margin-top:0.4rem;
+color:var(--text-high);
+">
+
+The goal is not a perfect score. The goal is to discover which environmental changes make the desired behavior easier.
+
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</body>
+</html>
