@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>LearningPath | Build Your Own Learning Strategy</title>
+
+<meta name="description" content="Build a personalized learning path with curated resources, practical projects, skill development, financial planning, and measurable progress.">
+
+<style>
+:root{
+  --black:#111310;
+  --deep:#171b17;
+  --forest:#20382d;
+  --forest2:#294639;
+  --cream:#f4f0e7;
+  --ivory:#fbfaf6;
+  --paper:#ffffff;
+  --gold:#c8a96b;
+  --goldlight:#e0ca96;
+  --sage:#dce4db;
+  --text:#1a211d;
+  --soft:#59625c;
+  --muted:#7a817c;
+  --line:#dedfd8;
+  --darkline:#39423c;
+  --shadow:0 20px 55px rgba(15,20,16,.10);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--cream);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+  line-height:1.65;
+}
+a{color:inherit;text-decoration:none}
+button,select,input,textarea{font:inherit}
+.container{width:min(1160px,90%);margin:auto}
+section{scroll-margin-top:25px}
+
+/* NAVIGATION */
+.nav{
+  background:var(--black);
+  color:white;
+  border-bottom:1px solid rgba(255,255,255,.1);
+}
+.nav-inner{
+  min-height:76px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:25px;
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:800;
+  letter-spacing:-.04em;
+}
+.logo-mark{
+  width:31px;height:31px;
+  border:1px solid var(--gold);
+  display:grid;place-items:center;
+}
+.logo-mark:after{
+  content:"";
+  width:10px;height:10px;
+  border:1px solid var(--goldlight);
+  transform:rotate(45deg);
+}
+.logo-name span{color:var(--goldlight)}
+.nav-links{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:25px;
+}
+.nav-links a{
+  color:#c3c9c4;
+  font-size:.82rem;
+  font-weight:700;
+}
+.nav-links a:hover{color:var(--goldlight)}
+.nav-button{
+  padding:9px 15px;
+  border:1px solid rgba(255,255,255,.25);
+  color:white!important;
+}
+
+/* BUTTONS */
+.button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:13px 21px;
+  border:0;
+  cursor:pointer;
+  font-size:.85rem;
+  font-weight:800;
+  transition:.2s ease;
+  text-align:center;
+}
+.button-gold{background:var(--gold);color:#151813}
+.button-gold:hover{background:var(--goldlight);transform:translateY(-2px)}
+.button-outline{border:1px solid rgba(255,255,255,.3);color:white;background:transparent}
+.button-outline:hover{border-color:var(--gold);color:var(--goldlight)}
+.button-dark{background:var(--forest);color:white}
+.button-dark:hover{background:var(--forest2)}
+.button-light{background:var(--ivory);color:var(--forest);border:1px solid var(--line)}
+.button-light:hover{background:var(--sage)}
+
+/* HERO */
+.hero{
+  background:var(--black);
+  color:white;
+  padding:95px 0 105px;
+  position:relative;
+  overflow:hidden;
+}
+.hero:after{
+  content:"";
+  position:absolute;
+  width:520px;height:520px;
+  border:1px solid rgba(200,169,107,.13);
+  border-radius:50%;
+  right:-230px;top:-210px;
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:65px;
+  align-items:center;
+  position:relative;z-index:1;
+}
+.eyebrow,.overline{
+  color:var(--goldlight);
+  font-size:.7rem;
+  font-weight:900;
+  letter-spacing:.17em;
+  text-transform:uppercase;
+  margin-bottom:20px;
+}
+.hero h1{
+  font-family:Georgia,serif;
+  font-size:clamp(3rem,6vw,5.8rem);
+  font-weight:400;
+  line-height:.98;
+  letter-spacing:-.06em;
+}
+.hero h1 em{color:var(--goldlight);font-style:normal}
+.hero-description{
+  max-width:620px;
+  color:#bdc6bf;
+  font-size:1.05rem;
+  margin-top:26px;
+}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+.hero-note{font-size:.75rem;color:#829087;margin-top:17px}
+
+/* HERO STRATEGY CARD */
+.strategy-card{
+  background:#1a201b;
+  border:1px solid #39433c;
+  padding:28px;
+  box-shadow:0 30px 70px rgba(0,0,0,.25);
+}
+.strategy-top{
+  display:flex;justify-content:space-between;gap:10px;
+  padding-bottom:18px;border-bottom:1px solid #39433c;
+}
+.strategy-label{
+  font-size:.65rem;color:#9aa59d;
+  text-transform:uppercase;letter-spacing:.14em;
+}
+.strategy-status{
+  color:var(--goldlight);
+  border:1px solid #64553a;
+  padding:4px 8px;font-size:.63rem;
+}
+.strategy-title{
+  font-family:Georgia,serif;
+  font-size:1.7rem;
+  line-height:1.2;
+  margin:23px 0;
+}
+.strategy-row{
+  display:grid;grid-template-columns:32px 1fr;
+  gap:13px;padding:15px 0;
+  border-top:1px solid #303832;
+}
+.strategy-number{color:var(--gold);font-weight:800;font-size:.75rem}
+.strategy-row strong{font-size:.88rem}
+.strategy-row p{color:#929d95;font-size:.76rem;margin-top:3px}
+
+/* GENERAL SECTION STYLES */
+.section{padding:85px 0}
+.section-light{background:var(--ivory)}
+.section-dark{background:var(--forest);color:white}
+.section-heading{max-width:760px;margin-bottom:42px}
+.section-heading .overline{color:var(--forest)}
+.section-dark .section-heading .overline{color:var(--goldlight)}
+.section-heading h2{
+  font-family:Georgia,serif;
+  font-size:clamp(2.3rem,4vw,3.8rem);
+  font-weight:400;line-height:1.05;
+  letter-spacing:-.045em;
+}
+.section-heading p{color:var(--soft);margin-top:16px;max-width:680px}
+.section-dark .section-heading p{color:#c0cbc3}
+
+/* INTRO */
+.intro-grid{
+  display:grid;grid-template-columns:.8fr 1.2fr;
+  gap:75px;align-items:start;
+}
+.intro h2{
+  font-family:Georgia,serif;
+  font-size:clamp(2.3rem,4vw,3.7rem);
+  line-height:1.05;font-weight:400;
+}
+.intro-copy{color:var(--soft);font-size:1rem}
+.intro-copy p+p{margin-top:17px}
+.highlight{
+  margin-top:25px;padding:15px 18px;
+  border-left:3px solid var(--gold);
+  color:var(--text);font-weight:700;
+  background:#f3eee3;
+}
+
+/* CHALLENGE GRID */
+.challenge-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border-top:1px solid var(--darkline);
+  border-bottom:1px solid var(--darkline);
+}
+.challenge{
+  padding:30px;
+  border-right:1px solid var(--darkline);
+}
+.challenge:last-child{border-right:0}
+.challenge-number{color:var(--gold);font-size:.7rem;font-weight:900;letter-spacing:.12em}
+.challenge h3{margin:15px 0 8px;font-size:1.05rem}
+.challenge p{color:#bac7be;font-size:.86rem}
+
+/* LEARNING CYCLE */
+.cycle-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+.cycle-card{
+  background:white;padding:25px;
+  border:1px solid var(--line);
+  border-top:4px solid var(--gold);
+  box-shadow:0 8px 22px rgba(0,0,0,.04);
+}
+.cycle-card .number{
+  font-size:.7rem;color:var(--forest);
+  font-weight:900;letter-spacing:.12em;
+}
+.cycle-card h3{margin:10px 0 7px}
+.cycle-card p{font-size:.86rem;color:var(--soft)}
+
+/* NEEDS ASSESSMENT */
+.assessment-section{
+  background:#e9e5da;
+  padding:90px 0;
+}
+.assessment-container{
+  max-width:900px;margin:auto;
+  background:white;padding:38px;
+  box-shadow:var(--shadow);
+  border:1px solid var(--line);
+}
+.assessment-container h2{
+  font-family:Georgia,serif;
+  font-size:2.5rem;font-weight:400;
+  text-align:center;line-height:1.1;
+}
+.assessment-intro{
+  text-align:center;max-width:690px;
+  margin:15px auto 30px;color:var(--soft);
+}
+.assessment-question{
+  margin:22px 0;padding-bottom:20px;
+  border-bottom:1px solid var(--line);
+}
+.assessment-question label{
+  display:block;font-weight:800;
+  margin-bottom:9px;color:var(--forest);
+}
+.assessment-question select,
+.assessment-question input,
+.assessment-question textarea{
+  width:100%;padding:13px;
+  border:1px solid #c9c9bf;
+  background:#fbfaf6;color:var(--text);
+  border-radius:4px;
+}
+.assessment-question textarea{min-height:85px;resize:vertical}
+.assessment-submit{
+  width:100%;padding:15px;
+  background:var(--forest);color:white;
+  border:0;font-weight:900;cursor:pointer;
+}
+.assessment-submit:hover{background:var(--forest2)}
+.assessment-result{
+  display:none;margin-top:28px;padding:25px;
+  background:#edf2eb;border-left:4px solid var(--forest);
+}
+.assessment-result h3{margin:12px 0 7px;color:var(--forest)}
+.assessment-result ul{padding-left:22px;margin:12px 0}
+.assessment-result li{margin:6px 0}
+.assessment-result p{margin:8px 0}
+.assessment-note{font-size:.76rem;color:var(--muted);margin-top:18px}
+.reset-button{
+  margin-top:18px;padding:10px 16px;
+  border:1px solid var(--forest);background:transparent;
+  color:var(--forest);cursor:pointer;font-weight:800;
+}
+
+/* PRODUCT CARDS */
+.product-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:20px;
+}
+.product-card{
+  background:white;border:1px solid var(--line);
+  box-shadow:0 8px 24px rgba(0,0,0,.05);
+  overflow:hidden;
+  display:flex;flex-direction:column;
+}
+.product-card img{
+  width:100%;height:175px;object-fit:cover;
+}
+.product-content{padding:22px;display:flex;flex-direction:column;flex:1}
+.product-content h3{font-size:1.05rem;margin-bottom:9px}
+.product-content p{font-size:.84rem;color:var(--soft);margin-bottom:13px}
+.product-content .button{margin-top:auto;width:100%}
+.product-tag{
+  font-size:.65rem;color:var(--forest);
+  font-weight:900;letter-spacing:.12em;
+  margin-bottom:8px;text-transform:uppercase;
+}
+
+/* SERVICE OFFER */
+.offer-header{text-align:center;max-width:740px;margin:0 auto 42px}
+.offer-header .overline{color:var(--forest)}
+.offer-header h2{
+  font-family:Georgia,serif;font-size:clamp(2.5rem,4vw,4rem);
+  font-weight:400;line-height:1.05;
+}
+.offer-header p{color:var(--soft);margin-top:15px}
+.offer-card{
+  display:grid;grid-template-columns:1.25fr .75fr;
+  box-shadow:var(--shadow);
+}
+.offer-content{background:white;padding:40px}
+.offer-content h3{
+  font-family:Georgia,serif;font-size:1.9rem;
+  font-weight:400;margin-bottom:12px;
+}
+.offer-content>p{color:var(--soft)}
+.feature-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1px;background:var(--line);
+  border:1px solid var(--line);margin-top:25px;
+}
+.feature{background:#fbfbf8;padding:16px;font-size:.82rem;font-weight:800}
+.feature span{display:block;color:var(--muted);font-size:.73rem;font-weight:400;margin-top:3px}
+.offer-price{
+  background:var(--forest);color:white;
+  padding:40px;display:flex;flex-direction:column;justify-content:center;
+}
+.price-overline{
+  color:var(--goldlight);font-size:.68rem;
+  letter-spacing:.15em;text-transform:uppercase;font-weight:900;
+}
+.price{
+  font-family:Georgia,serif;font-size:4.7rem;
+  line-height:1.15;margin:8px 0;
+}
+.price-description{color:#c0cbc3;font-size:.8rem}
+.price-details{list-style:none;margin:24px 0}
+.price-details li{
+  padding:9px 0;border-bottom:1px solid var(--darkline);
+  color:#d4ddd6;font-size:.82rem;
+}
+.price-button{
+  display:block;background:var(--gold);color:#151813;
+  padding:14px;text-align:center;font-weight:900;
+}
+.price-button:hover{background:var(--goldlight)}
+
+/* PROCESS */
+.process-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.process-item{padding:28px 23px;border-right:1px solid var(--line)}
+.process-item:last-child{border-right:0}
+.process-number{font-family:Georgia,serif;font-size:1.8rem;color:var(--gold)}
+.process-item h3{font-size:1rem;margin:12px 0 7px}
+.process-item p{font-size:.82rem;color:var(--soft)}
+
+/* FAQ */
+.faq-list{max-width:900px;margin:auto}
+.faq-item{
+  background:white;padding:21px 23px;
+  margin-bottom:13px;border-left:4px solid var(--gold);
+}
+.faq-item h3{font-size:.98rem;margin-bottom:7px}
+.faq-item p{font-size:.86rem;color:var(--soft)}
+
+/* FINAL CTA */
+.final{
+  background:var(--black);color:white;
+  text-align:center;padding:100px 0;
+}
+.final .overline{color:var(--goldlight)}
+.final h2{
+  max-width:820px;margin:auto;
+  font-family:Georgia,serif;
+  font-size:clamp(2.7rem,5vw,4.7rem);
+  font-weight:400;line-height:1;
+}
+.final p{max-width:620px;margin:20px auto;color:#bac4bd}
+.final-note{font-size:.75rem!important;color:#879188!important}
+
+/* FOOTER */
+footer{
+  background:#0b0d0b;color:#879188;
+  padding:28px 0;font-size:.75rem;
+}
+.footer-inner{
+  display:flex;justify-content:space-between;
+  gap:20px;flex-wrap:wrap;
+}
+
+/* RESPONSIVE */
+@media(max-width:950px){
+  .hero-grid,.intro-grid,.offer-card{grid-template-columns:1fr}
+  .hero-grid{gap:45px}
+  .challenge-grid{grid-template-columns:1fr}
+  .challenge{border-right:0;border-bottom:1px solid var(--darkline)}
+  .challenge:last-child{border-bottom:0}
+  .product-grid{grid-template-columns:repeat(2,1fr)}
+  .process-grid{grid-template-columns:repeat(2,1fr)}
+  .process-item:nth-child(2){border-right:0}
+  .process-item:nth-child(-n+2){border-bottom:1px solid var(--line)}
+}
+@media(max-width:650px){
+  .nav-inner{padding:16px 0;align-items:flex-start;flex-direction:column}
+  .nav-links{gap:12px}
+  .nav-links a{font-size:.75rem}
+  .nav-button{display:none}
+  .hero{padding:70px 0}
+  .hero h1{font-size:3.2rem}
+  .hero-actions{flex-direction:column}
+  .hero-actions .button{width:100%}
+  .section,.assessment-section{padding:65px 0}
+  .cycle-grid,.product-grid,.process-grid{grid-template-columns:1fr}
+  .process-item{border-right:0;border-bottom:1px solid var(--line)}
+  .process-item:last-child{border-bottom:0}
+  .feature-grid{grid-template-columns:1fr}
+  .assessment-container{padding:23px}
+  .offer-content,.offer-price{padding:27px}
+  .footer-inner{flex-direction:column}
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="#home" class="logo">
+      <div class="logo-mark"></div>
+      <div class="logo-name">Learning<span>Path</span></div>
+    </a>
+
+    <div class="nav-links">
+      <a href="#approach">Our Approach</a>
+      <a href="#assessment">Needs Assessment</a>
+      <a href="#tools">Tools</a>
+      <a href="#offer">Learning Roadmap</a>
+      <a href="#questions">FAQs</a>
+      <a href="#start" class="nav-button">Get Started</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="home">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">Personalized learning and career development</div>
+
+      <h1>Build a path.<br><em>Learn with direction.</em></h1>
+
+      <p class="hero-description">
+        You do not need another endless list of courses. You need a
+        practical way to identify what to learn, where to begin,
+        how to use your time, and what to produce as you develop new skills.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#assessment" class="button button-gold">Identify My Learning Needs</a>
+        <a href="#offer" class="button button-outline">Explore the Learning Roadmap</a>
+      </div>
+
+      <p class="hero-note">Research · Learning · Practice · Projects · Evidence · Progress</p>
+    </div>
+
+    <div class="strategy-card">
+      <div class="strategy-top">
+        <div class="strategy-label">Your learning strategy</div>
+        <div class="strategy-status">PERSONALIZED</div>
+      </div>
+
+      <div class="strategy-title">From an idea to a practical plan.</div>
+
+      <div class="strategy-row">
+        <div class="strategy-number">01</div>
+        <div><strong>Define your destination</strong><p>Identify the outcome you want to achieve.</p></div>
+      </div>
+
+      <div class="strategy-row">
+        <div class="strategy-number">02</div>
+        <div><strong>Assess your starting point</strong><p>Identify existing skills, gaps, and resources.</p></div>
+      </div>
+
+      <div class="strategy-row">
+        <div class="strategy-number">03</div>
+        <div><strong>Choose your learning route</strong><p>Compare courses, credentials, and alternatives.</p></div>
+      </div>
+
+      <div class="strategy-row">
+        <div class="strategy-number">04</div>
+        <div><strong>Practice and demonstrate</strong><p>Create projects and evidence of your work.</p></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- INTRODUCTION -->
+<section class="section section-light" id="approach">
+  <div class="container intro-grid">
+    <div>
+      <div class="overline">The real challenge</div>
+      <h2>Finding information is not the same as building a future.</h2>
+    </div>
+
+    <div class="intro-copy">
+      <p>
+        When you decide to learn a new skill, the internet gives you
+        thousands of possible starting points: courses, videos,
+        books, tutorials, certifications, apprenticeships, and communities.
+      </p>
+      <p>
+        But choosing a resource is only one part of the process.
+        You also need to understand the time involved, financial
+        requirements, skill prerequisites, practice opportunities,
+        and how the learning connects to a larger goal.
+      </p>
+      <p>
+        LearningPath helps organize those decisions into a sequence
+        you can actually follow.
+      </p>
+      <div class="highlight">
+        The objective is not simply to finish a course. It is to develop
+        useful skills and create evidence that you can apply them.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHALLENGES -->
+<section class="section section-dark">
+  <div class="container">
+    <div class="section-heading">
+      <div class="overline">Why learning plans stall</div>
+      <h2>More information can create more uncertainty.</h2>
+      <p>
+        A learning plan should help you make decisions, not create
+        another collection of unfinished research.
+      </p>
+    </div>
+
+    <div class="challenge-grid">
+      <div class="challenge">
+        <div class="challenge-number">01 / CHOICES</div>
+        <h3>Too many resources</h3>
+        <p>
+          You find multiple courses covering the same subject and
+          have no clear way to compare cost, quality, relevance, or value.
+        </p>
+      </div>
+
+      <div class="challenge">
+        <div class="challenge-number">02 / SEQUENCE</div>
+        <h3>No clear order</h3>
+        <p>
+          You study individual topics without knowing which skills
+          should come first or how they connect to your larger objective.
+        </p>
+      </div>
+
+      <div class="challenge">
+        <div class="challenge-number">03 / APPLICATION</div>
+        <h3>Nothing to demonstrate</h3>
+        <p>
+          You complete lessons but have few projects, work samples,
+          or practical examples showing what you can actually do.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEARNING CYCLE -->
+<section class="section">
+  <div class="container">
+    <div class="section-heading">
+      <div class="overline">The LearningPath framework</div>
+      <h2>Turn a learning goal into a repeatable process.</h2>
+      <p>
+        Every learning route should connect research, instruction,
+        practice, application, and review.
+      </p>
+    </div>
+
+    <div class="cycle-grid">
+      <div class="cycle-card">
+        <div class="number">01 / EXPLORE</div>
+        <h3>Define the destination</h3>
+        <p>Choose the career direction, skill, subject, or project you want to pursue.</p>
+      </div>
+
+      <div class="cycle-card">
+        <div class="number">02 / ASSESS</div>
+        <h3>Identify skill gaps</h3>
+        <p>Determine what you already know and what you need to learn next.</p>
+      </div>
+
+      <div class="cycle-card">
+        <div class="number">03 / SELECT</div>
+        <h3>Choose learning resources</h3>
+        <p>Compare courses, certifications, books, free resources, and training options.</p>
+      </div>
+
+      <div class="cycle-card">
+        <div class="number">04 / PLAN</div>
+        <h3>Organize your resources</h3>
+        <p>Account for time, cost, equipment, prerequisites, and available support.</p>
+      </div>
+
+      <div class="cycle-card">
+        <div class="number">05 / PRACTICE</div>
+        <h3>Apply what you learn</h3>
+        <p>Use exercises, assignments, simulations, and practical projects.</p>
+      </div>
+
+      <div class="cycle-card">
+        <div class="number">06 / DEMONSTRATE</div>
+        <h3>Create evidence</h3>
+        <p>Build work samples, project records, portfolios, and measurable outcomes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEEDS ASSESSMENT -->
+<section class="assessment-section" id="assessment">
+  <div class="container">
+    <div class="assessment-container">
+      <h2>What Do You Actually Need?</h2>
+
+      <p class="assessment-intro">
+        Your starting point matters. Answer these questions to identify
+        the type of learning support, planning tools, and next steps
+        that may be most useful.
+      </p>
+
+      <form id="needsForm">
+        <div class="assessment-question">
+          <label for="mainProblem">1. What is your biggest current challenge?</label>
+          <select id="mainProblem" required>
+            <option value="">Choose your answer</option>
+            <option value="ideas">I have too many ideas and cannot organize them.</option>
+            <option value="direction">I do not know which career or skill to pursue.</option>
+            <option value="resources">I cannot determine which courses or resources are worth using.</option>
+            <option value="skills">I need to identify and develop missing skills.</option>
+            <option value="focus">I struggle with focus, consistency, or completing work.</option>
+            <option value="practice">I study but do not get enough practical experience.</option>
+            <option value="evidence">I need projects or work samples to demonstrate my abilities.</option>
+            <option value="finances">I need a learning option that fits my financial situation.</option>
+          </select>
+        </div>
+
+        <div class="assessment-question">
+          <label for="currentSituation">2. Which best describes your current situation?</label>
+          <select id="currentSituation" required>
+            <option value="">Choose your answer</option>
+            <option value="beginner">I am starting from the beginning.</option>
+            <option value="some">I have some experience or knowledge.</option>
+            <option value="working">I am working and learning around my schedule.</option>
+            <option value="career">I want to change careers or enter a new field.</option>
+            <option value="business">I want to build skills for a business or independent project.</option>
+            <option value="advanced">I have experience and want to specialize or advance.</option>
+          </select>
+        </div>
+
+        <div class="assessment-question">
+          <label for="goal">3. What are you trying to accomplish?</label>
+          <select id="goal" required>
+            <option value="">Choose your answer</option>
+            <option value="career">Prepare for a new career.</option>
+            <option value="promotion">Qualify for better opportunities or advancement.</option>
+            <option value="business">Build or improve a business.</option>
+            <option value="credential">Earn a certification or credential.</option>
+            <option value="project">Build a portfolio or complete practical projects.</option>
+            <option value="knowledge">Develop knowledge for personal or professional growth.</option>
+            <option value="explore">Explore possible directions before committing.</option>
+          </select>
+        </div>
+
+        <div class="assessment-question">
+          <label for="timeAvailable">4. How much time can you realistically dedicate each week?</label>
+          <select id="timeAvailable" required>
+            <option value="">Choose your answer</option>
+            <option value="under3">Less than 3 hours.</option>
+            <option value="3to5">3–5 hours.</option>
+            <option value="6to10">6–10 hours.</option>
+            <option value="11to15">11–15 hours.</option>
+            <option value="over15">More than 15 hours.</option>
+            <option value="variable">My schedule changes each week.</option>
+          </select>
+        </div>
+
+        <div class="assessment-question">
+          <label for="budget">5. What is your current learning budget?</label>
+          <select id="budget" required>
+            <option value="">Choose your answer</option>
+            <option value="free">I need free resources.</option>
+            <option value="low">Under $50.</option>
+            <option value="medium">$50–$250.</option>
+            <option value="high">$250–$1,000.</option>
+            <option value="flexible">I can invest more if the value is clear.</option>
+            <option value="funding">I need scholarships, grants, or funding options.</option>
+          </select>
+        </div>
+
+        <div class="assessment-question">
+          <label for="preferredSupport">6. What type of support would help most?</label>
+          <select id="preferredSupport" required>
+            <option value="">Choose your answer</option>
+            <option value="digital">Digital templates, guides, and structured tools.</option>
+            <option value="physical">A physical planner or journal.</option>
+            <option value="stepbystep">Step-by-step instructions and a learning sequence.</option>
+            <option value="research">Research and comparison of learning options.</option>
+            <option value="projects">Practice assignments and project ideas.</option>
+            <option value="complete">A complete personalized learning plan.</option>
+            <option value="unsure">I am not sure yet.</option>
+          </select>
+        </div>
+
+        <div class="assessment-question">
+          <label for="experience">7. What skills or experience do you already have?</label>
+          <textarea id="experience" placeholder="List your current skills, courses, work experience, or subjects you have studied."></textarea>
+        </div>
+
+        <div class="assessment-question">
+          <label for="target">8. What subject, career, or skill are you considering?</label>
+          <input id="target" type="text" placeholder="Example: coding, data analysis, business, healthcare, cybersecurity">
+        </div>
+
+        <button type="submit" class="assessment-submit">Analyze My Learning Needs</button>
+      </form>
+
+      <div id="assessmentResult" class="assessment-result" aria-live="polite" tabindex="-1"></div>
+
+      <p class="assessment-note">
+        This assessment provides a starting recommendation based on
+        your answers. It does not guarantee employment, certification,
+        admission, or other external outcomes.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS AND PRODUCTS -->
+<section class="section section-light" id="tools">
+  <div class="container">
+    <div class="section-heading">
+      <div class="overline">Planning and execution tools</div>
+      <h2>Choose tools that solve an actual problem.</h2>
+      <p>
+        A planner, journal, or workflow template is useful when it helps
+        you make decisions, manage your time, practice skills, or track progress.
+      </p>
+    </div>
+
+    <div class="product-grid">
+      <article class="product-card">
+        <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a" alt="Notebook and writing tools">
+        <div class="product-content">
+          <div class="product-tag">Organization</div>
+          <h3>Learning Clarity Journal</h3>
+          <p>
+            Capture ideas, questions, goals, and responsibilities.
+            Organize your thinking before choosing your next step.
+          </p>
+          <a href="#assessment" class="button button-dark">Find My Starting Point</a>
+        </div>
+      </article>
+
+      <article class="product-card">
+        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40" alt="Planning and project workspace">
+        <div class="product-content">
+          <div class="product-tag">Planning</div>
+          <h3>Learning Roadmap Planner</h3>
+          <p>
+            Organize weekly learning goals, assignments, milestones,
+            study time, and completion checkpoints.
+          </p>
+          <a href="#offer" class="button button-dark">Explore the Roadmap</a>
+        </div>
+      </article>
+
+      <article class="product-card">
+        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3" alt="Person working on a digital project">
+        <div class="product-content">
+          <div class="product-tag">Skill development</div>
+          <h3>Practice and Project System</h3>
+          <p>
+            Convert lessons into exercises, practical assignments,
+            projects, and examples of completed work.
+          </p>
+          <a href="#approach" class="button button-dark">Review the Framework</a>
+        </div>
+      </article>
+
+      <article class="product-card">
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f" alt="Digital analytics and progress tracking">
+        <div class="product-content">
+          <div class="product-tag">Measurement</div>
+          <h3>Progress and Evidence Tracker</h3>
+          <p>
+            Track completed lessons, practice hours, project milestones,
+            skill development, and evidence you can share.
+          </p>
+          <a href="#offer" class="button button-dark">Build My Learning Plan</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PERSONALIZED ROADMAP SERVICE -->
+<section class="section" id="offer">
+  <div class="container">
+    <div class="offer-header">
+      <div class="overline">Personalized research and planning service</div>
+      <h2>Your Personalized Learning Roadmap</h2>
+      <p>
+        A structured learning plan built around your goal, starting point,
+        available time, financial needs, and desired outcome.
+      </p>
+    </div>
+
+    <div class="offer-card">
+      <div class="offer-content">
+        <h3>Know what to learn, why it matters, and what to do next.</h3>
+        <p>
+          Instead of collecting disconnected resources, receive an organized
+          route that connects learning choices with practical work and measurable progress.
+        </p>
+
+        <div class="feature-grid">
+          <div class="feature">Goal and outcome analysis<span>Clarify the destination.</span></div>
+          <div class="feature">Starting-point assessment<span>Build from what you know.</span></div>
+          <div class="feature">Curated resources<span>Compare relevant learning options.</span></div>
+          <div class="feature">4–8 week sequence<span>Organize the work into stages.</span></div>
+          <div class="feature">Time and schedule planning<span>Use your realistic availability.</span></div>
+          <div class="feature">Financial considerations<span>Identify costs and possible alternatives.</span></div>
+          <div class="feature">Practice assignments<span>Apply knowledge as you learn.</span></div>
+          <div class="feature">Practical project ideas<span>Create examples of your abilities.</span></div>
+          <div class="feature">Evidence checklist<span>Track what you can demonstrate.</span></div>
+          <div class="feature">Progress tracker<span>Keep milestones visible.</span></div>
+          <div class="feature">Next-step recommendations<span>Identify what comes afterward.</span></div>
+          <div class="feature">One revision round<span>Refine the plan.</span></div>
+        </div>
+      </div>
+
+      <div class="offer-price">
+        <div class="price-overline">Personalized roadmap</div>
+        <div class="price">$250</div>
+        <div class="price-description">One-time service price</div>
+
+        <ul class="price-details">
+          <li>Built around your stated goal</li>
+          <li>Research and resource selection</li>
+          <li>4–8 week learning sequence</li>
+          <li>Time and cost considerations</li>
+          <li>Practice and project recommendations</li>
+          <li>Evidence checkpoints</li>
+          <li>One revision round</li>
+        </ul>
+
+        <a href="#start" class="price-button">Begin My Roadmap Intake →</a>
+        <p style="font-size:.7rem;color:#c0cbc3;margin-top:12px">
+          Delivery timing and payment instructions should be confirmed
+          before purchase.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section section-light" id="process">
+  <div class="container">
+    <div class="section-heading">
+      <div class="overline">The process</div>
+      <h2>Four steps from uncertainty to a practical route.</h2>
+      <p>
+        You provide the destination and context. The roadmap organizes
+        the research, learning sequence, and practical next steps.
+      </p>
+    </div>
+
+    <div class="process-grid">
+      <div class="process-item">
+        <div class="process-number">01</div>
+        <h3>Define your goal</h3>
+        <p>Describe what you want to learn, accomplish, or prepare for.</p>
+      </div>
+      <div class="process-item">
+        <div class="process-number">02</div>
+        <h3>Assess your options</h3>
+        <p>Consider your current knowledge, resources, time, and financial limits.</p>
+      </div>
+      <div class="process-item">
+        <div class="process-number">03</div>
+        <h3>Build the route</h3>
+        <p>Organize learning resources, skills, practice, and milestones.</p>
+      </div>
+      <div class="process-item">
+        <div class="process-number">04</div>
+        <h3>Create evidence</h3>
+        <p>Complete projects and record the work that demonstrates your progress.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="questions">
+  <div class="container">
+    <div class="section-heading" style="margin-left:auto;margin-right:auto;text-align:center">
+      <div class="overline">Before you begin</div>
+      <h2>Questions worth asking.</h2>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <h3>Do I need to know what career I want before starting?</h3>
+        <p>
+          No. You can begin with an area of interest or a problem you want
+          to solve. Exploration and comparison can be part of the planning process.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Can I build a learning path without spending a lot of money?</h3>
+        <p>
+          Yes. Your plan can prioritize free resources, low-cost courses,
+          open educational materials, and funding opportunities where relevant.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Does the roadmap teach me the subject?</h3>
+        <p>
+          The roadmap is a research and planning service, not tutoring.
+          It organizes resources and practical work so you can study more deliberately.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>What if I am a complete beginner?</h3>
+        <p>
+          Your starting point is part of the assessment. A beginner route
+          should account for prerequisites and build skills in a logical order.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>What if I have very limited time?</h3>
+        <p>
+          The plan should account for your realistic weekly availability.
+          A smaller, consistent learning schedule can be more useful than
+          an unrealistic schedule you cannot maintain.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Will a roadmap guarantee a job or certification?</h3>
+        <p>
+          No. A learning plan cannot guarantee employment, admission,
+          certification, or income. Its purpose is to help you organize
+          learning, practice, and evidence of your abilities.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>What should I have when I finish learning?</h3>
+        <p>
+          Depending on your goal, you may have completed courses,
+          demonstrated skills, projects, work samples, a portfolio,
+          credentials, or a clearer next-step plan.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL INTAKE -->
+<section class="final" id="start">
+  <div class="container">
+    <div class="overline">Your next step</div>
+    <h2>Stop collecting information. Start building your route.</h2>
+    <p>
+      Begin by identifying what you want to accomplish, what you already
+      know, and what resources you can realistically use.
+    </p>
+    <a href="#assessment" class="button button-gold">Complete My Needs Assessment</a>
+    <p class="final-note">
+      LearningPath · Research · Planning · Practice · Evidence
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-inner">
+    <div>© 2026 LearningPath</div>
+    <div>Personalized learning research and planning</div>
+  </div>
+</footer>
+
+<script>
+/* =====================================================
+   PERSONALIZED NEEDS ASSESSMENT
+===================================================== */
+
+const needsForm = document.getElementById("needsForm");
+const result = document.getElementById("assessmentResult");
+
+needsForm.addEventListener("submit", function(event){
+  event.preventDefault();
+
+  const problem = document.getElementById("mainProblem").value;
+  const situation = document.getElementById("currentSituation").value;
+  const goal = document.getElementById("goal").value;
+  const time = document.getElementById("timeAvailable").value;
+  const budget = document.getElementById("budget").value;
+  const support = document.getElementById("preferredSupport").value;
+  const experience = document.getElementById("experience").value.trim();
+  const target = document.getElementById("target").value.trim();
+
+  let recommendation = "";
+  let explanation = "";
+  let actions = [];
+
+  if(problem === "direction" || goal === "explore"){
+    recommendation = "Career and Learning Exploration";
+    explanation = "Your first priority is to compare possible directions before committing to a specific course or training route.";
+    actions = [
+      "Identify three areas of interest.",
+      "Research the work, skills, and qualifications associated with each area.",
+      "Compare entry requirements and realistic learning costs.",
+      "Try a beginner lesson or introductory project in your strongest option.",
+      "Choose a direction to investigate further."
+    ];
+  }
+  else if(problem === "resources" || budget === "funding"){
+    recommendation = "Resource and Funding Research";
+    explanation = "Your first priority is to identify appropriate learning options and understand their costs, requirements, and possible funding alternatives.";
+    actions = [
+      "List the skills or credential you want to pursue.",
+      "Compare free, low-cost, and paid learning options.",
+      "Check prerequisites and course completion requirements.",
+      "Research scholarships, grants, employer support, and other eligible funding.",
+      "Compare the total cost before committing."
+    ];
+  }
+  else if(problem === "skills" || goal === "career" || goal === "promotion"){
+    recommendation = "Skill Development Roadmap";
+    explanation = "Your goal requires a clear understanding of the skills you need and how to develop them in a practical sequence.";
+    actions = [
+      "Identify the skills associated with your target direction.",
+      "Compare those skills with your current experience.",
+      "Choose learning resources for the most important gaps.",
+      "Practice each skill through exercises or assignments.",
+      "Create projects that demonstrate what you can do."
+    ];
+  }
+  else if(problem === "practice" || problem === "evidence" || goal === "project"){
+    recommendation = "Practice and Evidence Development";
+    explanation = "Your next step is to turn learning into applied work that can be reviewed, improved, and demonstrated.";
+    actions = [
+      "Choose one skill to demonstrate.",
+      "Find a practical exercise that uses the skill.",
+      "Complete a small project.",
+      "Document the process and final result.",
+      "Review the work and identify what to improve."
+    ];
+  }
+  else if(problem === "focus" || problem === "ideas"){
+    recommendation = "Learning Organization and Focus System";
+    explanation = "Your first priority is to reduce scattered activity and create a manageable learning process.";
+    actions = [
+      "Choose one main learning goal.",
+      "Break it into smaller topics or milestones.",
+      "Schedule realistic learning sessions.",
+      "Keep a record of completed lessons and practice.",
+      "Review progress once each week."
+    ];
+  }
+  else{
+    recommendation = "Personalized Learning Roadmap";
+    explanation = "Your answers suggest that you would benefit from connecting your goal, resources, schedule, practice, and progress into one organized plan.";
+    actions = [
+      "Clarify the result you want to achieve.",
+      "Identify your current knowledge and experience.",
+      "Compare learning options and requirements.",
+      "Create a realistic weekly schedule.",
+      "Practice through assignments and projects.",
+      "Record evidence of your progress."
+    ];
+  }
+
+  let budgetAdvice = "";
+  if(budget === "free"){
+    budgetAdvice = "Prioritize free learning resources and avoid paying for a course until you have confirmed that it meets a specific need.";
+  }else if(budget === "low"){
+    budgetAdvice = "Compare low-cost resources and free alternatives before making a purchase.";
+  }else if(budget === "funding"){
+    budgetAdvice = "Include funding research in your plan. Check eligibility, deadlines, and covered expenses before applying.";
+  }else{
+    budgetAdvice = "Compare the total cost of each option with the skills, credential, or practical outcome it provides.";
+  }
+
+  let timeAdvice = "";
+  if(time === "under3"){
+    timeAdvice = "With fewer than three hours weekly, focus on one small learning target at a time.";
+  }else if(time === "3to5"){
+    timeAdvice = "A short weekly schedule with one learning session and one practice session may be a realistic starting structure.";
+  }else if(time === "6to10"){
+    timeAdvice = "You may be able to divide your time between instruction, practice, and weekly review.";
+  }else if(time === "11to15" || time === "over15"){
+    timeAdvice = "You have room to plan a more structured sequence with dedicated learning, practice, and project time.";
+  }else{
+    timeAdvice = "Use flexible weekly milestones rather than depending on the same study hours every week.";
+  }
+
+  let supportAdvice = "";
+  if(support === "physical"){
+    supportAdvice = "A physical journal or planner may help you organize tasks and review your progress.";
+  }else if(support === "digital"){
+    supportAdvice = "Digital templates and trackers may help you organize resources, milestones, and project evidence.";
+  }else if(support === "research"){
+    supportAdvice = "Prioritize comparing course quality, cost, prerequisites, time requirements, and practical outcomes.";
+  }else if(support === "projects"){
+    supportAdvice = "Build practical assignments into your learning plan from the beginning.";
+  }else if(support === "stepbystep"){
+    supportAdvice = "Use a sequenced plan with clear milestones and specific actions.";
+  }else{
+    supportAdvice = "Start with the recommended actions and choose additional tools only when you identify a specific need.";
+  }
+
+  const safeTarget = target
+    ? target.replace(/[&<>"']/g, function(character){
+        return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[character];
+      })
+    : "Not specified";
+
+  const safeExperience = experience
+    ? experience.replace(/[&<>"']/g, function(character){
+        return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[character];
+      })
+    : "No prior experience details provided.";
+
+  result.innerHTML = `
+    <h3>Your Learning Needs Assessment</h3>
+    <p><strong>Recommended starting point:</strong> ${recommendation}</p>
+    <p>${explanation}</p>
+
+    <h3>Your Starting Information</h3>
+    <p><strong>Area of interest:</strong> ${safeTarget}</p>
+    <p><strong>Current experience:</strong> ${safeExperience}</p>
+    <p><strong>Weekly time:</strong> ${time}</p>
+    <p><strong>Current situation:</strong> ${situation}</p>
+    <p><strong>Desired outcome:</strong> ${goal}</p>
+
+    <h3>Recommended Action Plan</h3>
+    <ul>${actions.map(action => `<li>${action}</li>`).join("")}</ul>
+
+    <h3>Financial Consideration</h3>
+    <p>${budgetAdvice}</p>
+
+    <h3>Time Consideration</h3>
+    <p>${timeAdvice}</p>
+
+    <h3>Suggested Support</h3>
+    <p>${supportAdvice}</p>
+
+    <p><strong>Your next move:</strong> Start with the first action. Do not add more courses or tools until you know what problem they will solve.</p>
+
+    <p>
+      <a class="button button-dark" href="#offer">Explore a Personalized Roadmap</a>
+    </p>
+
+    <button type="button" class="reset-button" id="resetAssessment">Retake Assessment</button>
+  `;
+
+  result.style.display = "block";
+  result.focus();
+
+  document.getElementById("resetAssessment").addEventListener("click",function(){
+    needsForm.reset();
+    result.style.display = "none";
+    result.innerHTML = "";
+    document.getElementById("assessment").scrollIntoView({behavior:"smooth"});
+  });
+
+  result.scrollIntoView({behavior:"smooth",block:"nearest"});
+});
+</script>
+
+</body>
+</html>
