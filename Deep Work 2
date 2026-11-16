@@ -1,0 +1,1783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tech Genius | Deep Work Environment</title>
+
+<style>
+:root{
+    --bg:#07111f;
+    --bg2:#0b1728;
+    --panel:#101f33;
+    --panel2:#13263d;
+    --line:#263c56;
+    --text:#edf4fb;
+    --muted:#9fb0c3;
+    --accent:#58d6c0;
+    --accent2:#8fa8ff;
+    --warning:#e6c46a;
+    --danger:#e98787;
+    --white:#ffffff;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    background:
+        radial-gradient(circle at 20% 0%,rgba(88,214,192,.08),transparent 30%),
+        radial-gradient(circle at 85% 15%,rgba(143,168,255,.08),transparent 30%),
+        var(--bg);
+    color:var(--text);
+    line-height:1.65;
+}
+
+button,
+input,
+select,
+textarea{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    min-height:600px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:90px 24px;
+    border-bottom:1px solid var(--line);
+    background:
+        linear-gradient(rgba(7,17,31,.72),rgba(7,17,31,.95)),
+        radial-gradient(circle at center,rgba(88,214,192,.12),transparent 45%);
+}
+
+.hero-inner{
+    max-width:1050px;
+}
+
+.eyebrow{
+    display:inline-block;
+    padding:7px 14px;
+    border:1px solid rgba(88,214,192,.35);
+    border-radius:999px;
+    color:var(--accent);
+    text-transform:uppercase;
+    letter-spacing:.12em;
+    font-size:.72rem;
+    font-weight:800;
+    margin-bottom:24px;
+}
+
+.hero h1{
+    font-size:clamp(3rem,8vw,6.5rem);
+    line-height:.98;
+    letter-spacing:-.055em;
+    margin-bottom:28px;
+}
+
+.hero h1 span{
+    color:var(--accent);
+}
+
+.hero p{
+    max-width:850px;
+    margin:auto;
+    color:var(--muted);
+    font-size:1.15rem;
+}
+
+.hero-note{
+    margin-top:30px;
+    color:#cbd7e4;
+    font-size:.95rem;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.container{
+    width:min(1450px,94%);
+    margin:auto;
+}
+
+section{
+    padding:85px 0;
+}
+
+.section-heading{
+    max-width:850px;
+    margin-bottom:40px;
+}
+
+.section-heading .number{
+    color:var(--accent);
+    font-size:.75rem;
+    font-weight:800;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+}
+
+.section-heading h2{
+    font-size:clamp(2rem,4vw,3.4rem);
+    line-height:1.1;
+    margin:8px 0 15px;
+    letter-spacing:-.035em;
+}
+
+.section-heading p{
+    color:var(--muted);
+}
+
+/* =========================
+   CORE IDEA
+========================= */
+
+.principles{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+}
+
+.principle{
+    background:var(--panel);
+    padding:30px;
+    min-height:230px;
+}
+
+.principle-number{
+    font-size:2rem;
+    color:var(--accent);
+    font-weight:900;
+    margin-bottom:15px;
+}
+
+.principle h3{
+    margin-bottom:10px;
+}
+
+.principle p{
+    color:var(--muted);
+    font-size:.94rem;
+}
+
+/* =========================
+   ENVIRONMENT AUDIT
+========================= */
+
+.audit-layout{
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    gap:28px;
+}
+
+.panel{
+    background:linear-gradient(145deg,var(--panel),var(--bg2));
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:30px;
+}
+
+.panel h3{
+    margin-bottom:8px;
+}
+
+.panel-intro{
+    color:var(--muted);
+    margin-bottom:25px;
+}
+
+.audit-item{
+    padding:18px 0;
+    border-bottom:1px solid var(--line);
+}
+
+.audit-item:last-child{
+    border-bottom:none;
+}
+
+.audit-top{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:10px;
+}
+
+.audit-top span:last-child{
+    color:var(--accent);
+    font-weight:800;
+}
+
+.range{
+    width:100%;
+    accent-color:var(--accent);
+}
+
+.score-display{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:100%;
+    text-align:center;
+}
+
+.score-circle{
+    width:210px;
+    height:210px;
+    border:2px solid var(--accent);
+    border-radius:50%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 0 50px rgba(88,214,192,.08);
+}
+
+.score-circle strong{
+    font-size:4rem;
+    line-height:1;
+}
+
+.score-circle span{
+    color:var(--muted);
+    margin-top:10px;
+}
+
+/* =========================
+   DEEP WORK DESIGN
+========================= */
+
+.cycle-builder{
+    display:grid;
+    grid-template-columns:.8fr 1.2fr;
+    gap:28px;
+}
+
+.form-row{
+    margin-bottom:20px;
+}
+
+label{
+    display:block;
+    color:#d8e2ec;
+    font-size:.8rem;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    font-weight:800;
+    margin-bottom:8px;
+}
+
+input[type="text"],
+textarea,
+select{
+    width:100%;
+    border:1px solid var(--line);
+    background:#091523;
+    color:var(--text);
+    border-radius:10px;
+    padding:13px 15px;
+    outline:none;
+}
+
+textarea{
+    min-height:110px;
+    resize:vertical;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:var(--accent);
+}
+
+.cycle-options{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+.cycle-option{
+    padding:16px 10px;
+    background:var(--panel2);
+    border:1px solid var(--line);
+    color:var(--text);
+    border-radius:10px;
+    text-align:center;
+}
+
+.cycle-option.active{
+    border-color:var(--accent);
+    background:rgba(88,214,192,.1);
+    color:var(--accent);
+}
+
+.primary{
+    width:100%;
+    margin-top:10px;
+    padding:15px;
+    border:0;
+    border-radius:10px;
+    background:var(--accent);
+    color:#06120f;
+    font-weight:900;
+}
+
+.primary:hover{
+    filter:brightness(1.08);
+}
+
+/* =========================
+   TIMER
+========================= */
+
+.timer-panel{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    min-height:430px;
+}
+
+.timer-status{
+    color:var(--accent);
+    text-transform:uppercase;
+    letter-spacing:.12em;
+    font-size:.72rem;
+    font-weight:900;
+}
+
+.timer-task{
+    font-size:1.3rem;
+    margin:10px 0 20px;
+}
+
+.timer{
+    font-size:clamp(4rem,10vw,7.5rem);
+    font-weight:900;
+    line-height:1;
+    letter-spacing:-.06em;
+    font-variant-numeric:tabular-nums;
+    margin:20px 0 30px;
+}
+
+.timer-meta{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.meta{
+    padding:14px;
+    background:var(--panel2);
+    border:1px solid var(--line);
+    border-radius:10px;
+}
+
+.meta strong{
+    display:block;
+    color:var(--accent);
+    font-size:1.4rem;
+}
+
+.meta span{
+    color:var(--muted);
+    font-size:.72rem;
+    text-transform:uppercase;
+}
+
+.controls{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:10px;
+}
+
+.control{
+    padding:12px;
+    border-radius:9px;
+    border:1px solid var(--line);
+    background:transparent;
+    color:var(--text);
+}
+
+.control:hover{
+    border-color:var(--accent);
+}
+
+.control.primary-control{
+    background:var(--accent);
+    color:#06120f;
+    border-color:var(--accent);
+    font-weight:900;
+}
+
+/* =========================
+   INTERRUPTIONS
+========================= */
+
+.interruption-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+}
+
+.interruption{
+    background:var(--panel);
+    border:1px solid var(--line);
+    padding:22px;
+    border-radius:14px;
+}
+
+.interruption h4{
+    margin-bottom:6px;
+}
+
+.interruption p{
+    color:var(--muted);
+    font-size:.88rem;
+    margin-bottom:15px;
+}
+
+.counter{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-top:1px solid var(--line);
+    padding-top:15px;
+}
+
+.counter strong{
+    font-size:1.5rem;
+    color:var(--accent);
+}
+
+.counter button{
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:var(--panel2);
+    color:var(--text);
+}
+
+/* =========================
+   ATTENTION EQUATION
+========================= */
+
+.equation{
+    margin-top:30px;
+    padding:30px;
+    background:#06101d;
+    border:1px solid var(--line);
+    border-left:4px solid var(--accent);
+    border-radius:14px;
+    overflow:auto;
+}
+
+.equation-main{
+    font-size:1.5rem;
+    font-weight:800;
+    color:var(--accent);
+    margin-bottom:12px;
+}
+
+.equation p{
+    color:var(--muted);
+}
+
+/* =========================
+   LESSON CARDS
+========================= */
+
+.lessons{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.lesson{
+    background:var(--panel);
+    border:1px solid var(--line);
+    padding:28px;
+    border-radius:18px;
+}
+
+.lesson-number{
+    color:var(--accent);
+    font-weight:900;
+    font-size:.75rem;
+    letter-spacing:.1em;
+}
+
+.lesson h3{
+    margin:8px 0 12px;
+}
+
+.lesson p{
+    color:var(--muted);
+    font-size:.93rem;
+}
+
+.lesson ul{
+    margin-top:15px;
+    padding-left:20px;
+    color:#c9d5e1;
+}
+
+.lesson li{
+    margin-bottom:7px;
+}
+
+/* =========================
+   REFLECTION
+========================= */
+
+.reflection{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+}
+
+.metric-box{
+    padding:25px;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:16px;
+}
+
+.metric-box h3{
+    margin-bottom:10px;
+}
+
+.metric-value{
+    font-size:3rem;
+    color:var(--accent);
+    font-weight:900;
+}
+
+.metric-box p{
+    color:var(--muted);
+}
+
+.summary{
+    margin-top:25px;
+    padding:25px;
+    background:linear-gradient(135deg,rgba(88,214,192,.08),rgba(143,168,255,.05));
+    border:1px solid var(--line);
+    border-radius:16px;
+}
+
+.summary strong{
+    color:var(--accent);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    border-top:1px solid var(--line);
+    padding:50px 20px;
+    text-align:center;
+    color:var(--muted);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1000px){
+
+    .principles,
+    .interruption-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .audit-layout,
+    .cycle-builder,
+    .reflection{
+        grid-template-columns:1fr;
+    }
+
+    .lessons{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:650px){
+
+    section{
+        padding:60px 0;
+    }
+
+    .hero{
+        min-height:500px;
+        padding:70px 20px;
+    }
+
+    .principles,
+    .interruption-grid,
+    .lessons{
+        grid-template-columns:1fr;
+    }
+
+    .cycle-options,
+    .timer-meta,
+    .controls{
+        grid-template-columns:1fr;
+    }
+
+    .panel,
+    .lesson{
+        padding:22px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+HERO
+========================= -->
+
+<header class="hero">
+
+<div class="hero-inner">
+
+<div class="eyebrow">Tech Genius • Cognitive Performance Architecture</div>
+
+<h1>Build an environment where your <span>attention can work.</span></h1>
+
+<p>
+Deep work is not simply “trying harder.” It is the deliberate engineering
+of conditions that reduce attention leakage, lower switching costs, and
+allow difficult cognitive work to remain uninterrupted long enough to
+produce meaningful output.
+</p>
+
+<div class="hero-note">
+The objective is not to stay busy longer. The objective is to produce more
+valuable work with the cognitive capacity you actually have.
+</div>
+
+</div>
+
+</header>
+
+
+<main class="container">
+
+<!-- =========================
+SECTION 1
+========================= -->
+
+<section>
+
+<div class="section-heading">
+
+<div class="number">01 / The Architecture</div>
+
+<h2>Concentration is a system, not a personality trait.</h2>
+
+<p>
+When difficult work repeatedly fails, the instinct is often to blame
+discipline. A better diagnosis is to inspect the environment surrounding
+the behavior.
+</p>
+
+</div>
+
+<div class="principles">
+
+<div class="principle">
+<div class="principle-number">01</div>
+<h3>Reduce Switching</h3>
+<p>
+Every unnecessary transition asks the brain to reconstruct context.
+Deep work becomes easier when the number of competing contexts falls.
+</p>
+</div>
+
+<div class="principle">
+<div class="principle-number">02</div>
+<h3>Increase Friction for Noise</h3>
+<p>
+Make distracting behaviors inconvenient. Silence notifications, close
+irrelevant tabs, remove visual clutter, and separate communication.
+</p>
+</div>
+
+<div class="principle">
+<div class="principle-number">03</div>
+<h3>Protect the Start</h3>
+<p>
+The first minutes of a work session are expensive. Decide the objective
+before the timer begins so execution does not become another planning session.
+</p>
+</div>
+
+<div class="principle">
+<div class="principle-number">04</div>
+<h3>Recover Deliberately</h3>
+<p>
+Concentration is not infinite. Alternating demanding work with recovery
+allows cognitive resources to be redeployed instead of continuously drained.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+SECTION 2
+========================= -->
+
+<section>
+
+<div class="section-heading">
+
+<div class="number">02 / Environment Audit</div>
+
+<h2>Measure the environment before blaming the brain.</h2>
+
+<p>
+Rate the conditions surrounding your next work session. The purpose is not
+to produce a perfect score. It is to identify the largest source of cognitive
+leakage.
+</p>
+
+</div>
+
+<div class="audit-layout">
+
+<div class="panel">
+
+<h3>Attention Leakage Audit</h3>
+
+<p class="panel-intro">
+Move each slider from 0 to 10. Higher scores indicate a stronger problem.
+</p>
+
+<div class="audit-item">
+<div class="audit-top">
+<span>Notifications & interruptions</span>
+<span id="notificationsValue">5</span>
+</div>
+<input class="range audit-range" type="range" min="0" max="10" value="5"
+data-target="notificationsValue">
+</div>
+
+<div class="audit-item">
+<div class="audit-top">
+<span>Open tabs & digital clutter</span>
+<span id="tabsValue">5</span>
+</div>
+<input class="range audit-range" type="range" min="0" max="10" value="5"
+data-target="tabsValue">
+</div>
+
+<div class="audit-item">
+<div class="audit-top">
+<span>Task ambiguity</span>
+<span id="ambiguityValue">5</span>
+</div>
+<input class="range audit-range" type="range" min="0" max="10" value="5"
+data-target="ambiguityValue">
+</div>
+
+<div class="audit-item">
+<div class="audit-top">
+<span>Physical/environmental distraction</span>
+<span id="physicalValue">5</span>
+</div>
+<input class="range audit-range" type="range" min="0" max="10" value="5"
+data-target="physicalValue">
+</div>
+
+<div class="audit-item">
+<div class="audit-top">
+<span>Context switching</span>
+<span id="switchingValue">5</span>
+</div>
+<input class="range audit-range" type="range" min="0" max="10" value="5"
+data-target="switchingValue">
+</div>
+
+</div>
+
+<div class="panel score-display">
+
+<div class="score-circle">
+
+<strong id="environmentScore">50</strong>
+
+<span>Noise Index</span>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="equation">
+
+<div class="equation-main">
+Attention Field = (Deep Minutes ÷ Total Minutes) × (1 ÷ (1 + Switches)) × 100
+</div>
+
+<p>
+This model makes an important distinction: being at your desk is not the
+same as being cognitively present. A two-hour work period fragmented by
+constant switching can contain substantially less usable deep-work time
+than a shorter uninterrupted session.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+SECTION 3
+========================= -->
+
+<section>
+
+<div class="section-heading">
+
+<div class="number">03 / Build the Cycle</div>
+
+<h2>Use rhythmic concentration instead of indefinite effort.</h2>
+
+<p>
+Choose a target, define the output, select a cycle, and let the environment
+carry some of the discipline. Your job during the cycle is execution.
+</p>
+
+</div>
+
+<div class="cycle-builder">
+
+<div class="panel">
+
+<h3>Session Architecture</h3>
+
+<p class="panel-intro">
+Design the work session before starting it.
+</p>
+
+<div class="form-row">
+
+<label for="taskName">Primary Objective</label>
+
+<input
+type="text"
+id="taskName"
+placeholder="Example: Finish the homepage architecture"
+/>
+
+</div>
+
+<div class="form-row">
+
+<label for="definition">Definition of Done</label>
+
+<textarea
+id="definition"
+placeholder="What specific evidence will prove that this session produced an output?"
+></textarea>
+
+</div>
+
+<div class="form-row">
+
+<label>Concentration Cycle</label>
+
+<div class="cycle-options">
+
+<button class="cycle-option active" data-minutes="25">
+25 min
+</button>
+
+<button class="cycle-option" data-minutes="50">
+50 min
+</button>
+
+<button class="cycle-option" data-minutes="90">
+90 min
+</button>
+
+</div>
+
+</div>
+
+<button class="primary" id="startSession">
+Start Deep Work Cycle
+</button>
+
+</div>
+
+
+<div class="panel timer-panel">
+
+<div class="timer-status" id="timerStatus">
+Ready
+</div>
+
+<div class="timer-task" id="timerTask">
+Define the work before you begin.
+</div>
+
+<div class="timer" id="timer">
+25:00
+</div>
+
+<div class="timer-meta">
+
+<div class="meta">
+<strong id="cycleCount">0</strong>
+<span>Cycles</span>
+</div>
+
+<div class="meta">
+<strong id="deepMinutes">0</strong>
+<span>Deep Minutes</span>
+</div>
+
+<div class="meta">
+<strong id="switchCount">0</strong>
+<span>Switches</span>
+</div>
+
+</div>
+
+<div class="controls">
+
+<button class="control primary-control" id="pauseButton">
+Pause
+</button>
+
+<button class="control" id="finishButton">
+Finish
+</button>
+
+<button class="control" id="resetButton">
+Reset
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+SECTION 4
+========================= -->
+
+<section>
+
+<div class="section-heading">
+
+<div class="number">04 / Interruption Intelligence</div>
+
+<h2>Do not merely count interruptions. Diagnose them.</h2>
+
+<p>
+An interruption is useful data. Repeated interruptions reveal where the
+environment, workflow, technology, or planning system is leaking attention.
+</p>
+
+</div>
+
+<div class="interruption-grid">
+
+<div class="interruption">
+<h4>Phone / Messages</h4>
+<p>Incoming communication that breaks concentration.</p>
+
+<div class="counter">
+<strong id="phoneCount">0</strong>
+<button onclick="increment('phoneCount')">+</button>
+</div>
+</div>
+
+<div class="interruption">
+<h4>Unplanned Research</h4>
+<p>Leaving the task to investigate another question.</p>
+
+<div class="counter">
+<strong id="researchCount">0</strong>
+<button onclick="increment('researchCount')">+</button>
+</div>
+</div>
+
+<div class="interruption">
+<h4>Task Switching</h4>
+<p>Moving between projects before the current task is complete.</p>
+
+<div class="counter">
+<strong id="taskCount">0</strong>
+<button onclick="increment('taskCount')">+</button>
+</div>
+</div>
+
+<div class="interruption">
+<h4>Environment</h4>
+<p>Noise, movement, physical discomfort, or other environmental breaks.</p>
+
+<div class="counter">
+<strong id="environmentCount">0</strong>
+<button onclick="increment('environmentCount')">+</button>
+</div>
+</div>
+
+</div>
+
+<div class="summary">
+
+<strong>Strategic rule:</strong>
+
+If the same interruption repeatedly appears, stop treating it as a
+discipline problem. Treat it as a system-design problem.
+
+</div>
+
+</section>
+
+
+<!-- =========================
+SECTION 5
+========================= -->
+
+<section>
+
+<div class="section-heading">
+
+<div class="number">05 / Advanced Lessons</div>
+
+<h2>The deeper intelligence behind deep work.</h2>
+
+<p>
+The timer is only the visible layer. The real advantage comes from
+understanding the mechanisms underneath concentration.
+</p>
+
+</div>
+
+<div class="lessons">
+
+<div class="lesson">
+
+<div class="lesson-number">LESSON 01</div>
+
+<h3>Attention Has Switching Costs</h3>
+
+<p>
+Changing tasks is not simply changing what appears on the screen.
+The brain must reconstruct the goal, relevant information, current state,
+and next action.
+</p>
+
+<ul>
+<li>Reduce simultaneous projects.</li>
+<li>Keep relevant material visible.</li>
+<li>Write down interruptions instead of acting on them.</li>
+</ul>
+
+</div>
+
+
+<div class="lesson">
+
+<div class="lesson-number">LESSON 02</div>
+
+<h3>Ambiguity Creates Friction</h3>
+
+<p>
+A vague task such as “work on the website” creates repeated decisions.
+A concrete task such as “build the responsive navigation component”
+creates an executable target.
+</p>
+
+<ul>
+<li>Define one output.</li>
+<li>Define the stopping condition.</li>
+<li>Define the next physical action.</li>
+</ul>
+
+</div>
+
+
+<div class="lesson">
+
+<div class="lesson-number">LESSON 03</div>
+
+<h3>Friction Shapes Behavior</h3>
+
+<p>
+People tend to repeat behaviors that are easy to initiate. Engineer the
+environment so desired behaviors require fewer steps than distractions.
+</p>
+
+<ul>
+<li>Open the project before the session.</li>
+<li>Preload necessary resources.</li>
+<li>Make distracting applications harder to access.</li>
+</ul>
+
+</div>
+
+
+<div class="lesson">
+
+<div class="lesson-number">LESSON 04</div>
+
+<h3>Recovery Is Part of Output</h3>
+
+<p>
+Trying to maximize work minutes can produce diminishing returns. High-value
+performance depends on alternating demanding cognitive work with recovery.
+</p>
+
+<ul>
+<li>End cycles deliberately.</li>
+<li>Move away from the screen.</li>
+<li>Return with a defined next step.</li>
+</ul>
+
+</div>
+
+
+<div class="lesson">
+
+<div class="lesson-number">LESSON 05</div>
+
+<h3>Measure Output, Not Busyness</h3>
+
+<p>
+Hours are an input. Completed work is an output. A better performance
+system tracks what was actually created, solved, learned, or improved.
+</p>
+
+<ul>
+<li>Record completed outputs.</li>
+<li>Measure deep minutes.</li>
+<li>Compare output per focused hour.</li>
+</ul>
+
+</div>
+
+
+<div class="lesson">
+
+<div class="lesson-number">LESSON 06</div>
+
+<h3>Design for Re-entry</h3>
+
+<p>
+The end of today's session determines the difficulty of tomorrow's start.
+Leave a clear trail showing exactly where the work should resume.
+</p>
+
+<ul>
+<li>Record the current state.</li>
+<li>Write the next action.</li>
+<li>Save unresolved questions separately.</li>
+</ul>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+SECTION 6
+========================= -->
+
+<section>
+
+<div class="section-heading">
+
+<div class="number">06 / Performance Intelligence</div>
+
+<h2>Turn concentration into measurable evidence.</h2>
+
+<p>
+After each cycle, examine the relationship between time, interruptions,
+and output. The goal is to discover your personal operating conditions.
+</p>
+
+</div>
+
+<div class="reflection">
+
+<div class="metric-box">
+
+<h3>Deep Work Minutes</h3>
+
+<div class="metric-value" id="finalDeepMinutes">0</div>
+
+<p>
+Total minutes recorded by completed concentration cycles.
+</p>
+
+</div>
+
+<div class="metric-box">
+
+<h3>Interruption Load</h3>
+
+<div class="metric-value" id="finalInterruptions">0</div>
+
+<p>
+Total interruptions recorded during your work environment audit.
+</p>
+
+</div>
+
+</div>
+
+<div class="panel" style="margin-top:25px;">
+
+<h3>Your Performance Diagnosis</h3>
+
+<p id="diagnosis" class="panel-intro">
+Complete a cycle and record interruptions to generate a diagnosis.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+SECTION 7
+========================= -->
+
+<section>
+
+<div class="section-heading">
+
+<div class="number">07 / The Operating Protocol</div>
+
+<h2>A high-performance deep-work session.</h2>
+
+</div>
+
+<div class="principles">
+
+<div class="principle">
+
+<div class="principle-number">01</div>
+
+<h3>Specify</h3>
+
+<p>
+Choose one meaningful outcome. If the objective cannot be stated clearly,
+the session is not ready to begin.
+</p>
+
+</div>
+
+<div class="principle">
+
+<div class="principle-number">02</div>
+
+<h3>Prepare</h3>
+
+<p>
+Open only the tools required for the objective. Remove communication,
+entertainment, irrelevant tabs, and unnecessary physical distractions.
+</p>
+
+</div>
+
+<div class="principle">
+
+<div class="principle-number">03</div>
+
+<h3>Concentrate</h3>
+
+<p>
+Work until the cycle ends. When another thought appears, capture it rather
+than allowing it to redirect the session.
+</p>
+
+</div>
+
+<div class="principle">
+
+<div class="principle-number">04</div>
+
+<h3>Measure</h3>
+
+<p>
+Record deep minutes, interruptions, and completed output. Use the evidence
+to redesign the next session.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+Tech Genius • Cognitive Performance • Attention Architecture • Deep Work
+
+</footer>
+
+
+<script>
+
+/* =========================
+ENVIRONMENT AUDIT
+========================= */
+
+const auditRanges = document.querySelectorAll(".audit-range");
+
+function updateAudit(){
+
+    let total = 0;
+
+    auditRanges.forEach(function(range){
+
+        const value = Number(range.value);
+        const target = document.getElementById(range.dataset.target);
+
+        target.textContent = value;
+
+        total += value;
+
+    });
+
+    const score = Math.round((total / 50) * 100);
+
+    document.getElementById("environmentScore").textContent = score;
+
+}
+
+auditRanges.forEach(function(range){
+
+    range.addEventListener("input", updateAudit);
+
+});
+
+updateAudit();
+
+
+/* =========================
+CYCLE SELECTION
+========================= */
+
+let selectedMinutes = 25;
+
+const cycleOptions = document.querySelectorAll(".cycle-option");
+
+cycleOptions.forEach(function(option){
+
+    option.addEventListener("click", function(){
+
+        cycleOptions.forEach(function(item){
+            item.classList.remove("active");
+        });
+
+        option.classList.add("active");
+
+        selectedMinutes = Number(option.dataset.minutes);
+
+        if(!isRunning && !hasStarted){
+            secondsLeft = selectedMinutes * 60;
+            updateTimer();
+        }
+
+    });
+
+});
+
+
+/* =========================
+TIMER STATE
+========================= */
+
+let timerInterval = null;
+let secondsLeft = 25 * 60;
+let isRunning = false;
+let hasStarted = false;
+
+let completedCycles = 0;
+let totalDeepMinutes = 0;
+
+
+/* =========================
+TIMER DISPLAY
+========================= */
+
+function updateTimer(){
+
+    const minutes = Math.floor(secondsLeft / 60);
+    const seconds = secondsLeft % 60;
+
+    document.getElementById("timer").textContent =
+        String(minutes).padStart(2,"0") +
+        ":" +
+        String(seconds).padStart(2,"0");
+
+}
+
+
+/* =========================
+START
+========================= */
+
+document.getElementById("startSession").addEventListener("click",function(){
+
+    const task =
+        document.getElementById("taskName").value.trim();
+
+    const definition =
+        document.getElementById("definition").value.trim();
+
+    if(!task){
+
+        document.getElementById("taskName").focus();
+
+        document.getElementById("timerStatus").textContent =
+            "Define your objective first";
+
+        return;
+
+    }
+
+    hasStarted = true;
+
+    secondsLeft = selectedMinutes * 60;
+
+    document.getElementById("timerTask").textContent =
+        task;
+
+    document.getElementById("timerStatus").textContent =
+        definition ?
+        "Deep work active • Definition established" :
+        "Deep work active • Define your stopping condition";
+
+    updateTimer();
+
+    startTimer();
+
+});
+
+
+/* =========================
+START TIMER
+========================= */
+
+function startTimer(){
+
+    if(timerInterval){
+        clearInterval(timerInterval);
+    }
+
+    isRunning = true;
+
+    document.getElementById("pauseButton").textContent =
+        "Pause";
+
+    timerInterval = setInterval(function(){
+
+        if(secondsLeft > 0){
+
+            secondsLeft--;
+
+            updateTimer();
+
+        }else{
+
+            completeCycle();
+
+        }
+
+    },1000);
+
+}
+
+
+/* =========================
+PAUSE
+========================= */
+
+document.getElementById("pauseButton").addEventListener("click",function(){
+
+    if(!hasStarted){
+        return;
+    }
+
+    if(isRunning){
+
+        clearInterval(timerInterval);
+
+        isRunning = false;
+
+        document.getElementById("pauseButton").textContent =
+            "Resume";
+
+        document.getElementById("timerStatus").textContent =
+            "Paused";
+
+    }else{
+
+        startTimer();
+
+        document.getElementById("timerStatus").textContent =
+            "Deep work active";
+
+    }
+
+});
+
+
+/* =========================
+COMPLETE
+========================= */
+
+function completeCycle(){
+
+    clearInterval(timerInterval);
+
+    isRunning = false;
+
+    completedCycles++;
+
+    totalDeepMinutes += selectedMinutes;
+
+    document.getElementById("cycleCount").textContent =
+        completedCycles;
+
+    document.getElementById("deepMinutes").textContent =
+        totalDeepMinutes;
+
+    document.getElementById("finalDeepMinutes").textContent =
+        totalDeepMinutes;
+
+    document.getElementById("timerStatus").textContent =
+        "Cycle complete";
+
+    document.getElementById("timer").textContent =
+        "DONE";
+
+    document.getElementById("pauseButton").textContent =
+        "Start Again";
+
+    updateDiagnosis();
+
+}
+
+
+/* =========================
+FINISH EARLY
+========================= */
+
+document.getElementById("finishButton").addEventListener("click",function(){
+
+    if(!hasStarted){
+        return;
+    }
+
+    clearInterval(timerInterval);
+
+    isRunning = false;
+
+    const elapsed =
+        selectedMinutes -
+        Math.ceil(secondsLeft / 60);
+
+    if(elapsed > 0){
+
+        totalDeepMinutes += elapsed;
+
+        document.getElementById("deepMinutes").textContent =
+            totalDeepMinutes;
+
+        document.getElementById("finalDeepMinutes").textContent =
+            totalDeepMinutes;
+
+    }
+
+    document.getElementById("timerStatus").textContent =
+        "Session recorded";
+
+    updateDiagnosis();
+
+});
+
+
+/* =========================
+RESET
+========================= */
+
+document.getElementById("resetButton").addEventListener("click",function(){
+
+    clearInterval(timerInterval);
+
+    isRunning = false;
+    hasStarted = false;
+
+    secondsLeft = selectedMinutes * 60;
+
+    document.getElementById("timerStatus").textContent =
+        "Ready";
+
+    document.getElementById("timerTask").textContent =
+        "Define the work before you begin.";
+
+    document.getElementById("pauseButton").textContent =
+        "Pause";
+
+    updateTimer();
+
+});
+
+
+/* =========================
+INTERRUPTION COUNTERS
+========================= */
+
+function increment(id){
+
+    const element =
+        document.getElementById(id);
+
+    let value =
+        Number(element.textContent);
+
+    value++;
+
+    element.textContent =
+        value;
+
+    updateInterruptionTotal();
+
+}
+
+
+function updateInterruptionTotal(){
+
+    const ids = [
+        "phoneCount",
+        "researchCount",
+        "taskCount",
+        "environmentCount"
+    ];
+
+    let total = 0;
+
+    ids.forEach(function(id){
+
+        total +=
+            Number(document.getElementById(id).textContent);
+
+    });
+
+    document.getElementById("switchCount").textContent =
+        total;
+
+    document.getElementById("finalInterruptions").textContent =
+        total;
+
+    updateDiagnosis();
+
+}
+
+
+/* =========================
+DIAGNOSIS
+========================= */
+
+function updateDiagnosis(){
+
+    const interruptionTotal =
+        Number(document.getElementById("finalInterruptions").textContent);
+
+    const deepMinutes =
+        Number(document.getElementById("finalDeepMinutes").textContent);
+
+    const diagnosis =
+        document.getElementById("diagnosis");
+
+    if(deepMinutes === 0 && interruptionTotal === 0){
+
+        diagnosis.textContent =
+            "Your baseline is not established yet. Complete a concentration cycle and record interruptions.";
+
+        return;
+
+    }
+
+    if(interruptionTotal >= 8){
+
+        diagnosis.textContent =
+            "Your primary bottleneck appears to be attention leakage. Do not immediately demand more discipline. Redesign the environment by removing recurring interruption sources.";
+
+    }else if(interruptionTotal >= 4){
+
+        diagnosis.textContent =
+            "Your environment has moderate attention leakage. Identify the most frequent interruption and create friction around that behavior before increasing workload.";
+
+    }else if(deepMinutes >= 90){
+
+        diagnosis.textContent =
+            "Strong concentration capacity is being demonstrated. Your next optimization target is output quality: measure what meaningful work each deep-work block actually produces.";
+
+    }else{
+
+        diagnosis.textContent =
+            "Your environment is relatively controlled. The next performance gain should come from improving task definition, reducing startup friction, and increasing the value of each focused cycle.";
+
+    }
+
+}
+
+
+/* =========================
+INITIALIZE
+========================= */
+
+updateTimer();
+updateDiagnosis();
+
+</script>
+
+</body>
+</html>
