@@ -1,0 +1,1489 @@
+<div id="deep-work-os">
+  <style>
+    #deep-work-os {
+      --cream: #F7F2E8;
+      --cream-light: #FFFDF8;
+      --cream-dark: #EEE3D1;
+      --brown: #49352A;
+      --brown-mid: #674C3B;
+      --brown-soft: #8B6A50;
+      --blue: #294F6D;
+      --blue-mid: #3D6F91;
+      --blue-light: #DCEAF1;
+      --green: #54745B;
+      --red: #A34E45;
+      --border: rgba(73,53,42,.17);
+      --muted: #796B60;
+      color: var(--brown);
+      background: var(--cream);
+      font-family: Arial, Helvetica, sans-serif;
+      width: 100%;
+      min-height: 100%;
+      box-sizing: border-box;
+      border-radius: 16px;
+      overflow: hidden;
+      line-height: 1.5;
+    }
+
+    #deep-work-os *,
+    #deep-work-os *::before,
+    #deep-work-os *::after {
+      box-sizing: border-box;
+    }
+
+    #deep-work-os button,
+    #deep-work-os input,
+    #deep-work-os select {
+      font: inherit;
+    }
+
+    #deep-work-os button {
+      cursor: pointer;
+    }
+
+    #deep-work-os .dw-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding: 18px 24px;
+      background: var(--cream-light);
+      border-bottom: 1px solid var(--border);
+    }
+
+    #deep-work-os .dw-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: .07em;
+      color: var(--brown);
+    }
+
+    #deep-work-os .dw-brand-icon {
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: var(--blue);
+      color: white;
+      font-size: 21px;
+    }
+
+    #deep-work-os .dw-header-actions {
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    #deep-work-os .dw-button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      min-height: 40px;
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: var(--cream-light);
+      color: var(--brown);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      transition: .2s ease;
+    }
+
+    #deep-work-os .dw-button:hover {
+      background: var(--cream-dark);
+      transform: translateY(-1px);
+    }
+
+    #deep-work-os .dw-button-primary {
+      color: white;
+      background: var(--blue);
+      border-color: var(--blue);
+    }
+
+    #deep-work-os .dw-button-primary:hover {
+      background: var(--blue-mid);
+      color: white;
+    }
+
+    #deep-work-os .dw-resource-button {
+      background: var(--brown);
+      color: var(--cream);
+      border-color: var(--brown);
+    }
+
+    #deep-work-os .dw-resource-button:hover {
+      background: var(--brown-mid);
+      color: white;
+    }
+
+    #deep-work-os .dw-main {
+      display: grid;
+      grid-template-columns: minmax(220px, .9fr) minmax(300px, 1.5fr) minmax(220px, .9fr);
+      gap: 18px;
+      padding: 20px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    #deep-work-os .dw-panel {
+      min-width: 0;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--cream-light);
+      box-shadow: 0 5px 18px rgba(73,53,42,.05);
+    }
+
+    #deep-work-os .dw-panel-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    #deep-work-os .dw-panel-title {
+      margin: 0;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    #deep-work-os .dw-audio-card {
+      padding: 13px;
+      margin-bottom: 12px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: var(--cream);
+    }
+
+    #deep-work-os .dw-audio-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 12px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    #deep-work-os .dw-audio-head input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--blue);
+    }
+
+    #deep-work-os .dw-slider-group {
+      margin-top: 12px;
+    }
+
+    #deep-work-os .dw-slider-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 5px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    #deep-work-os input[type="range"] {
+      width: 100%;
+      accent-color: var(--blue);
+      cursor: pointer;
+    }
+
+    #deep-work-os .dw-preset-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    #deep-work-os .dw-preset {
+      padding: 6px 8px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--cream-light);
+      color: var(--brown);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    #deep-work-os .dw-preset.active {
+      color: white;
+      background: var(--blue);
+      border-color: var(--blue);
+    }
+
+    #deep-work-os .dw-audio-note {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    #deep-work-os .dw-center {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-width: 0;
+    }
+
+    #deep-work-os .dw-timer-card {
+      padding: 24px 18px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--cream-light);
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(73,53,42,.06);
+    }
+
+    #deep-work-os .dw-intention {
+      padding: 13px;
+      margin-bottom: 12px;
+      border-left: 4px solid var(--blue);
+      border-radius: 8px;
+      background: var(--blue-light);
+      text-align: left;
+    }
+
+    #deep-work-os .dw-small-label {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--blue);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    #deep-work-os .dw-intention-text {
+      color: var(--brown);
+      font-size: 14px;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+
+    #deep-work-os .dw-ring {
+      position: relative;
+      width: min(290px, 80vw);
+      aspect-ratio: 1;
+      margin: 12px auto 18px;
+    }
+
+    #deep-work-os .dw-ring svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    #deep-work-os .dw-ring-bg {
+      fill: none;
+      stroke: var(--cream-dark);
+      stroke-width: 9;
+    }
+
+    #deep-work-os .dw-ring-progress {
+      fill: none;
+      stroke: var(--blue);
+      stroke-width: 9;
+      stroke-linecap: round;
+      stroke-dasharray: 848.23;
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset .5s linear;
+    }
+
+    #deep-work-os .dw-timer-display {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #deep-work-os .dw-time {
+      color: var(--brown);
+      font-size: clamp(42px, 7vw, 64px);
+      font-weight: 700;
+      letter-spacing: -.06em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    #deep-work-os .dw-phase {
+      padding: 5px 12px;
+      border-radius: 20px;
+      background: var(--blue-light);
+      color: var(--blue);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .1em;
+    }
+
+    #deep-work-os .dw-timer-controls {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    #deep-work-os .dw-section-note {
+      margin: 13px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    #deep-work-os .dw-input-row {
+      display: flex;
+      gap: 7px;
+    }
+
+    #deep-work-os .dw-input {
+      width: 100%;
+      min-width: 0;
+      padding: 10px 11px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      outline: none;
+      background: white;
+      color: var(--brown);
+      font-size: 13px;
+    }
+
+    #deep-work-os .dw-input:focus {
+      border-color: var(--blue-mid);
+      box-shadow: 0 0 0 3px rgba(61,111,145,.12);
+    }
+
+    #deep-work-os .dw-ledger {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      max-height: 300px;
+      margin-top: 12px;
+      overflow-y: auto;
+    }
+
+    #deep-work-os .dw-ledger-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 9px;
+      border-left: 3px solid var(--brown-soft);
+      border-radius: 7px;
+      background: var(--cream);
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    #deep-work-os .dw-ledger-item.completed {
+      opacity: .55;
+      text-decoration: line-through;
+    }
+
+    #deep-work-os .dw-ledger-item button {
+      flex: 0 0 auto;
+      padding: 3px 7px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--cream-light);
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    #deep-work-os .dw-divider {
+      height: 1px;
+      margin: 18px 0;
+      border: 0;
+      background: var(--border);
+    }
+
+    #deep-work-os .dw-metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+    }
+
+    #deep-work-os .dw-metric {
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: var(--cream);
+    }
+
+    #deep-work-os .dw-metric-value {
+      display: block;
+      color: var(--blue);
+      font-size: 22px;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+    }
+
+    #deep-work-os .dw-metric-label {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    #deep-work-os .dw-status {
+      margin-top: 12px;
+      padding: 10px;
+      border-radius: 8px;
+      background: var(--blue-light);
+      color: var(--blue);
+      font-size: 11px;
+    }
+
+    #deep-work-os .dw-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      background: rgba(35,27,22,.65);
+    }
+
+    #deep-work-os .dw-modal.open {
+      display: flex;
+    }
+
+    #deep-work-os .dw-modal-card {
+      width: min(480px, 100%);
+      max-height: 90vh;
+      padding: 22px;
+      overflow-y: auto;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: var(--cream-light);
+      box-shadow: 0 20px 60px rgba(0,0,0,.25);
+    }
+
+    #deep-work-os .dw-modal-card h2 {
+      margin: 0 0 8px;
+      color: var(--brown);
+      font-size: 20px;
+    }
+
+    #deep-work-os .dw-modal-card p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    #deep-work-os .dw-form-group {
+      margin-bottom: 14px;
+    }
+
+    #deep-work-os .dw-form-group label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--brown-mid);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    #deep-work-os .dw-checkline {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 8px 0;
+      color: var(--brown);
+      font-size: 12px;
+    }
+
+    #deep-work-os .dw-checkline input {
+      accent-color: var(--blue);
+    }
+
+    #deep-work-os .dw-modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    #deep-work-os .dw-hidden {
+      display: none !important;
+    }
+
+    #deep-work-os.dw-monk-mode .dw-header,
+    #deep-work-os.dw-monk-mode .dw-sidebar {
+      display: none;
+    }
+
+    #deep-work-os.dw-monk-mode .dw-main {
+      grid-template-columns: minmax(0, 850px);
+      justify-content: center;
+    }
+
+    #deep-work-os.dw-monk-mode .dw-center {
+      min-height: 70vh;
+    }
+
+    @media (max-width: 1050px) {
+      #deep-work-os .dw-main {
+        grid-template-columns: minmax(220px, 1fr) minmax(280px, 1.4fr);
+      }
+
+      #deep-work-os .dw-sidebar-right {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 700px) {
+      #deep-work-os .dw-main {
+        grid-template-columns: 1fr;
+        padding: 12px;
+        gap: 12px;
+      }
+
+      #deep-work-os .dw-sidebar-right {
+        grid-column: auto;
+      }
+
+      #deep-work-os .dw-header {
+        padding: 14px;
+      }
+
+      #deep-work-os .dw-timer-card {
+        padding: 18px 12px;
+      }
+
+      #deep-work-os .dw-button {
+        padding: 8px 10px;
+        font-size: 12px;
+      }
+
+      #deep-work-os .dw-timer-controls .dw-button {
+        flex: 1 1 120px;
+      }
+    }
+  </style>
+
+  <header class="dw-header">
+    <div class="dw-brand">
+      <div class="dw-brand-icon">◈</div>
+      <span>DEEP WORK OS</span>
+    </div>
+
+    <div class="dw-header-actions">
+      <a class="dw-button dw-resource-button"
+         href="https://sites.google.com/view/pathkeeper/deepwork-resource-tool"
+         target="_blank"
+         rel="noopener noreferrer">
+        ↗ Resource Tool
+      </a>
+
+      <button type="button" class="dw-button" id="dw-monk-toggle">
+        Focus Mode
+      </button>
+
+      <button type="button" class="dw-button" id="dw-theme-toggle">
+        Theme
+      </button>
+    </div>
+  </header>
+
+  <main class="dw-main">
+    <!-- SOUND CONTROL PANEL -->
+    <aside class="dw-panel dw-sidebar dw-sidebar-left">
+      <div class="dw-panel-heading">
+        <h2 class="dw-panel-title">Soundscape Engine</h2>
+        <button type="button" class="dw-button" id="dw-master-audio">
+          Audio Off
+        </button>
+      </div>
+
+      <div class="dw-audio-card">
+        <div class="dw-audio-head">
+          <span>Binaural Protocol</span>
+          <input type="checkbox" id="dw-binaural-enable" aria-label="Enable binaural sound">
+        </div>
+
+        <div class="dw-preset-list">
+          <button type="button" class="dw-preset active" data-preset="alpha">Alpha · 10Hz</button>
+          <button type="button" class="dw-preset" data-preset="theta">Theta · 6Hz</button>
+          <button type="button" class="dw-preset" data-preset="gamma">Gamma · 40Hz</button>
+        </div>
+
+        <div class="dw-slider-group">
+          <div class="dw-slider-label">
+            <span>Intensity</span>
+            <span id="dw-binaural-value">20%</span>
+          </div>
+          <input type="range" id="dw-binaural-volume" min="0" max="100" value="20">
+        </div>
+      </div>
+
+      <div class="dw-audio-card">
+        <div class="dw-audio-head">
+          <span>Brown Noise Layer</span>
+          <input type="checkbox" id="dw-noise-enable" aria-label="Enable brown noise">
+        </div>
+
+        <div class="dw-slider-group">
+          <div class="dw-slider-label">
+            <span>Density</span>
+            <span id="dw-noise-value">25%</span>
+          </div>
+          <input type="range" id="dw-noise-volume" min="0" max="100" value="25">
+        </div>
+      </div>
+
+      <div class="dw-audio-card">
+        <div class="dw-audio-head">
+          <span>Resonant Hum</span>
+          <input type="checkbox" id="dw-hum-enable" aria-label="Enable resonant hum">
+        </div>
+
+        <div class="dw-slider-group">
+          <div class="dw-slider-label">
+            <span>Low Cutoff Filter</span>
+            <span id="dw-cutoff-value">350Hz</span>
+          </div>
+          <input type="range" id="dw-cutoff" min="100" max="1200" value="350">
+        </div>
+      </div>
+
+      <p class="dw-audio-note">
+        Audio starts only after you press an audio control. Use headphones for
+        stereo binaural effects. Keep volume low and comfortable.
+      </p>
+
+      <div id="dw-audio-status" class="dw-status" aria-live="polite">
+        Audio engine is off.
+      </div>
+    </aside>
+
+    <!-- TIMER -->
+    <section class="dw-center">
+      <div class="dw-timer-card">
+        <div class="dw-intention">
+          <span class="dw-small-label">Active Focus Intention</span>
+          <div class="dw-intention-text" id="dw-active-intent">
+            Set one clear target before beginning your focus block.
+          </div>
+        </div>
+
+        <div class="dw-ring">
+          <svg viewBox="0 0 300 300" aria-hidden="true">
+            <circle class="dw-ring-bg" cx="150" cy="150" r="135"></circle>
+            <circle class="dw-ring-progress" id="dw-timer-ring"
+                    cx="150" cy="150" r="135"></circle>
+          </svg>
+
+          <div class="dw-timer-display">
+            <span class="dw-time" id="dw-timer-digits">90:00</span>
+            <span class="dw-phase" id="dw-phase">READY TO FOCUS</span>
+          </div>
+        </div>
+
+        <div class="dw-timer-controls">
+          <button type="button" class="dw-button dw-button-primary" id="dw-start">
+            Start Block
+          </button>
+          <button type="button" class="dw-button" id="dw-pause">
+            Pause
+          </button>
+          <button type="button" class="dw-button" id="dw-reset">
+            Reset
+          </button>
+          <button type="button" class="dw-button" id="dw-shutdown">
+            Shutdown Ritual
+          </button>
+        </div>
+
+        <p class="dw-section-note" id="dw-timer-message" aria-live="polite">
+          Choose your intention and duration to begin.
+        </p>
+      </div>
+    </section>
+
+    <!-- FRICTION LEDGER AND METRICS -->
+    <aside class="dw-panel dw-sidebar dw-sidebar-right">
+      <div class="dw-panel-heading">
+        <h2 class="dw-panel-title">Friction Ledger</h2>
+        <span style="font-size:11px;color:#796B60;">Ctrl + K</span>
+      </div>
+
+      <div class="dw-input-row">
+        <input type="text"
+               class="dw-input"
+               id="dw-distraction-input"
+               placeholder="Capture a distracting thought..."
+               maxlength="180">
+        <button type="button" class="dw-button dw-button-primary" id="dw-add-distraction">
+          Add
+        </button>
+      </div>
+
+      <div class="dw-ledger" id="dw-ledger" aria-live="polite">
+        <p style="color:#796B60;font-size:12px;">
+          Your captured distractions will appear here.
+        </p>
+      </div>
+
+      <hr class="dw-divider">
+
+      <div class="dw-panel-heading">
+        <h2 class="dw-panel-title">Session Metrics</h2>
+      </div>
+
+      <div class="dw-metrics">
+        <div class="dw-metric">
+          <span class="dw-metric-value" id="dw-focus-minutes">0</span>
+          <span class="dw-metric-label">Focus minutes this visit</span>
+        </div>
+
+        <div class="dw-metric">
+          <span class="dw-metric-value" id="dw-completed-blocks">0</span>
+          <span class="dw-metric-label">Completed blocks</span>
+        </div>
+
+        <div class="dw-metric">
+          <span class="dw-metric-value" id="dw-friction-count">0</span>
+          <span class="dw-metric-label">Items captured</span>
+        </div>
+
+        <div class="dw-metric">
+          <span class="dw-metric-value" id="dw-block-duration">90</span>
+          <span class="dw-metric-label">Block duration (minutes)</span>
+        </div>
+      </div>
+
+      <div class="dw-status" id="dw-session-status" aria-live="polite">
+        No focus block is currently running.
+      </div>
+    </aside>
+  </main>
+
+  <!-- START SESSION MODAL -->
+  <div class="dw-modal" id="dw-ingress-modal" role="dialog" aria-modal="true"
+       aria-labelledby="dw-modal-title">
+    <div class="dw-modal-card">
+      <h2 id="dw-modal-title">Prepare Your Focus Block</h2>
+      <p>
+        Define one outcome and choose a realistic period of uninterrupted work.
+      </p>
+
+      <div class="dw-form-group">
+        <label for="dw-intent-input">Your single target goal</label>
+        <input class="dw-input" type="text" id="dw-intent-input"
+               placeholder="Example: Complete one JavaScript lesson"
+               maxlength="180">
+      </div>
+
+      <div class="dw-form-group">
+        <label for="dw-duration">Block duration</label>
+        <select class="dw-input" id="dw-duration">
+          <option value="90">90 minutes — extended focus</option>
+          <option value="60">60 minutes — standard block</option>
+          <option value="45">45 minutes — focused sprint</option>
+          <option value="30">30 minutes — short work session</option>
+          <option value="25">25 minutes — starter session</option>
+        </select>
+      </div>
+
+      <div class="dw-form-group">
+        <label>Prepare your environment</label>
+        <label class="dw-checkline">
+          <input type="checkbox" id="dw-phone-check">
+          Phone placed out of reach
+        </label>
+        <label class="dw-checkline">
+          <input type="checkbox" id="dw-notifications-check">
+          Unnecessary notifications disabled
+        </label>
+        <label class="dw-checkline">
+          <input type="checkbox" id="dw-materials-check">
+          Required materials ready
+        </label>
+      </div>
+
+      <div class="dw-modal-actions">
+        <button type="button" class="dw-button" id="dw-cancel-ingress">
+          Cancel
+        </button>
+        <button type="button" class="dw-button dw-button-primary" id="dw-confirm-ingress">
+          Begin Focus
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHUTDOWN MODAL -->
+  <div class="dw-modal" id="dw-shutdown-modal" role="dialog" aria-modal="true"
+       aria-labelledby="dw-shutdown-title">
+    <div class="dw-modal-card">
+      <h2 id="dw-shutdown-title">Shutdown Ritual</h2>
+      <p>
+        Close the session deliberately. Record what you completed and identify
+        the next action before moving on.
+      </p>
+
+      <div class="dw-form-group">
+        <label for="dw-completion-notes">What did you complete?</label>
+        <input class="dw-input" id="dw-completion-notes" type="text"
+               placeholder="Describe the result of this session">
+      </div>
+
+      <div class="dw-form-group">
+        <label for="dw-next-action">What is the next action?</label>
+        <input class="dw-input" id="dw-next-action" type="text"
+               placeholder="Write one concrete next step">
+      </div>
+
+      <div class="dw-modal-actions">
+        <button type="button" class="dw-button" id="dw-cancel-shutdown">
+          Keep Working
+        </button>
+        <button type="button" class="dw-button dw-button-primary" id="dw-confirm-shutdown">
+          Complete Shutdown
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const root = document.getElementById("deep-work-os");
+      if (!root || root.dataset.initialized === "true") return;
+      root.dataset.initialized = "true";
+
+      const $ = (id) => root.querySelector("#" + id);
+
+      /* -----------------------------------------
+         GENERAL STATE
+      ----------------------------------------- */
+
+      let totalSeconds = 90 * 60;
+      let remainingSeconds = totalSeconds;
+      let timerInterval = null;
+      let timerRunning = false;
+      let sessionStarted = false;
+      let focusSecondsThisVisit = 0;
+      let completedBlocks = 0;
+      let distractionCount = 0;
+      let sessionStartTimestamp = null;
+      let lastTickTimestamp = null;
+
+      const circumference = 2 * Math.PI * 135;
+
+      function setMessage(message) {
+        $("dw-timer-message").textContent = message;
+      }
+
+      function setSessionStatus(message) {
+        $("dw-session-status").textContent = message;
+      }
+
+      function formatTime(seconds) {
+        const safeSeconds = Math.max(0, Math.floor(seconds));
+        const minutes = Math.floor(safeSeconds / 60);
+        const secondsPart = safeSeconds % 60;
+
+        return String(minutes).padStart(2, "0") + ":" +
+               String(secondsPart).padStart(2, "0");
+      }
+
+      function updateTimerDisplay() {
+        $("dw-timer-digits").textContent = formatTime(remainingSeconds);
+
+        const progress = totalSeconds > 0
+          ? remainingSeconds / totalSeconds
+          : 0;
+
+        const offset = circumference * (1 - progress);
+        $("dw-timer-ring").style.strokeDasharray = circumference;
+        $("dw-timer-ring").style.strokeDashoffset = offset;
+
+        $("dw-focus-minutes").textContent =
+          Math.floor(focusSecondsThisVisit / 60);
+
+        $("dw-completed-blocks").textContent = completedBlocks;
+        $("dw-friction-count").textContent = distractionCount;
+        $("dw-block-duration").textContent = Math.round(totalSeconds / 60);
+      }
+
+      function setPhase(phase) {
+        $("dw-phase").textContent = phase;
+      }
+
+      /* -----------------------------------------
+         TIMER
+      ----------------------------------------- */
+
+      function stopTimerInterval() {
+        if (timerInterval !== null) {
+          clearInterval(timerInterval);
+          timerInterval = null;
+        }
+      }
+
+      function startTimer() {
+        if (timerRunning) return;
+
+        timerRunning = true;
+        sessionStarted = true;
+        lastTickTimestamp = Date.now();
+
+        setPhase("DEEP FOCUS");
+        setMessage("Your focus block is running. Keep your attention on the selected goal.");
+        setSessionStatus("Focus block in progress.");
+
+        stopTimerInterval();
+
+        timerInterval = setInterval(function () {
+          if (!timerRunning) return;
+
+          const now = Date.now();
+          const elapsed = Math.max(0, Math.round((now - lastTickTimestamp) / 1000));
+          lastTickTimestamp = now;
+
+          if (elapsed === 0) return;
+
+          const actualElapsed = Math.min(elapsed, remainingSeconds);
+          remainingSeconds -= actualElapsed;
+          focusSecondsThisVisit += actualElapsed;
+
+          updateTimerDisplay();
+
+          if (remainingSeconds <= 0) {
+            completeTimerNaturally();
+          }
+        }, 500);
+      }
+
+      function pauseTimer() {
+        if (!timerRunning) return;
+
+        timerRunning = false;
+        stopTimerInterval();
+        setPhase("PAUSED");
+        setMessage("Your timer is paused. Resume when you are ready.");
+        setSessionStatus("Focus block paused.");
+      }
+
+      function completeTimerNaturally() {
+        timerRunning = false;
+        stopTimerInterval();
+        remainingSeconds = 0;
+        completedBlocks += 1;
+
+        updateTimerDisplay();
+        setPhase("BLOCK COMPLETE");
+        setMessage("Your focus block is complete. Take a short break or complete your shutdown ritual.");
+        setSessionStatus("A focus block was completed.");
+
+        $("dw-shutdown-modal").classList.add("open");
+      }
+
+      function resetTimer() {
+        stopTimerInterval();
+        timerRunning = false;
+        sessionStarted = false;
+        remainingSeconds = totalSeconds;
+
+        updateTimerDisplay();
+        setPhase("READY TO FOCUS");
+        setMessage("Timer reset. Start a new focus block when ready.");
+        setSessionStatus("No focus block is currently running.");
+      }
+
+      $("dw-start").addEventListener("click", function () {
+        if (timerRunning) return;
+
+        if (!sessionStarted) {
+          $("dw-ingress-modal").classList.add("open");
+          $("dw-intent-input").focus();
+        } else {
+          startTimer();
+        }
+      });
+
+      $("dw-pause").addEventListener("click", pauseTimer);
+      $("dw-reset").addEventListener("click", resetTimer);
+
+      $("dw-cancel-ingress").addEventListener("click", function () {
+        $("dw-ingress-modal").classList.remove("open");
+      });
+
+      $("dw-confirm-ingress").addEventListener("click", function () {
+        const intent = $("dw-intent-input").value.trim();
+        const duration = Number($("dw-duration").value);
+
+        if (!intent) {
+          $("dw-intent-input").focus();
+          setMessage("Enter a focus goal before starting.");
+          return;
+        }
+
+        if (!Number.isFinite(duration) || duration <= 0) {
+          setMessage("Choose a valid timer duration.");
+          return;
+        }
+
+        totalSeconds = duration * 60;
+        remainingSeconds = totalSeconds;
+        sessionStarted = true;
+        sessionStartTimestamp = Date.now();
+
+        $("dw-active-intent").textContent = intent;
+        $("dw-ingress-modal").classList.remove("open");
+
+        updateTimerDisplay();
+        startTimer();
+      });
+
+      $("dw-shutdown").addEventListener("click", function () {
+        if (timerRunning) pauseTimer();
+        $("dw-shutdown-modal").classList.add("open");
+      });
+
+      $("dw-cancel-shutdown").addEventListener("click", function () {
+        $("dw-shutdown-modal").classList.remove("open");
+
+        if (sessionStarted && remainingSeconds > 0) {
+          setMessage("Session remains available. Resume when ready.");
+        }
+      });
+
+      $("dw-confirm-shutdown").addEventListener("click", function () {
+        const completion = $("dw-completion-notes").value.trim();
+        const nextAction = $("dw-next-action").value.trim();
+
+        stopTimerInterval();
+        timerRunning = false;
+
+        if (completion) {
+          setMessage("Session closed. Completed: " + completion);
+        } else {
+          setMessage("Shutdown ritual completed. Record your result in your notes if needed.");
+        }
+
+        if (nextAction) {
+          setSessionStatus("Next action: " + nextAction);
+        } else {
+          setSessionStatus("Session closed. Choose your next action when ready.");
+        }
+
+        if (remainingSeconds === 0) {
+          setPhase("BLOCK COMPLETE");
+        } else {
+          setPhase("SESSION CLOSED");
+        }
+
+        $("dw-shutdown-modal").classList.remove("open");
+        $("dw-completion-notes").value = "";
+        $("dw-next-action").value = "";
+        sessionStarted = false;
+      });
+
+      /* -----------------------------------------
+         DISTRACTION LEDGER
+      ----------------------------------------- */
+
+      const ledger = $("dw-ledger");
+      const distractionInput = $("dw-distraction-input");
+
+      function addDistraction() {
+        const value = distractionInput.value.trim();
+        if (!value) {
+          distractionInput.focus();
+          return;
+        }
+
+        const emptyMessage = ledger.querySelector("p");
+        if (emptyMessage) emptyMessage.remove();
+
+        const item = document.createElement("div");
+        item.className = "dw-ledger-item";
+
+        const text = document.createElement("span");
+        text.textContent = value;
+
+        const completeButton = document.createElement("button");
+        completeButton.type = "button";
+        completeButton.textContent = "Done";
+        completeButton.setAttribute("aria-label", "Mark distraction as handled");
+
+        completeButton.addEventListener("click", function () {
+          item.classList.toggle("completed");
+          completeButton.textContent =
+            item.classList.contains("completed") ? "Undo" : "Done";
+        });
+
+        item.appendChild(text);
+        item.appendChild(completeButton);
+        ledger.prepend(item);
+
+        distractionCount += 1;
+        distractionInput.value = "";
+        updateTimerDisplay();
+        distractionInput.focus();
+      }
+
+      $("dw-add-distraction").addEventListener("click", addDistraction);
+
+      distractionInput.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          addDistraction();
+        }
+      });
+
+      /* -----------------------------------------
+         AUDIO ENGINE
+      ----------------------------------------- */
+
+      let audioContext = null;
+      let masterGain = null;
+      let binauralGain = null;
+      let noiseGain = null;
+      let humGain = null;
+      let humFilter = null;
+      let noiseSource = null;
+      let leftOscillator = null;
+      let rightOscillator = null;
+      let humOscillator = null;
+      let audioEnabled = false;
+
+      const presets = {
+        alpha: { carrier: 200, beat: 10 },
+        theta: { carrier: 200, beat: 6 },
+        gamma: { carrier: 200, beat: 40 }
+      };
+
+      let currentPreset = "alpha";
+
+      function updateAudioStatus(message) {
+        $("dw-audio-status").textContent = message;
+      }
+
+      function makeBrownNoiseBuffer(context) {
+        const bufferLength = context.sampleRate * 3;
+        const buffer = context.createBuffer(1, bufferLength, context.sampleRate);
+        const data = buffer.getChannelData(0);
+
+        let lastOut = 0;
+
+        for (let i = 0; i < bufferLength; i++) {
+          const white = Math.random() * 2 - 1;
+          lastOut = (lastOut + (0.02 * white)) / 1.02;
+          data[i] = lastOut * 3.5;
+        }
+
+        return buffer;
+      }
+
+      function initializeAudio() {
+        if (audioContext) return true;
+
+        const AudioContextClass =
+          window.AudioContext || window.webkitAudioContext;
+
+        if (!AudioContextClass) {
+          updateAudioStatus("This browser does not support Web Audio.");
+          return false;
+        }
+
+        try {
+          audioContext = new AudioContextClass();
+
+          masterGain = audioContext.createGain();
+          masterGain.gain.value = 0;
+          masterGain.connect(audioContext.destination);
+
+          binauralGain = audioContext.createGain();
+          binauralGain.gain.value = 0;
+
+          const merger = audioContext.createChannelMerger(2);
+          leftOscillator = audioContext.createOscillator();
+          rightOscillator = audioContext.createOscillator();
+
+          leftOscillator.type = "sine";
+          rightOscillator.type = "sine";
+
+          leftOscillator.connect(merger, 0, 0);
+          rightOscillator.connect(merger, 0, 1);
+          merger.connect(binauralGain);
+          binauralGain.connect(masterGain);
+
+          leftOscillator.start();
+          rightOscillator.start();
+
+          const noiseBuffer = makeBrownNoiseBuffer(audioContext);
+          noiseSource = audioContext.createBufferSource();
+          noiseSource.buffer = noiseBuffer;
+          noiseSource.loop = true;
+
+          noiseGain = audioContext.createGain();
+          noiseGain.gain.value = 0;
+          noiseSource.connect(noiseGain);
+          noiseGain.connect(masterGain);
+          noiseSource.start();
+
+          humOscillator = audioContext.createOscillator();
+          humOscillator.type = "sine";
+          humOscillator.frequency.value = 55;
+
+          humFilter = audioContext.createBiquadFilter();
+          humFilter.type = "lowpass";
+          humFilter.frequency.value = Number($("dw-cutoff").value);
+
+          humGain = audioContext.createGain();
+          humGain.gain.value = 0;
+
+          humOscillator.connect(humFilter);
+          humFilter.connect(humGain);
+          humGain.connect(masterGain);
+          humOscillator.start();
+
+          applyBinauralPreset();
+          updateAudioStatus("Audio engine initialized. Select the sounds you want.");
+          return true;
+        } catch (error) {
+          updateAudioStatus("Audio could not start in this browser. Check browser permissions.");
+          return false;
+        }
+      }
+
+      function applyBinauralPreset() {
+        if (!audioContext || !leftOscillator || !rightOscillator) return;
+
+        const preset = presets[currentPreset];
+        leftOscillator.frequency.setTargetAtTime(
+          preset.carrier,
+          audioContext.currentTime,
+          0.03
+        );
+
+        rightOscillator.frequency.setTargetAtTime(
+          preset.carrier + preset.beat,
+          audioContext.currentTime,
+          0.03
+        );
+      }
+
+      function setAudioGain(node, value) {
+        if (!audioContext || !node) return;
+
+        const safeValue = Math.max(0, Math.min(1, value));
+        node.gain.setTargetAtTime(
+          safeValue,
+          audioContext.currentTime,
+          0.04
+        );
+      }
+
+      function updateAudioLevels() {
+        if (!audioContext) return;
+
+        const masterLevel = audioEnabled ? 0.7 : 0;
+
+        setAudioGain(masterGain, masterLevel);
+
+        setAudioGain(
+          binauralGain,
+          $("dw-binaural-enable").checked
+            ? Number($("dw-binaural-volume").value) / 100 * 0.12
+            : 0
+        );
+
+        setAudioGain(
+          noiseGain,
+          $("dw-noise-enable").checked
+            ? Number($("dw-noise-volume").value) / 100 * 0.18
+            : 0
+        );
+
+        setAudioGain(
+          humGain,
+          $("dw-hum-enable").checked ? 0.06 : 0
+        );
+      }
+
+      async function activateAudio() {
+        if (!initializeAudio()) return false;
+
+        try {
+          if (audioContext.state === "suspended") {
+            await audioContext.resume();
+          }
+
+          audioEnabled = true;
+          $("dw-master-audio").textContent = "Audio On";
+          updateAudioLevels();
+          updateAudioStatus("Audio is on. Adjust individual sound layers below.");
+          return true;
+        } catch (error) {
+          updateAudioStatus("Audio permission was not granted by the browser.");
+          return false;
+        }
+      }
+
+      $("dw-master-audio").addEventListener("click", async function () {
+        if (audioEnabled) {
+          audioEnabled = false;
+          updateAudioLevels();
+          $("dw-master-audio").textContent = "Audio Off";
+          updateAudioStatus("Audio is muted.");
+        } else {
+          await activateAudio();
+        }
+      });
+
+      ["dw-binaural-enable", "dw-noise-enable", "dw-hum-enable"].forEach(function (id) {
+        $(id).addEventListener("change", async function () {
+          if (this.checked && !audioEnabled) {
+            const success = await activateAudio();
+            if (!success) {
+              this.checked = false;
+              return;
+            }
+          }
+
+          if (audioEnabled) {
+            updateAudioLevels();
+          }
+        });
+      });
+
+      $("dw-binaural-volume").addEventListener("input", function () {
+        $("dw-binaural-value").textContent = this.value + "%";
+        updateAudioLevels();
+      });
+
+      $("dw-noise-volume").addEventListener("input", function () {
+        $("dw-noise-value").textContent = this.value + "%";
+        updateAudioLevels();
+      });
+
+      $("dw-cutoff").addEventListener("input", function () {
+        $("dw-cutoff-value").textContent = this.value + "Hz";
+
+        if (humFilter && audioContext) {
+          humFilter.frequency.setTargetAtTime(
+            Number(this.value),
+            audioContext.currentTime,
+            0.04
+          );
+        }
+      });
+
+      root.querySelectorAll("[data-preset]").forEach(function (button) {
+        button.addEventListener("click", function () {
+          currentPreset = this.dataset.preset;
+
+          root.querySelectorAll("[data-preset]").forEach(function (presetButton) {
+            presetButton.classList.toggle("active", presetButton === button);
+          });
+
+          if (audioEnabled) {
+            applyBinauralPreset();
+          }
+        });
+      });
+
+      /* -----------------------------------------
+         THEME AND FOCUS MODE
+      ----------------------------------------- */
+
+      let alternateTheme = false;
+
+      $("dw-theme-toggle").addEventListener("click", function () {
+        alternateTheme = !alternateTheme;
+
+        if (alternateTheme) {
+          root.style.setProperty("--cream", "#EEE3D1");
+          root.style.setProperty("--cream-light", "#F7F2E8");
+          root.style.setProperty("--brown", "#294F6D");
+          root.style.setProperty("--brown-mid", "#3D6F91");
+          root.style.setProperty("--blue", "#49352A");
+          root.style.setProperty("--blue-mid", "#674C3B");
+          root.style.setProperty("--blue-light", "#E2D2B9");
+          this.textContent = "Original Theme";
+        } else {
+          root.style.removeProperty("--cream");
+          root.style.removeProperty("--cream-light");
+          root.style.removeProperty("--brown");
+          root.style.removeProperty("--brown-mid");
+          root.style.removeProperty("--blue");
+          root.style.removeProperty("--blue-mid");
+          root.style.removeProperty("--blue-light");
+          this.textContent = "Theme";
+        }
+      });
+
+      function toggleFocusMode() {
+        root.classList.toggle("dw-monk-mode");
+
+        $("dw-monk-toggle").textContent =
+          root.classList.contains("dw-monk-mode")
+            ? "Exit Focus Mode"
+            : "Focus Mode";
+      }
+
+      $("dw-monk-toggle").addEventListener("click", toggleFocusMode);
+
+      /* -----------------------------------------
+         KEYBOARD SHORTCUTS
+      ----------------------------------------- */
+
+      document.addEventListener("keydown", function (event) {
+        if (!root.isConnected) return;
+
+        const target = event.target;
+        const typing = target &&
+          (target.tagName === "INPUT" ||
+           target.tagName === "TEXTAREA" ||
+           target.tagName === "SELECT");
+
+        if ((event.ctrlKey || event.metaKey) &&
+            event.key.toLowerCase() === "k") {
+          event.preventDefault();
+          distractionInput.focus();
+        }
+
+        if (!typing && event.altKey && event.key.toLowerCase() === "m") {
+          event.preventDefault();
+          toggleFocusMode();
+        }
+
+        if (event.key === "Escape") {
+          $("dw-ingress-modal").classList.remove("open");
+          $("dw-shutdown-modal").classList.remove("open");
+        }
+      });
+
+      /* -----------------------------------------
+         INITIAL DISPLAY
+      ----------------------------------------- */
+
+      $("dw-binaural-value").textContent =
+        $("dw-binaural-volume").value + "%";
+
+      $("dw-noise-value").textContent =
+        $("dw-noise-volume").value + "%";
+
+      $("dw-cutoff-value").textContent =
+        $("dw-cutoff").value + "Hz";
+
+      $("dw-timer-ring").style.strokeDasharray = circumference;
+      updateTimerDisplay();
+    })();
+  </script>
+</div>
