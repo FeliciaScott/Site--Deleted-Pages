@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PathKeeper — Portfolio Intelligence</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --cream-bg: #FDFBF7;
+      --cream-surface: #F5F0E6;
+      --cream-card: #FAF6EE;
+      --cream-border: #E6DFCD;
+      --black-main: #0B1120;
+      --black-card: #151D30;
+      --black-text: #1F2937;
+      --text-muted: #6B7280;
+      --blue-accent: #1E3A8A;
+      --blue-bright: #2563EB;
+      --blue-light: #EFF6FF;
+      --blue-border: #93C5FD;
+      --blue-glow: rgba(37, 99, 235, 0.15);
+    }
+
+    body {
+      background-color: var(--cream-bg);
+      color: var(--black-text);
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+    }
+
+    /* Typography Polish */
+    h1, h2, h3, h4, .font-heading {
+      letter-spacing: -0.02em;
+    }
+
+    /* Custom Accordion / Details */
+    details.lesson {
+      background: #FFFFFF;
+      border: 1px solid var(--cream-border);
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 1px 3px rgba(11, 17, 32, 0.02);
+      overflow: hidden;
+    }
+
+    details.lesson[open] {
+      border-color: var(--blue-bright);
+      box-shadow: 0 8px 24px -4px rgba(37, 99, 235, 0.08);
+    }
+
+    summary {
+      list-style: none;
+      padding: 1.25rem 1.5rem;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--black-main);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+      transition: background-color 0.2s;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary:hover {
+      background-color: var(--cream-surface);
+    }
+
+    summary::after {
+      content: '';
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-right: 2px solid var(--black-main);
+      border-bottom: 2px solid var(--black-main);
+      transform: rotate(45deg);
+      transition: transform 0.3s ease, border-color 0.2s;
+      margin-left: 1rem;
+      flex-shrink: 0;
+    }
+
+    details[open] summary::after {
+      transform: rotate(-135deg);
+      border-color: var(--blue-bright);
+    }
+
+    details[open] summary {
+      border-bottom: 1px solid var(--cream-border);
+      background-color: var(--cream-bg);
+      color: var(--blue-accent);
+    }
+
+    .lesson-body {
+      padding: 1.5rem;
+      background-color: #FFFFFF;
+    }
+
+    .lesson-body h4 {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--blue-accent);
+      font-weight: 700;
+      margin-top: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .lesson-body h4:first-child {
+      margin-top: 0;
+    }
+
+    .lesson-body p, .lesson-body ul, .lesson-body ol {
+      color: var(--black-text);
+      font-size: 0.975rem;
+      line-height: 1.7;
+      margin-bottom: 0.75rem;
+    }
+
+    .lesson-body ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .lesson-body ul li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .lesson-body ul li::before {
+      content: '•';
+      position: absolute;
+      left: 0.5rem;
+      color: var(--blue-bright);
+      font-weight: bold;
+    }
+
+    .lesson-body ol {
+      counter-reset: lesson-counter;
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .lesson-body ol li {
+      counter-increment: lesson-counter;
+      position: relative;
+      padding-left: 2.25rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .lesson-body ol li::before {
+      content: counter(lesson-counter);
+      position: absolute;
+      left: 0;
+      top: 0.15rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      background: var(--blue-light);
+      color: var(--blue-bright);
+      border-radius: 50%;
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Callout Card */
+    .callout {
+      background: var(--cream-surface);
+      border-left: 4px solid var(--blue-bright);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-top: 1.25rem;
+      font-size: 0.925rem;
+      color: var(--black-main);
+    }
+
+    .callout strong {
+      color: var(--blue-accent);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.5rem;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      font-size: 0.9rem;
+      gap: 0.5rem;
+    }
+
+    .btn-dark {
+      background: var(--black-main);
+      color: var(--cream-bg);
+      border: 1px solid var(--black-main);
+    }
+
+    .btn-dark:hover {
+      background: var(--blue-accent);
+      border-color: var(--blue-accent);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(11, 17, 32, 0.15);
+    }
+
+    .btn-light {
+      background: var(--cream-surface);
+      color: var(--black-main);
+      border: 1px solid var(--cream-border);
+    }
+
+    .btn-light:hover {
+      background: var(--cream-border);
+      color: var(--black-main);
+    }
+
+    /* Form Fields */
+    .field {
+      margin-bottom: 1.25rem;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--black-main);
+      margin-bottom: 0.4rem;
+    }
+
+    .field input[type="text"],
+    .field textarea,
+    .field select {
+      width: 100%;
+      background: #FFFFFF;
+      border: 1px solid var(--cream-border);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font-size: 0.95rem;
+      color: var(--black-main);
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    .field input[type="text"]:focus,
+    .field textarea:focus,
+    .field select:focus {
+      border-color: var(--blue-bright);
+      box-shadow: 0 0 0 3px var(--blue-glow);
+    }
+
+    .field textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    /* Interactive Tab Navigation */
+    .tab-btn {
+      padding: 0.6rem 1.2rem;
+      border-radius: 30px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: transparent;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover {
+      color: var(--black-main);
+      background: var(--cream-surface);
+    }
+
+    .tab-btn.active {
+      background: var(--black-main);
+      color: #FFFFFF;
+      border-color: var(--black-main);
+      box-shadow: 0 2px 8px rgba(11, 17, 32, 0.12);
+    }
+
+    /* Evidence Cards */
+    .evidence-card {
+      background: #FFFFFF;
+      border: 1px solid var(--cream-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .evidence-card:hover {
+      border-color: var(--blue-border);
+      box-shadow: 0 6px 18px rgba(37, 99, 235, 0.06);
+      transform: translateY(-2px);
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.725rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      width: fit-content;
+    }
+
+    .tag-accent {
+      background: var(--blue-light);
+      color: var(--blue-bright);
+    }
+
+    .bad-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #DC2626;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 0.5rem;
+    }
+
+    .good-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #059669;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 0.5rem;
+    }
+
+    /* Dynamic Output & Feedback Container */
+    .feedback pre {
+      background: var(--black-main);
+      color: #F3F4F6;
+      padding: 1.25rem;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin-top: 1rem;
+      border: 1px solid #1F2937;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    /* Template Display Block */
+    .template-block {
+      background: #FFFFFF;
+      border: 1px solid var(--cream-border);
+      padding: 1.25rem;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.825rem;
+      color: var(--black-main);
+      white-space: pre-wrap;
+      line-height: 1.6;
+      margin-top: 1rem;
+    }
+
+    /* Score Meter Panel */
+    .score-panel {
+      background: #FFFFFF;
+      border: 1px solid var(--cream-border);
+      border-radius: 12px;
+      padding: 1.75rem;
+    }
+
+    .score-number {
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--black-main);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .meter {
+      height: 10px;
+      background: var(--cream-surface);
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 1rem 0;
+      border: 1px solid var(--cream-border);
+    }
+
+    .meter-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--blue-accent), var(--blue-bright));
+      transition: width 0.5s ease;
+      border-radius: 20px;
+    }
+
+    .status {
+      display: inline-block;
+      font-weight: 700;
+      font-size: 0.875rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      background: var(--blue-light);
+      color: var(--blue-bright);
+      margin-bottom: 1rem;
+    }
+
+    /* Checklist Styling */
+    .check-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .check-item {
+      background: #FFFFFF;
+      border: 1px solid var(--cream-border);
+      padding: 1.25rem;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      transition: all 0.2s ease;
+    }
+
+    .check-item:hover {
+      border-color: var(--blue-border);
+      background: var(--cream-bg);
+    }
+
+    .check-item input[type="checkbox"] {
+      width: 1.2rem;
+      height: 1.2rem;
+      margin-top: 0.15rem;
+      accent-color: var(--blue-bright);
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .check-item span {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .check-item strong {
+      color: var(--black-main);
+      font-size: 0.95rem;
+    }
+
+    .check-item small {
+      color: var(--text-muted);
+      font-size: 0.825rem;
+      line-height: 1.4;
+    }
+
+    /* Layout Sections */
+    .section {
+      margin-bottom: 4rem;
+    }
+
+    .section-head {
+      margin-bottom: 2rem;
+    }
+
+    .section-head h2 {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--black-main);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-head p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 700px;
+    }
+
+    /* Custom Cards & Panels */
+    .panel {
+      background: #FFFFFF;
+      border: 1px solid var(--cream-border);
+      border-radius: 12px;
+      padding: 1.75rem;
+    }
+
+    .dark-panel {
+      background: var(--black-main);
+      color: var(--cream-bg);
+      border-radius: 16px;
+      padding: 3rem 2.5rem;
+      box-shadow: 0 20px 40px -15px rgba(11, 17, 32, 0.3);
+    }
+
+    .dark-panel h2 {
+      color: #FFFFFF;
+      font-size: 2rem;
+      font-weight: 800;
+      margin-top: 0.5rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.25;
+    }
+
+    .dark-panel p {
+      color: #D1D5DB;
+      font-size: 1.1rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .dark-panel ol {
+      counter-reset: dark-counter;
+      list-style: none;
+      padding: 0;
+    }
+
+    .dark-panel ol li {
+      counter-increment: dark-counter;
+      position: relative;
+      padding-left: 2.5rem;
+      margin-bottom: 1rem;
+      color: #E5E7EB;
+      font-size: 1rem;
+    }
+
+    .dark-panel ol li::before {
+      content: counter(dark-counter);
+      position: absolute;
+      left: 0;
+      top: 0.1rem;
+      width: 1.75rem;
+      height: 1.75rem;
+      background: rgba(37, 99, 235, 0.2);
+      border: 1px solid var(--blue-bright);
+      color: #93C5FD;
+      border-radius: 50%;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      background: #FFFFFF;
+      border: 1px solid var(--cream-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      height: 100%;
+    }
+
+    .eyebrow {
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--blue-bright);
+      margin-bottom: 0.5rem;
+    }
+
+    .quote {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--black-main);
+      border-left: 4px solid var(--blue-bright);
+      padding-left: 1.25rem;
+      font-style: italic;
+      background: var(--cream-surface);
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      border-radius: 0 8px 8px 0;
+    }
+
+    /* Layout Grids */
+    .workspace {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 1024px) {
+      .workspace {
+        grid-template-columns: 1.4fr 1fr;
+      }
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .grid-2 {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .grid-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+  <!-- TOP HEADER / NAV -->
+  <header class="border-b border-[var(--cream-border)] bg-[var(--cream-bg)] sticky top-0 z-50 backdrop-blur-md bg-opacity-90">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-[var(--black-main)] flex items-center justify-center text-[var(--cream-bg)] font-bold text-sm tracking-widest">
+          PK
+        </div>
+        <span class="font-bold text-lg tracking-tight text-[var(--black-main)]">PATHKEEPER <span class="text-xs uppercase font-semibold text-[var(--blue-bright)] tracking-widest ml-1 hidden sm:inline">· Portfolio Intelligence</span></span>
+      </div>
+      <nav class="flex items-center gap-4 text-sm font-semibold">
+        <a href="#lessons" class="text-[var(--text-muted)] hover:text-[var(--black-main)] transition">Lessons</a>
+        <a href="#case-study-lab" class="text-[var(--text-muted)] hover:text-[var(--black-main)] transition">Lab</a>
+        <a href="#evidence-scorer" class="text-[var(--text-muted)] hover:text-[var(--black-main)] transition">Scorer</a>
+        <a href="#audit" class="text-[var(--text-muted)] hover:text-[var(--black-main)] transition">Audit</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow w-full">
+
+    <!-- HERO HEADER -->
+    <div class="mb-12 border-b border-[var(--cream-border)] pb-8">
+      <div class="eyebrow">Evidence Architecture Framework</div>
+      <h1 class="text-3xl sm:text-5xl font-extrabold text-[var(--black-main)] tracking-tight mb-4">
+        Design Evidence That Removes Uncertainty.
+      </h1>
+      <p class="text-lg text-[var(--text-muted)] max-w-3xl leading-relaxed">
+        Turn raw accomplishments into inspectable career capital. Evaluators spend under 45 seconds analyzing your work—make every signal count.
+      </p>
+    </div>
+
+    <!-- SECTION 01 — PROFESSION EVIDENCE EXPLORER -->
+    <section class="section" id="explorer">
+      <div class="section-head">
+        <h2>01. Profession evidence explorer</h2>
+        <p>Compare weak portfolio claims against strategic, inspectable evidence across various industries.</p>
+      </div>
+
+      <!-- Tab Buttons -->
+      <div id="professionTabs" class="flex flex-wrap gap-2 mb-6 pb-2 border-b border-[var(--cream-border)] overflow-x-auto">
+        <button type="button" class="tab-btn active" data-profession="technology">Technology</button>
+        <button type="button" class="tab-btn" data-profession="leadership">Leadership</button>
+        <button type="button" class="tab-btn" data-profession="healthcare">Healthcare</button>
+        <button type="button" class="tab-btn" data-profession="education">Education</button>
+        <button type="button" class="tab-btn" data-profession="trades">Trades</button>
+        <button type="button" class="tab-btn" data-profession="finance">Finance</button>
+        <button type="button" class="tab-btn" data-profession="creative">Creative</button>
+        <button type="button" class="tab-btn" data-profession="sales">Sales</button>
+        <button type="button" class="tab-btn" data-profession="operations">Operations</button>
+      </div>
+
+      <!-- Tab Content Area -->
+      <div id="industryContent" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Rendered dynamically via JavaScript -->
+      </div>
+    </section>
+
+    <!-- LESSON ACCORDIONS SECTION -->
+    <section class="section" id="lessons">
+      <div class="section-head">
+        <h2>Core Signal Architecture</h2>
+        <p>Master the five tactical lessons for turning experience into high-signal artifacts.</p>
+      </div>
+
+      <details class="lesson">
+        <summary>Lesson 6 — Signal design: making evidence scannable</summary>
+        <div class="lesson-body">
+          <h4>The central idea</h4>
+          <p>Evaluators spend under 45 seconds scanning your portfolio before deciding whether to read further. Signal design is the discipline of making the most important evidence visible in that first glance.</p>
+          <h4>Signal design principles</h4>
+          <ul>
+            <li><strong>Lead with the metric:</strong> Open with the measurable outcome, not the setup.</li>
+            <li><strong>Use visual hierarchy:</strong> Large numbers, bold labels, and whitespace direct the eye.</li>
+            <li><strong>Front-load the decision:</strong> State the tradeoff you made before describing the artifact.</li>
+            <li><strong>Remove decoration:</strong> Every visual element should answer an evaluator question.</li>
+          </ul>
+          <h4>Practice</h4>
+          <p>Take your strongest project and reduce it to three lines: one metric, one decision, one verification link. If the three lines do not create curiosity, the signal is not yet strong enough.</p>
+          <div class="callout"><strong>Expert insight:</strong> A portfolio that is easy to scan is more likely to be read deeply.</div>
+        </div>
+      </details>
+
+      <details class="lesson">
+        <summary>Lesson 7 — Provenance and verification: making claims inspectable</summary>
+        <div class="lesson-body">
+          <h4>The central idea</h4>
+          <p>A claim that cannot be inspected is not evidence — it is a request for trust. Verification turns confidence into an inspectable artifact.</p>
+          <h4>Verification ladder</h4>
+          <ol>
+            <li><strong>Stated claim:</strong> "I improved the process."</li>
+            <li><strong>Documented claim:</strong> "I improved the process, here is the log."</li>
+            <li><strong>Measured claim:</strong> "I reduced cycle time from 12 days to 4 days."</li>
+            <li><strong>Reproducible claim:</strong> "Here is the dataset and method so you can verify the measurement."</li>
+            <li><strong>Independently validated claim:</strong> "An external auditor confirmed the reduction."</li>
+          </ol>
+          <h4>Practice</h4>
+          <p>For each major claim, identify which rung of the ladder you are currently on and what would be required to climb one rung.</p>
+          <div class="callout"><strong>Design rule:</strong> Attach at least one inspectable link, file, or artifact to every case study.</div>
+        </div>
+      </details>
+
+      <details class="lesson">
+        <summary>Lesson 8 — Portfolio as production system: building career capital</summary>
+        <div class="lesson-body">
+          <h4>The central idea</h4>
+          <p>A portfolio is not a one-time project. It is a production system that continuously converts research into credibility, and credibility into opportunity.</p>
+          <h4>The production loop</h4>
+          <ul>
+            <li><strong>Research:</strong> Investigate a real problem.</li>
+            <li><strong>Insight:</strong> Extract a reusable principle.</li>
+            <li><strong>Framework:</strong> Name and structure the principle so it can be taught.</li>
+            <li><strong>Artifact:</strong> Build something that demonstrates the framework.</li>
+            <li><strong>Publication:</strong> Put the artifact where it can be inspected.</li>
+            <li><strong>Feedback:</strong> Collect reactions and iterate.</li>
+          </ul>
+          <h4>Example</h4>
+          <p>One article can become a conference presentation, a LinkedIn post, an interview example, a workshop, a newsletter, a podcast discussion, a training module, a portfolio page, a client proposal, and a book chapter.</p>
+          <div class="callout"><strong>Expert insight:</strong> Stop treating the portfolio as a showcase. Treat it as a factory that compounds credibility.</div>
+        </div>
+      </details>
+
+      <details class="lesson">
+        <summary>Lesson 9 — The visibility flywheel: from research to authority</summary>
+        <div class="lesson-body">
+          <h4>The central idea</h4>
+          <p>Authority is not granted — it is accumulated through a repeatable flywheel. Each stage of the flywheel feeds the next, creating compounding career capital.</p>
+          <h4>The flywheel stages</h4>
+          <ol>
+            <li><strong>Research:</strong> Investigate a meaningful problem.</li>
+            <li><strong>Insight:</strong> Extract a principle worth sharing.</li>
+            <li><strong>Framework:</strong> Structure the insight into a teachable model.</li>
+            <li><strong>Artifact:</strong> Build something that demonstrates it.</li>
+            <li><strong>Publication:</strong> Publish where the right people can find it.</li>
+            <li><strong>Feedback:</strong> Collect responses and iterate.</li>
+            <li><strong>Improvement:</strong> Strengthen the artifact based on feedback.</li>
+            <li><strong>Authority:</strong> Accumulate a reputation for clear, useful thinking.</li>
+            <li><strong>Opportunity:</strong> Let opportunities find the system you have built.</li>
+          </ol>
+          <div class="callout"><strong>Design rule:</strong> The goal is not to get hired. The goal is to build a machine that continuously produces credibility.</div>
+        </div>
+      </details>
+
+      <details class="lesson">
+        <summary>Lesson 10 — Portfolio capital: turning artifacts into compounding assets</summary>
+        <div class="lesson-body">
+          <h4>The central idea</h4>
+          <p>Most people think portfolios demonstrate skill. They actually create career capital. Every artifact you publish becomes a reusable asset that can be recombined into new forms of value.</p>
+          <h4>Capital multiplication</h4>
+          <p>One well-documented case study can become a resume line, an interview story, a published article, a workshop, a framework for a client, a teaching resource, and a portfolio centerpiece.</p>
+          <h4>Practice</h4>
+          <p>For each artifact you produce, identify at least three downstream uses before you consider it "done."</p>
+          <div class="callout"><strong>Expert insight:</strong> The strongest portfolios are not collections of work — they are compounding evidence systems.</div>
+        </div>
+      </details>
+    </section>
+
+    <!-- SECTION 06 — CASE STUDY LAB -->
+    <section class="section" id="case-study-lab">
+      <div class="section-head">
+        <h2>06. Case study intelligence lab</h2>
+        <p>Turn a project into a strategic case study. This is not a project log — it is a structured argument that answers the five evaluator questions.</p>
+      </div>
+
+      <div class="workspace">
+        <div class="panel">
+          <h3 class="text-xl font-bold mb-4 text-[var(--black-main)]">Case study builder</h3>
+          
+          <div class="field">
+            <label for="csTitle">Project title</label>
+            <input type="text" id="csTitle" placeholder="Example: Automated onboarding workflow redesign">
+          </div>
+          
+          <div class="field">
+            <label for="csContext">Layer 1 — Credibility context</label>
+            <textarea id="csContext" placeholder="Starting conditions, constraints, resources, and what was uncertain at the outset."></textarea>
+          </div>
+          
+          <div class="field">
+            <label for="csDecision">Layer 2 — Decision intelligence</label>
+            <textarea id="csDecision" placeholder="Why you chose this approach, alternatives rejected, risks identified, tradeoffs accepted."></textarea>
+          </div>
+          
+          <div class="field">
+            <label for="csArtifact">Production artifact</label>
+            <textarea id="csArtifact" placeholder="The thing you built: system, report, framework, deployment, etc."></textarea>
+          </div>
+          
+          <div class="field">
+            <label for="csMeasure">Measured result</label>
+            <textarea id="csMeasure" placeholder="Before/after metrics, performance data, or other evidence of change."></textarea>
+          </div>
+          
+          <div class="field">
+            <label for="csTransfer">Layer 3 — Transferability statement</label>
+            <textarea id="csTransfer" placeholder="What this experience enables you to solve next."></textarea>
+          </div>
+          
+          <div class="field">
+            <label for="csVerification">Verification links</label>
+            <textarea id="csVerification" placeholder="Repositories, live links, datasets, documentation, or other inspectable evidence."></textarea>
+          </div>
+          
+          <div class="flex flex-wrap gap-3 mt-4">
+            <button class="btn btn-dark" type="button" id="buildCaseStudy">Generate case study</button>
+            <button class="btn btn-light" type="button" id="clearCaseStudy">Clear</button>
+          </div>
+          
+          <div class="feedback mt-4" id="caseStudyOutput" aria-live="polite"></div>
+        </div>
+
+        <aside class="panel sticky top-20 self-start" style="background:var(--cream-surface);">
+          <h3 class="text-lg font-bold mb-1 text-[var(--black-main)]">Strategic case study template</h3>
+          <p class="text-xs text-[var(--text-muted)] mb-3">Use this structure to convert raw project notes into evidence that answers the five evaluator questions.</p>
+          <div class="template-block"># [Project Title]
+
+## Executive Summary
+- **Challenge:** [2 sentences]
+- **Output:** [Concrete artifact]
+- **ROI / Metric:** [Measurable change]
+
+## 1. Credibility Context
+- Starting conditions and constraints
+- Resources available
+- What was uncertain
+
+## 2. Decision Intelligence
+- Strategy chosen
+- Alternatives rejected
+- Risks and tradeoffs
+
+## 3. Production Artifact
+- What was built
+- How it works
+- Personal contribution
+
+## 4. Measured Result
+- Before / after
+- Quantitative outcomes
+- Qualitative evidence
+
+## 5. Transferability
+- What this enables next
+
+## 6. Verification
+- Links, repos, documentation</div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- SECTION 07 — EVIDENCE SCORER -->
+    <section class="section" id="evidence-scorer">
+      <div class="section-head">
+        <h2>07. Evidence quality scorer</h2>
+        <p>Score the strength of a piece of portfolio evidence. This is a diagnostic of how much uncertainty the evidence removes for an evaluator.</p>
+      </div>
+
+      <div class="workspace">
+        <form class="panel" id="evidenceForm">
+          <div class="field">
+            <label for="evTitle">Evidence title</label>
+            <input type="text" id="evTitle" required placeholder="Example: Onboarding workflow before/after metrics">
+          </div>
+          
+          <div class="field">
+            <label for="evType">Evidence type</label>
+            <select id="evType">
+              <option value="0">Opinion or claim only</option>
+              <option value="1">Personal experience narrative</option>
+              <option value="2">Documentation or process log</option>
+              <option value="3">Measurement or metric</option>
+              <option value="4">Replication or reproducible artifact</option>
+              <option value="5">Independent third-party validation</option>
+            </select>
+          </div>
+          
+          <div class="field">
+            <label for="evRelevance">Relevance to target role or opportunity</label>
+            <select id="evRelevance">
+              <option value="0">Unclear or unrelated</option>
+              <option value="1">Loosely related</option>
+              <option value="2">Directly related to some requirements</option>
+              <option value="3">Directly addresses core requirements</option>
+            </select>
+          </div>
+          
+          <div class="field">
+            <label for="evVerifiability">Verifiability</label>
+            <select id="evVerifiability">
+              <option value="0">Not verifiable</option>
+              <option value="1">Partially verifiable with effort</option>
+              <option value="2">Verifiable through links or files</option>
+              <option value="3">Independently inspected by a third party</option>
+            </select>
+          </div>
+          
+          <div class="field">
+            <label for="evDecision">Shows decision judgment</label>
+            <select id="evDecision">
+              <option value="0">No decision content</option>
+              <option value="1">Mentions a decision</option>
+              <option value="2">Explains reasoning and tradeoffs</option>
+              <option value="3">Demonstrates executive-level judgment with alternatives</option>
+            </select>
+          </div>
+          
+          <div class="field">
+            <label for="evTransfer">Shows transferability</label>
+            <select id="evTransfer">
+              <option value="0">No transferability stated</option>
+              <option value="1">Implicit transferability only</option>
+              <option value="2">Explicitly states what the experience enables next</option>
+            </select>
+          </div>
+          
+          <div class="flex flex-wrap gap-3 mt-4">
+            <button type="submit" class="btn btn-dark">Score evidence</button>
+            <button type="button" class="btn btn-light" id="resetEvidenceForm">Clear</button>
+          </div>
+        </form>
+
+        <aside class="score-panel sticky top-20 self-start" aria-live="polite">
+          <div class="eyebrow">Evidence strength</div>
+          <div class="flex items-baseline gap-1">
+            <span class="score-number" id="evScore">0</span>
+            <span class="text-xl font-bold text-[var(--text-muted)]">/100</span>
+          </div>
+          
+          <div class="meter"><div class="meter-fill" id="evMeterFill"></div></div>
+          
+          <span class="status" id="evStatus">Not assessed</span>
+          
+          <h3 class="font-bold text-sm text-[var(--black-main)] uppercase tracking-wider mt-4 mb-1">Interpretation</h3>
+          <p id="evInterpretation" class="text-sm text-[var(--black-text)] leading-relaxed">Enter evidence details and score to generate a diagnostic.</p>
+          
+          <h3 class="font-bold text-sm text-[var(--black-main)] uppercase tracking-wider mt-4 mb-1">Strongest lever</h3>
+          <p id="evLever" class="text-sm text-[var(--blue-bright)] font-semibold">—</p>
+          
+          <p class="text-xs text-[var(--text-muted)] mt-6 border-t border-[var(--cream-border)] pt-4 leading-normal">
+            Self-assessed scores are not fact-checks. High-scoring evidence still requires contextual review for the specific opportunity you are targeting.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- SECTION 08 — READINESS AUDIT -->
+    <section class="section" id="audit">
+      <div class="section-head">
+        <h2>08. Portfolio readiness audit</h2>
+        <p>A portfolio is ready when someone else can verify your claims without needing to trust your confidence. Complete the audit honestly — the score measures process, not talent.</p>
+      </div>
+
+      <div id="auditChecklist" class="check-grid">
+        <label class="check-item">
+          <input type="checkbox" data-audit>
+          <span>
+            <strong>The starting problem is obvious</strong>
+            <small>An evaluator can understand the original challenge within seconds.</small>
+          </span>
+        </label>
+
+        <label class="check-item">
+          <input type="checkbox" data-audit>
+          <span>
+            <strong>My personal contribution is obvious</strong>
+            <small>The viewer can distinguish what you personally designed, built, solved, or changed.</small>
+          </span>
+        </label>
+
+        <label class="check-item">
+          <input type="checkbox" data-audit>
+          <span>
+            <strong>The process contains evidence</strong>
+            <small>There is a visible trail showing how you reached the result.</small>
+          </span>
+        </label>
+
+        <label class="check-item">
+          <input type="checkbox" data-audit>
+          <span>
+            <strong>The final output can be inspected</strong>
+            <small>Links, files, screenshots, demonstrations, or documentation exist.</small>
+          </span>
+        </label>
+
+        <label class="check-item">
+          <input type="checkbox" data-audit>
+          <span>
+            <strong>The result contains measurable evidence</strong>
+            <small>The case study includes useful metrics or meaningful comparisons.</small>
+          </span>
+        </label>
+
+        <label class="check-item">
+          <input type="checkbox" data-audit>
+          <span>
+            <strong>Decision reasoning is documented</strong>
+            <small>Alternatives, risks, and tradeoffs are explained.</small>
+          </span>
+        </label>
+
+        <label class="check-item">
+          <input type="checkbox" data-audit>
+          <span>
+            <strong>Transferability is stated</strong>
+            <small>The case study says what the experience enables next.</small>
+          </span>
+        </label>
+
+        <label class="check-item">
+          <input type="checkbox" data-audit>
+          <span>
+            <strong>Uncertainty is reduced for the viewer</strong>
+            <small>Each section answers one of the five evaluator questions.</small>
+          </span>
+        </label>
+      </div>
+
+      <div class="callout mt-6">
+        <strong id="auditProgress" class="block text-base mb-1">0 of 8 checks completed</strong>
+        <p id="auditAdvice" class="text-sm">Complete the audit to see your portfolio readiness diagnostic.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 09 — VISIBILITY FLYWHEEL -->
+    <section class="section">
+      <div class="section-head">
+        <h2>09. The visibility flywheel</h2>
+        <p>A portfolio is not a static showcase. It is a production system that continuously converts research into credibility, and credibility into opportunity.</p>
+      </div>
+
+      <div class="grid-3">
+        <article class="card">
+          <span class="tag tag-accent mb-3">Stage 01–03</span>
+          <h3 class="font-bold text-lg text-[var(--black-main)] mb-2">Research → Insight → Framework</h3>
+          <p class="text-sm text-[var(--black-text)]">Start with investigation. Extract a reusable insight. Turn the insight into a named framework that can be taught and applied.</p>
+        </article>
+
+        <article class="card">
+          <span class="tag tag-accent mb-3">Stage 04–06</span>
+          <h3 class="font-bold text-lg text-[var(--black-main)] mb-2">Artifact → Publication → Feedback</h3>
+          <p class="text-sm text-[var(--black-text)]">Build the artifact, publish it where it can be inspected, and collect feedback that reveals what actually landed.</p>
+        </article>
+
+        <article class="card">
+          <span class="tag tag-accent mb-3">Stage 07–09</span>
+          <h3 class="font-bold text-lg text-[var(--black-main)] mb-2">Improvement → Authority → Opportunity</h3>
+          <p class="text-sm text-[var(--black-text)]">Improve the artifact, accumulate authority through consistency, and let opportunities find the system you have built.</p>
+        </article>
+      </div>
+
+      <div class="quote mt-8">
+        "The goal isn't to get hired. It's to build a machine that continuously produces credibility."
+      </div>
+    </section>
+
+    <!-- SECTION 10 — PORTFOLIO CAPITAL -->
+    <section class="section">
+      <div class="section-head">
+        <h2>10. Portfolio capital</h2>
+        <p>Most people think portfolios demonstrate skill. They actually create career capital. Every artifact you publish becomes a reusable asset.</p>
+      </div>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3 class="font-bold text-xl text-[var(--black-main)] mb-4 pb-2 border-b border-[var(--cream-border)]">One article can become</h3>
+          <ul class="space-y-2 text-sm text-[var(--black-text)]">
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--blue-bright)]"></span> Conference presentation</li>
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--blue-bright)]"></span> LinkedIn post</li>
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--blue-bright)]"></span> Interview example</li>
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--blue-bright)]"></span> Workshop</li>
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--blue-bright)]"></span> Newsletter</li>
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--blue-bright)]"></span> Podcast discussion</li>
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--blue-bright)]"></span> Training material</li>
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--blue-bright)]"></span> Portfolio page</li>
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--blue-bright)]"></span> Client proposal</li>
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--blue-bright)]"></span> Book chapter</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3 class="font-bold text-xl text-[var(--black-main)] mb-4 pb-2 border-b border-[var(--cream-border)]">Your portfolio is a production system</h3>
+          <p class="text-sm text-[var(--black-text)] leading-relaxed">
+            Stop treating the portfolio as a one-time project. Treat it as a factory that converts raw experience into inspectable evidence, and inspectable evidence into opportunity.
+          </p>
+          <p class="text-sm text-[var(--black-text)] leading-relaxed mt-4">
+            Every mission you complete in this lab produces a reusable asset. The goal is not to fill pages — it is to build a compounding evidence base.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECTION 11 — FINAL PRINCIPLE -->
+    <section class="section">
+      <div class="dark-panel">
+        <div class="eyebrow">Final principle</div>
+        <h2>People rarely remember the longest resume. They remember the clearest evidence.</h2>
+        <p>A portfolio should not simply describe your experience. It should demonstrate how you think, how you solve problems, and why someone should trust you with greater responsibility.</p>
+        <ol>
+          <li>Answer the five evaluator questions before they are asked.</li>
+          <li>Move your evidence up the pyramid — from opinion to independent validation.</li>
+          <li>Document the decisions, not just the outcomes.</li>
+          <li>State what the experience enables you to solve next.</li>
+          <li>Build the flywheel so credibility compounds.</li>
+        </ol>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-[var(--cream-border)] bg-[var(--cream-surface)] py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-6">
+      <div>
+        <strong class="text-[var(--black-main)] font-extrabold tracking-wider text-sm block mb-1">PATHKEEPER · PORTFOLIO INTELLIGENCE</strong>
+        <p class="text-xs text-[var(--text-muted)] max-w-md">Design evidence that removes uncertainty. Build capital that compounds. Make your capability inspectable.</p>
+      </div>
+      <p class="text-xs text-[var(--text-muted)]">© 2026 Portfolio Intelligence · Evidence Architecture Framework</p>
+    </div>
+  </footer>
+
+  <!-- COMPLETE INTERACTIVE JAVASCRIPT LOGIC -->
+  <script>
+  (function () {
+    "use strict";
+
+    const $ = id => document.getElementById(id);
+
+    // ============================================================
+    // 1. PROFESSION EVIDENCE EXPLORER DATA & RENDERING
+    // ============================================================
+    const professions = {
+      technology: [
+        { title: "Clean infrastructure", bad: "I know how to code.", good: "Public repo with containerized setup, deployment structure, and architectural docs.", layer: "Credibility" },
+        { title: "Iteration history", bad: "I built an app.", good: "Commit graph showing debugging decisions, refactors, and architectural changes.", layer: "Decision" },
+        { title: "Working product", bad: "See screenshot.", good: "Live deployment link, source code, setup Readme, and design tradeoffs doc.", layer: "Transferability" }
+      ],
+      leadership: [
+        { title: "Conflict resolution framework", bad: "I managed a team.", good: "Documented decision log, operating system, and retention improvements.", layer: "Credibility" },
+        { title: "Organizational redesign", bad: "I'm a leader.", good: "Before/after team metrics and communication standards.", layer: "Decision" },
+        { title: "Performance dashboards", bad: "People liked working with me.", good: "Meeting operating system, communication standards, and measurable team outcomes.", layer: "Transferability" }
+      ],
+      healthcare: [
+        { title: "Patient safety initiative", bad: "5 years ICU experience.", good: "Documented quality improvement project with measured outcomes.", layer: "Credibility" },
+        { title: "Workflow redesign", bad: "I helped patients.", good: "Interdisciplinary coordination protocol and emergency decision framework.", layer: "Decision" },
+        { title: "Quality improvement", bad: "I'm experienced.", good: "Before/after safety metrics and protocol adoption evidence.", layer: "Transferability" }
+      ],
+      education: [
+        { title: "Curriculum redesign", bad: "I taught 4th grade.", good: "Documented differentiated instruction framework with assessment analytics.", layer: "Credibility" },
+        { title: "Assessment analytics", bad: "My students improved.", good: "Measurable student improvement data and parent communication system.", layer: "Decision" },
+        { title: "Behavior strategy", bad: "I'm a teacher.", good: "Classroom behavior strategy doc, parent communication framework, and outcome evidence.", layer: "Transferability" }
+      ],
+      trades: [
+        { title: "Workspace precision", bad: "I'm good with my hands.", good: "Tool calibration logs, material safety procedures, and blueprint interpretation benchmarks.", layer: "Credibility" },
+        { title: "Revision trail", bad: "I built it.", good: "Documented adjustments, troubleshooting, and corrections during construction.", layer: "Decision" },
+        { title: "Finished work", bad: "Looks great.", good: "Photographs, measurements, and technical specifications aligned with original schematics.", layer: "Transferability" }
+      ],
+      finance: [
+        { title: "Operating model", bad: "I'm good with numbers.", good: "Documented process, customer problem, resources, and constraints.", layer: "Credibility" },
+        { title: "Experiment log", bad: "I built a model.", good: "Tests, campaigns, revisions, customer feedback, and decisions.", layer: "Decision" },
+        { title: "Business result", bad: "The model worked.", good: "Revenue, efficiency, conversion, retention, or another meaningful result.", layer: "Transferability" }
+      ],
+      creative: [
+        { title: "Process portfolio", bad: "I'm creative.", good: "Documented iterations, rejected concepts, and decision reasoning for final designs.", layer: "Credibility" },
+        { title: "Client outcomes", bad: "I made a campaign.", good: "Before/after engagement metrics, brand consistency, and client feedback.", layer: "Decision" },
+        { title: "Transferability", bad: "Here's my work.", good: "Statement of what this body of work enables next and for whom.", layer: "Transferability" }
+      ],
+      sales: [
+        { title: "Pipeline discipline", bad: "I'm a closer.", good: "Documented pipeline management system, CRM hygiene, and forecast accuracy.", layer: "Credibility" },
+        { title: "Decision log", bad: "I hit quota.", good: "Recorded negotiation decisions, tradeoffs, and lost-deal post-mortems.", layer: "Decision" },
+        { title: "Measured outcomes", bad: "My numbers were good.", good: "Before/after conversion rates, retention, and territory growth metrics.", layer: "Transferability" }
+      ],
+      operations: [
+        { title: "Process design", bad: "I keep things running.", good: "Documented workflow redesign, SOPs, and operating procedures.", layer: "Credibility" },
+        { title: "Incident log", bad: "I solve problems.", good: "Recorded failures, root-cause analyses, and corrective actions.", layer: "Decision" },
+        { title: "Efficiency metrics", bad: "I improved things.", good: "Before/after cycle-time, cost, or quality metrics with supporting data.", layer: "Transferability" }
+      ]
+    };
+
+    const tabBar = $("professionTabs");
+    const industryContent = $("industryContent");
+
+    function renderProfession(professionKey) {
+      const items = professions[professionKey] || professions.technology;
+      industryContent.innerHTML = "";
+      items.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "evidence-card";
+        card.innerHTML = `
+          <span class="tag tag-accent">${item.layer} layer</span>
+          <h4 class="font-bold text-base text-[var(--black-main)]">${item.title}</h4>
+          <span class="bad-label">Weak evidence</span>
+          <p class="text-sm text-[var(--black-text)]">${item.bad}</p>
+          <span class="good-label">Strategic evidence</span>
+          <p class="text-sm text-[var(--black-text)] font-medium">${item.good}</p>
+        `;
+        industryContent.appendChild(card);
+      });
+    }
+
+    if (tabBar) {
+      tabBar.addEventListener("click", function (event) {
+        const btn = event.target.closest(".tab-btn");
+        if (!btn) return;
+        tabBar.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        renderProfession(btn.dataset.profession);
+      });
+    }
+
+    renderProfession("technology");
+
+    // ============================================================
+    // 2. CASE STUDY BUILDER LOGIC
+    // ============================================================
+    let latestCaseStudy = "";
+
+    const buildBtn = $("buildCaseStudy");
+    if (buildBtn) {
+      buildBtn.addEventListener("click", function () {
+        const fields = [
+          ["Project title", $("csTitle").value.trim()],
+          ["Layer 1 — Credibility context", $("csContext").value.trim()],
+          ["Layer 2 — Decision intelligence", $("csDecision").value.trim()],
+          ["Production artifact", $("csArtifact").value.trim()],
+          ["Measured result", $("csMeasure").value.trim()],
+          ["Layer 3 — Transferability", $("csTransfer").value.trim()],
+          ["Verification links", $("csVerification").value.trim()]
+        ];
+
+        latestCaseStudy = "PORTFOLIO INTELLIGENCE — CASE STUDY\n" +
+          "Created: " + new Date().toLocaleString() + "\n\n" +
+          fields.map(([label, value]) => "## " + label + "\n" + (value || "[Not supplied]")).join("\n\n");
+
+        const out = $("caseStudyOutput");
+        out.replaceChildren();
+
+        const heading = document.createElement("strong");
+        heading.className = "block text-sm text-[var(--blue-accent)] mb-2 font-bold";
+        heading.textContent = "Generated Case Study Export:";
+        out.appendChild(heading);
+
+        const pre = document.createElement("pre");
+        pre.textContent = latestCaseStudy;
+        out.appendChild(pre);
+      });
+    }
+
+    const clearBtn = $("clearCaseStudy");
+    if (clearBtn) {
+      clearBtn.addEventListener("click", function () {
+        ["csTitle","csContext","csDecision","csArtifact","csMeasure","csTransfer","csVerification"]
+          .forEach(id => {
+            if ($(id)) $(id).value = "";
+          });
+        latestCaseStudy = "";
+        const out = $("caseStudyOutput");
+        if (out) out.replaceChildren();
+      });
+    }
+
+    // ============================================================
+    // 3. EVIDENCE QUALITY SCORER LOGIC
+    // ============================================================
+    const evidenceForm = $("evidenceForm");
+
+    function calculateEvidenceScore() {
+      const pyramid = Number($("evType").value);
+      const relevance = Number($("evRelevance").value);
+      const verifiability = Number($("evVerifiability").value);
+      const decision = Number($("evDecision").value);
+      const transfer = Number($("evTransfer").value);
+
+      const score =
+        (pyramid / 5) * 35 +
+        (relevance / 3) * 20 +
+        (verifiability / 3) * 20 +
+        (decision / 3) * 15 +
+        (transfer / 2) * 10;
+
+      return Math.round(score);
+    }
+
+    function evidenceAssessment(score) {
+      if (score >= 85) return {
+        status: "Exceptional evidence",
+        interpretation: "This evidence sits near the top of the pyramid and reduces multiple types of evaluator uncertainty.",
+        lever: "Preserve this format and replicate it across other projects."
+      };
+      if (score >= 65) return {
+        status: "Strong evidence",
+        interpretation: "This evidence answers several evaluator questions, but one dimension is likely underdeveloped.",
+        lever: "Strengthen the weakest dimension — often decision reasoning or transferability."
+      };
+      if (score >= 40) return {
+        status: "Developing evidence",
+        interpretation: "The evidence communicates something useful, but an evaluator may still be uncertain about capability or judgment.",
+        lever: "Move one level up the pyramid: add measurement, replication, or independent validation."
+      };
+      return {
+        status: "Insufficient evidence",
+        interpretation: "This evidence functions more like a claim than proof. It may not reduce evaluator skepticism.",
+        lever: "Add inspectable documentation, measurement, or third-party validation."
+      };
+    }
+
+    function updateEvidenceDisplay() {
+      if (!evidenceForm) return;
+      const score = calculateEvidenceScore();
+      const assessment = evidenceAssessment(score);
+      $("evScore").textContent = score;
+      $("evMeterFill").style.width = score + "%";
+      $("evStatus").textContent = assessment.status;
+      $("evInterpretation").textContent = assessment.interpretation;
+      $("evLever").textContent = assessment.lever;
+    }
+
+    if (evidenceForm) {
+      evidenceForm.addEventListener("input", updateEvidenceDisplay);
+      evidenceForm.addEventListener("change", updateEvidenceDisplay);
+
+      evidenceForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        updateEvidenceDisplay();
+      });
+
+      const resetBtn = $("resetEvidenceForm");
+      if (resetBtn) {
+        resetBtn.addEventListener("click", function () {
+          evidenceForm.reset();
+          updateEvidenceDisplay();
+        });
+      }
+
+      updateEvidenceDisplay();
+    }
+
+    // ============================================================
+    // 4. READINESS AUDIT LOGIC
+    // ============================================================
+    const auditBoxes = Array.from(document.querySelectorAll("[data-audit]"));
+
+    function updateAudit() {
+      if (!auditBoxes.length) return;
+      const count = auditBoxes.filter(box => box.checked).length;
+      const total = auditBoxes.length;
+
+      $("auditProgress").textContent = count + " of " + total + " checks completed";
+
+      if (count === total) {
+        $("auditAdvice").textContent =
+          "All checks marked complete. Confirm the underlying evidence and ensure the case studies match the specific opportunity you are targeting.";
+      } else if (count >= total / 2) {
+        $("auditAdvice").textContent =
+          "Good progress. Focus on completing remaining items to turn stated claims into fully inspectable evidence.";
+      } else {
+        $("auditAdvice").textContent =
+          "Complete the audit to see your portfolio readiness diagnostic. Aim for complete verifiability across all projects.";
+      }
+    }
+
+    auditBoxes.forEach(box => {
+      box.addEventListener("change", updateAudit);
+    });
+
+    updateAudit();
+
+  })();
+  </script>
+</body>
+</html>
