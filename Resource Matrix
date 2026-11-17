@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Resource Matrix</title>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --primary-green: #10b981;
+            --primary-hover: #059669;
+            --accent-teal: #06b6d4;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-main); padding: 2rem 1rem; line-height: 1.5; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        header { text-align: center; margin-bottom: 3rem; }
+        header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        header h1 span { color: var(--primary-green); }
+
+        .filter-container { background-color: var(--card-bg); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color); display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+        .filter-group label { font-size: 0.85rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; display: block; margin-bottom: 0.5rem; }
+        .filter-group select { background-color: var(--bg-dark); color: var(--text-main); border: 1px solid var(--border-color); padding: 0.75rem; border-radius: 6px; width: 100%; cursor: pointer; }
+
+        .table-wrapper { background-color: var(--card-bg); border-radius: 12px; border: 1px solid var(--border-color); overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        th, td { padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border-color); }
+        th { color: var(--primary-green); font-size: 0.85rem; text-transform: uppercase; }
+        
+        .resource-name { font-weight: 600; display: block; }
+        .resource-platform { font-size: 0.85rem; color: var(--accent-teal); }
+        .badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.75rem; }
+        .btn-action { background-color: var(--primary-green); color: var(--bg-dark); text-decoration: none; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 600; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Elite Learning <span>Resource Matrix</span></h1>
+        <p>Vetted platforms that provide verifiable credentials and professional recognition.</p>
+    </header>
+
+    <div class="filter-container">
+        <!-- Filters remain the same logic -->
+        <div class="filter-group"><label>Industry</label><select id="filter-industry" onchange="filterMatrix()"><option value="all">All</option><option value="tech">Tech</option><option value="business">Business</option><option value="design">Creative & Design</option></select></div>
+        <div class="filter-group"><label>Output</label><select id="filter-output" onchange="filterMatrix()"><option value="all">All</option><option value="certification">Official Certificate</option><option value="portfolio">Project-Based</option></select></div>
+    </div>
+
+    <div class="table-wrapper">
+        <table id="matrix-table">
+            <thead><tr><th>Resource</th><th>Industry</th><th>Output</th><th>Action</th></tr></thead>
+            <tbody>
+                <tr data-industry="tech" data-output="certification">
+                    <td><span class="resource-name">Professional Certificates</span><span class="resource-platform">Google / Coursera</span></td>
+                    <td><span class="badge" style="background:rgba(6,182,212,0.1)">Tech</span></td>
+                    <td><span class="badge" style="background:rgba(16,185,129,0.1)">Official Certificate</span></td>
+                    <td><a href="https://www.coursera.org/google-certificates" target="_blank" class="btn-action">View</a></td>
+                </tr>
+                <tr data-industry="business" data-output="certification">
+                    <td><span class="resource-name">CFA Institute Investment Foundations</span><span class="resource-platform">CFA Institute</span></td>
+                    <td><span class="badge" style="background:rgba(6,182,212,0.1)">Business</span></td>
+                    <td><span class="badge" style="background:rgba(16,185,129,0.1)">Official Certificate</span></td>
+                    <td><a href="https://www.cfainstitute.org" target="_blank" class="btn-action">View</a></td>
+                </tr>
+                <tr data-industry="design" data-output="portfolio">
+                    <td><span class="resource-name">UX Design Professional Certificate</span><span class="resource-platform">Google / EdX</span></td>
+                    <td><span class="badge" style="background:rgba(6,182,212,0.1)">Creative & Design</span></td>
+                    <td><span class="badge" style="background:rgba(16,185,129,0.1)">Project-Based</span></td>
+                    <td><a href="https://www.edx.org" target="_blank" class="btn-action">View</a></td>
+                </tr>
+                <tr data-industry="tech" data-output="certification">
+                    <td><span class="resource-name">AWS Certified Cloud Practitioner</span><span class="resource-platform">Amazon Web Services</span></td>
+                    <td><span class="badge" style="background:rgba(6,182,212,0.1)">Tech</span></td>
+                    <td><span class="badge" style="background:rgba(16,185,129,0.1)">Official Certificate</span></td>
+                    <td><a href="https://aws.amazon.com/certification/" target="_blank" class="btn-action">View</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function filterMatrix() {
+        const industry = document.getElementById('filter-industry').value;
+        const output = document.getElementById('filter-output').value;
+        const rows = document.querySelectorAll('#matrix-table tbody tr');
+        rows.forEach(row => {
+            const matchInd = industry === 'all' || row.dataset.industry === industry;
+            const matchOut = output === 'all' || row.dataset.output === output;
+            row.style.display = (matchInd && matchOut) ? '' : 'none';
+        });
+    }
+</script>
+</body>
+</html>
