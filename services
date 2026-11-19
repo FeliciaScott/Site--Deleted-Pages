@@ -1,1387 +1,583 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta property="og:title" content="Lead With Speaking | Systems That Eliminate Chaos">
-<meta property="og:description" content="Build structured workflows, eliminate chaos, and increase income with proven systems.">
-<meta property="og:type" content="website">
-<meta property="og:image" content="https://images.unsplash.com/photo-1551288049-bebda4e38f71">
-
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Systems That Eliminate Chaos">
-<meta name="twitter:description" content="Structured workflows for clarity, discipline, and income growth.">
-
-<meta name="author" content="Lead With Speaking">
-
-<title>Products | Lead With Speaking</title>
-
-<meta name="description" content="Premium productivity systems, workflow tools, planners, journals, and leadership frameworks designed to eliminate chaos and increase execution.">
-
-<meta name="keywords" content="workflow systems, productivity tools, leadership systems, planners, journals, digital downloads">
-
+<title>PathKeeper | Stop Searching. Start Building.</title>
 
 <style>
+:root{
+  --cream:#F7F2E8;
+  --cream2:#EEE3D1;
+  --cream3:#E2D2B9;
 
-/* =========================
-   GLOBAL
-========================= */
+  --brown:#49352A;
+  --brown2:#674C3B;
+  --brown3:#8B6A50;
 
-body{
+  --blue:#294F6D;
+  --blue2:#3D6F91;
+  --blue3:#729BB5;
+  --blue-light:#DCEAF1;
 
-margin:0;
-
-font-family:
-Arial,
-Helvetica,
-sans-serif;
-
-background-color:#d9f0ff;
-
-color:#2d2424;
-
-line-height:1.6;
-
+  --text:#30271F;
+  --muted:#706356;
+  --white:#FFFFFF;
 }
-
 
 *{
-
-box-sizing:border-box;
-
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-
-/* =========================
-   NAVBAR
-========================= */
-
-.navbar{
-
-display:flex;
-
-justify-content:space-between;
-
-padding:20px 40px;
-
-background-color:#3b2f2f;
-
-color:white;
-
-align-items:center;
-
+html{
+  scroll-behavior:smooth;
 }
 
-
-.nav-links{
-
-display:flex;
-
-flex-wrap:wrap;
-
+body{
+  font-family:"Segoe UI",Arial,sans-serif;
+  background:var(--cream);
+  color:var(--text);
+  overflow-x:hidden;
+  line-height:1.7;
 }
 
-
-.nav-links a{
-
-margin:0 15px;
-
-color:white;
-
-text-decoration:none;
-
-font-weight:bold;
-
+header{
+  width:100%;
+  padding:20px 8%;
+  background:var(--brown);
+  border-bottom:2px solid var(--blue3);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:1000;
 }
 
-
-.nav-links a:hover{
-
-color:#d9f0ff;
-
+.logo{
+  font-size:1.5rem;
+  font-weight:800;
+  color:var(--cream);
+  text-decoration:none;
+  letter-spacing:1px;
 }
 
+.logo span{
+  color:#A9C9DC;
+}
 
-/* =========================
-   HERO
-========================= */
+section{
+  padding:60px 8%;
+}
+
+h1,h2,h3{
+  font-weight:800;
+}
+
+p{
+  color:var(--muted);
+}
+
+/* HERO */
 
 .hero{
+  padding:80px 8%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
 
-background:#3b2f2f;
+  background:
+    radial-gradient(circle at top,#729BB544,transparent 45%),
+    radial-gradient(circle at bottom,#8B6A5044,transparent 40%),
+    var(--blue);
 
-color:white;
-
-text-align:center;
-
-padding:45px 20px;
-
+  color:var(--cream);
+  position:relative;
 }
 
+.badge{
+  padding:8px 18px;
+  border:1px solid #D8B894;
+  border-radius:40px;
+  color:var(--cream);
+  margin-bottom:20px;
+  font-size:.9rem;
+  letter-spacing:1px;
+}
 
 .hero h1{
-
-margin:0 0 10px 0;
-
-font-size:32px;
-
+  font-size:3.8rem;
+  max-width:900px;
+  line-height:1.1;
+  margin-bottom:20px;
 }
 
+.highlight{
+  background:linear-gradient(90deg,#D8B894,#A9C9DC);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
 
 .hero p{
-
-margin:10px auto 20px auto;
-
-max-width:700px;
-
-font-size:15px;
-
+  max-width:760px;
+  font-size:1.2rem;
+  margin-bottom:30px;
+  color:#E8EDF0;
 }
 
+/* BUTTONS */
 
-.hero br{
-
-display:none;
-
+.button{
+  display:inline-block;
+  padding:16px 40px;
+  background:linear-gradient(90deg,var(--brown3),var(--blue3));
+  border-radius:60px;
+  color:white;
+  font-weight:bold;
+  text-decoration:none;
+  transition:.35s;
+  border:1px solid transparent;
 }
 
-
-/* =========================
-   SECTION
-========================= */
-
-.section{
-
-padding:60px 40px;
-
+.button:hover{
+  transform:translateY(-4px) scale(1.03);
+  box-shadow:0 20px 40px rgba(41,79,109,.3);
 }
 
-
-.section h2{
-
-font-size:28px;
-
-margin-bottom:20px;
-
+.button.service{
+  background:var(--cream);
+  color:var(--brown);
+  border:2px solid var(--cream);
 }
 
-
-/* =========================
-   DARK SECTION
-========================= */
-
-.dark-section{
-
-background:#3b2f2f;
-
-color:white;
-
+.button.service:hover{
+  background:var(--blue-light);
+  color:var(--blue);
+  border-color:var(--blue-light);
 }
 
-
-/* =========================
-   PRODUCT GRID
-========================= */
-
-.products{
-
-text-align:center;
-
+.hero-buttons{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:15px;
 }
 
+/* SCROLL */
 
-/* =========================
-   CARD
-========================= */
+.scroll{
+  margin-top:35px;
+  font-size:.85rem;
+  letter-spacing:2px;
+  color:#DCEAF1;
+}
+
+/* CARDS */
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:25px;
+}
 
 .card{
-
-background:white;
-
-border-radius:15px;
-
-padding:20px;
-
-margin:15px;
-
-width:280px;
-
-display:inline-block;
-
-vertical-align:top;
-
-text-align:left;
-
-box-shadow:
-0 8px 20px rgba(0,0,0,.08);
-
+  background:var(--white);
+  padding:30px;
+  border-radius:18px;
+  transition:.35s;
+  border:1px solid var(--cream3);
+  box-shadow:0 8px 25px rgba(73,53,42,.06);
 }
 
-
-.card img{
-
-width:100%;
-
-height:220px;
-
-object-fit:cover;
-
-border-radius:10px;
-
+.card:hover{
+  transform:translateY(-6px);
+  border-color:var(--blue3);
+  box-shadow:0 15px 30px rgba(41,79,109,.12);
 }
-
 
 .card h3{
-
-margin-bottom:10px;
-
+  margin:15px 0 10px;
+  color:var(--brown);
 }
 
-
-.card p{
-
-font-size:14px;
-
-line-height:1.5;
-
+.number{
+  font-size:2.5rem;
+  font-weight:900;
+  color:var(--blue2);
 }
 
+/* BIG QUOTE */
 
-/* =========================
-   BUTTON
-========================= */
-
-.btn{
-
-display:inline-block;
-
-padding:10px 20px;
-
-margin-top:10px;
-
-background-color:#3b2f2f;
-
-color:white;
-
-border-radius:50px;
-
-text-decoration:none;
-
-border:none;
-
-cursor:pointer;
-
-font-weight:bold;
-
+.statement{
+  background:var(--brown);
+  text-align:center;
+  border-radius:25px;
+  padding:50px 8%;
+  border:1px solid var(--brown3);
 }
 
-
-.btn:hover{
-
-background:#594747;
-
+.statement h2{
+  font-size:2.4rem;
+  max-width:950px;
+  margin:auto;
+  line-height:1.3;
+  color:var(--cream);
 }
 
-
-/* =========================
-   VALUE SECTION
-========================= */
-
-.value-section{
-
-background:#f7fbff;
-
-text-align:center;
-
+.statement span{
+  color:#A9C9DC;
 }
 
+/* COMPARISON */
 
-.value-intro{
-
-max-width:750px;
-
-margin:0 auto 40px auto;
-
-color:#555;
-
+.compare{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
 }
 
-
-.value-grid{
-
-display:grid;
-
-grid-template-columns:
-repeat(auto-fit,minmax(220px,1fr));
-
-gap:25px;
-
-max-width:1100px;
-
-margin:auto;
-
+.side{
+  padding:30px;
+  border-radius:20px;
 }
 
-
-.value-card{
-
-background:white;
-
-padding:30px;
-
-border-radius:15px;
-
-border-top:5px solid #3b2f2f;
-
-box-shadow:
-0 8px 20px rgba(0,0,0,.07);
-
-text-align:left;
-
+.old{
+  background:var(--cream2);
+  border:1px solid var(--cream3);
 }
 
-
-.value-number{
-
-font-size:14px;
-
-font-weight:bold;
-
-color:#8b6b55;
-
-letter-spacing:1px;
-
+.new{
+  background:var(--blue-light);
+  border:1px solid var(--blue3);
 }
 
-
-.value-card h3{
-
-margin:10px 0;
-
-color:#3b2f2f;
-
+.side h3{
+  margin-bottom:20px;
+  font-size:1.8rem;
+  color:var(--brown);
 }
 
-
-.value-card p{
-
-font-size:14px;
-
-color:#555;
-
+.side ul{
+  list-style:none;
 }
 
-
-/* =========================
-   SYSTEM MAP
-========================= */
-
-.system-map{
-
-max-width:1100px;
-
-margin:45px auto 0 auto;
-
-display:grid;
-
-grid-template-columns:
-repeat(auto-fit,minmax(180px,1fr));
-
-gap:15px;
-
+.side li{
+  margin:10px 0;
+  color:var(--text);
 }
 
+/* CTA */
 
-.system-step{
-
-padding:25px 15px;
-
-background:#4a3b3b;
-
-border-radius:12px;
-
-text-align:center;
-
-color:white;
-
+.cta{
+  text-align:center;
 }
 
-
-.system-step strong{
-
-display:block;
-
-font-size:20px;
-
-margin-bottom:8px;
-
-color:#d9f0ff;
-
+.cta h2{
+  font-size:2.8rem;
+  margin-bottom:20px;
+  color:var(--blue);
 }
 
-
-/* =========================
-   BUNDLE
-========================= */
-
-.bundle{
-
-background:
-linear-gradient(
-135deg,
-#3b2f2f,
-#594747
-);
-
-color:white;
-
-text-align:center;
-
-padding:65px 30px;
-
+.cta p{
+  max-width:700px;
+  margin:auto auto 30px;
 }
 
-
-.bundle h2{
-
-font-size:32px;
-
-margin-bottom:15px;
-
+.cta-buttons{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:15px;
 }
 
-
-.bundle p{
-
-max-width:750px;
-
-margin:0 auto 25px auto;
-
-}
-
-
-.bundle .btn{
-
-background:#d9f0ff;
-
-color:#3b2f2f;
-
-}
-
-
-.bundle .btn:hover{
-
-background:white;
-
-}
-
-
-/* =========================
-   FAQ
-========================= */
-
-.faq{
-
-max-width:900px;
-
-margin:auto;
-
-}
-
-
-.faq-item{
-
-background:white;
-
-padding:20px;
-
-margin-bottom:15px;
-
-border-radius:12px;
-
-border-left:5px solid #3b2f2f;
-
-}
-
-
-.faq-item strong{
-
-color:#3b2f2f;
-
-}
-
-
-/* =========================
-   FOOTER
-========================= */
+/* FOOTER */
 
 footer{
-
-background:#3b2f2f;
-
-color:white;
-
-text-align:center;
-
-padding:40px;
-
+  padding:30px;
+  text-align:center;
+  border-top:1px solid var(--brown3);
+  background:var(--brown);
+  color:var(--cream);
 }
 
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:700px){
-
-.navbar{
-
-flex-direction:column;
-
-gap:15px;
-
-padding:20px;
-
+footer p{
+  color:#E5D9CA;
 }
 
-.nav-links{
+/* RESPONSIVE */
 
-justify-content:center;
+@media(max-width:900px){
 
+  section{
+    padding:40px 6%;
+  }
+
+  .hero{
+    padding:60px 6%;
+  }
+
+  .hero h1{
+    font-size:2.5rem;
+  }
+
+  .compare{
+    grid-template-columns:1fr;
+  }
+
+  .statement h2{
+    font-size:1.8rem;
+  }
+
+  .cta h2{
+    font-size:2rem;
+  }
 }
 
-.nav-links a{
+@media(max-width:550px){
 
-margin:5px 8px;
+  .hero-buttons,
+  .cta-buttons{
+    flex-direction:column;
+    width:100%;
+  }
 
-font-size:13px;
+  .hero-buttons .button,
+  .cta-buttons .button{
+    width:100%;
+  }
 
-}
-
-.hero h1{
-
-font-size:25px;
-
-}
-
-.section{
-
-padding:45px 20px;
-
-}
-
-.card{
-
-width:90%;
-
-margin:15px auto;
-
-display:block;
+  header{
+    justify-content:center;
+  }
 
 }
-
-}
-
 </style>
-
 </head>
-
 
 <body>
 
+<header>
 
-<!-- =========================
-     NAVIGATION
-========================= -->
-
-<header class="navbar">
-
-<div>
-
-<strong>Lead With Speaking</strong>
-
-</div>
-
-
-<nav class="nav-links">
-
-<a href="#">Home</a>
-
-<a href="#">Products</a>
-
-<a href="#">About</a>
-
-<a href="#">Resources</a>
-
-<a href="#">Contact</a>
-
-<a href="#">
-Cart 🛒
-<span id="cart-count">0</span>
+<a href="https://sites.google.com/view/pathkeeper/home"
+   class="logo"
+   target="_blank"
+   rel="noopener noreferrer">
+   PATH<span>KEEPER</span>
 </a>
-
-</nav>
 
 </header>
 
-
-
-<!-- =========================
-     HERO
-========================= -->
+<!-- ORIGINAL HERO SECTION -->
 
 <section class="hero">
 
+<div class="badge">
+YOUR FUTURE DESERVES A STRATEGY
+</div>
+
 <h1>
-Eliminate Chaos. Build Systems That Pay You.
+Stop Collecting Information.
+<span class="highlight">Start Building Momentum.</span>
 </h1>
 
 <p>
-
-Most people are not disorganized because they are lazy —
-they lack systems.
-
-These tools are designed to help you think clearly,
-operate efficiently, and turn intentions into consistent action.
-
+Most people spend years searching for answers. PathKeeper helps you organize opportunities, develop valuable skills, and make intentional career decisions that compound over time.
 </p>
 
-<a href="#products" class="btn">
+<div class="hero-buttons">
 
-Explore Systems
-
+<a href="https://sites.google.com/view/pathkeeper/home"
+   class="button"
+   target="_blank"
+   rel="noopener noreferrer">
+   Enter PathKeeper
 </a>
 
+<!-- NEW SERVICES BUTTON -->
+
+<a href="https://sites.google.com/view/pathkeeper/single-services"
+   class="button service"
+   target="_blank"
+   rel="noopener noreferrer">
+   Explore Our Services
+</a>
+
+</div>
+
+<div class="scroll">
+SCROLL TO DISCOVER ↓
+</div>
+
 </section>
 
+<!-- ORIGINAL DISCOVER SECTION -->
 
+<section id="discover">
 
-<!-- =========================
-     PRODUCTS
-========================= -->
+<h2 style="text-align:center;font-size:2.4rem;margin-bottom:40px;color:#294F6D;">
+What If Every Decision Moved You Forward?
+</h2>
 
-<section class="section products" id="products">
+<div class="cards">
+
+<div class="card">
+
+<div class="number">01</div>
+
+<h3>Discover</h3>
+
+<p>
+Explore careers, certifications, learning resources, and opportunities that fit your goals.
+</p>
+
+</div>
+
+<div class="card">
+
+<div class="number">02</div>
+
+<h3>Organize</h3>
+
+<p>
+Keep everything in one place instead of bookmarking dozens of websites you'll never revisit.
+</p>
+
+</div>
+
+<div class="card">
+
+<div class="number">03</div>
+
+<h3>Improve</h3>
+
+<p>
+Develop practical skills that increase your value over months and years.
+</p>
+
+</div>
+
+<div class="card">
+
+<div class="number">04</div>
+
+<h3>Repeat</h3>
+
+<p>
+Continue building momentum so progress becomes part of your routine.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ORIGINAL BIG QUOTE SECTION -->
+
+<section>
+
+<div class="statement">
 
 <h2>
-Digital & Physical Systems
+Success isn't built by finding
+<span>one perfect opportunity.</span>
+It's built by making hundreds of better decisions.
 </h2>
 
-
-<div class="card">
-
-<img
-src="https://images.unsplash.com/photo-1551288049-bebda4e38f71"
-alt="Workflow analytics and planning system"
->
-
-<h3>
-Workflow Toolkit
-</h3>
-
-<p>
-
-A structured framework that helps you break down complex
-work into repeatable systems.
-
-Ideal for creators, freelancers, and leaders who feel overwhelmed.
-
-</p>
-
-<p>
-
-<strong>Includes:</strong>
-Templates, workflow maps, and execution guides.
-
-</p>
-
-<button onclick="addToCart()" class="btn">
-
-Add to Cart
-
-</button>
-
 </div>
-
-
-
-<div class="card">
-
-<img
-src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40"
-alt="Business planning and audit workspace"
->
-
-<h3>
-Audit System
-</h3>
-
-<p>
-
-Identify where time, money, and energy are being wasted.
-
-This system helps reveal hidden inefficiencies
-before they become expensive problems.
-
-</p>
-
-<p>
-
-<strong>Best for:</strong>
-Business owners and side hustlers.
-
-</p>
-
-<button onclick="addToCart()" class="btn">
-
-Add to Cart
-
-</button>
-
-</div>
-
-
-
-<div class="card">
-
-<img
-src="https://images.unsplash.com/photo-1517842645767-c639042777db"
-alt="Open physical journal with blank pages and pen"
->
-
-<h3>
-Printed Planner
-</h3>
-
-<p>
-
-A physical planning system designed to reduce mental clutter,
-organize priorities, and turn intentions into daily action.
-
-</p>
-
-<p>
-
-<strong>Use daily for:</strong>
-Focus, discipline, planning, and progress tracking.
-
-</p>
-
-<button onclick="addToCart()" class="btn">
-
-Add to Cart
-
-</button>
-
-</div>
-
-
-
-<div class="card">
-
-<img
-src="https://images.unsplash.com/photo-1492724441997-5dc865305da7"
-alt="Person working with focused attention"
->
-
-<h3>
-Focus Sprint System
-</h3>
-
-<p>
-
-A timed execution framework that helps you complete
-high-value tasks without constantly switching attention.
-
-</p>
-
-<p>
-
-<strong>Perfect for:</strong>
-People who struggle with procrastination and distraction.
-
-</p>
-
-<button onclick="addToCart()" class="btn">
-
-Add to Cart
-
-</button>
-
-</div>
-
 
 </section>
 
+<!-- ORIGINAL COMPARISON SECTION -->
 
+<section id="approach">
 
-<!-- =========================
-     WHY SYSTEMS MATTER
-========================= -->
-
-<section class="section dark-section">
-
-<h2 style="text-align:center;">
-
-Why Systems Matter
-
+<h2 style="text-align:center;font-size:2.4rem;margin-bottom:40px;color:#294F6D;">
+Choose Your Path
 </h2>
 
-<p style="
-max-width:700px;
-margin:auto;
-text-align:center;
-">
+<div class="compare">
 
-Without systems, you rely on motivation.
+<div class="side old">
 
-Motivation changes.
+<h3>Without PathKeeper</h3>
 
-Systems create repeatable behavior, reduce decision fatigue,
-and make it easier to identify what is actually producing results.
+<ul>
+<li>✕ Endless Google searches</li>
+<li>✕ Random career advice</li>
+<li>✕ Missed scholarships</li>
+<li>✕ Forgotten bookmarks</li>
+<li>✕ No long-term learning plan</li>
+<li>✕ Constantly starting over</li>
+</ul>
 
-</p>
+</div>
+
+<div class="side new">
+
+<h3>With PathKeeper</h3>
+
+<ul>
+<li>✓ Organized opportunities</li>
+<li>✓ Practical learning paths</li>
+<li>✓ Career planning resources</li>
+<li>✓ Skill development tools</li>
+<li>✓ Better financial decisions</li>
+<li>✓ Consistent long-term growth</li>
+</ul>
+
+</div>
+
+</div>
 
 </section>
 
+<!-- ORIGINAL FINAL CTA SECTION -->
 
-
-<!-- =========================
-     HIGH VALUE CONTENT
-========================= -->
-
-<section class="section value-section">
+<section class="cta">
 
 <h2>
-How to Turn a Planner Into a Performance System
+Don't Leave Your Future To Chance.
 </h2>
 
-<p class="value-intro">
-
-A planner is only as valuable as the decisions it helps you make.
-Use your physical and digital tools as part of a repeatable cycle
-for thinking, prioritizing, executing, and improving.
-
-</p>
-
-
-<div class="value-grid">
-
-
-<div class="value-card">
-
-<div class="value-number">
-01 / CAPTURE
-</div>
-
-<h3>
-Get It Out of Your Head
-</h3>
-
 <p>
-
-Write down responsibilities, ideas, problems, opportunities,
-appointments, and unfinished thoughts.
-
-The goal is to reduce mental clutter and create something
-you can actually organize.
-
+The difference between where you are today and where you'll be five years from now is largely determined by the decisions you make starting today.
 </p>
 
-</div>
-
-
-
-<div class="value-card">
-
-<div class="value-number">
-02 / PRIORITIZE
-</div>
-
-<h3>
-Separate Important From Urgent
-</h3>
-
-<p>
-
-Not everything deserves equal attention.
-
-Identify the activities that create meaningful progress
-and protect time for those activities before lower-value
-tasks consume your schedule.
-
-</p>
-
-</div>
-
-
-
-<div class="value-card">
-
-<div class="value-number">
-03 / EXECUTE
-</div>
-
-<h3>
-Convert Goals Into Actions
-</h3>
-
-<p>
-
-"Work on my business" is not an action.
-
-"Write the product description" is.
-
-Break large goals into specific actions that can be
-started, completed, and measured.
-
-</p>
-
-</div>
-
-
-
-<div class="value-card">
-
-<div class="value-number">
-04 / MEASURE
-</div>
-
-<h3>
-Track What Actually Happened
-</h3>
-
-<p>
-
-Record completed tasks, missed commitments, time spent,
-projects finished, revenue generated, or other meaningful
-indicators.
-
-Memory is not a measurement system.
-
-</p>
-
-</div>
-
-
-
-<div class="value-card">
-
-<div class="value-number">
-05 / REVIEW
-</div>
-
-<h3>
-Study Your Week
-</h3>
-
-<p>
-
-Ask what produced results, what consumed time without
-creating value, where you repeatedly got stuck, and what
-should change next week.
-
-</p>
-
-</div>
-
-
-
-<div class="value-card">
-
-<div class="value-number">
-06 / IMPROVE
-</div>
-
-<h3>
-Change the System
-</h3>
-
-<p>
-
-If the same problem keeps happening, don't simply
-try harder.
-
-Change the workflow, environment, schedule, trigger,
-or process that is producing the problem.
-
-</p>
-
-</div>
-
-
-</div>
-
-
-
-<!-- =========================
-     SYSTEM MAP
-========================= -->
-
-<div class="system-map">
-
-
-<div class="system-step">
-
-<strong>Capture</strong>
-
-Write it down.
-
-</div>
-
-
-<div class="system-step">
-
-<strong>Prioritize</strong>
-
-Choose what matters.
-
-</div>
-
-
-<div class="system-step">
-
-<strong>Plan</strong>
-
-Give it a place and time.
-
-</div>
-
-
-<div class="system-step">
-
-<strong>Execute</strong>
-
-Do the work.
-
-</div>
-
-
-<div class="system-step">
-
-<strong>Measure</strong>
-
-Record the result.
-
-</div>
-
-
-<div class="system-step">
-
-<strong>Improve</strong>
-
-Change the system.
-
-</div>
-
+<div class="cta-buttons">
+
+<a href="https://sites.google.com/view/pathkeeper/home"
+   class="button"
+   target="_blank"
+   rel="noopener noreferrer">
+   Start Building Your Future
+</a>
+
+<!-- ADDITIONAL SERVICES ACCESS -->
+
+<a href="https://sites.google.com/view/pathkeeper/single-services"
+   class="button service"
+   target="_blank"
+   rel="noopener noreferrer">
+   Explore PathKeeper Services
+</a>
 
 </div>
 
 </section>
-
-
-
-<!-- =========================
-     PRODUCT APPLICATION
-========================= -->
-
-<section class="section">
-
-<h2 style="text-align:center;">
-
-Which Tool Solves Which Problem?
-
-</h2>
-
-<p style="
-max-width:750px;
-margin:15px auto 35px auto;
-text-align:center;
-color:#555;
-">
-
-Choose the tool based on the problem you are trying to solve,
-not simply because the product looks appealing.
-
-</p>
-
-
-<div class="products">
-
-
-<div class="card">
-
-<h3>
-Too Many Ideas?
-</h3>
-
-<p>
-
-Use the journal or notebook to capture ideas before they
-compete for your attention.
-
-</p>
-
-<strong>
-Best fit: Clarity Journal
-</strong>
-
-</div>
-
-
-
-<div class="card">
-
-<h3>
-Too Much Work?
-</h3>
-
-<p>
-
-Use the planner to separate priorities from distractions
-and convert responsibilities into scheduled actions.
-
-</p>
-
-<strong>
-Best fit: Printed Planner
-</strong>
-
-</div>
-
-
-
-<div class="card">
-
-<h3>
-Business Feels Chaotic?
-</h3>
-
-<p>
-
-Use the audit system to examine where time, money,
-and energy are leaking from your operation.
-
-</p>
-
-<strong>
-Best fit: Audit System
-</strong>
-
-</div>
-
-
-
-<div class="card">
-
-<h3>
-Can't Focus?
-</h3>
-
-<p>
-
-Use the Focus Sprint System to create a defined period
-for concentrated execution.
-
-</p>
-
-<strong>
-Best fit: Focus Sprint System
-</strong>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-
-<!-- =========================
-     BUNDLE
-========================= -->
-
-<section class="bundle">
-
-<h2>
-Complete System Bundle
-</h2>
-
-<p>
-
-Instead of collecting disconnected productivity products,
-build a complete operating system for planning, focus,
-execution, and review.
-
-</p>
-
-<p>
-
-<strong>
-Capture → Prioritize → Plan → Execute → Measure → Improve
-</strong>
-
-</p>
-
-<button onclick="addToCart()" class="btn">
-
-Buy Full Bundle
-
-</button>
-
-</section>
-
-
-
-<!-- =========================
-     FAQ
-========================= -->
-
-<section class="section">
-
-<div class="faq">
-
-<h2>
-FAQs
-</h2>
-
-
-<div class="faq-item">
-
-<strong>
-Are these digital or physical?
-</strong>
-
-<p>
-
-The collection can include both digital systems and physical
-planning tools. Product descriptions identify what each item contains.
-
-</p>
-
-</div>
-
-
-
-<div class="faq-item">
-
-<strong>
-Do I need experience to use them?
-</strong>
-
-<p>
-
-No. The systems are designed to help you move from
-identifying a problem to creating a repeatable process.
-
-</p>
-
-</div>
-
-
-
-<div class="faq-item">
-
-<strong>
-Why use physical planning tools?
-</strong>
-
-<p>
-
-Writing can make information easier to externalize, organize,
-and review. A physical tool also creates a visible place for
-your plans and decisions.
-
-</p>
-
-</div>
-
-
-
-<div class="faq-item">
-
-<strong>
-What makes a system different from a checklist?
-</strong>
-
-<p>
-
-A checklist tells you what to do.
-
-A system explains how activities connect, when they happen,
-how results are measured, and what should change when the
-process does not work.
-
-</p>
-
-</div>
-
-
-
-<div class="faq-item">
-
-<strong>
-Which product should I start with?
-</strong>
-
-<p>
-
-Start with the tool that addresses your biggest current
-constraint. If your problem is scattered thinking, start
-with the journal. If execution is the problem, start with
-the planner or Focus Sprint System. If your business is
-inefficient, start with the Audit System.
-
-</p>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-
-<!-- =========================
-     FOOTER
-========================= -->
 
 <footer>
 
 <p>
-© 2026 Lead With Speaking
-</p>
-
-<p>
-Think Clearly • Build Systems • Execute Better
+© 2026 PathKeeper • Designed to Help You Keep Moving Forward
 </p>
 
 </footer>
 
-
-
-<!-- =========================
-     SIMPLE CART JAVASCRIPT
-========================= -->
-
-<script>
-
-let cart = 0;
-
-function addToCart(){
-
-cart++;
-
-document.getElementById("cart-count").innerText = cart;
-
-}
-
-</script>
-
-
 </body>
-
 </html>
