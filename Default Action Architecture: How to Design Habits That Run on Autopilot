@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Default Action Architecture | Personal Productivity Engine</title>
+    <!-- Google Fonts: Space Grotesk & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* COLOR PALETTE & DESIGN SYSTEM */
+        :root {
+            --bg-plum: #2B1B3D;
+            --plum-light: #3D2854;
+            --plum-border: #523870;
+            --electric-rose: #FF5E7E;
+            --rose-hover: #E04B69;
+            --rose-light: rgba(255, 94, 126, 0.15);
+            --warm-amber: #FFB03A;
+            --amber-light: rgba(255, 176, 58, 0.15);
+            --ice-mint: #E8F8F5;
+            --mint-accent: #2DD4BF;
+            --dark-charcoal: #18121E;
+            --card-bg: #231633;
+            --text-light: #F8FAFC;
+            --text-dim: #A79BB0;
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 24px;
+            --shadow-glow: 0 0 25px rgba(255, 94, 126, 0.25);
+            --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--dark-charcoal);
+            color: var(--text-light);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* TYPOGRAPHY */
+        h1, h2, h3, h4, .font-display {
+            font-family: var(--font-display);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        /* HEADER & NAVIGATION */
+        header {
+            background-color: var(--bg-plum);
+            border-bottom: 2px solid var(--plum-border);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-light);
+            text-decoration: none;
+            font-family: var(--font-display);
+        }
+
+        .brand-badge {
+            background: linear-gradient(135deg, var(--electric-rose), var(--warm-amber));
+            color: var(--dark-charcoal);
+            padding: 0.25rem 0.6rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.8rem;
+            font-weight: 800;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 0.5rem;
+            background-color: var(--dark-charcoal);
+            padding: 0.35rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--plum-border);
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .nav-btn:hover {
+            color: var(--text-light);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-btn.active {
+            background-color: var(--electric-rose);
+            color: var(--dark-charcoal);
+            font-weight: 700;
+        }
+
+        /* MAIN APP DASHBOARD - SPLIT VIEW LAYOUT */
+        .app-container {
+            max-width: 1600px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 2rem;
+            flex: 1;
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 2rem;
+        }
+
+        /* LEFT SIDEBAR CONTROLLER */
+        .sidebar-panel {
+            background-color: var(--bg-plum);
+            border: 1px solid var(--plum-border);
+            border-radius: var(--radius-lg);
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            height: fit-content;
+        }
+
+        .panel-title {
+            font-size: 1.1rem;
+            color: var(--warm-amber);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stat-card-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .metric-box {
+            background-color: var(--card-bg);
+            border: 1px solid var(--plum-border);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: var(--electric-rose);
+        }
+
+        .metric-val {
+            font-size: 2.2rem;
+            font-family: var(--font-display);
+            font-weight: 800;
+            color: var(--text-light);
+            line-height: 1.1;
+        }
+
+        .metric-label {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-top: 0.3rem;
+        }
+
+        .quick-action-btn {
+            background-color: var(--electric-rose);
+            color: var(--dark-charcoal);
+            border: none;
+            padding: 0.9rem;
+            border-radius: var(--radius-md);
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .quick-action-btn:hover {
+            background-color: var(--rose-hover);
+            transform: translateY(-2px);
+        }
+
+        /* RIGHT CONTENT DISPLAY PANELS */
+        .content-area {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .view-panel {
+            display: none;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .view-panel.active {
+            display: flex;
+        }
+
+        /* MODULE 1: SIMULATOR CANVAS */
+        .canvas-card {
+            background-color: var(--bg-plum);
+            border: 1px solid var(--plum-border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+        }
+
+        .canvas-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
+
+        .sim-controls-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--plum-border);
+            margin-bottom: 2rem;
+        }
+
+        .range-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .range-label-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            accent-color: var(--electric-rose);
+            cursor: pointer;
+            height: 6px;
+            border-radius: 3px;
+        }
+
+        /* VISUAL PATHWAY CANVAS */
+        .pathway-display {
+            background-color: var(--dark-charcoal);
+            border: 2px dashed var(--plum-border);
+            border-radius: var(--radius-md);
+            padding: 2.5rem 1.5rem;
+            position: relative;
+            min-height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+
+        .path-node {
+            background-color: var(--bg-plum);
+            border: 2px solid var(--plum-border);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            width: 220px;
+            text-align: center;
+            z-index: 2;
+            transition: var(--transition);
+        }
+
+        .path-node.start { border-color: var(--warm-amber); }
+        .path-node.target { border-color: var(--mint-accent); }
+
+        .node-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .node-desc {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+
+        .flow-line {
+            flex: 1;
+            height: 8px;
+            background-color: var(--plum-border);
+            margin: 0 1rem;
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .flow-particle {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 40%;
+            background: linear-gradient(90deg, transparent, var(--electric-rose), transparent);
+            border-radius: 4px;
+            animation: flowAnim 2s infinite linear;
+        }
+
+        @keyframes flowAnim {
+            0% { left: -40%; }
+            100% { left: 100%; }
+        }
+
+        .outcome-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+
+        /* MODULE 2: PIPELINE BUILDER */
+        .builder-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .rule-form-card {
+            background-color: var(--bg-plum);
+            border: 1px solid var(--plum-border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-dim);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background-color: var(--card-bg);
+            border: 1px solid var(--plum-border);
+            border-radius: var(--radius-sm);
+            color: var(--text-light);
+            font-family: inherit;
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--electric-rose);
+            box-shadow: 0 0 0 2px var(--rose-light);
+        }
+
+        .pipeline-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .pipeline-item {
+            background-color: var(--bg-plum);
+            border: 1px solid var(--plum-border);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: var(--transition);
+        }
+
+        .pipeline-item:hover {
+            border-color: var(--electric-rose);
+            transform: translateX(4px);
+        }
+
+        .rule-block {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .rule-pill {
+            padding: 0.3rem 0.75rem;
+            border-radius: 6px;
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .pill-trigger { background-color: var(--amber-light); color: var(--warm-amber); }
+        .pill-action { background-color: var(--rose-light); color: var(--electric-rose); }
+
+        .delete-btn {
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            cursor: pointer;
+            padding: 0.4rem;
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+
+        .delete-btn:hover { color: var(--electric-rose); }
+
+        /* MODULE 3: EVALUATOR COMPARISON */
+        .eval-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .eval-card {
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            border: 1px solid var(--plum-border);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .eval-choice-heavy {
+            background-color: rgba(24, 18, 30, 0.8);
+            border-top: 4px solid var(--warm-amber);
+        }
+
+        .eval-default-system {
+            background-color: var(--bg-plum);
+            border-top: 4px solid var(--electric-rose);
+        }
+
+        .eval-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .eval-header h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .eval-metric-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .eval-metric-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px dashed var(--plum-border);
+            padding-bottom: 0.75rem;
+        }
+
+        .eval-score-tag {
+            font-family: var(--font-display);
+            font-weight: 800;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        /* MODULE 4: AUDIT LOG */
+        .audit-card {
+            background-color: var(--bg-plum);
+            border: 1px solid var(--plum-border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+        }
+
+        .audit-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .audit-item {
+            background-color: var(--card-bg);
+            border: 1px solid var(--plum-border);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 1.25rem;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .audit-item.converted {
+            border-color: var(--mint-accent);
+            opacity: 0.85;
+        }
+
+        .audit-checkbox {
+            width: 22px;
+            height: 22px;
+            accent-color: var(--electric-rose);
+            cursor: pointer;
+        }
+
+        .audit-details h4 {
+            font-size: 1.05rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .audit-details p {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        .friction-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.3rem 0.75rem;
+            border-radius: 50px;
+            text-transform: uppercase;
+        }
+
+        .friction-high { background-color: rgba(255, 94, 126, 0.2); color: var(--electric-rose); }
+        .friction-low { background-color: rgba(45, 212, 191, 0.2); color: var(--mint-accent); }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--bg-plum);
+            border-top: 1px solid var(--plum-border);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-top: auto;
+        }
+
+        /* RESPONSIVE LAYOUT */
+        @media (max-width: 1100px) {
+            .app-container {
+                grid-template-columns: 1fr;
+            }
+
+            .builder-grid, .eval-grid, .sim-controls-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem;
+            }
+
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-tabs {
+                width: 100%;
+                overflow-x: auto;
+            }
+
+            .pathway-display {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .flow-line {
+                width: 100%;
+                height: 12px;
+                margin: 0;
+            }
+
+            .path-node {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- APPLICATION HEADER -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="brand-logo">
+                <span class="brand-badge">DAA</span>
+                <span>Default Action Architecture</span>
+            </a>
+            <nav class="nav-tabs">
+                <button class="nav-btn active" onclick="switchTab('simulator', this)">Friction Simulator</button>
+                <button class="nav-btn" onclick="switchTab('pipelines', this)">Rule Pipelines</button>
+                <button class="nav-btn" onclick="switchTab('evaluator', this)">Blueprint Evaluator</button>
+                <button class="nav-btn" onclick="switchTab('audit', this)">Routine Audit</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN INTERACTIVE WORKSPACE (SPLIT VIEW) -->
+    <main class="app-container">
+
+        <!-- LEFT SIDEBAR: LIVE SYSTEM METRICS -->
+        <aside class="sidebar-panel">
+            <div class="panel-title">
+                <span>⚡</span> Architecture Metrics
+            </div>
+
+            <div class="stat-card-stack">
+                <div class="metric-box">
+                    <div class="metric-val" id="frictionScoreDisplay">65%</div>
+                    <div class="metric-label">System Friction Index</div>
+                </div>
+
+                <div class="metric-box" style="--electric-rose: var(--warm-amber);">
+                    <div class="metric-val" id="activePipelinesCount">3 Active</div>
+                    <div class="metric-label">If-Then Default Rules</div>
+                </div>
+
+                <div class="metric-box" style="--electric-rose: var(--mint-accent);">
+                    <div class="metric-val" id="cognitiveSavedDisplay">1.8 hrs</div>
+                    <div class="metric-label">Daily Cognitive Fatigue Saved</div>
+                </div>
+            </div>
+
+            <button class="quick-action-btn" onclick="triggerQuickAction()">
+                <span>+</span> Quick Default Convert
+            </button>
+        </aside>
+
+        <!-- RIGHT PANEL CONTENT AREA -->
+        <section class="content-area">
+
+            <!-- MODULE 1: FRICTION & DEFAULT SIMULATOR -->
+            <div id="simulator" class="view-panel active">
+                <div class="canvas-card">
+                    <div class="canvas-header">
+                        <div>
+                            <h2>Friction & Behavioral Path Simulator</h2>
+                            <p style="color: var(--text-dim); font-size: 0.95rem;">
+                                Model how environmental cues and physical resistance alter your default execution speed.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- SLIDER CONTROLS -->
+                    <div class="sim-controls-grid">
+                        <div class="range-group">
+                            <div class="range-label-row">
+                                <span>Environmental Resistance (Friction)</span>
+                                <span style="color: var(--electric-rose);" id="frictionValText">High (7/10)</span>
+                            </div>
+                            <input type="range" id="frictionSlider" min="1" max="10" value="7" oninput="runSimulation()">
+                            <p style="font-size: 0.75rem; color: var(--text-dim);">Steps required to start the key task (e.g., opening tab, finding password, messy desk).</p>
+                        </div>
+
+                        <div class="range-group">
+                            <div class="range-label-row">
+                                <span>Trigger Prompt Clarity</span>
+                                <span style="color: var(--warm-amber);" id="triggerValText">Moderate (5/10)</span>
+                            </div>
+                            <input type="range" id="triggerSlider" min="1" max="10" value="5" oninput="runSimulation()">
+                            <p style="font-size: 0.75rem; color: var(--text-dim);">How unambiguous and immediate the starting cue is in your routine.</p>
+                        </div>
+                    </div>
+
+                    <!-- VISUAL PATHWAY CANVAS -->
+                    <div class="pathway-display">
+                        <div class="path-node start">
+                            <div class="node-title">Trigger Event</div>
+                            <div class="node-desc" id="triggerNodeDesc">Ambiguous Cue</div>
+                        </div>
+
+                        <div class="flow-line">
+                            <div class="flow-particle" id="flowParticle"></div>
+                        </div>
+
+                        <div class="path-node target">
+                            <div class="node-title">Default State</div>
+                            <div class="node-desc" id="targetNodeDesc">Evaluating...</div>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 1.5rem;">
+                        <span id="simOutcomeBadge" class="outcome-badge" style="background-color: var(--rose-light); color: var(--electric-rose);">
+                            Current Default: High Procrastination & Hesitation
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODULE 2: PIPELINE BUILDER -->
+            <div id="pipelines" class="view-panel">
+                <div class="builder-grid">
+                    <!-- BUILDER FORM -->
+                    <div class="rule-form-card">
+                        <h3 style="margin-bottom: 1.5rem;">Construct Default Rule</h3>
+                        <form onsubmit="addPipelineRule(event)">
+                            <div class="form-group">
+                                <label for="triggerInput">IF (Automatic Cue / Time / Event)</label>
+                                <input type="text" id="triggerInput" class="form-control" placeholder="e.g. 8:00 AM alarm rings" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="actionInput">THEN (Frictionless Default Action)</label>
+                                <input type="text" id="actionInput" class="form-control" placeholder="e.g. Open IDE & launch 25-min sprint" required>
+                            </div>
+
+                            <button type="submit" class="quick-action-btn" style="width: 100%; margin-top: 1rem;">
+                                Deploy Rule Pipeline
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- PIPELINE LIST -->
+                    <div>
+                        <h3 style="margin-bottom: 1rem;">Active Default Pipelines</h3>
+                        <div class="pipeline-stack" id="pipelineStack">
+                            <!-- Populated dynamically via JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODULE 3: EVALUATOR COMPARISON -->
+            <div id="evaluator" class="view-panel">
+                <div class="eval-grid">
+                    <!-- CHOICE HEAVY SYSTEM -->
+                    <div class="eval-card eval-choice-heavy">
+                        <div>
+                            <div class="eval-header">
+                                <span style="font-size:0.8rem; color:var(--warm-amber); font-weight:700; text-transform:uppercase;">Traditional Approach</span>
+                                <h3>Choice-Heavy Systems</h3>
+                                <p style="font-size:0.85rem; color:var(--text-dim);">Relies strictly on willpower, continuous decision-making, and high cognitive overhead.</p>
+                            </div>
+
+                            <ul class="eval-metric-list">
+                                <li class="eval-metric-item">
+                                    <span>Decision Fatigue</span>
+                                    <span class="eval-score-tag" style="background-color: var(--rose-light); color: var(--electric-rose);">Critical High</span>
+                                </li>
+                                <li class="eval-metric-item">
+                                    <span>Execution Consistency</span>
+                                    <span class="eval-score-tag" style="background-color: var(--amber-light); color: var(--warm-amber);">Unstable (30%)</span>
+                                </li>
+                                <li class="eval-metric-item">
+                                    <span>Start Resistance</span>
+                                    <span class="eval-score-tag" style="background-color: var(--rose-light); color: var(--electric-rose);">45+ Mins Delayed</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <p style="font-size: 0.8rem; color: var(--text-dim); border-top: 1px solid var(--plum-border); padding-top: 1rem;">
+                            ⚠️ Every action requires active negotiation, leading to career burnout and pivot cycles.
+                        </p>
+                    </div>
+
+                    <!-- DEFAULT ACTION SYSTEM -->
+                    <div class="eval-card eval-default-system">
+                        <div>
+                            <div class="eval-header">
+                                <span style="font-size:0.8rem; color:var(--electric-rose); font-weight:700; text-transform:uppercase;">Architected Approach</span>
+                                <h3>Default Action Systems</h3>
+                                <p style="font-size:0.85rem; color:var(--text-dim);">Pre-designs pathways so execution is the path of least physical and mental resistance.</p>
+                            </div>
+
+                            <ul class="eval-metric-list">
+                                <li class="eval-metric-item">
+                                    <span>Decision Fatigue</span>
+                                    <span class="eval-score-tag" style="background-color: rgba(45, 212, 191, 0.2); color: var(--mint-accent);">Near Zero</span>
+                                </li>
+                                <li class="eval-metric-item">
+                                    <span>Execution Consistency</span>
+                                    <span class="eval-score-tag" style="background-color: rgba(45, 212, 191, 0.2); color: var(--mint-accent);">High (90%+)</span>
+                                </li>
+                                <li class="eval-metric-item">
+                                    <span>Start Resistance</span>
+                                    <span class="eval-score-tag" style="background-color: rgba(45, 212, 191, 0.2); color: var(--mint-accent);">&lt; 2 Minutes</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <p style="font-size: 0.8rem; color: var(--text-dim); border-top: 1px solid var(--plum-border); padding-top: 1rem;">
+                            ✨ Removes willpower from the equation. High-yield actions execute on autopilot.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODULE 4: AUDIT LOG -->
+            <div id="audit" class="view-panel">
+                <div class="audit-card">
+                    <h2>Routine Friction Audit</h2>
+                    <p style="color: var(--text-dim); font-size: 0.9rem; margin-top: 0.25rem;">
+                        Identify high-friction career/study bottlenecks and convert them into automated defaults.
+                    </p>
+
+                    <div class="audit-list" id="auditList">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        Standardized Framework for Default Action Architecture — Designed for High-Performance Execution
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
+    <script>
+        // APP STATE MANAGEMENT
+        let pipelines = [
+            { id: 1, trigger: "8:00 AM Desk Sit", action: "Launch deep focus sprint immediately" },
+            { id: 2, trigger: "Browser Open", action: "Default tab opens primary study repository" },
+            { id: 3, trigger: "5:00 PM Shutdown", action: "Auto-clear desktop & queue tomorrow's 1st task" }
+        ];
+
+        let auditItems = [
+            { id: 1, title: "Career Skill Practice", desc: "Currently requires finding tutorials and setting up environment.", highFriction: true, converted: false },
+            { id: 2, title: "Educational Reading", desc: "Book placed on nightstand with bookmark pre-set.", highFriction: false, converted: true },
+            { id: 3, title: "Portfolio Development", desc: "Multiple login barriers and scattered project files.", highFriction: true, converted: false }
+        ];
+
+        // 1. TAB SWITCHER LOGIC
+        function switchTab(tabId, btn) {
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.view-panel').forEach(p => p.classList.remove('active'));
+
+            btn.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        // 2. SIMULATOR CALCULATIONS & ANIMATION
+        function runSimulation() {
+            const friction = parseInt(document.getElementById('frictionSlider').value);
+            const trigger = parseInt(document.getElementById('triggerSlider').value);
+
+            // Display text updates
+            document.getElementById('frictionValText').innerText = friction > 6 ? `High (${friction}/10)` : `Low (${friction}/10)`;
+            document.getElementById('triggerValText').innerText = trigger > 6 ? `Clear (${trigger}/10)` : `Vague (${trigger}/10)`;
+
+            // Calculate overall system friction score
+            const systemFrictionScore = Math.round(((friction * 0.7) + ((11 - trigger) * 0.3)) * 10);
+            document.getElementById('frictionScoreDisplay').innerText = `${systemFrictionScore}%`;
+
+            // Canvas node descriptions & visual flow speed
+            const particle = document.getElementById('flowParticle');
+            const targetNodeDesc = document.getElementById('targetNodeDesc');
+            const triggerNodeDesc = document.getElementById('triggerNodeDesc');
+            const outcomeBadge = document.getElementById('simOutcomeBadge');
+
+            triggerNodeDesc.innerText = trigger > 5 ? "Unambiguous Anchor" : "Ambiguous Prompt";
+
+            // Visual speed manipulation
+            const animDuration = (friction * 0.4) + 0.5;
+            particle.style.animationDuration = `${animDuration}s`;
+
+            if (systemFrictionScore > 60) {
+                targetNodeDesc.innerText = "Hesitation / Procrastination";
+                outcomeBadge.style.backgroundColor = "var(--rose-light)";
+                outcomeBadge.style.color = "var(--electric-rose)";
+                outcomeBadge.innerText = "Current Default: Passive Resistance & Friction Block";
+            } else if (systemFrictionScore > 35) {
+                targetNodeDesc.innerText = "Delayed Execution";
+                outcomeBadge.style.backgroundColor = "var(--amber-light)";
+                outcomeBadge.style.color = "var(--warm-amber)";
+                outcomeBadge.innerText = "Current Default: Moderate Willpower Required";
+            } else {
+                targetNodeDesc.innerText = "Immediate Action";
+                outcomeBadge.style.backgroundColor = "rgba(45, 212, 191, 0.2)";
+                outcomeBadge.style.color = "var(--mint-accent)";
+                outcomeBadge.innerText = "Current Default: Automatic Frictionless Execution";
+            }
+        }
+
+        // 3. PIPELINE BUILDER LOGIC
+        function renderPipelines() {
+            const container = document.getElementById('pipelineStack');
+            container.innerHTML = '';
+
+            pipelines.forEach(p => {
+                const item = document.createElement('div');
+                item.className = 'pipeline-item';
+                item.innerHTML = `
+                    <div class="rule-block">
+                        <span class="rule-pill pill-trigger">IF: ${escapeHtml(p.trigger)}</span>
+                        <span style="color: var(--text-dim); font-weight:700;">➔</span>
+                        <span class="rule-pill pill-action">THEN: ${escapeHtml(p.action)}</span>
+                    </div>
+                    <button class="delete-btn" onclick="deletePipeline(${p.id})">✕</button>
+                `;
+                container.appendChild(item);
+            });
+
+            document.getElementById('activePipelinesCount').innerText = `${pipelines.length} Active`;
+        }
+
+        function addPipelineRule(e) {
+            e.preventDefault();
+            const trigger = document.getElementById('triggerInput').value;
+            const action = document.getElementById('actionInput').value;
+
+            if (trigger && action) {
+                pipelines.push({
+                    id: Date.now(),
+                    trigger: trigger,
+                    action: action
+                });
+
+                document.getElementById('triggerInput').value = '';
+                document.getElementById('actionInput').value = '';
+                renderPipelines();
+            }
+        }
+
+        function deletePipeline(id) {
+            pipelines = pipelines.filter(p => p.id !== id);
+            renderPipelines();
+        }
+
+        // 4. ROUTINE AUDIT LOGIC
+        function renderAudit() {
+            const container = document.getElementById('auditList');
+            container.innerHTML = '';
+
+            auditItems.forEach(item => {
+                const el = document.createElement('div');
+                el.className = `audit-item ${item.converted ? 'converted' : ''}`;
+                el.innerHTML = `
+                    <input type="checkbox" class="audit-checkbox" ${item.converted ? 'checked' : ''} onchange="toggleAudit(${item.id})">
+                    <div class="audit-details">
+                        <h4>${escapeHtml(item.title)}</h4>
+                        <p>${escapeHtml(item.desc)}</p>
+                    </div>
+                    <div>
+                        <span class="friction-badge ${item.converted ? 'friction-low' : 'friction-high'}">
+                            ${item.converted ? 'Friction Removed' : 'High Friction'}
+                        </span>
+                    </div>
+                `;
+                container.appendChild(el);
+            });
+
+            // Update stats
+            const convertedCount = auditItems.filter(i => i.converted).length;
+            const savedHours = (convertedCount * 0.9).toFixed(1);
+            document.getElementById('cognitiveSavedDisplay').innerText = `${savedHours} hrs`;
+        }
+
+        function toggleAudit(id) {
+            const item = auditItems.find(i => i.id === id);
+            if (item) {
+                item.converted = !item.converted;
+                renderAudit();
+            }
+        }
+
+        function triggerQuickAction() {
+            switchTab('pipelines', document.querySelectorAll('.nav-btn')[1]);
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+
+        // INITIALIZATION ON LOAD
+        window.addEventListener('DOMContentLoaded', () => {
+            runSimulation();
+            renderPipelines();
+            renderAudit();
+        });
+    </script>
+</body>
+</html>
