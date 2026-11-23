@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High-Velocity Focus Dashboard</title>
+    <style>
+        :root {
+            --bg-main: #06080c;
+            --bg-surface: #0f1319;
+            --bg-card: #161c24;
+            --accent-neon: #22c55e;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border-ui: #222f3e;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', system-ui, sans-serif; }
+        body { background-color: var(--bg-main); color: var(--text-primary); padding: 2rem 1.5rem; line-height: 1.6; }
+        .dashboard-container { max-width: 1200px; margin: 0 auto; }
+
+        header { border-bottom: 1px solid var(--border-ui); padding-bottom: 1.5rem; margin-bottom: 2rem; }
+        h1 { font-size: 2rem; font-weight: 800; }
+        h1 span { color: var(--accent-neon); }
+
+        .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: stretch; }
+        .panel { background-color: var(--bg-surface); border: 1px solid var(--border-ui); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
+        .panel-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; color: var(--accent-neon); border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.5rem; }
+
+        .edu-content { font-size: 0.9rem; color: var(--text-secondary); flex-grow: 1; }
+        .edu-content h4 { color: var(--accent-neon); margin-top: 1.2rem; margin-bottom: 0.4rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .edu-content h4:first-child { margin-top: 0; }
+        
+        .goal-item { padding: 0.75rem 0; border-bottom: 1px solid var(--border-ui); font-size: 0.9rem; }
+        .goal-item:last-child { border-bottom: none; }
+        .goal-item strong { color: var(--accent-neon); display: block; margin-bottom: 2px; }
+        .btn-action { background: var(--accent-neon); color: #000; border: none; padding: 0.75rem; width: 100%; border-radius: 6px; cursor: pointer; font-weight: 700; margin-top: 10px; }
+        input { background: var(--bg-card); border: 1px solid var(--border-ui); padding: 0.75rem; color: white; border-radius: 6px; width: 100%; margin-bottom: 0.5rem; }
+    </style>
+</head>
+<body>
+
+<div class="dashboard-container">
+    <div class="dashboard-grid">
+        <main style="display: flex; flex-direction: column; gap: 1.5rem;">
+            <!-- ORIGINAL PILLARS -->
+            <div class="panel" style="margin-bottom: 0;">
+                <div class="panel-title">Cognitive Performance Architecture</div>
+                <div class="edu-content">
+                    <h4>Deep Work Protocol</h4>
+                    <p>Allocate 90-minute "Deep Blocks" for high-value synthesis. Context switching is the primary tax on your intellectual capital; defend your time like your revenue depends on it.</p>
+                    
+                    <h4>Antifragile Decision Making</h4>
+                    <p>Build systems that benefit from volatility. Don't just avoid failure; stress-test your processes so that errors become information that improves the system.</p>
+
+                    <h4>Asynchronous Leverage</h4>
+                    <p>Decouple your output from your presence. If a conversation or task doesn't require real-time collaboration, move it to an asynchronous format to protect your peak productive hours.</p>
+
+                    <h4>Cognitive Offloading</h4>
+                    <p>Use external ledgers for tracking; save your biological RAM for complex logic. If it’s not in the system, it doesn’t exist.</p>
+                </div>
+            </div>
+
+            <!-- RESILIENCE & REACH -->
+            <div class="panel" style="margin-bottom: 0;">
+                <div class="panel-title">Operational Resilience & Reach</div>
+                <div class="edu-content">
+                    <h4>Technical Debt Management</h4>
+                    <p>If you implement a "quick fix" twice, it is no longer a fix—it is debt. Budget 20% of your weekly cycle to refactor and harden your existing infrastructure to prevent catastrophic failure later.</p>
+
+                    <h4>Asymmetric Networking</h4>
+                    <p>Focus on high-leverage relationships rather than volume. One connection with someone who is 10 years ahead of you is worth more than 100 peers. Aim for "value-add" outreach—provide a solution before asking for a connection.</p>
+                </div>
+            </div>
+
+            <!-- KNOWLEDGE COMPOUNDING -->
+            <div class="panel" style="margin-bottom: 0;">
+                <div class="panel-title">Knowledge Compounding</div>
+                <div class="edu-content">
+                    <h4>The Feedback Loop</h4>
+                    <p>Every week, conduct a "Post-Mortem" on your Micro-Sprints. Record why an objective failed or succeeded to refine your estimation logic for the next cycle.</p>
+                    <h4>Input Filtering</h4>
+                    <p>Aggressively curate your information diet. Prioritize high-signal, long-form content that survives the "Lindy Effect"—the longer an idea has survived, the longer it is likely to remain relevant.</p>
+                </div>
+            </div>
+
+            <!-- VELOCITY TARGET VECTORS -->
+            <div class="panel" style="margin-bottom: 0;">
+                <div class="panel-title">Velocity Target Vectors</div>
+                <div>
+                    <input type="text" id="target-input" placeholder="Define strategic vector parameter...">
+                    <button class="btn-action" onclick="addTarget()">Lock Target Vector</button>
+                </div>
+                <div id="target-list" style="margin-top: 1rem; flex-grow: 1;">
+                    <div class="goal-item"><strong>Vector Alpha:</strong> Complete asynchronous pipeline migration.</div>
+                    <div class="goal-item"><strong>Vector Beta:</strong> Eliminate top 3 systemic workflow bottlenecks.</div>
+                    <div class="goal-item"><strong>Vector Gamma:</strong> Deploy automated continuous integration safety checks.</div>
+                </div>
+            </div>
+
+            <!-- LEFT BOTTOM SECTION 1 -->
+            <div class="panel" style="margin-bottom: 0;">
+                <div class="panel-title">Core Execution Lesson: Diminishing Returns</div>
+                <div class="edu-content">
+                    <h4>Optimization vs. Over-Engineering</h4>
+                    <p>More effort does not linearly correlate with better outcomes. Once a system achieves 80% efficiency, pushing for the remaining 20% often requires 4 times the resource allocation. Recognize when an infrastructure is "good enough" to deploy so you can redirect your cognitive velocity toward scaling macro assets rather than polishing dead ends.</p>
+                </div>
+            </div>
+
+            <!-- LEFT BOTTOM SECTION 2 (EXPANDED CONTENT) -->
+            <div class="panel" style="margin-bottom: 0;">
+                <div class="panel-title">Energy State Calibration & Flow States</div>
+                <div class="edu-content">
+                    <h4>Circadian Alignment</h4>
+                    <p>Match your task difficulty to your biological energy peaks. Reserve your high-focus morning windows for complex structural architecture, and shift administrative tasks to your afternoon troughs to protect your cognitive stamina.</p>
+                    <h4>Flow State Mechanics</h4>
+                    <p>Trigger deep focus instantaneously by eliminating ambient friction, isolating metrics of success, and removing all multi-tasking vectors prior to initialization.</p>
+                </div>
+            </div>
+        </main>
+
+        <aside style="display: flex; flex-direction: column; gap: 1.5rem;">
+            <div class="panel" style="margin-bottom: 0;">
+                <div class="panel-title">Macro Horizon Benchmarks</div>
+                <div class="edu-content">
+                    <div class="goal-item"><strong>Quarterly:</strong> Deploy 2 proprietary frameworks to reduce workflow friction by 30%.</div>
+                    <div class="goal-item"><strong>1-Year:</strong> Build 3 "Proof of Work" assets (code, writing, or systems).</div>
+                    <div class="goal-item"><strong>5-Year:</strong> Transition to architectural operator; decouple labor from time.</div>
+                </div>
+            </div>
+
+            <div class="panel" style="margin-bottom: 0;">
+                <div class="panel-title">Distraction Neutralization</div>
+                <div>
+                    <input type="text" id="distraction-input" placeholder="Enter high-friction cognitive leak...">
+                    <button class="btn-action" onclick="killDistraction()">Deploy Shield</button>
+                </div>
+                <ul id="shield-list" style="margin-top:1rem; list-style:none; flex-grow: 1;">
+                    <li class="goal-item"><strong>Syntactic Noise:</strong> Unstructured communication channels (Slack/Discord) closed.</li>
+                </ul>
+            </div>
+
+            <div class="panel" style="margin-bottom: 0;">
+                <div class="panel-title">Capital & Resource Allocation</div>
+                <div class="edu-content">
+                    <h4>Asymmetric Asset Building</h4>
+                    <p>Do not just spend money; deploy it into assets that have infinite shelf lives, such as technical documentation, custom tools, or high-value intellectual property.</p>
+                    <h4>Maintenance Ratios</h4>
+                    <p>Maintain a 3:1 ratio of production time to maintenance time. If you exceed this, your system is fragile and requires immediate simplification.</p>
+                </div>
+            </div>
+
+            <!-- MICRO-SPRINTS -->
+            <div class="panel" style="margin-bottom: 0;">
+                <div class="panel-title">Micro-Sprint Objectives</div>
+                <div>
+                    <input type="text" id="micro-input" placeholder="Define 60-minute output unit...">
+                    <button class="btn-action" onclick="addMicro()">Stage Micro-Objective</button>
+                </div>
+                <div id="micro-list" style="margin-top: 1rem; flex-grow: 1;">
+                    <div class="goal-item"><strong>Logic Tier:</strong> Validate backend architecture constraints.</div>
+                </div>
+            </div>
+
+            <!-- RIGHT BOTTOM SECTION 1 -->
+            <div class="panel" style="margin-bottom: 0;">
+                <div class="panel-title">Strategic Integration Protocol</div>
+                <div class="edu-content">
+                    <h4>The Compounding Threshold</h4>
+                    <p>Systems do not scale linearly; they cross inflection points only after persistent, uninterrupted feedback loops are established. Protect your core loops from external noise to ensure your operational velocity compounds exponentially over time.</p>
+                </div>
+            </div>
+
+            <!-- RIGHT BOTTOM SECTION 2 (EXPANDED CONTENT) -->
+            <div class="panel" style="margin-bottom: 0;">
+                <div class="panel-title">Friction Audit & Context Matrix</div>
+                <div class="edu-content">
+                    <h4>Systemic Resistance Tracking</h4>
+                    <p>Friction points are signals of poor architectural design. Whenever a workflow causes repeated frustration, treat it as a bug in your operating system rather than a personal failure.</p>
+                    <h4>Attention Boundary Defense</h4>
+                    <p>Protect your intellectual workspace from external context pollution. Set strict notification boundaries and implement execution windows where communication channels are entirely severed.</p>
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>
+
+<script>
+    function addMicro() {
+        const input = document.getElementById('micro-input');
+        if (!input.value.trim()) return;
+        const list = document.getElementById('micro-list');
+        const div = document.createElement('div');
+        div.className = 'goal-item';
+        div.innerHTML = `<strong>Staged Task:</strong> ${input.value}`;
+        list.appendChild(div);
+        input.value = '';
+    }
+    function killDistraction() {
+        const input = document.getElementById('distraction-input');
+        if (!input.value.trim()) return;
+        const list = document.getElementById('shield-list');
+        const li = document.createElement('li');
+        li.className = 'goal-item';
+        li.innerHTML = `<strong>Target:</strong> ${input.value}`;
+        list.appendChild(li);
+        input.value = '';
+    }
+    function addTarget() {
+        const input = document.getElementById('target-input');
+        if (!input.value.trim()) return;
+        const list = document.getElementById('target-list');
+        const div = document.createElement('div');
+        div.className = 'goal-item';
+        div.innerHTML = `<strong>Vector Locked:</strong> ${input.value}`;
+        list.appendChild(div);
+        input.value = '';
+    }
+</script>
+</body>
+</html>
