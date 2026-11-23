@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Default Action Architecture | Behavior Engineering Lab</title>
+
+<style>
+:root{
+  --navy:#142B42;
+  --navy2:#1D3B57;
+  --blue:#315C7B;
+  --blue-light:#DCE8EF;
+  --cream:#F7F2E8;
+  --cream2:#EDE2D0;
+  --brown:#49352A;
+  --brown2:#70533F;
+  --brown-light:#A78A6E;
+  --white:#FFFDF9;
+  --green:#557361;
+  --red:#9D5C4B;
+  --text:#243443;
+  --muted:#647384;
+  --border:#D9D0C3;
+  --shadow:0 12px 35px rgba(20,43,66,.09);
+  --radius:20px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--cream);
+  color:var(--text);
+  line-height:1.65;
+}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+a{color:inherit}
+.wrap{max-width:1200px;margin:auto;padding:0 22px}
+
+/* HEADER */
+.topbar{
+  background:var(--navy);
+  color:var(--cream);
+  padding:17px 0;
+  border-bottom:4px solid var(--brown2);
+}
+.brand{
+  display:flex;align-items:center;gap:12px;
+  font-weight:900;letter-spacing:.3px;
+}
+.brand-mark{
+  display:grid;place-items:center;
+  width:42px;height:42px;border-radius:12px;
+  background:var(--cream);color:var(--navy);
+  font-weight:900;
+}
+.brand small{display:block;font-weight:400;color:#B9C8D5;font-size:11px}
+.topbar-inner{display:flex;justify-content:space-between;align-items:center;gap:20px}
+.top-status{font-size:12px;color:#D4DFE8}
+
+/* HERO */
+.hero{
+  background:linear-gradient(130deg,var(--navy),var(--navy2) 68%,var(--brown));
+  color:var(--cream);
+  padding:65px 0 52px;
+}
+.hero-grid{
+  display:grid;grid-template-columns:1.3fr .7fr;gap:35px;align-items:center;
+}
+.eyebrow{
+  color:#D9B894;text-transform:uppercase;
+  font-size:12px;letter-spacing:2px;font-weight:800;
+}
+.hero h1{
+  font-size:clamp(34px,5vw,62px);
+  line-height:1.05;letter-spacing:-2px;margin:15px 0;
+}
+.hero p{max-width:700px;color:#E0E8EE;font-size:17px}
+.hero-quote{
+  margin-top:25px;border-left:3px solid var(--brown-light);
+  padding:12px 18px;color:#F3E3CD;
+  font-size:15px;font-weight:600;
+}
+.hero-box{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.18);
+  padding:25px;border-radius:20px;
+}
+.hero-box h3{font-size:18px;margin-bottom:12px;color:#E8C9A8}
+.hero-box ul{list-style:none}
+.hero-box li{padding:9px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:14px}
+.hero-box li:last-child{border:0}
+
+/* MAIN NAV */
+.nav-wrap{
+  position:sticky;top:0;z-index:20;
+  background:var(--white);
+  border-bottom:1px solid var(--border);
+}
+.nav{
+  display:flex;gap:8px;overflow:auto;padding:12px 0;
+}
+.nav button{
+  border:1px solid var(--border);background:var(--cream);
+  color:var(--brown);border-radius:30px;padding:10px 15px;
+  white-space:nowrap;font-size:12px;font-weight:800;
+  transition:.2s;
+}
+.nav button:hover{background:var(--blue-light)}
+.nav button.active{background:var(--navy);color:white;border-color:var(--navy)}
+
+/* LAYOUT */
+main{padding:32px 0 60px}
+.section{display:none;animation:fade .25s ease}
+.section.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.section-heading{margin-bottom:24px}
+.section-heading .eyebrow{color:var(--brown2)}
+.section-heading h2{font-size:clamp(26px,3.6vw,40px);color:var(--navy);letter-spacing:-1px}
+.section-heading p{color:var(--muted);max-width:800px;margin-top:7px}
+.card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);
+}
+.card h3{color:var(--navy);margin-bottom:10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.stack{display:flex;flex-direction:column;gap:18px}
+.small{font-size:13px;color:var(--muted)}
+.tag{
+  display:inline-block;background:var(--blue-light);color:var(--navy);
+  padding:5px 10px;border-radius:30px;font-size:11px;font-weight:800;
+}
+.tag.brown{background:#EDE1D2;color:var(--brown)}
+.tag.green{background:#E3ECE5;color:var(--green)}
+.callout{
+  border-left:4px solid var(--brown2;background:var(--cream);
+  padding:17px;border-radius:0 12px 12px 0;margin:15px 0;
+}
+.callout.blue{border-color:var(--blue);background:#EEF4F8}
+.callout h4{color:var(--navy);margin-bottom:5px}
+.callout p{font-size:14px}
+.card-dark{
+  background:var(--navy);color:var(--cream);
+  border-radius:var(--radius);padding:24px;
+}
+.card-dark h3{color:#E5C49E}
+.card-dark p,.card-dark li{color:#DFE7ED}
+.divider{height:1px;background:var(--border);margin:20px 0}
+.list{padding-left:20px}
+.list li{margin-bottom:8px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  background:var(--navy);color:white;border:0;
+  padding:12px 18px;border-radius:10px;font-weight:800;font-size:13px;
+  transition:.2s;
+}
+.btn:hover{background:var(--blue);transform:translateY(-1px)}
+.btn.secondary{background:var(--brown);color:var(--cream)}
+.btn.secondary:hover{background:var(--brown2)}
+.btn.light{background:var(--cream2);color:var(--brown);border:1px solid var(--border)}
+.btn.danger{background:var(--red)}
+.btn.small-btn{padding:8px 12px;font-size:12px}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}
+.field{margin:14px 0}
+.field label{
+  display:block;font-size:12px;font-weight:800;color:var(--brown);
+  margin-bottom:6px;
+}
+.field input,.field textarea,.field select{
+  width:100%;border:1px solid var(--border);background:#FFFEFC;
+  color:var(--text);padding:12px;border-radius:10px;outline:none;
+}
+.field input:focus,.field textarea:focus,.field select:focus{
+  border-color:var(--blue);box-shadow:0 0 0 3px rgba(49,92,123,.12);
+}
+.field textarea{min-height:100px;resize:vertical}
+.field select{cursor:pointer}
+.range{width:100%;accent-color:var(--navy)}
+.range-row{display:flex;justify-content:space-between;font-weight:700;font-size:13px}
+.result{
+  background:var(--blue-light);border-radius:14px;padding:18px;
+  color:var(--navy);margin-top:15px;
+}
+.result h3{margin-bottom:5px}
+.result.brown-result{background:#EEE3D5;color:var(--brown)}
+.result.green-result{background:#E3ECE5;color:var(--green)}
+.metric{
+  font-size:34px;font-weight:900;color:var(--navy);
+  line-height:1.1;margin:5px 0;
+}
+.metric-caption{font-size:12px;color:var(--muted)}
+/* LEARNING MODULES */
+.lesson-card{
+  border:1px solid var(--border);background:var(--white);
+  border-radius:16px;overflow:hidden;
+}
+.lesson-top{background:var(--navy);color:white;padding:17px}
+.lesson-top span{font-size:11px;color:#D9B894;font-weight:800;letter-spacing:1px}
+.lesson-top h3{color:white;margin-top:4px}
+.lesson-body{padding:20px}
+.lesson-body p{font-size:14px;margin-bottom:10px}
+.lesson-body ul{padding-left:18px;font-size:13px}
+.lesson-body li{margin-bottom:7px}
+.example{
+  background:var(--cream);border:1px solid var(--border);
+  padding:13px;border-radius:10px;font-size:13px;margin-top:12px;
+}
+.example b{color:var(--brown)}
+/* SIMULATOR */
+.sim-track{
+  display:flex;align-items:center;gap:12px;margin:25px 0;
+}
+.sim-node{
+  flex:1;text-align:center;background:var(--cream);
+  border:2px solid var(--border);border-radius:14px;padding:18px;
+}
+.sim-node strong{display:block;color:var(--navy);font-size:14px}
+.sim-node span{font-size:12px;color:var(--muted)}
+.sim-arrow{color:var(--brown);font-size:24px;font-weight:900}
+.score-bar{height:14px;border-radius:30px;background:#E7E0D7;overflow:hidden;margin:12px 0}
+.score-fill{height:100%;width:0;background:var(--brown2);transition:.3s}
+.sim-explanation{padding:18px;border-radius:12px;background:var(--cream);font-size:14px;margin-top:15px}
+.level{font-size:12px;font-weight:900;color:var(--brown);text-transform:uppercase;letter-spacing:1px}
+/* RULE BUILDER */
+.rule-item{
+  border:1px solid var(--border);background:var(--cream);
+  padding:16px;border-radius:14px;margin-bottom:12px;
+}
+.rule-item h4{color:var(--navy);font-size:14px}
+.rule-item p{font-size:13px;margin:8px 0}
+.rule-item .rule-if{color:var(--brown);font-weight:800}
+.rule-item .rule-then{color:var(--navy);font-weight:800}
+.rule-item .rule-after{color:var(--green);font-size:12px}
+.empty{padding:20px;text-align:center;color:var(--muted);font-size:13px}
+/* AUDIT */
+.audit-row{
+  display:grid;grid-template-columns:30px 1fr auto;gap:12px;
+  align-items:center;padding:15px;border:1px solid var(--border);
+  background:var(--white);border-radius:12px;margin-bottom:10px;
+}
+.audit-row input{width:20px;height:20px;accent-color:var(--green)}
+.audit-row h4{font-size:14px;color:var(--navy)}
+.audit-row p{font-size:12px;color:var(--muted)}
+.audit-row.done{border-color:var(--green);background:#F1F6F2}
+.audit-row.done h4{text-decoration:line-through;opacity:.7}
+/* BLUEPRINT */
+.blueprint-output{
+  background:var(--navy);color:var(--cream);border-radius:16px;padding:22px;
+}
+.blueprint-output h3{color:#E4C39B}
+.blueprint-output pre{
+  white-space:pre-wrap;overflow-wrap:anywhere;font-family:Arial,sans-serif;
+  font-size:14px;line-height:1.7;margin-top:15px;
+}
+.recovery-step{
+  background:var(--cream);padding:15px;border-radius:12px;border:1px solid var(--border);
+  margin-bottom:12px;
+}
+.recovery-step strong{display:block;color:var(--brown)}
+/* FOOTER */
+footer{
+  background:var(--navy);color:#D6E1E8;padding:28px 0;
+  text-align:center;font-size:12px;border-top:4px solid var(--brown2);
+}
+footer p{margin:5px}
+@media(max-width:900px){
+ .hero-grid{grid-template-columns:1fr}
+ .grid3{grid-template-columns:1fr 1fr}
+ .grid2{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+ .wrap{padding:0 15px}
+ .hero{padding:40px 0}
+ .hero h1{letter-spacing:-1px}
+ .grid3{grid-template-columns:1fr}
+ .sim-track{flex-direction:column}
+ .sim-arrow{transform:rotate(90deg)}
+ .sim-node{width:100%}
+ .card{padding:18px}
+ .audit-row{grid-template-columns:25px 1fr}
+ .audit-row>div:last-child{grid-column:2}
+ .top-status{display:none}
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <div class="brand">
+     
+      <div>DEFAULT ACTION ARCHITECTURE
+        <small>Behavior Engineering Lab</small>
+      </div>
+    </div>
+    <div class="top-status">Your physical and digital surroundings dictate your mental output. Learn how to engineer your cognitive environment to reduce mental friction, block interruptions, and prime your brain for sustained concentration.
+</div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Personal Behavior Engineering</div>
+      <h1>Build a system that makes action easier.</h1>
+      <p>Your behavior is influenced by what is visible, accessible, familiar, prepared, and easy to begin. Instead of repeatedly negotiating with yourself, redesign the conditions that shape your next action.</p>
+      <div class="hero-quote">The goal is not to eliminate choice. It is to stop making the same unnecessary choice every day.</div>
+    </div>
+    <div class="hero-box">
+      <h3>The architecture you will build</h3>
+      <ul>
+        <li>01 — Understand how defaults shape behavior</li>
+        <li>02 — Identify the friction that blocks action</li>
+        <li>03 — Create automatic cue-to-action rules</li>
+        <li>04 — Engineer your environment</li>
+        <li>05 — Design a recovery protocol</li>
+        <li>06 — Test and revise your system</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="nav-wrap">
+  <div class="wrap">
+    <nav class="nav">
+      <button class="active" onclick="showSection('learn',this)">Learn the Architecture</button>
+      <button onclick="showSection('simulator',this)">Friction Simulator</button>
+      <button onclick="showSection('builder',this)">If → Then Architect</button>
+      <button onclick="showSection('environment',this)">Environment Design</button>
+      <button onclick="showSection('audit',this)">Friction Audit</button>
+      <button onclick="showSection('blueprint',this)">My Blueprint</button>
+      <button onclick="showSection('recovery',this)">Recovery Engineering</button>
+    </nav>
+  </div>
+</div>
+
+<main class="wrap">
+
+<!-- SECTION 1: LEARN -->
+<section class="section active" id="learn">
+  <div class="section-heading">
+    <div class="eyebrow">Module 01 • The knowledge base</div>
+    <h2>Learn to engineer your defaults</h2>
+    <p>Understand the underlying behavioral mechanics before attempting to redesign your routine.</p>
+  </div>
+
+  <div class="grid3">
+    <article class="lesson-card">
+      <div class="lesson-top"><span>CONCEPT 01</span><h3>Default Behavior</h3></div>
+      <div class="lesson-body">
+        <p>A default is the behavior you are likely to fall into when you do not actively make a different choice. It may be intentional or accidental.</p>
+        <p>Defaults are powerful because they operate when attention is limited, energy is low, or decisions are postponed.</p>
+        <ul>
+          <li>Phone in reach → checking becomes convenient.</li>
+          <li>Open document ready → working becomes easier.</li>
+          <li>No plan for free time → familiar activities take over.</li>
+        </ul>
+        <div class="example"><b>Design question:</b> What do I usually do when I don't decide what to do?</div>
+      </div>
+    </article>
+
+    <article class="lesson-card">
+      <div class="lesson-top"><span>CONCEPT 02</span><h3>Behavioral Friction</h3></div>
+      <div class="lesson-body">
+        <p>Friction is the effort, delay, confusion, discomfort, or number of steps between intention and action.</p>
+        <p>Even small obstacles can matter when repeated every day. The more steps required to begin, the more opportunities there are to postpone.</p>
+        <ul>
+          <li>Searching for files</li>
+          <li>Deciding what to study</li>
+          <li>Setting up equipment</li>
+          <li>Unclear first steps</li>
+        </ul>
+        <div class="example"><b>Design question:</b> What can I prepare in advance to make starting easier?</div>
+      </div>
+    </article>
+
+    <article class="lesson-card">
+      <div class="lesson-top"><span>CONCEPT 03</span><h3>Trigger & Cue Design</h3></div>
+      <div class="lesson-body">
+        <p>A trigger connects a recognizable event to a planned response. A strong cue is specific, noticeable, and occurs when you can realistically act.</p>
+        <p>Vague intentions leave room for negotiation. Specific cues reduce the need to figure out when to begin.</p>
+        <ul>
+          <li>Weak: “I'll study sometime tonight.”</li>
+          <li>Stronger: “After dinner, I sit at my desk and open lesson 4.”</li>
+        </ul>
+        <div class="example"><b>Design question:</b> What event can reliably signal the start?</div>
+      </div>
+    </article>
+
+    <article class="lesson-card">
+      <div class="lesson-top"><span>CONCEPT 04</span><h3>Decision Load</h3></div>
+      <div class="lesson-body">
+        <p>Decision load is the collection of choices you must resolve before acting. Too many small decisions can create delay and make the task feel larger.</p>
+        <p>Pre-decide repeatable details so your effort can go toward the task itself.</p>
+        <ul>
+          <li>Which course?</li>
+          <li>Which lesson?</li>
+          <li>Where are my materials?</li>
+          <li>How long will I work?</li>
+        </ul>
+        <div class="example"><b>Design question:</b> Which decisions can be made once rather than repeatedly?</div>
+      </div>
+    </article>
+
+    <article class="lesson-card">
+      <div class="lesson-top"><span>CONCEPT 05</span><h3>Environment Engineering</h3></div>
+      <div class="lesson-body">
+        <p>Your surroundings can prompt, enable, obstruct, or compete with actions. Environment design means changing the physical or digital conditions around you.</p>
+        <p>You don't need perfect surroundings. You need surroundings that support the next useful action.</p>
+        <ul>
+          <li>Place useful tools within reach.</li>
+          <li>Remove distracting shortcuts.</li>
+          <li>Prepare your starting workspace.</li>
+          <li>Separate work and entertainment cues.</li>
+        </ul>
+        <div class="example"><b>Design question:</b> What can my surroundings do for me automatically?</div>
+      </div>
+    </article>
+
+    <article class="lesson-card">
+      <div class="lesson-top"><span>CONCEPT 06</span><h3>Feedback & Adaptation</h3></div>
+      <div class="lesson-body">
+        <p>A system should be evaluated by what actually happens, not what you intended it to do.</p>
+        <p>When a system fails, investigate the design. Was the cue missed? Was the action too large? Was there a barrier? Was the timing unrealistic?</p>
+        <ul>
+          <li>Observe actual behavior.</li>
+          <li>Locate the breakdown.</li>
+          <li>Change one variable.</li>
+          <li>Test again.</li>
+        </ul>
+        <div class="example"><b>Design question:</b> What does the result teach me about the system?</div>
+      </div>
+    </article>
+  </div>
+
+  <div class="callout blue">
+    <h4>Use the engineering cycle</h4>
+    <p><b>Observe → Identify the obstacle → Design a default → Test → Measure → Adapt.</b> You are not trying to prove that you have enough discipline. You are trying to construct conditions that support consistent behavior.</p>
+  </div>
+
+  <div class="card">
+    <h3>Example: Turning a goal into an architecture</h3>
+    <div class="grid2">
+      <div>
+        <span class="tag brown">BEFORE</span>
+        <h4 style="margin:10px 0;color:var(--brown)">Intention-based system</h4>
+        <p class="small">“I need to practice coding more. I'll try to do it after work.”</p>
+        <ul class="list small">
+          <li>No defined start time</li>
+          <li>No lesson selected</li>
+          <li>No prepared workspace</li>
+          <li>Many chances to postpone</li>
+        </ul>
+      </div>
+      <div>
+        <span class="tag green">AFTER</span>
+        <h4 style="margin:10px 0;color:var(--green)">Default-action system</h4>
+        <p class="small">“When I finish dinner, I sit down, open my saved coding lesson, and complete one exercise.”</p>
+        <ul class="list small">
+          <li>Reliable cue</li>
+          <li>Action chosen in advance</li>
+          <li>Materials prepared</li>
+          <li>Small defined starting task</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: SIMULATOR -->
+<section class="section" id="simulator">
+  <div class="section-heading">
+    <div class="eyebrow">Module 02 • Test the mechanics</div>
+    <h2>Default Action Simulator</h2>
+    <p>Experiment with clarity, friction, and action size. This model is a teaching simulation—not a scientifically calibrated prediction of your behavior.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="card stack">
+      <h3>Adjust your system</h3>
+      <div class="field">
+        <div class="range-row"><label>Trigger clarity</label><span id="clarityValue">4 / 10</span></div>
+        <input class="range" id="clarity" type="range" min="1" max="10" value="4">
+        <p class="small">How clear is the event that tells you to start?</p>
+      </div>
+      <div class="field">
+        <div class="range-row"><label>Start friction</label><span id="frictionValue">8 / 10</span></div>
+        <input class="range" id="friction" type="range" min="1" max="10" value="8">
+        <p class="small">How many obstacles or setup steps stand in the way?</p>
+      </div>
+      <div class="field">
+        <div class="range-row"><label>Action size</label><span id="actionValue">7 / 10</span></div>
+        <input class="range" id="actionSize" type="range" min="1" max="10" value="7">
+        <p class="small">How demanding is the first action?</p>
+      </div>
+      <div class="field">
+        <div class="range-row"><label>Environment support</label><span id="supportValue">3 / 10</span></div>
+        <input class="range" id="support" type="range" min="1" max="10" value="3">
+        <p class="small">How much does your environment make the action easier?</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>System response</h3>
+      <div class="metric" id="systemScore">--</div>
+      <div class="metric-caption">Estimated ease-of-start score (model)</div>
+      <div class="score-bar"><div class="score-fill" id="scoreFill"></div></div>
+      <div id="simLevel" class="level">Adjust the controls</div>
+      <div class="sim-track">
+        <div class="sim-node"><strong>TRIGGER</strong><span id="simTrigger">Vague signal</span></div>
+        <div class="sim-arrow">→</div>
+        <div class="sim-node"><strong>START</strong><span id="simStart">Obstacles remain</span></div>
+        <div class="sim-arrow">→</div>
+        <div class="sim-node"><strong>OUTCOME</strong><span id="simOutcome">Delayed action</span></div>
+      </div>
+      <div class="sim-explanation" id="simExplanation"></div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <h4>What this simulation demonstrates</h4>
+    <p>A clearer trigger, smaller starting action, fewer obstacles, and supportive surroundings may make starting easier. The values are illustrative, not measured probabilities. Use the simulation to identify which variable you should change in real life.</p>
+  </div>
+</section>
+
+<!-- SECTION 3: RULE BUILDER -->
+<section class="section" id="builder">
+  <div class="section-heading">
+    <div class="eyebrow">Module 03 • Behavioral programming</div>
+    <h2>If → Then Architect</h2>
+    <p>Create your own behavior rules. Instead of leaving actions to chance, connect specific situations to predetermined responses.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>Build a default rule</h3>
+      <p class="small">A good rule is concrete, realistic, and connected to a cue that will actually occur.</p>
+      <div class="field">
+        <label for="ruleTrigger">IF — cue, event, or time</label>
+        <input id="ruleTrigger" placeholder="Example: When I get home from work">
+      </div>
+      <div class="field">
+        <label for="ruleAction">THEN — your default action</label>
+        <input id="ruleAction" placeholder="Example: I change clothes and complete 1 lesson">
+      </div>
+      <div class="field">
+        <label for="ruleFallback">IF BLOCKED — fallback action</label>
+        <input id="ruleFallback" placeholder="Example: I complete 5 minutes instead">
+      </div>
+      <button class="btn" onclick="addRule()">+ Add My Rule</button>
+    </div>
+
+    <div class="card">
+      <h3>My behavior pipelines</h3>
+      <p class="small">Your rules are saved locally in this browser. They are not uploaded to a server.</p>
+      <div id="ruleList"></div>
+      <div class="btn-row">
+        <button class="btn light small-btn" onclick="exportRules()">Export Rules</button>
+        <button class="btn light small-btn" onclick="clearRules()">Clear Rules</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout blue">
+    <h4>Why include a fallback?</h4>
+    <p>A default system with no fallback can break when the original conditions change. Your fallback preserves continuity. It converts “I can't do my original plan” into “what is the smallest version I can still complete?”</p>
+  </div>
+</section>
+
+<!-- SECTION 4: ENVIRONMENT -->
+<section class="section" id="environment">
+  <div class="section-heading">
+    <div class="eyebrow">Module 04 • External control</div>
+    <h2>Engineer your environment</h2>
+    <p>Don't depend entirely on memory. Your physical space, digital workspace, tools, and access patterns can carry part of the workload.</p>
+  </div>
+
+  <div class="grid3">
+    <div class="card">
+      <span class="tag">PHYSICAL</span>
+      <h3 style="margin-top:12px">Workspace</h3>
+      <p class="small">Arrange the physical world to shorten the path to action.</p>
+      <ul class="list small">
+        <li>Put tools where the task happens.</li>
+        <li>Prepare supplies ahead of time.</li>
+        <li>Remove unnecessary setup steps.</li>
+        <li>Make the starting point visible.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="tag brown">DIGITAL</span>
+      <h3 style="margin-top:12px">Device Architecture</h3>
+      <p class="small">Organize your devices so the useful action has fewer clicks.</p>
+      <ul class="list small">
+        <li>Pin the primary resource.</li>
+        <li>Keep project files together.</li>
+        <li>Reduce distracting notifications.</li>
+        <li>Close unnecessary tabs.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="tag green">ACCESS</span>
+      <h3 style="margin-top:12px">Start Readiness</h3>
+      <p class="small">Pre-position the decisions and materials needed to begin.</p>
+      <ul class="list small">
+        <li>Choose the task in advance.</li>
+        <li>Save your next step.</li>
+        <li>Prepare a starting template.</li>
+        <li>Leave a visible instruction.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:20px">
+    <h3>Design a physical or digital default</h3>
+    <div class="grid2">
+      <div class="field">
+        <label for="environmentTarget">Behavior I want to support</label>
+        <input id="environmentTarget" placeholder="Example: Practice data analysis">
+      </div>
+      <div class="field">
+        <label for="environmentObstacle">Current obstacle</label>
+        <input id="environmentObstacle" placeholder="Example: Files scattered across folders">
+      </div>
+      <div class="field">
+        <label for="environmentChange">Environment change</label>
+        <input id="environmentChange" placeholder="Example: One folder with course, data, and project">
+      </div>
+      <div class="field">
+        <label for="environmentCue">Visible cue</label>
+        <input id="environmentCue" placeholder="Example: Open project folder pinned">
+      </div>
+    </div>
+    <button class="btn secondary" onclick="createEnvironmentPlan()">Design My Environment</button>
+    <div id="environmentOutput"></div>
+  </div>
+
+  <div class="callout">
+    <h4>Reduce friction without removing safeguards</h4>
+    <p>Make productive actions easier—but don't remove necessary safety, privacy, financial, or quality checks. Good architecture reduces unnecessary barriers while preserving important ones.</p>
+  </div>
+</section>
+
+<!-- SECTION 5: AUDIT -->
+<section class="section" id="audit">
+  <div class="section-heading">
+    <div class="eyebrow">Module 05 • System inspection</div>
+    <h2>Friction Audit</h2>
+    <p>Find the hidden steps that consume time or prevent action. Check the issues you have addressed and use the remaining items as your redesign targets.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>Friction checklist</h3>
+      <div id="auditItems"></div>
+    </div>
+    <div class="card">
+      <h3>Audit results</h3>
+      <div class="metric" id="auditScore">0%</div>
+      <div class="metric-caption">Friction problems addressed</div>
+      <div class="score-bar"><div class="score-fill" id="auditFill"></div></div>
+      <div id="auditMessage" class="sim-explanation"></div>
+      <div class="divider"></div>
+      <h3>Your next design target</h3>
+      <div id="auditNext"></div>
+    </div>
+  </div>
+
+  <div class="callout blue">
+    <h4>Audit rule: change the system, not just the expectation</h4>
+    <p>If you repeatedly forget, delay, or avoid the same task, look for a design problem. Is the task invisible? Too large? Unclear? Difficult to access? Competing with an easier reward? The audit should produce a system modification—not merely another promise.</p>
+  </div>
+</section>
+
+<!-- SECTION 6: BLUEPRINT -->
+<section class="section" id="blueprint">
+  <div class="section-heading">
+    <div class="eyebrow">Module 06 • Integration</div>
+    <h2>My Default Action Blueprint</h2>
+    <p>Combine the parts into a usable architecture. This is your personal design document for a behavior you want to make easier to execute.</p>
+  </div>
+
+  <div class="card">
+    <div class="grid2">
+      <div class="field">
+        <label for="bpGoal">Behavior / goal</label>
+        <input id="bpGoal" placeholder="What behavior do you want to make more consistent?">
+      </div>
+      <div class="field">
+        <label for="bpCue">Trigger / cue</label>
+        <input id="bpCue" placeholder="What event tells you to begin?">
+      </div>
+      <div class="field">
+        <label for="bpAction">Default action</label>
+        <input id="bpAction" placeholder="What exactly will you do first?">
+      </div>
+      <div class="field">
+        <label for="bpLocation">Location / environment</label>
+        <input id="bpLocation" placeholder="Where will it happen? What needs to be ready?">
+      </div>
+      <div class="field">
+        <label for="bpDuration">Starting duration</label>
+        <input id="bpDuration" placeholder="Example: 10 minutes">
+      </div>
+      <div class="field">
+        <label for="bpObstacle">Likely obstacle</label>
+        <input id="bpObstacle" placeholder="What usually interrupts or blocks you?">
+      </div>
+      <div class="field">
+        <label for="bpFallback">Fallback action</label>
+        <input id="bpFallback" placeholder="What is the minimum version on a difficult day?">
+      </div>
+      <div class="field">
+        <label for="bpReward">Completion marker</label>
+        <input id="bpReward" placeholder="How will you mark completion or see progress?">
+      </div>
+    </div>
+    <div class="field">
+      <label for="bpReview">Review date / system adjustment</label>
+      <input id="bpReview" placeholder="Example: Review after 7 days; reduce the start task if needed">
+    </div>
+    <button class="btn" onclick="generateBlueprint()">Generate My Blueprint</button>
+    <button class="btn secondary" onclick="saveBlueprint()">Save Blueprint</button>
+    <button class="btn light" onclick="loadBlueprint()">Load Saved Blueprint</button>
+  </div>
+
+  <div id="blueprintOutput" style="margin-top:20px"></div>
+</section>
+
+<!-- SECTION 7: RECOVERY -->
+<section class="section" id="recovery">
+  <div class="section-heading">
+    <div class="eyebrow">Module 07 • Resilience design</div>
+    <h2>Recovery Engineering</h2>
+    <p>A strong system is not one that never breaks. It is one that has a defined way of responding when it does.</p>
+  </div>
+
+  <div class="grid3">
+    <div class="card">
+      <span class="tag brown">FAILURE POINT</span>
+      <h3 style="margin-top:12px">The cue disappears</h3>
+      <p class="small">Your normal starting signal doesn't occur or is missed.</p>
+      <div class="divider"></div>
+      <p class="small"><b>Redesign:</b> Add a secondary cue tied to another dependable event.</p>
+    </div>
+    <div class="card">
+      <span class="tag">FAILURE POINT</span>
+      <h3 style="margin-top:12px">The task is too large</h3>
+      <p class="small">You have the time but cannot initiate the planned amount of work.</p>
+      <div class="divider"></div>
+      <p class="small"><b>Redesign:</b> Use a smaller entry action. Continue if capacity allows.</p>
+    </div>
+    <div class="card">
+      <span class="tag green">FAILURE POINT</span>
+      <h3 style="margin-top:12px">The environment changed</h3>
+      <p class="small">Your usual location, tools, or time window are unavailable.</p>
+      <div class="divider"></div>
+      <p class="small"><b>Redesign:</b> Create a portable version and a backup location.</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:20px">
+    <h3>Build your personal recovery protocol</h3>
+    <p class="small">Define a response before the interruption occurs. The goal is to prevent one missed session from becoming an indefinite stop.</p>
+    <div class="grid2">
+      <div class="field">
+        <label for="recFailure">When my system breaks because...</label>
+        <input id="recFailure" placeholder="Example: I arrive home too tired">
+      </div>
+      <div class="field">
+        <label for="recResponse">My recovery action will be...</label>
+        <input id="recResponse" placeholder="Example: Complete the 5-minute version">
+      </div>
+      <div class="field">
+        <label for="recRestart">I will restart at this cue...</label>
+        <input id="recRestart" placeholder="Example: Next scheduled morning">
+      </div>
+      <div class="field">
+        <label for="recPrevention">I can prevent this by...</label>
+        <input id="recPrevention" placeholder="Example: Prepare the task before leaving work">
+      </div>
+    </div>
+    <button class="btn secondary" onclick="generateRecovery()">Create Recovery Protocol</button>
+    <div id="recoveryOutput"></div>
+  </div>
+
+  <div class="callout">
+    <h4>Never make recovery depend on guilt</h4>
+    <p>Guilt does not tell you which system component needs repair. Replace self-judgment with a useful question: <b>What changed, what failed, and what adjustment makes the next attempt easier?</b></p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>DEFAULT ACTION ARCHITECTURE</strong> · Behavior Engineering Lab</p>
+    <p>Design the cue. Reduce friction. Define the action. Engineer recovery. Test and adapt.</p>
+  </div>
+</footer>
+
+<script>
+/* ================================
+   NAVIGATION
+================================ */
+function showSection(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(btn)btn.classList.add('active');
+}
+
+/* ================================
+   SIMULATOR
+   Illustrative model, not prediction
+================================ */
+const sliders=['clarity','friction','actionSize','support'];
+sliders.forEach(id=>{
+  document.getElementById(id).addEventListener('input',runSim);
+});
+
+function runSim(){
+  const clarity=+clarityInput.value;
+  const friction=+frictionInput.value;
+  const size=+actionSizeInput.value;
+  const support=+supportInput.value;
+
+  clarityValue.textContent=clarity+' / 10';
+  frictionValue.textContent=friction+' / 10';
+  actionValue.textContent=size+' / 10';
+  supportValue.textContent=support+' / 10';
+
+  // Simple teaching score. Not a validated behavioral measure.
+  const score=Math.round(
+    (clarity*2.5)+(support*2.5)+
+    ((11-friction)*2.5)+((11-size)*2.5)
+  );
+
+  systemScore.textContent=score+' / 100';
+  scoreFill.style.width=score+'%';
+
+  let level,outcome,explanation,trigger,start;
+  if(score>=75){
+    level='System: Supportive';
+    outcome='Easier initiation';
+    explanation='Your design currently has relatively strong starting conditions. Keep the cue stable, protect your environment, and measure whether the action actually happens. Avoid making the routine unnecessarily complex.';
+  }else if(score>=50){
+    level='System: Mixed conditions';
+    outcome='Some delay likely';
+    explanation='Some parts of the system are helpful, but one or more obstacles may still be demanding attention. Identify the weakest variable and change that before increasing the size of the task.';
+  }else{
+    level='System: High resistance';
+    outcome='Start likely feels difficult';
+    explanation='The simulated system has several barriers. Reduce the size of the first action, prepare materials, clarify the cue, or change your environment. Do not try to fix every variable at once.';
+  }
+
+  trigger=clarity>=7?'Specific cue':'Cue needs definition';
+  start=(friction+size)<=7?'Low setup burden':'Start is demanding';
+
+  simLevel.textContent=level;
+  simTrigger.textContent=trigger;
+  simStart.textContent=start;
+  simOutcome.textContent=outcome;
+  simExplanation.textContent=explanation;
+
+  scoreFill.style.background=score>=75?'var(--green)':score>=50?'var(--blue)':'var(--brown2)';
+}
+const clarityInput=document.getElementById('clarity');
+const frictionInput=document.getElementById('friction');
+const actionSizeInput=document.getElementById('actionSize');
+const supportInput=document.getElementById('support');
+const clarityValue=document.getElementById('clarityValue');
+const frictionValue=document.getElementById('frictionValue');
+const actionValue=document.getElementById('actionValue');
+const supportValue=document.getElementById('supportValue');
+const systemScore=document.getElementById('systemScore');
+const scoreFill=document.getElementById('scoreFill');
+const simLevel=document.getElementById('simLevel');
+const simTrigger=document.getElementById('simTrigger');
+const simStart=document.getElementById('simStart');
+const simOutcome=document.getElementById('simOutcome');
+const simExplanation=document.getElementById('simExplanation');
+
+/* ================================
+   RULE ARCHITECT
+================================ */
+let rules=JSON.parse(localStorage.getItem('daaRules')||'[]');
+
+function saveRulesToStorage(){
+  localStorage.setItem('daaRules',JSON.stringify(rules));
+}
+
+function addRule(){
+  const trigger=document.getElementById('ruleTrigger').value.trim();
+  const action=document.getElementById('ruleAction').value.trim();
+  const fallback=document.getElementById('ruleFallback').value.trim();
+
+  if(!trigger||!action){
+    alert('Add both a trigger and a default action.');
+    return;
+  }
+
+  rules.push({id:Date.now(),trigger,action,fallback});
+  saveRulesToStorage();
+  renderRules();
+
+  document.getElementById('ruleTrigger').value='';
+  document.getElementById('ruleAction').value='';
+  document.getElementById('ruleFallback').value='';
+}
+
+function renderRules(){
+  const list=document.getElementById('ruleList');
+  if(!rules.length){
+    list.innerHTML='<div class="empty">No rules created yet. Start by defining one cue and one action.</div>';
+    return;
+  }
+  list.innerHTML=rules.map(r=>`
+    <div class="rule-item">
+      <h4>Behavior Rule</h4>
+      <p class="rule-if">IF: ${esc(r.trigger)}</p>
+      <p class="rule-then">THEN: ${esc(r.action)}</p>
+      ${r.fallback?`<p class="rule-after">IF BLOCKED: ${esc(r.fallback)}</p>`:''}
+      <button class="btn danger small-btn" onclick="deleteRule(${r.id})">Delete Rule</button>
+    </div>
+  `).join('');
+}
+
+function deleteRule(id){
+  rules=rules.filter(r=>r.id!==id);
+  saveRulesToStorage();
+  renderRules();
+}
+
+function clearRules(){
+  if(confirm('Delete all your rules?')){
+    rules=[];
+    saveRulesToStorage();
+    renderRules();
+  }
+}
+
+function exportRules(){
+  if(!rules.length){alert('Create at least one rule first.');return;}
+  const content=rules.map(r=>
+    `IF: ${r.trigger}\nTHEN: ${r.action}\nIF BLOCKED: ${r.fallback||'No fallback defined'}\n`
+  ).join('\n-------------------\n');
+  downloadText('my-default-action-rules.txt',content);
+}
+
+/* ================================
+   ENVIRONMENT DESIGN TOOL
+================================ */
+function createEnvironmentPlan(){
+  const target=val('environmentTarget');
+  const obstacle=val('environmentObstacle');
+  const change=val('environmentChange');
+  const cue=val('environmentCue');
+
+  if(!target||!obstacle||!change||!cue){
+    alert('Complete all four fields to create your environment plan.');
+    return;
+  }
+
+  document.getElementById('environmentOutput').innerHTML=`
+    <div class="result">
+      <h3>Your Environment Design</h3>
+      <p><b>Behavior:</b> ${esc(target)}</p>
+      <p><b>Current obstacle:</b> ${esc(obstacle)}</p>
+      <p><b>System modification:</b> ${esc(change)}</p>
+      <p><b>Visible cue:</b> ${esc(cue)}</p>
+      <p><b>Test:</b> Put this change in place. Observe whether it shortens the path between cue and action.</p>
+    </div>`;
+}
+
+/* ================================
+   FRICTION AUDIT
+================================ */
+const auditData=[
+  {id:'task',title:'My first task is clearly defined',desc:'I do not have to decide what to work on after I start.'},
+  {id:'materials',title:'My materials are prepared',desc:'Tools, files, books, and resources are easy to access.'},
+  {id:'location',title:'My starting location is predictable',desc:'I know where I will begin the action.'},
+  {id:'cue',title:'I have a specific cue',desc:'A time, event, or activity clearly signals the start.'},
+  {id:'size',title:'My entry task is small enough',desc:'I can begin without committing to a large work session.'},
+  {id:'distraction',title:'Major distractions have been reduced',desc:'The easiest competing behavior is less accessible.'},
+  {id:'backup',title:'I have a backup plan',desc:'I know what to do if the normal routine is unavailable.'},
+  {id:'tracking',title:'I can see completion',desc:'A simple record tells me whether the system is working.'}
+];
+let auditChecked=JSON.parse(localStorage.getItem('daaAudit')||'[]');
+
+function renderAudit(){
+  const container=document.getElementById('auditItems');
+  container.innerHTML=auditData.map(item=>`
+    <div class="audit-row ${auditChecked.includes(item.id)?'done':''}">
+      <input type="checkbox" ${auditChecked.includes(item.id)?'checked':''}
+        onchange="toggleAudit('${item.id}')">
+      <div>
+        <h4>${item.title}</h4>
+        <p>${item.desc}</p>
+      </div>
+    </div>
+  `).join('');
+  updateAuditScore();
+}
+function toggleAudit(id){
+  auditChecked=auditChecked.includes(id)
+    ?auditChecked.filter(x=>x!==id)
+    :[...auditChecked,id];
+  localStorage.setItem('daaAudit',JSON.stringify(auditChecked));
+  renderAudit();
+}
+function updateAuditScore(){
+  const score=Math.round((auditChecked.length/auditData.length)*100);
+  auditScore.textContent=score+'%';
+  auditFill.style.width=score+'%';
+  if(score<40){
+    auditMessage.textContent='Your system still has several design gaps. Choose one or two barriers that repeatedly prevent you from beginning and modify those first.';
+  }else if(score<80){
+    auditMessage.textContent='Your system has a growing foundation. Focus on the remaining unchecked items. These may reveal the most important obstacles to consistency.';
+  }else{
+    auditMessage.textContent='Your architecture is well designed on paper. Now test it in real conditions. A high checklist score is not proof of performance—compare it against actual behavior.';
+  }
+  const remaining=auditData.filter(x=>!auditChecked.includes(x.id));
+  auditNext.innerHTML=remaining.length
+    ?'<p><b>Priority:</b> '+esc(remaining[0].title)+'</p><p class="small">'+esc(remaining[0].desc)+'</p>'
+    :'<p>You have addressed every checklist item. Review how your system performs and revise it when conditions change.</p>';
+}
+const auditScore=document.getElementById('auditScore');
+const auditFill=document.getElementById('auditFill');
+const auditMessage=document.getElementById('auditMessage');
+const auditNext=document.getElementById('auditNext');
+
+/* ================================
+   BLUEPRINT BUILDER
+================================ */
+const bpFields=['bpGoal','bpCue','bpAction','bpLocation','bpDuration','bpObstacle','bpFallback','bpReward','bpReview'];
+
+function getBlueprint(){
+  const data={};
+  bpFields.forEach(id=>data[id]=val(id));
+  return data;
+}
+function generateBlueprint(){
+  const d=getBlueprint();
+  if(!d.bpGoal||!d.bpCue||!d.bpAction){
+    alert('Complete your goal, cue, and default action first.');
+    return;
+  }
+  const output=`
+DEFAULT ACTION BLUEPRINT
+======================
+
+BEHAVIOR / GOAL
+${d.bpGoal}
+
+TRIGGER / CUE
+${d.bpCue}
+
+DEFAULT ACTION
+${d.bpAction}
+
+LOCATION / ENVIRONMENT
+${d.bpLocation||'Not specified'}
+
+STARTING DURATION
+${d.bpDuration||'Not specified'}
+
+LIKELY OBSTACLE
+${d.bpObstacle||'Not specified'}
+
+FALLBACK ACTION
+${d.bpFallback||'Not specified'}
+
+COMPLETION MARKER
+${d.bpReward||'Not specified'}
+
+REVIEW / ADAPTATION
+${d.bpReview||'Not specified'}
+
+SYSTEM RULE
+When the cue occurs, begin the default action. If the obstacle appears,
+use the fallback. Record what happened and review the system at the
+specified time.
+`;
+  document.getElementById('blueprintOutput').innerHTML=`
+    <div class="blueprint-output">
+      <h3>My Default Action Blueprint</h3>
+      <pre id="bpText">${esc(output)}</pre>
+      <button class="btn secondary small-btn" onclick="copyBlueprint()">Copy Blueprint</button>
+      <button class="btn light small-btn" onclick="downloadBlueprint()">Download Blueprint</button>
+    </div>`;
+}
+function saveBlueprint(){
+  localStorage.setItem('daaBlueprint',JSON.stringify(getBlueprint()));
+  alert('Blueprint saved in this browser.');
+}
+function loadBlueprint(){
+  const d=JSON.parse(localStorage.getItem('daaBlueprint')||'null');
+  if(!d){alert('No saved blueprint found.');return;}
+  bpFields.forEach(id=>document.getElementById(id).value=d[id]||'');
+  generateBlueprint();
+}
+function copyBlueprint(){
+  const text=document.getElementById('bpText').innerText;
+  navigator.clipboard.writeText(text)
+    .then(()=>alert('Blueprint copied.'))
+    .catch(()=>alert('Copy failed. Please select and copy the text manually.'));
+}
+function downloadBlueprint(){
+  const text=document.getElementById('bpText').innerText;
+  downloadText('default-action-blueprint.txt',text);
+}
+
+/* ================================
+   RECOVERY PROTOCOL
+================================ */
+function generateRecovery(){
+  const failure=val('recFailure');
+  const response=val('recResponse');
+  const restart=val('recRestart');
+  const prevention=val('recPrevention');
+  if(!failure||!response||!restart){
+    alert('Complete the failure, response, and restart cue fields.');
+    return;
+  }
+  recoveryOutput.innerHTML=`
+    <div class="result brown-result">
+      <h3>My Recovery Protocol</h3>
+      <div class="recovery-step"><strong>WHEN</strong>${esc(failure)}</div>
+      <div class="recovery-step"><strong>RESPOND BY</strong>${esc(response)}</div>
+      <div class="recovery-step"><strong>RESTART AT</strong>${esc(restart)}</div>
+      <div class="recovery-step"><strong>PREVENTION CHANGE</strong>${esc(prevention||'Review the obstacle and make a small system adjustment.')}</div>
+      <p><b>Recovery principle:</b> No punishment or restarting from zero. Return to the next planned cue and inspect the design.</p>
+      <button class="btn secondary small-btn" onclick="downloadRecovery()">Download Recovery Protocol</button>
+    </div>`;
+}
+function downloadRecovery(){
+  const text=`RECOVERY PROTOCOL
+
+WHEN:
+${val('recFailure')}
+
+RESPONSE:
+${val('recResponse')}
+
+RESTART CUE:
+${val('recRestart')}
+
+PREVENTION:
+${val('recPrevention')||'Review the obstacle and make a small system adjustment.'}
+
+PRINCIPLE:
+No punishment or restarting from zero. Return to the next planned cue and inspect the design.`;
+  downloadText('my-recovery-protocol.txt',text);
+}
+
+/* ================================
+   UTILITIES
+================================ */
+function val(id){return document.getElementById(id).value.trim()}
+function esc(s){
+  return String(s||'').replace(/[&<>"']/g,m=>({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[m]));
+}
+function downloadText(filename,text){
+  const blob=new Blob([text],{type:'text/plain;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download=filename;
+  document.body.appendChild(a);a.click();a.remove();
+  URL.revokeObjectURL(url);
+}
+
+/* INITIALIZE */
+runSim();
+renderRules();
+renderAudit();
+</script>
+
+</body>
+</html>
