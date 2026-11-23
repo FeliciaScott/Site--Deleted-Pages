@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Default Action Architecture — Micro-Action Decision Engine</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#17324D;
+  --bg2:#21445F;
+  --card-bg:#FFFFFF;
+  --card-bg-2:#F4F1E9;
+  --card-border:#D9E0E5;
+  --input-bg:#FFFFFF;
+  --accent:#6B4A35;
+  --accent-bright:#8B654B;
+  --accent-glow:rgba(107,74,53,.18);
+  --accent-hover:#4D3426;
+  --cyan:#294F6D;
+  --blue:#426C8C;
+  --amber:#8B654B;
+  --purple:#6B4A35;
+  --text:#17324D;
+  --text-soft:#334D61;
+  --text-muted:#526575;
+  --text-dim:#667783;
+  --border:#D9E0E5;
+  --code-bg:#F4F1E9;
+  --radius-xl:26px;
+  --radius-lg:20px;
+  --radius-md:12px;
+  --radius-sm:8px;
+  --transition:all .25s cubic-bezier(.4,0,.2,1);
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+
+body{
+  background:#FAF9F5;
+  color:#17324D;
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+  min-height:100vh;
+  padding:1.5rem;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+.matrix-card{
+  width:100%;
+  max-width:1120px;
+  margin:0 auto;
+  background:#FFFFFF;
+  border:1px solid #D9E0E5;
+  border-radius:var(--radius-xl);
+  box-shadow:0 24px 65px rgba(23,50,77,.12);
+  position:relative;
+  overflow:hidden;
+}
+
+.matrix-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(rgba(23,50,77,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(23,50,77,.025) 1px,transparent 1px);
+  background-size:42px 42px;
+  mask-image:linear-gradient(to bottom,black,transparent 55%);
+}
+
+.matrix-card::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:8%;
+  right:8%;
+  height:2px;
+  background:linear-gradient(90deg,transparent,#6B4A35,#17324D,#6B4A35,transparent);
+  box-shadow:0 0 18px rgba(107,74,53,.14);
+}
+
+/* HEADER */
+.engine-header{
+  padding:2rem 2.25rem 1.4rem;
+  background:#17324D;
+  color:#FAF9F5;
+  border-bottom:1px solid #294B68;
+  position:relative;
+  z-index:2;
+}
+
+.header-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:2rem;
+}
+
+.engine-kicker{
+  font-family:'JetBrains Mono',monospace;
+  color:#E7D8C8;
+  font-size:.68rem;
+  font-weight:800;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  margin-bottom:.65rem;
+}
+
+h1{
+  font-size:clamp(1.65rem,3vw,2.4rem);
+  font-weight:800;
+  letter-spacing:-.045em;
+  line-height:1.05;
+}
+
+.engine-header h1{color:#FAF9F5;}
+
+h1 .status-dot{
+  display:inline-block;
+  width:9px;
+  height:9px;
+  background:#B58B6A;
+  border-radius:50%;
+  box-shadow:0 0 0 5px rgba(181,139,106,.16),0 0 18px rgba(181,139,106,.45);
+  margin-right:.45rem;
+  vertical-align:middle;
+}
+
+.subtitle{
+  color:#FAF9F5;
+  opacity:.84;
+  font-size:.88rem;
+  line-height:1.6;
+  margin-top:.65rem;
+  max-width:680px;
+}
+
+.streak-counter{
+  flex-shrink:0;
+  background:rgba(250,249,245,.09);
+  border:1px solid rgba(250,249,245,.22);
+  padding:.55rem .8rem;
+  border-radius:10px;
+  color:#E7D8C8;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.7rem;
+  font-weight:800;
+  white-space:nowrap;
+}
+
+/* EDUCATIONAL INTRO */
+.education-intro{
+  padding:1.8rem 2.25rem;
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:1rem;
+  position:relative;
+  z-index:1;
+  background:#FAF9F5;
+}
+
+.intro-main{
+  background:#F4F1E9;
+  border:1px solid #E2D8CC;
+  border-radius:16px;
+  padding:1.3rem;
+}
+
+.section-eyebrow{
+  color:#294F6D;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.65rem;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  margin-bottom:.5rem;
+}
+
+.intro-main h2{
+  color:#17324D;
+  font-size:1.2rem;
+  letter-spacing:-.025em;
+  margin-bottom:.55rem;
+}
+
+.intro-main p{
+  color:#526575;
+  font-size:.82rem;
+  line-height:1.65;
+}
+
+.intro-main strong{color:#334D61;}
+
+.velocity-equation{
+  margin-top:.9rem;
+  padding:.75rem 1rem;
+  background:#17324D;
+  border:1px solid #294B68;
+  border-radius:10px;
+  color:#FAF9F5;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.76rem;
+  text-align:center;
+}
+
+.intro-side{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.65rem;
+}
+
+.mini-principle{
+  padding:.9rem;
+  border:1px solid #D9E0E5;
+  border-radius:12px;
+  background:#FFFFFF;
+}
+
+.mini-principle span{
+  display:block;
+  color:#6B4A35;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.6rem;
+  font-weight:800;
+  margin-bottom:.35rem;
+}
+
+.mini-principle strong{
+  display:block;
+  color:#17324D;
+  font-size:.76rem;
+  margin-bottom:.25rem;
+}
+
+.mini-principle p{
+  color:#526575;
+  font-size:.67rem;
+  line-height:1.45;
+}
+
+/* SELECTOR */
+.selector-area{
+  padding:0 2.25rem 2rem;
+  position:relative;
+  z-index:2;
+  background:#FAF9F5;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1rem;
+  margin-bottom:1rem;
+}
+
+.form-group{
+  display:flex;
+  flex-direction:column;
+  gap:.5rem;
+}
+
+label{
+  font-size:.66rem;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:#526575;
+}
+
+.select-wrapper{position:relative;}
+
+.select-wrapper::after{
+  content:'▾';
+  position:absolute;
+  right:1rem;
+  top:50%;
+  transform:translateY(-50%);
+  color:#6B4A35;
+  pointer-events:none;
+}
+
+select{
+  width:100%;
+  padding:.95rem 1rem;
+  background:#FFFFFF;
+  border:1px solid #C9D3DA;
+  border-radius:var(--radius-md);
+  color:#17324D;
+  font-size:.82rem;
+  font-weight:600;
+  outline:none;
+  cursor:pointer;
+  appearance:none;
+  transition:var(--transition);
+}
+
+select:focus{
+  border-color:#6B4A35;
+  box-shadow:0 0 0 3px rgba(107,74,53,.13);
+}
+
+.btn-execute{
+  width:100%;
+  padding:1rem;
+  background:#6B4A35;
+  color:#FFFFFF;
+  border:none;
+  border-radius:var(--radius-md);
+  font-weight:800;
+  font-size:.92rem;
+  cursor:pointer;
+  transition:var(--transition);
+  box-shadow:0 7px 22px rgba(107,74,53,.18);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:.5rem;
+}
+
+.btn-execute:hover{
+  background:#4D3426;
+  color:#FFFFFF;
+  transform:translateY(-2px);
+}
+
+/* DECISION SCIENCE GRID */
+.learning-section,.execution-model,.layers-section,
+.friction-section,.review-section{
+  padding:0 2.25rem 2rem;
+  position:relative;
+  z-index:1;
+  background:#FAF9F5;
+}
+
+.section-heading{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:1rem;
+  margin-bottom:.9rem;
+}
+
+.section-heading h2{
+  color:#17324D;
+  font-size:1rem;
+  letter-spacing:-.02em;
+}
+
+.section-heading p{
+  color:#667783;
+  font-size:.7rem;
+  max-width:550px;
+  text-align:right;
+  line-height:1.5;
+}
+
+.principles-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:.7rem;
+}
+
+.principle-card{
+  background:#FFFFFF;
+  border:1px solid #D9E0E5;
+  border-radius:13px;
+  padding:1rem;
+  position:relative;
+  overflow:hidden;
+  transition:var(--transition);
+}
+
+.principle-card:hover{
+  transform:translateY(-3px);
+  border-color:#BDA58F;
+  background:#F4F1E9;
+}
+
+.principle-number{
+  font-family:'JetBrains Mono',monospace;
+  color:#6B4A35;
+  font-size:.62rem;
+  font-weight:800;
+  margin-bottom:.55rem;
+}
+
+.principle-card h3{
+  color:#17324D;
+  font-size:.78rem;
+  margin-bottom:.4rem;
+}
+
+.principle-card p{
+  color:#526575;
+  font-size:.68rem;
+  line-height:1.55;
+}
+
+.principle-card::after{
+  content:"";
+  position:absolute;
+  width:45px;
+  height:45px;
+  right:-18px;
+  bottom:-18px;
+  border-radius:50%;
+  background:rgba(107,74,53,.09);
+}
+
+/* EXECUTION MODEL */
+.execution-panel{
+  background:#F4F1E9;
+  border:1px solid #D9E0E5;
+  border-radius:16px;
+  padding:1.25rem;
+}
+
+.execution-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:1rem;
+}
+
+.execution-header h2{color:#17324D;font-size:.95rem;}
+.execution-header span{
+  font-family:'JetBrains Mono',monospace;
+  color:#667783;
+  font-size:.62rem;
+}
+
+.execution-flow{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:.55rem;
+}
+
+.flow-node{
+  position:relative;
+  padding:.9rem .75rem;
+  background:#FFFFFF;
+  border:1px solid #D9E0E5;
+  border-radius:10px;
+  text-align:center;
+}
+
+.flow-node:not(:last-child)::after{
+  content:"→";
+  position:absolute;
+  right:-.72rem;
+  top:50%;
+  transform:translateY(-50%);
+  color:#6B4A35;
+  font-family:'JetBrains Mono',monospace;
+  z-index:3;
+}
+
+.flow-node .flow-number{
+  font-family:'JetBrains Mono',monospace;
+  color:#6B4A35;
+  font-size:.58rem;
+  font-weight:800;
+}
+
+.flow-node strong{
+  display:block;
+  color:#17324D;
+  font-size:.7rem;
+  margin:.3rem 0;
+}
+
+.flow-node p{
+  color:#526575;
+  font-size:.61rem;
+  line-height:1.4;
+}
+
+/* OUTPUT */
+.output-section{
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  padding:2rem 2.25rem;
+  animation:fadeIn .35s ease;
+  position:relative;
+  z-index:2;
+  background:#FAF9F5;
+  color:#17324D;
+}
+
+.output-section.active{display:flex;}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(10px) scale(.98);}
+  to{opacity:1;transform:translateY(0) scale(1);}
+}
+
+.action-badge{
+  display:inline-flex;
+  align-items:center;
+  padding:.4rem .9rem;
+  background:#F1E9E1;
+  color:#6B4A35;
+  border:1px solid #D9C7B7;
+  border-radius:9999px;
+  font-size:.67rem;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  margin-bottom:1rem;
+}
+
+.action-title{
+  color:#17324D;
+  font-size:1.3rem;
+  font-weight:700;
+  line-height:1.5;
+  margin-bottom:1.3rem;
+  max-width:720px;
+}
+
+.timer-container{
+  position:relative;
+  width:205px;
+  height:205px;
+  margin-bottom:1.4rem;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  filter:drop-shadow(0 0 16px rgba(107,74,53,.12));
+}
+
+.timer-svg{transform:rotate(-90deg);width:100%;height:100%;}
+.timer-circle-bg{fill:none;stroke:#D9E0E5;stroke-width:7;}
+.timer-circle-progress{
+  fill:none;
+  stroke:#6B4A35;
+  stroke-width:7;
+  stroke-linecap:round;
+  stroke-dasharray:565.48;
+  stroke-dashoffset:0;
+  transition:stroke-dashoffset 1s linear;
+}
+
+.timer-display{
+  position:absolute;
+  color:#17324D;
+  font-size:2.75rem;
+  font-weight:800;
+  font-family:'JetBrains Mono',monospace;
+}
+
+.timer-controls{
+  display:flex;
+  gap:.75rem;
+  width:100%;
+  max-width:600px;
+}
+
+.btn-secondary{
+  flex:1;
+  padding:.9rem;
+  background:#17324D;
+  border:1px solid #17324D;
+  color:#FFFFFF;
+  border-radius:var(--radius-md);
+  font-weight:700;
+  font-size:.82rem;
+  cursor:pointer;
+  transition:var(--transition);
+}
+
+.btn-secondary:hover{
+  background:#294B68;
+  border-color:#294B68;
+}
+
+/* SPRINT EDUCATION */
+.sprint-education{
+  width:100%;
+  max-width:900px;
+  margin-top:1.8rem;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:.7rem;
+}
+
+.sprint-card{
+  text-align:left;
+  padding:1rem;
+  background:#FFFFFF;
+  border:1px solid #D9E0E5;
+  border-radius:12px;
+}
+
+.sprint-card span{
+  font-family:'JetBrains Mono',monospace;
+  color:#294F6D;
+  font-size:.58rem;
+  font-weight:800;
+}
+
+.sprint-card h3{color:#17324D;font-size:.74rem;margin:.35rem 0;}
+.sprint-card p{color:#526575;font-size:.65rem;line-height:1.5;}
+
+/* LIFE LAYERS */
+.layer-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:.7rem;
+}
+
+.layer-card{
+  padding:1rem;
+  border-radius:13px;
+  border:1px solid #D9E0E5;
+  background:#FFFFFF;
+}
+
+.layer-card .layer-icon{
+  width:30px;
+  height:30px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:8px;
+  background:#F1E9E1;
+  color:#6B4A35;
+  margin-bottom:.7rem;
+  font-size:.8rem;
+}
+
+.layer-card h3{color:#17324D;font-size:.75rem;margin-bottom:.35rem;}
+.layer-card p{color:#526575;font-size:.65rem;line-height:1.5;}
+.layer-card small{
+  display:block;
+  margin-top:.65rem;
+  color:#667783;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.57rem;
+}
+
+/* FRICTION EDUCATION */
+.friction-panel{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1rem;
+  background:#F4F1E9;
+  border:1px solid #D9E0E5;
+  border-radius:16px;
+  padding:1.2rem;
+}
+
+.friction-column{padding:.5rem;}
+.friction-column:first-child{border-right:1px solid #D9E0E5;}
+.friction-column h3{color:#17324D;font-size:.8rem;margin-bottom:.75rem;}
+.friction-column p{color:#526575;font-size:.7rem;line-height:1.6;margin-bottom:.65rem;}
+.friction-list{display:flex;flex-direction:column;gap:.45rem;}
+.friction-item{display:flex;gap:.5rem;align-items:flex-start;}
+.friction-item b{
+  color:#6B4A35;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.6rem;
+}
+.friction-item span{color:#526575;font-size:.65rem;line-height:1.4;}
+
+/* REVIEW SYSTEM */
+.review-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:.7rem;
+}
+
+.review-card{
+  padding:1rem;
+  background:#FFFFFF;
+  border:1px solid #D9E0E5;
+  border-radius:12px;
+}
+
+.review-card span{
+  color:#6B4A35;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.6rem;
+  font-weight:800;
+}
+
+.review-card h3{color:#17324D;font-size:.75rem;margin:.35rem 0;}
+.review-card p{color:#526575;font-size:.65rem;line-height:1.5;}
+
+/* ACCORDION */
+.lesson-panel{
+  margin:0 2.25rem 2rem;
+  border-top:1px dashed #D9E0E5;
+  padding-top:1.25rem;
+  position:relative;
+  z-index:2;
+}
+
+details{width:100%;}
+
+summary{
+  list-style:none;
+  color:#6B4A35;
+  font-size:.8rem;
+  font-weight:800;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+  user-select:none;
+}
+
+summary::-webkit-details-marker{display:none;}
+summary:hover{color:#4D3426;}
+summary .chevron{font-size:.65rem;transition:transform .2s ease;}
+details[open] summary .chevron{transform:rotate(90deg);}
+
+.lesson-content{
+  margin-top:.85rem;
+  background:#FFFFFF;
+  border:1px solid #D9E0E5;
+  border-radius:var(--radius-md);
+  padding:1.3rem;
+  font-size:.75rem;
+  line-height:1.7;
+  color:#526575;
+}
+
+.lesson-content h3{color:#17324D;font-size:.9rem;margin-bottom:.65rem;}
+.lesson-content h4{color:#6B4A35;font-size:.75rem;margin:1rem 0 .3rem;}
+.lesson-content p{margin-bottom:.7rem;}
+.lesson-content p:last-child{margin-bottom:0;}
+
+/* FOOTER */
+.engine-footer{
+  background:#17324D;
+  border-top:1px solid #294B68;
+  padding:1rem 2.25rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:1rem;
+  color:#FAF9F5;
+  font-size:.62rem;
+  font-family:'JetBrains Mono',monospace;
+}
+
+.engine-footer strong{color:#E7D8C8;}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .education-intro{grid-template-columns:1fr;}
+  .principles-grid{grid-template-columns:repeat(2,1fr);}
+  .layer-grid{grid-template-columns:repeat(2,1fr);}
+  .execution-flow{grid-template-columns:repeat(5,1fr);}
+}
+
+@media(max-width:700px){
+  body{padding:.6rem;}
+
+  .engine-header,.selector-area,.learning-section,.execution-model,
+  .layers-section,.friction-section,.review-section{
+    padding-left:1rem;
+    padding-right:1rem;
+  }
+
+  .header-row{flex-direction:column;gap:1rem;}
+  .streak-counter{align-self:flex-start;}
+  .form-grid{grid-template-columns:1fr;}
+  .principles-grid{grid-template-columns:1fr 1fr;}
+  .layer-grid{grid-template-columns:1fr 1fr;}
+  .execution-flow{grid-template-columns:1fr;}
+  .flow-node:not(:last-child)::after{
+    content:"↓";
+    right:50%;
+    top:auto;
+    bottom:-.8rem;
+    transform:translateX(50%);
+  }
+  .sprint-education,.review-grid{grid-template-columns:1fr;}
+  .friction-panel{grid-template-columns:1fr;}
+  .friction-column:first-child{
+    border-right:0;
+    border-bottom:1px solid #D9E0E5;
+    padding-bottom:1rem;
+  }
+  .section-heading{align-items:flex-start;flex-direction:column;}
+  .section-heading p{text-align:left;}
+  .engine-footer{
+    padding-left:1rem;
+    padding-right:1rem;
+    flex-direction:column;
+    align-items:flex-start;
+  }
+  .lesson-panel{margin-left:1rem;margin-right:1rem;}
+  .timer-controls{flex-direction:column;}
+}
+</style>
+</head>
+
+<body>
+
+<main class="matrix-card">
+
+<header class="engine-header">
+  <div class="header-row">
+    <div>
+      <div class="engine-kicker">MICRO-ACTION DECISION SYSTEM // v2.0</div>
+      <h1><span class="status-dot"></span>DEFAULT ACTION ARCHITECTURE</h1>
+      <p class="subtitle">
+        Turn vague intentions into one concrete action matched to your
+        available energy, time, and life domain.
+      </p>
+    </div>
+    <div class="streak-counter">
+      <span id="streakCount">0</span> SPRINTS DONE
+    </div>
+  </div>
+</header>
+
+<section class="education-intro">
+  <div class="intro-main">
+    <div class="section-eyebrow">DEFAULT ACTION ARCHITECTURE</div>
+    <h2>Progress is often constrained by execution friction, not ambition.</h2>
+    <p>
+      A large goal can contain dozens of decisions. What should you do first?
+      How long should you work? What if you are tired? What if the task feels
+      too large? The result can be <strong>decision delay</strong>.
+    </p>
+    <p style="margin-top:.55rem;">
+      This engine reduces the problem to three variables:
+      <strong>what matters, what capacity you have, and how much time is available.</strong>
+      It then converts those variables into a small executable behavior.
+    </p>
+    <div class="velocity-equation">
+      EXECUTION VELOCITY = CLARITY × CAPACITY × IMMEDIACY
+    </div>
+  </div>
+
+  <div class="intro-side">
+    <div class="mini-principle">
+      <span>01 // CLARITY</span>
+      <strong>Define the next action.</strong>
+      <p>A goal describes a destination. An action describes what happens next.</p>
+    </div>
+    <div class="mini-principle">
+      <span>02 // CAPACITY</span>
+      <strong>Match the task to your state.</strong>
+      <p>A good task for high energy may be a poor task when capacity is low.</p>
+    </div>
+    <div class="mini-principle">
+      <span>03 // FRICTION</span>
+      <strong>Reduce unnecessary steps.</strong>
+      <p>The more effort required to begin, the more opportunities there are to delay.</p>
+    </div>
+    <div class="mini-principle">
+      <span>04 // FEEDBACK</span>
+      <strong>Measure completion.</strong>
+      <p>Finished actions create information that can improve your next decision.</p>
+    </div>
+  </div>
+</section>
+
+<section class="selector-area" id="selectorForm">
+  <div class="form-grid">
+    <div class="form-group">
+      <label for="layer">1. Life Improvement Layer</label>
+      <div class="select-wrapper">
+        <select id="layer">
+          <option value="Learning">Learning & Education</option>
+          <option value="Career">Career & Professional Growth</option>
+          <option value="Financial">Financial Improvement</option>
+          <option value="Health">Health & Personal Wellbeing</option>
+          <option value="Business">Business & Entrepreneurship</option>
+          <option value="Relationships">Relationships & Communication</option>
+          <option value="Personal">Personal Development</option>
+          <option value="Environment">Home & Environment</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="energy">2. Current Energy Level</label>
+      <div class="select-wrapper">
+        <select id="energy">
+          <option value="High">High — I can focus deeply</option>
+          <option value="Medium" selected>Medium — I can do steady work</option>
+          <option value="Low">Low — I need a small starting point</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="time">3. Available Time</label>
+      <div class="select-wrapper">
+        <select id="time">
+          <option value="5">5 minutes</option>
+          <option value="10">10 minutes</option>
+          <option value="15" selected>15 minutes</option>
+          <option value="25">25 minutes</option>
+          <option value="45">45 minutes</option>
+          <option value="60">60 minutes</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-execute" onclick="generateAction()">
+    GENERATE MY NEXT ACTION <span>→</span>
+  </button>
+</section>
+
+<section class="learning-section">
+  <div class="section-heading">
+    <h2>The Four Principles of Action Design</h2>
+    <p>Use these principles to understand why a small, well-designed action can outperform an ambitious but unclear intention.</p>
+  </div>
+
+  <div class="principles-grid">
+    <article class="principle-card">
+      <div class="principle-number">01 / SPECIFICITY</div>
+      <h3>Make the action observable</h3>
+      <p>Replace broad intentions with a behavior someone could see or verify. “Work on my career” is vague. “Compare three job descriptions” is observable.</p>
+    </article>
+    <article class="principle-card">
+      <div class="principle-number">02 / CAPACITY</div>
+      <h3>Match the action to available resources</h3>
+      <p>Time, attention, energy, tools, and knowledge all affect what is realistic. Design the next step around actual capacity rather than an ideal day.</p>
+    </article>
+    <article class="principle-card">
+      <div class="principle-number">03 / FRICTION</div>
+      <h3>Make starting easier</h3>
+      <p>Remove avoidable obstacles before the work begins. Prepare the document, materials, workspace, or first instruction in advance.</p>
+    </article>
+    <article class="principle-card">
+      <div class="principle-number">04 / FEEDBACK</div>
+      <h3>Close the action loop</h3>
+      <p>Record what happened. Completion, delay, and difficulty are useful information for improving the next action.</p>
+    </article>
+  </div>
+</section>
+
+<section class="execution-model">
+  <div class="execution-panel">
+    <div class="execution-header">
+      <h2>The Execution Sequence</h2>
+      <span>INTENTION → EVIDENCE</span>
+    </div>
+    <div class="execution-flow">
+      <div class="flow-node">
+        <div class="flow-number">01</div>
+        <strong>Identify</strong>
+        <p>Choose the area that matters now.</p>
+      </div>
+      <div class="flow-node">
+        <div class="flow-number">02</div>
+        <strong>Assess</strong>
+        <p>Check your time and capacity.</p>
+      </div>
+      <div class="flow-node">
+        <div class="flow-number">03</div>
+        <strong>Reduce</strong>
+        <p>Define the smallest useful step.</p>
+      </div>
+      <div class="flow-node">
+        <div class="flow-number">04</div>
+        <strong>Execute</strong>
+        <p>Begin and complete the action.</p>
+      </div>
+      <div class="flow-node">
+        <div class="flow-number">05</div>
+        <strong>Review</strong>
+        <p>Capture evidence and adjust.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="output-section" id="outputSection">
+  <div class="action-badge" id="actionBadge">YOUR NEXT ACTION</div>
+  <h2 class="action-title" id="actionText">Your action will appear here.</h2>
+
+  <div class="timer-container">
+    <svg class="timer-svg" viewBox="0 0 200 200" aria-hidden="true">
+      <circle class="timer-circle-bg" cx="100" cy="100" r="90"></circle>
+      <circle class="timer-circle-progress" id="timerProgress" cx="100" cy="100" r="90"></circle>
+    </svg>
+    <div class="timer-display" id="timerDisplay">15:00</div>
+  </div>
+
+  <div class="timer-controls">
+    <button class="btn-secondary" id="toggleBtn" onclick="toggleTimer()">Pause</button>
+    <button class="btn-secondary" onclick="completeSprint()">Complete / Reset</button>
+  </div>
+
+  <div class="sprint-education">
+    <article class="sprint-card">
+      <span>SPRINT PRINCIPLE 01</span>
+      <h3>Protect the starting point</h3>
+      <p>Do not add unrelated tasks to this work period. Keep the selected action visible and reduce switching.</p>
+    </article>
+    <article class="sprint-card">
+      <span>SPRINT PRINCIPLE 02</span>
+      <h3>Completion is evidence</h3>
+      <p>When the timer ends, identify what changed. A completed step should leave a result, decision, or useful observation.</p>
+    </article>
+    <article class="sprint-card">
+      <span>SPRINT PRINCIPLE 03</span>
+      <h3>Adjust without judgment</h3>
+      <p>If the action was too large, reduce its scope. If it was too easy, increase the challenge deliberately next time.</p>
+    </article>
+  </div>
+</section>
+
+<section class="layers-section">
+  <div class="section-heading">
+    <h2>Eight Areas Where Small Actions Compound</h2>
+    <p>Choose a domain based on the outcome you want to influence, not simply the task that is easiest to do.</p>
+  </div>
+
+  <div class="layer-grid">
+    <article class="layer-card">
+      <div class="layer-icon">L</div>
+      <h3>Learning</h3>
+      <p>Build knowledge through deliberate study, practice, retrieval, and application.</p>
+      <small>KNOWLEDGE → SKILL</small>
+    </article>
+    <article class="layer-card">
+      <div class="layer-icon">C</div>
+      <h3>Career</h3>
+      <p>Develop marketable skills, demonstrate competence, and improve professional options.</p>
+      <small>SKILL → OPPORTUNITY</small>
+    </article>
+    <article class="layer-card">
+      <div class="layer-icon">F</div>
+      <h3>Financial</h3>
+      <p>Improve financial awareness, organize obligations, and make informed decisions.</p>
+      <small>INFORMATION → CONTROL</small>
+    </article>
+    <article class="layer-card">
+      <div class="layer-icon">H</div>
+      <h3>Health</h3>
+      <p>Support sustainable routines for physical wellbeing, recovery, and daily function.</p>
+      <small>ROUTINE → SUPPORT</small>
+    </article>
+    <article class="layer-card">
+      <div class="layer-icon">B</div>
+      <h3>Business</h3>
+      <p>Test ideas, understand customers, and turn assumptions into useful evidence.</p>
+      <small>IDEA → VALIDATION</small>
+    </article>
+    <article class="layer-card">
+      <div class="layer-icon">R</div>
+      <h3>Relationships</h3>
+      <p>Practice listening, clear communication, repair, and consistent follow-through.</p>
+      <small>COMMUNICATION → TRUST</small>
+    </article>
+    <article class="layer-card">
+      <div class="layer-icon">P</div>
+      <h3>Personal Growth</h3>
+      <p>Strengthen self-management through reflection, decisions, and intentional practice.</p>
+      <small>REFLECTION → CHANGE</small>
+    </article>
+    <article class="layer-card">
+      <div class="layer-icon">E</div>
+      <h3>Environment</h3>
+      <p>Arrange your surroundings so useful actions are easier to begin and repeat.</p>
+      <small>DESIGN → SUPPORT</small>
+    </article>
+  </div>
+</section>
+
+<section class="friction-section">
+  <div class="section-heading">
+    <h2>Understand Execution Friction</h2>
+    <p>When an action does not happen, investigate the conditions before assuming the problem is a lack of motivation.</p>
+  </div>
+
+  <div class="friction-panel">
+    <div class="friction-column">
+      <h3>Common Sources of Friction</h3>
+      <p>Friction is any condition that makes an intended action harder to start, continue, or complete.</p>
+      <div class="friction-list">
+        <div class="friction-item"><b>01</b><span><strong>Unclear next step:</strong> the task has no defined starting behavior.</span></div>
+        <div class="friction-item"><b>02</b><span><strong>Excessive scope:</strong> the first step is too large for the available time.</span></div>
+        <div class="friction-item"><b>03</b><span><strong>Missing resources:</strong> tools, information, or materials are unavailable.</span></div>
+        <div class="friction-item"><b>04</b><span><strong>Competing demands:</strong> interruptions or obligations take priority.</span></div>
+        <div class="friction-item"><b>05</b><span><strong>Emotional resistance:</strong> uncertainty, discomfort, or fear makes initiation harder.</span></div>
+      </div>
+    </div>
+
+    <div class="friction-column">
+      <h3>How to Reduce Friction</h3>
+      <p>Choose a practical adjustment that changes the conditions around the behavior.</p>
+      <div class="friction-list">
+        <div class="friction-item"><b>A</b><span>Write the first physical action in one sentence.</span></div>
+        <div class="friction-item"><b>B</b><span>Reduce the task until it fits the time available.</span></div>
+        <div class="friction-item"><b>C</b><span>Prepare the materials before the planned start time.</span></div>
+        <div class="friction-item"><b>D</b><span>Protect a realistic work window from avoidable interruptions.</span></div>
+        <div class="friction-item"><b>E</b><span>Use a manageable first step while preserving the larger goal.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="review-section">
+  <div class="section-heading">
+    <h2>Review the Result, Not Just the Effort</h2>
+    <p>A useful review turns an experience into information that can improve the next attempt.</p>
+  </div>
+
+  <div class="review-grid">
+    <article class="review-card">
+      <span>REVIEW 01</span>
+      <h3>What did I complete?</h3>
+      <p>Record a visible result: a finished exercise, a decision, a draft, a comparison, or a prepared resource.</p>
+    </article>
+    <article class="review-card">
+      <span>REVIEW 02</span>
+      <h3>What made it easier or harder?</h3>
+      <p>Identify the condition that influenced the action. Look for missing information, interruptions, or excessive scope.</p>
+    </article>
+    <article class="review-card">
+      <span>REVIEW 03</span>
+      <h3>What should change next time?</h3>
+      <p>Keep what worked. Change one relevant condition and test whether the next attempt improves.</p>
+    </article>
+  </div>
+</section>
+
+<section class="lesson-panel">
+  <details>
+    <summary>
+      <span class="chevron">▶</span>
+      <span>Deep Lesson: The Difference Between Motivation, Activation & Momentum</span>
+    </summary>
+
+    <div class="lesson-content">
+      <h3>Motivation is not the only variable controlling behavior.</h3>
+
+      <p>
+        A person can genuinely want an outcome and still fail to initiate
+        the behavior required to reach it. The gap can come from unclear
+        instructions, excessive task size, competing demands, poor timing,
+        missing resources, or an environment that makes the undesired behavior
+        easier.
+      </p>
+
+      <h4>1. Motivation</h4>
+      <p>
+        Motivation concerns the desire or willingness to pursue an outcome.
+        It can fluctuate throughout the day, which means a system that depends
+        entirely on feeling motivated is inherently unstable.
+      </p>
+
+      <h4>2. Activation</h4>
+      <p>
+        Activation is the transition from intention to the first observable
+        behavior. "Study programming" is an intention. "Open the lesson and
+        complete the first exercise" is an activation sequence.
+      </p>
+
+      <h4>3. Momentum</h4>
+      <p>
+        Momentum is the advantage created when one completed behavior makes
+        another behavior easier to identify or initiate. For example, organizing
+        your workspace can make tomorrow's study session easier to start.
+      </p>
+
+      <h4>4. The Important Distinction</h4>
+      <p>
+        A micro-action should not become an excuse to permanently avoid difficult
+        work. Its purpose is to create an entry point. Once the system has
+        established movement, the appropriate next step may be significantly larger.
+      </p>
+
+      <h4>5. The Better Question</h4>
+      <p>
+        Instead of asking, "How can I finish my entire goal today?" ask:
+        <strong>What action would meaningfully change the state of the system
+        within the time and capacity I actually have?</strong>
+      </p>
+    </div>
+  </details>
+</section>
+
+<footer class="engine-footer">
+  <span>LIFE VELOCITY // DECISION ENGINE</span>
+  <strong>CLARIFY → EXECUTE → OBSERVE → ADAPT</strong>
+</footer>
+
+</main>
+
+<script>
+/* AUDIO ENGINE */
+const AudioEngine = {
+  ctx:null,
+
+  init(){
+    if(!this.ctx){
+      this.ctx = new (
+        window.AudioContext ||
+        window.webkitAudioContext
+      )();
+    }
+  },
+
+  playTone(freq,type,duration){
+    this.init();
+
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq,this.ctx.currentTime);
+
+    gain.gain.setValueAtTime(0.08,this.ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(
+      0.0001,
+      this.ctx.currentTime + duration
+    );
+
+    osc.connect(gain);
+    gain.connect(this.ctx.destination);
+
+    osc.start();
+    osc.stop(this.ctx.currentTime + duration);
+  },
+
+  playStart(){
+    this.playTone(440,'sine',.12);
+    setTimeout(()=>this.playTone(660,'sine',.15),100);
+  },
+
+  playPause(){
+    this.playTone(330,'sine',.12);
+  },
+
+  playComplete(){
+    this.playTone(523.25,'sine',.15);
+    setTimeout(()=>this.playTone(659.25,'sine',.15),140);
+    setTimeout(()=>this.playTone(783.99,'sine',.2),280);
+  }
+};
+
+/* ACTION LIBRARY */
+const actionLibrary = {
+  Learning:{
+    High:"Complete one focused lesson or practice exercise. Write down the concept you learned and one way to apply it.",
+    Medium:"Study one short lesson section and write three points you want to remember.",
+    Low:"Open your current learning resource and review one concept or example."
+  },
+  Career:{
+    High:"Review three job descriptions or career paths. Identify the skills and evidence that appear repeatedly.",
+    Medium:"Improve one section of your resume, portfolio, or professional profile.",
+    Low:"Find one role or career path that interests you and save its requirements."
+  },
+  Financial:{
+    High:"Review your current financial picture. Categorize recent spending and identify one decision that could improve your position.",
+    Medium:"Review one bill, account, or financial obligation and record the next action it requires.",
+    Low:"Write down one financial question you need to answer and identify a reliable source."
+  },
+  Health:{
+    High:"Complete a planned wellbeing activity and record how you felt before and after.",
+    Medium:"Prepare one practical meal, recovery step, or wellbeing routine for later today.",
+    Low:"Choose one small supportive action, such as preparing water or organizing what you need."
+  },
+  Business:{
+    High:"Test one business assumption. Review potential customers, competing offers, and evidence of demand.",
+    Medium:"Write a one-paragraph description of a problem your business idea could solve.",
+    Low:"List one customer problem you want to understand better."
+  },
+  Relationships:{
+    High:"Prepare for an important conversation. Identify the issue, the outcome you want, and questions you need to ask.",
+    Medium:"Send a thoughtful follow-up or clarify one outstanding communication.",
+    Low:"Identify one person you need to contact and the main point you want to communicate."
+  },
+  Personal:{
+    High:"Review a current goal and identify the decisions, habits, and conditions affecting your progress.",
+    Medium:"Write a short reflection about one decision you made and what you learned from it.",
+    Low:"Write down one thing you want to improve and the smallest useful action."
+  },
+  Environment:{
+    High:"Redesign one part of your environment to make an important behavior easier to begin and repeat.",
+    Medium:"Prepare your workspace or materials for the next important task.",
+    Low:"Remove one small obstacle from the place where you plan to work."
+  }
+};
+
+/* TIMER STATE */
+let timerInterval = null;
+let secondsLeft = 0;
+let totalSeconds = 0;
+let isRunning = false;
+let completedSprints = 0;
+
+const circleCircumference = 2 * Math.PI * 90;
+
+/* GENERATE ACTION */
+function generateAction(){
+  const layer = document.getElementById('layer').value;
+  const energy = document.getElementById('energy').value;
+  const time = document.getElementById('time').value;
+
+  const action = actionLibrary[layer][energy];
+
+  document.getElementById('actionText').innerText = action;
+
+  document.getElementById('actionBadge').innerText =
+    `${layer} • ${energy} energy • ${time} min`;
+
+  totalSeconds = parseInt(time,10) * 60;
+  secondsLeft = totalSeconds;
+
+  updateTimerDisplay();
+  updateProgressCircle();
+
+  document.getElementById('selectorForm').style.display = 'none';
+  document.getElementById('outputSection').classList.add('active');
+
+  AudioEngine.playStart();
+  startTimer();
+
+  document.getElementById('outputSection').scrollIntoView({
+    behavior:'smooth',
+    block:'center'
+  });
+}
+
+/* DISPLAY TIMER */
+function updateTimerDisplay(){
+  const mins = Math.floor(secondsLeft / 60);
+  const secs = secondsLeft % 60;
+
+  const formatted =
+    `${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
+
+  document.getElementById('timerDisplay').innerText = formatted;
+
+  if(isRunning){
+    document.title = `${formatted} - Action Sprint`;
+  }
+}
+
+/* PROGRESS CIRCLE */
+function updateProgressCircle(){
+  const circle = document.getElementById('timerProgress');
+
+  if(!totalSeconds){
+    circle.style.strokeDashoffset = circleCircumference;
+    return;
+  }
+
+  const offset =
+    circleCircumference -
+    (secondsLeft / totalSeconds) * circleCircumference;
+
+  circle.style.strokeDashoffset = offset;
+}
+
+/* START TIMER */
+function startTimer(){
+  if(timerInterval){
+    clearInterval(timerInterval);
+  }
+
+  isRunning = true;
+  document.getElementById('toggleBtn').innerText = 'Pause';
+
+  timerInterval = setInterval(()=>{
+    if(secondsLeft > 0){
+      secondsLeft--;
+      updateTimerDisplay();
+      updateProgressCircle();
+    }else{
+      clearInterval(timerInterval);
+      timerInterval = null;
+      isRunning = false;
+
+      document.getElementById('timerDisplay').innerText = "DONE!";
+      document.getElementById('toggleBtn').innerText = 'Finished';
+      document.title = "Sprint Completed!";
+
+      AudioEngine.playComplete();
+
+      completedSprints++;
+      document.getElementById('streakCount').innerText = completedSprints;
+    }
+  },1000);
+}
+
+/* PAUSE / RESUME */
+function toggleTimer(){
+  if(isRunning){
+    clearInterval(timerInterval);
+    timerInterval = null;
+    isRunning = false;
+
+    document.getElementById('toggleBtn').innerText = 'Resume';
+    document.title = "Paused";
+
+    AudioEngine.playPause();
+  }else if(secondsLeft > 0){
+    AudioEngine.playStart();
+    startTimer();
+  }
+}
+
+/* COMPLETE / RESET */
+function completeSprint(){
+  if(timerInterval){
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
+
+  if(secondsLeft < totalSeconds && secondsLeft > 0){
+    completedSprints++;
+    document.getElementById('streakCount').innerText = completedSprints;
+  }
+
+  isRunning = false;
+  secondsLeft = 0;
+  totalSeconds = 0;
+
+  document.title = "Life Velocity — Micro-Action Engine";
+
+  document.getElementById('outputSection').classList.remove('active');
+  document.getElementById('selectorForm').style.display = 'block';
+
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+
+</body>
+</html>
