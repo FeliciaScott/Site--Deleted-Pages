@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PathKeeper | Career Development Tools & Resources</title>
+
+<meta name="description" content="Explore practical tools, workbooks, templates, and learning systems to research opportunities, develop skills, plan a career path, and build proof of work.">
+<meta name="keywords" content="career planning tools, self education, skill development, scholarships, grants, apprenticeships, career research, portfolio building, PathKeeper">
+<meta name="author" content="PathKeeper">
+
+<meta property="og:title" content="PathKeeper | Build Your Own Career Path">
+<meta property="og:description" content="Practical tools for self-education, career planning, opportunity research, skill development, and proof of work.">
+<meta property="og:type" content="website">
+
+<style>
+:root {
+  --cream: #F7F2E8;
+  --cream-dark: #EEE3D1;
+  --brown: #49352A;
+  --brown-mid: #674C3B;
+  --brown-light: #8B6A50;
+  --blue: #294F6D;
+  --blue-mid: #3D6F91;
+  --blue-light: #729BB5;
+  --blue-pale: #DCEAF1;
+  --white: #FFFFFF;
+  --text: #302C29;
+  --muted: #665F58;
+  --border: #D8CCBC;
+  --shadow: 0 8px 24px rgba(49, 42, 34, .09);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  line-height: 1.65;
+}
+
+button, a {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+/* HEADER */
+
+.pk-header {
+  background: var(--brown);
+  color: var(--white);
+  padding: 19px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.pk-brand {
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: .5px;
+}
+
+.pk-brand span {
+  color: #DCC4A7;
+}
+
+.pk-header-note {
+  font-size: 12px;
+  color: #E9DFD3;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* HERO */
+
+.pk-hero {
+  background: linear-gradient(125deg, var(--blue), var(--brown));
+  color: white;
+  text-align: center;
+  padding: 75px 20px;
+}
+
+.pk-hero-inner {
+  max-width: 850px;
+  margin: auto;
+}
+
+.pk-eyebrow {
+  color: #DCEAF1;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.pk-hero h1 {
+  font-size: clamp(30px, 5vw, 49px);
+  line-height: 1.17;
+  margin: 15px 0;
+}
+
+.pk-hero p {
+  max-width: 720px;
+  margin: 0 auto 25px;
+  color: #F0EAE2;
+  font-size: 17px;
+}
+
+.pk-button {
+  display: inline-block;
+  padding: 12px 22px;
+  border: 0;
+  border-radius: 7px;
+  background: var(--blue);
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.pk-button:hover {
+  background: var(--brown-light);
+  transform: translateY(-2px);
+}
+
+.pk-button-light {
+  background: var(--cream);
+  color: var(--brown);
+}
+
+.pk-button-light:hover {
+  background: white;
+}
+
+.pk-button-outline {
+  background: transparent;
+  color: var(--blue);
+  border: 1px solid var(--blue);
+}
+
+.pk-button-outline:hover {
+  color: white;
+}
+
+/* GENERAL SECTIONS */
+
+.pk-section {
+  padding: 65px 5%;
+}
+
+.pk-section-inner {
+  max-width: 1180px;
+  margin: auto;
+}
+
+.pk-section-heading {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 38px;
+}
+
+.pk-section-heading h2 {
+  color: var(--brown);
+  font-size: clamp(25px, 4vw, 34px);
+  margin: 0 0 12px;
+}
+
+.pk-section-heading p {
+  color: var(--muted);
+  margin: 0;
+}
+
+.pk-blue-section {
+  background: var(--blue-pale);
+}
+
+.pk-dark-section {
+  background: var(--brown);
+  color: white;
+}
+
+.pk-dark-section h2,
+.pk-dark-section h3 {
+  color: white;
+}
+
+/* INTRODUCTION */
+
+.pk-intro-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px;
+}
+
+.pk-intro-card {
+  padding: 25px;
+  background: white;
+  border-radius: 12px;
+  border-top: 4px solid var(--blue);
+  box-shadow: var(--shadow);
+}
+
+.pk-intro-card h3 {
+  color: var(--brown);
+  margin-top: 0;
+}
+
+.pk-intro-card p {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+/* PRODUCT FILTERS */
+
+.pk-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.pk-filter {
+  padding: 9px 16px;
+  border-radius: 30px;
+  border: 1px solid var(--border);
+  background: white;
+  color: var(--brown);
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.pk-filter.active,
+.pk-filter:hover {
+  background: var(--blue);
+  color: white;
+  border-color: var(--blue);
+}
+
+/* PRODUCTS */
+
+.pk-products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+  gap: 24px;
+}
+
+.pk-product-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow);
+}
+
+.pk-product-visual {
+  min-height: 145px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 57px;
+  background: var(--blue-pale);
+}
+
+.pk-product-card:nth-child(3n + 2) .pk-product-visual {
+  background: var(--cream-dark);
+}
+
+.pk-product-card:nth-child(3n) .pk-product-visual {
+  background: #E7E1DA;
+}
+
+.pk-product-content {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.pk-category {
+  color: var(--blue-mid);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+.pk-product-content h3 {
+  color: var(--brown);
+  margin: 8px 0;
+  font-size: 19px;
+  line-height: 1.3;
+}
+
+.pk-product-content p {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.pk-includes {
+  background: var(--cream);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 13px;
+  margin: 10px 0;
+}
+
+.pk-includes strong {
+  color: var(--brown);
+}
+
+.pk-outcome {
+  font-size: 13px;
+  color: var(--blue);
+  font-weight: bold;
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.pk-price {
+  font-size: 23px;
+  color: var(--brown);
+  font-weight: bold;
+  margin: 12px 0 5px;
+}
+
+.pk-product-content .pk-button {
+  width: 100%;
+  margin-top: 13px;
+  text-align: center;
+}
+
+.pk-no-results {
+  display: none;
+  text-align: center;
+  color: var(--muted);
+  padding: 25px;
+}
+
+/* PROCESS */
+
+.pk-process-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px;
+}
+
+.pk-process-step {
+  background: var(--blue);
+  padding: 22px 16px;
+  border-radius: 10px;
+  text-align: center;
+  color: white;
+}
+
+.pk-process-step strong {
+  display: block;
+  color: #E2D2B9;
+  font-size: 19px;
+  margin-bottom: 8px;
+}
+
+.pk-process-step p {
+  font-size: 13px;
+  margin: 0;
+}
+
+/* LEARNING VALUE */
+
+.pk-value-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px;
+}
+
+.pk-value-card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  border-left: 5px solid var(--blue);
+}
+
+.pk-value-card span {
+  color: var(--brown-light);
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.pk-value-card h3 {
+  color: var(--brown);
+  margin: 9px 0;
+}
+
+.pk-value-card p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* BUNDLE */
+
+.pk-bundle {
+  background: linear-gradient(130deg, var(--brown), var(--blue));
+  color: white;
+  text-align: center;
+  padding: 65px 20px;
+}
+
+.pk-bundle-inner {
+  max-width: 850px;
+  margin: auto;
+}
+
+.pk-bundle h2 {
+  font-size: 32px;
+  margin-top: 0;
+}
+
+.pk-bundle p {
+  color: #F0EAE2;
+}
+
+.pk-bundle-price {
+  font-size: 29px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+/* CART */
+
+.pk-cart-section {
+  background: white;
+}
+
+.pk-cart {
+  max-width: 850px;
+  margin: auto;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 25px;
+}
+
+.pk-cart h2 {
+  color: var(--brown);
+  margin-top: 0;
+}
+
+.pk-cart-list {
+  padding: 0;
+  list-style: none;
+}
+
+.pk-cart-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.pk-cart-total {
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--brown);
+  text-align: right;
+}
+
+.pk-cart-message {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.pk-remove {
+  border: 0;
+  color: #8B3A32;
+  background: transparent;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.pk-empty {
+  color: var(--muted);
+}
+
+/* FAQ */
+
+.pk-faq {
+  max-width: 900px;
+  margin: auto;
+}
+
+.pk-faq details {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 18px 20px;
+  margin-bottom: 13px;
+}
+
+.pk-faq summary {
+  color: var(--brown);
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.pk-faq details p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* FOOTER */
+
+.pk-footer {
+  background: var(--brown);
+  color: white;
+  text-align: center;
+  padding: 35px 20px;
+}
+
+.pk-footer p {
+  margin: 5px;
+  font-size: 13px;
+  color: #E9DFD3;
+}
+
+/* MOBILE */
+
+@media(max-width:650px) {
+  .pk-header {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .pk-hero {
+    padding: 55px 20px;
+  }
+
+  .pk-section {
+    padding: 45px 18px;
+  }
+
+  .pk-products {
+    grid-template-columns: 1fr;
+  }
+
+  .pk-cart {
+    padding: 18px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="pk-header">
+  <div class="pk-brand">PathKeeper<span>Services:</span></div>
+  <div class="pk-header-note">1-on-1 Strategy, Execution Coaching & Audits </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+
+<section class="pk-hero">
+  <div class="pk-hero-inner">
+    <div class="pk-eyebrow">PathKeeper Resource Collection</div>
+    <h1>Don't Just Choose a Career. Learn How to Build Your Own Path.</h1>
+    <p>
+      Partner directly with PathKeeper for tailored strategic planning, workflow audits, and execution coaching designed to help you break through bottlenecks and scale your output.
+    </p>
+    <a href="#products" class="pk-button pk-button-light">
+      Explore Learning Tools
+    </a>
+  </div>
+</section>
+
+<!-- PURPOSE -->
+
+<section class="pk-section">
+  <div class="pk-section-inner">
+    <div class="pk-section-heading">
+      <h2>Resources That Help You Move From Learning to Doing</h2>
+      <p>
+        A career path can be built through research, deliberate learning,
+        practical experience, and evidence of what you can accomplish.
+        These resources are designed to help you manage each part of that process.
+      </p>
+    </div>
+
+    <div class="pk-intro-grid">
+      <article class="pk-intro-card">
+        <h3>Research Opportunities</h3>
+        <p>
+          Find scholarships, grants, apprenticeships, certifications,
+          competitions, training programs, and other ways to gain access
+          to education or experience.
+        </p>
+      </article>
+
+      <article class="pk-intro-card">
+        <h3>Design Your Learning</h3>
+        <p>
+          Compare courses, identify skill gaps, estimate time requirements,
+          and organize a self-education plan around your goals.
+        </p>
+      </article>
+
+      <article class="pk-intro-card">
+        <h3>Build Practical Skills</h3>
+        <p>
+          Turn lessons into projects, exercises, experiments, and
+          real-world practice instead of relying on course completion alone.
+        </p>
+      </article>
+
+      <article class="pk-intro-card">
+        <h3>Produce Evidence</h3>
+        <p>
+          Document projects, research, completed work, and demonstrated
+          abilities so you have something concrete to show.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+
+<section class="pk-section pk-blue-section" id="products">
+  <div class="pk-section-inner">
+
+    <div class="pk-section-heading">
+      <h2>PathKeeper Tools & Products</h2>
+      <p>
+        Choose a resource based on the stage of your career-building
+        process. Product prices below are suggested starting prices
+        and can be edited before publishing.
+      </p>
+    </div>
+
+    <div class="pk-filter-bar" aria-label="Filter products">
+      <button class="pk-filter active" data-filter="all">All Resources</button>
+      <button class="pk-filter" data-filter="research">Research</button>
+      <button class="pk-filter" data-filter="learning">Self-Education</button>
+      <button class="pk-filter" data-filter="planning">Career Planning</button>
+      <button class="pk-filter" data-filter="skills">Skill Building</button>
+      <button class="pk-filter" data-filter="evidence">Proof of Work</button>
+      <button class="pk-filter" data-filter="business">Business</button>
+    </div>
+
+    <div class="pk-products" id="product-grid">
+
+      <!-- PRODUCT 1 -->
+
+      <article class="pk-product-card" data-category="planning">
+        <div class="pk-product-visual">🧭</div>
+        <div class="pk-product-content">
+          <span class="pk-category">Career Planning</span>
+          <h3>Career Path Blueprint Workbook</h3>
+          <p>
+            Develop a career direction by examining your interests,
+            existing abilities, target roles, financial needs, and
+            available learning routes.
+          </p>
+          <div class="pk-includes">
+            <strong>Includes:</strong>
+            Career direction worksheet, skill inventory, goal map,
+            timeline, milestones, and backup plan.
+          </div>
+          <div class="pk-outcome">
+            Outcome: A documented career development plan.
+          </div>
+          <div class="pk-price">$19.00</div>
+          <button class="pk-button add-cart" data-name="Career Path Blueprint Workbook" data-price="19">
+            Add to Cart
+          </button>
+        </div>
+      </article>
+
+      <!-- PRODUCT 2 -->
+
+      <article class="pk-product-card" data-category="research">
+        <div class="pk-product-visual">🔎</div>
+        <div class="pk-product-content">
+          <span class="pk-category">Research Intelligence</span>
+          <h3>Opportunity Research Toolkit</h3>
+          <p>
+            Learn how to locate, compare, and evaluate opportunities
+            instead of applying randomly or relying on incomplete information.
+          </p>
+          <div class="pk-includes">
+            <strong>Includes:</strong>
+            Opportunity comparison sheets, eligibility checklist,
+            application tracker, deadline tracker, and source evaluation guide.
+          </div>
+          <div class="pk-outcome">
+            Outcome: An organized list of relevant opportunities.
+          </div>
+          <div class="pk-price">$15.00</div>
+          <button class="pk-button add-cart" data-name="Opportunity Research Toolkit" data-price="15">
+            Add to Cart
+          </button>
+        </div>
+      </article>
+
+      <!-- PRODUCT 3 -->
+
+      <article class="pk-product-card" data-category="learning">
+        <div class="pk-product-visual">📚</div>
+        <div class="pk-product-content">
+          <span class="pk-category">Self-Education</span>
+          <h3>Self-Education Design System</h3>
+          <p>
+            Create a structured learning program using courses,
+            books, tutorials, practice projects, and independent research.
+          </p>
+          <div class="pk-includes">
+            <strong>Includes:</strong>
+            Learning sequence planner, resource comparison,
+            study schedule, knowledge checks, and progress review.
+          </div>
+          <div class="pk-outcome">
+            Outcome: A structured self-education curriculum.
+          </div>
+          <div class="pk-price">$24.00</div>
+          <button class="pk-button add-cart" data-name="Self-Education Design System" data-price="24">
+            Add to Cart
+          </button>
+        </div>
+      </article>
+
+      <!-- PRODUCT 4 -->
+
+      <article class="pk-product-card" data-category="learning">
+        <div class="pk-product-visual">🎓</div>
+        <div class="pk-product-content">
+          <span class="pk-category">Course Selection</span>
+          <h3>Course & Certification Evaluation Kit</h3>
+          <p>
+            Evaluate whether a course, certificate, or training program
+            is worth the time and money before committing.
+          </p>
+          <div class="pk-includes">
+            <strong>Includes:</strong>
+            Cost comparison, time estimates, skill outcomes,
+            prerequisites, credibility checks, and ROI worksheet.
+          </div>
+          <div class="pk-outcome">
+            Outcome: A reasoned learning investment decision.
+          </div>
+          <div class="pk-price">$17.00</div>
+          <button class="pk-button add-cart" data-name="Course & Certification Evaluation Kit" data-price="17">
+            Add to Cart
+          </button>
+        </div>
+      </article>
+
+      <!-- PRODUCT 5 -->
+
+      <article class="pk-product-card" data-category="skills">
+        <div class="pk-product-visual">🛠️</div>
+        <div class="pk-product-content">
+          <span class="pk-category">Skill Development</span>
+          <h3>Skill Practice & Project Builder</h3>
+          <p>
+            Convert what you learn into repeatable practice and
+            practical projects that demonstrate your developing abilities.
+          </p>
+          <div class="pk-includes">
+            <strong>Includes:</strong>
+            Skill breakdown sheets, practice exercises,
+            project prompts, difficulty progression, and review criteria.
+          </div>
+          <div class="pk-outcome">
+            Outcome: A portfolio of completed practice projects.
+          </div>
+          <div class="pk-price">$21.00</div>
+          <button class="pk-button add-cart" data-name="Skill Practice & Project Builder" data-price="21">
+            Add to Cart
+          </button>
+        </div>
+      </article>
+
+      <!-- PRODUCT 6 -->
+
+      <article class="pk-product-card" data-category="evidence">
+        <div class="pk-product-visual">📂</div>
+        <div class="pk-product-content">
+          <span class="pk-category">Proof of Work</span>
+          <h3>WorkProof Portfolio System</h3>
+          <p>
+            Organize evidence of your abilities through completed projects,
+            screenshots, written explanations, research, and practical results.
+          </p>
+          <div class="pk-includes">
+            <strong>Includes:</strong>
+            Evidence blocks, project documentation,
+            portfolio organization, progress records, and presentation guide.
+          </div>
+          <div class="pk-outcome">
+            Outcome: A structured portfolio of demonstrated work.
+          </div>
+          <div class="pk-price">$27.00</div>
+          <button class="pk-button add-cart" data-name="WorkProof Portfolio System" data-price="27">
+            Add to Cart
+          </button>
+        </div>
+      </article>
+
+      <!-- PRODUCT 7 -->
+
+      <article class="pk-product-card" data-category="planning">
+        <div class="pk-product-visual">⏳</div>
+        <div class="pk-product-content">
+          <span class="pk-category">Time & Focus</span>
+          <h3>Deep Work & Learning Planner</h3>
+          <p>
+            Build realistic study and project schedules around work,
+            personal responsibilities, available energy, and deadlines.
+          </p>
+          <div class="pk-includes">
+            <strong>Includes:</strong>
+            Weekly time map, focus sessions, task breakdown,
+            interruption log, and study review.
+          </div>
+          <div class="pk-outcome">
+            Outcome: A manageable learning and execution schedule.
+          </div>
+          <div class="pk-price">$14.00</div>
+          <button class="pk-button add-cart" data-name="Deep Work & Learning Planner" data-price="14">
+            Add to Cart
+          </button>
+        </div>
+      </article>
+
+      <!-- PRODUCT 8 -->
+
+      <article class="pk-product-card" data-category="research">
+        <div class="pk-product-visual">💰</div>
+        <div class="pk-product-content">
+          <span class="pk-category">Financial Planning</span>
+          <h3>Education & Opportunity Funding Planner</h3>
+          <p>
+            Examine the financial requirements of a learning or career
+            route and identify possible funding sources.
+          </p>
+          <div class="pk-includes">
+            <strong>Includes:</strong>
+            Education expense worksheet, grant and scholarship tracker,
+            application planning, and funding gap analysis.
+          </div>
+          <div class="pk-outcome">
+            Outcome: A documented funding strategy.
+          </div>
+          <div class="pk-price">$19.00</div>
+          <button class="pk-button add-cart" data-name="Education & Opportunity Funding Planner" data-price="19">
+            Add to Cart
+          </button>
+        </div>
+      </article>
+
+      <!-- PRODUCT 9 -->
+
+      <article class="pk-product-card" data-category="business">
+        <div class="pk-product-visual">🚀</div>
+        <div class="pk-product-content">
+          <span class="pk-category">Business Development</span>
+          <h3>Startup Idea Validation Workbook</h3>
+          <p>
+            Investigate a business idea before investing heavily.
+            Examine customers, competition, costs, risks, and practical tests.
+          </p>
+          <div class="pk-includes">
+            <strong>Includes:</strong>
+            Idea validation questions, customer research,
+            competitor analysis, cost planning, and milestone tracker.
+          </div>
+          <div class="pk-outcome">
+            Outcome: A documented idea validation plan.
+          </div>
+          <div class="pk-price">$22.00</div>
+          <button class="pk-button add-cart" data-name="Startup Idea Validation Workbook" data-price="22">
+            Add to Cart
+          </button>
+        </div>
+      </article>
+
+      <!-- PRODUCT 10 -->
+
+      <article class="pk-product-card" data-category="skills">
+        <div class="pk-product-visual">🧠</div>
+        <div class="pk-product-content">
+          <span class="pk-category">Problem Solving</span>
+          <h3>Problem Solving Intelligence Toolkit</h3>
+          <p>
+            Learn to define problems, investigate causes, compare solutions,
+            test assumptions, and evaluate results.
+          </p>
+          <div class="pk-includes">
+            <strong>Includes:</strong>
+            Root cause analysis, 5 Whys, decision matrices,
+            experiment planner, risk review, and improvement cycle.
+          </div>
+          <div class="pk-outcome">
+            Outcome: A repeatable problem-solving process.
+          </div>
+          <div class="pk-price">$23.00</div>
+          <button class="pk-button add-cart" data-name="Problem Solving Intelligence Toolkit" data-price="23">
+            Add to Cart
+          </button>
+        </div>
+      </article>
+
+    </div>
+
+    <p class="pk-no-results" id="no-results">
+      No products match this category.
+    </p>
+
+  </div>
+</section>
+
+<!-- THE PATHKEEPER PROCESS -->
+
+<section class="pk-section pk-dark-section">
+  <div class="pk-section-inner">
+    <div class="pk-section-heading">
+      <h2>How the Resources Work Together</h2>
+      <p>
+        Each tool supports a different stage. The goal is not to collect
+        worksheets. It is to make measurable progress toward a career,
+        business, or learning outcome.
+      </p>
+    </div>
+
+    <div class="pk-process-grid">
+      <div class="pk-process-step">
+        <strong>01. Discover</strong>
+        <p>Identify interests, needs, possible directions, and opportunities.</p>
+      </div>
+      <div class="pk-process-step">
+        <strong>02. Research</strong>
+        <p>Compare pathways, programs, requirements, costs, and risks.</p>
+      </div>
+      <div class="pk-process-step">
+        <strong>03. Design</strong>
+        <p>Build a learning sequence, schedule, and realistic strategy.</p>
+      </div>
+      <div class="pk-process-step">
+        <strong>04. Practice</strong>
+        <p>Develop skills through exercises, projects, and applied learning.</p>
+      </div>
+      <div class="pk-process-step">
+        <strong>05. Demonstrate</strong>
+        <p>Document completed work and create evidence of ability.</p>
+      </div>
+      <div class="pk-process-step">
+        <strong>06. Improve</strong>
+        <p>Review results, identify gaps, and adjust the next steps.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY THE PRODUCTS ARE DIFFERENT -->
+
+<section class="pk-section">
+  <div class="pk-section-inner">
+    <div class="pk-section-heading">
+      <h2>What You Should Be Able to Do After Using a Resource</h2>
+      <p>
+        Every product should help you create something useful,
+        make a better decision, or demonstrate progress.
+      </p>
+    </div>
+
+    <div class="pk-value-grid">
+      <article class="pk-value-card">
+        <span>RESEARCH OUTPUT</span>
+        <h3>Make Informed Decisions</h3>
+        <p>
+          Compare opportunities using eligibility, costs, deadlines,
+          requirements, credibility, and potential benefits.
+        </p>
+      </article>
+
+      <article class="pk-value-card">
+        <span>LEARNING OUTPUT</span>
+        <h3>Build a Learning Curriculum</h3>
+        <p>
+          Organize resources into a sequence that addresses specific
+          skill gaps and produces practical knowledge.
+        </p>
+      </article>
+
+      <article class="pk-value-card">
+        <span>PROJECT OUTPUT</span>
+        <h3>Create Demonstrable Work</h3>
+        <p>
+          Complete projects and exercises that show how you apply
+          what you have learned.
+        </p>
+      </article>
+
+      <article class="pk-value-card">
+        <span>STRATEGY OUTPUT</span>
+        <h3>Prepare for Obstacles</h3>
+        <p>
+          Identify financial, time, access, and skill constraints.
+          Develop alternative routes when the original plan changes.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- BUNDLE -->
+
+<section class="pk-bundle">
+  <div class="pk-bundle-inner">
+    <h2>PathKeeper Career Builder Collection</h2>
+    <p>
+      Bring together career planning, opportunity research,
+      self-education, skill practice, project development,
+      and portfolio documentation.
+    </p>
+    <p>
+      A connected collection for people who want to take an active
+      role in designing their education and career development.
+    </p>
+    <div class="pk-bundle-price">Suggested bundle price: $89.00</div>
+    <button
+      class="pk-button pk-button-light"
+      id="bundle-button"
+      type="button">
+      Add Complete Collection
+    </button>
+  </div>
+</section>
+
+<!-- CART -->
+
+<section class="pk-section pk-cart-section" id="cart">
+  <div class="pk-section-inner">
+    <div class="pk-cart">
+      <h2>Your Selected Resources</h2>
+      <p class="pk-cart-message">
+        Review your selections below. This is a selection cart demonstration;
+        payment and checkout must be connected separately before selling.
+      </p>
+
+      <ul class="pk-cart-list" id="cart-list">
+        <li class="pk-empty">No resources selected yet.</li>
+      </ul>
+
+      <div class="pk-cart-total" id="cart-total">Total: $0.00</div>
+      <button class="pk-button pk-button-outline" id="clear-cart" type="button">
+        Clear Selection
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+
+<section class="pk-section">
+  <div class="pk-section-inner">
+    <div class="pk-faq">
+      <div class="pk-section-heading">
+        <h2>Frequently Asked Questions</h2>
+      </div>
+
+      <details>
+        <summary>Are these resources courses?</summary>
+        <p>
+          Some resources can be used independently, while others can
+          support courses or self-directed learning programs. Their purpose
+          is to help you organize information and apply what you learn.
+        </p>
+      </details>
+
+      <details>
+        <summary>Do I need a degree or previous experience?</summary>
+        <p>
+          Not necessarily. Many tools are designed to help beginners
+          identify a starting point, understand requirements, and build
+          skills progressively. Individual opportunities may have their
+          own eligibility requirements.
+        </p>
+      </details>
+
+      <details>
+        <summary>Can I use these resources while working?</summary>
+        <p>
+          Yes. The planning tools are intended to help you account for
+          available time, responsibilities, financial limits, and realistic
+          learning schedules.
+        </p>
+      </details>
+
+      <details>
+        <summary>Do these products guarantee employment or funding?</summary>
+        <p>
+          No. They provide research, planning, and learning support.
+          Scholarships, grants, jobs, admissions, and other opportunities
+          have independent selection requirements and outcomes.
+        </p>
+      </details>
+
+      <details>
+        <summary>What should I purchase first?</summary>
+        <p>
+          Start with the resource that addresses your current obstacle.
+          If you do not know which direction to pursue, begin with career
+          planning. If you need to find options, begin with opportunity
+          research. If you already have a direction, use the self-education
+          and skill practice resources.
+        </p>
+      </details>
+
+      <details>
+        <summary>Are the prices and products finalized?</summary>
+        <p>
+          The prices shown are suggested starting prices. Review the
+          product contents, production costs, and intended customer value
+          before publishing or connecting payment.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="pk-footer">
+  <strong>PathKeeper</strong>
+  <p>Research. Learn. Build. Demonstrate. Adapt.</p>
+  <p>Helping people create and develop their own career paths.</p>
+</footer>
+
+<script>
+/* =====================================
+   PRODUCT FILTER
+===================================== */
+
+const filterButtons = document.querySelectorAll(".pk-filter");
+const productCards = document.querySelectorAll(".pk-product-card");
+const noResults = document.getElementById("no-results");
+
+filterButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    const filter = button.dataset.filter;
+    let visibleCount = 0;
+
+    filterButtons.forEach(item => item.classList.remove("active"));
+    button.classList.add("active");
+
+    productCards.forEach(card => {
+      const matches =
+        filter === "all" || card.dataset.category === filter;
+
+      card.style.display = matches ? "flex" : "none";
+
+      if (matches) visibleCount++;
+    });
+
+    noResults.style.display = visibleCount === 0 ? "block" : "none";
+  });
+});
+
+/* =====================================
+   SIMPLE PRODUCT SELECTION CART
+===================================== */
+
+let cartItems = [];
+
+const cartList = document.getElementById("cart-list");
+const cartTotal = document.getElementById("cart-total");
+
+function formatMoney(amount) {
+  return "$" + amount.toFixed(2);
+}
+
+function renderCart() {
+  cartList.innerHTML = "";
+
+  if (cartItems.length === 0) {
+    const empty = document.createElement("li");
+    empty.className = "pk-empty";
+    empty.textContent = "No resources selected yet.";
+    cartList.appendChild(empty);
+  } else {
+    cartItems.forEach((item, index) => {
+      const li = document.createElement("li");
+
+      const itemName = document.createElement("span");
+      itemName.textContent = item.name + " — " + formatMoney(item.price);
+
+      const removeButton = document.createElement("button");
+      removeButton.type = "button";
+      removeButton.className = "pk-remove";
+      removeButton.textContent = "Remove";
+      removeButton.setAttribute("aria-label", "Remove " + item.name);
+
+      removeButton.addEventListener("click", () => {
+        cartItems.splice(index, 1);
+        renderCart();
+      });
+
+      li.appendChild(itemName);
+      li.appendChild(removeButton);
+      cartList.appendChild(li);
+    });
+  }
+
+  const total = cartItems.reduce((sum, item) => sum + item.price, 0);
+  cartTotal.textContent = "Total: " + formatMoney(total);
+}
+
+/* Add individual products */
+
+document.querySelectorAll(".add-cart").forEach(button => {
+  button.addEventListener("click", () => {
+    const name = button.dataset.name;
+    const price = Number(button.dataset.price);
+
+    cartItems.push({ name, price });
+    renderCart();
+
+    document.getElementById("cart").scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  });
+});
+
+/* Add complete collection */
+
+document.getElementById("bundle-button").addEventListener("click", () => {
+  cartItems.push({
+    name: "PathKeeper Career Builder Collection",
+    price: 89
+  });
+
+  renderCart();
+
+  document.getElementById("cart").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+});
+
+/* Clear cart */
+
+document.getElementById("clear-cart").addEventListener("click", () => {
+  cartItems = [];
+  renderCart();
+});
+
+renderCart();
+</script>
+
+</body>
+</html>
