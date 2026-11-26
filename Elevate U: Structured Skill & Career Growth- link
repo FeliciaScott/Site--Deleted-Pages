@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Future Opportunity Hub | Certificates, Study Abroad & Competitions</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:#081a2b;
+color:#f7f2e7;
+line-height:1.6;
+}
+
+.container{
+max-width:1200px;
+margin:40px auto;
+padding:30px;
+}
+
+/* =========================
+HERO
+========================= */
+
+.hero{
+background:
+linear-gradient(135deg,#183b59,#0b1d2e);
+padding:70px 45px;
+border-radius:28px;
+text-align:center;
+margin-bottom:55px;
+box-shadow:0 18px 45px rgba(0,0,0,.35);
+border:1px solid rgba(255,255,255,.06);
+}
+
+.hero h1{
+font-size:3.2rem;
+line-height:1.15;
+margin-bottom:22px;
+}
+
+.hero h1 span{
+color:#f2cb88;
+}
+
+.hero p{
+max-width:780px;
+margin:auto;
+font-size:1.12rem;
+line-height:1.9;
+color:#e3d9c6;
+}
+
+/* =========================
+PATH INDICATOR
+========================= */
+
+.path-strip{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+margin-top:40px;
+}
+
+.path-item{
+padding:18px;
+background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.08);
+border-radius:16px;
+}
+
+.path-item strong{
+display:block;
+color:#f2cb88;
+font-size:1.05rem;
+margin-bottom:4px;
+}
+
+.path-item span{
+font-size:.9rem;
+color:#c9c0b2;
+}
+
+/* =========================
+SECTION HEADINGS
+========================= */
+
+.section-title{
+text-align:center;
+font-size:2.35rem;
+margin-bottom:14px;
+}
+
+.subtitle{
+text-align:center;
+max-width:750px;
+margin:0 auto 42px;
+color:#d7cab6;
+}
+
+/* =========================
+MAIN OPPORTUNITY CARDS
+========================= */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:25px;
+}
+
+.card{
+background:#122c44;
+padding:32px;
+border-radius:22px;
+border:1px solid rgba(255,255,255,.06);
+transition:.3s;
+min-height:330px;
+}
+
+.card:hover{
+transform:translateY(-7px);
+background:#163650;
+box-shadow:0 15px 30px rgba(0,0,0,.2);
+}
+
+.icon{
+font-size:2.7rem;
+margin-bottom:18px;
+}
+
+.card h3{
+font-size:1.45rem;
+margin-bottom:13px;
+color:#f2cb88;
+}
+
+.card p{
+color:#d7cab6;
+line-height:1.75;
+margin-bottom:20px;
+}
+
+.card ul{
+padding-left:20px;
+color:#cfc5b5;
+}
+
+.card li{
+margin-bottom:8px;
+}
+
+/* =========================
+DECISION SECTION
+========================= */
+
+.decision{
+margin:65px 0;
+}
+
+.decision-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+}
+
+.decision-card{
+background:#0f2438;
+padding:27px;
+border-radius:20px;
+border-left:4px solid #f2cb88;
+}
+
+.decision-card h3{
+color:#f2cb88;
+margin-bottom:12px;
+}
+
+.decision-card p{
+color:#d7cab6;
+}
+
+/* =========================
+VALUE SECTION
+========================= */
+
+.highlight{
+margin:60px 0;
+background:#173654;
+padding:45px;
+border-radius:27px;
+text-align:center;
+}
+
+.highlight h2{
+font-size:2.15rem;
+margin-bottom:18px;
+}
+
+.highlight > p{
+max-width:760px;
+margin:auto;
+color:#d7cab6;
+}
+
+.value-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px;
+margin-top:35px;
+}
+
+.value-box{
+background:#0d2235;
+padding:25px 18px;
+border-radius:18px;
+}
+
+.value-box h3{
+color:#f2cb88;
+font-size:1.8rem;
+margin-bottom:8px;
+}
+
+.value-box p{
+color:#cfc5b5;
+font-size:.95rem;
+}
+
+/* =========================
+STRATEGY SECTION
+========================= */
+
+.strategy{
+margin:65px 0;
+}
+
+.strategy-box{
+display:grid;
+grid-template-columns:80px 1fr;
+gap:22px;
+align-items:start;
+background:#10283e;
+padding:28px;
+border-radius:20px;
+margin-bottom:15px;
+border:1px solid rgba(255,255,255,.05);
+}
+
+.number{
+width:55px;
+height:55px;
+border-radius:50%;
+background:#f2cb88;
+color:#0b1d2e;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:1.25rem;
+font-weight:bold;
+}
+
+.strategy-box h3{
+color:#f2cb88;
+margin-bottom:7px;
+}
+
+.strategy-box p{
+color:#d7cab6;
+}
+
+/* =========================
+FINAL SECTION
+========================= */
+
+.footer-box{
+margin-top:60px;
+padding:55px 40px;
+background:
+linear-gradient(135deg,#132f47,#0b1d2e);
+border-radius:27px;
+text-align:center;
+border:1px solid rgba(255,255,255,.06);
+}
+
+.footer-box h2{
+margin-bottom:18px;
+font-size:2.2rem;
+}
+
+.footer-box p{
+max-width:720px;
+margin:auto;
+color:#d7cab6;
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+.grid,
+.decision-grid{
+grid-template-columns:1fr;
+}
+
+.value-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+.path-strip{
+grid-template-columns:1fr;
+}
+
+}
+
+@media(max-width:600px){
+
+.container{
+padding:18px;
+margin:20px auto;
+}
+
+.hero{
+padding:45px 25px;
+}
+
+.hero h1{
+font-size:2.25rem;
+}
+
+.value-grid{
+grid-template-columns:1fr;
+}
+
+.strategy-box{
+grid-template-columns:1fr;
+}
+
+.number{
+margin-bottom:5px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- =========================
+HERO
+========================= -->
+
+<section class="hero">
+
+<h1>
+Build Proof of What <span>You Can Do</span>
+</h1>
+
+<p>
+Your education does not have to end with a classroom or a degree.
+Certificates can demonstrate specialized skills, studying abroad can expand
+your academic and cultural experience, and competitions can give you a way
+to prove your ability through real challenges.
+</p>
+
+<div class="path-strip">
+
+<div class="path-item">
+<strong>📜 Certificates</strong>
+<span>Build recognizable skills</span>
+</div>
+
+<div class="path-item">
+<strong>🌎 Study Abroad</strong>
+<span>Learn beyond your usual environment</span>
+</div>
+
+<div class="path-item">
+<strong>🏆 Competitions</strong>
+<span>Test your abilities through challenges</span>
+</div>
+
+</div>
+
+</section>
+
+<!-- =========================
+THREE PATHS
+========================= -->
+
+<h2 class="section-title">Three Ways to Build Opportunity</h2>
+
+<p class="subtitle">
+Each path develops a different type of evidence. Choose based on what you
+want to learn, experience, demonstrate, or add to your future applications.
+</p>
+
+<div class="grid">
+
+<!-- CERTIFICATES -->
+
+<div class="card">
+
+<div class="icon">📜</div>
+
+<h3>Certificates</h3>
+
+<p>
+Use structured learning to develop specific knowledge or technical skills
+that can strengthen your education, career profile, or portfolio.
+</p>
+
+<ul>
+<li>Technology & software</li>
+<li>Business & management</li>
+<li>Data & analytics</li>
+<li>Marketing & communication</li>
+<li>Professional skills</li>
+</ul>
+
+</div>
+
+<!-- STUDY ABROAD -->
+
+<div class="card">
+
+<div class="icon">🌎</div>
+
+<h3>Study Abroad</h3>
+
+<p>
+Explore education outside your home country and gain experiences that can
+expand your academic perspective, cultural knowledge, and independence.
+</p>
+
+<ul>
+<li>University programs</li>
+<li>Student exchanges</li>
+<li>Short-term programs</li>
+<li>International courses</li>
+<li>Research experiences</li>
+</ul>
+
+</div>
+
+<!-- COMPETITIONS -->
+
+<div class="card">
+
+<div class="icon">🏆</div>
+
+<h3>Competitions</h3>
+
+<p>
+Turn knowledge into demonstrated ability by solving problems, creating
+projects, presenting ideas, or competing against other participants.
+</p>
+
+<ul>
+<li>Business challenges</li>
+<li>Hackathons</li>
+<li>Case competitions</li>
+<li>Writing & research contests</li>
+<li>Innovation challenges</li>
+</ul>
+
+</div>
+
+</div>
+
+<!-- =========================
+WHICH PATH?
+========================= -->
+
+<section class="decision">
+
+<h2 class="section-title">Which Path Fits Your Goal?</h2>
+
+<p class="subtitle">
+You do not have to choose only one. Combining different types of opportunities
+can create a much stronger body of evidence over time.
+</p>
+
+<div class="decision-grid">
+
+<div class="decision-card">
+
+<h3>Need a Specific Skill?</h3>
+
+<p>
+Start with a certificate. Choose something connected to a skill you can
+actually demonstrate through projects, work, or a portfolio.
+</p>
+
+</div>
+
+<div class="decision-card">
+
+<h3>Want a Different Environment?</h3>
+
+<p>
+Explore studying abroad. Look beyond traditional semesters and consider
+short programs, exchanges, research opportunities, and international courses.
+</p>
+
+</div>
+
+<div class="decision-card">
+
+<h3>Want to Prove Yourself?</h3>
+
+<p>
+Look at competitions. A completed challenge can provide evidence that you
+can apply knowledge rather than simply say that you know something.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =========================
+WHY THESE MATTER
+========================= -->
+
+<section class="highlight">
+
+<h2>Build More Than a Résumé</h2>
+
+<p>
+The strongest opportunity strategy is not simply collecting credentials.
+It is building evidence that shows what you know, what you can do,
+how you operate in unfamiliar situations, and what you are capable of producing.
+</p>
+
+<div class="value-grid">
+
+<div class="value-box">
+<h3>01</h3>
+<p>Knowledge you can explain</p>
+</div>
+
+<div class="value-box">
+<h3>02</h3>
+<p>Skills you can demonstrate</p>
+</div>
+
+<div class="value-box">
+<h3>03</h3>
+<p>Experiences you can describe</p>
+</div>
+
+<div class="value-box">
+<h3>04</h3>
+<p>Results you can show</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- =========================
+OPPORTUNITY STRATEGY
+========================= -->
+
+<section class="strategy">
+
+<h2 class="section-title">Turn Opportunities Into a Strategy</h2>
+
+<p class="subtitle">
+Instead of randomly applying to everything, build an opportunity portfolio.
+</p>
+
+<div class="strategy-box">
+
+<div class="number">1</div>
+
+<div>
+
+<h3>Choose a Direction</h3>
+
+<p>
+Identify an area you want to understand better or a skill you want to develop.
+Your opportunities should connect to something meaningful rather than simply
+increase the number of items on your résumé.
+</p>
+
+</div>
+
+</div>
+
+<div class="strategy-box">
+
+<div class="number">2</div>
+
+<div>
+
+<h3>Build the Skill</h3>
+
+<p>
+Use certificates and structured learning to close knowledge gaps. Whenever
+possible, choose learning that results in something tangible you can demonstrate.
+</p>
+
+</div>
+
+</div>
+
+<div class="strategy-box">
+
+<div class="number">3</div>
+
+<div>
+
+<h3>Apply the Skill</h3>
+
+<p>
+Enter competitions, complete projects, solve problems, write, research,
+design, build, or present. Application turns passive knowledge into evidence.
+</p>
+
+</div>
+
+</div>
+
+<div class="strategy-box">
+
+<div class="number">4</div>
+
+<div>
+
+<h3>Expand Your Environment</h3>
+
+<p>
+Use study-abroad experiences and international programs to encounter different
+academic systems, cultures, ideas, and professional perspectives.
+</p>
+
+</div>
+
+</div>
+
+<div class="strategy-box">
+
+<div class="number">5</div>
+
+<div>
+
+<h3>Document the Evidence</h3>
+
+<p>
+Keep your certificates, competition results, projects, presentations,
+research, awards, reflections, and international experiences organized.
+Your opportunity history can become part of your professional story.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =========================
+FINAL
+========================= -->
+
+<section class="footer-box">
+
+<h2>Keep Building Your Opportunity Portfolio</h2>
+
+<p>
+One certificate can add a skill. One competition can demonstrate your ability.
+One international experience can change your perspective. The goal is not
+to collect opportunities—it is to continuously build evidence of what you
+can learn, do, and contribute.
+</p>
+
+</section>
+
+</div>
+
+</body>
+</html>
