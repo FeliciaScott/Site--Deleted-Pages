@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Primary Meta Tags -->
+<title>PathKeeper | Career Action Planner</title>
+<meta name="description" content="Build a practical career plan, develop valuable skills, produce evidence of your abilities, and track the actions that move you toward your next opportunity. Includes starter plans, task tracking, and weekly reviews.">
+<meta name="keywords" content="career action planner, career development, skill development, portfolio building, job search plan, weekly review, PathKeeper, career goal, task tracker, professional development, action plan">
+<meta name="author" content="PathKeeper">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph / Social Media -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="PathKeeper | Career Action Planner">
+<meta property="og:description" content="Plan your career actions, build skills, and produce evidence. Local-first storage with CSV and JSON export.">
+<meta property="og:site_name" content="PathKeeper">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PathKeeper | Career Action Planner">
+<meta name="twitter:description" content="Turn career ambition into measurable action. Plan, practice, produce evidence, and progress.">
+
+<style>
+:root {
+  --forest: #173D30;
+  --deep: #102C23;
+  --green: #47765C;
+  --sage: #DCE8D9;
+  --cream: #F7F5ED;
+  --white: #FFFFFF;
+  --brown: #75543D;
+  --sand: #E9DFCE;
+  --text: #25352C;
+  --muted: #68776C;
+  --border: #DDE3D8;
+  --red: #A54438;
+  --gold: #C5A66B;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+/* Accessibility: Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+button { cursor: pointer; }
+
+/* Accessibility: Skip link */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  background: var(--forest);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 0 0 6px 6px;
+  font-weight: 700;
+  font-size: 14px;
+  z-index: 9999;
+  text-decoration: none;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* Accessibility: Visible focus indicators */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.hero {
+  background: var(--deep);
+  color: white;
+  padding: 38px 22px 45px;
+}
+
+.hero-inner, main, footer {
+  max-width: 1150px;
+  margin: auto;
+}
+
+.brand {
+  color: #D9E7D7;
+  font-weight: 800;
+  letter-spacing: 2px;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  font-size: clamp(30px, 5vw, 49px);
+  line-height: 1.1;
+  margin: 18px 0 14px;
+  max-width: 760px;
+}
+
+.hero p {
+  color: #D6E2D8;
+  max-width: 700px;
+  margin: 0;
+  font-size: 17px;
+}
+
+.hero-tag {
+  display: inline-block;
+  margin-top: 24px;
+  padding: 7px 12px;
+  border: 1px solid #537866;
+  border-radius: 5px;
+  color: #E5EDE5;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+main { padding: 26px 18px 45px; }
+
+.section-heading {
+  margin: 34px 0 15px;
+}
+
+.section-heading h2 {
+  font-size: 24px;
+  color: var(--forest);
+  margin: 0 0 4px;
+}
+
+.section-heading p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.panel {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 22px;
+  margin-bottom: 20px;
+}
+
+.panel h3 {
+  color: var(--forest);
+  margin: 0 0 15px;
+  font-size: 19px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.field.full { grid-column: 1 / -1; }
+
+label {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--forest);
+}
+
+input, select, textarea {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #CBD6CA;
+  background: #FDFDFC;
+  border-radius: 7px;
+  padding: 11px 12px;
+  color: var(--text);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--green);
+  outline: 3px solid rgba(71,118,92,.18);
+}
+
+textarea {
+  min-height: 85px;
+  resize: vertical;
+}
+
+.help {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 17px;
+}
+
+.btn {
+  border: 0;
+  border-radius: 7px;
+  padding: 11px 16px;
+  font-weight: 700;
+  font-size: 13px;
+  transition: transform .15s, opacity .15s;
+}
+
+.btn:hover { transform: translateY(-1px); }
+
+.btn-primary {
+  background: var(--forest);
+  color: white;
+}
+
+.btn-secondary {
+  background: var(--sage);
+  color: var(--forest);
+}
+
+.btn-outline {
+  background: white;
+  border: 1px solid var(--border);
+  color: var(--forest);
+}
+
+.btn-danger {
+  background: #F8E7E3;
+  color: var(--red);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 13px;
+  margin: 20px 0;
+}
+
+.stat {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  padding: 17px;
+  min-width: 0;
+}
+
+.stat-label {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.stat-number {
+  font-size: 30px;
+  color: var(--forest);
+  font-weight: 800;
+  line-height: 1.3;
+  margin-top: 4px;
+  overflow-wrap: anywhere;
+}
+
+.progress-track {
+  height: 10px;
+  background: #E6EAE2;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 12px 0 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--green);
+  transition: width .3s;
+}
+
+.progress-copy {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.goal-summary {
+  background: var(--sage);
+  border-left: 5px solid var(--green);
+  border-radius: 8px;
+  padding: 18px;
+  margin-bottom: 20px;
+}
+
+.goal-summary h3 {
+  margin: 0 0 5px;
+  color: var(--forest);
+  font-size: 20px;
+}
+
+.goal-summary p { margin: 4px 0; }
+
+.goal-summary .small {
+  color: #4C6353;
+  font-size: 13px;
+}
+
+.template-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.template {
+  background: #FBFAF6;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 15px;
+}
+
+.template h4 {
+  color: var(--forest);
+  margin: 0 0 7px;
+}
+
+.template p {
+  color: var(--muted);
+  font-size: 13px;
+  margin: 0 0 12px;
+}
+
+.template .btn { width: 100%; }
+
+.task-form {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 13px;
+}
+
+.task-form .wide { grid-column: 1 / -1; }
+
+.filters {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) repeat(2, minmax(130px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.task {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 13px;
+  align-items: start;
+  background: white;
+}
+
+.task.completed { background: #F5F8F3; }
+
+.task.completed .task-title {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+.task-check {
+  width: 20px;
+  height: 20px;
+  margin-top: 3px;
+  accent-color: var(--green);
+}
+
+.task-title {
+  font-weight: 800;
+  color: var(--forest);
+  overflow-wrap: anywhere;
+}
+
+.task-description {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 4px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.task-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 9px;
+}
+
+.pill {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  background: #E8EEE5;
+  color: var(--forest);
+}
+
+.pill.priority-High {
+  background: #F8E7E3;
+  color: #8E352C;
+}
+
+.pill.priority-Medium {
+  background: #F4EBD7;
+  color: #76572C;
+}
+
+.pill.overdue {
+  background: #F8E7E3;
+  color: #8E352C;
+}
+
+.task-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.task-actions button {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 5px 8px;
+  color: var(--forest);
+  font-size: 12px;
+}
+
+.empty {
+  text-align: center;
+  padding: 32px 18px;
+  border: 1px dashed #BFCDBD;
+  border-radius: 10px;
+  color: var(--muted);
+  background: #FBFAF6;
+}
+
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.review-card {
+  padding: 17px;
+  border-radius: 9px;
+  background: #F7F5ED;
+  border: 1px solid var(--border);
+}
+
+.review-card h4 {
+  margin: 0 0 7px;
+  color: var(--forest);
+}
+
+.review-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.review-card textarea { margin-top: 10px; }
+
+.note {
+  background: #F6F0E5;
+  border: 1px solid #E6D9C4;
+  border-radius: 9px;
+  padding: 15px;
+  font-size: 13px;
+  color: #614C36;
+}
+
+footer {
+  padding: 20px 18px 35px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 12px;
+}
+
+footer strong { color: var(--forest); }
+
+@media (max-width: 720px) {
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .template-grid { grid-template-columns: 1fr; }
+  .task-form { grid-template-columns: 1fr; }
+  .task-form .wide { grid-column: auto; }
+  .filters { grid-template-columns: 1fr; }
+  .review-grid { grid-template-columns: 1fr; }
+  .grid { grid-template-columns: 1fr; }
+  .field.full { grid-column: auto; }
+  .panel { padding: 16px; }
+  .task { grid-template-columns: auto minmax(0, 1fr); }
+  .task-actions {
+    grid-column: 2;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .btn { min-height: 44px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Accessibility: Skip to main content link -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<header class="hero" role="banner">
+  <div class="hero-inner">
+    <div class="brand">PathKeeper · Career Development</div>
+    <h1>Action Planner &amp; Focus Systems</h1>
+    <p>
+      Build a practical plan, develop valuable skills, produce evidence of
+      your abilities, and track the actions that move you toward your next
+      career opportunity.
+    </p>
+    <div class="hero-tag">Plan · Practice · Produce · Progress</div>
+  </div>
+</header>
+
+<main id="main-content">
+  <div class="section-heading">
+    <h2>01 / Define Your Destination</h2>
+    <p>Start with a result you want to achieve, not just a vague ambition.</p>
+  </div>
+
+  <section class="panel" aria-labelledby="goal-heading">
+    <h3 id="goal-heading" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Career goal form</h3>
+    <form id="goalForm">
+      <div class="grid">
+        <div class="field full">
+          <label for="goalTitle">What career goal are you working toward?</label>
+          <input id="goalTitle" required
+            placeholder="Example: Become a junior web developer">
+        </div>
+
+        <div class="field">
+          <label for="careerField">Career area</label>
+          <select id="careerField">
+            <option value="Technology">Technology / Coding</option>
+            <option value="Business">Business / Entrepreneurship</option>
+            <option value="Administration">Administration / Operations</option>
+            <option value="Communication">Communication / Leadership</option>
+            <option value="Healthcare">Healthcare</option>
+            <option value="Skilled Trades">Skilled Trades</option>
+            <option value="Education">Education</option>
+            <option value="Creative">Creative / Design</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="targetDate">Target date</label>
+          <input id="targetDate" type="date">
+        </div>
+
+        <div class="field">
+          <label for="weeklyHours">Hours available each week</label>
+          <input id="weeklyHours" type="number" min="1" max="100" value="5">
+        </div>
+
+        <div class="field">
+          <label for="currentLevel">Where are you starting?</label>
+          <select id="currentLevel">
+            <option>Exploring the field</option>
+            <option>Beginner</option>
+            <option>Building foundational skills</option>
+            <option>Practicing independently</option>
+            <option>Building a portfolio</option>
+            <option>Applying for opportunities</option>
+          </select>
+        </div>
+
+        <div class="field full">
+          <label for="goalOutcome">What would count as success?</label>
+          <textarea id="goalOutcome"
+            placeholder="Example: Build three projects, publish a portfolio, and apply to ten suitable jobs."></textarea>
+        </div>
+
+        <div class="field full">
+          <label for="goalBarrier">What is your biggest obstacle right now?</label>
+          <input id="goalBarrier"
+            placeholder="Example: Limited time, missing skills, or no work samples">
+        </div>
+      </div>
+
+      <div class="button-row">
+        <button class="btn btn-primary" type="submit">Save Career Goal</button>
+        <button class="btn btn-secondary" type="button" id="saveGoalButton">
+          Save Changes
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <div class="goal-summary" aria-live="polite">
+    <h3 id="summaryTitle">Your career goal starts here.</h3>
+    <p id="summaryOutcome">Define the destination, then plan the work required to reach it.</p>
+    <p class="small" id="summaryDetails">Your plan will be saved in this browser when local storage is available.</p>
+  </div>
+
+  <div class="section-heading">
+    <h2>02 / Measure Your Progress</h2>
+    <p>Track completed work and whether your plan is producing useful evidence.</p>
+  </div>
+
+  <section class="stats" aria-label="Career plan statistics">
+    <div class="stat">
+      <div class="stat-label">Total tasks</div>
+      <div class="stat-number" id="totalTasks">0</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Completed</div>
+      <div class="stat-number" id="completedTasks">0</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Remaining</div>
+      <div class="stat-number" id="remainingTasks">0</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Overdue</div>
+      <div class="stat-number" id="overdueTasks">0</div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h3>Overall Plan Progress</h3>
+    <div
+      class="progress-track"
+      role="progressbar"
+      id="progressBar"
+      aria-label="Completed career plan tasks"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="0">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="progress-copy" id="progressText">0% complete · Your first completed task starts the process.</div>
+  </section>
+
+  <div class="section-heading">
+    <h2>03 / Build Your Action Plan</h2>
+    <p>Use a starter plan or create your own steps. Adapt every task to your circumstances.</p>
+  </div>
+
+  <section class="panel">
+    <h3>Choose a Starting Plan</h3>
+    <div class="template-grid">
+      <article class="template">
+        <h4>Learn a Career Skill</h4>
+        <p>Identify skill requirements, study, practice, and demonstrate what you can do.</p>
+        <button class="btn btn-secondary" type="button" data-template="skill">
+          Add Skill Plan
+        </button>
+      </article>
+
+      <article class="template">
+        <h4>Build a Portfolio</h4>
+        <p>Turn practice into projects, work samples, documentation, and evidence.</p>
+        <button class="btn btn-secondary" type="button" data-template="portfolio">
+          Add Portfolio Plan
+        </button>
+      </article>
+
+      <article class="template">
+        <h4>Find Opportunities</h4>
+        <p>Research roles, strengthen applications, make connections, and follow up.</p>
+        <button class="btn btn-secondary" type="button" data-template="job">
+          Add Opportunity Plan
+        </button>
+      </article>
+    </div>
+    <p class="help" style="margin-top:13px;">
+      Adding a starter plan appends tasks to your existing list. Review the deadlines and adjust them.
+    </p>
+  </section>
+
+  <section class="panel">
+    <h3>Add a Task or Milestone</h3>
+    <form id="taskForm">
+      <div class="task-form">
+        <div class="field wide">
+          <label for="taskTitle">Action to complete</label>
+          <input id="taskTitle" required
+            placeholder="Example: Build a responsive portfolio homepage">
+        </div>
+
+        <div class="field">
+          <label for="taskCategory">Work category</label>
+          <select id="taskCategory">
+            <option>Research</option>
+            <option>Learning</option>
+            <option>Practice</option>
+            <option>Project</option>
+            <option>Portfolio Evidence</option>
+            <option>Networking</option>
+            <option>Applications</option>
+            <option>Review</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="taskDue">Due date</label>
+          <input id="taskDue" type="date">
+        </div>
+
+        <div class="field">
+          <label for="taskPriority">Priority</label>
+          <select id="taskPriority">
+            <option>Medium</option>
+            <option>High</option>
+            <option>Low</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="taskHours">Estimated hours</label>
+          <input id="taskHours" type="number" min="0" max="1000" step="0.5" value="1">
+        </div>
+
+        <div class="field">
+          <label for="taskMilestone">Milestone</label>
+          <input id="taskMilestone" placeholder="Example: First portfolio project">
+        </div>
+
+        <div class="field wide">
+          <label for="taskEvidence">What will prove this is complete?</label>
+          <textarea id="taskEvidence"
+            placeholder="Example: A published page, finished project, certificate, written summary, or application confirmation."></textarea>
+        </div>
+      </div>
+
+      <div class="button-row">
+        <button class="btn btn-primary" type="submit">+ Add to My Plan</button>
+      </div>
+    </form>
+  </section>
+
+  <div class="section-heading">
+    <h2>04 / Do the Work</h2>
+    <p>Choose the next action, complete it, and record evidence instead of relying on memory.</p>
+  </div>
+
+  <section class="panel">
+    <div class="filters">
+      <div class="field">
+        <label for="taskSearch">Search tasks</label>
+        <input id="taskSearch" placeholder="Search title, milestone, or evidence">
+      </div>
+      <div class="field">
+        <label for="statusFilter">Status</label>
+        <select id="statusFilter">
+          <option value="all">All tasks</option>
+          <option value="open">Incomplete</option>
+          <option value="completed">Completed</option>
+          <option value="overdue">Overdue</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="categoryFilter">Category</label>
+        <select id="categoryFilter">
+          <option value="all">All categories</option>
+          <option>Research</option>
+          <option>Learning</option>
+          <option>Practice</option>
+          <option>Project</option>
+          <option>Portfolio Evidence</option>
+          <option>Networking</option>
+          <option>Applications</option>
+          <option>Review</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="taskList" class="task-list" aria-live="polite">
+      <div class="empty">
+        Your action plan is waiting for its first task. Add one above or select a starter plan.
+      </div>
+    </div>
+
+    <div class="button-row">
+      <button class="btn btn-secondary" type="button" id="exportButton">
+        Export Plan as CSV
+      </button>
+      <button class="btn btn-outline" type="button" id="exportJsonButton">
+        Back Up Plan as JSON
+      </button>
+    </div>
+  </section>
+
+  <div class="section-heading">
+    <h2>05 / Review and Adapt</h2>
+    <p>A plan is a working system. Change the approach when the evidence tells you to.</p>
+  </div>
+
+  <section class="panel">
+    <div class="review-grid">
+      <div class="review-card">
+        <h4>What did I complete?</h4>
+        <p>Record specific work completed, not only time spent.</p>
+        <textarea id="reviewCompleted" placeholder="Projects finished, skills practiced, applications submitted..."></textarea>
+      </div>
+
+      <div class="review-card">
+        <h4>What evidence did I produce?</h4>
+        <p>Identify something another person could inspect or verify.</p>
+        <textarea id="reviewEvidence" placeholder="Work samples, links, test results, certificates, feedback..."></textarea>
+      </div>
+
+      <div class="review-card">
+        <h4>What slowed me down?</h4>
+        <p>Identify the constraint without confusing it with the goal.</p>
+        <textarea id="reviewObstacles" placeholder="Time, unclear instructions, missing tools, difficult concepts..."></textarea>
+      </div>
+
+      <div class="review-card">
+        <h4>What will I change next week?</h4>
+        <p>Choose a realistic adjustment to your plan or working method.</p>
+        <textarea id="reviewNext" placeholder="Reduce scope, practice a smaller task, seek feedback, change schedule..."></textarea>
+      </div>
+    </div>
+
+    <div class="button-row">
+      <button class="btn btn-primary" type="button" id="saveReviewButton">
+        Save Weekly Review
+      </button>
+    </div>
+    <p class="help" id="reviewStatus" aria-live="polite"></p>
+  </section>
+
+  <section class="panel">
+    <h3>Your Planning Rules</h3>
+    <div class="note">
+      <strong>Make the work observable.</strong> “Learn coding” is an intention.
+      “Build and test a responsive contact form” is an action.
+      <br><br>
+      <strong>Keep the plan realistic.</strong> Estimate your available hours,
+      break large tasks into smaller steps, and avoid scheduling more work than
+      you can reasonably complete.
+      <br><br>
+      <strong>Produce evidence.</strong> Keep finished projects, notes, results,
+      work samples, feedback, and other legitimate proof of your capabilities.
+      <br><br>
+      <strong>Adapt deliberately.</strong> If you repeatedly miss a deadline,
+      reconsider the task size, available time, resources, or sequence of work.
+      Missing a deadline is information you can use to improve the plan.
+    </div>
+  </section>
+
+  <section class="panel">
+    <h3>Manage Your Plan</h3>
+    <p class="help">
+      Your plan is stored in this browser on this device. It does not automatically
+      sync across devices or submit information to PathKeeper.
+      Export a backup regularly if the plan matters to you.
+    </p>
+    <div class="button-row">
+      <button class="btn btn-danger" type="button" id="clearTasksButton">
+        Clear All Tasks
+      </button>
+      <button class="btn btn-outline" type="button" id="resetPlanButton">
+        Reset Entire Plan
+      </button>
+    </div>
+  </section>
+</main>
+
+<footer role="contentinfo">
+  <strong>PathKeeper</strong> · Create your path through deliberate work.
+  <br>Plan your actions. Build your skills. Produce evidence. Keep progressing.
+</footer>
+
+<script>
+(() => {
+  "use strict";
+
+  const STORAGE_KEY = "pathkeeperCareerActionPlannerV1";
+
+  const $ = id => document.getElementById(id);
+
+  const defaultState = () => ({
+    goal: {
+      title: "",
+      field: "Technology",
+      targetDate: "",
+      weeklyHours: 5,
+      level: "Exploring the field",
+      outcome: "",
+      barrier: ""
+    },
+    tasks: [],
+    review: {
+      completed: "",
+      evidence: "",
+      obstacles: "",
+      next: ""
+    }
+  });
+
+  let state = defaultState();
+
+  function makeId() {
+    return Date.now().toString(36) +
+      Math.random().toString(36).slice(2, 8);
+  }
+
+  function loadState() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (!saved) return;
+
+      const parsed = JSON.parse(saved);
+      if (!parsed || typeof parsed !== "object") return;
+
+      state = {
+        ...defaultState(),
+        ...parsed,
+        goal: {
+          ...defaultState().goal,
+          ...(parsed.goal || {})
+        },
+        tasks: Array.isArray(parsed.tasks) ? parsed.tasks : [],
+        review: {
+          ...defaultState().review,
+          ...(parsed.review || {})
+        }
+      };
+    } catch (error) {
+      console.warn("Could not load the saved plan.", error);
+    }
+  }
+
+  function saveState() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      return true;
+    } catch (error) {
+      console.warn("Could not save the plan.", error);
+      alert("The plan could not be saved in this browser. Export a backup if possible.");
+      return false;
+    }
+  }
+
+  function escapeHtml(value) {
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    })[char]);
+  }
+
+  function todayString() {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+
+  function isOverdue(task) {
+    return Boolean(
+      !task.completed &&
+      task.due &&
+      task.due < todayString()
+    );
+  }
+
+  function saveGoalFromForm() {
+    state.goal = {
+      title: $("goalTitle").value.trim(),
+      field: $("careerField").value,
+      targetDate: $("targetDate").value,
+      weeklyHours: Number($("weeklyHours").value) || 0,
+      level: $("currentLevel").value,
+      outcome: $("goalOutcome").value.trim(),
+      barrier: $("goalBarrier").value.trim()
+    };
+
+    saveState();
+    renderGoal();
+  }
+
+  function renderGoal() {
+    const goal = state.goal;
+
+    $("goalTitle").value = goal.title;
+    $("careerField").value = goal.field;
+    $("targetDate").value = goal.targetDate;
+    $("weeklyHours").value = goal.weeklyHours;
+    $("currentLevel").value = goal.level;
+    $("goalOutcome").value = goal.outcome;
+    $("goalBarrier").value = goal.barrier;
+
+    $("summaryTitle").textContent =
+      goal.title || "Your career goal starts here.";
+
+    $("summaryOutcome").textContent =
+      goal.outcome || "Define the destination, then plan the work required to reach it.";
+
+    const target = goal.targetDate
+      ? `Target date: ${goal.targetDate}`
+      : "Target date: not set";
+
+    $("summaryDetails").textContent =
+      `${goal.field} · ${goal.level} · ${goal.weeklyHours} hours per week · ${target}`;
+  }
+
+  function renderStats() {
+    const total = state.tasks.length;
+    const completed = state.tasks.filter(task => task.completed).length;
+    const remaining = total - completed;
+    const overdue = state.tasks.filter(isOverdue).length;
+    const percent = total ? Math.round((completed / total) * 100) : 0;
+
+    $("totalTasks").textContent = total;
+    $("completedTasks").textContent = completed;
+    $("remainingTasks").textContent = remaining;
+    $("overdueTasks").textContent = overdue;
+    $("progressFill").style.width = `${percent}%`;
+    $("progressBar").setAttribute("aria-valuenow", percent);
+    $("progressText").textContent = total
+      ? `${percent}% complete · ${completed} of ${total} tasks completed.`
+      : "0% complete · Your first completed task starts the process.";
+  }
+
+  function renderTasks() {
+    const search = $("taskSearch").value.trim().toLowerCase();
+    const status = $("statusFilter").value;
+    const category = $("categoryFilter").value;
+
+    let tasks = state.tasks.filter(task => {
+      const searchable = [
+        task.title, task.description, task.milestone,
+        task.category, task.evidence
+      ].join(" ").toLowerCase();
+
+      if (search && !searchable.includes(search)) return false;
+      if (category !== "all" && task.category !== category) return false;
+      if (status === "open" && task.completed) return false;
+      if (status === "completed" && !task.completed) return false;
+      if (status === "overdue" && !isOverdue(task)) return false;
+
+      return true;
+    });
+
+    tasks.sort((a, b) => {
+      if (a.completed !== b.completed) return a.completed ? 1 : -1;
+      if (!a.due && !b.due) return b.createdAt - a.createdAt;
+      if (!a.due) return 1;
+      if (!b.due) return -1;
+      return a.due.localeCompare(b.due);
+    });
+
+    if (!tasks.length) {
+      $("taskList").innerHTML = `
+        <div class="empty">
+          ${state.tasks.length
+            ? "No tasks match these filters. Try changing your search."
+            : "Your action plan is waiting for its first task. Add one above or select a starter plan."}
+        </div>`;
+      return;
+    }
+
+    $("taskList").innerHTML = tasks.map(task => {
+      const overdue = isOverdue(task);
+      const dueText = task.due
+        ? `Due: ${escapeHtml(task.due)}`
+        : "No deadline";
+
+      const dueClass = overdue ? "pill overdue" : "pill";
+
+      return `
+        <article class="task ${task.completed ? "completed" : ""}">
+          <input
+            class="task-check"
+            type="checkbox"
+            aria-label="Mark ${escapeHtml(task.title)} complete"
+            data-action="toggle"
+            data-id="${escapeHtml(task.id)}"
+            ${task.completed ? "checked" : ""}>
+
+          <div>
+            <div class="task-title">${escapeHtml(task.title)}</div>
+            ${task.description
+              ? `<div class="task-description">${escapeHtml(task.description)}</div>`
+              : ""}
+            <div class="task-meta">
+              <span class="pill">${escapeHtml(task.category)}</span>
+              <span class="pill priority-${escapeHtml(task.priority)}">
+                ${escapeHtml(task.priority)} priority
+              </span>
+              <span class="${dueClass}">${overdue ? "Overdue · " : ""}${dueText}</span>
+              ${task.hours > 0
+                ? `<span class="pill">${escapeHtml(task.hours)} hours</span>`
+                : ""}
+              ${task.milestone
+                ? `<span class="pill">Milestone: ${escapeHtml(task.milestone)}</span>`
+                : ""}
+            </div>
+            ${task.evidence
+              ? `<div class="task-description"><strong>Evidence:</strong> ${escapeHtml(task.evidence)}</div>`
+              : ""}
+          </div>
+
+          <div class="task-actions">
+            <button type="button" data-action="edit" data-id="${escapeHtml(task.id)}">Edit</button>
+            <button type="button" data-action="delete" data-id="${escapeHtml(task.id)}">Delete</button>
+          </div>
+        </article>`;
+    }).join("");
+  }
+
+  function renderReview() {
+    $("reviewCompleted").value = state.review.completed || "";
+    $("reviewEvidence").value = state.review.evidence || "";
+    $("reviewObstacles").value = state.review.obstacles || "";
+    $("reviewNext").value = state.review.next || "";
+  }
+
+  function renderAll() {
+    renderGoal();
+    renderStats();
+    renderTasks();
+    renderReview();
+  }
+
+  function addTask(task) {
+    state.tasks.push({
+      id: makeId(),
+      title: task.title || "",
+      description: task.description || "",
+      category: task.category || "Practice",
+      due: task.due || "",
+      priority: task.priority || "Medium",
+      hours: Number(task.hours) || 0,
+      milestone: task.milestone || "",
+      evidence: task.evidence || "",
+      completed: false,
+      createdAt: Date.now()
+    });
+
+    saveState();
+    renderStats();
+    renderTasks();
+  }
+
+  $("goalForm").addEventListener("submit", event => {
+    event.preventDefault();
+    saveGoalFromForm();
+    alert("Career goal saved.");
+  });
+
+  $("saveGoalButton").addEventListener("click", () => {
+    saveGoalFromForm();
+    alert("Career goal changes saved.");
+  });
+
+  $("taskForm").addEventListener("submit", event => {
+    event.preventDefault();
+
+    addTask({
+      title: $("taskTitle").value.trim(),
+      category: $("taskCategory").value,
+      due: $("taskDue").value,
+      priority: $("taskPriority").value,
+      hours: $("taskHours").value,
+      milestone: $("taskMilestone").value.trim(),
+      evidence: $("taskEvidence").value.trim()
+    });
+
+    $("taskForm").reset();
+    $("taskHours").value = 1;
+    $("taskPriority").value = "Medium";
+    $("taskCategory").value = "Research";
+    $("taskTitle").focus();
+  });
+
+  const templates = {
+    skill: [
+      ["Research the required skills for my target role", "Research", 1, "Identify the actual requirements in current job listings."],
+      ["Choose one priority skill to develop first", "Learning", 1, "Write down the skill and why it matters."],
+      ["Complete a focused learning session", "Learning", 2, "Save notes or a completed lesson."],
+      ["Practice the skill with a small exercise", "Practice", 2, "Save the exercise and results."],
+      ["Complete a task without following a tutorial", "Practice", 2, "Document what I completed independently."],
+      ["Review mistakes and identify the next skill gap", "Review", 1, "Write down errors, corrections, and the next action."]
+    ],
+    portfolio: [
+      ["Research examples of strong work in my target field", "Research", 1, "Record what makes the examples effective."],
+      ["Choose a small project that demonstrates a useful skill", "Project", 1, "Write the project goal and requirements."],
+      ["Create the first working version of the project", "Project", 3, "Save the project files or work sample."],
+      ["Test the work and correct problems", "Practice", 2, "Record tests, feedback, or improvements."],
+      ["Document the problem, process, and result", "Portfolio Evidence", 1, "Create a short case study or project description."],
+      ["Publish or organize the finished work sample", "Portfolio Evidence", 1, "Save the portfolio link or final files."]
+    ],
+    job: [
+      ["Review current opportunities in my target field", "Research", 1, "Save relevant job listings and requirements."],
+      ["Identify repeated skills and qualifications", "Research", 1, "Create a list of recurring requirements."],
+      ["Update my resume with relevant evidence", "Applications", 2, "Save a targeted resume version."],
+      ["Prepare examples that demonstrate my abilities", "Portfolio Evidence", 2, "Collect work samples and achievement examples."],
+      ["Submit one carefully matched application", "Applications", 1, "Record the role and submission date."],
+      ["Follow up and review the results", "Networking", 1, "Record the response and next step."]
+    ]
+  };
+
+  document.querySelectorAll("[data-template]").forEach(button => {
+    button.addEventListener("click", () => {
+      const template = templates[button.dataset.template];
+      if (!template) return;
+
+      const milestoneNames = {
+        skill: "Skill Development",
+        portfolio: "Portfolio Project",
+        job: "Opportunity Search"
+      };
+
+      const milestone = milestoneNames[button.dataset.template];
+
+      template.forEach((item, index) => {
+        addTask({
+          title: item[0],
+          category: item[1],
+          hours: item[2],
+          evidence: item[3],
+          milestone,
+          priority: index === 0 ? "High" : "Medium"
+        });
+      });
+
+      alert(`${template.length} starter tasks added. Set realistic due dates and adjust them to fit your goal.`);
+      $("taskList").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+
+  $("taskList").addEventListener("change", event => {
+    const checkbox = event.target.closest('[data-action="toggle"]');
+    if (!checkbox) return;
+
+    const task = state.tasks.find(item => item.id === checkbox.dataset.id);
+    if (!task) return;
+
+    task.completed = checkbox.checked;
+    task.completedAt = task.completed ? new Date().toISOString() : null;
+
+    saveState();
+    renderStats();
+    renderTasks();
+  });
+
+  $("taskList").addEventListener("click", event => {
+    const button = event.target.closest("button[data-action]");
+    if (!button) return;
+
+    const task = state.tasks.find(item => item.id === button.dataset.id);
+    if (!task) return;
+
+    if (button.dataset.action === "delete") {
+      if (!confirm(`Delete this task?\n\n${task.title}`)) return;
+
+      state.tasks = state.tasks.filter(item => item.id !== task.id);
+      saveState();
+      renderStats();
+      renderTasks();
+      return;
+    }
+
+    if (button.dataset.action === "edit") {
+      const title = prompt("Task title:", task.title);
+      if (title === null) return;
+      if (!title.trim()) {
+        alert("The task title cannot be empty.");
+        return;
+      }
+
+      const due = prompt("Due date (YYYY-MM-DD), or leave blank:", task.due || "");
+      if (due === null) return;
+
+      if (due && !/^\d{4}-\d{2}-\d{2}$/.test(due)) {
+        alert("Please enter the date as YYYY-MM-DD or leave it blank.");
+        return;
+      }
+
+      task.title = title.trim();
+      task.due = due.trim();
+
+      saveState();
+      renderStats();
+      renderTasks();
+    }
+  });
+
+  ["taskSearch", "statusFilter", "categoryFilter"].forEach(id => {
+    $(id).addEventListener(id === "taskSearch" ? "input" : "change", renderTasks);
+  });
+
+  function downloadFile(filename, content, type) {
+    const blob = new Blob([content], { type });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+
+    anchor.href = url;
+    anchor.download = filename;
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  function csvCell(value) {
+    return '"' + String(value ?? "").replace(/"/g, '""') + '"';
+  }
+
+  $("exportButton").addEventListener("click", () => {
+    const columns = [
+      "Task", "Category", "Due Date", "Priority",
+      "Estimated Hours", "Milestone", "Evidence",
+      "Completed", "Completed At"
+    ];
+
+    const rows = state.tasks.map(task => [
+      task.title, task.category, task.due, task.priority,
+      task.hours, task.milestone, task.evidence,
+      task.completed ? "Yes" : "No", task.completedAt || ""
+    ]);
+
+    const csv = [columns, ...rows]
+      .map(row => row.map(csvCell).join(","))
+      .join("\r\n");
+
+    downloadFile(
+      "pathkeeper-career-plan.csv",
+      "\uFEFF" + csv,
+      "text/csv;charset=utf-8;"
+    );
+  });
+
+  $("exportJsonButton").addEventListener("click", () => {
+    downloadFile(
+      "pathkeeper-career-plan-backup.json",
+      JSON.stringify(state, null, 2),
+      "application/json"
+    );
+  });
+
+  $("saveReviewButton").addEventListener("click", () => {
+    state.review = {
+      completed: $("reviewCompleted").value,
+      evidence: $("reviewEvidence").value,
+      obstacles: $("reviewObstacles").value,
+      next: $("reviewNext").value
+    };
+
+    saveState();
+    $("reviewStatus").textContent = "Weekly review saved in this browser.";
+  });
+
+  $("clearTasksButton").addEventListener("click", () => {
+    if (!confirm("Delete every task in this career plan? Your goal and review notes will remain.")) return;
+
+    state.tasks = [];
+    saveState();
+    renderStats();
+    renderTasks();
+  });
+
+  $("resetPlanButton").addEventListener("click", () => {
+    if (!confirm("Reset the entire plan, including the career goal, tasks, and review notes? Export a backup first if needed.")) return;
+
+    state = defaultState();
+    saveState();
+    renderAll();
+  });
+
+  loadState();
+  renderAll();
+})();
+</script>
+
+</body>
+</html>
