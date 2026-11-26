@@ -1,0 +1,1705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Self-Education Intelligence System</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+--bg:#071018;
+--panel:#0d1822;
+--panel2:#111f2b;
+--line:#263b4a;
+--blue:#63b3ed;
+--cyan:#67e8f9;
+--gold:#e6c36a;
+--cream:#f4f1e8;
+--muted:#9eacb7;
+--red:#ef8888;
+--green:#72d6a0;
+}
+
+body{
+font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+background:
+radial-gradient(circle at 10% 0%,rgba(99,179,237,.10),transparent 30%),
+radial-gradient(circle at 90% 10%,rgba(103,232,249,.07),transparent 28%),
+var(--bg);
+color:var(--cream);
+line-height:1.6;
+}
+
+.container{
+width:min(1500px,94%);
+margin:auto;
+}
+
+.hero{
+padding:75px 20px 55px;
+border-bottom:1px solid var(--line);
+}
+
+.eyebrow{
+font-size:.72rem;
+font-weight:900;
+letter-spacing:.18em;
+color:var(--gold);
+text-transform:uppercase;
+margin-bottom:15px;
+}
+
+.hero h1{
+font-size:clamp(2.6rem,6vw,5.8rem);
+line-height:.98;
+max-width:1050px;
+margin-bottom:22px;
+}
+
+.hero h1 span{
+color:var(--cyan);
+}
+
+.hero p{
+max-width:900px;
+font-size:1.1rem;
+color:var(--muted);
+}
+
+.dashboard{
+padding:40px 0 80px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(12,1fr);
+gap:20px;
+}
+
+.panel{
+background:linear-gradient(145deg,var(--panel),#09131b);
+border:1px solid var(--line);
+border-radius:20px;
+padding:26px;
+}
+
+.panel h2{
+font-size:1.35rem;
+color:var(--gold);
+margin-bottom:16px;
+}
+
+.panel h3{
+color:var(--cyan);
+margin-bottom:8px;
+}
+
+.full{grid-column:span 12}
+.half{grid-column:span 6}
+.third{grid-column:span 4}
+
+.field{
+margin-bottom:18px;
+}
+
+label{
+display:block;
+font-size:.72rem;
+font-weight:900;
+letter-spacing:.09em;
+text-transform:uppercase;
+color:var(--muted);
+margin-bottom:7px;
+}
+
+input,
+select,
+textarea{
+width:100%;
+background:#061018;
+border:1px solid var(--line);
+border-radius:10px;
+padding:12px 14px;
+color:var(--cream);
+font-size:.95rem;
+outline:none;
+}
+
+textarea{
+min-height:110px;
+resize:vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+border-color:var(--cyan);
+}
+
+button{
+border:0;
+border-radius:10px;
+padding:12px 17px;
+font-weight:900;
+cursor:pointer;
+font-size:.9rem;
+}
+
+.primary{
+background:var(--cyan);
+color:#061018;
+}
+
+.secondary{
+background:#172936;
+color:var(--cream);
+border:1px solid var(--line);
+}
+
+.danger{
+background:#392121;
+color:#ffb3b3;
+}
+
+button:hover{
+filter:brightness(1.1);
+}
+
+.stat-grid{
+display:grid;
+grid-template-columns:repeat(6,1fr);
+gap:12px;
+}
+
+.stat{
+background:#08141d;
+border:1px solid var(--line);
+border-radius:14px;
+padding:18px;
+}
+
+.stat-value{
+font-size:2rem;
+font-weight:900;
+color:var(--cyan);
+}
+
+.stat-label{
+font-size:.7rem;
+letter-spacing:.08em;
+text-transform:uppercase;
+color:var(--muted);
+}
+
+.category-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:14px;
+}
+
+.category{
+background:#08141d;
+border:1px solid var(--line);
+border-radius:15px;
+padding:20px;
+cursor:pointer;
+transition:.2s;
+}
+
+.category:hover{
+transform:translateY(-3px);
+border-color:var(--cyan);
+}
+
+.category-number{
+font-size:.7rem;
+font-weight:900;
+letter-spacing:.12em;
+color:var(--gold);
+}
+
+.category h3{
+color:var(--cream);
+margin:7px 0;
+}
+
+.category p{
+font-size:.85rem;
+color:var(--muted);
+}
+
+.inventory-form{
+display:grid;
+grid-template-columns:2fr 1fr 1fr 1fr;
+gap:12px;
+align-items:end;
+}
+
+.inventory-list{
+margin-top:20px;
+display:grid;
+gap:10px;
+}
+
+.inventory-item{
+display:grid;
+grid-template-columns:2fr 1fr 1fr 1fr auto;
+gap:12px;
+align-items:center;
+background:#08141d;
+border:1px solid var(--line);
+border-radius:12px;
+padding:14px;
+}
+
+.inventory-item strong{
+color:var(--cream);
+}
+
+.inventory-item span{
+color:var(--muted);
+font-size:.85rem;
+}
+
+.badge{
+display:inline-block;
+padding:4px 8px;
+border-radius:20px;
+font-size:.68rem;
+font-weight:900;
+text-transform:uppercase;
+}
+
+.need{
+background:#493525;
+color:#ffd18a;
+}
+
+.ready{
+background:#173d30;
+color:#91e5b8;
+}
+
+.watch{
+background:#30352c;
+color:#d9df99;
+}
+
+.prediction{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:16px;
+}
+
+.prediction-card{
+background:
+linear-gradient(145deg,#112735,#08141d);
+border:1px solid rgba(103,232,249,.25);
+border-radius:16px;
+padding:20px;
+}
+
+.prediction-card .tag{
+font-size:.7rem;
+font-weight:900;
+color:var(--gold);
+letter-spacing:.12em;
+text-transform:uppercase;
+}
+
+.prediction-card h3{
+color:var(--cream);
+margin:7px 0;
+}
+
+.prediction-card p{
+font-size:.88rem;
+color:var(--muted);
+}
+
+.confidence{
+margin-top:14px;
+height:7px;
+background:#061018;
+border-radius:20px;
+overflow:hidden;
+}
+
+.confidence div{
+height:100%;
+background:var(--cyan);
+}
+
+.skill-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+}
+
+.skill{
+background:#08141d;
+border:1px solid var(--line);
+border-radius:15px;
+padding:18px;
+}
+
+.skill-top{
+display:flex;
+justify-content:space-between;
+gap:10px;
+margin-bottom:10px;
+}
+
+.skill-top strong{
+color:var(--cream);
+}
+
+.skill-top span{
+color:var(--cyan);
+font-weight:900;
+}
+
+.progress{
+height:8px;
+background:#061018;
+border-radius:20px;
+overflow:hidden;
+}
+
+.progress div{
+height:100%;
+background:var(--blue);
+}
+
+.learning-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+}
+
+.learning-card{
+background:#08141d;
+border:1px solid var(--line);
+border-radius:15px;
+padding:20px;
+}
+
+.learning-card h3{
+color:var(--cream);
+margin:7px 0;
+}
+
+.learning-card p{
+color:var(--muted);
+font-size:.87rem;
+}
+
+.learning-type{
+font-size:.68rem;
+font-weight:900;
+letter-spacing:.1em;
+color:var(--gold);
+}
+
+.timeline{
+display:grid;
+gap:12px;
+}
+
+.timeline-item{
+display:grid;
+grid-template-columns:120px 1fr;
+gap:20px;
+padding:15px;
+background:#08141d;
+border-left:3px solid var(--cyan);
+border-radius:10px;
+}
+
+.timeline-date{
+color:var(--gold);
+font-weight:900;
+}
+
+.timeline-item p{
+color:var(--muted);
+font-size:.88rem;
+}
+
+.analysis{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:12px;
+}
+
+.analysis-box{
+background:#061018;
+border:1px solid var(--line);
+border-radius:13px;
+padding:17px;
+}
+
+.analysis-box span{
+display:block;
+font-size:.68rem;
+text-transform:uppercase;
+letter-spacing:.1em;
+color:var(--muted);
+}
+
+.analysis-box strong{
+display:block;
+font-size:1.65rem;
+color:var(--cyan);
+margin-top:5px;
+}
+
+.insight{
+margin-top:20px;
+padding:22px;
+border:1px solid rgba(230,195,106,.3);
+border-radius:16px;
+background:linear-gradient(145deg,#172630,#09131b);
+}
+
+.insight h3{
+color:var(--gold);
+}
+
+.insight p{
+color:var(--cream);
+margin-top:8px;
+}
+
+.action{
+margin-top:15px;
+padding:17px;
+background:#061018;
+border-left:3px solid var(--cyan);
+border-radius:10px;
+}
+
+.action strong{
+display:block;
+font-size:.7rem;
+letter-spacing:.1em;
+text-transform:uppercase;
+color:var(--gold);
+margin-bottom:5px;
+}
+
+.log{
+max-height:280px;
+overflow:auto;
+}
+
+.log-entry{
+padding:11px;
+border-bottom:1px solid var(--line);
+font-size:.82rem;
+color:var(--muted);
+}
+
+.log-entry strong{
+color:var(--cream);
+}
+
+footer{
+border-top:1px solid var(--line);
+padding:40px 20px;
+text-align:center;
+color:var(--muted);
+}
+
+@media(max-width:1100px){
+
+.stat-grid{
+grid-template-columns:repeat(3,1fr);
+}
+
+.category-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+.skill-grid,
+.learning-grid{
+grid-template-columns:1fr 1fr;
+}
+
+.inventory-form{
+grid-template-columns:1fr 1fr;
+}
+
+}
+
+@media(max-width:750px){
+
+.half,
+.third{
+grid-column:span 12;
+}
+
+.stat-grid,
+.category-grid,
+.skill-grid,
+.learning-grid,
+.prediction,
+.analysis{
+grid-template-columns:1fr;
+}
+
+.inventory-form{
+grid-template-columns:1fr;
+}
+
+.inventory-item{
+grid-template-columns:1fr;
+}
+
+.timeline-item{
+grid-template-columns:1fr;
+gap:5px;
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+<div class="container">
+
+<div class="eyebrow">
+Teach Yourself New Skills With a Step-by-Step Learning Plan
+</div>
+
+<h1>
+Don't just consume information.<br>
+<span>Build learning capital.</span>
+</h1>
+
+<p>
+A personal education operating system that tracks what you are
+learning, what you already have, what you are missing, what evidence
+you are producing, and what you are likely to need next.
+</p>
+
+</div>
+</section>
+
+
+<main class="dashboard">
+<div class="container">
+<div class="grid">
+
+
+<!-- =========================
+01 LEARNING PROFILE
+========================= -->
+
+<section class="panel half">
+
+<h2>01 / Learning Profile</h2>
+
+<div class="field">
+<label>Your Primary Goal</label>
+
+<input
+id="goal"
+placeholder="Example: Become employable as a junior web developer">
+</div>
+
+<div class="field">
+<label>Target Skill / Field</label>
+
+<input
+id="field"
+placeholder="Example: Web development, data analysis, cybersecurity">
+</div>
+
+<div class="field">
+<label>Weekly Learning Capacity</label>
+
+<select id="hours">
+<option value="3">3 hours</option>
+<option value="5">5 hours</option>
+<option value="10" selected>10 hours</option>
+<option value="15">15 hours</option>
+<option value="20">20+ hours</option>
+</select>
+</div>
+
+<div class="field">
+<label>Current Level</label>
+
+<select id="level">
+<option>Beginner</option>
+<option>Developing</option>
+<option>Intermediate</option>
+<option>Advanced</option>
+</select>
+</div>
+
+<button class="primary" onclick="buildPlan()">
+Build Learning Intelligence
+</button>
+
+</section>
+
+
+<!-- =========================
+02 SYSTEM STATUS
+========================= -->
+
+<section class="panel half">
+
+<h2>02 / Learning System Status</h2>
+
+<div class="stat-grid" style="grid-template-columns:1fr 1fr">
+
+<div class="stat">
+<div class="stat-value" id="momentum">0</div>
+<div class="stat-label">Learning Momentum</div>
+</div>
+
+<div class="stat">
+<div class="stat-value" id="skills">0</div>
+<div class="stat-label">Skills Tracked</div>
+</div>
+
+<div class="stat">
+<div class="stat-value" id="resources">0</div>
+<div class="stat-label">Resources</div>
+</div>
+
+<div class="stat">
+<div class="stat-value" id="evidence">0</div>
+<div class="stat-label">Evidence Pieces</div>
+</div>
+
+</div>
+
+<div class="insight">
+
+<h3>System Diagnosis</h3>
+
+<p id="diagnosis">
+Add your learning goal and begin recording resources.
+The system will identify patterns as information is added.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+03 RESOURCE CATEGORIES
+========================= -->
+
+<section class="panel full">
+
+<h2>03 / Learning Resource Inventory</h2>
+
+<div class="category-grid">
+
+<div class="category">
+<div class="category-number">01</div>
+<h3>Books</h3>
+<p>Textbooks, reference books, ebooks, manuals and foundational reading.</p>
+</div>
+
+<div class="category">
+<div class="category-number">02</div>
+<h3>Courses</h3>
+<p>Online courses, workshops, bootcamps and structured programs.</p>
+</div>
+
+<div class="category">
+<div class="category-number">03</div>
+<h3>Tutorials</h3>
+<p>Documentation, tutorials, articles, videos and technical explainers.</p>
+</div>
+
+<div class="category">
+<div class="category-number">04</div>
+<h3>Practice</h3>
+<p>Exercises, quizzes, coding challenges, simulations and drills.</p>
+</div>
+
+<div class="category">
+<div class="category-number">05</div>
+<h3>Projects</h3>
+<p>Real-world projects that convert knowledge into demonstrable ability.</p>
+</div>
+
+<div class="category">
+<div class="category-number">06</div>
+<h3>Tools</h3>
+<p>Software, platforms, development environments and productivity tools.</p>
+</div>
+
+<div class="category">
+<div class="category-number">07</div>
+<h3>Credentials</h3>
+<p>Certificates, exams, assessments and credentials that validate knowledge.</p>
+</div>
+
+<div class="category">
+<div class="category-number">08</div>
+<h3>Evidence</h3>
+<p>Portfolios, case studies, demonstrations, repositories and completed work.</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+04 ADD INVENTORY
+========================= -->
+
+<section class="panel full">
+
+<h2>04 / Add What You Already Have</h2>
+
+<div class="inventory-form">
+
+<div class="field">
+<label>Resource</label>
+<input id="resourceName" placeholder="Example: FreeCodeCamp JavaScript curriculum">
+</div>
+
+<div class="field">
+<label>Category</label>
+
+<select id="resourceCategory">
+<option>Book</option>
+<option>Course</option>
+<option>Tutorial</option>
+<option>Practice</option>
+<option>Project</option>
+<option>Tool</option>
+<option>Credential</option>
+<option>Evidence</option>
+</select>
+</div>
+
+<div class="field">
+<label>Status</label>
+
+<select id="resourceStatus">
+<option>Available</option>
+<option>In Progress</option>
+<option>Completed</option>
+<option>Needs Review</option>
+</select>
+</div>
+
+<div>
+<button class="primary" onclick="addResource()">
+Add Resource
+</button>
+</div>
+
+</div>
+
+<div class="inventory-list" id="inventoryList">
+
+<div class="inventory-item">
+<strong>No resources recorded yet.</strong>
+<span>Add your existing learning assets above.</span>
+<span>—</span>
+<span>—</span>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+05 SKILL MAP
+========================= -->
+
+<section class="panel full">
+
+<h2>05 / Skill Capital Map</h2>
+
+<div class="skill-grid" id="skillGrid">
+
+<div class="skill">
+
+<div class="skill-top">
+<strong>Critical Thinking</strong>
+<span>20%</span>
+</div>
+
+<div class="progress">
+<div style="width:20%"></div>
+</div>
+
+</div>
+
+<div class="skill">
+
+<div class="skill-top">
+<strong>Technical Execution</strong>
+<span>20%</span>
+</div>
+
+<div class="progress">
+<div style="width:20%"></div>
+</div>
+
+</div>
+
+<div class="skill">
+
+<div class="skill-top">
+<strong>Communication</strong>
+<span>20%</span>
+</div>
+
+<div class="progress">
+<div style="width:20%"></div>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+06 PREDICTION ENGINE
+========================= -->
+
+<section class="panel full">
+
+<h2>06 / Predictive Learning Engine</h2>
+
+<div class="prediction" id="predictionArea">
+
+<div class="prediction-card">
+
+<div class="tag">
+PREDICTION
+</div>
+
+<h3>
+Build Evidence Before Adding Another Course
+</h3>
+
+<p>
+If you are accumulating learning materials faster than completed
+projects, your next requirement is probably application rather
+than additional information.
+</p>
+
+<div class="confidence">
+<div style="width:82%"></div>
+</div>
+
+</div>
+
+
+<div class="prediction-card">
+
+<div class="tag">
+LIKELY NEXT NEED
+</div>
+
+<h3>
+Practice + Demonstration
+</h3>
+
+<p>
+Self-education becomes more valuable when knowledge is converted
+into something another person can inspect.
+</p>
+
+<div class="confidence">
+<div style="width:76%"></div>
+</div>
+
+</div>
+
+</div>
+
+<div class="action">
+
+<strong>Predicted System Action</strong>
+
+<div id="predictionAction">
+Add several learning resources, then the system will compare
+your resource mix with your evidence and activity patterns.
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+07 LEARNING CAPITAL
+========================= -->
+
+<section class="panel full">
+
+<h2>07 / Learning Capital Engine</h2>
+
+<div class="learning-grid">
+
+<div class="learning-card">
+
+<div class="learning-type">
+KNOWLEDGE
+</div>
+
+<h3>
+What Do You Know?
+</h3>
+
+<p>
+Track concepts, principles, terminology, frameworks and facts
+you can explain without simply copying the source.
+</p>
+
+</div>
+
+<div class="learning-card">
+
+<div class="learning-type">
+ABILITY
+</div>
+
+<h3>
+What Can You Do?
+</h3>
+
+<p>
+A skill becomes stronger when you can repeatedly perform it under
+realistic conditions.
+</p>
+
+</div>
+
+<div class="learning-card">
+
+<div class="learning-type">
+EVIDENCE
+</div>
+
+<h3>
+What Can You Prove?
+</h3>
+
+<p>
+Projects, demonstrations, portfolios and case studies provide
+observable evidence that learning became capability.
+</p>
+
+</div>
+
+<div class="learning-card">
+
+<div class="learning-type">
+TRANSFER
+</div>
+
+<h3>
+Can You Use It Elsewhere?
+</h3>
+
+<p>
+Test whether a concept still works when the problem, industry,
+tool or context changes.
+</p>
+
+</div>
+
+<div class="learning-card">
+
+<div class="learning-type">
+RETRIEVAL
+</div>
+
+<h3>
+Can You Recall It?
+</h3>
+
+<p>
+Attempt to reconstruct knowledge before looking at the source.
+This exposes gaps that passive rereading can hide.
+</p>
+
+</div>
+
+<div class="learning-card">
+
+<div class="learning-type">
+COMPOUNDING
+</div>
+
+<h3>
+Does New Learning Build on Old Learning?
+</h3>
+
+<p>
+The strongest learning systems connect new skills to existing
+capabilities instead of treating every course as an isolated event.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+08 LEARNING ROADMAP
+========================= -->
+
+<section class="panel half">
+
+<h2>08 / Learning Roadmap</h2>
+
+<div class="timeline">
+
+<div class="timeline-item">
+
+<div class="timeline-date">
+NOW
+</div>
+
+<div>
+<strong>Establish the target</strong>
+<p>
+Define the skill and the outcome you want the learning to produce.
+</p>
+</div>
+
+</div>
+
+<div class="timeline-item">
+
+<div class="timeline-date">
+NEXT
+</div>
+
+<div>
+<strong>Build fundamentals</strong>
+<p>
+Acquire the minimum conceptual foundation required to begin practicing.
+</p>
+</div>
+
+</div>
+
+<div class="timeline-item">
+
+<div class="timeline-date">
+THEN
+</div>
+
+<div>
+<strong>Practice under constraints</strong>
+<p>
+Use exercises and projects rather than remaining in consumption mode.
+</p>
+</div>
+
+</div>
+
+<div class="timeline-item">
+
+<div class="timeline-date">
+PROVE
+</div>
+
+<div>
+<strong>Create evidence</strong>
+<p>
+Produce work that demonstrates what you can actually do.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+09 ANALYTICS
+========================= -->
+
+<section class="panel half">
+
+<h2>09 / Learning Analytics</h2>
+
+<div class="analysis">
+
+<div class="analysis-box">
+
+<span>
+Resource Balance
+</span>
+
+<strong id="resourceBalance">
+—
+</strong>
+
+</div>
+
+<div class="analysis-box">
+
+<span>
+Evidence Ratio
+</span>
+
+<strong id="evidenceRatio">
+0%
+</strong>
+
+</div>
+
+<div class="analysis-box">
+
+<span>
+Practice Ratio
+</span>
+
+<strong id="practiceRatio">
+0%
+</strong>
+
+</div>
+
+<div class="analysis-box">
+
+<span>
+Readiness
+</span>
+
+<strong id="readiness">
+—
+</strong>
+
+</div>
+
+</div>
+
+<div class="insight">
+
+<h3>
+The Information Trap
+</h3>
+
+<p>
+More information does not automatically create more capability.
+The system watches whether your learning inventory is becoming
+balanced with practice and evidence.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+10 ACTIVITY LOG
+========================= -->
+
+<section class="panel full">
+
+<h2>10 / Intelligence Activity Log</h2>
+
+<div class="log" id="log">
+
+<div class="log-entry">
+<strong>System:</strong>
+Self-education intelligence system initialized.
+</div>
+
+</div>
+
+</section>
+
+
+</div>
+</div>
+</main>
+
+
+<footer>
+Self-Education Intelligence System • Learning Capital • Skill Development • Evidence Building
+</footer>
+
+
+<script>
+
+let resources = [];
+let skills = [
+{name:"Critical Thinking",level:20},
+{name:"Technical Execution",level:20},
+{name:"Communication",level:20}
+];
+
+let evidenceCount = 0;
+let practiceCount = 0;
+
+
+function log(message){
+
+const box =
+document.getElementById("log");
+
+const entry =
+document.createElement("div");
+
+entry.className =
+"log-entry";
+
+entry.innerHTML =
+"<strong>System:</strong> " +
+message;
+
+box.prepend(entry);
+
+}
+
+
+function addResource(){
+
+const name =
+document.getElementById("resourceName")
+.value.trim();
+
+const category =
+document.getElementById("resourceCategory")
+.value;
+
+const status =
+document.getElementById("resourceStatus")
+.value;
+
+if(!name){
+
+alert("Enter a resource first.");
+
+return;
+
+}
+
+resources.push({
+name,
+category,
+status
+});
+
+renderInventory();
+
+document.getElementById("resourceName")
+.value = "";
+
+updateAnalytics();
+
+log(
+"Learning resource added: " +
+name +
+" (" +
+category +
+")."
+);
+
+}
+
+
+function renderInventory(){
+
+const list =
+document.getElementById("inventoryList");
+
+if(resources.length === 0){
+
+list.innerHTML =
+`
+<div class="inventory-item">
+<strong>No resources recorded yet.</strong>
+<span>Add your existing learning assets above.</span>
+<span>—</span>
+<span>—</span>
+</div>
+`;
+
+return;
+
+}
+
+list.innerHTML =
+resources.map(
+(item,index)=>{
+
+let badge =
+item.status === "Completed"
+? "ready"
+: item.status === "Needs Review"
+? "need"
+: "watch";
+
+return `
+<div class="inventory-item">
+
+<strong>
+${item.name}
+</strong>
+
+<span>
+${item.category}
+</span>
+
+<span>
+<span class="badge ${badge}">
+${item.status}
+</span>
+</span>
+
+<span>
+${predictResourceNeed(item)}
+</span>
+
+<button
+class="danger"
+onclick="removeResource(${index})">
+Remove
+</button>
+
+</div>
+`;
+
+}).join("");
+
+}
+
+
+function removeResource(index){
+
+const removed =
+resources[index];
+
+resources.splice(index,1);
+
+renderInventory();
+
+updateAnalytics();
+
+log(
+"Removed resource: " +
+removed.name
+);
+
+}
+
+
+function predictResourceNeed(item){
+
+if(item.category === "Course" &&
+resources.filter(r=>r.category==="Project").length === 0){
+
+return "Project likely needed";
+
+}
+
+if(item.category === "Book" &&
+item.status === "Completed"){
+
+return "Practice likely needed";
+
+}
+
+if(item.category === "Tutorial"){
+
+return "Application likely needed";
+
+}
+
+if(item.category === "Project"){
+
+return "Evidence building";
+
+}
+
+if(item.category === "Evidence"){
+
+return "Portfolio expansion";
+
+}
+
+return "Monitor";
+
+}
+
+
+function updateAnalytics(){
+
+const total =
+resources.length;
+
+document.getElementById("resources")
+.textContent =
+total;
+
+
+const skillCount =
+skills.length;
+
+document.getElementById("skills")
+.textContent =
+skillCount;
+
+
+evidenceCount =
+resources.filter(
+r=>r.category==="Evidence"
+).length;
+
+
+practiceCount =
+resources.filter(
+r=>r.category==="Practice"
+).length;
+
+
+document.getElementById("evidence")
+.textContent =
+evidenceCount;
+
+
+let evidenceRatio =
+total === 0
+? 0
+: Math.round(
+(evidenceCount / total) * 100
+);
+
+
+let practiceRatio =
+total === 0
+? 0
+: Math.round(
+(practiceCount / total) * 100
+);
+
+
+document.getElementById(
+"evidenceRatio"
+).textContent =
+evidenceRatio + "%";
+
+
+document.getElementById(
+"practiceRatio"
+).textContent =
+practiceRatio + "%";
+
+
+let balance =
+total === 0
+? "—"
+: evidenceRatio >= 20 && practiceRatio >= 20
+? "Balanced"
+: "Learning Heavy";
+
+
+document.getElementById(
+"resourceBalance"
+).textContent =
+balance;
+
+
+let readiness =
+total === 0
+? "—"
+: evidenceRatio >= 30
+? "HIGH"
+: evidenceRatio >= 15
+? "MEDIUM"
+: "LOW";
+
+
+document.getElementById(
+"readiness"
+).textContent =
+readiness;
+
+
+let momentum =
+Math.min(
+100,
+(total * 8) +
+(evidenceCount * 15) +
+(practiceCount * 10)
+);
+
+
+document.getElementById(
+"momentum"
+).textContent =
+momentum;
+
+
+updatePredictions();
+
+}
+
+
+function updatePredictions(){
+
+const courseCount =
+resources.filter(
+r=>r.category==="Course"
+).length;
+
+const bookCount =
+resources.filter(
+r=>r.category==="Book"
+).length;
+
+const projectCount =
+resources.filter(
+r=>r.category==="Project"
+).length;
+
+const evidence =
+resources.filter(
+r=>r.category==="Evidence"
+).length;
+
+
+let action;
+
+if(resources.length === 0){
+
+action =
+"Add your current books, courses, tutorials, practice resources and projects. The system needs behavioral data before it can make stronger predictions.";
+
+}
+else if(
+(courseCount + bookCount) >= 3 &&
+projectCount === 0
+){
+
+action =
+"Your inventory is accumulating knowledge resources without a project layer. Start a project that forces you to apply what you are learning.";
+
+}
+else if(
+projectCount > 0 &&
+evidence === 0
+){
+
+action =
+"You have entered application mode. Convert the project into visible evidence: a case study, portfolio artifact, demonstration, repository or documented result.";
+
+}
+else if(
+evidence > 0 &&
+practiceCount === 0
+){
+
+action =
+"Your evidence exists, but the system detects little deliberate practice. Add targeted drills to strengthen repeatable performance.";
+
+}
+else{
+
+action =
+"Your learning system is becoming balanced. Strengthen the weakest layer instead of automatically adding another course.";
+
+}
+
+
+document.getElementById(
+"predictionAction"
+).textContent =
+action;
+
+
+document.getElementById(
+"diagnosis"
+).textContent =
+action;
+
+}
+
+
+function buildPlan(){
+
+const goal =
+document.getElementById("goal")
+.value.trim();
+
+const field =
+document.getElementById("field")
+.value.trim();
+
+const hours =
+document.getElementById("hours")
+.value;
+
+const level =
+document.getElementById("level")
+.value;
+
+
+if(!goal || !field){
+
+alert(
+"Enter your learning goal and target field."
+);
+
+return;
+
+}
+
+
+log(
+"Learning profile created for " +
+field +
+" at " +
+level +
+" level with approximately " +
+hours +
+" hours per week."
+);
+
+
+document.getElementById(
+"diagnosis"
+).textContent =
+"Your system is configured around " +
+field +
+". The next step is to compare knowledge acquisition with practice and evidence production.";
+
+
+document.getElementById(
+"predictionAction"
+).textContent =
+"Build the smallest project that demonstrates your target skill. Use your learning resources to solve the project rather than consuming information without an application target.";
+
+}
+
+
+</script>
+
+</body>
+</html>
