@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Scholarships & Funding Opportunities | PathKeeper</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            50: '#f0f4f9',
+                            100: '#dbe4f0',
+                            800: '#1b365d',
+                            900: '#0a192f',
+                            950: '#060e1c'
+                        },
+                        brown: {
+                            100: '#f4ece6',
+                            300: '#c87d55',
+                            500: '#a0522d',
+                            700: '#8b4513',
+                            800: '#703816'
+                        },
+                        cream: {
+                            50: '#fffdf9',
+                            100: '#fdfbf7',
+                            200: '#f5efeb',
+                            300: '#efe6dd',
+                            400: '#e3d6c8'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'Georgia', 'serif'],
+                        mono: ['Fira Code', 'monospace']
+                    }
+                }
+            }
+        };
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #FDFBF7;
+            color: #0A192F;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .serif-title {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        .code-font {
+            font-family: 'Fira Code', monospace;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #F5EFEB;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #8B4513;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #703816;
+        }
+
+        .glass-card {
+            background: rgba(253, 251, 247, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(139, 69, 19, 0.15);
+        }
+
+        .scholarship-card {
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .scholarship-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .sch-tag-btn.active {
+            background-color: #0a192f;
+            color: #ffffff;
+        }
+
+        .drawer-open {
+            transform: translateX(0) !important;
+        }
+
+        .modal-panel {
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        button:focus-visible,
+        input:focus-visible,
+        select:focus-visible,
+        textarea:focus-visible,
+        a:focus-visible {
+            outline: 3px solid #c87d55;
+            outline-offset: 3px;
+        }
+    </style>
+</head>
+
+<body class="bg-cream-100 text-navy-900 antialiased min-h-screen flex flex-col justify-between selection:bg-brown-500 selection:text-white">
+
+    <!-- NAVIGATION HEADER -->
+
+    <header class="sticky top-0 z-40 w-full bg-cream-100/95 backdrop-blur border-b border-cream-300 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap items-center justify-between gap-3 min-h-20 py-3">
+
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-lg bg-navy-900 flex items-center justify-center text-cream-100 shadow-md border border-brown-500">
+                        <i class="fa-solid fa-compass text-brown-300"></i>
+                    </div>
+
+                    <div>
+                        <span class="text-xl font-bold tracking-tight text-navy-900 serif-title">PathKeeper</span>
+                        <span class="hidden sm:inline-block text-xs uppercase tracking-widest text-brown-700 font-semibold ml-2 px-2 py-0.5 bg-cream-300 rounded">
+                            Funding Hub
+                        </span>
+                    </div>
+                </div>
+
+                <nav class="hidden md:flex flex-wrap gap-5 text-sm font-medium">
+                    <a href="#core-opportunities" class="text-navy-800 hover:text-brown-700 transition">Overview</a>
+                    <a href="#scholarship-directory" class="text-navy-800 hover:text-brown-700 transition">Scholarships</a>
+                    <a href="#linking-text-matrix" class="text-navy-800 hover:text-brown-700 transition">Application Strategy</a>
+                    <a href="#micro-funding" class="text-navy-800 hover:text-brown-700 transition">Micro-Funding</a>
+                    <a href="#application-tracker" class="text-navy-800 hover:text-brown-700 transition">Tracker</a>
+                </nav>
+
+                <div class="flex items-center gap-2">
+                    <button onclick="openWizardModal()" class="hidden sm:inline-flex items-center px-4 py-2 border border-brown-700 text-xs font-semibold uppercase tracking-wider rounded-md text-brown-800 bg-cream-200 hover:bg-brown-700 hover:text-white transition shadow-sm">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2"></i>
+                        Funding Guide
+                    </button>
+
+                    <button onclick="togglePackDrawer()" class="relative inline-flex items-center px-4 py-2 rounded-md bg-navy-900 text-cream-100 text-xs font-semibold uppercase tracking-wider hover:bg-navy-800 transition shadow">
+                        <i class="fa-solid fa-vault mr-2 text-brown-300"></i>
+                        Funding Pack
+                        <span id="pack-count-badge" class="ml-2 bg-brown-500 text-white text-[10px] font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+
+    <section id="core-opportunities" class="relative bg-gradient-to-b from-cream-200 via-cream-100 to-cream-100 pt-12 pb-20 border-b border-cream-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+
+            <span class="inline-block px-3 py-1 bg-brown-100 border border-brown-300 text-brown-800 text-xs font-semibold uppercase tracking-widest rounded-full mb-4">
+                PathKeeper Opportunity Atlas
+            </span>
+
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-navy-900 serif-title tracking-tight leading-tight">
+                Scholarships & Funding Opportunities
+            </h1>
+
+            <p class="mt-4 max-w-3xl mx-auto text-lg text-navy-800/80 leading-relaxed">
+                Discover scholarship pathways, grants, micro-funding, financial assistance, and practical tools for organizing applications and building a funding strategy around your education or career goals.
+            </p>
+
+            <div class="mt-8 max-w-2xl mx-auto relative">
+                <div class="relative flex items-center">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 text-brown-500 text-lg"></i>
+
+                    <input
+                        type="text"
+                        id="globalSearch"
+                        oninput="filterAllContent()"
+                        placeholder="Search scholarships, grants, eligibility, or requirements..."
+                        class="w-full pl-12 pr-28 py-4 bg-white rounded-xl border-2 border-cream-300 focus:border-brown-500 focus:outline-none text-navy-900 shadow-md placeholder-gray-400"
+                    >
+
+                    <button onclick="resetGlobalSearch()" class="absolute right-3 px-3 py-1.5 bg-cream-200 hover:bg-cream-300 text-navy-800 text-xs font-semibold rounded-lg transition">
+                        Clear
+                    </button>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-2 mt-3 text-xs text-navy-800">
+                    <span class="font-semibold text-brown-700">Quick Filters:</span>
+                    <button onclick="setQuickSearch('STEM')" class="hover:underline">STEM</button>
+                    <span>•</span>
+                    <button onclick="setQuickSearch('Need-Based')" class="hover:underline">Need-Based</button>
+                    <span>•</span>
+                    <button onclick="setQuickSearch('Merit')" class="hover:underline">Merit</button>
+                    <span>•</span>
+                    <button onclick="setQuickSearch('Micro-Grant')" class="hover:underline">Micro-Grants</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-24">
+
+        <!-- MODULE 1: SCHOLARSHIP DIRECTORY -->
+
+        <section id="scholarship-directory" class="searchable-section scroll-mt-28">
+
+            <div class="border-l-4 border-brown-700 pl-4 mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <span class="text-xs font-bold text-brown-700 uppercase tracking-widest">Module 01</span>
+                    <h2 class="text-3xl font-bold text-navy-900 serif-title">Scholarship Directory</h2>
+                    <p class="text-navy-800/80 text-sm mt-1">
+                        Organize academic, merit, STEM, and need-based scholarship targets.
+                    </p>
+                </div>
+
+                <button onclick="openAddScholarshipModal()" class="self-start md:self-auto px-4 py-2 bg-navy-900 text-white rounded-lg text-xs font-bold hover:bg-navy-800 transition flex items-center">
+                    <i class="fa-solid fa-plus mr-2 text-brown-300"></i>
+                    Add Custom Target
+                </button>
+            </div>
+
+            <div class="bg-white p-4 rounded-xl border border-cream-300 shadow-sm mb-8 flex flex-wrap items-center justify-between gap-4">
+
+                <div class="flex flex-wrap items-center gap-2" id="directoryTagFilters">
+                    <button onclick="filterScholarshipTag('All', this)" class="sch-tag-btn active px-3 py-1 bg-navy-900 text-white rounded text-xs font-medium">All</button>
+                    <button onclick="filterScholarshipTag('STEM', this)" class="sch-tag-btn px-3 py-1 bg-cream-200 text-navy-800 hover:bg-cream-300 rounded text-xs font-medium">STEM</button>
+                    <button onclick="filterScholarshipTag('Merit', this)" class="sch-tag-btn px-3 py-1 bg-cream-200 text-navy-800 hover:bg-cream-300 rounded text-xs font-medium">Merit-Based</button>
+                    <button onclick="filterScholarshipTag('Need-Based', this)" class="sch-tag-btn px-3 py-1 bg-cream-200 text-navy-800 hover:bg-cream-300 rounded text-xs font-medium">Need-Based</button>
+                    <button onclick="filterScholarshipTag('Undergraduate', this)" class="sch-tag-btn px-3 py-1 bg-cream-200 text-navy-800 hover:bg-cream-300 rounded text-xs font-medium">Undergraduate</button>
+                    <button onclick="filterScholarshipTag('Postgraduate', this)" class="sch-tag-btn px-3 py-1 bg-cream-200 text-navy-800 hover:bg-cream-300 rounded text-xs font-medium">Postgraduate</button>
+                </div>
+
+                <div class="text-xs font-semibold text-navy-800">
+                    Showing <span id="scholarship-count" class="text-brown-700 font-bold">4</span> Award Pathways
+                </div>
+            </div>
+
+            <div id="scholarship-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- Scholarship 1 -->
+
+                <div class="scholarship-card bg-white p-6 rounded-2xl border border-cream-300 shadow-sm hover:border-brown-500 transition flex flex-col justify-between" data-tags="STEM Undergraduate Merit">
+
+                    <div>
+                        <div class="flex justify-between items-start mb-3 gap-2">
+                            <span class="px-2.5 py-1 bg-navy-50 text-navy-800 text-[10px] font-bold uppercase rounded border border-navy-100">STEM & Innovation</span>
+                            <span class="px-2 py-0.5 bg-brown-100 text-brown-800 text-xs font-bold rounded">$10,000 / Yr</span>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-navy-900 mb-2">PathKeeper Future Systems Fellowship</h3>
+
+                        <p class="text-xs text-navy-800/80 mb-4">
+                            Example award profile for students pursuing computing, automation, and systems engineering with demonstrated technical leadership.
+                        </p>
+
+                        <div class="space-y-1.5 text-xs text-navy-900 mb-6 bg-cream-50 p-3 rounded-lg border border-cream-200">
+                            <div><strong class="text-brown-700">Example Deadline:</strong> Nov 30, 2026</div>
+                            <div><strong class="text-brown-700">Example GPA:</strong> 3.50</div>
+                            <div><strong class="text-brown-700">Requirements:</strong> Technical Essay, System Design Portfolio, Transcript</div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-2">
+                        <button onclick="toggleFundingPack('PathKeeper Future Systems Fellowship', 10000, '2026-11-30')" class="flex-1 py-2 px-3 bg-navy-900 hover:bg-navy-800 text-white rounded-lg text-xs font-bold transition flex items-center justify-center">
+                            <i class="fa-solid fa-plus mr-2 text-brown-300"></i>
+                            Add to Funding Pack
+                        </button>
+
+                        <button onclick="showDetailsModal('PathKeeper Future Systems Fellowship', 'This is an illustrative scholarship profile, not a verified active award. Use the requirements as a planning example and confirm real opportunities with the sponsoring organization.')" class="py-2 px-3 bg-cream-200 hover:bg-cream-300 text-navy-900 rounded-lg text-xs font-bold transition">
+                            Details
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Scholarship 2 -->
+
+                <div class="scholarship-card bg-white p-6 rounded-2xl border border-cream-300 shadow-sm hover:border-brown-500 transition flex flex-col justify-between" data-tags="Need-Based Undergraduate Postgraduate">
+
+                    <div>
+                        <div class="flex justify-between items-start mb-3 gap-2">
+                            <span class="px-2.5 py-1 bg-navy-50 text-navy-800 text-[10px] font-bold uppercase rounded border border-navy-100">Ecosystem Access</span>
+                            <span class="px-2 py-0.5 bg-brown-100 text-brown-800 text-xs font-bold rounded">$7,500</span>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-navy-900 mb-2">Global Opportunity Mobility Grant</h3>
+
+                        <p class="text-xs text-navy-800/80 mb-4">
+                            Example funding profile for students seeking assistance with educational access and career development.
+                        </p>
+
+                        <div class="space-y-1.5 text-xs text-navy-900 mb-6 bg-cream-50 p-3 rounded-lg border border-cream-200">
+                            <div><strong class="text-brown-700">Example Deadline:</strong> Dec 15, 2026</div>
+                            <div><strong class="text-brown-700">Example GPA:</strong> 3.00</div>
+                            <div><strong class="text-brown-700">Requirements:</strong> Financial Need Form, Personal Narrative, Recommendation</div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-2">
+                        <button onclick="toggleFundingPack('Global Opportunity Mobility Grant', 7500, '2026-12-15')" class="flex-1 py-2 px-3 bg-navy-900 hover:bg-navy-800 text-white rounded-lg text-xs font-bold transition flex items-center justify-center">
+                            <i class="fa-solid fa-plus mr-2 text-brown-300"></i>
+                            Add to Funding Pack
+                        </button>
+
+                        <button onclick="showDetailsModal('Global Opportunity Mobility Grant', 'This is an illustrative funding profile, not a verified active grant. Confirm eligibility, award amount, and deadlines with the actual funding provider.')" class="py-2 px-3 bg-cream-200 hover:bg-cream-300 text-navy-900 rounded-lg text-xs font-bold transition">
+                            Details
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Scholarship 3 -->
+
+                <div class="scholarship-card bg-white p-6 rounded-2xl border border-cream-300 shadow-sm hover:border-brown-500 transition flex flex-col justify-between" data-tags="Merit Postgraduate STEM">
+
+                    <div>
+                        <div class="flex justify-between items-start mb-3 gap-2">
+                            <span class="px-2.5 py-1 bg-navy-50 text-navy-800 text-[10px] font-bold uppercase rounded border border-navy-100">Advanced Research</span>
+                            <span class="px-2 py-0.5 bg-brown-100 text-brown-800 text-xs font-bold rounded">$15,000</span>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-navy-900 mb-2">Algorithmic Governance Research Award</h3>
+
+                        <p class="text-xs text-navy-800/80 mb-4">
+                            Example award profile for postgraduate research into algorithmic decision frameworks, policy automation, and ethical technology.
+                        </p>
+
+                        <div class="space-y-1.5 text-xs text-navy-900 mb-6 bg-cream-50 p-3 rounded-lg border border-cream-200">
+                            <div><strong class="text-brown-700">Example Deadline:</strong> Jan 20, 2027</div>
+                            <div><strong class="text-brown-700">Example GPA:</strong> 3.70</div>
+                            <div><strong class="text-brown-700">Requirements:</strong> Research Proposal, Published Works, References</div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-2">
+                        <button onclick="toggleFundingPack('Algorithmic Governance Research Award', 15000, '2027-01-20')" class="flex-1 py-2 px-3 bg-navy-900 hover:bg-navy-800 text-white rounded-lg text-xs font-bold transition flex items-center justify-center">
+                            <i class="fa-solid fa-plus mr-2 text-brown-300"></i>
+                            Add to Funding Pack
+                        </button>
+
+                        <button onclick="showDetailsModal('Algorithmic Governance Research Award', 'This is an illustrative research award profile. Verify whether an equivalent award exists and review its official requirements before applying.')" class="py-2 px-3 bg-cream-200 hover:bg-cream-300 text-navy-900 rounded-lg text-xs font-bold transition">
+                            Details
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Scholarship 4 -->
+
+                <div class="scholarship-card bg-white p-6 rounded-2xl border border-cream-300 shadow-sm hover:border-brown-500 transition flex flex-col justify-between" data-tags="Merit Undergraduate">
+
+                    <div>
+                        <div class="flex justify-between items-start mb-3 gap-2">
+                            <span class="px-2.5 py-1 bg-navy-50 text-navy-800 text-[10px] font-bold uppercase rounded border border-navy-100">Leadership</span>
+                            <span class="px-2 py-0.5 bg-brown-100 text-brown-800 text-xs font-bold rounded">$5,000</span>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-navy-900 mb-2">Civic Atlas Leadership Stipend</h3>
+
+                        <p class="text-xs text-navy-800/80 mb-4">
+                            Example funding profile recognizing community initiatives, local projects, and student leadership.
+                        </p>
+
+                        <div class="space-y-1.5 text-xs text-navy-900 mb-6 bg-cream-50 p-3 rounded-lg border border-cream-200">
+                            <div><strong class="text-brown-700">Example Deadline:</strong> Feb 10, 2027</div>
+                            <div><strong class="text-brown-700">Example GPA:</strong> 3.20</div>
+                            <div><strong class="text-brown-700">Requirements:</strong> Community Impact Essay, Peer Endorsement</div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-2">
+                        <button onclick="toggleFundingPack('Civic Atlas Leadership Stipend', 5000, '2027-02-10')" class="flex-1 py-2 px-3 bg-navy-900 hover:bg-navy-800 text-white rounded-lg text-xs font-bold transition flex items-center justify-center">
+                            <i class="fa-solid fa-plus mr-2 text-brown-300"></i>
+                            Add to Funding Pack
+                        </button>
+
+                        <button onclick="showDetailsModal('Civic Atlas Leadership Stipend', 'This is an illustrative award profile. Confirm the sponsor, application availability, and eligibility requirements before treating it as a real opportunity.')" class="py-2 px-3 bg-cream-200 hover:bg-cream-300 text-navy-900 rounded-lg text-xs font-bold transition">
+                            Details
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <p class="mt-5 text-xs text-brown-800 bg-cream-200 border border-cream-300 rounded-lg p-4">
+                <strong>Important:</strong> The scholarship names, award values, GPA thresholds, and deadlines displayed in these sample cards are illustrative planning examples. They are not verified active scholarship listings. Always verify real awards through the sponsoring organization before applying.
+            </p>
+
+        </section>
+
+        <!-- MODULE 2: APPLICATION STRATEGY -->
+
+        <section id="linking-text-matrix" class="searchable-section scroll-mt-28">
+
+            <div class="border-l-4 border-brown-700 pl-4 mb-8">
+                <span class="text-xs font-bold text-brown-700 uppercase tracking-widest">Module 02</span>
+                <h2 class="text-3xl font-bold text-navy-900 serif-title">Application Writing & Essay Strategy</h2>
+                <p class="text-navy-800/80 text-sm mt-1">
+                    Connect your experience, accomplishments, and evidence to the selection criteria.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+                <div class="bg-white p-6 sm:p-8 rounded-2xl border border-cream-300 shadow-md">
+
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-brown-700 text-white flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-font"></i>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-bold text-navy-900">Scholarship Keyword Review</h3>
+                            <p class="text-xs text-navy-800/80">
+                                Check whether your draft addresses common application themes.
+                            </p>
+                        </div>
+                    </div>
+
+                    <textarea
+                        id="essayInput"
+                        oninput="analyzeEssayText()"
+                        rows="6"
+                        placeholder="Paste your scholarship essay draft here..."
+                        class="w-full p-4 text-xs bg-cream-50 border border-cream-300 rounded-xl focus:border-brown-500 focus:outline-none text-navy-900 placeholder-gray-400 mb-4"
+                    ></textarea>
+
+                    <div class="grid grid-cols-3 gap-3 text-center mb-4">
+
+                        <div class="bg-cream-100 p-3 rounded-lg border border-cream-200">
+                            <span class="text-[10px] uppercase font-bold text-navy-800 block">Word Count</span>
+                            <span id="wordCount" class="text-lg font-bold text-brown-700 code-font">0</span>
+                        </div>
+
+                        <div class="bg-cream-100 p-3 rounded-lg border border-cream-200">
+                            <span class="text-[10px] uppercase font-bold text-navy-800 block">Linked Terms</span>
+                            <span id="linkedTermsCount" class="text-lg font-bold text-brown-700 code-font">0</span>
+                        </div>
+
+                        <div class="bg-cream-100 p-3 rounded-lg border border-cream-200">
+                            <span class="text-[10px] uppercase font-bold text-navy-800 block">Term Coverage</span>
+                            <span id="matchScore" class="text-lg font-bold text-brown-700 code-font">0%</span>
+                        </div>
+
+                    </div>
+
+                    <p class="text-[10px] text-gray-500 mb-3">
+                        This measures keyword coverage only. It does not predict an evaluator's score.
+                    </p>
+
+                    <div id="keywordBadges" class="flex flex-wrap gap-1.5 text-[11px]">
+                        <span class="px-2 py-0.5 rounded bg-cream-200 text-navy-800 border border-cream-300" data-kw="leadership">leadership</span>
+                        <span class="px-2 py-0.5 rounded bg-cream-200 text-navy-800 border border-cream-300" data-kw="impact">impact</span>
+                        <span class="px-2 py-0.5 rounded bg-cream-200 text-navy-800 border border-cream-300" data-kw="innovation">innovation</span>
+                        <span class="px-2 py-0.5 rounded bg-cream-200 text-navy-800 border border-cream-300" data-kw="research">research</span>
+                        <span class="px-2 py-0.5 rounded bg-cream-200 text-navy-800 border border-cream-300" data-kw="community">community</span>
+                        <span class="px-2 py-0.5 rounded bg-cream-200 text-navy-800 border border-cream-300" data-kw="systems">systems</span>
+                        <span class="px-2 py-0.5 rounded bg-cream-200 text-navy-800 border border-cream-300" data-kw="sustainability">sustainability</span>
+                    </div>
+                </div>
+
+                <div class="bg-navy-900 text-cream-100 p-6 sm:p-8 rounded-2xl border border-navy-800 shadow-md">
+
+                    <span class="text-xs font-bold text-brown-300 uppercase tracking-widest block mb-2">
+                        Application Strategy
+                    </span>
+
+                    <h3 class="text-2xl font-bold text-white serif-title mb-4">
+                        Connecting Evidence to Criteria
+                    </h3>
+
+                    <p class="text-xs text-cream-300 leading-relaxed mb-6">
+                        A strong application connects what you have done to what the funding organization is seeking. Use its published selection criteria to guide your examples.
+                    </p>
+
+                    <div class="space-y-4 text-xs">
+
+                        <div class="p-3 bg-navy-950 rounded-xl border border-navy-800">
+                            <div class="font-bold text-brown-300 mb-1">1. Explain Your Experience</div>
+                            <p class="text-cream-400">
+                                Describe the situation, your role, the action you took, and what happened as a result.
+                            </p>
+                        </div>
+
+                        <div class="p-3 bg-navy-950 rounded-xl border border-navy-800">
+                            <div class="font-bold text-brown-300 mb-1">2. Provide Evidence</div>
+                            <p class="text-cream-400">
+                                Support your claims with measurable results, completed projects, responsibilities, or documented achievements.
+                            </p>
+                        </div>
+
+                        <div class="p-3 bg-navy-950 rounded-xl border border-navy-800">
+                            <div class="font-bold text-brown-300 mb-1">3. Connect to the Mission</div>
+                            <p class="text-cream-400">
+                                Explain how your goals and experience relate to the purpose of the scholarship or grant.
+                            </p>
+                        </div>
+
+                        <div class="p-3 bg-navy-950 rounded-xl border border-navy-800">
+                            <div class="font-bold text-brown-300 mb-1">4. Review the Requirements</div>
+                            <p class="text-cream-400">
+                                Check word limits, supporting documents, references, submission format, and deadlines.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODULE 3: MICRO-FUNDING -->
+
+        <section id="micro-funding" class="searchable-section scroll-mt-28">
+
+            <div class="border-l-4 border-brown-700 pl-4 mb-8">
+                <span class="text-xs font-bold text-brown-700 uppercase tracking-widest">Module 03</span>
+                <h2 class="text-3xl font-bold text-navy-900 serif-title">Micro-Funding & Financial Assistance</h2>
+                <p class="text-navy-800/80 text-sm mt-1">
+                    Explore smaller funding needs, project assistance, educational expenses, and emergency support.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                <div class="bg-white p-6 rounded-2xl border border-cream-300 shadow-md lg:col-span-1">
+
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-brown-700 text-white flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-calculator"></i>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-bold text-navy-900">Profile Strength Review</h3>
+                            <p class="text-xs text-navy-800/80">Review selected application factors.</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 text-xs">
+
+                        <div>
+                            <label class="block font-semibold text-navy-900 mb-1">Current GPA</label>
+                            <input type="number" id="calcGpa" min="0" max="4" step="0.1" value="3.6" class="w-full p-2.5 bg-cream-50 border border-cream-300 rounded-lg text-navy-900 focus:outline-none focus:border-brown-500">
+                        </div>
+
+                        <div>
+                            <label class="block font-semibold text-navy-900 mb-1">Community Service / Extra Hours</label>
+                            <input type="number" id="calcHours" min="0" max="500" value="60" class="w-full p-2.5 bg-cream-50 border border-cream-300 rounded-lg text-navy-900 focus:outline-none focus:border-brown-500">
+                        </div>
+
+                        <div>
+                            <label class="block font-semibold text-navy-900 mb-1">Essay Preparation</label>
+                            <select id="calcEssay" class="w-full p-2.5 bg-cream-50 border border-cream-300 rounded-lg text-navy-900 focus:outline-none focus:border-brown-500">
+                                <option value="1.2">Polished and aligned</option>
+                                <option value="1.0" selected>Developed draft</option>
+                                <option value="0.8">Needs revision</option>
+                            </select>
+                        </div>
+
+                        <button onclick="calculateScholarshipOdds()" class="w-full py-2.5 bg-navy-900 hover:bg-navy-800 text-white text-xs font-bold uppercase rounded-lg transition">
+                            Review Profile
+                        </button>
+
+                        <div id="oddsResultBox" class="p-4 bg-cream-100 rounded-xl border border-brown-300 text-center">
+                            <span class="text-[10px] font-bold uppercase text-brown-700 block">Profile Review</span>
+                            <div id="oddsScore" class="text-xl font-bold text-navy-900 my-1">Ready to Review</div>
+                            <p id="oddsAdvice" class="text-[11px] text-navy-800/80">
+                                Complete the fields and select Review Profile.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 space-y-4">
+
+                    <h3 class="text-xl font-bold text-navy-900 serif-title">
+                        Funding Categories to Investigate
+                    </h3>
+
+                    <div class="bg-white p-5 rounded-xl border border-cream-300 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div>
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="px-2 py-0.5 bg-brown-100 text-brown-800 text-[10px] font-bold rounded">Travel Assistance</span>
+                                <span class="text-xs font-bold text-brown-700">Varies by Provider</span>
+                            </div>
+                            <h4 class="text-base font-bold text-navy-900">Academic Conference & Travel Support</h4>
+                            <p class="text-xs text-navy-800/80 mt-1">
+                                Funding to investigate for students presenting research or attending professional events.
+                            </p>
+                        </div>
+
+                        <button onclick="toggleFundingPack('Academic Conference Travel Support', 1500, 'Verify deadline')" class="px-4 py-2 bg-cream-200 hover:bg-brown-700 hover:text-white text-navy-900 text-xs font-bold rounded-lg transition shrink-0">
+                            + Add to Pack
+                        </button>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-xl border border-cream-300 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div>
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="px-2 py-0.5 bg-brown-100 text-brown-800 text-[10px] font-bold rounded">Technology Assistance</span>
+                                <span class="text-xs font-bold text-brown-700">Varies by Provider</span>
+                            </div>
+                            <h4 class="text-base font-bold text-navy-900">Student Technology & Equipment Support</h4>
+                            <p class="text-xs text-navy-800/80 mt-1">
+                                Investigate laptop assistance, equipment grants, and technology access programs.
+                            </p>
+                        </div>
+
+                        <button onclick="toggleFundingPack('Student Technology Assistance', 1200, 'Verify deadline')" class="px-4 py-2 bg-cream-200 hover:bg-brown-700 hover:text-white text-navy-900 text-xs font-bold rounded-lg transition shrink-0">
+                            + Add to Pack
+                        </button>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-xl border border-cream-300 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div>
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="px-2 py-0.5 bg-brown-100 text-brown-800 text-[10px] font-bold rounded">Project Funding</span>
+                                <span class="text-xs font-bold text-brown-700">Varies by Provider</span>
+                            </div>
+                            <h4 class="text-base font-bold text-navy-900">Student Project & Innovation Grants</h4>
+                            <p class="text-xs text-navy-800/80 mt-1">
+                                Investigate funding for prototypes, research, community projects, and open-source tools.
+                            </p>
+                        </div>
+
+                        <button onclick="toggleFundingPack('Student Project and Innovation Grant', 3000, 'Verify deadline')" class="px-4 py-2 bg-cream-200 hover:bg-brown-700 hover:text-white text-navy-900 text-xs font-bold rounded-lg transition shrink-0">
+                            + Add to Pack
+                        </button>
+                    </div>
+
+                    <p class="text-xs text-brown-800 bg-cream-200 border border-cream-300 rounded-lg p-4">
+                        These are funding categories to investigate, not confirmed active grants. Verify each program's sponsor, eligibility, award amount, and application dates.
+                    </p>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- MODULE 4: APPLICATION TRACKER -->
+
+        <section id="application-tracker" class="searchable-section scroll-mt-28">
+
+            <div class="border-l-4 border-brown-700 pl-4 mb-8">
+                <span class="text-xs font-bold text-brown-700 uppercase tracking-widest">Module 04</span>
+                <h2 class="text-3xl font-bold text-navy-900 serif-title">Application Pipeline & Tracker</h2>
+                <p class="text-navy-800/80 text-sm mt-1">
+                    Track saved funding opportunities from initial research through submission and award.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4" id="trackerPipeline">
+
+                <div class="bg-cream-200/60 p-4 rounded-xl border border-cream-300">
+                    <div class="flex items-center justify-between mb-3 pb-2 border-b border-cream-300">
+                        <span class="text-xs font-bold text-navy-900 uppercase">1. Saved Target</span>
+                        <span id="count-saved" class="px-2 py-0.5 bg-white text-brown-700 font-bold text-[10px] rounded-full">0</span>
+                    </div>
+                    <div id="col-saved" class="space-y-3 min-h-[120px]"></div>
+                </div>
+
+                <div class="bg-cream-200/60 p-4 rounded-xl border border-cream-300">
+                    <div class="flex items-center justify-between mb-3 pb-2 border-b border-cream-300">
+                        <span class="text-xs font-bold text-navy-900 uppercase">2. Essay Draft</span>
+                        <span id="count-draft" class="px-2 py-0.5 bg-white text-brown-700 font-bold text-[10px] rounded-full">0</span>
+                    </div>
+                    <div id="col-draft" class="space-y-3 min-h-[120px]"></div>
+                </div>
+
+                <div class="bg-cream-200/60 p-4 rounded-xl border border-cream-300">
+                    <div class="flex items-center justify-between mb-3 pb-2 border-b border-cream-300">
+                        <span class="text-xs font-bold text-navy-900 uppercase">3. Submitted</span>
+                        <span id="count-submitted" class="px-2 py-0.5 bg-white text-brown-700 font-bold text-[10px] rounded-full">0</span>
+                    </div>
+                    <div id="col-submitted" class="space-y-3 min-h-[120px]"></div>
+                </div>
+
+                <div class="bg-cream-200/60 p-4 rounded-xl border border-cream-300">
+                    <div class="flex items-center justify-between mb-3 pb-2 border-b border-cream-300">
+                        <span class="text-xs font-bold text-navy-900 uppercase">4. Awarded</span>
+                        <span id="count-awarded" class="px-2 py-0.5 bg-white text-brown-700 font-bold text-[10px] rounded-full">0</span>
+                    </div>
+                    <div id="col-awarded" class="space-y-3 min-h-[120px]"></div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- MODULE 5: RESOURCE PACK -->
+
+        <section id="opportunity-pack" class="searchable-section scroll-mt-28">
+
+            <div class="border-l-4 border-brown-700 pl-4 mb-8">
+                <span class="text-xs font-bold text-brown-700 uppercase tracking-widest">Module 05</span>
+                <h2 class="text-3xl font-bold text-navy-900 serif-title">Funding Preparation Resources</h2>
+                <p class="text-navy-800/80 text-sm mt-1">
+                    Build a personal collection of application tools, planning resources, and funding materials.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                <div class="bg-white p-6 rounded-2xl border border-cream-300 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 bg-brown-100 text-brown-700 rounded-lg flex items-center justify-center text-lg mb-4">
+                            <i class="fa-solid fa-file-contract"></i>
+                        </div>
+
+                        <h3 class="text-lg font-bold text-navy-900 mb-1">Scholarship Essay Blueprint</h3>
+
+                        <p class="text-xs text-navy-800/80 mb-4">
+                            A planning framework for organizing scholarship narratives, personal achievements, and application requirements.
+                        </p>
+
+                        <ul class="text-xs text-navy-900 space-y-2 mb-6">
+                            <li><i class="fa-solid fa-check text-brown-500 mr-2"></i> Experience Audit Worksheet</li>
+                            <li><i class="fa-solid fa-check text-brown-500 mr-2"></i> Essay Planning Outline</li>
+                            <li><i class="fa-solid fa-check text-brown-500 mr-2"></i> Application Review Checklist</li>
+                        </ul>
+                    </div>
+
+                    <button onclick="togglePackItem('Scholarship Essay Blueprint')" class="w-full py-2.5 px-4 bg-cream-200 hover:bg-brown-700 hover:text-white text-navy-900 text-xs font-bold rounded-xl transition border border-cream-300 flex items-center justify-center">
+                        <i class="fa-solid fa-plus mr-2"></i>
+                        Add to Custom Pack
+                    </button>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-cream-300 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 bg-brown-100 text-brown-700 rounded-lg flex items-center justify-center text-lg mb-4">
+                            <i class="fa-solid fa-gears"></i>
+                        </div>
+
+                        <h3 class="text-lg font-bold text-navy-900 mb-1">Funding Organization Toolkit</h3>
+
+                        <p class="text-xs text-navy-800/80 mb-4">
+                            Planning tools for tracking funding sources, application deadlines, and supporting documents.
+                        </p>
+
+                        <ul class="text-xs text-navy-900 space-y-2 mb-6">
+                            <li><i class="fa-solid fa-check text-brown-500 mr-2"></i> Deadline Tracking Template</li>
+                            <li><i class="fa-solid fa-check text-brown-500 mr-2"></i> Funding Comparison Sheet</li>
+                            <li><i class="fa-solid fa-check text-brown-500 mr-2"></i> Application Status Checklist</li>
+                        </ul>
+                    </div>
+
+                    <button onclick="togglePackItem('Funding Organization Toolkit')" class="w-full py-2.5 px-4 bg-cream-200 hover:bg-brown-700 hover:text-white text-navy-900 text-xs font-bold rounded-xl transition border border-cream-300 flex items-center justify-center">
+                        <i class="fa-solid fa-plus mr-2"></i>
+                        Add to Custom Pack
+                    </button>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-cream-300 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 bg-brown-100 text-brown-700 rounded-lg flex items-center justify-center text-lg mb-4">
+                            <i class="fa-solid fa-compass-drafting"></i>
+                        </div>
+
+                        <h3 class="text-lg font-bold text-navy-900 mb-1">Funding Strategy Guide</h3>
+
+                        <p class="text-xs text-navy-800/80 mb-4">
+                            A framework for combining different funding sources and organizing education-related financial needs.
+                        </p>
+
+                        <ul class="text-xs text-navy-900 space-y-2 mb-6">
+                            <li><i class="fa-solid fa-check text-brown-500 mr-2"></i> Funding Needs Assessment</li>
+                            <li><i class="fa-solid fa-check text-brown-500 mr-2"></i> Multiple Award Planning</li>
+                            <li><i class="fa-solid fa-check text-brown-500 mr-2"></i> Financial Gap Review</li>
+                        </ul>
+                    </div>
+
+                    <button onclick="togglePackItem('Funding Strategy Guide')" class="w-full py-2.5 px-4 bg-cream-200 hover:bg-brown-700 hover:text-white text-navy-900 text-xs font-bold rounded-xl transition border border-cream-300 flex items-center justify-center">
+                        <i class="fa-solid fa-plus mr-2"></i>
+                        Add to Custom Pack
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+
+    <footer class="bg-navy-900 text-cream-100 border-t border-navy-800 py-12 mt-12">
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 rounded bg-brown-500 flex items-center justify-center text-white font-bold">
+                            <i class="fa-solid fa-compass"></i>
+                        </div>
+                        <span class="text-xl font-bold serif-title text-white">PathKeeper</span>
+                    </div>
+
+                    <p class="text-xs text-cream-300 leading-relaxed">
+                        A structured resource for discovering funding opportunities, preparing applications, and organizing financial support for education and career development.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold text-brown-300 uppercase tracking-widest mb-4">Funding Resources</h4>
+                    <ul class="text-xs space-y-2 text-cream-300">
+                        <li><a href="#scholarship-directory" class="hover:text-white transition">Scholarship Directory</a></li>
+                        <li><a href="#linking-text-matrix" class="hover:text-white transition">Application Strategy</a></li>
+                        <li><a href="#micro-funding" class="hover:text-white transition">Micro-Funding</a></li>
+                        <li><a href="#application-tracker" class="hover:text-white transition">Application Tracker</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold text-brown-300 uppercase tracking-widest mb-4">Interactive Tools</h4>
+                    <ul class="text-xs space-y-2 text-cream-300">
+                        <li><button onclick="openWizardModal()" class="hover:text-white transition">Funding Guide</button></li>
+                        <li><button onclick="togglePackDrawer()" class="hover:text-white transition">Funding Pack Vault</button></li>
+                        <li><button onclick="openAddScholarshipModal()" class="hover:text-white transition">Add Custom Target</button></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold text-brown-300 uppercase tracking-widest mb-4">Color System</h4>
+
+                    <div class="flex items-center space-x-2">
+                        <div class="w-6 h-6 rounded bg-navy-900 border border-cream-300" title="Deep Blue"></div>
+                        <div class="w-6 h-6 rounded bg-brown-700" title="Warm Brown"></div>
+                        <div class="w-6 h-6 rounded bg-brown-300" title="Terracotta"></div>
+                        <div class="w-6 h-6 rounded bg-cream-100" title="Soft Cream"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="pt-8 border-t border-navy-800 flex flex-col sm:flex-row justify-between items-center text-xs text-cream-400">
+                <p>&copy; PathKeeper | Scholarships & Funding Opportunities</p>
+                <p class="mt-2 sm:mt-0">Deep Blue, Warm Brown & Soft Cream</p>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- FUNDING PACK DRAWER -->
+
+    <div id="packDrawer" class="fixed inset-y-0 right-0 max-w-md w-full bg-cream-100 border-l border-cream-300 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col justify-between">
+
+        <div class="p-6 overflow-y-auto">
+
+            <div class="flex items-center justify-between pb-4 border-b border-cream-300">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-vault text-brown-700 text-xl"></i>
+                    <h3 class="text-lg font-bold text-navy-900 serif-title">My Funding Stack</h3>
+                </div>
+
+                <button onclick="togglePackDrawer()" class="text-navy-800 hover:text-brown-700 text-lg" aria-label="Close funding pack">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="mt-4 p-4 bg-navy-900 text-cream-100 rounded-xl flex items-center justify-between">
+                <div>
+                    <span class="text-[10px] font-bold text-brown-300 uppercase block">Total Potential Value</span>
+                    <span id="total-funding-amount" class="text-2xl font-bold code-font text-white">$0</span>
+                </div>
+                <i class="fa-solid fa-sack-dollar text-2xl text-brown-300"></i>
+            </div>
+
+            <p class="text-xs text-navy-800/80 my-4">
+                Selected funding opportunities and resources saved in your active target pack:
+            </p>
+
+            <div id="pack-items-list" class="space-y-3">
+                <p id="empty-pack-msg" class="text-xs italic text-gray-400">
+                    No funding items saved yet. Explore the directory to add targets.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="p-6 border-t border-cream-300 bg-cream-200">
+            <button onclick="exportFundingPackSchedule()" class="w-full py-3 bg-brown-700 hover:bg-brown-800 text-white text-xs font-bold uppercase tracking-wider rounded-xl transition shadow flex items-center justify-center">
+                <i class="fa-solid fa-download mr-2"></i>
+                Export Master Schedule (.CSV)
+            </button>
+        </div>
+
+    </div>
+
+    <!-- ADD CUSTOM SCHOLARSHIP MODAL -->
+
+    <div id="addScholarshipModal" class="fixed inset-0 bg-navy-950/70 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+
+        <div class="modal-panel bg-cream-100 rounded-2xl border border-cream-300 max-w-md w-full p-6 shadow-2xl relative">
+
+            <button onclick="closeAddScholarshipModal()" class="absolute top-4 right-4 text-navy-800 hover:text-brown-700 text-lg" aria-label="Close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <h3 class="text-xl font-bold text-navy-900 serif-title mb-4">
+                Add Custom Funding Target
+            </h3>
+
+            <div class="space-y-3 text-xs">
+
+                <div>
+                    <label for="custTitle" class="block font-bold text-navy-900 mb-1">Opportunity Title</label>
+                    <input type="text" id="custTitle" placeholder="e.g. Local Tech Excellence Award" class="w-full p-2.5 bg-white border border-cream-300 rounded-lg text-navy-900 focus:outline-none focus:border-brown-500">
+                </div>
+
+                <div>
+                    <label for="custAmount" class="block font-bold text-navy-900 mb-1">Estimated Award Amount ($)</label>
+                    <input type="number" id="custAmount" min="0" placeholder="2500" class="w-full p-2.5 bg-white border border-cream-300 rounded-lg text-navy-900 focus:outline-none focus:border-brown-500">
+                </div>
+
+                <div>
+                    <label for="custDeadline" class="block font-bold text-navy-900 mb-1">Application Deadline</label>
+                    <input type="date" id="custDeadline" class="w-full p-2.5 bg-white border border-cream-300 rounded-lg text-navy-900 focus:outline-none focus:border-brown-500">
+                </div>
+
+                <div>
+                    <label for="custTag" class="block font-bold text-navy-900 mb-1">Primary Category</label>
+                    <select id="custTag" class="w-full p-2.5 bg-white border border-cream-300 rounded-lg text-navy-900 focus:outline-none focus:border-brown-500">
+                        <option value="STEM">STEM</option>
+                        <option value="Merit">Merit-Based</option>
+                        <option value="Need-Based">Need-Based</option>
+                        <option value="Undergraduate">Undergraduate</option>
+                        <option value="Postgraduate">Postgraduate</option>
+                    </select>
+                </div>
+
+                <button onclick="saveCustomScholarship()" class="w-full py-3 bg-navy-900 hover:bg-navy-800 text-white text-xs font-bold uppercase rounded-lg transition mt-2">
+                    Save to Directory & Vault
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- FUNDING GUIDE MODAL -->
+
+    <div id="wizardModal" class="fixed inset-0 bg-navy-950/70 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+
+        <div class="modal-panel bg-cream-100 rounded-2xl border border-cream-300 max-w-xl w-full p-6 sm:p-8 shadow-2xl relative">
+
+            <button onclick="closeWizardModal()" class="absolute top-4 right-4 text-navy-800 hover:text-brown-700 text-lg" aria-label="Close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="flex items-center space-x-3 mb-6">
+                <div class="w-10 h-10 rounded-lg bg-brown-700 text-white flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-navy-900 serif-title">Funding Pathway Guide</h3>
+                    <p class="text-xs text-navy-800/80">
+                        Answer two questions to identify a starting point for your funding research.
+                    </p>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+
+                <div>
+                    <label for="wizardGoal" class="block text-xs font-bold uppercase text-navy-900 mb-2">
+                        1. What are you pursuing?
+                    </label>
+
+                    <select id="wizardGoal" class="w-full text-xs p-3 bg-white border border-cream-300 rounded-lg text-navy-900 focus:outline-none focus:border-brown-500">
+                        <option value="career">Undergraduate Degree</option>
+                        <option value="coded">Postgraduate / Research</option>
+                        <option value="strategy">Vocational / Skill Certification</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="wizardStage" class="block text-xs font-bold uppercase text-navy-900 mb-2">
+                        2. What is your primary funding need?
+                    </label>
+
+                    <select id="wizardStage" class="w-full text-xs p-3 bg-white border border-cream-300 rounded-lg text-navy-900 focus:outline-none focus:border-brown-500">
+                        <option value="entry">Academic / Merit Funding</option>
+                        <option value="advanced">Need-Based Financial Assistance</option>
+                        <option value="master">Micro-Funding / Emergency Support</option>
+                    </select>
+                </div>
+
+                <button onclick="calculateRecommendedPath()" class="w-full py-3 bg-navy-900 hover:bg-navy-800 text-cream-100 text-xs font-bold uppercase tracking-wider rounded-lg transition shadow mt-4">
+                    Recommend a Starting Point
+                </button>
+
+                <div id="wizardResult" class="hidden mt-6 p-4 bg-cream-200 border border-brown-300 rounded-xl">
+                    <span class="text-[10px] font-bold text-brown-700 uppercase tracking-widest block mb-1">
+                        Suggested Starting Point
+                    </span>
+
+                    <h4 id="wizardResultTitle" class="text-base font-bold text-navy-900 mb-1"></h4>
+
+                    <p id="wizardResultDesc" class="text-xs text-navy-800/80 leading-relaxed"></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- DETAILS MODAL -->
+
+    <div id="detailsModal" class="fixed inset-0 bg-navy-950/70 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+
+        <div class="modal-panel bg-white rounded-2xl border border-cream-300 max-w-lg w-full p-6 shadow-2xl relative">
+
+            <button onclick="closeDetailsModal()" class="absolute top-4 right-4 text-navy-800 hover:text-brown-700 text-lg" aria-label="Close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <h3 id="detailsModalTitle" class="text-xl font-bold text-navy-900 serif-title mb-2"></h3>
+
+            <p id="detailsModalBody" class="text-xs text-navy-800/80 leading-relaxed mb-6"></p>
+
+            <div class="flex justify-end">
+                <button onclick="closeDetailsModal()" class="px-4 py-2 bg-brown-700 text-white rounded-lg text-xs font-bold">
+                    Close
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+        const STORAGE_KEY = 'pathkeeper_funding_pack';
+
+        let fundingPack = [];
+
+        try {
+            fundingPack = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+            if (!Array.isArray(fundingPack)) fundingPack = [];
+        } catch (error) {
+            fundingPack = [];
+        }
+
+        function saveFundingPack() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(fundingPack));
+            } catch (error) {
+                console.warn('Funding pack could not be saved in this browser.');
+            }
+        }
+
+        function escapeHTML(value) {
+            return String(value).replace(/[&<>"']/g, char => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            })[char]);
+        }
+
+        function safeNumber(value) {
+            const number = Number(value);
+            return Number.isFinite(number) && number >= 0 ? number : 0;
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderFundingPackUI();
+            renderPipelineTracker();
+            updateScholarshipCount();
+        });
+
+        // SCHOLARSHIP FILTERING
+
+        let activeScholarshipTag = 'All';
+
+        function filterScholarshipTag(tag, button) {
+            activeScholarshipTag = tag;
+
+            document.querySelectorAll('.sch-tag-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-navy-900', 'text-white');
+                btn.classList.add('bg-cream-200', 'text-navy-800');
+            });
+
+            if (button) {
+                button.classList.add('active', 'bg-navy-900', 'text-white');
+                button.classList.remove('bg-cream-200', 'text-navy-800');
+            }
+
+            filterScholarshipCards();
+        }
+
+        function filterScholarshipCards() {
+            const query = document.getElementById('globalSearch').value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.scholarship-card');
+
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const tags = card.getAttribute('data-tags') || '';
+                const content = card.innerText.toLowerCase();
+
+                const matchesTag = activeScholarshipTag === 'All' || tags.includes(activeScholarshipTag);
+                const matchesSearch = !query || content.includes(query);
+
+                if (matchesTag && matchesSearch) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            document.getElementById('scholarship-count').innerText = visibleCount;
+        }
+
+        function updateScholarshipCount() {
+            filterScholarshipCards();
+        }
+
+        // FUNDING PACK
+
+        function toggleFundingPack(title, amount, deadline) {
+            const index = fundingPack.findIndex(item => item.title === title);
+
+            if (index > -1) {
+                fundingPack.splice(index, 1);
+            } else {
+                fundingPack.push({
+                    title,
+                    amount: safeNumber(amount),
+                    deadline: deadline || 'TBD',
+                    stage: 'saved'
+                });
+            }
+
+            saveFundingPack();
+            renderFundingPackUI();
+            renderPipelineTracker();
+        }
+
+        function renderFundingPackUI() {
+            document.getElementById('pack-count-badge').innerText = fundingPack.length;
+
+            const container = document.getElementById('pack-items-list');
+
+            const total = fundingPack.reduce((sum, item) => sum + safeNumber(item.amount), 0);
+
+            document.getElementById('total-funding-amount').innerText =
+                '$' + total.toLocaleString();
+
+            if (fundingPack.length === 0) {
+                container.innerHTML = `
+                    <p class="text-xs italic text-gray-400">
+                        No funding items saved yet. Explore the directory to add targets.
+                    </p>
+                `;
+                return;
+            }
+
+            container.innerHTML = fundingPack.map((item, index) => `
+                <div class="flex items-center justify-between gap-3 p-3 bg-white rounded-xl border border-cream-300 text-xs shadow-sm">
+                    <div class="min-w-0">
+                        <div class="font-bold text-navy-900 break-words">${escapeHTML(item.title)}</div>
+                        <div class="text-[10px] text-brown-700 font-semibold">
+                            $${safeNumber(item.amount).toLocaleString()} • Due: ${escapeHTML(item.deadline)}
+                        </div>
+                    </div>
+
+                    <button onclick="removeFundingItem(${index})" class="text-red-500 hover:text-red-700 ml-2 shrink-0" aria-label="Remove funding item">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function removeFundingItem(index) {
+            fundingPack.splice(index, 1);
+            saveFundingPack();
+            renderFundingPackUI();
+            renderPipelineTracker();
+        }
+
+        function exportFundingPackSchedule() {
+            if (fundingPack.length === 0) {
+                showDetailsModal(
+                    'Funding Pack Empty',
+                    'Add at least one funding opportunity to your pack before exporting your schedule.'
+                );
+                return;
+            }
+
+            const rows = [
+                ['Opportunity Title', 'Amount', 'Deadline', 'Stage']
+            ];
+
+            fundingPack.forEach(item => {
+                rows.push([
+                    item.title,
+                    item.amount,
+                    item.deadline,
+                    item.stage
+                ]);
+            });
+
+            const csvContent = rows.map(row =>
+                row.map(value =>
+                    '"' + String(value).replace(/"/g, '""') + '"'
+                ).join(',')
+            ).join('\n');
+
+            const blob = new Blob([csvContent], {
+                type: 'text/csv;charset=utf-8;'
+            });
+
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+
+            link.href = url;
+            link.download = 'PathKeeper_Funding_Opportunities.csv';
+
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            URL.revokeObjectURL(url);
+        }
+
+        // APPLICATION PIPELINE
+
+        function renderPipelineTracker() {
+            const stages = ['saved', 'draft', 'submitted', 'awarded'];
+
+            stages.forEach(stage => {
+                const col = document.getElementById(`col-${stage}`);
+                const stageItems = fundingPack.filter(item => item.stage === stage);
+
+                document.getElementById(`count-${stage}`).innerText = stageItems.length;
+
+                if (stageItems.length === 0) {
+                    col.innerHTML = `
+                        <div class="text-[11px] text-gray-400 italic p-3 text-center border border-dashed border-cream-300 rounded-lg">
+                            No items in this stage
+                        </div>
+                    `;
+                    return;
+                }
+
+                col.innerHTML = stageItems.map(item => {
+                    const index = fundingPack.indexOf(item);
+
+                    return `
+                        <div class="bg-white p-3 rounded-lg border border-cream-300 text-xs shadow-sm space-y-2">
+                            <div class="font-bold text-navy-900 break-words">${escapeHTML(item.title)}</div>
+
+                            <div class="text-[10px] text-brown-700">
+                                $${safeNumber(item.amount).toLocaleString()}
+                            </div>
+
+                            <select onchange="updateItemStage(${index}, this.value)" class="w-full text-[10px] bg-cream-50 border border-cream-300 rounded p-1" aria-label="Update application status">
+                                <option value="saved" ${item.stage === 'saved' ? 'selected' : ''}>1. Saved</option>
+                                <option value="draft" ${item.stage === 'draft' ? 'selected' : ''}>2. Draft</option>
+                                <option value="submitted" ${item.stage === 'submitted' ? 'selected' : ''}>3. Submitted</option>
+                                <option value="awarded" ${item.stage === 'awarded' ? 'selected' : ''}>4. Awarded</option>
+                            </select>
+                        </div>
+                    `;
+                }).join('');
+            });
+        }
+
+        function updateItemStage(index, newStage) {
+            if (!fundingPack[index]) return;
+
+            const allowedStages = ['saved', 'draft', 'submitted', 'awarded'];
+
+            if (!allowedStages.includes(newStage)) return;
+
+            fundingPack[index].stage = newStage;
+
+            saveFundingPack();
+            renderPipelineTracker();
+        }
+
+        // ESSAY KEYWORD REVIEW
+
+        function analyzeEssayText() {
+            const text = document.getElementById('essayInput').value.toLowerCase();
+
+            const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+
+            document.getElementById('wordCount').innerText = words;
+
+            const keywords = [
+                'leadership',
+                'impact',
+                'innovation',
+                'research',
+                'community',
+                'systems',
+                'sustainability'
+            ];
+
+            let matched = 0;
+
+            keywords.forEach(keyword => {
+                const badge = document.querySelector(`[data-kw="${keyword}"]`);
+
+                if (!badge) return;
+
+                if (text.includes(keyword)) {
+                    matched++;
+                    badge.classList.remove('bg-cream-200', 'text-navy-800');
+                    badge.classList.add('bg-brown-700', 'text-white', 'font-bold');
+                } else {
+                    badge.classList.remove('bg-brown-700', 'text-white', 'font-bold');
+                    badge.classList.add('bg-cream-200', 'text-navy-800');
+                }
+            });
+
+            document.getElementById('linkedTermsCount').innerText = matched;
+
+            const score = Math.round((matched / keywords.length) * 100);
+
+            document.getElementById('matchScore').innerText = score + '%';
+        }
+
+        // PROFILE STRENGTH REVIEW
+
+        function calculateScholarshipOdds() {
+            const gpaInput = document.getElementById('calcGpa').value;
+            const hoursInput = document.getElementById('calcHours').value;
+
+            const gpa = Number(gpaInput);
+            const hours = Number(hoursInput);
+
+            const essayMultiplier = Number(document.getElementById('calcEssay').value);
+
+            const scoreEl = document.getElementById('oddsScore');
+            const adviceEl = document.getElementById('oddsAdvice');
+
+            if (
+                gpaInput === '' ||
+                hoursInput === '' ||
+                !Number.isFinite(gpa) ||
+                !Number.isFinite(hours) ||
+                gpa < 0 ||
+                gpa > 4 ||
+                hours < 0
+            ) {
+                scoreEl.innerText = 'Check Your Entries';
+                adviceEl.innerText = 'Enter a GPA between 0 and 4 and a non-negative number of hours.';
+                return;
+            }
+
+            const baseScore =
+                (gpa / 4) * 50 +
+                Math.min((hours / 100) * 30, 30);
+
+            const finalScore = Math.min(
+                Math.round(baseScore * essayMultiplier),
+                100
+            );
+
+            scoreEl.className = 'text-xl font-bold my-1';
+
+            if (finalScore >= 75) {
+                scoreEl.innerText = 'Strong Preparation (' + finalScore + '/100)';
+                scoreEl.classList.add('text-green-700');
+
+                adviceEl.innerText =
+                    'Your selected factors indicate a developed starting profile. Compare your experience with each award’s actual eligibility requirements.';
+            } else if (finalScore >= 55) {
+                scoreEl.innerText = 'Developing Preparation (' + finalScore + '/100)';
+                scoreEl.classList.add('text-brown-700');
+
+                adviceEl.innerText =
+                    'Review your application evidence, strengthen your essay, and investigate awards that match your current qualifications.';
+            } else {
+                scoreEl.innerText = 'Preparation in Progress (' + finalScore + '/100)';
+                scoreEl.classList.add('text-red-600');
+
+                adviceEl.innerText =
+                    'Start by identifying realistic funding categories and building the experience or documents required for your target opportunities.';
+            }
+        }
+
+        // CUSTOM SCHOLARSHIP
+
+        function openAddScholarshipModal() {
+            document.getElementById('addScholarshipModal').classList.remove('hidden');
+        }
+
+        function closeAddScholarshipModal() {
+            document.getElementById('addScholarshipModal').classList.add('hidden');
+        }
+
+        function saveCustomScholarship() {
+            const title = document.getElementById('custTitle').value.trim();
+
+            const amountInput = document.getElementById('custAmount').value;
+            const amount = amountInput === '' ? 0 : Number(amountInput);
+
+            const deadline = document.getElementById('custDeadline').value || 'TBD';
+            const tag = document.getElementById('custTag').value;
+
+            if (!title) {
+                showDetailsModal('Input Required', 'Please provide a title for your custom funding target.');
+                return;
+            }
+
+            if (!Number.isFinite(amount) || amount < 0) {
+                showDetailsModal('Invalid Amount', 'Enter a valid non-negative funding amount.');
+                return;
+            }
+
+            const grid = document.getElementById('scholarship-grid');
+
+            const newCard = document.createElement('div');
+
+            newCard.className =
+                'scholarship-card bg-white p-6 rounded-2xl border border-brown-300 shadow-sm flex flex-col justify-between';
+
+            newCard.setAttribute('data-tags', `${tag} Custom`);
+
+            const safeTitle = escapeHTML(title);
+            const safeDeadline = escapeHTML(deadline);
+            const safeTag = escapeHTML(tag);
+
+            const details = document.createElement('div');
+
+            details.innerHTML = `
+                <div class="flex justify-between items-start mb-3 gap-2">
+                    <span class="px-2.5 py-1 bg-brown-100 text-brown-800 text-[10px] font-bold uppercase rounded">
+                        Custom Target
+                    </span>
+
+                    <span class="px-2 py-0.5 bg-brown-100 text-brown-800 text-xs font-bold rounded">
+                        $${amount.toLocaleString()}
+                    </span>
+                </div>
+
+                <h3 class="text-xl font-bold text-navy-900 mb-2">${safeTitle}</h3>
+
+                <p class="text-xs text-navy-800/80 mb-4">
+                    Personal funding target added to your directory.
+                </p>
+
+                <div class="space-y-1.5 text-xs text-navy-900 mb-6 bg-cream-50 p-3 rounded-lg border border-cream-200">
+                    <div><strong class="text-brown-700">Deadline:</strong> ${safeDeadline}</div>
+                    <div><strong class="text-brown-700">Category:</strong> ${safeTag}</div>
+                </div>
+            `;
+
+            const addButton = document.createElement('button');
+
+            addButton.className =
+                'w-full py-2 px-3 bg-navy-900 hover:bg-navy-800 text-white rounded-lg text-xs font-bold transition';
+
+            addButton.textContent = '+ Add to Funding Pack';
+
+            addButton.addEventListener('click', () => {
+                toggleFundingPack(title, amount, deadline);
+            });
+
+            newCard.appendChild(details);
+            newCard.appendChild(addButton);
+
+            grid.prepend(newCard);
+
+            document.getElementById('custTitle').value = '';
+            document.getElementById('custAmount').value = '';
+            document.getElementById('custDeadline').value = '';
+
+            closeAddScholarshipModal();
+
+            toggleFundingPack(title, amount, deadline);
+
+            updateScholarshipCount();
+        }
+
+        // DRAWER
+
+        function togglePackDrawer() {
+            document.getElementById('packDrawer').classList.toggle('drawer-open');
+        }
+
+        function togglePackItem(item) {
+            toggleFundingPack(item, 0, 'TBD');
+        }
+
+        // GLOBAL SEARCH
+
+        function filterAllContent() {
+            const query = document.getElementById('globalSearch').value.toLowerCase().trim();
+
+            const sections = document.querySelectorAll('.searchable-section');
+
+            sections.forEach(section => {
+                const sectionText = section.innerText.toLowerCase();
+
+                const matchesSection = !query || sectionText.includes(query);
+
+                section.classList.toggle('hidden', !matchesSection);
+            });
+
+            filterScholarshipCards();
+        }
+
+        function setQuickSearch(term) {
+            document.getElementById('globalSearch').value = term;
+            filterAllContent();
+        }
+
+        function resetGlobalSearch() {
+            document.getElementById('globalSearch').value = '';
+
+            document.querySelectorAll('.searchable-section').forEach(section => {
+                section.classList.remove('hidden');
+            });
+
+            filterScholarshipCards();
+        }
+
+        // FUNDING GUIDE
+
+        function openWizardModal() {
+            document.getElementById('wizardModal').classList.remove('hidden');
+        }
+
+        function closeWizardModal() {
+            document.getElementById('wizardModal').classList.add('hidden');
+        }
+
+        function calculateRecommendedPath() {
+            const goal = document.getElementById('wizardGoal').value;
+            const stage = document.getElementById('wizardStage').value;
+
+            let title = '';
+            let desc = '';
+
+            if (stage === 'master') {
+                title = 'Micro-Funding & Emergency Assistance';
+
+                desc =
+                    'Investigate smaller grants, emergency assistance, equipment programs, and short-term financial support. Check whether the funding can be used for your particular expense.';
+            } else if (stage === 'advanced') {
+                title = 'Need-Based Scholarships & Financial Assistance';
+
+                desc =
+                    'Start by reviewing need-based scholarships, institutional aid, local foundations, and programs that consider financial circumstances.';
+            } else if (goal === 'coded') {
+                title = 'Postgraduate & Research Funding';
+
+                desc =
+                    'Investigate research awards, graduate fellowships, academic department funding, and discipline-specific research grants.';
+            } else if (goal === 'strategy') {
+                title = 'Vocational & Certification Funding';
+
+                desc =
+                    'Investigate workforce development grants, employer-sponsored training, industry scholarships, and certification assistance.';
+            } else {
+                title = 'Undergraduate Scholarship Opportunities';
+
+                desc =
+                    'Investigate academic scholarships, merit awards, institutional scholarships, community foundations, and need-based programs.';
+            }
+
+            document.getElementById('wizardResultTitle').innerText = title;
+            document.getElementById('wizardResultDesc').innerText = desc;
+
+            document.getElementById('wizardResult').classList.remove('hidden');
+        }
+
+        // DETAILS MODAL
+
+        function showDetailsModal(title, body) {
+            document.getElementById('detailsModalTitle').innerText = title;
+            document.getElementById('detailsModalBody').innerText = body;
+
+            document.getElementById('detailsModal').classList.remove('hidden');
+        }
+
+        function closeDetailsModal() {
+            document.getElementById('detailsModal').classList.add('hidden');
+        }
+
+        // CLOSE MODALS WHEN CLICKING OUTSIDE
+
+        document.querySelectorAll('#addScholarshipModal, #wizardModal, #detailsModal').forEach(modal => {
+            modal.addEventListener('click', event => {
+                if (event.target === modal) {
+                    modal.classList.add('hidden');
+                }
+            });
+        });
+
+    </script>
+
+</body>
+</html>
