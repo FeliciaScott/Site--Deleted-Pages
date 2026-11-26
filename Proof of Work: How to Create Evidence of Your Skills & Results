@@ -1,0 +1,1817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary Meta Tags -->
+  <title>PathKeeper WorkProof | Create Evidence of Your Skills &amp; Results</title>
+  <meta name="description" content="Learning alone does not demonstrate what you can do. WorkProof helps you turn lessons, practice, projects, and completed work into structured, inspectable evidence that others can evaluate.">
+  <meta name="keywords" content="proof of work, evidence builder, portfolio evidence, skill documentation, work samples, capability demonstration, PathKeeper, evidence block, career evidence, project documentation">
+  <meta name="author" content="PathKeeper">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="PathKeeper WorkProof | Create Evidence of Your Skills &amp; Results">
+  <meta property="og:description" content="Turn learning, projects, and completed work into evidence that another person can understand and evaluate.">
+  <meta property="og:site_name" content="PathKeeper">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PathKeeper WorkProof | Create Evidence of Your Skills &amp; Results">
+  <meta name="twitter:description" content="Create evidence. Make your work visible. Document capability with a six-part evidence block.">
+
+  <style>
+    /* Accessibility: Respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
+    }
+
+    /* Accessibility: Skip link */
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 16px;
+      background: #294F6D;
+      color: #FFFFFF;
+      padding: 12px 20px;
+      border-radius: 0 0 6px 6px;
+      font-weight: 800;
+      font-size: 14px;
+      z-index: 9999;
+      text-decoration: none;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0; }
+  </style>
+</head>
+<body>
+
+<a href="#pk-workproof" class="skip-link">Skip to main content</a>
+
+<div id="pk-workproof">
+
+<style>
+#pk-workproof {
+  --cream:#F7F2E8;
+  --cream2:#EEE3D1;
+  --cream3:#E2D2B9;
+  --brown:#49352A;
+  --brown2:#674C3B;
+  --brown3:#8B6A50;
+  --blue:#294F6D;
+  --blue2:#3D6F91;
+  --blue3:#729BB5;
+  --blue-light:#DCEAF1;
+  --white:#FFFFFF;
+  --ink:#30251F;
+  --muted:#71665E;
+  --border:#D9CBB9;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--ink);
+  background:var(--cream);
+  line-height:1.65;
+  width:100%;
+  overflow:hidden;
+  border-radius:18px;
+}
+
+#pk-workproof * {
+  box-sizing:border-box;
+}
+
+#pk-workproof h1,
+#pk-workproof h2,
+#pk-workproof h3,
+#pk-workproof h4,
+#pk-workproof p {
+  margin-top:0;
+}
+
+#pk-workproof h1,
+#pk-workproof h2,
+#pk-workproof h3,
+#pk-workproof h4 {
+  color:var(--brown);
+  line-height:1.2;
+}
+
+#pk-workproof p {
+  margin-bottom:14px;
+}
+
+#pk-workproof button,
+#pk-workproof input,
+#pk-workproof select,
+#pk-workproof textarea {
+  font:inherit;
+}
+
+#pk-workproof button {
+  cursor:pointer;
+}
+
+/* Accessibility: Visible focus */
+#pk-workproof button:focus-visible,
+#pk-workproof a:focus-visible,
+#pk-workproof input:focus-visible,
+#pk-workproof select:focus-visible,
+#pk-workproof textarea:focus-visible {
+  outline:3px solid var(--blue2);
+  outline-offset:3px;
+}
+
+#pk-workproof .wp-shell {
+  max-width:1150px;
+  margin:auto;
+  padding:24px;
+}
+
+#pk-workproof .wp-hero {
+  background:linear-gradient(135deg,var(--brown),var(--blue));
+  color:var(--cream);
+  padding:55px 35px;
+  border-radius:20px;
+  margin-bottom:30px;
+  position:relative;
+  overflow:hidden;
+}
+
+#pk-workproof .wp-hero:after {
+  content:"";
+  position:absolute;
+  width:260px;
+  height:260px;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:50%;
+  right:-70px;
+  top:-90px;
+  box-shadow:0 0 0 35px rgba(255,255,255,.04),
+             0 0 0 70px rgba(255,255,255,.03);
+}
+
+#pk-workproof .wp-kicker {
+  text-transform:uppercase;
+  letter-spacing:2px;
+  font-size:11px;
+  font-weight:800;
+  margin-bottom:14px;
+  color:var(--cream3);
+}
+
+#pk-workproof .wp-hero h1 {
+  color:var(--cream);
+  font-size:clamp(34px,5vw,54px);
+  max-width:760px;
+  margin-bottom:16px;
+}
+
+#pk-workproof .wp-hero p {
+  max-width:760px;
+  font-size:17px;
+  color:#F4EBDD;
+}
+
+#pk-workproof .wp-hero-actions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:25px;
+  position:relative;
+  z-index:2;
+}
+
+#pk-workproof .wp-btn {
+  border:0;
+  border-radius:9px;
+  padding:12px 18px;
+  font-weight:800;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  transition:transform .2s,background .2s;
+}
+
+#pk-workproof .wp-btn:hover {
+  transform:translateY(-2px);
+}
+
+#pk-workproof .wp-btn-primary {
+  background:var(--cream);
+  color:var(--brown);
+}
+
+#pk-workproof .wp-btn-secondary {
+  background:var(--blue);
+  color:white;
+}
+
+#pk-workproof .wp-btn-outline {
+  background:transparent;
+  border:1px solid var(--cream);
+  color:var(--cream);
+}
+
+#pk-workproof .wp-btn-brown {
+  background:var(--brown);
+  color:white;
+}
+
+#pk-workproof .wp-btn-blue {
+  background:var(--blue);
+  color:white;
+}
+
+#pk-workproof .wp-section {
+  margin:35px 0;
+}
+
+#pk-workproof .wp-section-heading {
+  margin-bottom:20px;
+}
+
+#pk-workproof .wp-eyebrow {
+  color:var(--blue2);
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:1.8px;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+
+#pk-workproof .wp-section-heading h2 {
+  font-size:clamp(25px,3vw,35px);
+  margin-bottom:10px;
+}
+
+#pk-workproof .wp-section-heading p {
+  max-width:800px;
+  color:var(--muted);
+}
+
+#pk-workproof .wp-card {
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:22px;
+  box-shadow:0 5px 18px rgba(73,53,42,.06);
+}
+
+#pk-workproof .wp-grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:16px;
+}
+
+#pk-workproof .wp-grid-2 {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+}
+
+#pk-workproof .wp-number {
+  width:35px;
+  height:35px;
+  display:grid;
+  place-items:center;
+  border-radius:9px;
+  background:var(--blue-light);
+  color:var(--blue);
+  font-weight:900;
+  margin-bottom:13px;
+}
+
+#pk-workproof .wp-card h3 {
+  font-size:19px;
+  margin-bottom:9px;
+}
+
+#pk-workproof .wp-card p {
+  color:var(--muted);
+  font-size:14px;
+  margin-bottom:0;
+}
+
+#pk-workproof .wp-callout {
+  padding:22px;
+  border-left:5px solid var(--blue2);
+  background:var(--blue-light);
+  border-radius:10px;
+  margin:20px 0;
+}
+
+#pk-workproof .wp-callout strong {
+  color:var(--brown);
+}
+
+#pk-workproof .wp-compare {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+#pk-workproof .wp-compare-box {
+  padding:20px;
+  border-radius:13px;
+  border:1px solid var(--border);
+  background:white;
+}
+
+#pk-workproof .wp-compare-box.bad {
+  border-top:5px solid var(--brown3);
+}
+
+#pk-workproof .wp-compare-box.good {
+  border-top:5px solid var(--blue2);
+}
+
+#pk-workproof .wp-compare-box h3 {
+  font-size:18px;
+}
+
+#pk-workproof .wp-quote {
+  font-size:16px;
+  font-weight:700;
+  color:var(--brown);
+  margin:12px 0;
+}
+
+#pk-workproof .wp-table-wrap {
+  width:100%;
+  overflow-x:auto;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:white;
+}
+
+#pk-workproof table {
+  border-collapse:collapse;
+  width:100%;
+  min-width:600px;
+  font-size:14px;
+}
+
+#pk-workproof th {
+  background:var(--blue);
+  color:white;
+  text-align:left;
+  padding:13px;
+}
+
+#pk-workproof td {
+  padding:13px;
+  border-bottom:1px solid var(--border);
+  vertical-align:top;
+}
+
+#pk-workproof tr:nth-child(even) td {
+  background:#FAF7F1;
+}
+
+#pk-workproof .wp-builder {
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:18px;
+  overflow:hidden;
+}
+
+#pk-workproof .wp-builder-head {
+  background:var(--brown);
+  color:var(--cream);
+  padding:22px;
+}
+
+#pk-workproof .wp-builder-head h2 {
+  color:var(--cream);
+  margin-bottom:7px;
+}
+
+#pk-workproof .wp-builder-head p {
+  color:var(--cream2);
+  margin-bottom:0;
+}
+
+#pk-workproof .wp-progress-area {
+  padding:18px 22px 0;
+}
+
+#pk-workproof .wp-progress-track {
+  width:100%;
+  height:10px;
+  background:var(--cream2);
+  border-radius:20px;
+  overflow:hidden;
+}
+
+#pk-workproof .wp-progress-fill {
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--blue),var(--brown3));
+  border-radius:20px;
+  transition:width .3s;
+}
+
+#pk-workproof .wp-progress-label {
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  font-size:12px;
+  font-weight:800;
+  color:var(--muted);
+  margin-bottom:8px;
+}
+
+#pk-workproof .wp-builder-layout {
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:20px;
+  padding:22px;
+}
+
+#pk-workproof .wp-field {
+  margin-bottom:16px;
+}
+
+#pk-workproof .wp-field label {
+  display:block;
+  font-weight:800;
+  font-size:13px;
+  color:var(--brown);
+  margin-bottom:6px;
+}
+
+#pk-workproof .wp-field small {
+  display:block;
+  color:var(--muted);
+  font-size:12px;
+  margin-top:4px;
+}
+
+#pk-workproof .wp-field input,
+#pk-workproof .wp-field select,
+#pk-workproof .wp-field textarea {
+  width:100%;
+  padding:11px 12px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:#FFFEFC;
+  color:var(--ink);
+  outline:none;
+}
+
+#pk-workproof .wp-field input:focus,
+#pk-workproof .wp-field select:focus,
+#pk-workproof .wp-field textarea:focus {
+  border-color:var(--blue2);
+  box-shadow:0 0 0 3px rgba(61,111,145,.13);
+}
+
+#pk-workproof .wp-field textarea {
+  min-height:85px;
+  resize:vertical;
+}
+
+#pk-workproof .wp-preview {
+  background:var(--cream);
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:19px;
+  position:sticky;
+  top:12px;
+  align-self:start;
+}
+
+#pk-workproof .wp-preview h3 {
+  font-size:20px;
+  margin-bottom:12px;
+}
+
+#pk-workproof .wp-preview-block {
+  padding:12px 0;
+  border-bottom:1px solid var(--cream3);
+}
+
+#pk-workproof .wp-preview-block:last-child {
+  border-bottom:0;
+}
+
+#pk-workproof .wp-preview-label {
+  display:block;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  font-size:10px;
+  font-weight:900;
+  color:var(--blue2);
+  margin-bottom:4px;
+}
+
+#pk-workproof .wp-preview-value {
+  font-size:13px;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  color:var(--ink);
+}
+
+#pk-workproof .wp-empty {
+  color:#887B70;
+  font-style:italic;
+}
+
+#pk-workproof .wp-builder-actions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  padding:0 22px 22px;
+  align-items:center;
+}
+
+#pk-workproof .wp-checklist {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+#pk-workproof .wp-check {
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  padding:13px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:white;
+  font-size:14px;
+  cursor:pointer;
+}
+
+#pk-workproof .wp-check input {
+  margin-top:4px;
+  accent-color:var(--blue);
+  flex-shrink:0;
+}
+
+#pk-workproof .wp-check strong {
+  color:var(--brown);
+}
+
+#pk-workproof .wp-check-result {
+  margin-top:15px;
+  padding:15px;
+  background:var(--blue-light);
+  border-radius:10px;
+  color:var(--blue);
+  font-weight:800;
+}
+
+#pk-workproof .wp-library-controls {
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:17px;
+}
+
+#pk-workproof .wp-library-controls input,
+#pk-workproof .wp-library-controls select {
+  min-width:180px;
+  flex:1;
+  padding:11px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:white;
+  color:var(--ink);
+}
+
+#pk-workproof .wp-asset {
+  background:white;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:17px;
+}
+
+#pk-workproof .wp-asset-tag {
+  display:inline-block;
+  padding:4px 8px;
+  border-radius:20px;
+  background:var(--blue-light);
+  color:var(--blue);
+  font-size:10px;
+  font-weight:900;
+  text-transform:uppercase;
+  margin-bottom:9px;
+}
+
+#pk-workproof .wp-asset h3 {
+  font-size:17px;
+  margin-bottom:8px;
+}
+
+#pk-workproof .wp-asset p {
+  font-size:13px;
+  color:var(--muted);
+}
+
+#pk-workproof .wp-asset button {
+  border:1px solid var(--blue);
+  background:transparent;
+  color:var(--blue);
+  border-radius:7px;
+  padding:7px 10px;
+  font-size:12px;
+  font-weight:800;
+}
+
+#pk-workproof .wp-steps {
+  counter-reset:wpstep;
+}
+
+#pk-workproof .wp-step {
+  position:relative;
+  padding:0 0 22px 55px;
+  border-left:2px solid var(--cream3);
+  margin-left:17px;
+}
+
+#pk-workproof .wp-step:last-child {
+  border-left-color:transparent;
+}
+
+#pk-workproof .wp-step:before {
+  counter-increment:wpstep;
+  content:counter(wpstep,decimal-leading-zero);
+  position:absolute;
+  left:-18px;
+  top:0;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:var(--blue);
+  color:white;
+  font-size:11px;
+  font-weight:900;
+}
+
+#pk-workproof .wp-step h3 {
+  font-size:17px;
+  margin-bottom:5px;
+}
+
+#pk-workproof .wp-step p {
+  color:var(--muted);
+  font-size:14px;
+  margin-bottom:0;
+}
+
+#pk-workproof .wp-final {
+  padding:30px;
+  background:linear-gradient(135deg,var(--brown),var(--blue));
+  color:var(--cream);
+  border-radius:16px;
+  margin-top:35px;
+}
+
+#pk-workproof .wp-final h2 {
+  color:var(--cream);
+}
+
+#pk-workproof .wp-final p {
+  color:var(--cream2);
+  max-width:800px;
+}
+
+#pk-workproof .wp-footer {
+  text-align:center;
+  padding:24px 10px 10px;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:1px;
+}
+
+#pk-workproof .wp-hidden {
+  display:none !important;
+}
+
+#pk-workproof .wp-status {
+  color:var(--blue);
+  font-weight:800;
+  font-size:13px;
+  min-height:20px;
+}
+
+@media(max-width:800px) {
+  #pk-workproof .wp-grid {
+    grid-template-columns:1fr 1fr;
+  }
+
+  #pk-workproof .wp-builder-layout {
+    grid-template-columns:1fr;
+  }
+
+  #pk-workproof .wp-preview {
+    position:static;
+  }
+}
+
+@media(max-width:560px) {
+  #pk-workproof .wp-shell {
+    padding:12px;
+  }
+
+  #pk-workproof .wp-hero {
+    padding:32px 22px;
+  }
+
+  #pk-workproof .wp-grid,
+  #pk-workproof .wp-grid-2,
+  #pk-workproof .wp-compare,
+  #pk-workproof .wp-checklist {
+    grid-template-columns:1fr;
+  }
+
+  #pk-workproof .wp-builder-layout {
+    padding:15px;
+  }
+
+  #pk-workproof .wp-builder-actions {
+    padding:0 15px 18px;
+  }
+
+  #pk-workproof .wp-hero-actions .wp-btn {
+    width:100%;
+  }
+
+  #pk-workproof .wp-btn {
+    min-height:44px;
+  }
+}
+</style>
+
+<div class="wp-shell">
+
+  <!-- HERO -->
+  <header class="wp-hero">
+    <div class="wp-kicker">Proof of Work: How to Create Evidence of Your Skills &amp; Results </div>
+    <h1>Create Evidence. Make Your Work Visible.</h1>
+    <p>
+      Learning is important, but learning alone does not always demonstrate
+      what you can do. WorkProof helps you turn lessons, practice, projects,
+      experiments, and completed work into evidence that another person can
+      understand and evaluate.
+    </p>
+    <div class="wp-hero-actions">
+      <button class="wp-btn wp-btn-primary" type="button"
+        onclick="document.getElementById('wp-builder').scrollIntoView({behavior:'smooth'});">
+        Create an Evidence Block
+      </button>
+      <button class="wp-btn wp-btn-outline" type="button"
+        onclick="document.getElementById('wp-library').scrollIntoView({behavior:'smooth'});">
+        Explore Evidence Examples
+      </button>
+    </div>
+  </header>
+
+  <!-- INTRO -->
+  <section class="wp-section">
+    <div class="wp-section-heading">
+      <div class="wp-eyebrow">01 / THE PURPOSE</div>
+      <h2>Shift from claiming ability to presenting evidence.</h2>
+      <p>
+        A course completion, a skill claim, and a demonstrated result are
+        different things. WorkProof helps you connect what you learned to
+        something observable.
+      </p>
+    </div>
+
+    <div class="wp-grid">
+      <article class="wp-card">
+        <div class="wp-number">01</div>
+        <h3>Learning</h3>
+        <p>
+          Identify the concept, tool, method, or skill you are studying.
+          Record what you understand and what you still need to practice.
+        </p>
+      </article>
+      <article class="wp-card">
+        <div class="wp-number">02</div>
+        <h3>Application</h3>
+        <p>
+          Use the knowledge to solve a problem, complete an exercise,
+          build something, or perform a task under defined conditions.
+        </p>
+      </article>
+      <article class="wp-card">
+        <div class="wp-number">03</div>
+        <h3>Evidence</h3>
+        <p>
+          Preserve the result. Explain what you did, how you did it,
+          what changed, and where someone can inspect the work.
+        </p>
+      </article>
+    </div>
+
+    <div class="wp-callout">
+      <strong>Core principle:</strong>
+      Do not rely on a statement such as "I know JavaScript."
+      Show the code, explain the function, demonstrate the result,
+      and identify what you personally completed.
+    </div>
+  </section>
+
+  <!-- CLAIM VS EVIDENCE -->
+  <section class="wp-section">
+    <div class="wp-section-heading">
+      <div class="wp-eyebrow">02 / CLAIM VS. PROOF</div>
+      <h2>What makes a statement credible?</h2>
+      <p>
+        A claim describes what you believe you can do. Evidence gives
+        another person something concrete to examine.
+      </p>
+    </div>
+
+    <div class="wp-compare">
+      <div class="wp-compare-box bad">
+        <h3>Claim without supporting evidence</h3>
+        <div class="wp-quote">"I am good at website development."</div>
+        <p>
+          This does not identify the project, tools, responsibilities,
+          technical decisions, or completed result.
+        </p>
+      </div>
+      <div class="wp-compare-box good">
+        <h3>Evidence-supported statement</h3>
+        <div class="wp-quote">
+          "I created a responsive resource directory using HTML, CSS,
+          and JavaScript, including category filters and search."
+        </div>
+        <p>
+          The statement identifies the work, tools, functionality,
+          and a result that can be inspected.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVIDENCE BLOCK FRAMEWORK -->
+  <section class="wp-section">
+    <div class="wp-section-heading">
+      <div class="wp-eyebrow">03 / THE EVIDENCE BLOCK</div>
+      <h2>Six components that make work understandable.</h2>
+      <p>
+        A useful evidence record should communicate more than a title
+        and a screenshot. It should explain the work and its significance.
+      </p>
+    </div>
+
+    <div class="wp-grid">
+      <article class="wp-card">
+        <div class="wp-number">01</div>
+        <h3>Diagnostic Hook</h3>
+        <p>
+          What problem, need, question, or opportunity caused you
+          to begin the work?
+        </p>
+      </article>
+      <article class="wp-card">
+        <div class="wp-number">02</div>
+        <h3>Artifact Core</h3>
+        <p>
+          What did you create, complete, analyze, repair, organize,
+          or demonstrate?
+        </p>
+      </article>
+      <article class="wp-card">
+        <div class="wp-number">03</div>
+        <h3>Scalable Output</h3>
+        <p>
+          What can the work be used for? Can it be repeated, improved,
+          extended, or adapted to another situation?
+        </p>
+      </article>
+      <article class="wp-card">
+        <div class="wp-number">04</div>
+        <h3>Supporting Evidence</h3>
+        <p>
+          What files, screenshots, links, records, test results,
+          or demonstrations verify the work?
+        </p>
+      </article>
+      <article class="wp-card">
+        <div class="wp-number">05</div>
+        <h3>Business or Practical Impact</h3>
+        <p>
+          What problem does the work solve? What time, effort,
+          uncertainty, or cost could it reduce?
+        </p>
+      </article>
+      <article class="wp-card">
+        <div class="wp-number">06</div>
+        <h3>Reflection</h3>
+        <p>
+          What did you learn? What limitations remain?
+          What would you improve in the next version?
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- EVIDENCE BUILDER -->
+  <section class="wp-section" id="wp-builder">
+    <div class="wp-section-heading">
+      <div class="wp-eyebrow">04 / INTERACTIVE WORKSPACE</div>
+      <h2>Build your Evidence Block.</h2>
+      <p>
+        Complete the fields to create a structured record of your work.
+        Your preview updates as you type. You can copy the finished record
+        and save it in your portfolio or project folder.
+      </p>
+    </div>
+
+    <div class="wp-builder">
+      <div class="wp-builder-head">
+        <div class="wp-kicker">WORKPROOF // EVIDENCE BUILDER</div>
+        <h2>Document what you can demonstrate.</h2>
+        <p>Complete the fields that apply. You can return to improve this record later.</p>
+      </div>
+
+      <div class="wp-progress-area">
+        <div class="wp-progress-label">
+          <span>Evidence record completion</span>
+          <span id="wp-score">0% complete</span>
+        </div>
+        <div class="wp-progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Evidence record completion">
+          <div class="wp-progress-fill" id="wp-progress-fill"></div>
+        </div>
+      </div>
+
+      <div class="wp-builder-layout">
+        <div>
+          <div class="wp-field">
+            <label for="wp-title">Evidence title</label>
+            <input id="wp-title" type="text"
+              placeholder="Example: Responsive Career Resource Directory">
+          </div>
+
+          <div class="wp-field">
+            <label for="wp-category">Work category</label>
+            <select id="wp-category">
+              <option value="">Select a category</option>
+              <option>Website Development</option>
+              <option>Programming</option>
+              <option>Research and Analysis</option>
+              <option>Business and Entrepreneurship</option>
+              <option>Data and Technology</option>
+              <option>Communication</option>
+              <option>Operations and Administration</option>
+              <option>Design and Creative Work</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="wp-field">
+            <label for="wp-diagnostic">1. Diagnostic Hook — What needed attention?</label>
+            <textarea id="wp-diagnostic"
+              placeholder="Describe the problem, need, question, or opportunity that started this work."></textarea>
+            <small>Explain why this work was necessary or worth doing.</small>
+          </div>
+
+          <div class="wp-field">
+            <label for="wp-artifact">2. Artifact Core — What did you produce?</label>
+            <textarea id="wp-artifact"
+              placeholder="Describe what you personally created, completed, tested, organized, or analyzed."></textarea>
+            <small>Be specific about your actions and responsibilities.</small>
+          </div>
+
+          <div class="wp-field">
+            <label for="wp-output">3. Scalable Output — How can it be used again?</label>
+            <textarea id="wp-output"
+              placeholder="Explain whether the work can be reused, expanded, repeated, or adapted."></textarea>
+          </div>
+
+          <div class="wp-field">
+            <label for="wp-evidence">4. Supporting Evidence — What can someone inspect?</label>
+            <textarea id="wp-evidence"
+              placeholder="List screenshots, files, links, test results, demonstrations, or other proof."></textarea>
+          </div>
+
+          <div class="wp-field">
+            <label for="wp-impact">5. Practical Impact — What does it improve?</label>
+            <textarea id="wp-impact"
+              placeholder="Describe the problem solved, time saved, process improved, or value created."></textarea>
+          </div>
+
+          <div class="wp-field">
+            <label for="wp-reflection">6. Reflection — What did you learn?</label>
+            <textarea id="wp-reflection"
+              placeholder="Describe what worked, what did not, what you learned, and what you would improve."></textarea>
+          </div>
+
+          <div class="wp-field">
+            <label for="wp-status">Evidence status</label>
+            <select id="wp-status">
+              <option value="In progress">In progress</option>
+              <option value="Completed">Completed</option>
+              <option value="Needs testing">Needs testing</option>
+              <option value="Ready for review">Ready for review</option>
+            </select>
+          </div>
+        </div>
+
+        <aside class="wp-preview" id="wp-preview">
+          <div class="wp-eyebrow">LIVE PREVIEW</div>
+          <h3 id="wp-preview-title">Your Evidence Block</h3>
+
+          <div class="wp-preview-block">
+            <span class="wp-preview-label">Category</span>
+            <div class="wp-preview-value" id="wp-preview-category">Not selected</div>
+          </div>
+
+          <div class="wp-preview-block">
+            <span class="wp-preview-label">Diagnostic Hook</span>
+            <div class="wp-preview-value wp-empty" id="wp-preview-diagnostic">Your explanation will appear here.</div>
+          </div>
+
+          <div class="wp-preview-block">
+            <span class="wp-preview-label">Artifact Core</span>
+            <div class="wp-preview-value wp-empty" id="wp-preview-artifact">Your work description will appear here.</div>
+          </div>
+
+          <div class="wp-preview-block">
+            <span class="wp-preview-label">Scalable Output</span>
+            <div class="wp-preview-value wp-empty" id="wp-preview-output">Your output will appear here.</div>
+          </div>
+
+          <div class="wp-preview-block">
+            <span class="wp-preview-label">Supporting Evidence</span>
+            <div class="wp-preview-value wp-empty" id="wp-preview-evidence">Your evidence list will appear here.</div>
+          </div>
+
+          <div class="wp-preview-block">
+            <span class="wp-preview-label">Practical Impact</span>
+            <div class="wp-preview-value wp-empty" id="wp-preview-impact">Your impact explanation will appear here.</div>
+          </div>
+
+          <div class="wp-preview-block">
+            <span class="wp-preview-label">Reflection</span>
+            <div class="wp-preview-value wp-empty" id="wp-preview-reflection">Your reflection will appear here.</div>
+          </div>
+
+          <div class="wp-preview-block">
+            <span class="wp-preview-label">Status</span>
+            <div class="wp-preview-value" id="wp-preview-status">In progress</div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="wp-builder-actions">
+        <button type="button" class="wp-btn wp-btn-blue" id="wp-copy">
+          Copy Evidence Block
+        </button>
+        <button type="button" class="wp-btn wp-btn-brown" id="wp-clear">
+          Clear Builder
+        </button>
+        <span class="wp-status" id="wp-copy-status" aria-live="polite"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- READINESS CHECKLIST -->
+  <section class="wp-section">
+    <div class="wp-section-heading">
+      <div class="wp-eyebrow">05 / QUALITY CONTROL</div>
+      <h2>Evidence readiness checklist.</h2>
+      <p>
+        Before presenting your work, check whether another person can
+        understand what you did and evaluate the result.
+      </p>
+    </div>
+
+    <div class="wp-card">
+      <div class="wp-checklist" id="wp-checklist">
+        <label class="wp-check">
+          <input type="checkbox">
+          <span><strong>Clear purpose:</strong> The reason for the work is explained.</span>
+        </label>
+        <label class="wp-check">
+          <input type="checkbox">
+          <span><strong>Personal contribution:</strong> My role is clear.</span>
+        </label>
+        <label class="wp-check">
+          <input type="checkbox">
+          <span><strong>Observable output:</strong> There is something concrete to inspect.</span>
+        </label>
+        <label class="wp-check">
+          <input type="checkbox">
+          <span><strong>Supporting material:</strong> Files, screenshots, links, or results are identified.</span>
+        </label>
+        <label class="wp-check">
+          <input type="checkbox">
+          <span><strong>Practical relevance:</strong> The value or purpose is explained.</span>
+        </label>
+        <label class="wp-check">
+          <input type="checkbox">
+          <span><strong>Limitations:</strong> I have not exaggerated what the work proves.</span>
+        </label>
+        <label class="wp-check">
+          <input type="checkbox">
+          <span><strong>Testing:</strong> I have checked the result where appropriate.</span>
+        </label>
+        <label class="wp-check">
+          <input type="checkbox">
+          <span><strong>Next step:</strong> I know what should be improved or developed next.</span>
+        </label>
+      </div>
+      <div class="wp-check-result" id="wp-check-result" aria-live="polite">
+        0 of 8 readiness checks completed.
+      </div>
+    </div>
+  </section>
+
+  <!-- CLAIM CONVERSION -->
+  <section class="wp-section">
+    <div class="wp-section-heading">
+      <div class="wp-eyebrow">06 / CLAIM CONVERSION</div>
+      <h2>Turn a general claim into a stronger description.</h2>
+      <p>
+        Use this exercise to replace vague skill statements with specific
+        descriptions of actions and results.
+      </p>
+    </div>
+
+    <div class="wp-card">
+      <div class="wp-field">
+        <label for="wp-claim">Write a claim you want to improve.</label>
+        <textarea id="wp-claim" placeholder="Example: I know how to analyze information."></textarea>
+      </div>
+      <div class="wp-field">
+        <label for="wp-action">What action did you actually perform?</label>
+        <textarea id="wp-action" placeholder="Example: I compared information from multiple sources and organized the findings."></textarea>
+      </div>
+      <div class="wp-field">
+        <label for="wp-result">What was the result or output?</label>
+        <textarea id="wp-result" placeholder="Example: I produced a comparison report identifying differences, gaps, and recommendations."></textarea>
+      </div>
+      <button type="button" class="wp-btn wp-btn-blue" id="wp-convert">
+        Build Stronger Statement
+      </button>
+      <div class="wp-callout" id="wp-converted" aria-live="polite">
+        Your improved statement will appear here.
+      </div>
+      <button type="button" class="wp-btn wp-btn-brown" id="wp-copy-converted">
+        Copy Statement
+      </button>
+      <span class="wp-status" id="wp-claim-status" aria-live="polite"></span>
+    </div>
+  </section>
+
+  <!-- EVIDENCE ASSET LIBRARY -->
+  <section class="wp-section" id="wp-library">
+    <div class="wp-section-heading">
+      <div class="wp-eyebrow">07 / EVIDENCE ASSET LIBRARY</div>
+      <h2>What can count as evidence?</h2>
+      <p>
+        Evidence does not have to be a large project. It can be a small,
+        clearly documented result that demonstrates a meaningful capability.
+      </p>
+    </div>
+
+    <div class="wp-library-controls">
+      <input type="search" id="wp-library-search"
+        placeholder="Search evidence examples..." aria-label="Search evidence examples">
+      <select id="wp-library-filter" aria-label="Filter evidence category">
+        <option value="all">All categories</option>
+        <option value="technology">Technology</option>
+        <option value="business">Business</option>
+        <option value="research">Research</option>
+        <option value="communication">Communication</option>
+        <option value="operations">Operations</option>
+        <option value="learning">Learning</option>
+      </select>
+    </div>
+
+    <div class="wp-grid" id="wp-asset-list">
+      <article class="wp-asset" data-category="technology">
+        <span class="wp-asset-tag">Technology</span>
+        <h3>Working Website</h3>
+        <p>A live or locally demonstrated website with an explanation of its purpose, features, tools, and testing.</p>
+        <button type="button" data-example="Website project: I created a website to address a defined need. The evidence includes the working page, source code, screenshots, and a description of its features and testing.">Use as a writing example</button>
+      </article>
+
+      <article class="wp-asset" data-category="technology">
+        <span class="wp-asset-tag">Technology</span>
+        <h3>JavaScript Function</h3>
+        <p>A function that solves a defined problem, with code, example inputs, expected outputs, and test cases.</p>
+        <button type="button" data-example="Programming exercise: I wrote a JavaScript function to solve a defined problem. I documented the inputs, expected outputs, actual results, and test cases.">Use as a writing example</button>
+      </article>
+
+      <article class="wp-asset" data-category="business">
+        <span class="wp-asset-tag">Business</span>
+        <h3>Business Research Brief</h3>
+        <p>A documented comparison of customers, competitors, costs, risks, or possible business models.</p>
+        <button type="button" data-example="Business research: I investigated a business opportunity, compared alternatives, documented costs and risks, and produced a brief with findings and recommendations.">Use as a writing example</button>
+      </article>
+
+      <article class="wp-asset" data-category="research">
+        <span class="wp-asset-tag">Research</span>
+        <h3>Source Comparison</h3>
+        <p>A comparison showing source quality, evidence strength, disagreements, and conclusions.</p>
+        <button type="button" data-example="Research comparison: I reviewed multiple sources, evaluated their credibility, compared their claims, and documented the findings and remaining uncertainties.">Use as a writing example</button>
+      </article>
+
+      <article class="wp-asset" data-category="communication">
+        <span class="wp-asset-tag">Communication</span>
+        <h3>Instructional Guide</h3>
+        <p>A guide that explains a process clearly, with steps, examples, and an intended audience.</p>
+        <button type="button" data-example="Instructional guide: I created a step-by-step resource to help a defined audience complete a task. I organized the instructions, included examples, and reviewed the guide for clarity.">Use as a writing example</button>
+      </article>
+
+      <article class="wp-asset" data-category="operations">
+        <span class="wp-asset-tag">Operations</span>
+        <h3>Process Improvement</h3>
+        <p>A documented workflow showing the original process, identified friction, and proposed improvements.</p>
+        <button type="button" data-example="Process improvement: I documented an existing workflow, identified delays or repeated steps, and designed a revised process with measurable review criteria.">Use as a writing example</button>
+      </article>
+
+      <article class="wp-asset" data-category="learning">
+        <span class="wp-asset-tag">Learning</span>
+        <h3>Course Application Project</h3>
+        <p>A practical project showing how a course concept was applied beyond watching or reading the lesson.</p>
+        <button type="button" data-example="Learning application: I studied a specific concept and applied it in a practical exercise. I preserved the completed work, documented what I learned, and identified the next skill to practice.">Use as a writing example</button>
+      </article>
+
+      <article class="wp-asset" data-category="research">
+        <span class="wp-asset-tag">Research</span>
+        <h3>Data Analysis</h3>
+        <p>A dataset, analysis process, charts or tables, and a written explanation of findings and limitations.</p>
+        <button type="button" data-example="Data analysis: I worked with a defined dataset, organized and examined the information, documented the method, and presented findings with relevant limitations.">Use as a writing example</button>
+      </article>
+
+      <article class="wp-asset" data-category="business">
+        <span class="wp-asset-tag">Business</span>
+        <h3>Offer or Product Prototype</h3>
+        <p>A product concept, sample deliverable, prototype, pricing assumptions, and feedback plan.</p>
+        <button type="button" data-example="Product prototype: I developed a sample product or service, defined its intended user, documented its features, and identified how the concept could be tested.">Use as a writing example</button>
+      </article>
+    </div>
+    <p class="wp-status" id="wp-library-status" aria-live="polite"></p>
+  </section>
+
+  <!-- LEARNING TO EVIDENCE -->
+  <section class="wp-section">
+    <div class="wp-section-heading">
+      <div class="wp-eyebrow">08 / LEARNING TO WORK</div>
+      <h2>Connect education to practical output.</h2>
+      <p>
+        A learning plan becomes more useful when it includes practice
+        and a deliverable. Use the examples below to plan that connection.
+      </p>
+    </div>
+
+    <div class="wp-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Learning Area</th>
+            <th>Practice Activity</th>
+            <th>Possible Evidence</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>HTML and CSS</td>
+            <td>Build and style a responsive page.</td>
+            <td>Working webpage, source code, and mobile screenshots.</td>
+          </tr>
+          <tr>
+            <td>JavaScript</td>
+            <td>Create a functional tool or interactive feature.</td>
+            <td>Working function, test cases, and explanation.</td>
+          </tr>
+          <tr>
+            <td>Data Analysis</td>
+            <td>Clean, organize, and analyze a dataset.</td>
+            <td>Analysis file, charts, and findings report.</td>
+          </tr>
+          <tr>
+            <td>Business Research</td>
+            <td>Compare an opportunity and its risks.</td>
+            <td>Research brief, comparison table, and recommendation.</td>
+          </tr>
+          <tr>
+            <td>Communication</td>
+            <td>Write instructions or explain a complex process.</td>
+            <td>Guide, presentation, or documented communication sample.</td>
+          </tr>
+          <tr>
+            <td>Project Management</td>
+            <td>Plan and track a small project.</td>
+            <td>Project plan, milestones, status record, and final review.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- EVIDENCE DEVELOPMENT -->
+  <section class="wp-section">
+    <div class="wp-section-heading">
+      <div class="wp-eyebrow">09 / DEVELOPMENT PATH</div>
+      <h2>Build evidence in four stages.</h2>
+    </div>
+
+    <div class="wp-card wp-steps">
+      <div class="wp-step">
+        <h3>Choose a capability to demonstrate.</h3>
+        <p>
+          Identify a skill or knowledge area connected to a career direction.
+          Define what someone should be able to observe when you use it.
+        </p>
+      </div>
+      <div class="wp-step">
+        <h3>Practice through a defined task.</h3>
+        <p>
+          Choose a project or exercise with a clear beginning, expected output,
+          and a reasonable scope.
+        </p>
+      </div>
+      <div class="wp-step">
+        <h3>Preserve and test the result.</h3>
+        <p>
+          Save the work, record your process, check for errors, and collect
+          screenshots, files, links, or other relevant supporting material.
+        </p>
+      </div>
+      <div class="wp-step">
+        <h3>Review, improve, and present.</h3>
+        <p>
+          Explain your contribution, acknowledge limitations, improve the
+          work, and organize it so another person can evaluate it.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STALLED MILESTONE / RECOVERY -->
+  <section class="wp-section">
+    <div class="wp-section-heading">
+      <div class="wp-eyebrow">10 / RECOVERY AND REUSE</div>
+      <h2>A stalled milestone can still produce a useful asset.</h2>
+      <p>
+        Not every project reaches its original target. An unfinished effort
+        may still contain research, tested assumptions, working components,
+        documented decisions, or lessons that can support the next attempt.
+      </p>
+    </div>
+
+    <div class="wp-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Situation</th>
+            <th>What may still be valuable?</th>
+            <th>Evidence to preserve</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Project was not completed.</td>
+            <td>Completed components, design decisions, and identified gaps.</td>
+            <td>Working sections, project files, progress record, and remaining task list.</td>
+          </tr>
+          <tr>
+            <td>Business idea did not gain traction.</td>
+            <td>Customer research, assumptions tested, and feedback collected.</td>
+            <td>Interview notes, research brief, prototype, and test results.</td>
+          </tr>
+          <tr>
+            <td>Application or opportunity was unsuccessful.</td>
+            <td>Preparation, eligibility research, and materials developed.</td>
+            <td>Application drafts, requirements comparison, and improvement notes.</td>
+          </tr>
+          <tr>
+            <td>Portfolio was never published.</td>
+            <td>Individual projects, source code, drafts, and examples.</td>
+            <td>Project files, screenshots, descriptions, and a publication plan.</td>
+          </tr>
+          <tr>
+            <td>Technical approach failed.</td>
+            <td>Failure conditions, debugging knowledge, and alternative approaches.</td>
+            <td>Error records, test cases, attempted fixes, and revised solution.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="wp-card" style="margin-top:18px;">
+      <h3>Recovery ladder: turn a setback into an asset.</h3>
+      <div class="wp-steps">
+        <div class="wp-step">
+          <h3>Stop and describe the actual outcome.</h3>
+          <p>Separate what happened from what you expected to happen.</p>
+        </div>
+        <div class="wp-step">
+          <h3>Identify what remains usable.</h3>
+          <p>List completed work, knowledge, files, contacts, research, and tested components.</p>
+        </div>
+        <div class="wp-step">
+          <h3>Record what the experience revealed.</h3>
+          <p>Document the assumptions, constraints, errors, and conditions that affected the result.</p>
+        </div>
+        <div class="wp-step">
+          <h3>Choose a smaller next test.</h3>
+          <p>Reduce scope and test the most important unresolved question before investing further.</p>
+        </div>
+        <div class="wp-step">
+          <h3>Preserve the evidence.</h3>
+          <p>Create a record that explains the attempt, the result, and what changed in your understanding.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL -->
+  <section class="wp-final">
+    <div class="wp-kicker">PATHKEEPER // WORKPROOF</div>
+    <h2>Your learning should leave a trail of evidence.</h2>
+    <p>
+      Each course, practice session, experiment, project, and improvement
+      can contribute to a body of work. The goal is not to claim that
+      everything is complete. The goal is to make progress visible,
+      explain what you can do, and show how your capability is developing.
+    </p>
+    <button type="button" class="wp-btn wp-btn-primary" id="wp-return-builder">
+      Create or Update an Evidence Block
+    </button>
+  </section>
+
+  <footer class="wp-footer">
+    PATHKEEPER WORKPROOF // CREATE EVIDENCE • DOCUMENT PROGRESS • DEMONSTRATE CAPABILITY
+  </footer>
+
+</div>
+<!-- /.wp-shell -->
+
+</div>
+<!-- /#pk-workproof -->
+
+<script>
+(function() {
+  "use strict";
+
+  const root = document.getElementById("pk-workproof");
+  if (!root) return;
+
+  const $ = (id) => document.getElementById(id);
+
+  /* =====================================================
+     EVIDENCE BUILDER — FIELD MAPPING
+     ===================================================== */
+  const fields = [
+    { input: "wp-title",        preview: "wp-preview-title",       empty: "Your Evidence Block" },
+    { input: "wp-category",     preview: "wp-preview-category",    empty: "Not selected" },
+    { input: "wp-diagnostic",   preview: "wp-preview-diagnostic",  empty: "Your explanation will appear here." },
+    { input: "wp-artifact",     preview: "wp-preview-artifact",    empty: "Your work description will appear here." },
+    { input: "wp-output",       preview: "wp-preview-output",      empty: "Your output will appear here." },
+    { input: "wp-evidence",     preview: "wp-preview-evidence",    empty: "Your evidence list will appear here." },
+    { input: "wp-impact",       preview: "wp-preview-impact",      empty: "Your impact explanation will appear here." },
+    { input: "wp-reflection",   preview: "wp-preview-reflection",  empty: "Your reflection will appear here." },
+    { input: "wp-status",       preview: "wp-preview-status",      empty: "In progress" }
+  ];
+
+  const requiredForProgress = [
+    "wp-title", "wp-category", "wp-diagnostic", "wp-artifact",
+    "wp-evidence", "wp-reflection"
+  ];
+
+  function updatePreview() {
+    fields.forEach((f) => {
+      const input = $(f.input);
+      const preview = $(f.preview);
+      if (!input || !preview) return;
+
+      const value = input.value.trim();
+
+      if (value) {
+        preview.textContent = value;
+        preview.classList.remove("wp-empty");
+      } else {
+        preview.textContent = f.empty;
+        preview.classList.add("wp-empty");
+      }
+    });
+
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const completed = requiredForProgress.filter((id) => {
+      const el = $(id);
+      return el && el.value.trim() !== "";
+    }).length;
+
+    const percent = Math.round(
+      (completed / requiredForProgress.length) * 100
+    );
+
+    const fill = $("wp-progress-fill");
+    const score = $("wp-score");
+    const track = fill ? fill.parentElement : null;
+
+    if (fill) fill.style.width = percent + "%";
+    if (score) score.textContent = percent + "% complete";
+    if (track && track.getAttribute("role") === "progressbar") {
+      track.setAttribute("aria-valuenow", percent);
+    }
+  }
+
+  /* =====================================================
+     COPY EVIDENCE BLOCK
+     ===================================================== */
+  function buildEvidenceText() {
+    const title = $("wp-title").value.trim() || "Untitled Evidence Block";
+    const category = $("wp-category").value || "Not selected";
+    const diagnostic = $("wp-diagnostic").value.trim() || "Not provided";
+    const artifact = $("wp-artifact").value.trim() || "Not provided";
+    const output = $("wp-output").value.trim() || "Not provided";
+    const evidence = $("wp-evidence").value.trim() || "Not provided";
+    const impact = $("wp-impact").value.trim() || "Not provided";
+    const reflection = $("wp-reflection").value.trim() || "Not provided";
+    const status = $("wp-status").value;
+
+    return [
+      "WORKPROOF — EVIDENCE BLOCK",
+      "====================================",
+      "",
+      "TITLE: " + title,
+      "CATEGORY: " + category,
+      "STATUS: " + status,
+      "",
+      "1. DIAGNOSTIC HOOK",
+      diagnostic,
+      "",
+      "2. ARTIFACT CORE",
+      artifact,
+      "",
+      "3. SCALABLE OUTPUT",
+      output,
+      "",
+      "4. SUPPORTING EVIDENCE",
+      evidence,
+      "",
+      "5. PRACTICAL IMPACT",
+      impact,
+      "",
+      "6. REFLECTION",
+      reflection,
+      "",
+      "====================================",
+      "PathKeeper WorkProof · Evidence record"
+    ].join("\n");
+  }
+
+  function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(text);
+    }
+
+    return new Promise((resolve, reject) => {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand("copy");
+        resolve();
+      } catch (error) {
+        reject(error);
+      } finally {
+        textarea.remove();
+      }
+    });
+  }
+
+  const copyBtn = $("wp-copy");
+  const copyStatus = $("wp-copy-status");
+
+  if (copyBtn) {
+    copyBtn.addEventListener("click", () => {
+      copyText(buildEvidenceText())
+        .then(() => {
+          copyStatus.textContent = "Evidence block copied to clipboard.";
+          setTimeout(() => { copyStatus.textContent = ""; }, 3000);
+        })
+        .catch(() => {
+          copyStatus.textContent = "Copy unavailable. Select the text manually.";
+        });
+    });
+  }
+
+  /* =====================================================
+     CLEAR BUILDER
+     ===================================================== */
+  const clearBtn = $("wp-clear");
+  if (clearBtn) {
+    clearBtn.addEventListener("click", () => {
+      if (!confirm("Clear all Evidence Builder fields?")) return;
+
+      ["wp-title", "wp-diagnostic", "wp-artifact", "wp-output",
+       "wp-evidence", "wp-impact", "wp-reflection"].forEach((id) => {
+        const el = $(id);
+        if (el) el.value = "";
+      });
+
+      $("wp-category").value = "";
+      $("wp-status").value = "In progress";
+
+      updatePreview();
+      if (copyStatus) copyStatus.textContent = "Builder cleared.";
+      setTimeout(() => { if (copyStatus) copyStatus.textContent = ""; }, 2000);
+    });
+  }
+
+  /* =====================================================
+     LIVE BINDINGS
+     ===================================================== */
+  fields.forEach((f) => {
+    const input = $(f.input);
+    if (input) {
+      input.addEventListener("input", updatePreview);
+      input.addEventListener("change", updatePreview);
+    }
+  });
+
+  /* =====================================================
+     READINESS CHECKLIST
+     ===================================================== */
+  const checklistItems = root.querySelectorAll("#wp-checklist input[type='checkbox']");
+  const checklistResult = $("wp-check-result");
+
+  function updateChecklist() {
+    const total = checklistItems.length;
+    const checked = Array.from(checklistItems).filter((c) => c.checked).length;
+
+    if (!checklistResult) return;
+
+    if (checked === total) {
+      checklistResult.textContent =
+        total + " of " + total + " checks completed. Evidence is ready for review.";
+    } else if (checked === 0) {
+      checklistResult.textContent =
+        "0 of " + total + " readiness checks completed.";
+    } else {
+      checklistResult.textContent =
+        checked + " of " + total + " readiness checks completed.";
+    }
+  }
+
+  checklistItems.forEach((item) => {
+    item.addEventListener("change", updateChecklist);
+  });
+
+  /* =====================================================
+     CLAIM CONVERSION
+     ===================================================== */
+  const convertBtn = $("wp-convert");
+  const converted = $("wp-converted");
+  const copyConvertedBtn = $("wp-copy-converted");
+  const claimStatus = $("wp-claim-status");
+
+  if (convertBtn) {
+    convertBtn.addEventListener("click", () => {
+      const claim = $("wp-claim").value.trim();
+      const action = $("wp-action").value.trim();
+      const result = $("wp-result").value.trim();
+
+      if (!claim || !action || !result) {
+        if (claimStatus) {
+          claimStatus.textContent =
+            "Complete the claim, action, and result fields first.";
+        }
+        return;
+      }
+
+      const statement =
+        "I " + action.replace(/^I\s+/i, "").replace(/\.$/, "") +
+        ", producing " + result.replace(/^I\s+/i, "").replace(/\.$/, "") +
+        ". This addresses the claim: \"" + claim + "\"";
+
+      converted.textContent = statement;
+      if (claimStatus) claimStatus.textContent = "Statement generated.";
+    });
+  }
+
+  if (copyConvertedBtn) {
+    copyConvertedBtn.addEventListener("click", () => {
+      const text = converted.textContent.trim();
+      if (!text || text.startsWith("Your improved statement")) {
+        if (claimStatus) claimStatus.textContent = "Generate a statement first.";
+        return;
+      }
+
+      copyText(text)
+        .then(() => {
+          if (claimStatus) claimStatus.textContent = "Statement copied.";
+          setTimeout(() => {
+            if (claimStatus) claimStatus.textContent = "";
+          }, 2000);
+        })
+        .catch(() => {
+          if (claimStatus) claimStatus.textContent = "Copy unavailable.";
+        });
+    });
+  }
+
+  /* =====================================================
+     ASSET LIBRARY SEARCH / FILTER
+     ===================================================== */
+  const librarySearch = $("wp-library-search");
+  const libraryFilter = $("wp-library-filter");
+  const assetList = $("wp-asset-list");
+  const libraryStatus = $("wp-library-status");
+
+  function filterAssets() {
+    if (!assetList) return;
+
+    const query = (librarySearch.value || "").toLowerCase().trim();
+    const category = libraryFilter.value;
+    const assets = assetList.querySelectorAll(".wp-asset");
+
+    let visible = 0;
+
+    assets.forEach((asset) => {
+      const assetCategory = asset.getAttribute("data-category");
+      const text = asset.textContent.toLowerCase();
+
+      const matchesSearch = !query || text.includes(query);
+      const matchesCategory = category === "all" || assetCategory === category;
+
+      if (matchesSearch && matchesCategory) {
+        asset.style.display = "";
+        visible++;
+      } else {
+        asset.style.display = "none";
+      }
+    });
+
+    if (libraryStatus) {
+      libraryStatus.textContent =
+        "Showing " + visible + " of " + assets.length + " evidence examples.";
+    }
+  }
+
+  if (librarySearch) librarySearch.addEventListener("input", filterAssets);
+  if (libraryFilter) libraryFilter.addEventListener("change", filterAssets);
+
+  /* Asset "Use as example" buttons — populate the builder */
+  if (assetList) {
+    assetList.addEventListener("click", (event) => {
+      const btn = event.target.closest("button[data-example]");
+      if (!btn) return;
+
+      const example = btn.getAttribute("data-example");
+      const artifactField = $("wp-artifact");
+
+      if (artifactField) {
+        artifactField.value = example;
+        updatePreview();
+        artifactField.focus();
+
+        const builder = $("wp-builder");
+        if (builder) {
+          builder.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
+    });
+  }
+
+  /* =====================================================
+     RETURN TO BUILDER BUTTON
+     ===================================================== */
+  const returnBtn = $("wp-return-builder");
+  if (returnBtn) {
+    returnBtn.addEventListener("click", () => {
+      const builder = $("wp-builder");
+      if (builder) builder.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
+
+  /* =====================================================
+     INITIALIZE
+     ===================================================== */
+  updatePreview();
+  updateChecklist();
+  filterAssets();
+})();
+</script>
+
+</body>
+</html>
