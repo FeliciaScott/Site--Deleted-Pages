@@ -1,0 +1,2115 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ElevateU | Student Intelligence Lab</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --bg:#07131d;
+    --panel:#0d202e;
+    --panel2:#10293a;
+    --panel3:#132f42;
+    --cream:#f5ecd9;
+    --muted:#aebbc4;
+    --gold:#e4c477;
+    --cyan:#65d8e8;
+    --green:#73d6a1;
+    --red:#e98b8b;
+    --blue:#76aef2;
+    --line:rgba(255,255,255,.09);
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:
+        radial-gradient(circle at 10% 0%,rgba(101,216,232,.09),transparent 28%),
+        radial-gradient(circle at 90% 5%,rgba(228,196,119,.08),transparent 30%),
+        var(--bg);
+    color:var(--cream);
+    font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    line-height:1.6;
+}
+
+.container{
+    width:min(1450px,92%);
+    margin:auto;
+}
+
+/* HEADER */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(7,19,29,.94);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+}
+
+.header-inner{
+    min-height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.logo{
+    font-size:1.35rem;
+    font-weight:900;
+    letter-spacing:-.03em;
+}
+
+.logo span{
+    color:var(--gold);
+}
+
+nav{
+    display:flex;
+    gap:6px;
+    flex-wrap:wrap;
+}
+
+nav a{
+    color:var(--muted);
+    text-decoration:none;
+    padding:9px 12px;
+    border-radius:9px;
+    font-size:.82rem;
+}
+
+nav a:hover{
+    background:var(--panel2);
+    color:var(--cream);
+}
+
+/* HERO */
+
+.hero{
+    padding:85px 0 70px;
+    border-bottom:1px solid var(--line);
+}
+
+.eyebrow{
+    color:var(--gold);
+    text-transform:uppercase;
+    letter-spacing:.18em;
+    font-size:.7rem;
+    font-weight:900;
+    margin-bottom:15px;
+}
+
+.hero-grid{
+    display:grid;
+    grid-template-columns:1.5fr .8fr;
+    gap:50px;
+    align-items:end;
+}
+
+.hero h1{
+    font-size:clamp(3rem,6vw,6.2rem);
+    line-height:.94;
+    letter-spacing:-.06em;
+    max-width:1000px;
+}
+
+.hero h1 span{
+    color:var(--cyan);
+}
+
+.hero-copy{
+    margin-top:25px;
+    color:var(--muted);
+    max-width:800px;
+    font-size:1.08rem;
+}
+
+.hero-card{
+    background:linear-gradient(145deg,var(--panel2),var(--panel));
+    border:1px solid var(--line);
+    border-radius:24px;
+    padding:26px;
+}
+
+.hero-card .number{
+    font-size:3rem;
+    font-weight:900;
+    color:var(--gold);
+}
+
+.hero-card p{
+    color:var(--muted);
+    font-size:.86rem;
+}
+
+/* INTRO */
+
+.intro{
+    padding:50px 0 20px;
+}
+
+.intro-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+}
+
+.intro-card{
+    border:1px solid var(--line);
+    background:var(--panel);
+    border-radius:18px;
+    padding:22px;
+}
+
+.intro-card strong{
+    display:block;
+    color:var(--cyan);
+    margin-bottom:7px;
+}
+
+.intro-card p{
+    color:var(--muted);
+    font-size:.87rem;
+}
+
+/* SECTION */
+
+section.lab{
+    padding:45px 0;
+}
+
+.section-heading{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    gap:20px;
+    margin-bottom:22px;
+}
+
+.section-heading h2{
+    font-size:1.7rem;
+}
+
+.section-number{
+    color:var(--gold);
+    font-size:.68rem;
+    letter-spacing:.15em;
+    font-weight:900;
+    margin-bottom:5px;
+}
+
+.section-heading p{
+    color:var(--muted);
+    max-width:650px;
+    font-size:.85rem;
+}
+
+/* BUTTONS */
+
+button{
+    border:0;
+    cursor:pointer;
+    font:inherit;
+}
+
+.btn{
+    padding:11px 16px;
+    border-radius:10px;
+    font-weight:800;
+    font-size:.82rem;
+    transition:.2s;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+    filter:brightness(1.08);
+}
+
+.primary{
+    background:var(--cyan);
+    color:#061018;
+}
+
+.secondary{
+    background:var(--panel3);
+    border:1px solid var(--line);
+    color:var(--cream);
+}
+
+.gold{
+    background:var(--gold);
+    color:#15130c;
+}
+
+/* DECISION LAB */
+
+.decision-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+.panel{
+    background:linear-gradient(145deg,var(--panel),#091923);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:25px;
+}
+
+.panel h3{
+    margin-bottom:8px;
+}
+
+.panel-description{
+    color:var(--muted);
+    font-size:.86rem;
+    margin-bottom:20px;
+}
+
+.choice-grid{
+    display:grid;
+    gap:10px;
+}
+
+.choice{
+    padding:16px;
+    background:#081722;
+    border:1px solid var(--line);
+    border-radius:13px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.choice:hover{
+    border-color:var(--cyan);
+}
+
+.choice.selected{
+    border-color:var(--cyan);
+    background:#102b39;
+}
+
+.choice strong{
+    display:block;
+}
+
+.choice span{
+    display:block;
+    color:var(--muted);
+    font-size:.76rem;
+}
+
+.result-box{
+    margin-top:18px;
+    padding:18px;
+    background:#081722;
+    border-radius:13px;
+    border-left:3px solid var(--gold);
+}
+
+.result-box strong{
+    color:var(--gold);
+}
+
+.result-box p{
+    color:var(--muted);
+    font-size:.84rem;
+    margin-top:5px;
+}
+
+/* SCORE */
+
+.score-row{
+    display:grid;
+    grid-template-columns:1fr 70px;
+    gap:15px;
+    align-items:center;
+    margin:16px 0;
+}
+
+.score-label{
+    font-size:.8rem;
+    color:var(--muted);
+}
+
+.score-bar{
+    height:8px;
+    background:#07131d;
+    border-radius:99px;
+    overflow:hidden;
+    margin-top:7px;
+}
+
+.score-fill{
+    height:100%;
+    width:0;
+    background:var(--cyan);
+    transition:.6s;
+}
+
+.score-value{
+    text-align:right;
+    color:var(--gold);
+    font-weight:900;
+}
+
+/* BIAS LAB */
+
+.bias-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.bias-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:17px;
+    padding:21px;
+}
+
+.bias-card .label{
+    color:var(--gold);
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    font-size:.62rem;
+    font-weight:900;
+}
+
+.bias-card h3{
+    margin:9px 0;
+}
+
+.bias-card p{
+    color:var(--muted);
+    font-size:.83rem;
+}
+
+.bias-card button{
+    margin-top:17px;
+}
+
+/* CASE STUDIES */
+
+.case-layout{
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:18px;
+}
+
+.case-list{
+    display:grid;
+    gap:10px;
+}
+
+.case-option{
+    background:#081722;
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:15px;
+    cursor:pointer;
+}
+
+.case-option:hover{
+    border-color:var(--cyan);
+}
+
+.case-option strong{
+    display:block;
+}
+
+.case-option span{
+    color:var(--muted);
+    font-size:.74rem;
+}
+
+.case-story{
+    background:linear-gradient(145deg,#102b3b,#0b1d29);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:28px;
+}
+
+.case-story h3{
+    color:var(--cyan);
+    font-size:1.35rem;
+    margin-bottom:10px;
+}
+
+.case-story p{
+    color:var(--muted);
+    font-size:.88rem;
+    margin-bottom:15px;
+}
+
+.case-question{
+    padding:17px;
+    border:1px solid rgba(228,196,119,.25);
+    background:rgba(228,196,119,.05);
+    border-radius:13px;
+}
+
+.case-question strong{
+    color:var(--gold);
+}
+
+/* ECONOMICS */
+
+.economics-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+.input-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.field label{
+    display:block;
+    color:var(--muted);
+    font-size:.68rem;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    font-weight:900;
+    margin-bottom:6px;
+}
+
+input,select{
+    width:100%;
+    background:#071722;
+    color:var(--cream);
+    border:1px solid var(--line);
+    padding:12px;
+    border-radius:9px;
+    outline:none;
+}
+
+input:focus,select:focus{
+    border-color:var(--cyan);
+}
+
+.metric{
+    display:flex;
+    justify-content:space-between;
+    padding:13px 0;
+    border-bottom:1px solid var(--line);
+}
+
+.metric:last-child{
+    border-bottom:0;
+}
+
+.metric span{
+    color:var(--muted);
+    font-size:.8rem;
+}
+
+.metric strong{
+    color:var(--cream);
+}
+
+/* CHART */
+
+.chart-wrap{
+    margin-top:20px;
+    height:260px;
+    position:relative;
+}
+
+canvas{
+    width:100%;
+    height:100%;
+}
+
+/* LEARNING SCIENCE */
+
+.learning-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+}
+
+.learning-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:21px;
+}
+
+.learning-card .icon{
+    font-size:1.5rem;
+    margin-bottom:10px;
+}
+
+.learning-card h3{
+    font-size:1rem;
+    margin-bottom:7px;
+}
+
+.learning-card p{
+    color:var(--muted);
+    font-size:.8rem;
+}
+
+/* DIALOGUE */
+
+.dialogue{
+    display:grid;
+    grid-template-columns:.8fr 1.2fr;
+    gap:18px;
+}
+
+.dialogue-controls{
+    display:grid;
+    gap:9px;
+}
+
+.dialogue-controls button{
+    text-align:left;
+    padding:14px;
+    background:#081722;
+    color:var(--cream);
+    border:1px solid var(--line);
+    border-radius:10px;
+}
+
+.dialogue-controls button.active{
+    border-color:var(--cyan);
+}
+
+.dialogue-box{
+    background:#0b1d2a;
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:25px;
+}
+
+.speaker{
+    color:var(--gold);
+    font-size:.7rem;
+    text-transform:uppercase;
+    letter-spacing:.12em;
+    font-weight:900;
+}
+
+.dialogue-box blockquote{
+    margin:12px 0 20px;
+    font-size:1.15rem;
+    line-height:1.5;
+}
+
+.analysis{
+    padding:16px;
+    background:#071722;
+    border-radius:12px;
+    color:var(--muted);
+    font-size:.83rem;
+}
+
+/* RESEARCH FACTS */
+
+.fact-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.fact{
+    background:var(--panel);
+    border:1px solid var(--line);
+    padding:22px;
+    border-radius:16px;
+}
+
+.fact-number{
+    color:var(--cyan);
+    font-size:2rem;
+    font-weight:900;
+}
+
+.fact h3{
+    margin:5px 0;
+}
+
+.fact p{
+    color:var(--muted);
+    font-size:.8rem;
+}
+
+/* PROGRESS */
+
+.progress-panel{
+    background:linear-gradient(135deg,#102c3b,#0c1d29);
+    border:1px solid rgba(101,216,232,.2);
+    border-radius:20px;
+    padding:28px;
+}
+
+.progress-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+}
+
+.level{
+    color:var(--gold);
+    font-weight:900;
+}
+
+.xp{
+    color:var(--cyan);
+    font-size:1.5rem;
+    font-weight:900;
+}
+
+.progress-bar{
+    height:10px;
+    background:#07131d;
+    border-radius:99px;
+    margin-top:17px;
+    overflow:hidden;
+}
+
+.progress-fill{
+    height:100%;
+    width:0;
+    background:linear-gradient(90deg,var(--cyan),var(--gold));
+    transition:.5s;
+}
+
+/* FOOTER */
+
+footer{
+    border-top:1px solid var(--line);
+    padding:50px 0;
+    color:var(--muted);
+    text-align:center;
+    font-size:.8rem;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1050px){
+
+    .hero-grid,
+    .case-layout,
+    .economics-grid,
+    .decision-grid,
+    .dialogue{
+        grid-template-columns:1fr;
+    }
+
+    .learning-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .bias-grid,
+    .fact-grid{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:700px){
+
+    nav{
+        display:none;
+    }
+
+    .hero{
+        padding:55px 0;
+    }
+
+    .intro-grid,
+    .bias-grid,
+    .fact-grid,
+    .learning-grid,
+    .input-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:3rem;
+    }
+
+    .section-heading{
+        display:block;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+<div class="container header-inner">
+
+<div class="logo">
+Elevate<span>U</span>
+</div>
+
+<nav>
+<a href="#decision">Decision Lab</a>
+<a href="#bias">Bias Lab</a>
+<a href="#cases">Cases</a>
+<a href="#economics">Economics</a>
+<a href="#learning">Learning Science</a>
+<a href="#research">Research</a>
+</nav>
+
+</div>
+</header>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="container hero-grid">
+
+<div>
+
+<div class="eyebrow">
+Student Intelligence Lab
+</div>
+
+<h1>
+Learn things that make you
+<span>harder to replace.</span>
+</h1>
+
+<p class="hero-copy">
+Most education teaches students what to know. ElevateU focuses on
+how to think: opportunity cost, incentives, decision quality,
+learning science, career economics, cognitive bias, strategic
+tradeoffs and the hidden systems that influence outcomes.
+</p>
+
+</div>
+
+<div class="hero-card">
+
+<div class="number" id="xpHero">0</div>
+
+<strong>Intelligence XP</strong>
+
+<p>
+Earn XP by completing simulations, analyzing cases and testing
+your understanding.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ORIENTATION -->
+
+<section class="intro">
+
+<div class="container">
+
+<div class="intro-grid">
+
+<div class="intro-card">
+<strong>01 — Think in Systems</strong>
+<p>
+Learn to identify incentives, constraints, feedback loops and
+second-order effects instead of looking only at immediate outcomes.
+</p>
+</div>
+
+<div class="intro-card">
+<strong>02 — Make Better Decisions</strong>
+<p>
+Separate a good decision from a good outcome. Analyze choices
+before luck and hindsight distort your judgment.
+</p>
+</div>
+
+<div class="intro-card">
+<strong>03 — Build Transferable Intelligence</strong>
+<p>
+The objective is not memorization. It is being able to use an idea
+in a new situation.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- DECISION LAB -->
+
+<section class="lab" id="decision">
+
+<div class="container">
+
+<div class="section-heading">
+
+<div>
+<div class="section-number">01 / DECISION INTELLIGENCE</div>
+<h2>The Opportunity Cost Lab</h2>
+</div>
+
+<p>
+Every choice spends scarce resources. Time spent on one path cannot
+simultaneously be spent on another.
+</p>
+
+</div>
+
+<div class="decision-grid">
+
+<div class="panel">
+
+<h3>You have 10 hours this week.</h3>
+
+<p class="panel-description">
+Choose the strategy you believe creates the strongest long-term
+position.
+</p>
+
+<div class="choice-grid">
+
+<div class="choice" onclick="chooseDecision(this,'credential')">
+<strong>Earn a credential</strong>
+<span>Increase formal signaling and structured knowledge.</span>
+</div>
+
+<div class="choice" onclick="chooseDecision(this,'project')">
+<strong>Build a public project</strong>
+<span>Create evidence that demonstrates ability.</span>
+</div>
+
+<div class="choice" onclick="chooseDecision(this,'network')">
+<strong>Build relationships</strong>
+<span>Increase access to people, information and opportunities.</span>
+</div>
+
+<div class="choice" onclick="chooseDecision(this,'income')">
+<strong>Practice a monetizable skill</strong>
+<span>Develop the ability to produce economic value.</span>
+</div>
+
+</div>
+
+<div class="result-box" id="decisionResult">
+<strong>Decision principle</strong>
+<p>
+There is no universally correct choice. The intelligent question is:
+<strong>What constraint are you trying to remove?</strong>
+</p>
+</div>
+
+</div>
+
+<div class="panel">
+
+<h3>Decision Quality Score</h3>
+
+<p class="panel-description">
+A useful decision considers more than immediate reward.
+</p>
+
+<div class="score-row">
+<div>
+<div class="score-label">Evidence</div>
+<div class="score-bar"><div class="score-fill" id="evidenceBar"></div></div>
+</div>
+<div class="score-value" id="evidenceValue">0</div>
+</div>
+
+<div class="score-row">
+<div>
+<div class="score-label">Reversibility</div>
+<div class="score-bar"><div class="score-fill" id="reverseBar"></div></div>
+</div>
+<div class="score-value" id="reverseValue">0</div>
+</div>
+
+<div class="score-row">
+<div>
+<div class="score-label">Upside</div>
+<div class="score-bar"><div class="score-fill" id="upsideBar"></div></div>
+</div>
+<div class="score-value" id="upsideValue">0</div>
+</div>
+
+<div class="score-row">
+<div>
+<div class="score-label">Downside protection</div>
+<div class="score-bar"><div class="score-fill" id="downsideBar"></div></div>
+</div>
+<div class="score-value" id="downsideValue">0</div>
+</div>
+
+<button class="btn secondary" onclick="scoreDecision()">
+Evaluate My Decision
+</button>
+
+<div class="result-box" id="decisionScore">
+<strong>Not evaluated</strong>
+<p>
+Choose an option, then evaluate the decision.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- BIAS LAB -->
+
+<section class="lab" id="bias">
+
+<div class="container">
+
+<div class="section-heading">
+
+<div>
+<div class="section-number">02 / COGNITIVE INTELLIGENCE</div>
+<h2>Bias Detection Lab</h2>
+</div>
+
+<p>
+Knowing cognitive biases is not enough. The valuable skill is noticing
+when they are affecting your own reasoning.
+</p>
+
+</div>
+
+<div class="bias-grid">
+
+<div class="bias-card">
+
+<div class="label">Bias 01</div>
+
+<h3>Sunk Cost</h3>
+
+<p>
+Continuing because you already invested time, money or effort—even
+when future costs exceed future benefits.
+</p>
+
+<button class="btn secondary" onclick="showBias('sunk')">
+Test Yourself
+</button>
+
+</div>
+
+<div class="bias-card">
+
+<div class="label">Bias 02</div>
+
+<h3>Confirmation Bias</h3>
+
+<p>
+Searching for or interpreting evidence in ways that reinforce what
+you already believe.
+</p>
+
+<button class="btn secondary" onclick="showBias('confirmation')">
+Test Yourself
+</button>
+
+</div>
+
+<div class="bias-card">
+
+<div class="label">Bias 03</div>
+
+<h3>Present Bias</h3>
+
+<p>
+Giving disproportionate weight to immediate rewards compared with
+larger future rewards.
+</p>
+
+<button class="btn secondary" onclick="showBias('present')">
+Test Yourself
+</button>
+
+</div>
+
+</div>
+
+<div class="result-box" id="biasResult">
+
+<strong>Bias challenge</strong>
+
+<p>
+Select a bias to receive a scenario that tests whether you can
+recognize it in practice.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CASE STUDIES -->
+
+<section class="lab" id="cases">
+
+<div class="container">
+
+<div class="section-heading">
+
+<div>
+<div class="section-number">03 / STRATEGIC CASE STUDIES</div>
+<h2>What Would You Do?</h2>
+</div>
+
+<p>
+Real intelligence develops when you have to make decisions with
+incomplete information.
+</p>
+
+</div>
+
+<div class="case-layout">
+
+<div class="panel">
+
+<h3>Select a case</h3>
+
+<div class="case-list">
+
+<div class="case-option" onclick="loadCase('degree')">
+<strong>The Expensive Degree</strong>
+<span>A student has a strong academic opportunity but substantial debt.</span>
+</div>
+
+<div class="case-option" onclick="loadCase('startup')">
+<strong>The Startup Trap</strong>
+<span>A student has an exciting idea but no evidence of demand.</span>
+</div>
+
+<div class="case-option" onclick="loadCase('career')">
+<strong>The High-Paying Job</strong>
+<span>A student receives two offers with very different learning curves.</span>
+</div>
+
+<div class="case-option" onclick="loadCase('skill')">
+<strong>The Skill Bet</strong>
+<span>A student must decide which skill to develop before technology changes.</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="case-story" id="caseStory">
+
+<h3>Select a case study</h3>
+
+<p>
+Choose one of the scenarios. You will receive the situation,
+strategic tension and the question an intelligent decision-maker
+should ask.
+</p>
+
+<div class="case-question">
+<strong>Core principle</strong>
+<p>
+The goal is not predicting the future perfectly. The goal is making
+a robust decision despite uncertainty.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ECONOMICS -->
+
+<section class="lab" id="economics">
+
+<div class="container">
+
+<div class="section-heading">
+
+<div>
+<div class="section-number">04 / CAREER ECONOMICS</div>
+<h2>Human Capital Calculator</h2>
+</div>
+
+<p>
+A career decision is an investment decision. Compare learning,
+income, time and opportunity cost rather than looking at salary alone.
+</p>
+
+</div>
+
+<div class="economics-grid">
+
+<div class="panel">
+
+<h3>Your assumptions</h3>
+
+<div class="input-grid">
+
+<div class="field">
+<label>Current hourly value</label>
+<input id="currentRate" type="number" value="15">
+</div>
+
+<div class="field">
+<label>Future hourly value</label>
+<input id="futureRate" type="number" value="30">
+</div>
+
+<div class="field">
+<label>Learning hours / week</label>
+<input id="learningHours" type="number" value="8">
+</div>
+
+<div class="field">
+<label>Weeks per year</label>
+<input id="weeks" type="number" value="48">
+</div>
+
+</div>
+
+<button class="btn primary" style="margin-top:18px;" onclick="calculateHumanCapital()">
+Calculate
+</button>
+
+<div class="chart-wrap">
+<canvas id="incomeChart"></canvas>
+</div>
+
+</div>
+
+<div class="panel">
+
+<h3>What the numbers mean</h3>
+
+<div class="metric">
+<span>Annual value at current rate</span>
+<strong id="currentAnnual">$0</strong>
+</div>
+
+<div class="metric">
+<span>Annual value at future rate</span>
+<strong id="futureAnnual">$0</strong>
+</div>
+
+<div class="metric">
+<span>Potential annual difference</span>
+<strong id="annualDifference">$0</strong>
+</div>
+
+<div class="metric">
+<span>Learning investment</span>
+<strong id="learningInvestment">0 hrs</strong>
+</div>
+
+<div class="result-box">
+<strong id="economicInsight">
+Your calculation will appear here.
+</strong>
+
+<p id="economicText">
+The important question is not simply "What does this career pay?"
+Ask how the investment changes your future options.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- LEARNING SCIENCE -->
+
+<section class="lab" id="learning">
+
+<div class="container">
+
+<div class="section-heading">
+
+<div>
+<div class="section-number">05 / LEARNING SCIENCE</div>
+<h2>How Learning Actually Compounds</h2>
+</div>
+
+<p>
+Better studying is not necessarily studying longer. The method changes
+the quality of the learning signal.
+</p>
+
+</div>
+
+<div class="learning-grid">
+
+<div class="learning-card">
+<div class="icon">🔁</div>
+<h3>Retrieval Practice</h3>
+<p>
+Attempt to recall information before looking at the answer. Retrieval
+strengthens the ability to access knowledge later.
+</p>
+</div>
+
+<div class="learning-card">
+<div class="icon">⏳</div>
+<h3>Spacing</h3>
+<p>
+Distribute learning over time rather than concentrating everything
+into one session.
+</p>
+</div>
+
+<div class="learning-card">
+<div class="icon">🔀</div>
+<h3>Interleaving</h3>
+<p>
+Mix related problem types so you must determine which method applies
+instead of repeating one procedure automatically.
+</p>
+</div>
+
+<div class="learning-card">
+<div class="icon">🧩</div>
+<h3>Transfer</h3>
+<p>
+Use an idea in a different situation. Knowing something is different
+from being able to recognize when it applies.
+</p>
+</div>
+
+</div>
+
+<div class="panel" style="margin-top:18px;">
+
+<h3>Learning Strategy Experiment</h3>
+
+<p class="panel-description">
+Which method would you use to prepare for a difficult exam?
+</p>
+
+<div class="choice-grid">
+
+<div class="choice" onclick="learningChoice(this,1)">
+<strong>Read the chapter three times</strong>
+<span>High familiarity, but limited retrieval testing.</span>
+</div>
+
+<div class="choice" onclick="learningChoice(this,2)">
+<strong>Close the book and explain the concepts</strong>
+<span>Forces active retrieval and exposes gaps.</span>
+</div>
+
+<div class="choice" onclick="learningChoice(this,3)">
+<strong>Study everything the night before</strong>
+<span>Concentrates exposure but sacrifices spacing.</span>
+</div>
+
+</div>
+
+<div class="result-box" id="learningResult">
+<strong>Choose a strategy</strong>
+<p>
+The explanation matters more than simply identifying the "right" answer.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- DIALOGUE -->
+
+<section class="lab">
+
+<div class="container">
+
+<div class="section-heading">
+
+<div>
+<div class="section-number">06 / INTELLECTUAL DIALOGUE</div>
+<h2>Argue Both Sides</h2>
+</div>
+
+<p>
+One of the most powerful forms of intellectual training is constructing
+the strongest argument against your own position.
+</p>
+
+</div>
+
+<div class="dialogue">
+
+<div class="panel dialogue-controls">
+
+<button class="active" onclick="loadDialogue(0,this)">
+College is worth the cost
+</button>
+
+<button onclick="loadDialogue(1,this)">
+AI will create more opportunity
+</button>
+
+<button onclick="loadDialogue(2,this)">
+Students should specialize early
+</button>
+
+<button onclick="loadDialogue(3,this)">
+Grades matter less than skills
+</button>
+
+</div>
+
+<div class="dialogue-box">
+
+<div class="speaker" id="speaker">
+Position A
+</div>
+
+<blockquote id="dialogueQuote">
+College can provide structured knowledge, credentials, networks and
+access to careers that are difficult to enter without formal education.
+</blockquote>
+
+<div class="analysis" id="dialogueAnalysis">
+The strongest version of this argument is not "college is good."
+It is that education can function as a signaling mechanism, learning
+environment and network simultaneously. The counterargument is that
+these benefits vary dramatically by field, institution and cost.
+</div>
+
+<br>
+
+<button class="btn gold" onclick="flipDialogue()">
+Show Counterargument
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- RESEARCH -->
+
+<section class="lab" id="research">
+
+<div class="container">
+
+<div class="section-heading">
+
+<div>
+<div class="section-number">07 / KNOWLEDGE BASE</div>
+<h2>Ideas Worth Knowing</h2>
+</div>
+
+<p>
+These concepts are useful because they change how you interpret
+situations—not because they are motivational slogans.
+</p>
+
+</div>
+
+<div class="fact-grid">
+
+<div class="fact">
+
+<div class="fact-number">01</div>
+
+<h3>Second-Order Effects</h3>
+
+<p>
+An action can create consequences beyond its immediate result.
+Strategic thinking asks: "What happens next?"
+</p>
+
+</div>
+
+<div class="fact">
+
+<div class="fact-number">02</div>
+
+<h3>Incentives</h3>
+
+<p>
+People and organizations respond to what is rewarded, punished,
+measured and made easier.
+</p>
+
+</div>
+
+<div class="fact">
+
+<div class="fact-number">03</div>
+
+<h3>Compounding</h3>
+
+<p>
+Small improvements can become substantial when repeated consistently
+over long periods.
+</p>
+
+</div>
+
+<div class="fact">
+
+<div class="fact-number">04</div>
+
+<h3>Optionality</h3>
+
+<p>
+Some decisions create more future choices. Others lock resources
+into one path.
+</p>
+
+</div>
+
+<div class="fact">
+
+<div class="fact-number">05</div>
+
+<h3>Signal vs. Substance</h3>
+
+<p>
+A credential can signal ability, while a project can provide evidence
+of ability. Strong positioning often uses both.
+</p>
+
+</div>
+
+<div class="fact">
+
+<div class="fact-number">06</div>
+
+<h3>Feedback Loops</h3>
+
+<p>
+Behavior can create conditions that reinforce the same behavior.
+Understanding loops helps explain why systems persist.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- PROGRESS -->
+
+<section class="lab">
+
+<div class="container">
+
+<div class="progress-panel">
+
+<div class="progress-top">
+
+<div>
+<div class="level" id="levelText">LEVEL 1 — EXPLORER</div>
+<p style="color:var(--muted);font-size:.82rem;">
+Complete intellectual challenges to develop your reasoning profile.
+</p>
+</div>
+
+<div class="xp" id="xpText">0 XP</div>
+
+</div>
+
+<div class="progress-bar">
+<div class="progress-fill" id="progressFill"></div>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<div class="container">
+
+ElevateU Student Intelligence Lab
+
+<br><br>
+
+Think deeper • Test assumptions • Understand systems • Build options
+
+</div>
+
+</footer>
+
+<script>
+
+/* =========================================
+   STATE
+========================================= */
+
+let xp = Number(localStorage.getItem("elevateUXP")) || 0;
+
+let selectedDecision = "";
+
+let dialogueIndex = 0;
+let dialogueFlipped = false;
+
+
+/* =========================================
+   XP SYSTEM
+========================================= */
+
+function addXP(amount){
+
+    xp += amount;
+
+    localStorage.setItem("elevateUXP",xp);
+
+    updateXP();
+
+}
+
+
+function updateXP(){
+
+    document.getElementById("xpText").textContent =
+        xp + " XP";
+
+    document.getElementById("xpHero").textContent =
+        xp;
+
+    let level = Math.floor(xp / 100) + 1;
+
+    let names = [
+        "EXPLORER",
+        "ANALYST",
+        "STRATEGIST",
+        "SYSTEMS THINKER",
+        "OPPORTUNITY ARCHITECT"
+    ];
+
+    let title =
+        names[Math.min(level-1,names.length-1)];
+
+    document.getElementById("levelText").textContent =
+        "LEVEL " + level + " — " + title;
+
+    let progress =
+        xp % 100;
+
+    document.getElementById("progressFill").style.width =
+        progress + "%";
+
+}
+
+
+/* =========================================
+   DECISION LAB
+========================================= */
+
+function chooseDecision(element,type){
+
+    document
+        .querySelectorAll(".choice")
+        .forEach(x => x.classList.remove("selected"));
+
+    element.classList.add("selected");
+
+    selectedDecision = type;
+
+    const explanations = {
+
+        credential:
+        "A credential is strongest when the target opportunity uses formal screening. Its weakness is that the credential itself may not demonstrate execution.",
+
+        project:
+        "A project creates evidence. This can be especially powerful when employers or collaborators need proof that you can actually produce something.",
+
+        network:
+        "Relationships create access to information, referrals, opportunities and feedback. Their value often compounds because one relationship can create several future connections.",
+
+        income:
+        "A monetizable skill connects learning directly to value creation. Its advantage is feedback from the market; its weakness is that early income may be inconsistent."
+
+    };
+
+    document.getElementById("decisionResult").innerHTML =
+        "<strong>Strategic interpretation</strong><p>" +
+        explanations[type] +
+        "</p>";
+
+}
+
+
+function scoreDecision(){
+
+    if(!selectedDecision){
+
+        document.getElementById("decisionScore").innerHTML =
+        "<strong>Choose first</strong><p>Select one strategy before evaluating it.</p>";
+
+        return;
+    }
+
+    const scores = {
+
+        credential:[75,55,65,70],
+        project:[85,90,85,80],
+        network:[70,90,75,75],
+        income:[80,75,90,65]
+
+    };
+
+    const values = scores[selectedDecision];
+
+    const bars = [
+        ["evidenceBar","evidenceValue"],
+        ["reverseBar","reverseValue"],
+        ["upsideBar","upsideValue"],
+        ["downsideBar","downsideValue"]
+    ];
+
+    bars.forEach((pair,i)=>{
+
+        document.getElementById(pair[0]).style.width =
+            values[i] + "%";
+
+        document.getElementById(pair[1]).textContent =
+            values[i];
+
+    });
+
+    let average =
+        Math.round(
+            values.reduce((a,b)=>a+b,0)/values.length
+        );
+
+    document.getElementById("decisionScore").innerHTML =
+        "<strong>Decision quality: " + average + "/100</strong>" +
+        "<p>These are reasoning dimensions, not predictions. A decision can score well while still producing a poor outcome because uncertainty and luck remain.</p>";
+
+    addXP(10);
+
+}
+
+
+/* =========================================
+   BIAS LAB
+========================================= */
+
+function showBias(type){
+
+    const scenarios = {
+
+        sunk:{
+            title:"Sunk Cost Challenge",
+            question:"You spent $800 on a course. After three months, you realize it is poorly designed. You have learned little. Would you continue because you already paid?",
+            answer:"The $800 is already gone. The relevant question is whether the next hour and next dollar should be invested in the course or redirected elsewhere."
+        },
+
+        confirmation:{
+            title:"Confirmation Bias Challenge",
+            question:"You believe a particular career is the best option. You search online and find ten articles supporting your belief. What should you do next?",
+            answer:"Actively search for strong evidence against the belief. A useful test is to ask: 'What evidence would convince me that I am wrong?'"
+        },
+
+        present:{
+            title:"Present Bias Challenge",
+            question:"You can receive $50 today or $100 six months from now. Which do you choose—and what assumptions about your situation affect the decision?",
+            answer:"The mathematically larger reward is not automatically the correct choice. Liquidity needs, risk, reliability and personal circumstances matter. The bias appears when immediate gratification receives disproportionate weight without analysis."
+        }
+
+    };
+
+    const s = scenarios[type];
+
+    document.getElementById("biasResult").innerHTML =
+        "<strong>" + s.title + "</strong>" +
+        "<p><b>Scenario:</b> " + s.question + "</p>" +
+        "<p style='margin-top:10px'><b>Analysis:</b> " + s.answer + "</p>";
+
+    addXP(5);
+
+}
+
+
+/* =========================================
+   CASE STUDIES
+========================================= */
+
+function loadCase(type){
+
+    const cases = {
+
+        degree:{
+            title:"The Expensive Degree",
+            story:"A student is accepted into a respected university. The program could improve access to several careers. The student would need significant debt to attend. A lower-cost institution offers a related program.",
+            question:"What variables should be compared before making the decision?",
+            answer:"Net cost, completion probability, career access, earnings potential, institutional outcomes, alternatives, financing terms and the value of the network. Prestige alone is an incomplete variable."
+        },
+
+        startup:{
+            title:"The Startup Trap",
+            story:"A student has an exciting business idea. Friends say they would buy it. The student wants to spend six months building the full product before showing anyone.",
+            question:"What is the strategic mistake that might occur?",
+            answer:"Confusing building with validation. A lower-cost experiment could test whether strangers—not just supportive friends—will actually take the desired action."
+        },
+
+        career:{
+            title:"The High-Paying Job",
+            story:"Offer A pays $10,000 more but provides repetitive work. Offer B pays less but places the student beside experienced people and exposes them to valuable systems.",
+            question:"Should salary determine the decision?",
+            answer:"Salary is important, but the decision should also consider skill accumulation, network, future signaling, responsibility, learning rate, stability and future options."
+        },
+
+        skill:{
+            title:"The Skill Bet",
+            story:"A student can spend a year mastering one narrow technical tool or develop broader abilities in communication, analysis, technology and problem-solving.",
+            question:"How should the student think about the tradeoff?",
+            answer:"Consider complementarity and durability. Skills that work across many environments can provide resilience, while specialized skills can create valuable depth. The strongest strategy may combine a durable core with specialized technical ability."
+        }
+
+    };
+
+    const c = cases[type];
+
+    document.getElementById("caseStory").innerHTML =
+        "<h3>" + c.title + "</h3>" +
+        "<p>" + c.story + "</p>" +
+        "<div class='case-question'>" +
+        "<strong>Decision question</strong>" +
+        "<p>" + c.question + "</p>" +
+        "</div>" +
+        "<div class='result-box'>" +
+        "<strong>Strategic analysis</strong>" +
+        "<p>" + c.answer + "</p>" +
+        "</div>";
+
+    addXP(10);
+
+}
+
+
+/* =========================================
+   HUMAN CAPITAL CALCULATOR
+========================================= */
+
+function calculateHumanCapital(){
+
+    const current =
+        Number(document.getElementById("currentRate").value) || 0;
+
+    const future =
+        Number(document.getElementById("futureRate").value) || 0;
+
+    const hours =
+        Number(document.getElementById("learningHours").value) || 0;
+
+    const weeks =
+        Number(document.getElementById("weeks").value) || 0;
+
+    const currentAnnual =
+        current * 40 * weeks;
+
+    const futureAnnual =
+        future * 40 * weeks;
+
+    const difference =
+        futureAnnual - currentAnnual;
+
+    const investment =
+        hours * weeks;
+
+    document.getElementById("currentAnnual").textContent =
+        "$" + Math.round(currentAnnual).toLocaleString();
+
+    document.getElementById("futureAnnual").textContent =
+        "$" + Math.round(futureAnnual).toLocaleString();
+
+    document.getElementById("annualDifference").textContent =
+        "$" + Math.round(difference).toLocaleString();
+
+    document.getElementById("learningInvestment").textContent =
+        Math.round(investment).toLocaleString() + " hrs";
+
+    document.getElementById("economicInsight").textContent =
+        difference > 0
+        ? "Potential annual value increase: $" +
+          Math.round(difference).toLocaleString()
+        : "The assumed future value is not higher.";
+
+    document.getElementById("economicText").textContent =
+        "This is not a salary prediction. It is a simple human-capital model showing why the value of learning depends on what the skill changes about your future earning capacity.";
+
+    drawIncomeChart(currentAnnual,futureAnnual);
+
+    addXP(10);
+
+}
+
+
+/* =========================================
+   CHART
+========================================= */
+
+function drawIncomeChart(currentAnnual,futureAnnual){
+
+    const canvas =
+        document.getElementById("incomeChart");
+
+    const ctx =
+        canvas.getContext("2d");
+
+    const width =
+        canvas.clientWidth * window.devicePixelRatio;
+
+    const height =
+        canvas.clientHeight * window.devicePixelRatio;
+
+    canvas.width = width;
+    canvas.height = height;
+
+    ctx.scale(
+        window.devicePixelRatio,
+        window.devicePixelRatio
+    );
+
+    const w = canvas.clientWidth;
+    const h = canvas.clientHeight;
+
+    ctx.clearRect(0,0,w,h);
+
+    const max =
+        Math.max(currentAnnual,futureAnnual,1);
+
+    const values = [
+        currentAnnual,
+        futureAnnual
+    ];
+
+    const labels = [
+        "Current",
+        "Potential"
+    ];
+
+    const barWidth = 70;
+
+    values.forEach((value,i)=>{
+
+        const barHeight =
+            (value/max) * (h-55);
+
+        const x =
+            70 + i*130;
+
+        const y =
+            h-30-barHeight;
+
+        ctx.fillStyle =
+            i === 0 ? "#65d8e8" : "#e4c477";
+
+        ctx.fillRect(
+            x,
+            y,
+            barWidth,
+            barHeight
+        );
+
+        ctx.fillStyle =
+            "#aebbc4";
+
+        ctx.font =
+            "12px Inter, sans-serif";
+
+        ctx.fillText(
+            labels[i],
+            x+8,
+            h-10
+        );
+
+        ctx.fillStyle =
+            "#f5ecd9";
+
+        ctx.fillText(
+            "$"+Math.round(value/1000)+"k",
+            x+8,
+            y-8
+        );
+
+    });
+
+}
+
+
+/* =========================================
+   LEARNING SCIENCE
+========================================= */
+
+function learningChoice(element,choice){
+
+    document
+        .querySelectorAll("#learning .choice")
+        .forEach(x=>x.classList.remove("selected"));
+
+    element.classList.add("selected");
+
+    const answers = {
+
+        1:
+        "Reading creates familiarity, but familiarity can be mistaken for mastery. Add retrieval: close the book and reconstruct the ideas from memory.",
+
+        2:
+        "Strong choice. Explaining from memory exposes gaps and forces you to organize knowledge. Make it harder by applying the concept to a new example.",
+
+        3:
+        "Cramming can produce short-term performance, but spacing generally provides stronger conditions for longer-term retention."
+
+    };
+
+    document.getElementById("learningResult").innerHTML =
+        "<strong>Analysis</strong><p>" +
+        answers[choice] +
+        "</p>";
+
+    addXP(5);
+
+}
+
+
+/* =========================================
+   INTELLECTUAL DIALOGUE
+========================================= */
+
+const dialogues = [
+
+{
+a:"College can provide structured knowledge, credentials, networks and access to careers that are difficult to enter without formal education.",
+b:"The value of college depends heavily on field, cost and alternatives. A credential with enormous debt may have a weaker economic return than a lower-cost path combined with strong experience."
+},
+
+{
+a:"AI can lower the cost of producing software, content, analysis and other forms of work, allowing individuals to accomplish more with fewer resources.",
+b:"Lower production costs can also increase competition. The advantage may shift toward people who combine AI with judgment, domain knowledge, relationships and the ability to define valuable problems."
+},
+
+{
+a:"Specializing early can allow a student to build deeper expertise and become highly capable in a narrow field.",
+b:"Specializing too early can create path dependence before the student understands their strengths. Exploration can reveal better opportunities before deep specialization."
+},
+
+{
+a:"Grades provide evidence that a student can meet structured requirements and learn within an academic system.",
+b:"Grades measure only part of capability. Employers and organizations may also value execution, communication, judgment, adaptability and evidence of real-world performance."
+}
+
+];
+
+
+function loadDialogue(index,button){
+
+    dialogueIndex = index;
+    dialogueFlipped = false;
+
+    document
+        .querySelectorAll(".dialogue-controls button")
+        .forEach(x=>x.classList.remove("active"));
+
+    button.classList.add("active");
+
+    updateDialogue();
+
+}
+
+
+function flipDialogue(){
+
+    dialogueFlipped =
+        !dialogueFlipped;
+
+    updateDialogue();
+
+    if(dialogueFlipped)
+        addXP(3);
+
+}
+
+
+function updateDialogue(){
+
+    const d =
+        dialogues[dialogueIndex];
+
+    document.getElementById("speaker").textContent =
+        dialogueFlipped ? "Position B" : "Position A";
+
+    document.getElementById("dialogueQuote").textContent =
+        dialogueFlipped ? d.b : d.a;
+
+    document.getElementById("dialogueAnalysis").textContent =
+        dialogueFlipped
+        ? "Now ask whether the counterargument changes your original conclusion, changes the conditions under which it is true, or reveals a variable you had ignored."
+        : "Construct the strongest version of this position before criticizing it. Strong reasoning begins by representing an opposing argument fairly.";
+
+}
+
+
+/* =========================================
+   START
+========================================= */
+
+updateXP();
+
+calculateHumanCapital();
+
+
+/* =========================================
+   RESPONSIVE CANVAS
+========================================= */
+
+window.addEventListener("resize",()=>{
+    calculateHumanCapital();
+});
+
+</script>
+
+</body>
+</html>
