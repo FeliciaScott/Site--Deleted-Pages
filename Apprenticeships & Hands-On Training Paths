@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Apprenticeships & Hands-On Training Paths</title>
+
+<style>
+:root{
+   --rust:#3D1C17;
+   --rust-dark:#28110E;
+   --rust-soft:#542B24;
+
+   --blue:#B0C4DE;
+   --blue-soft:#E7EDF5;
+   --blue-deep:#8FA9C7;
+
+   --alabaster:#F8F9FA;
+   --white:#ffffff;
+
+   --text:#292527;
+   --muted:#625B59;
+
+   --copper:#6B3E36;
+   --copper-soft:#9A6B60;
+
+   --shadow:0 5px 18px rgba(61,28,23,.10);
+}
+
+*{
+   margin:0;
+   padding:0;
+   box-sizing:border-box;
+}
+
+html{
+   scroll-behavior:smooth;
+}
+
+body{
+   font-family:Arial,Helvetica,sans-serif;
+   background:var(--alabaster);
+   color:var(--text);
+   line-height:1.6;
+}
+
+/* TOP NAV */
+
+nav{
+   background:var(--rust);
+   color:var(--alabaster);
+   padding:15px 5%;
+   display:flex;
+   justify-content:space-between;
+   align-items:center;
+   gap:20px;
+   position:sticky;
+   top:0;
+   z-index:100;
+   border-bottom:1px solid var(--copper);
+}
+
+.logo{
+   font-weight:800;
+   letter-spacing:.03em;
+}
+
+.logo span{
+   color:var(--blue);
+}
+
+nav a{
+   color:var(--alabaster);
+   text-decoration:none;
+   font-size:.85rem;
+   margin-left:18px;
+   transition:.2s;
+}
+
+nav a:hover{
+   color:var(--blue);
+}
+
+/* INTRO */
+
+.intro{
+   max-width:1100px;
+   margin:auto;
+   padding:38px 5% 28px;
+}
+
+.intro-label{
+   color:var(--copper);
+   text-transform:uppercase;
+   letter-spacing:.12em;
+   font-size:.72rem;
+   font-weight:800;
+   margin-bottom:7px;
+}
+
+.intro h1{
+   color:var(--rust);
+   font-size:2.6rem;
+   line-height:1.15;
+   margin-bottom:10px;
+}
+
+.intro p{
+   max-width:850px;
+   color:var(--muted);
+   font-size:1rem;
+}
+
+.notice{
+   margin-top:18px;
+   padding:14px 17px;
+   background:var(--blue-soft);
+   border-left:4px solid var(--blue);
+   border-radius:6px;
+   font-size:.88rem;
+   color:var(--text);
+}
+
+/* MAIN */
+
+.container{
+   width:min(1100px,90%);
+   margin:auto;
+}
+
+.section{
+   margin-bottom:45px;
+}
+
+.section-heading{
+   margin-bottom:18px;
+}
+
+.section-heading h2{
+   color:var(--rust);
+   font-size:1.8rem;
+   margin-bottom:5px;
+}
+
+.section-heading p{
+   color:var(--muted);
+   font-size:.92rem;
+}
+
+/* OPPORTUNITY GRID */
+
+.grid{
+   display:grid;
+   grid-template-columns:repeat(4,minmax(0,1fr));
+   gap:14px;
+}
+
+.card{
+   background:var(--white);
+   border:1px solid var(--copper);
+   border-radius:11px;
+   padding:20px;
+   box-shadow:var(--shadow);
+   transition:.2s;
+   display:flex;
+   flex-direction:column;
+}
+
+.card:hover{
+   transform:translateY(-3px);
+   border-color:var(--blue);
+   box-shadow:0 8px 24px rgba(61,28,23,.14);
+}
+
+.card-label{
+   color:var(--copper);
+   font-size:.67rem;
+   font-weight:800;
+   letter-spacing:.08em;
+   text-transform:uppercase;
+   margin-bottom:7px;
+}
+
+.card h3{
+   color:var(--rust);
+   font-size:1.08rem;
+   margin-bottom:8px;
+}
+
+.card p{
+   color:var(--muted);
+   font-size:.84rem;
+   margin-bottom:12px;
+}
+
+.card ul{
+   padding-left:17px;
+   color:#514A48;
+   font-size:.8rem;
+   margin-bottom:15px;
+}
+
+.card li{
+   margin-bottom:4px;
+}
+
+.card-footer{
+   margin-top:auto;
+   padding-top:12px;
+   border-top:1px solid var(--copper);
+}
+
+.card-footer strong{
+   display:block;
+   color:var(--rust);
+   font-size:.72rem;
+   margin-bottom:5px;
+}
+
+.card-footer a{
+   color:#536F91;
+   text-decoration:none;
+   font-size:.76rem;
+   font-weight:700;
+}
+
+.card-footer a:hover{
+   color:var(--rust);
+   text-decoration:underline;
+}
+
+/* FEATURED UNKNOWN */
+
+.unknown{
+   background:var(--rust);
+   color:var(--alabaster);
+   border:1px solid var(--copper);
+   border-radius:13px;
+   padding:25px;
+   margin-bottom:16px;
+}
+
+.unknown h2{
+   color:var(--alabaster);
+   font-size:1.6rem;
+   margin-bottom:6px;
+}
+
+.unknown p{
+   color:#E4DAD7;
+   font-size:.9rem;
+}
+
+.unknown-grid{
+   display:grid;
+   grid-template-columns:repeat(4,1fr);
+   gap:12px;
+   margin-top:18px;
+}
+
+.unknown-item{
+   background:rgba(176,196,222,.10);
+   border:1px solid rgba(176,196,222,.25);
+   border-radius:9px;
+   padding:16px;
+   transition:.2s;
+}
+
+.unknown-item:hover{
+   background:rgba(176,196,222,.17);
+   border-color:var(--blue);
+   transform:translateY(-2px);
+}
+
+.unknown-item strong{
+   display:block;
+   color:var(--blue);
+   margin-bottom:6px;
+}
+
+.unknown-item span{
+   color:#E1E5EA;
+   font-size:.78rem;
+}
+
+/* CAREER CLUSTERS */
+
+.cluster{
+   background:var(--white);
+   border:1px solid var(--copper);
+   border-radius:12px;
+   padding:22px;
+   margin-bottom:16px;
+   box-shadow:var(--shadow);
+}
+
+.cluster-header{
+   display:flex;
+   justify-content:space-between;
+   align-items:flex-start;
+   gap:15px;
+   margin-bottom:15px;
+}
+
+.cluster h3{
+   color:var(--rust);
+   font-size:1.25rem;
+}
+
+.cluster-intro{
+   color:var(--muted);
+   font-size:.83rem;
+   max-width:700px;
+}
+
+.badge{
+   white-space:nowrap;
+   background:var(--blue-soft);
+   color:#536F91;
+   padding:5px 9px;
+   border-radius:20px;
+   font-size:.65rem;
+   font-weight:800;
+   border:1px solid var(--blue);
+}
+
+.cluster-grid{
+   display:grid;
+   grid-template-columns:repeat(4,1fr);
+   gap:10px;
+}
+
+.career{
+   background:#F4F6F8;
+   border:1px solid var(--copper);
+   padding:14px;
+   border-radius:8px;
+   transition:.2s;
+}
+
+.career:hover{
+   border-color:var(--blue);
+   background:var(--blue-soft);
+}
+
+.career strong{
+   display:block;
+   color:var(--rust);
+   font-size:.86rem;
+   margin-bottom:4px;
+}
+
+.career span{
+   display:block;
+   color:var(--muted);
+   font-size:.74rem;
+}
+
+/* SEARCH SYSTEM */
+
+.search-box{
+   background:var(--blue-soft);
+   border:1px solid var(--blue);
+   border-radius:12px;
+   padding:24px;
+}
+
+.search-box h2{
+   color:var(--rust);
+   margin-bottom:5px;
+}
+
+.search-box p{
+   color:var(--muted);
+   font-size:.86rem;
+   margin-bottom:15px;
+}
+
+.search-actions{
+   display:flex;
+   gap:10px;
+   flex-wrap:wrap;
+}
+
+.button{
+   display:inline-block;
+   background:var(--rust);
+   color:var(--alabaster);
+   padding:10px 16px;
+   border-radius:7px;
+   text-decoration:none;
+   font-size:.78rem;
+   font-weight:700;
+   border:1px solid var(--rust);
+   transition:.2s;
+}
+
+.button:hover{
+   background:var(--rust-dark);
+   border-color:var(--rust-dark);
+   transform:translateY(-1px);
+}
+
+.button.secondary{
+   background:var(--white);
+   color:var(--rust);
+   border:1px solid var(--copper);
+}
+
+.button.secondary:hover{
+   background:var(--rust);
+   color:var(--alabaster);
+   border-color:var(--rust);
+}
+
+/* REALITY CHECK */
+
+.reality{
+   display:grid;
+   grid-template-columns:repeat(4,1fr);
+   gap:12px;
+}
+
+.reality-card{
+   background:var(--white);
+   border:1px solid var(--copper);
+   border-radius:10px;
+   padding:18px;
+   transition:.2s;
+}
+
+.reality-card:hover{
+   border-color:var(--blue);
+   transform:translateY(-2px);
+}
+
+.reality-card h3{
+   color:var(--rust);
+   font-size:.95rem;
+   margin-bottom:7px;
+}
+
+.reality-card p{
+   color:var(--muted);
+   font-size:.78rem;
+}
+
+/* STEPS */
+
+.steps{
+   display:grid;
+   grid-template-columns:repeat(4,1fr);
+   gap:12px;
+}
+
+.step{
+   background:var(--white);
+   border:1px solid var(--copper);
+   border-radius:10px;
+   padding:18px;
+   transition:.2s;
+}
+
+.step:hover{
+   border-color:var(--blue);
+   box-shadow:var(--shadow);
+}
+
+.step-number{
+   color:#536F91;
+   font-size:.7rem;
+   font-weight:900;
+}
+
+.step h3{
+   color:var(--rust);
+   margin:6px 0;
+   font-size:.95rem;
+}
+
+.step p{
+   color:var(--muted);
+   font-size:.78rem;
+}
+
+/* SOURCES */
+
+.sources{
+   background:#F0F3F6;
+   border:1px solid var(--blue);
+   border-radius:10px;
+   padding:20px;
+}
+
+.sources h2{
+   color:var(--rust);
+   font-size:1.35rem;
+   margin-bottom:8px;
+}
+
+.sources p{
+   color:var(--muted);
+   font-size:.84rem;
+   margin-bottom:12px;
+}
+
+.source-grid{
+   display:grid;
+   grid-template-columns:repeat(4,1fr);
+   gap:10px;
+}
+
+.source{
+   background:var(--white);
+   border:1px solid var(--copper);
+   border-radius:7px;
+   padding:12px;
+   transition:.2s;
+}
+
+.source:hover{
+   border-color:var(--blue);
+}
+
+.source strong{
+   display:block;
+   color:var(--rust);
+   font-size:.8rem;
+   margin-bottom:4px;
+}
+
+.source a{
+   color:#536F91;
+   font-size:.72rem;
+   text-decoration:none;
+}
+
+.source a:hover{
+   color:var(--rust);
+   text-decoration:underline;
+}
+
+/* FINAL CTA */
+
+.cta{
+   background:var(--rust);
+   color:var(--alabaster);
+   padding:35px 5%;
+   margin-top:35px;
+   border-top:1px solid var(--copper);
+   border-bottom:1px solid var(--copper);
+}
+
+.cta-inner{
+   width:min(1000px,90%);
+   margin:auto;
+}
+
+.cta h2{
+   color:var(--alabaster);
+   font-size:1.8rem;
+   margin-bottom:6px;
+}
+
+.cta p{
+   color:#E4DAD7;
+   max-width:750px;
+   font-size:.88rem;
+}
+
+footer{
+   background:var(--rust-dark);
+   color:#C8BCB8;
+   text-align:center;
+   padding:18px;
+   font-size:.72rem;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:950px){
+
+   .grid{
+       grid-template-columns:repeat(2,1fr);
+   }
+
+   .unknown-grid,
+   .cluster-grid,
+   .reality,
+   .steps,
+   .source-grid{
+       grid-template-columns:repeat(2,1fr);
+   }
+
+}
+
+@media(max-width:650px){
+
+   nav{
+       padding:13px 5%;
+   }
+
+   nav div:last-child{
+       display:none;
+   }
+
+   .intro{
+       padding-top:28px;
+   }
+
+   .intro h1{
+       font-size:2rem;
+   }
+
+   .grid{
+       grid-template-columns:1fr;
+   }
+
+   .unknown-grid,
+   .cluster-grid,
+   .reality,
+   .steps,
+   .source-grid{
+       grid-template-columns:1fr;
+   }
+
+   .cluster-header{
+       flex-direction:column;
+   }
+
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">
+CAREER<span>PATHS</span>
+</div>
+
+<div>
+<a href="#unknown">Unknown Paths</a>
+<a href="#clusters">Career Areas</a>
+<a href="#search">Find Programs</a>
+</div>
+
+</nav>
+
+
+<section class="intro">
+
+<div class="intro-label">
+Hidden Career Pathways
+</div>
+
+<h1>Apprenticeships Most People Don't Think About</h1>
+
+<p>
+When people hear "apprenticeship," they often think electrician,
+plumber, or construction worker. The modern apprenticeship system
+is much larger. Registered Apprenticeship spans more than 1,000
+occupations, including technology, healthcare, finance, manufacturing,
+energy, transportation, education, and agriculture.
+</p>
+
+<div class="notice">
+<strong>Important:</strong> An occupation being approved for Registered
+Apprenticeship does not mean an opening exists in your area today.
+Use the official Apprenticeship Finder to verify current openings,
+employers, sponsors, locations, and requirements.
+</div>
+
+</section>
+
+
+<main class="container">
+
+
+<section class="section" id="unknown">
+
+<div class="unknown">
+
+<h2>Unknown Apprenticeships Worth Investigating</h2>
+
+<p>
+These are career paths that can be overlooked because they don't
+look like traditional apprenticeships.
+</p>
+
+<div class="unknown-grid">
+
+<div class="unknown-item">
+<strong>Claims Examiner</strong>
+<span>Learn how insurance claims are reviewed, documented, investigated, and processed.</span>
+</div>
+
+<div class="unknown-item">
+<strong>Insurance Underwriter</strong>
+<span>Learn how insurers evaluate applications, risk, policies, and customers.</span>
+</div>
+
+<div class="unknown-item">
+<strong>Data Analyst</strong>
+<span>Build analytical skills while working with business and operational data.</span>
+</div>
+
+<div class="unknown-item">
+<strong>UX/UI Designer</strong>
+<span>Apprenticeships can provide structured experience in digital product design.</span>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="grid">
+
+<div class="card">
+<div class="card-label">Often overlooked</div>
+<h3>Medical Coding</h3>
+<p>Learn how healthcare services are translated into standardized records and billing codes.</p>
+<ul>
+<li>Medical records</li>
+<li>Coding systems</li>
+<li>Healthcare documentation</li>
+<li>Compliance processes</li>
+</ul>
+<div class="card-footer">
+<strong>Potential direction</strong>
+<a href="https://www.apprenticeship.gov/apprenticeship-industries/healthcare" target="_blank">Healthcare apprenticeships →</a>
+</div>
+</div>
+
+
+<div class="card">
+<div class="card-label">Digital career</div>
+<h3>Prompt Engineer</h3>
+<p>Technology apprenticeship pathways are expanding into emerging AI-related occupations.</p>
+<ul>
+<li>AI systems</li>
+<li>Prompt design</li>
+<li>Testing</li>
+<li>Digital workflows</li>
+</ul>
+<div class="card-footer">
+<strong>Potential direction</strong>
+<a href="https://www.apprenticeship.gov/apprenticeship-industries/technology" target="_blank">Technology apprenticeships →</a>
+</div>
+</div>
+
+
+<div class="card">
+<div class="card-label">Operations</div>
+<h3>Project Coordinator</h3>
+<p>Learn how organizations coordinate schedules, people, documentation, and deliverables.</p>
+<ul>
+<li>Project tracking</li>
+<li>Scheduling</li>
+<li>Documentation</li>
+<li>Team coordination</li>
+</ul>
+<div class="card-footer">
+<strong>Potential direction</strong>
+<a href="https://www.apprenticeship.gov/apprenticeship-occupations" target="_blank">Explore occupations →</a>
+</div>
+</div>
+
+
+<div class="card">
+<div class="card-label">Creative technology</div>
+<h3>Graphic Designer</h3>
+<p>Some apprenticeship pathways extend into business operations and creative production.</p>
+<ul>
+<li>Brand design</li>
+<li>Digital graphics</li>
+<li>Marketing assets</li>
+<li>Production workflows</li>
+</ul>
+<div class="card-footer">
+<strong>Potential direction</strong>
+<a href="https://www.apprenticeship.gov/apprenticeship-occupations" target="_blank">Explore occupations →</a>
+</div>
+</div>
+
+
+<div class="card">
+<div class="card-label">Infrastructure</div>
+<h3>Database Administrator</h3>
+<p>Learn how organizations maintain, organize, secure, and manage databases.</p>
+<ul>
+<li>Database systems</li>
+<li>Data maintenance</li>
+<li>Security</li>
+<li>System administration</li>
+</ul>
+<div class="card-footer">
+<strong>Potential direction</strong>
+<a href="https://www.apprenticeship.gov/apprenticeship-industries/technology" target="_blank">Technology apprenticeships →</a>
+</div>
+</div>
+
+
+<div class="card">
+<div class="card-label">Manufacturing</div>
+<h3>Mechatronics Technician</h3>
+<p>Combine mechanical systems, electronics, automation, and industrial technology.</p>
+<ul>
+<li>Automation</li>
+<li>Robotics</li>
+<li>Industrial systems</li>
+<li>Equipment maintenance</li>
+</ul>
+<div class="card-footer">
+<strong>Potential direction</strong>
+<a href="https://www.apprenticeship.gov/apprenticeship-industries/advanced-manufacturing" target="_blank">Manufacturing pathways →</a>
+</div>
+</div>
+
+
+<div class="card">
+<div class="card-label">Manufacturing</div>
+<h3>Precision Machinist</h3>
+<p>Learn to manufacture highly precise components using industrial equipment.</p>
+<ul>
+<li>CNC machining</li>
+<li>Measurement</li>
+<li>Blueprint reading</li>
+<li>Quality control</li>
+</ul>
+<div class="card-footer">
+<strong>Potential direction</strong>
+<a href="https://www.apprenticeship.gov/apprenticeship-industries/advanced-manufacturing" target="_blank">Manufacturing pathways →</a>
+</div>
+</div>
+
+
+<div class="card">
+<div class="card-label">Infrastructure</div>
+<h3>Fiber / Telecom Technician</h3>
+<p>Build and maintain the communications infrastructure behind modern connectivity.</p>
+<ul>
+<li>Fiber systems</li>
+<li>Network infrastructure</li>
+<li>Installation</li>
+<li>Field troubleshooting</li>
+</ul>
+<div class="card-footer">
+<strong>Potential direction</strong>
+<a href="https://www.apprenticeship.gov/apprenticeship-industries/telecom" target="_blank">Telecommunications pathways →</a>
+</div>
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<div class="section-heading">
+<h2>More Career Paths Hiding in Plain Sight</h2>
+<p>
+These examples demonstrate how broad apprenticeship can become once
+you stop limiting your search to traditional construction trades.
+</p>
+</div>
+
+<div class="grid">
+
+<div class="card">
+<div class="card-label">Finance</div>
+<h3>General Insurance Associate</h3>
+<p>Learn insurance operations, customer needs, policy processes, and industry systems.</p>
+<ul>
+<li>Insurance operations</li>
+<li>Customer service</li>
+<li>Policy administration</li>
+</ul>
+<div class="card-footer">
+<a href="https://www.apprenticeship.gov/apprenticeship-industries/financial-services" target="_blank">Financial services →</a>
+</div>
+</div>
+
+
+<div class="card">
+<div class="card-label">Finance</div>
+<h3>Banking Operations</h3>
+<p>Build experience in financial services without assuming that every entry route requires a four-year degree.</p>
+<ul>
+<li>Retail banking</li>
+<li>Customer support</li>
+<li>Operations</li>
+</ul>
+<div class="card-footer">
+<a href="https://www.apprenticeship.gov/apprenticeship-industries/financial-services" target="_blank">Financial services →</a>
+</div>
+</div>
+
+
+<div class="card">
+<div class="card-label">Healthcare</div>
+<h3>Surgical Technologist</h3>
+<p>Train for the operating-room environment through structured education and workplace learning.</p>
+<ul>
+<li>Surgical preparation</li>
+<li>Equipment</li>
+<li>Sterile procedures</li>
+</ul>
+<div class="card-footer">
+<a href="https://www.apprenticeship.gov/apprenticeship-industries/healthcare" target="_blank">Healthcare →</a>
+</div>
+</div>
+
+
+<div class="card">
+<div class="card-label">Healthcare</div>
+<h3>Community Health Worker</h3>
+<p>Work at the intersection of healthcare, communication, outreach, and community services.</p>
+<ul>
+<li>Patient support</li>
+<li>Community outreach</li>
+<li>Health education</li>
+</ul>
+<div class="card-footer">
+<a href="https://www.apprenticeship.gov/apprenticeship-industries/healthcare" target="_blank">Healthcare →</a>
+</div>
+</div>
+
+
+<div class="card">
+<div class="card-label">Manufacturing</div>
+<h3>Robotics Technician</h3>
+<p>Learn to support automated machinery and robotics used in modern manufacturing.</p>
+<ul>
+<li>Robotics</li>
+<li>Automation</li>
+<li>Diagnostics</li>
+</ul>
+<div class="card-footer">
+<a href="https://www.apprenticeship.gov/apprenticeship-industries/advanced-manufacturing" target="_blank">Manufacturing →</a>
+</div>
+</div>
+
+
+<div class="card">
+<div class="card-label">Manufacturing</div>
+<h3>Industrial Engineering Technician</h3>
+<p>Help organizations improve production processes, efficiency, quality, and workflow.</p>
+<ul>
+<li>Process improvement</li>
+<li>Quality</li>
+<li>Production systems</li>
+</ul>
+<div class="card-footer">
+<a href="https://www.apprenticeship.gov/apprenticeship-industries/advanced-manufacturing" target="_blank">Manufacturing →</a>
+</div>
+</div>
+
+
+<div class="card">
+<div class="card-label">Business</div>
+<h3>Digital Marketing Specialist</h3>
+<p>Build practical marketing skills around digital campaigns, content, and customer acquisition.</p>
+<ul>
+<li>Digital campaigns</li>
+<li>Marketing operations</li>
+<li>Customer research</li>
+</ul>
+<div class="card-footer">
+<a href="https://www.apprenticeship.gov/apprenticeship-occupations" target="_blank">Explore occupations →</a>
+</div>
+</div>
+
+
+<div class="card">
+<div class="card-label">Business</div>
+<h3>Human Resources Associate</h3>
+<p>Learn recruiting, employee support, documentation, and organizational processes.</p>
+<ul>
+<li>Recruiting</li>
+<li>HR operations</li>
+<li>Employee support</li>
+</ul>
+<div class="card-footer">
+<a href="https://www.apprenticeship.gov/apprenticeship-occupations" target="_blank">Explore occupations →</a>
+</div>
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section" id="clusters">
+
+<div class="section-heading">
+<h2>Apprenticeship Career Map</h2>
+<p>
+Don't search for one job title. Search entire career families.
+</p>
+</div>
+
+
+<div class="cluster">
+
+<div class="cluster-header">
+<div>
+<h3>Technology & Digital Infrastructure</h3>
+<p class="cluster-intro">
+Technology apprenticeship opportunities include application development,
+IT support, cybersecurity, data analysis, networking, software development,
+and emerging AI-related roles.
+</p>
+</div>
+<span class="badge">HIGH-GROWTH</span>
+</div>
+
+<div class="cluster-grid">
+
+<div class="career">
+<strong>Software Developer</strong>
+<span>Build applications and systems.</span>
+</div>
+
+<div class="career">
+<strong>Data Analyst</strong>
+<span>Turn organizational data into insights.</span>
+</div>
+
+<div class="career">
+<strong>Cybersecurity Technician</strong>
+<span>Support security operations.</span>
+</div>
+
+<div class="career">
+<strong>Network Support Technician</strong>
+<span>Maintain connectivity and networks.</span>
+</div>
+
+</div>
+</div>
+
+
+<div class="cluster">
+
+<div class="cluster-header">
+<div>
+<h3>Healthcare</h3>
+<p class="cluster-intro">
+Healthcare is one of the major apprenticeship sectors, with pathways
+ranging from entry-level support roles to advanced clinical occupations.
+</p>
+</div>
+<span class="badge">EXPANDING</span>
+</div>
+
+<div class="cluster-grid">
+
+<div class="career">
+<strong>Medical Assistant</strong>
+<span>Clinical and administrative support.</span>
+</div>
+
+<div class="career">
+<strong>Phlebotomist</strong>
+<span>Blood collection and laboratory support.</span>
+</div>
+
+<div class="career">
+<strong>Dental Assistant</strong>
+<span>Dental clinical support.</span>
+</div>
+
+<div class="career">
+<strong>Community Health Worker</strong>
+<span>Patient and community support.</span>
+</div>
+
+</div>
+</div>
+
+
+<div class="cluster">
+
+<div class="cluster-header">
+<div>
+<h3>Advanced Manufacturing</h3>
+<p class="cluster-intro">
+Modern manufacturing includes aerospace, automotive, semiconductors,
+shipbuilding, biotechnology, robotics, and other technology-intensive fields.
+</p>
+</div>
+<span class="badge">TECHNICAL</span>
+</div>
+
+<div class="cluster-grid">
+
+<div class="career">
+<strong>CNC Operator</strong>
+<span>Computer-controlled machining.</span>
+</div>
+
+<div class="career">
+<strong>Mechatronics Technician</strong>
+<span>Mechanical + electronic systems.</span>
+</div>
+
+<div class="career">
+<strong>Robotics Technician</strong>
+<span>Automation and robotics.</span>
+</div>
+
+<div class="career">
+<strong>Tool & Die Maker</strong>
+<span>Precision manufacturing.</span>
+</div>
+
+</div>
+</div>
+
+
+<div class="cluster">
+
+<div class="cluster-header">
+<div>
+<h3>Financial Services</h3>
+<p class="cluster-intro">
+Apprenticeships aren't limited to physical work. Financial services
+has developed pathways for people entering banking, insurance,
+operations, and related roles.
+</p>
+</div>
+<span class="badge">OVERLOOKED</span>
+</div>
+
+<div class="cluster-grid">
+
+<div class="career">
+<strong>Insurance Associate</strong>
+<span>Insurance operations and customers.</span>
+</div>
+
+<div class="career">
+<strong>Risk Consultant</strong>
+<span>Analyze organizational risk.</span>
+</div>
+
+<div class="career">
+<strong>Banking Operations</strong>
+<span>Financial service operations.</span>
+</div>
+
+<div class="career">
+<strong>Claims Representative</strong>
+<span>Claims and customer processes.</span>
+</div>
+
+</div>
+</div>
+
+</section>
+
+
+<section class="section">
+
+<div class="section-heading">
+<h2>Industries People Forget to Check</h2>
+<p>
+The biggest mistake is searching only for the occupation you already know.
+Check the industry first, then discover its occupations.
+</p>
+</div>
+
+<div class="reality">
+
+<div class="reality-card">
+<h3>Agriculture</h3>
+<p>Modern agriculture includes equipment, technology, production, and specialized technical work.</p>
+</div>
+
+<div class="reality-card">
+<h3>Education</h3>
+<p>Apprenticeship pathways can extend into teaching and education-related roles.</p>
+</div>
+
+<div class="reality-card">
+<h3>Hospitality</h3>
+<p>Hospitality management and culinary career pathways can include structured training.</p>
+</div>
+
+<div class="reality-card">
+<h3>Transportation</h3>
+<p>Look beyond driving jobs into vehicle maintenance, logistics, shipping, and technical operations.</p>
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section" id="search">
+
+<div class="search-box">
+
+<h2>Don't Search Google First</h2>
+
+<p>
+Start with the official federal Apprenticeship Finder. It allows you
+to search current apprenticeship job opportunities by career path
+and location and apply directly with the employer or program sponsor.
+</p>
+
+<div class="search-actions">
+
+<a class="button"
+href="https://www.apprenticeship.gov/apprenticeship-job-finder"
+target="_blank" rel="noopener noreferrer">
+Open Apprenticeship Finder
+</a>
+
+<a class="button secondary"
+href="https://www.apprenticeship.gov/apprenticeship-occupations"
+target="_blank" rel="noopener noreferrer">
+Browse Approved Occupations
+</a>
+
+<a class="button secondary"
+href="https://www.apprenticeship.gov/apprenticeship-industries"
+target="_blank" rel="noopener noreferrer">
+Browse Industries
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<div class="section-heading">
+<h2>Application Process</h2>
+<p>
+Treat apprenticeship hunting like a research project instead of
+waiting for one perfect job posting.
+</p>
+</div>
+
+<div class="steps">
+
+<div class="step">
+<div class="step-number">01 — EXPLORE</div>
+<h3>Pick 3 Industries</h3>
+<p>Choose industries that match your interests, strengths, and realistic entry point.</p>
+</div>
+
+<div class="step">
+<div class="step-number">02 — EXPAND</div>
+<h3>Find Occupations</h3>
+<p>Search multiple job titles instead of searching only for "apprentice."</p>
+</div>
+
+<div class="step">
+<div class="step-number">03 — VERIFY</div>
+<h3>Check the Program</h3>
+<p>Confirm the employer, sponsor, location, requirements, pay structure, and training.</p>
+</div>
+
+<div class="step">
+<div class="step-number">04 — APPLY</div>
+<h3>Build a Pipeline</h3>
+<p>Apply to multiple legitimate opportunities and track every application.</p>
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<div class="section-heading">
+<h2>What Makes a Registered Apprenticeship Different?</h2>
+<p>
+The value isn't simply getting a job with the word "apprentice" in the title.
+</p>
+</div>
+
+<div class="reality">
+
+<div class="reality-card">
+<h3>Paid Work</h3>
+<p>Registered apprenticeships are jobs, with apprentices earning wages as they develop skills.</p>
+</div>
+
+<div class="reality-card">
+<h3>Mentorship</h3>
+<p>Training occurs under experienced workers rather than relying entirely on self-study.</p>
+</div>
+
+<div class="reality-card">
+<h3>Education</h3>
+<p>Programs include structured supplemental instruction connected to the occupation.</p>
+</div>
+
+<div class="reality-card">
+<h3>Credential</h3>
+<p>Registered apprentices can earn a portable, nationally recognized credential.</p>
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<div class="sources">
+
+<h2>Official Starting Points</h2>
+
+<p>
+Use these resources to verify opportunities rather than relying on
+random social-media lists or outdated apprenticeship articles.
+</p>
+
+<div class="source-grid">
+
+<div class="source">
+<strong>Apprenticeship Finder</strong>
+<a href="https://www.apprenticeship.gov/apprenticeship-job-finder" target="_blank" rel="noopener noreferrer">
+Search current openings →
+</a>
+</div>
+
+<div class="source">
+<strong>Occupation Finder</strong>
+<a href="https://www.apprenticeship.gov/apprenticeship-occupations" target="_blank" rel="noopener noreferrer">
+Explore approved occupations →
+</a>
+</div>
+
+<div class="source">
+<strong>Industry Directory</strong>
+<a href="https://www.apprenticeship.gov/apprenticeship-industries" target="_blank" rel="noopener noreferrer">
+Explore career sectors →
+</a>
+</div>
+
+<div class="source">
+<strong>What Is Apprenticeship?</strong>
+<a href="https://www.apprenticeship.gov/help/what-apprenticeship" target="_blank" rel="noopener noreferrer">
+Understand the model →
+</a>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<section class="cta">
+
+<div class="cta-inner">
+
+<h2>Stop Searching for "Apprenticeships."</h2>
+
+<p>
+Search for occupations you could realistically learn, then determine
+which of those occupations have apprenticeship pathways. That small
+change in strategy can expose career options you would never find
+by searching only for electrician, plumber, or HVAC jobs.
+</p>
+
+</div>
+
+</section>
+
+
+<footer>
+
+<p>
+Apprenticeships & Hands-On Training Paths • Research first. Verify programs. Apply strategically.
+</p>
+
+</footer>
+
+</body>
+</html>
