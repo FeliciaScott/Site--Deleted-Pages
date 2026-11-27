@@ -1,0 +1,556 @@
+<div id="pk-contact-page">
+
+<style>
+#pk-contact-page {
+  --cream: #F7F2E8;
+  --cream-light: #FFFCF5;
+  --cream-dark: #E8DCC9;
+  --brown: #49352A;
+  --brown-mid: #674C3B;
+  --brown-light: #8B6A50;
+  --blue: #294F6D;
+  --blue-mid: #3D6F91;
+  --blue-light: #DCEAF1;
+  --blue-pale: #EDF3F7;
+  --text: #352F2A;
+  --muted: #71685F;
+
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+  background: var(--cream);
+  line-height: 1.7;
+  width: 100%;
+}
+
+#pk-contact-page * {
+  box-sizing: border-box;
+}
+
+#pk-contact-page a,
+#pk-contact-page button,
+#pk-contact-page input,
+#pk-contact-page textarea {
+  font-family: inherit;
+}
+
+#pk-contact-page .contact-shell {
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 25px 18px 60px;
+}
+
+/* HERO */
+#pk-contact-page .contact-hero {
+  background: linear-gradient(135deg, var(--blue), #1B394F 70%, var(--brown));
+  padding: 65px 35px;
+  border-radius: 20px;
+  color: var(--cream);
+  position: relative;
+  overflow: hidden;
+}
+
+#pk-contact-page .contact-hero:after {
+  content: "";
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  right: -90px;
+  top: -90px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 50%;
+  box-shadow: 0 0 0 35px rgba(255,255,255,.025),
+              0 0 0 70px rgba(255,255,255,.025);
+  pointer-events: none;
+}
+
+#pk-contact-page .eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #DCC4A5;
+  margin-bottom: 15px;
+}
+
+#pk-contact-page .contact-hero h1 {
+  font-size: clamp(32px, 5vw, 54px);
+  line-height: 1.15;
+  color: #FFFDF8;
+  margin: 0 0 20px;
+}
+
+#pk-contact-page .contact-hero h1 span {
+  color: #D8C1A4;
+}
+
+#pk-contact-page .contact-hero p {
+  font-size: 17px;
+  color: #E8EAF0;
+  max-width: 650px;
+  margin: 0;
+}
+
+/* INTRO */
+#pk-contact-page .contact-intro {
+  text-align: center;
+  max-width: 760px;
+  margin: 55px auto 35px;
+}
+
+#pk-contact-page .contact-intro h2 {
+  color: var(--brown);
+  font-size: 30px;
+  line-height: 1.3;
+  margin: 0 0 14px;
+}
+
+#pk-contact-page .contact-intro p {
+  color: var(--muted);
+  font-size: 16px;
+  margin: 0;
+}
+
+/* LAYOUT */
+#pk-contact-page .contact-grid {
+  display: grid;
+  grid-template-columns: .85fr 1.35fr;
+  gap: 24px;
+  align-items: stretch;
+}
+
+/* CONTACT INFO */
+#pk-contact-page .contact-info {
+  background: var(--brown);
+  color: var(--cream);
+  padding: 32px 27px;
+  border-radius: 17px;
+  display: flex;
+  flex-direction: column;
+}
+
+#pk-contact-page .contact-info h3 {
+  font-size: 23px;
+  margin: 0 0 12px;
+  color: var(--cream);
+}
+
+#pk-contact-page .contact-info > p {
+  color: #E9DDD0;
+  font-size: 14px;
+  margin: 0 0 28px;
+}
+
+#pk-contact-page .contact-info .info-label {
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 11px;
+  font-weight: bold;
+  color: #D8C1A4;
+  margin-bottom: 8px;
+}
+
+#pk-contact-page .email-box {
+  border: 1px solid rgba(247,242,232,.25);
+  background: rgba(255,255,255,.06);
+  border-radius: 12px;
+  padding: 17px 14px;
+  margin-bottom: 22px;
+  overflow-wrap: anywhere;
+}
+
+#pk-contact-page .email-address {
+  color: #FFFDF8;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+#pk-contact-page .email-address:hover {
+  text-decoration: underline;
+  color: #D8C1A4;
+}
+
+#pk-contact-page .direct-email {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 48px;
+  padding: 12px 17px;
+  border-radius: 8px;
+  background: var(--cream);
+  color: var(--blue);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 14px;
+  transition: .2s ease;
+}
+
+#pk-contact-page .direct-email:hover {
+  background: var(--blue-light);
+  transform: translateY(-2px);
+}
+
+#pk-contact-page .contact-note {
+  border-top: 1px solid rgba(247,242,232,.2);
+  margin-top: auto;
+  padding-top: 22px;
+  font-size: 13px;
+  color: #E8DDD0;
+}
+
+/* FORM */
+#pk-contact-page .contact-form-card {
+  background: var(--cream-light);
+  border: 1px solid var(--cream-dark);
+  padding: 32px;
+  border-radius: 17px;
+  box-shadow: 0 12px 30px rgba(73,53,42,.07);
+}
+
+#pk-contact-page .contact-form-card h3 {
+  color: var(--blue);
+  font-size: 24px;
+  margin: 0 0 8px;
+}
+
+#pk-contact-page .form-description {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 23px;
+}
+
+#pk-contact-page .form-group {
+  margin-bottom: 18px;
+}
+
+#pk-contact-page label {
+  display: block;
+  color: var(--brown);
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 7px;
+}
+
+#pk-contact-page input,
+#pk-contact-page textarea {
+  display: block;
+  width: 100%;
+  border: 1px solid #CFC3B3;
+  border-radius: 8px;
+  padding: 13px 14px;
+  background: #FFFFFF;
+  color: var(--text);
+  font-size: 15px;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+#pk-contact-page input {
+  min-height: 48px;
+}
+
+#pk-contact-page textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+#pk-contact-page input:focus,
+#pk-contact-page textarea:focus {
+  border-color: var(--blue-mid);
+  box-shadow: 0 0 0 3px rgba(61,111,145,.18);
+}
+
+#pk-contact-page .submit-button {
+  width: 100%;
+  min-height: 50px;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 20px;
+  background: var(--blue);
+  color: #FFFFFF;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background .2s, transform .2s;
+}
+
+#pk-contact-page .submit-button:hover {
+  background: var(--brown);
+  transform: translateY(-2px);
+}
+
+#pk-contact-page .form-footnote {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 13px;
+}
+
+#pk-contact-page .contact-status {
+  margin-top: 15px;
+  color: var(--blue);
+  font-weight: bold;
+  font-size: 14px;
+}
+
+#pk-contact-page .contact-status:empty {
+  display: none;
+}
+
+/* BOTTOM MESSAGE */
+#pk-contact-page .contact-bottom {
+  margin-top: 35px;
+  text-align: center;
+  background: var(--blue-light);
+  border: 1px solid #C8DCE8;
+  border-radius: 14px;
+  padding: 27px 22px;
+}
+
+#pk-contact-page .contact-bottom h3 {
+  color: var(--blue);
+  font-size: 21px;
+  margin: 0 0 8px;
+}
+
+#pk-contact-page .contact-bottom p {
+  color: var(--brown);
+  font-size: 14px;
+  margin: 0;
+}
+
+/* ACCESSIBILITY */
+#pk-contact-page a:focus-visible,
+#pk-contact-page button:focus-visible,
+#pk-contact-page input:focus-visible,
+#pk-contact-page textarea:focus-visible {
+  outline: 3px solid #8B6A50;
+  outline-offset: 4px;
+}
+
+#pk-contact-page button,
+#pk-contact-page a {
+  min-height: 44px;
+}
+
+@media (max-width: 760px) {
+  #pk-contact-page .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #pk-contact-page .contact-hero {
+    padding: 45px 24px;
+  }
+
+  #pk-contact-page .contact-info {
+    padding: 27px 22px;
+  }
+
+  #pk-contact-page .contact-form-card {
+    padding: 24px 19px;
+  }
+
+  #pk-contact-page .contact-intro {
+    margin-top: 38px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #pk-contact-page *,
+  #pk-contact-page *::before,
+  #pk-contact-page *::after {
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+
+<div class="contact-shell">
+
+  <!-- HERO -->
+  <section class="contact-hero" aria-labelledby="pk-contact-title">
+    <div class="eyebrow">PathKeeper • Get in Touch</div>
+
+    <h1 id="pk-contact-title">
+      Let's Start a <span>Conversation.</span>
+    </h1>
+
+    <p>
+      Have a question, suggestion, idea, or want to connect?
+      Reach out. Your message is welcome.
+    </p>
+  </section>
+
+  <!-- INTRO -->
+  <section class="contact-intro">
+    <h2>Connect With PathKeeper</h2>
+    <p>
+      Whether you're exploring resources, have feedback about the site,
+      want to share an idea, or simply have a question, use the form below
+      or send an email directly.
+    </p>
+  </section>
+
+  <!-- CONTACT CONTENT -->
+  <div class="contact-grid">
+
+    <!-- EMAIL INFORMATION -->
+    <aside class="contact-info" aria-label="Direct contact information">
+
+      <h3>Direct Contact</h3>
+
+      <p>
+        Prefer email? You can contact me directly.
+        Send a message whenever you're ready.
+      </p>
+
+      <div class="info-label">Email Address</div>
+
+      <div class="email-box">
+        <a class="email-address"
+           href="mailto:admin@leadwithspeaking.cvm">
+          admin@leadwithspeaking.cvm
+        </a>
+      </div>
+
+      <a class="direct-email"
+         href="mailto:admin@leadwithspeaking.cvm?subject=Hello%20PathKeeper">
+        Send an Email
+      </a>
+
+      <div class="contact-note">
+        <strong>Every message matters.</strong>
+        <p>
+          Questions, feedback, suggestions, and new ideas are all welcome.
+        </p>
+      </div>
+
+    </aside>
+
+    <!-- CONTACT FORM -->
+    <section class="contact-form-card" aria-labelledby="pk-form-title">
+
+      <h3 id="pk-form-title">Send a Message</h3>
+
+      <p class="form-description">
+        Fill out the form below. When you submit, your email application
+        will open with your message ready to send.
+      </p>
+
+      <form id="pk-contact-form">
+
+        <div class="form-group">
+          <label for="pk-contact-name">Your Name</label>
+          <input
+            type="text"
+            id="pk-contact-name"
+            name="name"
+            placeholder="Enter your name"
+            autocomplete="name"
+            required>
+        </div>
+
+        <div class="form-group">
+          <label for="pk-contact-email">Your Email</label>
+          <input
+            type="email"
+            id="pk-contact-email"
+            name="email"
+            placeholder="you@example.com"
+            autocomplete="email"
+            required>
+        </div>
+
+        <div class="form-group">
+          <label for="pk-contact-subject">Subject</label>
+          <input
+            type="text"
+            id="pk-contact-subject"
+            name="subject"
+            placeholder="What would you like to discuss?"
+            required>
+        </div>
+
+        <div class="form-group">
+          <label for="pk-contact-message">Your Message</label>
+          <textarea
+            id="pk-contact-message"
+            name="message"
+            placeholder="Write your message here..."
+            required></textarea>
+        </div>
+
+        <button class="submit-button" type="submit">
+          Prepare My Email →
+        </button>
+
+        <p class="form-footnote">
+          This form opens your email program to send the message.
+          Your message will not be sent automatically.
+        </p>
+
+        <div id="pk-contact-status"
+             class="contact-status"
+             role="status"
+             aria-live="polite"></div>
+
+      </form>
+    </section>
+
+  </div>
+
+  <!-- BOTTOM -->
+  <section class="contact-bottom">
+    <h3>Good Ideas Begin With a Conversation.</h3>
+    <p>
+      Keep learning, keep building, and keep moving forward.
+      Thank you for connecting with PathKeeper.
+    </p>
+  </section>
+
+</div>
+
+<script>
+(function() {
+  const contactForm = document.getElementById("pk-contact-form");
+  const statusMessage = document.getElementById("pk-contact-status");
+
+  if (!contactForm) return;
+
+  contactForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById("pk-contact-name").value.trim();
+    const senderEmail = document.getElementById("pk-contact-email").value.trim();
+    const subject = document.getElementById("pk-contact-subject").value.trim();
+    const message = document.getElementById("pk-contact-message").value.trim();
+
+    if (!name || !senderEmail || !subject || !message) {
+      statusMessage.textContent = "Please complete all fields before continuing.";
+      return;
+    }
+
+    const recipient = "admin@leadwithspeaking.cvm";
+
+    const emailSubject = encodeURIComponent(subject);
+    const emailBody = encodeURIComponent(
+      "Name: " + name + "\n" +
+      "Email: " + senderEmail + "\n\n" +
+      "Message:\n" + message
+    );
+
+    statusMessage.textContent =
+      "Opening your email application with your message prepared.";
+
+    const emailLink =
+      "mailto:" + recipient +
+      "?subject=" + emailSubject +
+      "&body=" + emailBody;
+
+    window.location.href = emailLink;
+  });
+})();
+</script>
+
+</div>
