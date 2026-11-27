@@ -1,0 +1,2304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PathKeeper | Grants & Creator Funding Resources</title>
+
+<style>
+:root{
+  --cream:#F7F2E8;
+  --cream2:#EEE3D1;
+  --cream3:#E2D2B9;
+  --brown:#49352A;
+  --brown2:#674C3B;
+  --brown3:#8B6A50;
+  --blue:#294F6D;
+  --blue2:#3D6F91;
+  --blue3:#729BB5;
+  --blue-light:#DCEAF1;
+  --green:#54745B;
+  --white:#FFFEFA;
+  --text:#302820;
+  --muted:#71675D;
+  --border:#D6C8B5;
+  --shadow:0 12px 35px rgba(73,53,42,.09);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+body{
+  background:var(--cream);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+  line-height:1.6;
+}
+
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+
+.page{
+  max-width:1200px;
+  margin:auto;
+  background:var(--cream);
+  overflow:hidden;
+}
+
+.topbar{
+  padding:18px 5%;
+  background:var(--brown);
+  color:var(--cream);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
+
+.brand{
+  font-size:.85rem;
+  font-weight:900;
+  letter-spacing:.08em;
+}
+
+.brand span{color:var(--blue-light)}
+
+.top-note{
+  font-size:.72rem;
+  color:var(--cream2);
+}
+
+.hero{
+  padding:70px 7%;
+  color:var(--cream);
+  background:
+    radial-gradient(circle at 90% 15%,rgba(114,155,181,.25),transparent 30%),
+    linear-gradient(120deg,var(--blue),var(--brown));
+}
+
+.eyebrow{
+  color:var(--cream3);
+  font-size:.72rem;
+  font-weight:900;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  margin-bottom:15px;
+}
+
+.hero h1{
+  max-width:850px;
+  font-size:clamp(2.3rem,6vw,4.4rem);
+  line-height:1.05;
+  letter-spacing:-.045em;
+  margin-bottom:20px;
+}
+
+.hero h1 span{color:var(--blue-light)}
+
+.hero p{
+  max-width:760px;
+  color:#F0E8DC;
+  font-size:1rem;
+  line-height:1.8;
+}
+
+.hero-note{
+  display:inline-block;
+  margin-top:25px;
+  padding:9px 14px;
+  border:1px solid rgba(255,255,255,.3);
+  border-radius:8px;
+  color:var(--cream);
+  font-size:.76rem;
+}
+
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:25px;
+}
+
+.hero-button{
+  display:inline-block;
+  text-decoration:none;
+  padding:13px 19px;
+  border-radius:8px;
+  background:var(--cream);
+  color:var(--blue);
+  font-size:.82rem;
+  font-weight:900;
+  border:1px solid var(--cream);
+  transition:.2s;
+}
+
+.hero-button:hover{
+  background:var(--blue-light);
+  transform:translateY(-2px);
+}
+
+.hero-button.secondary-link{
+  background:transparent;
+  color:var(--cream);
+  border-color:rgba(255,255,255,.5);
+}
+
+.hero-button.secondary-link:hover{
+  background:rgba(255,255,255,.12);
+}
+
+.nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  padding:16px 5%;
+  background:var(--white);
+  border-bottom:1px solid var(--border);
+}
+
+.nav a{
+  color:var(--blue);
+  text-decoration:none;
+  font-size:.75rem;
+  font-weight:800;
+  padding:8px 11px;
+  border-radius:6px;
+}
+
+.nav a:hover{background:var(--blue-light)}
+
+.section{
+  padding:55px 6%;
+  border-bottom:1px solid var(--border);
+}
+
+.section.alt{background:#F0E8DA}
+
+.section.dark{
+  background:var(--brown);
+  color:var(--cream);
+}
+
+.section-heading{
+  max-width:780px;
+  margin-bottom:28px;
+}
+
+.kicker{
+  color:var(--blue2);
+  font-size:.7rem;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  margin-bottom:8px;
+}
+
+.dark .kicker{color:#BBD6E5}
+
+.section-heading h2{
+  color:var(--brown);
+  font-size:clamp(1.7rem,4vw,2.6rem);
+  line-height:1.15;
+  margin-bottom:12px;
+}
+
+.dark .section-heading h2{color:var(--cream)}
+
+.section-heading p{
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+.dark .section-heading p{color:#E3D7C8}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:15px;
+}
+
+.card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:22px;
+  box-shadow:var(--shadow);
+}
+
+.card h3{
+  color:var(--brown);
+  font-size:1rem;
+  margin-bottom:9px;
+}
+
+.card p{
+  color:var(--muted);
+  font-size:.82rem;
+}
+
+.card .number{
+  color:var(--blue2);
+  font-size:1.65rem;
+  font-weight:900;
+  margin-bottom:8px;
+}
+
+.callout{
+  background:var(--blue-light);
+  border-left:4px solid var(--blue2);
+  padding:17px 20px;
+  border-radius:8px;
+  margin-top:20px;
+  color:var(--brown);
+  font-size:.84rem;
+}
+
+.callout strong{color:var(--blue)}
+
+.two-col{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+  align-items:start;
+}
+
+.panel{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:23px;
+}
+
+.panel h3{
+  color:var(--brown);
+  margin-bottom:8px;
+  font-size:1rem;
+}
+
+.panel-intro{
+  color:var(--muted);
+  font-size:.8rem;
+  margin-bottom:18px;
+}
+
+label{
+  display:block;
+  color:var(--brown);
+  font-size:.76rem;
+  font-weight:800;
+  margin-bottom:6px;
+}
+
+.field{margin-bottom:15px}
+
+.input,.select,.textarea{
+  width:100%;
+  background:#FFFEFA;
+  color:var(--text);
+  border:1px solid var(--border);
+  border-radius:7px;
+  padding:11px 12px;
+  outline:none;
+  font-size:.82rem;
+}
+
+.textarea{min-height:105px;resize:vertical}
+
+.input:focus,.select:focus,.textarea:focus{
+  border-color:var(--blue2);
+  box-shadow:0 0 0 3px rgba(61,111,145,.12);
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:13px;
+}
+
+.full{grid-column:1/-1}
+
+.btn{
+  border:0;
+  border-radius:7px;
+  padding:11px 16px;
+  font-size:.78rem;
+  font-weight:900;
+  transition:.2s;
+}
+
+.btn:hover{transform:translateY(-1px)}
+
+.primary{background:var(--blue);color:white}
+.secondary{background:var(--brown2);color:white}
+.light-btn{
+  background:var(--blue-light);
+  color:var(--blue);
+  border:1px solid #B9D0DE;
+}
+.outline{
+  background:transparent;
+  color:var(--blue);
+  border:1px solid var(--blue3);
+}
+
+.button-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:12px;
+}
+
+.small-note{
+  color:var(--muted);
+  font-size:.72rem;
+  margin-top:10px;
+}
+
+.result{
+  display:none;
+  margin-top:18px;
+  padding:17px;
+  background:var(--blue-light);
+  border:1px solid #B9D0DE;
+  border-radius:9px;
+  color:var(--brown);
+  font-size:.82rem;
+}
+
+.result h3{margin-bottom:8px}
+
+.receipt{
+  background:var(--white);
+  border:1px dashed var(--blue2);
+  padding:18px;
+  border-radius:9px;
+  margin-top:15px;
+}
+
+.receipt-title{
+  color:var(--blue);
+  font-size:.7rem;
+  letter-spacing:.1em;
+  font-weight:900;
+  margin-bottom:9px;
+}
+
+.receipt p{margin:5px 0;font-size:.8rem}
+
+.opportunity-list{
+  display:grid;
+  gap:12px;
+  margin-top:20px;
+}
+
+.opportunity{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:17px;
+}
+
+.opportunity-top{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:flex-start;
+}
+
+.opportunity h3{
+  color:var(--brown);
+  font-size:.94rem;
+}
+
+.opportunity p{
+  color:var(--muted);
+  font-size:.77rem;
+  margin-top:5px;
+  overflow-wrap:anywhere;
+}
+
+.tag{
+  display:inline-block;
+  padding:4px 8px;
+  border-radius:20px;
+  background:var(--blue-light);
+  color:var(--blue);
+  font-size:.65rem;
+  font-weight:900;
+}
+
+.opportunity-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+
+.opportunity-actions button{
+  font-size:.7rem;
+  padding:7px 10px;
+}
+
+.empty{
+  padding:22px;
+  border:1px dashed var(--border);
+  border-radius:10px;
+  color:var(--muted);
+  text-align:center;
+  font-size:.82rem;
+}
+
+.compare-wrap{
+  overflow-x:auto;
+  border:1px solid var(--border);
+  border-radius:11px;
+  background:var(--white);
+}
+
+table{
+  border-collapse:collapse;
+  width:100%;
+  min-width:650px;
+}
+
+th{
+  background:var(--blue);
+  color:white;
+  text-align:left;
+  padding:13px;
+  font-size:.73rem;
+}
+
+td{
+  padding:13px;
+  border-top:1px solid var(--border);
+  color:var(--muted);
+  font-size:.77rem;
+  vertical-align:top;
+  overflow-wrap:anywhere;
+}
+
+td:first-child{
+  color:var(--brown);
+  font-weight:800;
+}
+
+.framework{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+}
+
+.framework-step{
+  padding:18px;
+  border-radius:10px;
+  background:var(--white);
+  border:1px solid var(--border);
+}
+
+.framework-step .step{
+  color:var(--blue2);
+  font-weight:900;
+  font-size:.72rem;
+  margin-bottom:8px;
+}
+
+.framework-step h3{
+  color:var(--brown);
+  font-size:.9rem;
+  margin-bottom:6px;
+}
+
+.framework-step p{
+  color:var(--muted);
+  font-size:.76rem;
+}
+
+.checklist{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.check-item{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  padding:13px;
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:8px;
+}
+
+.check-item input{
+  margin-top:3px;
+  accent-color:var(--blue);
+}
+
+.check-item label{
+  margin:0;
+  font-size:.78rem;
+  line-height:1.45;
+}
+
+.progress-area{margin-bottom:18px}
+
+.progress-top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:7px;
+  color:var(--brown);
+  font-size:.75rem;
+  font-weight:800;
+}
+
+.progress-track{
+  height:9px;
+  background:var(--cream3);
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.progress-fill{
+  height:100%;
+  width:0;
+  background:var(--green);
+  transition:width .25s;
+}
+
+.timeline{display:grid;gap:12px}
+
+.timeline-row{
+  display:grid;
+  grid-template-columns:130px 1fr;
+  gap:15px;
+  padding:15px;
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:9px;
+}
+
+.timeline-row strong{
+  color:var(--blue);
+  font-size:.8rem;
+}
+
+.timeline-row p{
+  color:var(--muted);
+  font-size:.78rem;
+}
+
+.allocation-list{display:grid;gap:13px}
+
+.allocation-row{
+  display:grid;
+  grid-template-columns:1fr 85px 110px;
+  gap:10px;
+  align-items:center;
+}
+
+.allocation-row label{margin:0}
+.allocation-row input{width:100%}
+
+.allocation-value{
+  text-align:right;
+  color:var(--blue);
+  font-size:.78rem;
+  font-weight:900;
+}
+
+.allocation-total{
+  margin-top:16px;
+  padding:13px;
+  background:var(--blue-light);
+  border-radius:8px;
+  color:var(--brown);
+  font-size:.82rem;
+  font-weight:900;
+}
+
+.preview{
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  max-height:520px;
+  overflow:auto;
+  padding:18px;
+  background:#F0E8DA;
+  border:1px solid var(--border);
+  border-radius:9px;
+  color:var(--brown);
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:.78rem;
+  line-height:1.7;
+}
+
+.faq{border-top:1px solid var(--border)}
+.faq-item{border-bottom:1px solid var(--border)}
+
+.faq-question{
+  width:100%;
+  text-align:left;
+  background:none;
+  border:0;
+  padding:16px 0;
+  color:var(--brown);
+  font-size:.84rem;
+  font-weight:900;
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.faq-answer{
+  display:none;
+  padding:0 25px 17px 0;
+  color:var(--muted);
+  font-size:.79rem;
+}
+
+.faq-item.open .faq-answer{display:block}
+
+.footer{
+  background:var(--brown);
+  color:var(--cream2);
+  padding:30px 6%;
+  text-align:center;
+  font-size:.75rem;
+}
+
+.footer strong{color:white}
+
+.footer a{
+  color:var(--blue-light);
+  font-weight:900;
+  text-decoration:none;
+}
+
+.footer a:hover{text-decoration:underline}
+
+@media(max-width:850px){
+  .grid{grid-template-columns:1fr 1fr}
+  .framework{grid-template-columns:1fr 1fr}
+}
+
+@media(max-width:650px){
+  .hero{padding:48px 24px}
+  .section{padding:40px 22px}
+  .topbar{align-items:flex-start;flex-direction:column}
+  .two-col,.grid,.framework,.checklist,.form-grid{grid-template-columns:1fr}
+  .full{grid-column:auto}
+  .timeline-row{grid-template-columns:1fr;gap:5px}
+  .allocation-row{grid-template-columns:1fr 75px}
+  .allocation-value{grid-column:1/-1;text-align:left}
+  .nav{gap:3px}
+  .nav a{font-size:.69rem}
+}
+
+@media print{
+  body,.page{background:white}
+  .topbar,.hero,.footer{
+    print-color-adjust:exact;
+    -webkit-print-color-adjust:exact;
+  }
+  .nav,.button-row,.btn,.opportunity-actions,.hero-actions{
+    display:none!important;
+  }
+  .section{break-inside:avoid}
+  .card,.panel{box-shadow:none}
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+<header class="topbar">
+  <div class="brand">PATHKEEPER <span>| FUNDING INTELLIGENCE</span></div>
+  <div class="top-note">Research carefully. Compare opportunities. Prepare stronger applications.</div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="eyebrow">Grants & Creator Funding Resources</div>
+
+  <h1>Grants & <span>Creator Funding Resources.</span></h1>
+
+  <p>
+    "Fund your growth and direct your own learning. Browse curated resources for grants, scholarships, self-education roadmaps, and tools to support independent projects and long-term goals." Find and evaluate grants that match an educational, career, business, or
+    community goal. Organize requirements, compare opportunities, calculate
+    a realistic funding request, prepare supporting evidence, and build an
+    application that responds to what each funder actually asks for.
+  </p>
+
+  <div class="hero-note">
+    A grant is not just an application. It is a fit assessment, a documented need,
+    a budget, and a plan for results.
+  </div>
+
+  <div class="hero-actions">
+    <a
+      class="hero-button"
+      href="https://sites.google.com/view/pathkeeper/2-grant-template"
+      target="_blank"
+      rel="noopener noreferrer">
+      Open Grant Application Template →
+    </a>
+
+    <a class="hero-button secondary-link" href="#tracker">
+      Start Organizing Funding →
+    </a>
+  </div>
+</section>
+
+<nav class="nav">
+  <a href="#overview">Overview</a>
+  <a href="#tracker">Opportunity Tracker</a>
+  <a href="#comparison">Compare Grants</a>
+  <a href="#framework">Application Framework</a>
+  <a href="#readiness">Readiness Checklist</a>
+  <a href="#timeline">Timeline</a>
+  <a href="#budget">Funding Plan</a>
+  <a href="#builder">Proposal Builder</a>
+</nav>
+
+<!-- OVERVIEW -->
+<section class="section" id="overview">
+  <div class="section-heading">
+    <div class="kicker">Start with the right questions</div>
+    <h2>Funding research should lead to a decision—not just a list of links.</h2>
+    <p>
+      A useful grant research process identifies who can apply, what the funding
+      supports, what evidence is required, how much time the application takes,
+      and whether the opportunity advances a defined goal.
+    </p>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="number">01</div>
+      <h3>Discover</h3>
+      <p>Identify funding sources, eligibility conditions, award amounts, deadlines, and permitted uses.</p>
+    </div>
+
+    <div class="card">
+      <div class="number">02</div>
+      <h3>Evaluate</h3>
+      <p>Compare each opportunity against your qualifications, financial need, timeline, and intended outcome.</p>
+    </div>
+
+    <div class="card">
+      <div class="number">03</div>
+      <h3>Prepare</h3>
+      <p>Organize your project description, budget, evidence, supporting documents, and application responses.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Important:</strong> A grant listing is not proof that funding is currently
+    open. Confirm the deadline, eligibility, award terms, and application instructions
+    on the funder's official website before preparing or submitting an application.
+  </div>
+
+  <div class="callout">
+    <strong>Use the companion template:</strong> The
+    <a href="https://sites.google.com/view/pathkeeper/2-grant-template"
+       target="_blank" rel="noopener noreferrer">
+      Grant Application Template page
+    </a>
+    provides an additional place to review the grant-template material.
+  </div>
+</section>
+
+<!-- OPPORTUNITY TRACKER -->
+<section class="section alt" id="tracker">
+  <div class="section-heading">
+    <div class="kicker">Grant Opportunity Intelligence</div>
+    <h2>Create a searchable record of funding opportunities.</h2>
+    <p>
+      Add grants as you research them. Each entry creates a receipt containing the
+      details you recorded. Your saved list can be used to compare options and
+      organize your next steps.
+    </p>
+  </div>
+
+  <div class="two-col">
+    <div class="panel">
+      <h3>Opportunity Intake Form</h3>
+      <p class="panel-intro">Record the information from the funder's official listing.</p>
+
+      <div class="field">
+        <label for="grantName">Grant or Funding Opportunity Name</label>
+        <input class="input" id="grantName" placeholder="Enter the opportunity name">
+      </div>
+
+      <div class="form-grid">
+        <div class="field">
+          <label for="grantFunder">Funder / Organization</label>
+          <input class="input" id="grantFunder" placeholder="Organization name">
+        </div>
+
+        <div class="field">
+          <label for="grantCategory">Funding Category</label>
+          <select class="select" id="grantCategory">
+            <option value="">Choose category</option>
+            <option>Education / Tuition</option>
+            <option>Career Training</option>
+            <option>Certification / Exams</option>
+            <option>Technology / Equipment</option>
+            <option>Business / Startup</option>
+            <option>Research / Project</option>
+            <option>Community / Nonprofit</option>
+            <option>General Financial Assistance</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="grantAmountInput">Maximum Award Amount ($)</label>
+          <input class="input" id="grantAmountInput" type="number" min="0" placeholder="Example: 5000">
+        </div>
+
+        <div class="field">
+          <label for="grantDeadline">Application Deadline</label>
+          <input class="input" id="grantDeadline" type="date">
+        </div>
+
+        <div class="field">
+          <label for="grantStatus">Opportunity Status</label>
+          <select class="select" id="grantStatus">
+            <option>Researching</option>
+            <option>Potential Match</option>
+            <option>Preparing Application</option>
+            <option>Submitted</option>
+            <option>Awarded</option>
+            <option>Not Eligible</option>
+            <option>Closed</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="grantEligibility">Eligibility Result</label>
+          <select class="select" id="grantEligibility">
+            <option>Not yet verified</option>
+            <option>Appears eligible</option>
+            <option>Eligibility confirmed</option>
+            <option>Not eligible</option>
+            <option>Need clarification</option>
+          </select>
+        </div>
+
+        <div class="field full">
+          <label for="grantLink">Official Grant Website / Application URL</label>
+          <input class="input" id="grantLink" type="url" placeholder="https://">
+        </div>
+
+        <div class="field full">
+          <label for="grantPurpose">What can the funding pay for?</label>
+          <textarea class="textarea" id="grantPurpose"
+            placeholder="Record the funder's approved expenses and restrictions."></textarea>
+        </div>
+
+        <div class="field full">
+          <label for="grantRequirements">Important Requirements</label>
+          <textarea class="textarea" id="grantRequirements"
+            placeholder="Record eligibility, documents, essays, recommendations, budget requirements, and other conditions."></textarea>
+        </div>
+      </div>
+
+      <button class="btn primary" type="button" onclick="addOpportunity()">
+        Save Opportunity & Create Receipt
+      </button>
+
+      <div class="small-note">
+        Saved entries are stored in this browser on this device. They are not submitted to the funder.
+      </div>
+
+      <div class="result" id="receiptResult" aria-live="polite"></div>
+    </div>
+
+    <div class="panel">
+      <h3>Opportunity Research Standard</h3>
+      <p class="panel-intro">Use this review before treating a listing as a real application option.</p>
+
+      <div class="timeline">
+        <div class="timeline-row">
+          <strong>Who can apply?</strong>
+          <p>Confirm applicant type, location, age, education level, business status, and other eligibility restrictions.</p>
+        </div>
+
+        <div class="timeline-row">
+          <strong>What is funded?</strong>
+          <p>Check whether tuition, equipment, fees, supplies, travel, wages, or other costs are permitted.</p>
+        </div>
+
+        <div class="timeline-row">
+          <strong>What is required?</strong>
+          <p>Identify essays, budgets, transcripts, references, proof of enrollment, financial records, or project plans.</p>
+        </div>
+
+        <div class="timeline-row">
+          <strong>When is it due?</strong>
+          <p>Record the deadline, time zone, submission method, and whether the opportunity is rolling or recurring.</p>
+        </div>
+
+        <div class="timeline-row">
+          <strong>What happens next?</strong>
+          <p>Record notification dates, award conditions, payment timing, reporting duties, and follow-up requirements.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-heading" style="margin-top:35px;margin-bottom:15px">
+    <div class="kicker">Your funding records</div>
+    <h2 style="font-size:1.5rem">Saved Opportunity List</h2>
+    <p>Review, compare, update, or remove the records you have entered.</p>
+  </div>
+
+  <div class="button-row">
+    <button class="btn light-btn" onclick="exportOpportunities()">Export Opportunity List</button>
+    <button class="btn outline" onclick="window.print()">Print Records</button>
+  </div>
+
+  <div id="opportunityList" class="opportunity-list">
+    <div class="empty">
+      No opportunities have been added yet. Use the intake form to create your first record.
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section class="section" id="comparison">
+  <div class="section-heading">
+    <div class="kicker">Funding Comparison</div>
+    <h2>Compare opportunities before investing time in applications.</h2>
+    <p>
+      Compare the amount, deadline, eligibility, purpose, and preparation burden.
+      A larger award is not automatically the best opportunity if the requirements
+      are difficult to meet or the funds cannot pay for your intended expenses.
+    </p>
+  </div>
+
+  <div class="panel">
+    <h3>Choose opportunities to compare</h3>
+    <p class="panel-intro">Add at least two opportunities in the tracker first.</p>
+
+    <div class="form-grid">
+      <div class="field">
+        <label for="compareOne">Opportunity One</label>
+        <select class="select" id="compareOne"></select>
+      </div>
+
+      <div class="field">
+        <label for="compareTwo">Opportunity Two</label>
+        <select class="select" id="compareTwo"></select>
+      </div>
+    </div>
+
+    <button class="btn primary" onclick="compareOpportunities()">
+      Compare Selected Opportunities
+    </button>
+
+    <div id="comparisonResult" style="margin-top:20px"></div>
+  </div>
+
+  <div class="callout">
+    <strong>Decision rule:</strong> Prioritize confirmed eligibility, relevant permitted
+    expenses, realistic deadlines, and a strong connection between the funding request
+    and your goal. Treat award size as only one factor.
+  </div>
+</section>
+
+<!-- APPLICATION FRAMEWORK -->
+<section class="section alt" id="framework">
+  <div class="section-heading">
+    <div class="kicker">Grant Application Framework</div>
+    <h2>Build the application around the funder's actual questions.</h2>
+    <p>
+      The framework below helps organize your thinking. Adapt each section to the
+      grant instructions instead of submitting the same generic response everywhere.
+    </p>
+  </div>
+
+  <div class="framework">
+    <div class="framework-step">
+      <div class="step">01 / NEED</div>
+      <h3>Define the Need</h3>
+      <p>What problem, barrier, educational cost, or opportunity makes funding necessary?</p>
+    </div>
+
+    <div class="framework-step">
+      <div class="step">02 / GOAL</div>
+      <h3>State the Goal</h3>
+      <p>What specific outcome will the funding help you achieve?</p>
+    </div>
+
+    <div class="framework-step">
+      <div class="step">03 / PLAN</div>
+      <h3>Explain the Plan</h3>
+      <p>What activities, courses, equipment, services, or project steps will be completed?</p>
+    </div>
+
+    <div class="framework-step">
+      <div class="step">04 / BUDGET</div>
+      <h3>Justify the Budget</h3>
+      <p>What will each requested amount pay for, and how was the cost determined?</p>
+    </div>
+
+    <div class="framework-step">
+      <div class="step">05 / EVIDENCE</div>
+      <h3>Show Readiness</h3>
+      <p>What documents, experience, work samples, research, or references support the request?</p>
+    </div>
+
+    <div class="framework-step">
+      <div class="step">06 / RESULTS</div>
+      <h3>Describe Results</h3>
+      <p>What will change after the project, training, or educational activity is completed?</p>
+    </div>
+
+    <div class="framework-step">
+      <div class="step">07 / ACCOUNTABILITY</div>
+      <h3>Explain Tracking</h3>
+      <p>How will progress, spending, completion, and outcomes be documented?</p>
+    </div>
+
+    <div class="framework-step">
+      <div class="step">08 / CONTINUITY</div>
+      <h3>Plan Beyond Funding</h3>
+      <p>What happens after the award ends? Identify maintenance, next steps, and backup plans.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Application writing reminder:</strong> Use the grantmaker's language when
+    appropriate, answer the actual question, support claims with evidence, and avoid
+    promising results you cannot reasonably demonstrate.
+  </div>
+</section>
+
+<!-- READINESS CHECKLIST -->
+<section class="section" id="readiness">
+  <div class="section-heading">
+    <div class="kicker">Application Readiness</div>
+    <h2>Use one checklist to prepare and verify your application.</h2>
+    <p>
+      This checklist combines overlapping requirements and readiness checks.
+      Mark items as you complete them. The progress indicator reflects your selections.
+    </p>
+  </div>
+
+  <div class="progress-area">
+    <div class="progress-top">
+      <span>Application preparation progress</span>
+      <span id="checkProgress">0 of 16 complete</span>
+    </div>
+
+    <div class="progress-track">
+      <div class="progress-fill" id="checkProgressFill"></div>
+    </div>
+  </div>
+
+  <div class="checklist" id="readinessChecklist">
+    <div class="check-item">
+      <input type="checkbox" onchange="updateChecklist()">
+      <label>Official grant source and current application instructions verified.</label>
+    </div>
+
+    <div class="check-item">
+      <input type="checkbox" onchange="updateChecklist()">
+      <label>Applicant eligibility reviewed and confirmed.</label>
+    </div>
+
+    <div class="check-item">
+      <input type="checkbox" onchange="updateChecklist()">
+      <label>Funding purpose matches the grant's permitted expenses.</label>
+    </div>
+
+    <div class="check-item">
+      <input type="checkbox" onchange="updateChecklist()">
+      <label>Deadline, time zone, and submission method recorded.</label>
+    </div>
+
+    <div class="check-item">
+      <input type="checkbox" onchange="updateChecklist()">
+      <label>Project or education goal clearly defined.</label>
+    </div>
+
+    <div class="check-item">
+      <input type="checkbox" onchange="updateChecklist()">
+      <label>Need statement prepared with relevant facts.</label>
+    </div>
+
+    <div class="check-item">
+      <input type="checkbox" onchange="updateChecklist()">
+      <label>Activities and project timeline outlined.</label>
+    </div>
+
+    <div class="check-item">
+      <input type="checkbox" onchange="updateChecklist()">
+      <label>Requested amount supported by realistic cost estimates.</label>
+    </div>
+
+    <div class="check-item">
+      <input type="checkbox" onchange="updateChecklist()">
+      <label>Budget follows the funder's allowable-cost rules.</label>
+    </div>
+
+    <div class="check-item">
+      <input type="checkbox" onchange="updateChecklist()">
+      <label>Required identification, enrollment, or organization records prepared.</label>
+    </div>
+
+    <div class="check-item">
+      <input type="checkbox" onchange="updateChecklist()">
+      <label>References, recommendations, or endorsements requested if needed.</label>
+    </div>
+
+    <div class="check-item">
+      <input type="checkbox" onchange="updateChecklist()">
+      <label>Work samples, transcripts, certificates, or other evidence organized.</label>
+    </div>
+
+    <div class="check-item">
+      <input type="checkbox" onchange="updateChecklist()">
+      <label>Application responses address the actual evaluation criteria.</label>
+    </div>
+
+    <div class="check-item">
+      <input type="checkbox" onchange="updateChecklist()">
+      <label>Proofreading and final document review completed.</label>
+    </div>
+
+    <div class="check-item">
+      <input type="checkbox" onchange="updateChecklist()">
+      <label>Submission confirmation and receipt will be saved.</label>
+    </div>
+
+    <div class="check-item">
+      <input type="checkbox" onchange="updateChecklist()">
+      <label>Follow-up, reporting, and award conditions reviewed.</label>
+    </div>
+  </div>
+
+  <div class="callout">
+    Checklist completion is a preparation indicator, not a guarantee of eligibility,
+    application acceptance, or funding.
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="section alt" id="timeline">
+  <div class="section-heading">
+    <div class="kicker">Application Timeline</div>
+    <h2>Plan backward from the deadline.</h2>
+    <p>
+      Use one timeline for every grant. Adjust the schedule to the actual application
+      requirements and the amount of time available.
+    </p>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-row">
+      <strong>Stage 1 — Research</strong>
+      <p>Confirm eligibility, official instructions, funding restrictions, deadlines, and required documents.</p>
+    </div>
+
+    <div class="timeline-row">
+      <strong>Stage 2 — Organize</strong>
+      <p>Gather records, identify missing information, request references, and estimate project costs.</p>
+    </div>
+
+    <div class="timeline-row">
+      <strong>Stage 3 — Draft</strong>
+      <p>Prepare the need statement, project description, outcomes, budget explanation, and required responses.</p>
+    </div>
+
+    <div class="timeline-row">
+      <strong>Stage 4 — Review</strong>
+      <p>Check eligibility, consistency, word limits, attachments, arithmetic, and alignment with evaluation criteria.</p>
+    </div>
+
+    <div class="timeline-row">
+      <strong>Stage 5 — Submit</strong>
+      <p>Submit through the official channel before the deadline. Save the confirmation, receipt, and final application copy.</p>
+    </div>
+
+    <div class="timeline-row">
+      <strong>Stage 6 — Follow Up</strong>
+      <p>Track notification dates, respond to requests, review award conditions, and document the outcome.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FUNDING PLAN -->
+<section class="section" id="budget">
+  <div class="section-heading">
+    <div class="kicker">Funding Allocation Planner</div>
+    <h2>Build a budget that explains what the money will accomplish.</h2>
+    <p>
+      Enter a hypothetical or requested amount. Adjust the allocation percentages
+      to reflect the actual project. The categories are starting points, not rules:
+      always follow the funder's allowable-cost requirements.
+    </p>
+  </div>
+
+  <div class="two-col">
+    <div class="panel">
+      <h3>Funding Amount</h3>
+      <p class="panel-intro">Change the amount and percentages to test different budget plans.</p>
+
+      <div class="field">
+        <label for="budgetAmount">Total Funding Requested ($)</label>
+        <input class="input" type="number" min="0" id="budgetAmount"
+          value="10000" oninput="calculateBudget()">
+      </div>
+
+      <div class="allocation-list">
+        <div class="allocation-row">
+          <label for="percentLearning">Education / Training</label>
+          <input class="input percentage" type="number" min="0" max="100"
+            id="percentLearning" value="35" oninput="calculateBudget()">
+          <div class="allocation-value" id="valueLearning">$3,500</div>
+        </div>
+
+        <div class="allocation-row">
+          <label for="percentTechnology">Technology / Equipment</label>
+          <input class="input percentage" type="number" min="0" max="100"
+            id="percentTechnology" value="25" oninput="calculateBudget()">
+          <div class="allocation-value" id="valueTechnology">$2,500</div>
+        </div>
+
+        <div class="allocation-row">
+          <label for="percentProject">Project Materials</label>
+          <input class="input percentage" type="number" min="0" max="100"
+            id="percentProject" value="20" oninput="calculateBudget()">
+          <div class="allocation-value" id="valueProject">$2,000</div>
+        </div>
+
+        <div class="allocation-row">
+          <label for="percentSupport">Support Services</label>
+          <input class="input percentage" type="number" min="0" max="100"
+            id="percentSupport" value="10" oninput="calculateBudget()">
+          <div class="allocation-value" id="valueSupport">$1,000</div>
+        </div>
+
+        <div class="allocation-row">
+          <label for="percentOther">Other Approved Costs</label>
+          <input class="input percentage" type="number" min="0" max="100"
+            id="percentOther" value="10" oninput="calculateBudget()">
+          <div class="allocation-value" id="valueOther">$1,000</div>
+        </div>
+      </div>
+
+      <div class="allocation-total" id="allocationTotal">Total allocation: 100%</div>
+      <p class="small-note" id="budgetStatus">Your allocation currently totals 100%.</p>
+    </div>
+
+    <div class="panel">
+      <h3>Budget Justification Guide</h3>
+      <p class="panel-intro">A budget should explain the relationship between each cost and the proposed outcome.</p>
+
+      <div class="timeline">
+        <div class="timeline-row">
+          <strong>Expense</strong>
+          <p>Name the specific item, service, fee, course, or resource.</p>
+        </div>
+
+        <div class="timeline-row">
+          <strong>Amount</strong>
+          <p>Use a quote, published price, fee schedule, or documented estimate.</p>
+        </div>
+
+        <div class="timeline-row">
+          <strong>Purpose</strong>
+          <p>Explain why the expense is necessary to complete the proposed activity.</p>
+        </div>
+
+        <div class="timeline-row">
+          <strong>Outcome</strong>
+          <p>Connect the expense to a measurable result or completed milestone.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        Do not assume a grant allows personal living expenses, equipment purchases,
+        contractor payments, or overhead. Verify each category before including it.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROPOSAL BUILDER -->
+<section class="section alt" id="builder">
+  <div class="section-heading">
+    <div class="kicker">Reusable Application Builder</div>
+    <h2>Turn your research into a grant application draft.</h2>
+    <p>
+      Enter your project details once to create a structured working draft.
+      Adapt the draft to the funder's exact questions, format, and word limits.
+    </p>
+  </div>
+
+  <div class="two-col">
+    <div class="panel">
+      <h3>Application Questionnaire</h3>
+      <p class="panel-intro">Use specific, factual responses. You can revise them before copying or saving.</p>
+
+      <div class="field">
+        <label for="applicant">Applicant Name / Organization</label>
+        <input class="input" id="applicant" placeholder="Your name or organization">
+      </div>
+
+      <div class="field">
+        <label for="programName">Grant Program</label>
+        <input class="input" id="programName" placeholder="Name of funding opportunity">
+      </div>
+
+      <div class="field">
+        <label for="projectTitle">Project / Education Goal</label>
+        <input class="input" id="projectTitle" placeholder="What are you seeking funding to accomplish?">
+      </div>
+
+      <div class="field">
+        <label for="needStatement">1. What need or barrier makes this funding necessary?</label>
+        <textarea class="textarea" id="needStatement"
+          placeholder="Describe the need using clear facts and relevant context."></textarea>
+      </div>
+
+      <div class="field">
+        <label for="goalStatement">2. What do you intend to accomplish?</label>
+        <textarea class="textarea" id="goalStatement"
+          placeholder="Describe the specific goal and intended result."></textarea>
+      </div>
+
+      <div class="field">
+        <label for="activityStatement">3. What activities will the funding support?</label>
+        <textarea class="textarea" id="activityStatement"
+          placeholder="List the courses, training, project steps, equipment, or services."></textarea>
+      </div>
+
+      <div class="field">
+        <label for="outcomeStatement">4. What results will demonstrate success?</label>
+        <textarea class="textarea" id="outcomeStatement"
+          placeholder="Describe measurable results, milestones, completed work, or credentials."></textarea>
+      </div>
+
+      <div class="field">
+        <label for="evidenceStatement">5. What evidence supports your readiness?</label>
+        <textarea class="textarea" id="evidenceStatement"
+          placeholder="Describe experience, work samples, research, references, or prior progress."></textarea>
+      </div>
+
+      <div class="field">
+        <label for="continuityStatement">6. What happens after the funding period?</label>
+        <textarea class="textarea" id="continuityStatement"
+          placeholder="Describe next steps, sustainability, maintenance, or a backup plan."></textarea>
+      </div>
+
+      <div class="field">
+        <label for="extraNotes">Additional Grant-Specific Requirements</label>
+        <textarea class="textarea" id="extraNotes"
+          placeholder="Add required responses, special instructions, or information to verify."></textarea>
+      </div>
+
+      <div class="button-row">
+        <button class="btn primary" onclick="buildProposal()">Generate Application Draft</button>
+        <button class="btn outline" onclick="clearProposal()">Clear Answers</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>Generated Application Draft</h3>
+      <p class="panel-intro">Your working draft will appear below. Review every section before using it.</p>
+
+      <div id="proposalPreview" class="preview">
+        Your application draft will appear here after you select “Generate Application Draft.”
+      </div>
+
+      <div class="button-row">
+        <button class="btn primary" onclick="copyProposal()">Copy Application Draft</button>
+        <button class="btn secondary" onclick="downloadProposal()">Save Draft as Text File</button>
+        <button class="btn light-btn" onclick="window.print()">Print Page</button>
+      </div>
+
+      <div class="small-note" id="proposalMessage" aria-live="polite"></div>
+
+      <div class="callout">
+        This tool creates a draft only. It does not verify eligibility, guarantee accuracy,
+        or submit an application to a grantmaker.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="section-heading">
+    <div class="kicker">Reference Guide</div>
+    <h2>Questions to consider before applying.</h2>
+  </div>
+
+  <div class="faq">
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFAQ(this)">
+        What is the purpose of the opportunity receipt? <span>+</span>
+      </button>
+      <div class="faq-answer">
+        The receipt records the information entered into the tracker so you can review
+        what you found, what still needs verification, and which opportunity you may
+        want to pursue. It is not an official receipt from the grantmaker.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFAQ(this)">
+        Does the comparison tool determine whether I qualify? <span>+</span>
+      </button>
+      <div class="faq-answer">
+        No. It displays the information you recorded so you can compare opportunities.
+        Eligibility must be checked against the official grant instructions. The tool
+        does not independently verify a funder's rules.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFAQ(this)">
+        Does the budget calculator decide how a grant must be spent? <span>+</span>
+      </button>
+      <div class="faq-answer">
+        No. The percentages are editable planning assumptions. Use the funder's
+        allowable-cost rules and your actual project expenses to prepare the final budget.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFAQ(this)">
+        Can I reuse the application draft? <span>+</span>
+      </button>
+      <div class="faq-answer">
+        You can reuse the structure as a starting point, but each application should
+        respond to that funder's mission, eligibility rules, questions, scoring criteria,
+        and formatting requirements.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFAQ(this)">
+        Where should I verify grant information? <span>+</span>
+      </button>
+      <div class="faq-answer">
+        Use the official funder website or the application portal named by the funder.
+        Confirm that the opportunity is open, that the information is current, and
+        that the application URL is legitimate before sharing personal or financial information.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFAQ(this)">
+        Are my saved opportunity records shared with PathKeeper? <span>+</span>
+      </button>
+      <div class="faq-answer">
+        No. This standalone page stores records in the browser's local storage on the
+        device where you use it. The records are not sent to PathKeeper through this code.
+        Clearing browser data or changing devices may remove or make those records unavailable.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFAQ(this)">
+        What does the Grant Application Template button open? <span>+</span>
+      </button>
+      <div class="faq-answer">
+        It opens the existing PathKeeper 2 Grant Template page in a new browser tab.
+        This page and the template page remain separate Google Sites pages.
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <strong>PATHKEEPER | Grants & Creator Funding Resources</strong>
+  <p>Research with care. Prepare with evidence. Apply with a clear plan.</p>
+  <p style="margin-top:12px">
+    <a href="https://sites.google.com/view/pathkeeper/2-grant-template"
+       target="_blank" rel="noopener noreferrer">
+      Open Grant Application Template →
+    </a>
+  </p>
+</footer>
+
+</div>
+
+<script>
+/* =========================================
+   STORAGE AND GENERAL HELPERS
+========================================= */
+
+const STORAGE_KEY = "pathkeeper_grant_opportunities_v1";
+
+function getOpportunities(){
+  try{
+    const stored = localStorage.getItem(STORAGE_KEY);
+    return stored ? JSON.parse(stored) : [];
+  }catch(error){
+    return [];
+  }
+}
+
+function saveOpportunities(items){
+  try{
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(items));
+    return true;
+  }catch(error){
+    alert("Your browser could not save this record. Check browser storage settings.");
+    return false;
+  }
+}
+
+function money(value){
+  return new Intl.NumberFormat("en-US",{
+    style:"currency",
+    currency:"USD",
+    maximumFractionDigits:0
+  }).format(Number(value)||0);
+}
+
+function safeText(value){
+  return String(value || "").trim();
+}
+
+function makeId(){
+  return "grant-" + Date.now() + "-" + Math.floor(Math.random()*100000);
+}
+
+function downloadFile(content,filename,type){
+  const blob = new Blob([content],{type:type+";charset=utf-8"});
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+async function copyText(text,message){
+  try{
+    if(navigator.clipboard && window.isSecureContext){
+      await navigator.clipboard.writeText(text);
+    }else{
+      const area = document.createElement("textarea");
+      area.value = text;
+      area.style.position = "fixed";
+      area.style.opacity = "0";
+      document.body.appendChild(area);
+      area.select();
+
+      const success = document.execCommand("copy");
+      area.remove();
+
+      if(!success) throw new Error("Copy unavailable");
+    }
+
+    const messageElement = document.getElementById("proposalMessage");
+
+    if(messageElement){
+      messageElement.textContent = message;
+    }else{
+      alert(message);
+    }
+
+  }catch(error){
+    alert("Copying was blocked by the browser. Select the text and copy it manually.");
+  }
+}
+
+/* =========================================
+   OPPORTUNITY TRACKER AND RECEIPTS
+========================================= */
+
+function addOpportunity(){
+  const name = safeText(document.getElementById("grantName").value);
+
+  if(!name){
+    alert("Enter a grant or funding opportunity name first.");
+    return;
+  }
+
+  const linkValue = safeText(document.getElementById("grantLink").value);
+
+  if(linkValue){
+    try{
+      const parsed = new URL(linkValue);
+      if(!["http:","https:"].includes(parsed.protocol)){
+        alert("Enter a valid website address beginning with http:// or https://");
+        return;
+      }
+    }catch(error){
+      alert("Enter a valid official grant website address.");
+      return;
+    }
+  }
+
+  const opportunity = {
+    id:makeId(),
+    name:name,
+    funder:safeText(document.getElementById("grantFunder").value),
+    category:safeText(document.getElementById("grantCategory").value),
+    amount:Number(document.getElementById("grantAmountInput").value)||0,
+    deadline:document.getElementById("grantDeadline").value,
+    status:document.getElementById("grantStatus").value,
+    eligibility:document.getElementById("grantEligibility").value,
+    link:linkValue,
+    purpose:safeText(document.getElementById("grantPurpose").value),
+    requirements:safeText(document.getElementById("grantRequirements").value),
+    dateAdded:new Date().toLocaleDateString()
+  };
+
+  const items = getOpportunities();
+  items.push(opportunity);
+
+  if(!saveOpportunities(items)) return;
+
+  showReceipt(opportunity);
+  renderOpportunities();
+  updateCompareOptions();
+
+  [
+    "grantName",
+    "grantFunder",
+    "grantCategory",
+    "grantAmountInput",
+    "grantDeadline",
+    "grantLink",
+    "grantPurpose",
+    "grantRequirements"
+  ].forEach(id=>{
+    document.getElementById(id).value = "";
+  });
+
+  document.getElementById("grantStatus").value = "Researching";
+  document.getElementById("grantEligibility").value = "Not yet verified";
+}
+
+function showReceipt(item){
+  const result = document.getElementById("receiptResult");
+  result.style.display = "block";
+
+  const receipt = document.createElement("div");
+  receipt.className = "receipt";
+
+  const title = document.createElement("div");
+  title.className = "receipt-title";
+  title.textContent = "PATHKEEPER OPPORTUNITY RECEIPT";
+  receipt.appendChild(title);
+
+  const fields = [
+    ["Record",item.name],
+    ["Funder",item.funder || "Not entered"],
+    ["Category",item.category || "Not entered"],
+    ["Potential award",money(item.amount)],
+    ["Deadline",item.deadline || "Not entered"],
+    ["Status",item.status],
+    ["Eligibility",item.eligibility],
+    ["Recorded",item.dateAdded],
+    ["Record ID",item.id]
+  ];
+
+  fields.forEach(([label,value])=>{
+    const p = document.createElement("p");
+    const strong = document.createElement("strong");
+    strong.textContent = label + ": ";
+    p.appendChild(strong);
+    p.appendChild(document.createTextNode(value));
+    receipt.appendChild(p);
+  });
+
+  const reminder = document.createElement("p");
+  reminder.style.marginTop = "10px";
+  reminder.textContent = "Reminder: This is your personal research record, not a grantmaker confirmation.";
+  receipt.appendChild(reminder);
+
+  const actions = document.createElement("div");
+  actions.className = "button-row";
+
+  const copyButton = document.createElement("button");
+  copyButton.className = "btn light-btn";
+  copyButton.type = "button";
+  copyButton.textContent = "Copy Receipt";
+  copyButton.addEventListener("click",()=>copyReceipt(item.id));
+
+  actions.appendChild(copyButton);
+  receipt.appendChild(actions);
+
+  result.replaceChildren(receipt);
+  result.scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+
+function receiptText(item){
+  return [
+    "PATHKEEPER OPPORTUNITY RECEIPT",
+    "Opportunity: "+item.name,
+    "Funder: "+item.funder,
+    "Category: "+item.category,
+    "Potential Award: "+money(item.amount),
+    "Deadline: "+item.deadline,
+    "Status: "+item.status,
+    "Eligibility: "+item.eligibility,
+    "Official Link: "+item.link,
+    "Purpose: "+item.purpose,
+    "Requirements: "+item.requirements,
+    "Recorded: "+item.dateAdded,
+    "Record ID: "+item.id,
+    "This is a personal research record, not a grantmaker confirmation."
+  ].join("\n");
+}
+
+function copyReceipt(id){
+  const item = getOpportunities().find(entry=>entry.id===id);
+  if(item) copyText(receiptText(item),"Receipt copied.");
+}
+
+function renderOpportunities(){
+  const container = document.getElementById("opportunityList");
+  const items = getOpportunities();
+
+  container.replaceChildren();
+
+  if(!items.length){
+    const empty = document.createElement("div");
+    empty.className = "empty";
+    empty.textContent = "No opportunities have been added yet. Use the intake form to create your first record.";
+    container.appendChild(empty);
+    return;
+  }
+
+  items.forEach(item=>{
+    const article = document.createElement("article");
+    article.className = "opportunity";
+
+    const top = document.createElement("div");
+    top.className = "opportunity-top";
+
+    const details = document.createElement("div");
+    const heading = document.createElement("h3");
+    heading.textContent = item.name;
+
+    const funder = document.createElement("p");
+    funder.textContent =
+      (item.funder || "Funder not entered") +
+      " · " +
+      (item.category || "Category not entered");
+
+    details.append(heading,funder);
+
+    const tag = document.createElement("span");
+    tag.className = "tag";
+    tag.textContent = item.status;
+
+    top.append(details,tag);
+    article.appendChild(top);
+
+    const amount = document.createElement("p");
+    amount.textContent =
+      "Potential award: " + money(item.amount) +
+      " | Deadline: " + (item.deadline || "Not entered");
+
+    const eligibility = document.createElement("p");
+    eligibility.textContent = "Eligibility: " + item.eligibility;
+
+    article.append(amount,eligibility);
+
+    const actions = document.createElement("div");
+    actions.className = "opportunity-actions";
+
+    if(item.link){
+      addActionButton(actions,"Open Official Link","light-btn",()=>openGrantLink(item.id));
+    }
+
+    addActionButton(actions,"View Receipt","outline",()=>showReceipt(item));
+    addActionButton(actions,"Update Status","outline",()=>editOpportunity(item.id));
+    addActionButton(actions,"Remove Record","outline",()=>removeOpportunity(item.id));
+
+    article.appendChild(actions);
+    container.appendChild(article);
+  });
+}
+
+function addActionButton(container,label,className,action){
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "btn " + className;
+  button.textContent = label;
+  button.addEventListener("click",action);
+  container.appendChild(button);
+}
+
+function openGrantLink(id){
+  const item = getOpportunities().find(entry=>entry.id===id);
+  if(!item || !item.link) return;
+
+  try{
+    const url = new URL(item.link);
+
+    if(url.protocol==="https:" || url.protocol==="http:"){
+      window.open(url.href,"_blank","noopener,noreferrer");
+    }else{
+      alert("Please enter a valid http or https URL.");
+    }
+  }catch(error){
+    alert("This record does not contain a valid web address.");
+  }
+}
+
+function editOpportunity(id){
+  const items = getOpportunities();
+  const item = items.find(entry=>entry.id===id);
+  if(!item) return;
+
+  const allowed = [
+    "Researching",
+    "Potential Match",
+    "Preparing Application",
+    "Submitted",
+    "Awarded",
+    "Not Eligible",
+    "Closed"
+  ];
+
+  const nextStatus = prompt(
+    "Enter a new status:\n"+allowed.join(", "),
+    item.status
+  );
+
+  if(nextStatus===null) return;
+
+  if(!allowed.includes(nextStatus.trim())){
+    alert("Use one of the listed status options.");
+    return;
+  }
+
+  item.status = nextStatus.trim();
+
+  if(saveOpportunities(items)){
+    renderOpportunities();
+    updateCompareOptions();
+  }
+}
+
+function removeOpportunity(id){
+  if(!confirm("Remove this opportunity from your saved list?")) return;
+
+  const items = getOpportunities().filter(entry=>entry.id!==id);
+
+  if(saveOpportunities(items)){
+    renderOpportunities();
+    updateCompareOptions();
+  }
+}
+
+function exportOpportunities(){
+  const items = getOpportunities();
+
+  if(!items.length){
+    alert("There are no saved opportunities to export.");
+    return;
+  }
+
+  const rows = [[
+    "Opportunity","Funder","Category","Amount","Deadline",
+    "Status","Eligibility","Official Link","Purpose",
+    "Requirements","Date Added"
+  ]];
+
+  items.forEach(item=>{
+    rows.push([
+      item.name,
+      item.funder,
+      item.category,
+      item.amount,
+      item.deadline,
+      item.status,
+      item.eligibility,
+      item.link,
+      item.purpose,
+      item.requirements,
+      item.dateAdded
+    ]);
+  });
+
+  const csv = rows.map(row=>
+    row.map(value=>
+      '"'+String(value??"").replace(/"/g,'""')+'"'
+    ).join(",")
+  ).join("\n");
+
+  downloadFile(csv,"pathkeeper-grant-opportunities.csv","text/csv");
+}
+
+/* =========================================
+   OPPORTUNITY COMPARISON
+========================================= */
+
+function updateCompareOptions(){
+  const items = getOpportunities();
+
+  ["compareOne","compareTwo"].forEach(id=>{
+    const select = document.getElementById(id);
+    const previous = select.value;
+
+    select.replaceChildren();
+
+    const placeholder = document.createElement("option");
+    placeholder.value = "";
+    placeholder.textContent = "Select an opportunity";
+    select.appendChild(placeholder);
+
+    items.forEach(item=>{
+      const option = document.createElement("option");
+      option.value = item.id;
+      option.textContent = item.name;
+      select.appendChild(option);
+    });
+
+    if(items.some(item=>item.id===previous)){
+      select.value = previous;
+    }
+  });
+}
+
+function compareOpportunities(){
+  const items = getOpportunities();
+
+  const one = items.find(item=>
+    item.id===document.getElementById("compareOne").value
+  );
+
+  const two = items.find(item=>
+    item.id===document.getElementById("compareTwo").value
+  );
+
+  const output = document.getElementById("comparisonResult");
+  output.replaceChildren();
+
+  if(!one || !two){
+    const message = document.createElement("div");
+    message.className = "empty";
+    message.textContent = "Choose two saved opportunities to compare.";
+    output.appendChild(message);
+    return;
+  }
+
+  if(one.id===two.id){
+    const message = document.createElement("div");
+    message.className = "empty";
+    message.textContent = "Choose two different opportunities.";
+    output.appendChild(message);
+    return;
+  }
+
+  const fields = [
+    ["Funder","funder"],
+    ["Category","category"],
+    ["Potential Award","amount"],
+    ["Deadline","deadline"],
+    ["Status","status"],
+    ["Eligibility","eligibility"],
+    ["Permitted Purpose","purpose"],
+    ["Requirements","requirements"]
+  ];
+
+  const wrap = document.createElement("div");
+  wrap.className = "compare-wrap";
+
+  const table = document.createElement("table");
+  const thead = document.createElement("thead");
+  const header = document.createElement("tr");
+
+  ["Comparison Factor",one.name,two.name].forEach(value=>{
+    const th = document.createElement("th");
+    th.textContent = value;
+    header.appendChild(th);
+  });
+
+  thead.appendChild(header);
+
+  const tbody = document.createElement("tbody");
+
+  fields.forEach(([label,key])=>{
+    const row = document.createElement("tr");
+
+    const first = document.createElement("td");
+    first.textContent = label;
+    row.appendChild(first);
+
+    [one,two].forEach(item=>{
+      const cell = document.createElement("td");
+      cell.textContent = key==="amount"
+        ? money(item[key])
+        : (item[key] || "Not recorded");
+      row.appendChild(cell);
+    });
+
+    tbody.appendChild(row);
+  });
+
+  table.append(thead,tbody);
+  wrap.appendChild(table);
+  output.appendChild(wrap);
+
+  const reminder = document.createElement("div");
+  reminder.className = "callout";
+  reminder.innerHTML =
+    "<strong>Decision reminder:</strong> Confirm eligibility, funding restrictions, deadline, and application workload. This comparison displays your saved information; it does not independently verify either opportunity.";
+
+  output.appendChild(reminder);
+}
+
+/* =========================================
+   READINESS CHECKLIST
+========================================= */
+
+function updateChecklist(){
+  const checks = [
+    ...document.querySelectorAll("#readinessChecklist input[type=checkbox]")
+  ];
+
+  const completed = checks.filter(check=>check.checked).length;
+  const total = checks.length;
+  const percent = total ? (completed/total)*100 : 0;
+
+  document.getElementById("checkProgress").textContent =
+    `${completed} of ${total} complete`;
+
+  document.getElementById("checkProgressFill").style.width =
+    percent + "%";
+}
+
+/* =========================================
+   FUNDING ALLOCATION CALCULATOR
+========================================= */
+
+const budgetItems = [
+  {id:"percentLearning",value:"valueLearning"},
+  {id:"percentTechnology",value:"valueTechnology"},
+  {id:"percentProject",value:"valueProject"},
+  {id:"percentSupport",value:"valueSupport"},
+  {id:"percentOther",value:"valueOther"}
+];
+
+function calculateBudget(){
+  const amount = Math.max(
+    0,
+    Number(document.getElementById("budgetAmount").value)||0
+  );
+
+  let total = 0;
+
+  budgetItems.forEach(item=>{
+    const percent = Math.max(
+      0,
+      Number(document.getElementById(item.id).value)||0
+    );
+
+    total += percent;
+
+    document.getElementById(item.value).textContent =
+      money(amount*percent/100);
+  });
+
+  document.getElementById("allocationTotal").textContent =
+    "Total allocation: "+total+"%";
+
+  const status = document.getElementById("budgetStatus");
+
+  if(total===100){
+    status.textContent = "Your allocation currently totals 100%.";
+    status.style.color = "var(--green)";
+  }else if(total<100){
+    status.textContent =
+      "Your allocation is "+(100-total)+"% below the full budget.";
+    status.style.color = "var(--brown2)";
+  }else{
+    status.textContent =
+      "Your allocation exceeds 100% by "+(total-100)+"%. Adjust the percentages.";
+    status.style.color = "#A33B32";
+  }
+}
+
+function getBudgetSummary(){
+  const amount = Math.max(
+    0,
+    Number(document.getElementById("budgetAmount").value)||0
+  );
+
+  const names = [
+    ["Education / Training","percentLearning"],
+    ["Technology / Equipment","percentTechnology"],
+    ["Project Materials","percentProject"],
+    ["Support Services","percentSupport"],
+    ["Other Approved Costs","percentOther"]
+  ];
+
+  return names.map(([name,id])=>{
+    const percent = Math.max(
+      0,
+      Number(document.getElementById(id).value)||0
+    );
+
+    return `${name}: ${percent}% — ${money(amount*percent/100)}`;
+  }).join("\n");
+}
+
+/* =========================================
+   PROPOSAL BUILDER
+========================================= */
+
+function buildProposal(){
+  const applicant = safeText(document.getElementById("applicant").value);
+  const program = safeText(document.getElementById("programName").value);
+  const project = safeText(document.getElementById("projectTitle").value);
+
+  const fields = [
+    ["Need or Barrier","needStatement"],
+    ["Goal and Intended Result","goalStatement"],
+    ["Activities and Use of Funds","activityStatement"],
+    ["Expected Outcomes","outcomeStatement"],
+    ["Readiness and Supporting Evidence","evidenceStatement"],
+    ["Continuity and Next Steps","continuityStatement"],
+    ["Grant-Specific Requirements","extraNotes"]
+  ];
+
+  const sections = fields.map(([title,id])=>{
+    const value = safeText(document.getElementById(id).value);
+    return `${title}\n${value || "[Add information for this section]"}`;
+  }).join("\n\n");
+
+  const amount = Number(document.getElementById("budgetAmount").value)||0;
+
+  const budgetTotal = budgetItems.reduce((sum,item)=>{
+    return sum + (
+      Number(document.getElementById(item.id).value)||0
+    );
+  },0);
+
+  const text = [
+    "PATHKEEPER — GRANTS & CREATOR FUNDING RESOURCES",
+    "",
+    "Applicant: "+(applicant || "[Applicant name]"),
+    "Grant Program: "+(program || "[Grant program]"),
+    "Project / Education Goal: "+(project || "[Project goal]"),
+    "Funding Amount Requested: "+money(amount),
+    "",
+    "PROPOSED BUDGET",
+    getBudgetSummary(),
+    "Total allocation: "+budgetTotal+"%",
+    "",
+    sections,
+    "",
+    "FINAL REVIEW REMINDERS",
+    "- Verify all eligibility requirements against the official grant instructions.",
+    "- Confirm every requested expense is permitted by the funder.",
+    "- Replace placeholders and adapt responses to the actual application questions.",
+    "- Check all amounts, supporting documents, word limits, and submission requirements.",
+    "- Save the final submitted application and confirmation receipt.",
+    "",
+    "This is a working draft, not a submitted application or a guarantee of funding."
+  ].join("\n");
+
+  document.getElementById("proposalPreview").textContent = text;
+
+  document.getElementById("proposalMessage").textContent =
+    "Draft generated. Review and customize it before submission.";
+}
+
+function clearProposal(){
+  const ids = [
+    "applicant",
+    "programName",
+    "projectTitle",
+    "needStatement",
+    "goalStatement",
+    "activityStatement",
+    "outcomeStatement",
+    "evidenceStatement",
+    "continuityStatement",
+    "extraNotes"
+  ];
+
+  ids.forEach(id=>{
+    document.getElementById(id).value = "";
+  });
+
+  document.getElementById("proposalPreview").textContent =
+    "Your application draft will appear here after you select “Generate Application Draft.”";
+
+  document.getElementById("proposalMessage").textContent =
+    "Answers cleared.";
+}
+
+function copyProposal(){
+  const text = document.getElementById("proposalPreview").textContent;
+
+  if(text.startsWith("Your application draft")){
+    alert("Generate the application draft first.");
+    return;
+  }
+
+  copyText(text,"Application draft copied.");
+}
+
+function downloadProposal(){
+  const text = document.getElementById("proposalPreview").textContent;
+
+  if(text.startsWith("Your application draft")){
+    alert("Generate the application draft first.");
+    return;
+  }
+
+  downloadFile(
+    text,
+    "pathkeeper-grant-application-draft.txt",
+    "text/plain"
+  );
+
+  document.getElementById("proposalMessage").textContent =
+    "Text file prepared for saving.";
+}
+
+/* =========================================
+   FAQ
+========================================= */
+
+function toggleFAQ(button){
+  const item = button.closest(".faq-item");
+  const wasOpen = item.classList.contains("open");
+
+  document.querySelectorAll(".faq-item").forEach(entry=>{
+    entry.classList.remove("open");
+    entry.querySelector(".faq-question span").textContent = "+";
+  });
+
+  if(!wasOpen){
+    item.classList.add("open");
+    item.querySelector(".faq-question span").textContent = "−";
+  }
+}
+
+/* =========================================
+   INITIALIZE PAGE
+========================================= */
+
+renderOpportunities();
+updateCompareOptions();
+updateChecklist();
+calculateBudget();
+
+</script>
+</body>
+</html>
